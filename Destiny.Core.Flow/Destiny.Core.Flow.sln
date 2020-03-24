@@ -23,6 +23,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.EntityFra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow", "Destiny.Core.Flow\Destiny.Core.Flow.csproj", "{49FF2838-ED54-48FF-A8C4-C0F91F1EB872}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.Log4Net", "Destiny.Core.Flow.Log4Net\Destiny.Core.Flow.Log4Net.csproj", "{DC68A647-D7C2-4321-BDC7-ED8F65CD6A5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.AutoMapper", "Destiny.Core.Flow.AutoMapper\Destiny.Core.Flow.AutoMapper.csproj", "{1BEA2CF0-145B-4B0C-ABDC-A429E40E5890}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{49FF2838-ED54-48FF-A8C4-C0F91F1EB872}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49FF2838-ED54-48FF-A8C4-C0F91F1EB872}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49FF2838-ED54-48FF-A8C4-C0F91F1EB872}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC68A647-D7C2-4321-BDC7-ED8F65CD6A5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC68A647-D7C2-4321-BDC7-ED8F65CD6A5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC68A647-D7C2-4321-BDC7-ED8F65CD6A5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC68A647-D7C2-4321-BDC7-ED8F65CD6A5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BEA2CF0-145B-4B0C-ABDC-A429E40E5890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BEA2CF0-145B-4B0C-ABDC-A429E40E5890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BEA2CF0-145B-4B0C-ABDC-A429E40E5890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BEA2CF0-145B-4B0C-ABDC-A429E40E5890}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
