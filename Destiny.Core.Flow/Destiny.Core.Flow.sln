@@ -3,23 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.API", "Destiny.Core.Flow.API\Destiny.Core.Flow.API.csproj", "{FF447721-BFD6-40C6-AE23-D672EC225A00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.API", "Destiny.Core.Flow.API\Destiny.Core.Flow.API.csproj", "{FF447721-BFD6-40C6-AE23-D672EC225A00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.IRepositry", "Destiny.Core.Flow.IRepositry\Destiny.Core.Flow.IRepositry.csproj", "{BC525BD0-B2A9-4E56-BB8D-C2CC2F65E6BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.IRepositry", "Destiny.Core.Flow.IRepositry\Destiny.Core.Flow.IRepositry.csproj", "{BC525BD0-B2A9-4E56-BB8D-C2CC2F65E6BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.Repositry", "Destiny.Core.Flow.Repositry\Destiny.Core.Flow.Repositry.csproj", "{42FE9C0C-5673-4107-AC25-C6DE1C0C08F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Repositry", "Destiny.Core.Flow.Repositry\Destiny.Core.Flow.Repositry.csproj", "{42FE9C0C-5673-4107-AC25-C6DE1C0C08F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.IServices", "Destiny.Core.Flow.IServices\Destiny.Core.Flow.IServices.csproj", "{0FDF7DC0-77FE-4529-8E8C-D17FF03D84A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.IServices", "Destiny.Core.Flow.IServices\Destiny.Core.Flow.IServices.csproj", "{0FDF7DC0-77FE-4529-8E8C-D17FF03D84A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.Services", "Destiny.Core.Flow.Services\Destiny.Core.Flow.Services.csproj", "{89D24E5C-7C65-4150-AB7B-656809CC6011}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Services", "Destiny.Core.Flow.Services\Destiny.Core.Flow.Services.csproj", "{89D24E5C-7C65-4150-AB7B-656809CC6011}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.CustomExtension", "Destiny.Core.Flow.CustomExtension\Destiny.Core.Flow.CustomExtension.csproj", "{4A7587D3-0F99-4E94-9C17-07D047C4232B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.CustomExtension", "Destiny.Core.Flow.CustomExtension\Destiny.Core.Flow.CustomExtension.csproj", "{4A7587D3-0F99-4E94-9C17-07D047C4232B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.Commom", "Destiny.Core.Flow.Commom\Destiny.Core.Flow.Commom.csproj", "{8A24B1C6-9E7C-4011-9EDD-DC6D3FC9826B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Commom", "Destiny.Core.Flow.Commom\Destiny.Core.Flow.Commom.csproj", "{8A24B1C6-9E7C-4011-9EDD-DC6D3FC9826B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.Model", "Destiny.Core.Flow.Model\Destiny.Core.Flow.Model.csproj", "{3350DDC6-02D0-4986-9F13-17B8B94B9456}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Model", "Destiny.Core.Flow.Model\Destiny.Core.Flow.Model.csproj", "{3350DDC6-02D0-4986-9F13-17B8B94B9456}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.Context", "Destiny.Core.Flow.Context\Destiny.Core.Flow.Context.csproj", "{60DE5D0D-4434-49AB-81BC-705865F058E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.EntityFrameworkCore", "Destiny.Core.Flow.Context\Destiny.Core.Flow.EntityFrameworkCore.csproj", "{60DE5D0D-4434-49AB-81BC-705865F058E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow", "Destiny.Core.Flow\Destiny.Core.Flow.csproj", "{49FF2838-ED54-48FF-A8C4-C0F91F1EB872}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{60DE5D0D-4434-49AB-81BC-705865F058E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60DE5D0D-4434-49AB-81BC-705865F058E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60DE5D0D-4434-49AB-81BC-705865F058E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49FF2838-ED54-48FF-A8C4-C0F91F1EB872}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49FF2838-ED54-48FF-A8C4-C0F91F1EB872}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49FF2838-ED54-48FF-A8C4-C0F91F1EB872}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49FF2838-ED54-48FF-A8C4-C0F91F1EB872}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
