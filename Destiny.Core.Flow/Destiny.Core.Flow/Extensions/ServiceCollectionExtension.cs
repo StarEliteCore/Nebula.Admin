@@ -146,6 +146,7 @@ namespace Destiny.Core.Flow.Extensions
         {
             if (type != null)
             {
+
                 foreach (var interfaceType in type.GetImplementedInterfaces())
                 {
                     services.Add(new ServiceDescriptor(interfaceType, type, serviceLifetime));

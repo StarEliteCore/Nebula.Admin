@@ -159,7 +159,7 @@ namespace Destiny.Core.Flow.Extensions
         /// Get ImplementedInterfaces
         /// </summary>
         /// <param name="type">type</param>
-        /// <returns></returns>
+        /// <returns>当前类型实现的接口的集合。</returns>
         public static IEnumerable<Type> GetImplementedInterfaces([NotNull]this Type type)
         {
             return type.GetTypeInfo().ImplementedInterfaces;

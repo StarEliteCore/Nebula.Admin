@@ -21,11 +21,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Model", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.EntityFrameworkCore", "Destiny.Core.Flow.Context\Destiny.Core.Flow.EntityFrameworkCore.csproj", "{60DE5D0D-4434-49AB-81BC-705865F058E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow", "Destiny.Core.Flow\Destiny.Core.Flow.csproj", "{49FF2838-ED54-48FF-A8C4-C0F91F1EB872}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow", "Destiny.Core.Flow\Destiny.Core.Flow.csproj", "{49FF2838-ED54-48FF-A8C4-C0F91F1EB872}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.Log4Net", "Destiny.Core.Flow.Log4Net\Destiny.Core.Flow.Log4Net.csproj", "{DC68A647-D7C2-4321-BDC7-ED8F65CD6A5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Log4Net", "Destiny.Core.Flow.Log4Net\Destiny.Core.Flow.Log4Net.csproj", "{DC68A647-D7C2-4321-BDC7-ED8F65CD6A5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.AutoMapper", "Destiny.Core.Flow.AutoMapper\Destiny.Core.Flow.AutoMapper.csproj", "{1BEA2CF0-145B-4B0C-ABDC-A429E40E5890}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.AutoMapper", "Destiny.Core.Flow.AutoMapper\Destiny.Core.Flow.AutoMapper.csproj", "{1BEA2CF0-145B-4B0C-ABDC-A429E40E5890}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Tests", "Destiny.Core.Tests\Destiny.Core.Tests.csproj", "{57C6446B-F401-402D-9BAD-4CB9302AA344}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{1BEA2CF0-145B-4B0C-ABDC-A429E40E5890}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BEA2CF0-145B-4B0C-ABDC-A429E40E5890}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BEA2CF0-145B-4B0C-ABDC-A429E40E5890}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57C6446B-F401-402D-9BAD-4CB9302AA344}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57C6446B-F401-402D-9BAD-4CB9302AA344}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57C6446B-F401-402D-9BAD-4CB9302AA344}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57C6446B-F401-402D-9BAD-4CB9302AA344}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
