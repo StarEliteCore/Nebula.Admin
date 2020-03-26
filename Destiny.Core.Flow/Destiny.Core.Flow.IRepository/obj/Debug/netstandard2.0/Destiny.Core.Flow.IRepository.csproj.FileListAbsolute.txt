@@ -1,9 +1,0 @@
-F:\Project\Destiny.Core.Flow\Destiny.Core.Flow\Destiny.Core.Flow.IRepository\bin\Debug\netstandard2.0\Destiny.Core.Flow.IRepository.deps.json
-F:\Project\Destiny.Core.Flow\Destiny.Core.Flow\Destiny.Core.Flow.IRepository\bin\Debug\netstandard2.0\Destiny.Core.Flow.IRepository.dll
-F:\Project\Destiny.Core.Flow\Destiny.Core.Flow\Destiny.Core.Flow.IRepository\bin\Debug\netstandard2.0\Destiny.Core.Flow.IRepository.pdb
-F:\Project\Destiny.Core.Flow\Destiny.Core.Flow\Destiny.Core.Flow.IRepository\obj\Debug\netstandard2.0\Destiny.Core.Flow.IRepository.csprojAssemblyReference.cache
-F:\Project\Destiny.Core.Flow\Destiny.Core.Flow\Destiny.Core.Flow.IRepository\obj\Debug\netstandard2.0\Destiny.Core.Flow.IRepository.csproj.CoreCompileInputs.cache
-F:\Project\Destiny.Core.Flow\Destiny.Core.Flow\Destiny.Core.Flow.IRepository\obj\Debug\netstandard2.0\Destiny.Core.Flow.IRepository.AssemblyInfoInputs.cache
-F:\Project\Destiny.Core.Flow\Destiny.Core.Flow\Destiny.Core.Flow.IRepository\obj\Debug\netstandard2.0\Destiny.Core.Flow.IRepository.AssemblyInfo.cs
-F:\Project\Destiny.Core.Flow\Destiny.Core.Flow\Destiny.Core.Flow.IRepository\obj\Debug\netstandard2.0\Destiny.Core.Flow.IRepository.dll
-F:\Project\Destiny.Core.Flow\Destiny.Core.Flow\Destiny.Core.Flow.IRepository\obj\Debug\netstandard2.0\Destiny.Core.Flow.IRepository.pdb
