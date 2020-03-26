@@ -5,10 +5,6 @@ VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.API", "Destiny.Core.Flow.API\Destiny.Core.Flow.API.csproj", "{FF447721-BFD6-40C6-AE23-D672EC225A00}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.IRepository", "Destiny.Core.Flow.IRepositry\Destiny.Core.Flow.IRepository.csproj", "{BC525BD0-B2A9-4E56-BB8D-C2CC2F65E6BE}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Repositry", "Destiny.Core.Flow.Repositry\Destiny.Core.Flow.Repositry.csproj", "{42FE9C0C-5673-4107-AC25-C6DE1C0C08F4}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.IServices", "Destiny.Core.Flow.IServices\Destiny.Core.Flow.IServices.csproj", "{0FDF7DC0-77FE-4529-8E8C-D17FF03D84A0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Services", "Destiny.Core.Flow.Services\Destiny.Core.Flow.Services.csproj", "{89D24E5C-7C65-4150-AB7B-656809CC6011}"
@@ -29,6 +25,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.AutoMappe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Tests", "Destiny.Core.Tests\Destiny.Core.Tests.csproj", "{57C6446B-F401-402D-9BAD-4CB9302AA344}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.IRepository", "Destiny.Core.Flow.IRepository\Destiny.Core.Flow.IRepository.csproj", "{C5CA43D3-F2C5-4AD2-B3A2-9FD62A4D4D6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.Repository", "Destiny.Core.Flow.Repository\Destiny.Core.Flow.Repository.csproj", "{F671FCFA-5ABE-48B2-9CE8-126C635F4288}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,14 +39,6 @@ Global
 		{FF447721-BFD6-40C6-AE23-D672EC225A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF447721-BFD6-40C6-AE23-D672EC225A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF447721-BFD6-40C6-AE23-D672EC225A00}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BC525BD0-B2A9-4E56-BB8D-C2CC2F65E6BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BC525BD0-B2A9-4E56-BB8D-C2CC2F65E6BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BC525BD0-B2A9-4E56-BB8D-C2CC2F65E6BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BC525BD0-B2A9-4E56-BB8D-C2CC2F65E6BE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{42FE9C0C-5673-4107-AC25-C6DE1C0C08F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{42FE9C0C-5673-4107-AC25-C6DE1C0C08F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{42FE9C0C-5673-4107-AC25-C6DE1C0C08F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{42FE9C0C-5673-4107-AC25-C6DE1C0C08F4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0FDF7DC0-77FE-4529-8E8C-D17FF03D84A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0FDF7DC0-77FE-4529-8E8C-D17FF03D84A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FDF7DC0-77FE-4529-8E8C-D17FF03D84A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -87,6 +79,14 @@ Global
 		{57C6446B-F401-402D-9BAD-4CB9302AA344}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57C6446B-F401-402D-9BAD-4CB9302AA344}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57C6446B-F401-402D-9BAD-4CB9302AA344}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5CA43D3-F2C5-4AD2-B3A2-9FD62A4D4D6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5CA43D3-F2C5-4AD2-B3A2-9FD62A4D4D6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5CA43D3-F2C5-4AD2-B3A2-9FD62A4D4D6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5CA43D3-F2C5-4AD2-B3A2-9FD62A4D4D6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F671FCFA-5ABE-48B2-9CE8-126C635F4288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F671FCFA-5ABE-48B2-9CE8-126C635F4288}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F671FCFA-5ABE-48B2-9CE8-126C635F4288}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F671FCFA-5ABE-48B2-9CE8-126C635F4288}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Destiny.Core.Flow.IRepositry
+namespace Destiny.Core.Flow.IRepository
 {
     public class Class1
     {

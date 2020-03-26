@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "QWuq47IWnFC07Xl0Wz4Z+HEFKuysRfs2zkL3xMivMNyEagsF6cctI8LLdHMR3JhDpvyNcK7SvpYLQZoqco2xYQ==",
+  "success": true,
+  "projectFilePath": "F:\\Project\\Destiny.Core.Flow\\Destiny.Core.Flow\\Destiny.Core.Flow.IRepository\\Destiny.Core.Flow.IRepository.csproj",
+  "expectedPackageFiles": [
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
