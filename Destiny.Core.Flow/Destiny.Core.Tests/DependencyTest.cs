@@ -12,78 +12,63 @@ using System.Runtime.Loader;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Destiny.Core.Flow.Dependency;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Destiny.Core.Flow.Reflection;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Destiny.Core.Tests
 {
-    public class DependencyTest : IClassFixture<WebApplicationFactory<TestServerFixtureBase>>
+    public class DependencyTest : IClassFixture<CustomWebApplicationFactory<TestServerFixtureBase>>
     {
-        private readonly WebApplicationFactory<TestServerFixtureBase> _factory;
-        private readonly IServiceCollection services;
-        public DependencyTest(WebApplicationFactory<TestServerFixtureBase> factory)
+
+        private readonly CustomWebApplicationFactory<TestServerFixtureBase>
+    _factory;
+
+        public DependencyTest(
+            CustomWebApplicationFactory<TestServerFixtureBase> factory)
         {
             _factory = factory;
-         
-                   services = new ServiceCollection(); 
+          
         }
 
         [Fact]
         public void Test_BulkInjection()
         {
-            
-            string[] filters =
-            {
-                "mscorlib",
-                "netstandard",
-                "dotnet",
-                "api-ms-win-core",
-                "runtime.",
-                "System",
-                "Microsoft",
-                "Window",
-            };
-            List<Assembly> list = new List<Assembly>();
-            var deps = DependencyContext.Default;
-            //排除所有的系统程序集、Nuget下载包
-            var libs = deps.CompileLibraries.Where(lib => !lib.Serviceable && lib.Type != "package" && !filters.Any(lib.Name.StartsWith));
-  
-            foreach (var lib in libs)
-            {
-                var assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(lib.Name));
-                list.Add(assembly);
-            }
-            //var types=  ReflectHelper.GetAssemblies().SelectMany(o=>o.GetTypes());
+            var provider = _factory.Server.Services;
 
-            Type[] dependencyTypes = list.SelectMany(o=>o.GetTypes()).Where(type => type.IsClass && !type.IsAbstract && !type.IsInterface && type.HasAttribute<DependencyAttribute>()).ToArray();
-      
-            foreach (var dependencyType in dependencyTypes.Where(o => !o.IsAbstract || !o.IsInterface))
-            {
-                var atrr = dependencyType.GetAttribute<DependencyAttribute>();
-                Type[] serviceTypes = dependencyType.GetImplementedInterfaces().ToArray();
-                if (serviceTypes.Length == 0)
-                {
-                    services.TryAdd(new ServiceDescriptor(dependencyType, dependencyType, atrr.Lifetime));
-                    continue;
-                }
+          
+        
+            ////var list=  AppRuntimeAssembly.FindAllItems();
+            //////var types=  ReflectHelper.GetAssemblies().SelectMany(o=>o.GetTypes());
 
-                if (atrr?.AddSelf == true)
-                {
-                    services.TryAdd(new ServiceDescriptor(dependencyType, dependencyType, atrr.Lifetime));
-                }
-                foreach (var interfaceType in serviceTypes)
-                {
-                    
-                    services.Add(new ServiceDescriptor(interfaceType, dependencyType, atrr.Lifetime));
-                }
-                //services.RegisterTypeAsImplementedInterfaces(dependencyType, atrr.Lifetime);
-            }
+            ////Type[] dependencyTypes = list.SelectMany(o=>o.GetTypes()).Where(type => type.IsClass && !type.IsAbstract && !type.IsInterface && type.HasAttribute<DependencyAttribute>()).ToArray();
 
-            var provider = services.BuildServiceProvider();
+            ////foreach (var dependencyType in dependencyTypes.Where(o => !o.IsAbstract || !o.IsInterface))
+            ////{
+            ////    var atrr = dependencyType.GetAttribute<DependencyAttribute>();
+            ////    Type[] serviceTypes = dependencyType.GetImplementedInterfaces().ToArray();
+            ////    if (serviceTypes.Length == 0)
+            ////    {
+            ////        services.TryAdd(new ServiceDescriptor(dependencyType, dependencyType, atrr.Lifetime));
+            ////        continue;
+            ////    }
+
+            ////    if (atrr?.AddSelf == true)
+            ////    {
+            ////        services.TryAdd(new ServiceDescriptor(dependencyType, dependencyType, atrr.Lifetime));
+            ////    }
+            ////    foreach (var interfaceType in serviceTypes)
+            ////    {
+
+            ////        services.Add(new ServiceDescriptor(interfaceType, dependencyType, atrr.Lifetime));
+            ////    }
+            ////    //services.RegisterTypeAsImplementedInterfaces(dependencyType, atrr.Lifetime);
+            ////}
             var test = provider.GetService<ITestScopedService>();
             Assert.NotNull(test);
             var getTest = test.GetTest();
             Assert.Equal("Test", getTest);
 
-            var testTransientService =provider.GetService<ITestTransientService>();
+            var testTransientService = provider.GetService<ITestTransientService>();
             Assert.NotNull(testTransientService);
             var transient = testTransientService.GetTransientService();
             Assert.NotNull(transient);
@@ -97,11 +82,8 @@ namespace Destiny.Core.Tests
 
         }
 
-       
+
     }
-
-
-
 
     public interface ITestScopedService
     {
@@ -136,25 +118,29 @@ namespace Destiny.Core.Tests
 
     [Dependency(ServiceLifetime.Singleton)]
     public class TestSingleton
-    { 
-    
-    
+    {
+
+
     }
     public interface ITestService<User>
     {
     }
     [Dependency(ServiceLifetime.Scoped)]
     public class TestService : ITestService<User>
-    { 
-    
+    {
+
     }
 
 
 
     public class User
-    { 
-    
+    {
+
     }
+
+
+
+
 
 
 }
