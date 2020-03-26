@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Destiny.Core.Flow.EntityFrameworkCore;
 
 namespace Destiny.Core.Flow
 {

@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Destiny.Core.Flow
+namespace Destiny.Core.Flow.EntityFrameworkCore
 {
     ///https://docs.microsoft.com/zh-cn/ef/core/saving/transactions 共享连接和事务
     /// <summary>

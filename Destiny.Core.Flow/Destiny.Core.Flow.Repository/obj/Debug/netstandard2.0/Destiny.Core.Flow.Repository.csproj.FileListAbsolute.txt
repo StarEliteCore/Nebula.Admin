@@ -1,8 +1,0 @@
-D:\项目\Destiny.Core.Flow\Destiny.Core.Flow\Destiny.Core.Flow.Repository\bin\Debug\netstandard2.0\Destiny.Core.Flow.Repository.deps.json
-D:\项目\Destiny.Core.Flow\Destiny.Core.Flow\Destiny.Core.Flow.Repository\bin\Debug\netstandard2.0\Destiny.Core.Flow.Repository.dll
-D:\项目\Destiny.Core.Flow\Destiny.Core.Flow\Destiny.Core.Flow.Repository\bin\Debug\netstandard2.0\Destiny.Core.Flow.Repository.pdb
-D:\项目\Destiny.Core.Flow\Destiny.Core.Flow\Destiny.Core.Flow.Repository\obj\Debug\netstandard2.0\Destiny.Core.Flow.Repository.csprojAssemblyReference.cache
-D:\项目\Destiny.Core.Flow\Destiny.Core.Flow\Destiny.Core.Flow.Repository\obj\Debug\netstandard2.0\Destiny.Core.Flow.Repository.AssemblyInfoInputs.cache
-D:\项目\Destiny.Core.Flow\Destiny.Core.Flow\Destiny.Core.Flow.Repository\obj\Debug\netstandard2.0\Destiny.Core.Flow.Repository.AssemblyInfo.cs
-D:\项目\Destiny.Core.Flow\Destiny.Core.Flow\Destiny.Core.Flow.Repository\obj\Debug\netstandard2.0\Destiny.Core.Flow.Repository.dll
-D:\项目\Destiny.Core.Flow\Destiny.Core.Flow\Destiny.Core.Flow.Repository\obj\Debug\netstandard2.0\Destiny.Core.Flow.Repository.pdb
