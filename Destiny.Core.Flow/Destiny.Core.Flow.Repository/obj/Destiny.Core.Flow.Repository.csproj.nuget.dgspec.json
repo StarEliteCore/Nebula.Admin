@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Project\\Destiny.Core.Flow\\Destiny.Core.Flow\\Destiny.Core.Flow.Repository\\Destiny.Core.Flow.Repository.csproj": {}
+    "D:\\项目\\Destiny.Core.Flow\\Destiny.Core.Flow\\Destiny.Core.Flow.Repository\\Destiny.Core.Flow.Repository.csproj": {}
   },
   "projects": {
-    "F:\\Project\\Destiny.Core.Flow\\Destiny.Core.Flow\\Destiny.Core.Flow.Repository\\Destiny.Core.Flow.Repository.csproj": {
+    "D:\\项目\\Destiny.Core.Flow\\Destiny.Core.Flow\\Destiny.Core.Flow.Repository\\Destiny.Core.Flow.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Project\\Destiny.Core.Flow\\Destiny.Core.Flow\\Destiny.Core.Flow.Repository\\Destiny.Core.Flow.Repository.csproj",
+        "projectUniqueName": "D:\\项目\\Destiny.Core.Flow\\Destiny.Core.Flow\\Destiny.Core.Flow.Repository\\Destiny.Core.Flow.Repository.csproj",
         "projectName": "Destiny.Core.Flow.Repository",
-        "projectPath": "F:\\Project\\Destiny.Core.Flow\\Destiny.Core.Flow\\Destiny.Core.Flow.Repository\\Destiny.Core.Flow.Repository.csproj",
-        "packagesPath": "C:\\Users\\wzwei\\.nuget\\packages\\",
-        "outputPath": "F:\\Project\\Destiny.Core.Flow\\Destiny.Core.Flow\\Destiny.Core.Flow.Repository\\obj\\",
+        "projectPath": "D:\\项目\\Destiny.Core.Flow\\Destiny.Core.Flow\\Destiny.Core.Flow.Repository\\Destiny.Core.Flow.Repository.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\项目\\Destiny.Core.Flow\\Destiny.Core.Flow\\Destiny.Core.Flow.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\wzwei\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -58,7 +58,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
