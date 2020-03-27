@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Reflection
 {
-  public static  class AppRuntimeAssembly
+  public static  class AssemblyHelper
     {
 
         /// <summary>

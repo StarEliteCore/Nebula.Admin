@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Modules
 {
-    public interface IAppServiceModuleManager
+    public interface IAppModuleManager
     {
 
         IServiceCollection LoadModules(IServiceCollection services);

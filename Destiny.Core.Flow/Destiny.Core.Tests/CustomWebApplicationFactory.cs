@@ -14,6 +14,7 @@ using Destiny.Core.Flow.Dependency;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Destiny.Core.Flow.Reflection;
 using Microsoft.AspNetCore.Hosting;
+using Destiny.Core.Flow.Modules;
 
 namespace Destiny.Core.Tests
 {
@@ -30,10 +31,13 @@ namespace Destiny.Core.Tests
         {
             builder.ConfigureServices(services =>
             {
-                services.AddScoped<IDependencyProvide, DependencyProvide>();
-                // Remove the app's ApplicationDbContext registration.
-                var dependency = services.BuildServiceProvider().GetService<IDependencyProvide>();
-                dependency.BulkIntoServices(services);
+                services.AddSingleton<IAssemblyFinder, AssemblyFinder>();
+
+
+                services.AddSingleton<IAppModuleManager, AppModuleManager>();
+                var provider=  services.BuildServiceProvider();
+                var appModuleManager = provider.GetService<IAppModuleManager>();
+                appModuleManager.LoadModules(services);
                 IServiceCollection = services;
             });
         }

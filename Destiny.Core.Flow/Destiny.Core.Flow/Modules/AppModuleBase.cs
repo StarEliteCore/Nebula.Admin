@@ -9,7 +9,7 @@ namespace Destiny.Core.Flow.Modules
     /// <summary>
     ///服务模块基类
     /// </summary>
-   public abstract class AppServiceModuleBase
+   public abstract class AppModuleBase
     {
 
         /// <summary>
@@ -23,6 +23,10 @@ namespace Destiny.Core.Flow.Modules
         }
 
 
+        /// <summary>
+        /// 此方法由运行时调用。使用此方法配置HTTP请求管道。
+        /// </summary>
+        /// <param name="applicationBuilder"></param>
         public virtual void Configure(IApplicationBuilder applicationBuilder)
         {
 

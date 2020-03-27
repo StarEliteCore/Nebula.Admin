@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.Modules;
 using Destiny.Core.Flow.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -9,16 +10,25 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Dependency
 {
-    public class DependencyProvide : IDependencyProvide
+    /// <summary>
+    /// 自动注入模块
+    /// </summary>
+    public class DependencyAppModule: AppModuleBase
     {
-       // private IServiceCollection _services;
 
-   
 
-        public void BulkIntoServices(IServiceCollection services)
+        public override IServiceCollection ConfigureServices(IServiceCollection services)
         {
-            var typs = AppRuntimeAssembly.FindAllItems();
-            Type[] dependencyTypes = typs.SelectMany(o => o.GetTypes()).Where(type => type.IsClass && !type.IsAbstract && !type.IsInterface && type.HasAttribute<DependencyAttribute>()).ToArray();
+            this.BulkIntoServices(services);
+            return services;
+        }
+
+
+        private void BulkIntoServices(IServiceCollection services)
+        {
+            var typeFinder = services.GetOrAddSingletonService<ITypeFinder, TypeFinder>();
+            typeFinder.NotNull(nameof(typeFinder));
+            Type[] dependencyTypes = typeFinder.Find(type => type.IsClass && !type.IsAbstract && !type.IsInterface && type.HasAttribute<DependencyAttribute>());
             foreach (var dependencyType in dependencyTypes)
             {
                 AddToServices(services, dependencyType);
@@ -34,7 +44,7 @@ namespace Destiny.Core.Flow.Dependency
         {
 
             var atrr = implementationType.GetAttribute<DependencyAttribute>();
-            Type[] serviceTypes = implementationType.GetImplementedInterfaces().ToArray();
+            Type[] serviceTypes = implementationType.GetImplementedInterfaces().Where(o=>!o.HasAttribute<IgnoreDependencyAttribute>()).ToArray();
 
             if (serviceTypes.Length == 0)
             {
@@ -52,5 +62,6 @@ namespace Destiny.Core.Flow.Dependency
                 services.Add(new ServiceDescriptor(interfaceType, implementationType, atrr.Lifetime));
             }
         }
+
     }
 }

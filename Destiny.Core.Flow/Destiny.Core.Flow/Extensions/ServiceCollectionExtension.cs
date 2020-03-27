@@ -186,5 +186,40 @@ namespace Destiny.Core.Flow.Extensions
 
             return services;
         }
+
+
+
+        /// <summary>
+        /// 得到注入服务
+        /// </summary>
+        /// <typeparam name="TType"></typeparam>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static TType GetService<TType>(this IServiceCollection services)
+        {
+            var provider = services.BuildServiceProvider();
+            return provider.GetService<TType>();
+        }
+
+        /// <summary>
+        /// 得到或添加Singleton服务
+        /// </summary>
+        /// <typeparam name="TType"></typeparam>
+        /// <typeparam name="TImplementation"></typeparam>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static TType GetOrAddSingletonService<TType, TImplementation>(this IServiceCollection services) where TType : class
+       where TImplementation : class, TType
+        {
+            var type = services.GetService<TType>();
+            if (type is null)
+            {
+                services.AddSingleton<TType, TImplementation>();
+                type = services.GetService<TType>();
+            }
+
+            return type;
+        }
+
     }
 }
