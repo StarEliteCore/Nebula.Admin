@@ -186,9 +186,6 @@ namespace Destiny.Core.Flow.Extensions
 
             return services;
         }
-
-
-
         /// <summary>
         /// 得到注入服务
         /// </summary>
@@ -200,7 +197,6 @@ namespace Destiny.Core.Flow.Extensions
             var provider = services.BuildServiceProvider();
             return provider.GetService<TType>();
         }
-
         /// <summary>
         /// 得到或添加Singleton服务
         /// </summary>

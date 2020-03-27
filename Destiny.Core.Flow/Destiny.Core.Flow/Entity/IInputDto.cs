@@ -5,7 +5,7 @@ using System.Text;
 namespace Destiny.Core.Flow.Entity
 {
     /// <summary>
-    /// 定义输入DTO
+    /// 定义输入DTO底层接口
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     public interface IInputDto<TKey>

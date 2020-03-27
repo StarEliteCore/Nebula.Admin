@@ -16,13 +16,9 @@ namespace Destiny.Core.Flow.Extensions
         /// <returns></returns>
         public static string ToDescription(this Enum value)
         {
-
             var type = value.GetType();
             MemberInfo member = type.GetMember(value.ToString()).FirstOrDefault();
             return member.ToDescription();
-
-        }
-
-  
+        }  
     }
 }

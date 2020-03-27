@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +8,19 @@ namespace Destiny.Core.Flow.Extensions
 {
     public static partial class Extensions
     {
+        /// <summary>
+        /// 根据Index下标移除
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public static List<T> Remove<T>(this List<T> list, int index) where T : class, new()
         {
             list.RemoveAt(index);
             return list;
 
         }
-
-
-
-
         /// <summary>
         /// 移除
         /// </summary>
@@ -34,9 +36,7 @@ namespace Destiny.Core.Flow.Extensions
                 list.RemoveAt(i);
             }
             return list;
-
         }
-
         /// <summary>串联对象数组的各个元素，其中在每个元素之间使用指定的分隔符。</summary>
         /// <returns>一个由 <paramref name="values" /> 的元素组成的字符串，这些元素以 <paramref name="separator" /> 字符串分隔。如果 <paramref name="values" /> 为空数组，该方法将返回 <see cref="F:System.String.Empty" />。</returns>
         /// <param name="separator">要用作分隔符的字符串。只有在 <paramref name="separator" /> 具有多个元素时，<paramref name="values" /> 才包括在返回的字符串中。</param>
@@ -45,18 +45,9 @@ namespace Destiny.Core.Flow.Extensions
         /// <paramref name="values" /> 为 null。</exception>
         public static string ToJoin<TSource>(this IEnumerable<TSource> values, string separator = ",") where TSource : IEnumerable
         {
-
             values = values.Where(o => !o.AsTo<string>().IsNullOrEmpty());
-
             return string.Join(separator, values);
-
         }
-
-
-
-
-
-
         /// <summary>
         /// 去重
         /// </summary>
@@ -68,11 +59,8 @@ namespace Destiny.Core.Flow.Extensions
         public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector)
         {
-
             return source.GroupBy(keySelector).Select(gropby => gropby.First());
         }
-
-
         /// <summary>
         /// 去重
         /// </summary>
@@ -81,14 +69,12 @@ namespace Destiny.Core.Flow.Extensions
         /// <param name="source">数据源</param>
         /// <param name="keySelector">键条件</param>
         /// <returns>返回去重后集合数据</returns>
-
         public static IList<TSource> ToDistinctBy<TSource, TKey>(this IEnumerable<TSource> source,
              Func<TSource, TKey> keySelector) 
         {
 
             return source.DistinctBy(keySelector).ToList();
         }
-
         /// <summary>
         /// 把集合转成SqlIn
         /// </summary>
@@ -116,12 +102,6 @@ namespace Destiny.Core.Flow.Extensions
             string newStr = sb.ToString()?.TrimEnd($"{separator}".ToCharArray());
             return newStr;
         }
-
-
-     
-
-    
-
         /// <summary>
         /// 根据集合字典转成字典
         /// </summary>
@@ -129,7 +109,6 @@ namespace Destiny.Core.Flow.Extensions
         /// <typeparam name="TValue">值的类型</typeparam>
         /// <param name="keyValuePairs">数据源</param>
         /// <returns>返回所需的字典</returns>
-
         public static IDictionary<TKey, TValue> AsDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> keyValuePairs)
         {
             keyValuePairs.NotNullOrEmpty(nameof(keyValuePairs));
@@ -139,7 +118,6 @@ namespace Destiny.Core.Flow.Extensions
             {
                 dic.Add(keys.Key, keys.Value);
             }
-
             return dic;
         }
         public static IEnumerable<TSource> WhereIf<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate, bool condition) where TSource : IEnumerable
@@ -148,7 +126,6 @@ namespace Destiny.Core.Flow.Extensions
             predicate.NotNull(nameof(predicate));
             return condition ? source.Where(predicate) : source;
         }
-
         /// <summary>
         /// 给IEnumerable拓展ForEach方法
         /// </summary>
@@ -162,7 +139,6 @@ namespace Destiny.Core.Flow.Extensions
                 func(item);
             }
         }
-
         /// <summary>
         /// 给IEnumerable拓展ForEach方法
         /// </summary>
@@ -178,10 +154,8 @@ namespace Destiny.Core.Flow.Extensions
                 func(array[i], i);
             }
         }
-
-
         /// <summary>
-        /// 将列表转换为树形结构
+        /// 将列表转换为树形结构（泛型无限递归）
         /// </summary>
         /// <typeparam name="T">类型</typeparam>
         /// <param name="list">数据</param>
@@ -202,13 +176,11 @@ namespace Destiny.Core.Flow.Extensions
             {
                 return treelist;
             }
-
             //树根
             if (list.Any<T>(e => rootwhere(entity, e)))
             {
                 treelist.AddRange(list.Where(e => rootwhere(entity, e)));
             }
-
             //树叶
             foreach (var item in treelist)
             {
@@ -224,11 +196,8 @@ namespace Destiny.Core.Flow.Extensions
                     addchilds(item, nodedata);
                 }
             }
-
             return treelist;
         }
-
-
         /// <summary>
         /// 把集合的元素转成指定的类型
         /// </summary>
@@ -243,22 +212,15 @@ namespace Destiny.Core.Flow.Extensions
             {
                 return enumerable;
             }
-         
-
             return CastIterator<TTarget>(source);
-
-
         }
-
         private static IEnumerable<TResult> CastIterator<TResult>(IEnumerable source)
         {
-
             foreach (object current in source)
             {
                 yield return (current.AsTo<TResult>());
             }
             yield break;
-
         }
     }
 }

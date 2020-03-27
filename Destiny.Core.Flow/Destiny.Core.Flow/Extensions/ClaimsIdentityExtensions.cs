@@ -9,7 +9,6 @@ namespace Destiny.Core.Flow.Extensions
 {
     public static partial class Extensions
     {
-
         /// <summary>
         /// 得到用户ID
         /// </summary>
@@ -31,7 +30,6 @@ namespace Destiny.Core.Flow.Extensions
             }
             return value.AsTo<T>();
         }
-
         /// <summary>
         /// 得到用户ID
         /// </summary>
@@ -49,7 +47,6 @@ namespace Destiny.Core.Flow.Extensions
             string value = claimsIdentity.FindFirst(type)?.Value;
             return value;
         }
-
         /// <summary>
         /// 得到用户名
         /// </summary>
@@ -65,8 +62,6 @@ namespace Destiny.Core.Flow.Extensions
             }
             return claimsIdentity.FindFirst(type)?.Value;
         }
-
-
         /// <summary>
         /// 获取昵称
         /// </summary>
@@ -100,7 +95,6 @@ namespace Destiny.Core.Flow.Extensions
             return value.AsTo<T>();
 
         }
-
         /// <summary>
         /// 得到角色
         /// </summary>

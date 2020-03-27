@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Destiny.Core.Flow.AutoMapper\Destiny.Core.Flow.AutoMapper.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow\Destiny.Core.Flow.csproj" />
   </ItemGroup>
 

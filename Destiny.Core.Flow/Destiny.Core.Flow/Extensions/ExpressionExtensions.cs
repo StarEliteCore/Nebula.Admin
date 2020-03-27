@@ -12,8 +12,6 @@ namespace Destiny.Core.Flow.Extensions
     /// </summary>
     public static partial class Extensions
     {
-
-
         /// <summary>
         /// Parser语法分析器
         /// </summary>
@@ -125,7 +123,6 @@ namespace Destiny.Core.Flow.Extensions
                     throw new Exception($"Unhandled expression type:{expression.NodeType}");
             }
         }
-
         /// <summary>
         /// 表达树类型转换
         /// </summary>
@@ -133,7 +130,6 @@ namespace Destiny.Core.Flow.Extensions
         /// <typeparam name="TToProperty">要转成的类型</typeparam>
         /// <param name="expression"></param>
         /// <returns></returns>
-
         public static Expression<Func<TToProperty, bool>> Cast<TInput, TToProperty>(
             this Expression<Func<TInput, bool>> expression) where TInput : class, new()
             where TToProperty : class, new()
@@ -143,8 +139,6 @@ namespace Destiny.Core.Flow.Extensions
             var x = Parser(p, expression);
             return Expression.Lambda<Func<TToProperty, bool>>(x, p);
         }
-
-
         /// <summary>
         /// 得到表达树对应属性的名字
         /// </summary>
@@ -178,8 +172,6 @@ namespace Destiny.Core.Flow.Extensions
             }
             return name;
         }
-
-
         ///// <summary>
         ///// 表达树and操作
         ///// </summary>
@@ -187,7 +179,6 @@ namespace Destiny.Core.Flow.Extensions
         ///// <param name="expr1"></param>
         ///// <param name="expr2"></param>
         ///// <returns></returns>
-
         public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> expr1, Expression<Func<T, bool>> expr2)
         {
             if (expr1 == null)
@@ -200,7 +191,6 @@ namespace Destiny.Core.Flow.Extensions
             return Expression.Lambda<Func<T, bool>>(body, newParameter);
 
         }
-
         public static Expression<Func<T, bool>> AndIf<T>(this Expression<Func<T, bool>> expr1, Expression<Func<T, bool>> expr2, Func<bool> conditionFunc)
         {
             if (expr1 == null)
@@ -214,7 +204,6 @@ namespace Destiny.Core.Flow.Extensions
 
             return expr1.And(expr2);
         }
-
         /// <summary>
         /// Or操作
         /// </summary>
@@ -233,7 +222,6 @@ namespace Destiny.Core.Flow.Extensions
             var body = Expression.Or(exp.left, exp.right);
             return Expression.Lambda<Func<T, bool>>(body, newParameter);
         }
-
         /// <summary>
         /// 替换参数
         /// </summary>
@@ -253,7 +241,6 @@ namespace Destiny.Core.Flow.Extensions
             var right = visitor.Replace(expr2.Body);
             return (left, right);
         }
-
         public static Dictionary<string, object> ExpressionToDictValues<T>(this Expression<Func<T, T>> expression)
         {
             var dictValues = new Dictionary<string, object>();
@@ -344,11 +331,7 @@ namespace Destiny.Core.Flow.Extensions
 
             return dictValues;
         }
-
-
-       
     }
-
     public class NewExpressionVisitor : ExpressionVisitor
     {
         public ParameterExpression NewParameter { get; private set; }
