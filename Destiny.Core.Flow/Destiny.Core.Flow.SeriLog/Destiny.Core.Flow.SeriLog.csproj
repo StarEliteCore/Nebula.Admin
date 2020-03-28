@@ -12,4 +12,8 @@
     <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Destiny.Core.Flow\Destiny.Core.Flow.csproj" />
+  </ItemGroup>
+
 </Project>

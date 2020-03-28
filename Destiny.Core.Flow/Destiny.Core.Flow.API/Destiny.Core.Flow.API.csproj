@@ -20,5 +20,9 @@
     <ProjectReference Include="..\Destiny.Core.Flow.Swagger\Destiny.Core.Flow.Swagger.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="StartupExtension\" />
+  </ItemGroup>
+
 
 </Project>
