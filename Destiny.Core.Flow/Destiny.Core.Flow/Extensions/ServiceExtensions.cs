@@ -38,9 +38,17 @@ namespace Destiny.Core.Flow.Extensions
             return factory.CreateLogger(type);
         }
 
-
-
-    
+        /// <summary>
+        /// 得到注入服务
+        /// </summary>
+        /// <typeparam name="TService">动态类型</typeparam>
+        /// <param name="provider"></param>
+        /// <returns></returns>
+        public static TService GetService<TService>(this IServiceProvider provider)
+        {
+            TService service = provider.GetService<TService>();
+            return service;
+        }
 
     }
 }
