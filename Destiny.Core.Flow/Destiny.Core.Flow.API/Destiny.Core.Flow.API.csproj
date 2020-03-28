@@ -12,5 +12,9 @@
     <ProjectReference Include="..\Destiny.Core.Flow.AutoMapper\Destiny.Core.Flow.AutoMapper.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="StartupExtension\" />
+  </ItemGroup>
+
 
 </Project>
