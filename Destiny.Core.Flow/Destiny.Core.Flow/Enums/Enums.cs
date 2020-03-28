@@ -68,4 +68,14 @@ namespace Destiny.Core.Flow.Enums
 
 
     }
+
+    [Description("姓别")]
+    public enum Sex
+    {
+        [Description("男")]
+        Man,
+        [Description("女")]
+        Female
+    }
+
 }

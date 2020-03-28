@@ -31,9 +31,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Repositor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.SeriLog", "Destiny.Core.Flow.SeriLog\Destiny.Core.Flow.SeriLog.csproj", "{41EB9B3E-C420-4EFD-86CB-6D292EDF7AEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.Swagger", "Destiny.Core.Flow.Swagger\Destiny.Core.Flow.Swagger.csproj", "{6F852563-D024-40F5-93E4-4A84EF87EEA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Swagger", "Destiny.Core.Flow.Swagger\Destiny.Core.Flow.Swagger.csproj", "{6F852563-D024-40F5-93E4-4A84EF87EEA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.AspNetCore", "Destiny.Core.Flow.AspNetCore\Destiny.Core.Flow.AspNetCore.csproj", "{2AE8D727-313D-40BE-87CB-5E39ABF33B7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.AspNetCore", "Destiny.Core.Flow.AspNetCore\Destiny.Core.Flow.AspNetCore.csproj", "{2AE8D727-313D-40BE-87CB-5E39ABF33B7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.Identitys", "Destiny.Core.Flow.Identity\Destiny.Core.Flow.Identitys.csproj", "{40DA34CA-8A05-40E9-9542-596D6291D3A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,10 @@ Global
 		{2AE8D727-313D-40BE-87CB-5E39ABF33B7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AE8D727-313D-40BE-87CB-5E39ABF33B7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AE8D727-313D-40BE-87CB-5E39ABF33B7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40DA34CA-8A05-40E9-9542-596D6291D3A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40DA34CA-8A05-40E9-9542-596D6291D3A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40DA34CA-8A05-40E9-9542-596D6291D3A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40DA34CA-8A05-40E9-9542-596D6291D3A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
