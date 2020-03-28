@@ -13,10 +13,7 @@ namespace Destiny.Core.Flow.Entity
         public EntityBase()
         {
 
-            if (typeof(TKey) == typeof(Guid))
-            { 
-              
-            }
+      
         }
 
         [Description("主键")]

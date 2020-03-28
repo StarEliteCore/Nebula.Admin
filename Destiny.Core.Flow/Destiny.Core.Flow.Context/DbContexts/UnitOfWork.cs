@@ -244,8 +244,9 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
         /// <returns></returns>
         public DbContext GetDbContext()
         {
-            _dbContext.UnitOfWork = this;
+    
             _connection = _dbContext.Database.GetDbConnection();
+            _dbContext.UnitOfWork = this;
             return _dbContext as DbContext;
         }
 

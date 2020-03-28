@@ -30,7 +30,7 @@ namespace Destiny.Core.Flow
            
         }
 
-        public IUnitOfWork UnitOfWork { get; set; }
+        public IUnitOfWork UnitOfWork { get;  set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -43,18 +43,30 @@ namespace Destiny.Core.Flow
                 item.Map(modelBuilder);
 
             }
-
-
         }
 
 
-
+        /// <summary>
+        /// 异步保存
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
     
             return base.SaveChangesAsync(cancellationToken);
         }
+
+        /// <summary>
+        /// 保存更改
+        /// </summary>
+        /// <returns></returns>
+        public override int SaveChanges()
+        {
+            return base.SaveChanges();
+        }
+
 
     }
 }

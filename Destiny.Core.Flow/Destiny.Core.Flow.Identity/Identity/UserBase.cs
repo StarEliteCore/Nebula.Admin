@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Identity
 {
-    public abstract class UserBase<TUserKey> : EntityBase<TUserKey>,ICreatedTime
+    public abstract class UserBase<TUserKey> : EntityBase<TUserKey>
          where TUserKey : IEquatable<TUserKey>
     {
 
@@ -77,8 +77,7 @@ namespace Destiny.Core.Flow.Identity
         [DisplayName("登录失败次数")]
         public int AccessFailedCount { get; set; }
     
-        [DisplayName("创建时间")]
-        public DateTime CreatedTime { get; set; }
+
 
 
         [DisplayName("是否系统")]
