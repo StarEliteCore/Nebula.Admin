@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Destiny.Core.Flow.API.StartupExtension;
+using Destiny.Core.Flow.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,8 +27,9 @@ namespace Destiny.Core.Flow.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-           // services.MapperExtension();
+            services.AddAppModuleManager<AspNetCoreAppModuleManager>();
+            //services.AddControllers();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,16 +40,16 @@ namespace Destiny.Core.Flow.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseRouting();
 
-            app.UseRouting();
+            //app.UseAuthorization();
 
-            app.UseAuthorization();
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers();
+            //});
+            app.UseAppModule<AspNetCoreAppModuleManager>();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
         }
     }
 }

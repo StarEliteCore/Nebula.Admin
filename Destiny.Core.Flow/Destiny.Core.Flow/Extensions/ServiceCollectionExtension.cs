@@ -1,4 +1,6 @@
-﻿using Destiny.Core.Flow.Helpers;
+﻿
+using Destiny.Core.Flow.Helpers;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -215,6 +217,31 @@ namespace Destiny.Core.Flow.Extensions
             }
 
             return type;
+        }
+
+        public static IConfiguration GetConfiguration(this IServiceCollection services)
+        {
+            return services.GetSingletonInstanceOrNull<IConfiguration>();
+        }
+
+        /// <summary>
+        /// 获取单例注册服务对象
+        /// </summary>
+        public static T GetSingletonInstanceOrNull<T>(this IServiceCollection services)
+        {
+            ServiceDescriptor descriptor = services.FirstOrDefault(d => d.ServiceType == typeof(T) && d.Lifetime == ServiceLifetime.Singleton);
+
+            if (descriptor?.ImplementationInstance != null)
+            {
+                return (T)descriptor.ImplementationInstance;
+            }
+
+            if (descriptor?.ImplementationFactory != null)
+            {
+                return (T)descriptor.ImplementationFactory.Invoke(null);
+            }
+
+            return default;
         }
 
     }

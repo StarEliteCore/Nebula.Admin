@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Modules
 {
-    [Dependency(ServiceLifetime.Singleton)]
+ 
     public class AppModuleManager: IAppModuleManager
     {
         public List<AppModuleBase> SourceModules { get; private set; }

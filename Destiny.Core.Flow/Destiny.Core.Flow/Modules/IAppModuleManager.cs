@@ -11,6 +11,7 @@ namespace Destiny.Core.Flow.Modules
 
         IServiceCollection LoadModules(IServiceCollection services);
 
+        List<AppModuleBase> SourceModules { get; }
 
         //此方法由运行时调用。使用此方法配置HTTP请求管道。
         void Configure(IApplicationBuilder applicationBuilder);
