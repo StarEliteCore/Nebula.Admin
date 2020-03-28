@@ -74,9 +74,6 @@ namespace Destiny.Core.Flow.Extensions
         {
             Require<ArgumentNullException>(value != null, $"参数“{paramName}”不能为空引用。");
         }
-
-
-
         /// <summary>
         /// 检查字符串不能为空引用或空字符串，否则抛出<see cref="ArgumentNullException"/>异常或<see cref="ArgumentException"/>异常。
         /// </summary>
@@ -113,8 +110,6 @@ namespace Destiny.Core.Flow.Extensions
             NotNull(collection, paramName);
             Require<ArgumentException>(collection.Any(), $"参数“{paramName}”不能为空引用或空集合。");
         }
-
-
         /// <summary>
         ///  检查集合不能为空委托，否则抛出<see cref="ArgumentNullException"/>异常或<see cref="ArgumentException"/>异常。
         /// </summary>
@@ -127,8 +122,6 @@ namespace Destiny.Core.Flow.Extensions
             NotNull(func, paramName);
             Require<ArgumentException>(func.IsNotNull(), $"参数“{paramName}”不能为空委托。");
         }
-
-
         /// <summary>
         /// 检查指定路径的文件夹必须存在，否则抛出<see cref="DirectoryNotFoundException"/>异常。
         /// </summary>
@@ -141,7 +134,6 @@ namespace Destiny.Core.Flow.Extensions
             NotNull(directory, paramName);
             Require<DirectoryNotFoundException>(Directory.Exists(directory), $"指定的目录路径“{directory}”不存在。");
         }
-
         /// <summary>
         /// 检查指定路径的文件必须存在，否则抛出<see cref="FileNotFoundException"/>异常。
         /// </summary>
@@ -154,7 +146,5 @@ namespace Destiny.Core.Flow.Extensions
             NotNull(filename, paramName);
             Require<FileNotFoundException>(File.Exists(filename), $"指定的文件路径“{filename}”不存在");
         }
-
-
     }
 }

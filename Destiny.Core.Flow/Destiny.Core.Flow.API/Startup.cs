@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using Destiny.Core.Flow.API.StartupExtension;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +28,7 @@ namespace Destiny.Core.Flow.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+           // services.MapperExtension();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

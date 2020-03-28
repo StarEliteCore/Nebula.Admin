@@ -15,15 +15,15 @@ namespace Destiny.Core.Flow.Dependency
     /// </summary>
     public class DependencyAppModule: AppModuleBase
     {
-
-
         public override IServiceCollection ConfigureServices(IServiceCollection services)
         {
             this.BulkIntoServices(services);
             return services;
         }
-
-
+        /// <summary>
+        /// 批量注入服务
+        /// </summary>
+        /// <param name="services"></param>
         private void BulkIntoServices(IServiceCollection services)
         {
             var typeFinder = services.GetOrAddSingletonService<ITypeFinder, TypeFinder>();

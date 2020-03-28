@@ -26,8 +26,6 @@ namespace Destiny.Core.Flow.Extensions
             return value.Split(new[] { strSplit },
                 removeEmptyEntries ? StringSplitOptions.RemoveEmptyEntries : StringSplitOptions.None);
         }
-
-
         /// <summary>
         /// 将字符中拼接
         /// </summary>
@@ -51,7 +49,6 @@ namespace Destiny.Core.Flow.Extensions
             }
             return sb.ToString().TrimEnd(separator.ToCharArray());
         }
-
         /// <summary>
         ///把字符串转成SQL中IN
         /// </summary>
@@ -80,10 +77,6 @@ namespace Destiny.Core.Flow.Extensions
             }
             return sb.ToString().TrimEnd(inMiddleSeparator.ToCharArray());
         }
-
-
-
-
         /// <summary>
         /// 是否为空或者为null或者空格
         /// </summary>
@@ -93,8 +86,6 @@ namespace Destiny.Core.Flow.Extensions
         {
             return string.IsNullOrWhiteSpace(value);
         }
-
-
         /// <summary>
         /// 是否为空或者为null
         /// </summary>
@@ -105,7 +96,6 @@ namespace Destiny.Core.Flow.Extensions
 
             return string.IsNullOrEmpty(value);
         }
-
         /// <summary>
         /// 判断是否数字
         /// </summary>
@@ -115,7 +105,6 @@ namespace Destiny.Core.Flow.Extensions
         {
             return Regex.IsMatch(value, @"^[0-9]*$");
         }
-
         /// <summary>
         /// 在指定的输入字符串中搜索指定的正则表达式的第一个匹配项
         /// </summary>
@@ -130,7 +119,6 @@ namespace Destiny.Core.Flow.Extensions
             }
             return Regex.Match(value, pattern).Value;
         }
-
         public static string FormatWith(this string format, params object[] args)
         {
             format.NotNull("format");
