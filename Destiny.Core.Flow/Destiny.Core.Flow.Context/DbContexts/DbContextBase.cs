@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Destiny.Core.Flow.EntityFrameworkCore;
+using Destiny.Core.Flow.Reflection;
+using Destiny.Core.Flow.Extensions;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Destiny.Core.Flow
 {
@@ -29,6 +32,20 @@ namespace Destiny.Core.Flow
 
         public IUnitOfWork UnitOfWork { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            var typeFinder = _serviceProvider.GetService<ITypeFinder>();
+
+            IEntityMappingConfiguration[] mappings = typeFinder.Find(o => o.IsDeriveClassFrom<IEntityMappingConfiguration>()).Select(o => Activator.CreateInstance(o) as IEntityMappingConfiguration).ToArray();
+            foreach (var item in mappings)
+            {
+                item.Map(modelBuilder);
+
+            }
+
+
+        }
 
 
 
