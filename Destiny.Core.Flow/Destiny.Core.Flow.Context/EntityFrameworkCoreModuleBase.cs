@@ -17,7 +17,7 @@ namespace Destiny.Core.Flow
 
             services = UseSql(services);
 
-            services.AddSingleton<IEntityManager, EntityManager>();
+            //services.AddSingleton<IEntityManager, EntityManager>();
             return services;
         }
 

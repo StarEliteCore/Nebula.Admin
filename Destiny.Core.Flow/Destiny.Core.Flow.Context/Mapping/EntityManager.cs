@@ -20,9 +20,9 @@ namespace Destiny.Core.Flow.Mapping
         public void Initialize()
         {
          
-            var typeFinder = _serviceProvider.GetService<ITypeFinder>();
-            typeFinder.NotNull(nameof(typeFinder));
-            Type[] types= typeFinder.Find(o => o.IsDeriveClassFrom<IEntityMappingConfiguration>()).Distinct().ToArray();
+            //var typeFinder = _serviceProvider.GetService<ITypeFinder>();
+            //typeFinder.NotNull(nameof(typeFinder));
+            //Type[] types= typeFinder.Find(o => o.IsDeriveClassFrom<IEntityMappingConfiguration>()).Distinct().ToArray();
         }
     }
 }

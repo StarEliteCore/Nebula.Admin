@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using AutoMapper.Configuration;
-using Destiny.Core.Flow.AutoMapper.AutoMapperBase;
+﻿
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Reflection;
