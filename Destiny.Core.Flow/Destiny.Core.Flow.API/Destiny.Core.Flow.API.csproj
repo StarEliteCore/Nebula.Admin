@@ -10,13 +10,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.3" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Destiny.Core.Flow.AspNetCore\Destiny.Core.Flow.AspNetCore.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.AutoMapper\Destiny.Core.Flow.AutoMapper.csproj" />
+    <ProjectReference Include="..\Destiny.Core.Flow.Context\Destiny.Core.Flow.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Destiny.Core.Flow.Model\Destiny.Core.Flow.Model.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Swagger\Destiny.Core.Flow.Swagger.csproj" />
   </ItemGroup>
 
