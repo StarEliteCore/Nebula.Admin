@@ -68,7 +68,7 @@ namespace Destiny.Core.Flow.Dependency
         public override void Configure(IApplicationBuilder applicationBuilder)
         {
             IocManage.Instance.SetApplicationServiceProvider(applicationBuilder.ApplicationServices);
-            base.Configure();
+            base.Configure(applicationBuilder);
         }
 
     }
