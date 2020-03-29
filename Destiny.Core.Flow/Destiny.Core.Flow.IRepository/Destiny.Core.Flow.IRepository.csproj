@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Destiny.Core.Flow.Context\Destiny.Core.Flow.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Destiny.Core.Flow.EntityFrameworkCore\Destiny.Core.Flow.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow\Destiny.Core.Flow.csproj" />
   </ItemGroup>
 
