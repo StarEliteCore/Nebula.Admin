@@ -78,3 +78,5 @@
 /src/Destiny.Core.Flow.IServices/bin
 /src/Destiny.Core.Flow.IServices/obj
 /.vs
+/src/Destiny.Core.Flow.DTOs/obj
+/src/Destiny.Core.Flow.DTOs/bin
