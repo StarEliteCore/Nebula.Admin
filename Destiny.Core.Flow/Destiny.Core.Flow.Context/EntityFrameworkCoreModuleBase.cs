@@ -9,7 +9,7 @@ namespace Destiny.Core.Flow
     public  abstract class EntityFrameworkCoreModuleBase: AppModuleBase
     {
 
-        //public override int Order => 1;
+
 
         public override IServiceCollection ConfigureServices(IServiceCollection services)
         {
@@ -17,7 +17,6 @@ namespace Destiny.Core.Flow
 
             services = UseSql(services);
 
-            //services.AddSingleton<IEntityManager, EntityManager>();
             return services;
         }
 
