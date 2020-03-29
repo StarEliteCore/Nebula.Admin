@@ -3,37 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.API", "Destiny.Core.Flow.API\Destiny.Core.Flow.API.csproj", "{FF447721-BFD6-40C6-AE23-D672EC225A00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.API", "src\Destiny.Core.Flow.API\Destiny.Core.Flow.API.csproj", "{FF447721-BFD6-40C6-AE23-D672EC225A00}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.IServices", "Destiny.Core.Flow.IServices\Destiny.Core.Flow.IServices.csproj", "{0FDF7DC0-77FE-4529-8E8C-D17FF03D84A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.IServices", "src\Destiny.Core.Flow.IServices\Destiny.Core.Flow.IServices.csproj", "{0FDF7DC0-77FE-4529-8E8C-D17FF03D84A0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Services", "Destiny.Core.Flow.Services\Destiny.Core.Flow.Services.csproj", "{89D24E5C-7C65-4150-AB7B-656809CC6011}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Services", "src\Destiny.Core.Flow.Services\Destiny.Core.Flow.Services.csproj", "{89D24E5C-7C65-4150-AB7B-656809CC6011}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.CustomExtension", "Destiny.Core.Flow.CustomExtension\Destiny.Core.Flow.CustomExtension.csproj", "{4A7587D3-0F99-4E94-9C17-07D047C4232B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Model", "src\Destiny.Core.Flow.Model\Destiny.Core.Flow.Model.csproj", "{3350DDC6-02D0-4986-9F13-17B8B94B9456}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Commom", "Destiny.Core.Flow.Commom\Destiny.Core.Flow.Commom.csproj", "{8A24B1C6-9E7C-4011-9EDD-DC6D3FC9826B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow", "src\Destiny.Core.Flow\Destiny.Core.Flow.csproj", "{49FF2838-ED54-48FF-A8C4-C0F91F1EB872}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Model", "Destiny.Core.Flow.Model\Destiny.Core.Flow.Model.csproj", "{3350DDC6-02D0-4986-9F13-17B8B94B9456}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Log4Net", "src\Destiny.Core.Flow.Log4Net\Destiny.Core.Flow.Log4Net.csproj", "{DC68A647-D7C2-4321-BDC7-ED8F65CD6A5C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow", "Destiny.Core.Flow\Destiny.Core.Flow.csproj", "{49FF2838-ED54-48FF-A8C4-C0F91F1EB872}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.AutoMapper", "src\Destiny.Core.Flow.AutoMapper\Destiny.Core.Flow.AutoMapper.csproj", "{1BEA2CF0-145B-4B0C-ABDC-A429E40E5890}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Log4Net", "Destiny.Core.Flow.Log4Net\Destiny.Core.Flow.Log4Net.csproj", "{DC68A647-D7C2-4321-BDC7-ED8F65CD6A5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Tests", "src\Destiny.Core.Tests\Destiny.Core.Tests.csproj", "{57C6446B-F401-402D-9BAD-4CB9302AA344}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.AutoMapper", "Destiny.Core.Flow.AutoMapper\Destiny.Core.Flow.AutoMapper.csproj", "{1BEA2CF0-145B-4B0C-ABDC-A429E40E5890}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.SeriLog", "src\Destiny.Core.Flow.SeriLog\Destiny.Core.Flow.SeriLog.csproj", "{41EB9B3E-C420-4EFD-86CB-6D292EDF7AEF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Tests", "Destiny.Core.Tests\Destiny.Core.Tests.csproj", "{57C6446B-F401-402D-9BAD-4CB9302AA344}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Swagger", "src\Destiny.Core.Flow.Swagger\Destiny.Core.Flow.Swagger.csproj", "{6F852563-D024-40F5-93E4-4A84EF87EEA1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Repository", "Destiny.Core.Flow.Repository\Destiny.Core.Flow.Repository.csproj", "{F671FCFA-5ABE-48B2-9CE8-126C635F4288}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.AspNetCore", "src\Destiny.Core.Flow.AspNetCore\Destiny.Core.Flow.AspNetCore.csproj", "{2AE8D727-313D-40BE-87CB-5E39ABF33B7D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.SeriLog", "Destiny.Core.Flow.SeriLog\Destiny.Core.Flow.SeriLog.csproj", "{41EB9B3E-C420-4EFD-86CB-6D292EDF7AEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Identitys", "src\Destiny.Core.Flow.Identity\Destiny.Core.Flow.Identitys.csproj", "{40DA34CA-8A05-40E9-9542-596D6291D3A8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Swagger", "Destiny.Core.Flow.Swagger\Destiny.Core.Flow.Swagger.csproj", "{6F852563-D024-40F5-93E4-4A84EF87EEA1}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.AspNetCore", "Destiny.Core.Flow.AspNetCore\Destiny.Core.Flow.AspNetCore.csproj", "{2AE8D727-313D-40BE-87CB-5E39ABF33B7D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Identitys", "Destiny.Core.Flow.Identity\Destiny.Core.Flow.Identitys.csproj", "{40DA34CA-8A05-40E9-9542-596D6291D3A8}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.EntityFrameworkCore", "Destiny.Core.Flow.EntityFrameworkCore\Destiny.Core.Flow.EntityFrameworkCore.csproj", "{009E18C9-38CE-4CE0-9EA0-D9A1AB38DE86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.EntityFrameworkCore", "src\Destiny.Core.Flow.EntityFrameworkCore\Destiny.Core.Flow.EntityFrameworkCore.csproj", "{009E18C9-38CE-4CE0-9EA0-D9A1AB38DE86}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1249687C-582B-4A3E-8090-2AAF36AA3284}"
 EndProject
@@ -59,14 +53,6 @@ Global
 		{89D24E5C-7C65-4150-AB7B-656809CC6011}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89D24E5C-7C65-4150-AB7B-656809CC6011}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89D24E5C-7C65-4150-AB7B-656809CC6011}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A7587D3-0F99-4E94-9C17-07D047C4232B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A7587D3-0F99-4E94-9C17-07D047C4232B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A7587D3-0F99-4E94-9C17-07D047C4232B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A7587D3-0F99-4E94-9C17-07D047C4232B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8A24B1C6-9E7C-4011-9EDD-DC6D3FC9826B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A24B1C6-9E7C-4011-9EDD-DC6D3FC9826B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A24B1C6-9E7C-4011-9EDD-DC6D3FC9826B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A24B1C6-9E7C-4011-9EDD-DC6D3FC9826B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3350DDC6-02D0-4986-9F13-17B8B94B9456}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3350DDC6-02D0-4986-9F13-17B8B94B9456}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3350DDC6-02D0-4986-9F13-17B8B94B9456}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -87,10 +73,6 @@ Global
 		{57C6446B-F401-402D-9BAD-4CB9302AA344}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57C6446B-F401-402D-9BAD-4CB9302AA344}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57C6446B-F401-402D-9BAD-4CB9302AA344}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F671FCFA-5ABE-48B2-9CE8-126C635F4288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F671FCFA-5ABE-48B2-9CE8-126C635F4288}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F671FCFA-5ABE-48B2-9CE8-126C635F4288}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F671FCFA-5ABE-48B2-9CE8-126C635F4288}.Release|Any CPU.Build.0 = Release|Any CPU
 		{41EB9B3E-C420-4EFD-86CB-6D292EDF7AEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{41EB9B3E-C420-4EFD-86CB-6D292EDF7AEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41EB9B3E-C420-4EFD-86CB-6D292EDF7AEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -119,14 +101,11 @@ Global
 		{FF447721-BFD6-40C6-AE23-D672EC225A00} = {9A347066-1CEA-4FD6-BD7E-598A7FF21E6C}
 		{0FDF7DC0-77FE-4529-8E8C-D17FF03D84A0} = {1249687C-582B-4A3E-8090-2AAF36AA3284}
 		{89D24E5C-7C65-4150-AB7B-656809CC6011} = {1249687C-582B-4A3E-8090-2AAF36AA3284}
-		{4A7587D3-0F99-4E94-9C17-07D047C4232B} = {1249687C-582B-4A3E-8090-2AAF36AA3284}
-		{8A24B1C6-9E7C-4011-9EDD-DC6D3FC9826B} = {1249687C-582B-4A3E-8090-2AAF36AA3284}
 		{3350DDC6-02D0-4986-9F13-17B8B94B9456} = {1249687C-582B-4A3E-8090-2AAF36AA3284}
 		{49FF2838-ED54-48FF-A8C4-C0F91F1EB872} = {1249687C-582B-4A3E-8090-2AAF36AA3284}
 		{DC68A647-D7C2-4321-BDC7-ED8F65CD6A5C} = {1249687C-582B-4A3E-8090-2AAF36AA3284}
 		{1BEA2CF0-145B-4B0C-ABDC-A429E40E5890} = {1249687C-582B-4A3E-8090-2AAF36AA3284}
 		{57C6446B-F401-402D-9BAD-4CB9302AA344} = {B74CBBDD-8574-4768-AA9D-2144A77D4875}
-		{F671FCFA-5ABE-48B2-9CE8-126C635F4288} = {1249687C-582B-4A3E-8090-2AAF36AA3284}
 		{41EB9B3E-C420-4EFD-86CB-6D292EDF7AEF} = {1249687C-582B-4A3E-8090-2AAF36AA3284}
 		{6F852563-D024-40F5-93E4-4A84EF87EEA1} = {1249687C-582B-4A3E-8090-2AAF36AA3284}
 		{2AE8D727-313D-40BE-87CB-5E39ABF33B7D} = {1249687C-582B-4A3E-8090-2AAF36AA3284}
