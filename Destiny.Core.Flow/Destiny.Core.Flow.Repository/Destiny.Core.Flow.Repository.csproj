@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Destiny.Core.Flow.EntityFrameworkCore\Destiny.Core.Flow.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.IRepository\Destiny.Core.Flow.IRepository.csproj" />
   </ItemGroup>
 

@@ -37,3 +37,5 @@
 /Destiny.Core.Flow/Destiny.Core.Flow.AspNetCore/bin
 /Destiny.Core.Flow/Destiny.Core.Flow.Identity/bin
 /Destiny.Core.Flow/Destiny.Core.Flow.Identity/obj
+/Destiny.Core.Flow/Destiny.Core.Flow.EntityFrameworkCore/obj
+/Destiny.Core.Flow/Destiny.Core.Flow.EntityFrameworkCore/bin
