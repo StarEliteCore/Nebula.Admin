@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Destiny.Core.Flow.DTOs
+namespace Destiny.Core.Flow.Dtos
 {
     public class Class1
     {
