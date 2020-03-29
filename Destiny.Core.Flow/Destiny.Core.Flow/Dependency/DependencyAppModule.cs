@@ -1,6 +1,7 @@
 ﻿using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Modules;
 using Destiny.Core.Flow.Reflection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
@@ -17,6 +18,7 @@ namespace Destiny.Core.Flow.Dependency
     {
         public override IServiceCollection ConfigureServices(IServiceCollection services)
         {
+            IocManage.Instance.SetServiceCollection(services);
             this.BulkIntoServices(services);
             return services;
         }
@@ -61,6 +63,12 @@ namespace Destiny.Core.Flow.Dependency
             {
                 services.Add(new ServiceDescriptor(interfaceType, implementationType, atrr.Lifetime));
             }
+        }
+
+        public override void Configure(IApplicationBuilder applicationBuilder)
+        {
+            IocManage.Instance.SetApplicationServiceProvider(applicationBuilder.ApplicationServices);
+            base.Configure();
         }
 
     }
