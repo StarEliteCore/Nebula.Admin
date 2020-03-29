@@ -1,6 +1,5 @@
 ﻿using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.EntityFrameworkCore;
-using Destiny.Core.Flow.IRepository.IBaseRepository;
 using Destiny.Core.Flow.Ui;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Exceptions;
 using Destiny.Core.Flow.Enums;
+using Destiny.Core.Flow.Model.RepositoryBase;
 
 namespace Destiny.Core.Flow.Repository.BaseRepository
 {
