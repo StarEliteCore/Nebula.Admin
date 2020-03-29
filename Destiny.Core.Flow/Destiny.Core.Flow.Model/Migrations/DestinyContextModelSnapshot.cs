@@ -68,6 +68,20 @@ namespace Destiny.Core.Flow.Model.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Role");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("b8551e97-0723-47fc-bd7e-aff35bb1b1e7"),
+                            ConcurrencyStamp = "b871ceee-f73b-4763-9fde-e188bffb268e",
+                            CreatedTime = new DateTime(2020, 3, 29, 13, 53, 38, 461, DateTimeKind.Local).AddTicks(8889),
+                            CreatorUserId = new Guid("a1e89f45-4fa8-4751-9df9-dec86f7e6c14"),
+                            Description = "拥有系统上所有有权限请不要删除!",
+                            IsAdmin = true,
+                            IsDeleted = false,
+                            Name = "系统管理员",
+                            NormalizedName = "系统管理员"
+                        });
                 });
 
             modelBuilder.Entity("Destiny.Core.Flow.Model.Entities.Identity.RoleClaim", b =>
@@ -210,7 +224,7 @@ namespace Destiny.Core.Flow.Model.Migrations
                             Id = new Guid("a1e89f45-4fa8-4751-9df9-dec86f7e6c14"),
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "0286cab6-8a4a-44ed-9a97-86b0506c65c3",
-                            CreatedTime = new DateTime(2020, 3, 29, 13, 41, 46, 685, DateTimeKind.Local).AddTicks(9989),
+                            CreatedTime = new DateTime(2020, 3, 29, 13, 53, 38, 485, DateTimeKind.Local).AddTicks(492),
                             Description = "系统管理员拥有所有权限",
                             EmailConfirmed = false,
                             IsDeleted = false,
