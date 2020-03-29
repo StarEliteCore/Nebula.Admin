@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Destiny.Core.Flow.Model.Migrations
 {
-    public partial class InitializationDestinyCoreFlowDB : Migration
+    public partial class CreateDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -143,12 +143,12 @@ namespace Destiny.Core.Flow.Model.Migrations
             migrationBuilder.InsertData(
                 table: "Role",
                 columns: new[] { "Id", "Code", "ConcurrencyStamp", "CreatedTime", "CreatorUserId", "Description", "IsAdmin", "LastModifierTime", "LastModifierUserId", "Name", "NormalizedName" },
-                values: new object[] { new Guid("b8551e97-0723-47fc-bd7e-aff35bb1b1e7"), null, "b871ceee-f73b-4763-9fde-e188bffb268e", new DateTime(2020, 3, 29, 13, 53, 38, 461, DateTimeKind.Local).AddTicks(8889), new Guid("a1e89f45-4fa8-4751-9df9-dec86f7e6c14"), "拥有系统上所有有权限请不要删除!", true, null, null, "系统管理员", "系统管理员" });
+                values: new object[] { new Guid("b8551e97-0723-47fc-bd7e-aff35bb1b1e7"), null, "dfcef156-19d3-435c-aa8b-8351f87b2e11", new DateTime(2020, 3, 29, 14, 14, 52, 377, DateTimeKind.Local).AddTicks(3376), new Guid("a1e89f45-4fa8-4751-9df9-dec86f7e6c14"), "拥有系统上所有有权限请不要删除!", true, null, null, "系统管理员", "系统管理员" });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedTime", "CreatorUserId", "Description", "Email", "EmailConfirmed", "HeadImg", "IsSystem", "LastModifierTime", "LastModifierUserId", "LockoutEnabled", "LockoutEnd", "NickName", "NormalizeEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Sex", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("a1e89f45-4fa8-4751-9df9-dec86f7e6c14"), "0286cab6-8a4a-44ed-9a97-86b0506c65c3", new DateTime(2020, 3, 29, 13, 53, 38, 485, DateTimeKind.Local).AddTicks(492), null, "系统管理员拥有所有权限", null, false, null, true, null, null, true, null, "管理员", null, "ADMIN", "AQAAAAEAACcQAAAAEEPWhHPCHU1i6Z0ayoApKGbPlZUb38RUdJg4QjUcccVhUSto0sRZtLOXfwWUJ+P2Xw==", null, false, "3OWMGQAK5ZTXMSV6OFSGIWWWNIWJ2SX6", 0, false, "Admin" });
+                values: new object[] { new Guid("a1e89f45-4fa8-4751-9df9-dec86f7e6c14"), "0286cab6-8a4a-44ed-9a97-86b0506c65c3", new DateTime(2020, 3, 29, 14, 14, 52, 401, DateTimeKind.Local).AddTicks(4118), null, "系统管理员拥有所有权限", null, false, null, true, null, null, true, null, "管理员", null, "ADMIN", "AQAAAAEAACcQAAAAEEPWhHPCHU1i6Z0ayoApKGbPlZUb38RUdJg4QjUcccVhUSto0sRZtLOXfwWUJ+P2Xw==", null, false, "3OWMGQAK5ZTXMSV6OFSGIWWWNIWJ2SX6", 0, false, "Admin" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

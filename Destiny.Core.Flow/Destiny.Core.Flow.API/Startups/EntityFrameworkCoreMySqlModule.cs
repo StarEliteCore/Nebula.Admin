@@ -1,4 +1,4 @@
-﻿using Destiny.Core.Flow.DbContexts;
+﻿
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
@@ -18,7 +18,7 @@ namespace Destiny.Core.Flow.API.Startups
         {
             var Assembly = typeof(EntityFrameworkCoreMySqlModule).GetTypeInfo().Assembly.GetName().Name;//获取程序集
             var mysqlconn = services.GetConfiguration()["Destiny:DbContext:MysqlConnectionString"];
-            services.AddDbContext<DestinyContext>(oprions => {
+            services.AddDbContext<DefaultDbContext>(oprions => {
                 oprions.UseMySql(mysqlconn, assembly => { assembly.MigrationsAssembly("Destiny.Core.Flow.Model"); });
             });
             return services;

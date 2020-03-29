@@ -23,7 +23,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Destiny.Core.Flow.AspNetCore\Destiny.Core.Flow.AspNetCore.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.AutoMapper\Destiny.Core.Flow.AutoMapper.csproj" />
-    <ProjectReference Include="..\Destiny.Core.Flow.Context\Destiny.Core.Flow.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Model\Destiny.Core.Flow.Model.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Swagger\Destiny.Core.Flow.Swagger.csproj" />
   </ItemGroup>
