@@ -9,11 +9,23 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.EntityFrameworkCore;
 
 namespace Destiny.Core.Flow.API.Startups
 {
     public class EntityFrameworkCoreMySqlModule : EntityFrameworkCoreModuleBase
     {
+        protected override IServiceCollection AddRepository(IServiceCollection services)
+        {
+  
+            return services.AddScoped(typeof(IEFCoreRepository<,>),typeof(Repository<,>));
+        }
+
+        protected override IServiceCollection AddUnitOfWork(IServiceCollection services)
+        {
+            return services.AddScoped<IUnitOfWork, UnitOfWork<DefaultDbContext>>();
+        }
+
         protected override IServiceCollection UseSql(IServiceCollection services)
         {
             var Assembly = typeof(EntityFrameworkCoreMySqlModule).GetTypeInfo().Assembly.GetName().Name;//获取程序集
