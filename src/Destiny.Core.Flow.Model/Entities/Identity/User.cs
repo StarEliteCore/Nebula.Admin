@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Entity;
+﻿using AutoMapper;
+using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Identity;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Text;
 namespace Destiny.Core.Flow.Model.Entities.Identity
 {
     [DisplayName("用户信息")]
+
     public class User : UserBase<Guid>, IFullAuditedEntity<Guid>
     {
 

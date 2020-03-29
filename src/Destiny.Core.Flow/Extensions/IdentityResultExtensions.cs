@@ -12,7 +12,7 @@ namespace Destiny.Core.Flow.Extensions
 {
     public static partial class Extensions
     {
-        public static OperationResponse ToOperationResult(this IdentityResult identityResult)
+        public static OperationResponse ToOperationResponse(this IdentityResult identityResult)
         {
 
 

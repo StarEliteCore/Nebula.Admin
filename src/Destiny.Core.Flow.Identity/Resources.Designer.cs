@@ -8,8 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Destiny.Core.Flow
-{
+namespace Destiny.Core.Flow {
     using System;
     
     
@@ -23,8 +22,7 @@ namespace Destiny.Core.Flow
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources
-    {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -41,7 +39,7 @@ namespace Destiny.Core.Flow
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MNZ.CMS.Core.Identity.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Destiny.Core.Flow.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -72,7 +70,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 An unknown failure has occurred. 的本地化字符串。
+        ///   查找类似 发生了一个未知故障。 的本地化字符串。
         /// </summary>
         internal static string DefaultError {
             get {
@@ -81,7 +79,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Email &apos;{0}&apos; is already taken. 的本地化字符串。
+        ///   查找类似 电子邮件“{0}”已被占用。 的本地化字符串。
         /// </summary>
         internal static string DuplicateEmail {
             get {
@@ -90,7 +88,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Role name &apos;{0}&apos; is already taken. 的本地化字符串。
+        ///   查找类似 角色名“{0}”已被占用。 的本地化字符串。
         /// </summary>
         internal static string DuplicateRoleName {
             get {
@@ -99,7 +97,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 User name &apos;{0}&apos; is already taken. 的本地化字符串。
+        ///   查找类似 用户名“{0}”已被占用。 的本地化字符串。
         /// </summary>
         internal static string DuplicateUserName {
             get {
@@ -108,7 +106,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Email &apos;{0}&apos; is invalid. 的本地化字符串。
+        ///   查找类似 电子邮件“{0}“无效。 的本地化字符串。
         /// </summary>
         internal static string InvalidEmail {
             get {
@@ -117,7 +115,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Type {0} must derive from {1}&lt;{2}&gt;. 的本地化字符串。
+        ///   查找类似 类型“{0}“必须从{1}&lt;{2}&gt;派生。 的本地化字符串。
         /// </summary>
         internal static string InvalidManagerType {
             get {
@@ -126,7 +124,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 The provided PasswordHasherCompatibilityMode is invalid. 的本地化字符串。
+        ///   查找类似 提供的PasswordHasherCompatibilityMode无效。 的本地化字符串。
         /// </summary>
         internal static string InvalidPasswordHasherCompatibilityMode {
             get {
@@ -135,7 +133,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 The iteration count must be a positive integer. 的本地化字符串。
+        ///   查找类似 迭代计数必须为正整数。 的本地化字符串。
         /// </summary>
         internal static string InvalidPasswordHasherIterationCount {
             get {
@@ -144,7 +142,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Role name &apos;{0}&apos; is invalid. 的本地化字符串。
+        ///   查找类似 角色名“{0}“无效。 的本地化字符串。
         /// </summary>
         internal static string InvalidRoleName {
             get {
@@ -153,7 +151,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Invalid token. 的本地化字符串。
+        ///   查找类似 无效的令牌。 的本地化字符串。
         /// </summary>
         internal static string InvalidToken {
             get {
@@ -162,7 +160,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 User name &apos;{0}&apos; is invalid, can only contain letters or digits. 的本地化字符串。
+        ///   查找类似 用户名“{0}“无效，只能包含字母或数字。 的本地化字符串。
         /// </summary>
         internal static string InvalidUserName {
             get {
@@ -171,7 +169,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 A user with this login already exists. 的本地化字符串。
+        ///   查找类似 具有此登录名的用户已经存在。 的本地化字符串。
         /// </summary>
         internal static string LoginAlreadyAssociated {
             get {
@@ -180,7 +178,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 AddIdentity must be called on the service collection. 的本地化字符串。
+        ///   查找类似 必须对服务集合调用AddIdEntity。 的本地化字符串。
         /// </summary>
         internal static string MustCallAddIdentity {
             get {
@@ -189,7 +187,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 No IPersonalDataProtector service was registered, this is required when ProtectPersonalData = true. 的本地化字符串。
+        ///   查找类似 未注册IPersonalDataProtector服务，当ProtectPersonalData=true时需要此服务。 的本地化字符串。
         /// </summary>
         internal static string NoPersonalDataProtector {
             get {
@@ -198,7 +196,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 No RoleType was specified, try AddRoles&lt;TRole&gt;(). 的本地化字符串。
+        ///   查找类似 未指定RoleType，请尝试AddRoles&lt;TRole&gt;（）。 的本地化字符串。
         /// </summary>
         internal static string NoRoleType {
             get {
@@ -207,7 +205,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 No IUserTwoFactorTokenProvider&lt;{0}&gt; named &apos;{1}&apos; is registered. 的本地化字符串。
+        ///   查找类似 没有注册名为{1}的IUserTwoFactorTokenProvider&lt;{0}&gt;。 的本地化字符串。
         /// </summary>
         internal static string NoTokenProvider {
             get {
@@ -216,7 +214,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 User security stamp cannot be null. 的本地化字符串。
+        ///   查找类似 用户安全戳不能为空。 的本地化字符串。
         /// </summary>
         internal static string NullSecurityStamp {
             get {
@@ -225,7 +223,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Incorrect password. 的本地化字符串。
+        ///   查找类似 密码不正确。 的本地化字符串。
         /// </summary>
         internal static string PasswordMismatch {
             get {
@@ -234,7 +232,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Passwords must have at least one digit (&apos;0&apos;-&apos;9&apos;). 的本地化字符串。
+        ///   查找类似 密码必须至少有一个数字（“0”-“9”）。 的本地化字符串。
         /// </summary>
         internal static string PasswordRequiresDigit {
             get {
@@ -243,7 +241,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Passwords must have at least one lowercase (&apos;a&apos;-&apos;z&apos;). 的本地化字符串。
+        ///   查找类似 密码必须至少有一个小写（&apos;a&apos;-&apos;z&apos;）。 的本地化字符串。
         /// </summary>
         internal static string PasswordRequiresLower {
             get {
@@ -252,7 +250,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Passwords must have at least one non alphanumeric character. 的本地化字符串。
+        ///   查找类似 密码必须至少有一个非字母数字字符。 的本地化字符串。
         /// </summary>
         internal static string PasswordRequiresNonAlphanumeric {
             get {
@@ -261,7 +259,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Passwords must use at least {0} different characters. 的本地化字符串。
+        ///   查找类似 密码必须至少使用“{0}“不同的字符。 的本地化字符串。
         /// </summary>
         internal static string PasswordRequiresUniqueChars {
             get {
@@ -270,7 +268,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Passwords must have at least one uppercase (&apos;A&apos;-&apos;Z&apos;). 的本地化字符串。
+        ///   查找类似 密码必须至少有一个大写（&apos;A&apos;-&apos;Z&apos;）。 的本地化字符串。
         /// </summary>
         internal static string PasswordRequiresUpper {
             get {
@@ -279,7 +277,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Passwords must be at least {0} characters. 的本地化字符串。
+        ///   查找类似 密码必须至少为“{0}“个字符。 的本地化字符串。
         /// </summary>
         internal static string PasswordTooShort {
             get {
@@ -288,7 +286,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Recovery code redemption failed. 的本地化字符串。
+        ///   查找类似 恢复代码赎回失败 的本地化字符串。
         /// </summary>
         internal static string RecoveryCodeRedemptionFailed {
             get {
@@ -297,7 +295,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Role {0} does not exist. 的本地化字符串。
+        ///   查找类似 角色“{0}“不存在。 的本地化字符串。
         /// </summary>
         internal static string RoleNotFound {
             get {
@@ -306,7 +304,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Store does not implement IProtectedUserStore&lt;TUser&gt; which is required when ProtectPersonalData = true. 的本地化字符串。
+        ///   查找类似 Store不实现IProtectedUserStore&lt;TUser&gt;这在ProtectPersonalData=true时是必需的。 的本地化字符串。
         /// </summary>
         internal static string StoreNotIProtectedUserStore {
             get {
@@ -315,7 +313,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Store does not implement IQueryableRoleStore&lt;TRole&gt;. 的本地化字符串。
+        ///   查找类似 Store不实现IQueryableRoleStore&lt;TRole&gt;。 的本地化字符串。
         /// </summary>
         internal static string StoreNotIQueryableRoleStore {
             get {
@@ -324,7 +322,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Store does not implement IQueryableUserStore&lt;TUser&gt;. 的本地化字符串。
+        ///   查找类似 Store不实现IQueryableUserStore&lt;TUser&gt;。 的本地化字符串。
         /// </summary>
         internal static string StoreNotIQueryableUserStore {
             get {
@@ -333,7 +331,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Store does not implement IRoleClaimStore&lt;TRole&gt;. 的本地化字符串。
+        ///   查找类似 Store不实现IRoleClaimStore&lt;TRole&gt;。 的本地化字符串。
         /// </summary>
         internal static string StoreNotIRoleClaimStore {
             get {
@@ -342,7 +340,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Store does not implement IUserAuthenticationTokenStore&lt;User&gt;. 的本地化字符串。
+        ///   查找类似 Store不实现IUserAuthenticationTokenStore&lt;User&gt;。 的本地化字符串。
         /// </summary>
         internal static string StoreNotIUserAuthenticationTokenStore {
             get {
@@ -351,7 +349,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Store does not implement IUserAuthenticatorKeyStore&lt;User&gt;. 的本地化字符串。
+        ///   查找类似 Store不实现IUserAuthenticatorKeyStore&lt;User&gt;。 的本地化字符串。
         /// </summary>
         internal static string StoreNotIUserAuthenticatorKeyStore {
             get {
@@ -360,7 +358,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Store does not implement IUserClaimStore&lt;TUser&gt;. 的本地化字符串。
+        ///   查找类似 Store不实现IUserClaimStore&lt;TUser&gt;。 的本地化字符串。
         /// </summary>
         internal static string StoreNotIUserClaimStore {
             get {
@@ -369,7 +367,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Store does not implement IUserConfirmationStore&lt;TUser&gt;. 的本地化字符串。
+        ///   查找类似 Store不实现IUserConfirmationStore&lt;TUser&gt;。 的本地化字符串。
         /// </summary>
         internal static string StoreNotIUserConfirmationStore {
             get {
@@ -387,7 +385,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Store does not implement IUserLockoutStore&lt;TUser&gt;. 的本地化字符串。
+        ///   查找类似 Store不实现IUserEmailStore&lt;TUser&gt;。 的本地化字符串。
         /// </summary>
         internal static string StoreNotIUserLockoutStore {
             get {
@@ -396,7 +394,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Store does not implement IUserLoginStore&lt;TUser&gt;. 的本地化字符串。
+        ///   查找类似 Store不实现IUserLoginStore&lt;TUser&gt;。 的本地化字符串。
         /// </summary>
         internal static string StoreNotIUserLoginStore {
             get {
@@ -405,7 +403,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Store does not implement IUserPasswordStore&lt;TUser&gt;. 的本地化字符串。
+        ///   查找类似 Store不实现IUserPasswordStore&lt;TUser&gt;。 的本地化字符串。
         /// </summary>
         internal static string StoreNotIUserPasswordStore {
             get {
@@ -414,7 +412,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Store does not implement IUserPhoneNumberStore&lt;TUser&gt;. 的本地化字符串。
+        ///   查找类似 Store不实现IUserPhoneNumberStore&lt;TUser&gt;。 的本地化字符串。
         /// </summary>
         internal static string StoreNotIUserPhoneNumberStore {
             get {
@@ -423,7 +421,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Store does not implement IUserRoleStore&lt;TUser&gt;. 的本地化字符串。
+        ///   查找类似 Store不实现IUserRoleStore&lt;TUser&gt;。 的本地化字符串。
         /// </summary>
         internal static string StoreNotIUserRoleStore {
             get {
@@ -432,7 +430,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Store does not implement IUserSecurityStampStore&lt;TUser&gt;. 的本地化字符串。
+        ///   查找类似 Store不实现IUserSecurityStampStore&lt;TUser&gt;。 的本地化字符串。
         /// </summary>
         internal static string StoreNotIUserSecurityStampStore {
             get {
@@ -441,7 +439,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Store does not implement IUserTwoFactorRecoveryCodeStore&lt;User&gt;. 的本地化字符串。
+        ///   查找类似 Store不实现IUserTwoFactorRecoveryCodeStore&lt;User&gt;。 的本地化字符串。
         /// </summary>
         internal static string StoreNotIUserTwoFactorRecoveryCodeStore {
             get {
@@ -450,7 +448,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Store does not implement IUserTwoFactorStore&lt;TUser&gt;. 的本地化字符串。
+        ///   查找类似 Store不实现IUserTwoFactorStore&lt;TUser&gt;。 的本地化字符串。
         /// </summary>
         internal static string StoreNotIUserTwoFactorStore {
             get {
@@ -459,7 +457,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 User already has a password set. 的本地化字符串。
+        ///   查找类似 用户已经设置了密码。 的本地化字符串。
         /// </summary>
         internal static string UserAlreadyHasPassword {
             get {
@@ -468,7 +466,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 User already in role &apos;{0}&apos;. 的本地化字符串。
+        ///   查找类似 用户已经处于角色“{0}”中。 的本地化字符串。
         /// </summary>
         internal static string UserAlreadyInRole {
             get {
@@ -477,7 +475,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 User is locked out. 的本地化字符串。
+        ///   查找类似 用户被锁定。 的本地化字符串。
         /// </summary>
         internal static string UserLockedOut {
             get {
@@ -486,7 +484,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 Lockout is not enabled for this user. 的本地化字符串。
+        ///   查找类似 此用户未启用锁定。 的本地化字符串。
         /// </summary>
         internal static string UserLockoutNotEnabled {
             get {
@@ -495,7 +493,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 User {0} does not exist. 的本地化字符串。
+        ///   查找类似 用户“{0}”不存在。 的本地化字符串。
         /// </summary>
         internal static string UserNameNotFound {
             get {
@@ -504,7 +502,7 @@ namespace Destiny.Core.Flow
         }
         
         /// <summary>
-        ///   查找类似 User is not in role &apos;{0}&apos;. 的本地化字符串。
+        ///   查找类似 用户不在角色“{0}”中。 的本地化字符串。
         /// </summary>
         internal static string UserNotInRole {
             get {
