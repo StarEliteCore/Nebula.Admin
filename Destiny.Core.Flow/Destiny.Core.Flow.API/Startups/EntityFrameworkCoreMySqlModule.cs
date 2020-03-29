@@ -9,12 +9,24 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.EntityFrameworkCore;
 using System.IO;
 
 namespace Destiny.Core.Flow.API.Startups
 {
     public class EntityFrameworkCoreMySqlModule : EntityFrameworkCoreModuleBase
     {
+        protected override IServiceCollection AddRepository(IServiceCollection services)
+        {
+  
+            return services.AddScoped(typeof(IEFCoreRepository<,>),typeof(Repository<,>));
+        }
+
+        protected override IServiceCollection AddUnitOfWork(IServiceCollection services)
+        {
+            return services.AddScoped<IUnitOfWork, UnitOfWork<DefaultDbContext>>();
+        }
+
         protected override IServiceCollection UseSql(IServiceCollection services)
         {
             var Dbpath= services.GetConfiguration()["Destiny:DbContext:MysqlConnectionString"];
