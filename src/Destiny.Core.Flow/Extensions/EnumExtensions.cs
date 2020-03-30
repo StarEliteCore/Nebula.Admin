@@ -1,4 +1,5 @@
 ﻿
+using Destiny.Core.Flow.Attributes.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,21 @@ namespace Destiny.Core.Flow.Extensions
             var type = value.GetType();
             MemberInfo member = type.GetMember(value.ToString()).FirstOrDefault();
             return member.ToDescription();
-        }  
+        }
+
+
+        /// <summary>
+        /// 得到枚举值指定特性下描述
+        /// </summary>
+        /// <typeparam name="TAttribute">要得到的特性</typeparam>
+        /// <param name="value">枚举值</param>
+        /// <returns></returns>
+        public static string ToDescription<TAttribute>(this Enum value)
+                where TAttribute : AttributeBase
+        {
+            var type = value.GetType();
+            MemberInfo member = type.GetMember(value.ToString()).FirstOrDefault();
+            return member.ToDescription<TAttribute>();
+        }
     }
 }

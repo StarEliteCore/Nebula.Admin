@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Dtos;
+using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices.Users;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -111,5 +112,12 @@ namespace Destiny.Core.Flow.API.Controllers
             return (await _userService.UpdateAsync(dto)).ToAjaxResult();
         }
 
+        [HttpPost]
+        [Description("异步得到分页")]
+        public async Task<PageListDto<UserOutputPageListDto>> GetUserPageAsync(PageRequest request)
+        {
+
+            return (await _userService.GetUserPageAsync(request)).PageListDto();
+        }
     }
 }

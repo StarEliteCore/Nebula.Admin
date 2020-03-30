@@ -9,7 +9,7 @@ namespace Destiny.Core.Flow.Ui
 
 
       
-        public virtual bool Successed { get; set; }
+        public virtual bool Success { get; set; }
 
 
         public virtual string Message { get; set; }

@@ -3,6 +3,7 @@ using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices.Users;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Ui;
@@ -77,6 +78,20 @@ namespace Destiny.Core.Flow.Services.Users
                 return result.ToOperationResponse();
             }
             return new OperationResponse("更新成功!!", OperationResponseType.Success);
+        }
+
+        /// <summary>
+        /// 异步得到用户分页
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public async Task<PageResult<UserOutputPageListDto>> GetUserPageAsync(PageRequest request)
+        {
+
+            request.NotNull(nameof(request));
+
+             return  await  _userManager.Users.ToPageAsync<User, UserOutputPageListDto>(o=>true, request.PageParameters);
+
         }
     }
 }

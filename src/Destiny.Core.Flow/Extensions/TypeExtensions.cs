@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Entity;
+﻿using Destiny.Core.Flow.Attributes.Base;
+using Destiny.Core.Flow.Entity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -195,7 +196,26 @@ namespace Destiny.Core.Flow.Extensions
 
         }
 
-       
+
+        /// <summary>
+        /// 得到特性下描述 
+        /// </summary>
+        /// <typeparam name="TAttribute">动态特性</typeparam>
+        /// <param name="member"></param>
+        /// <returns></returns>
+        public static string ToDescription<TAttribute>(this MemberInfo member)
+            where TAttribute: AttributeBase
+        {
+
+            var attributeBase = (AttributeBase)member.GetCustomAttribute<TAttribute>();
+            if (!attributeBase.IsNull())
+            {
+               return attributeBase.Description();
+            }
+            return member.Name;
+
+        }
+
 
         public static string GetKeySelector(this Type type, string keyName)
         {

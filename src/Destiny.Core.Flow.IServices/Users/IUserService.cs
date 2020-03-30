@@ -1,5 +1,6 @@
 ﻿
 using Destiny.Core.Flow.Dtos;
+using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Ui;
 using System;
 using System.Collections.Generic;
@@ -42,5 +43,7 @@ namespace Destiny.Core.Flow.IServices.Users
         /// <param name="id"></param>
         /// <returns></returns>
         Task<OperationResponse<UserOutputDto>> LoadFormUserAsync(Guid id);
+
+        Task<PageResult<UserOutputPageListDto>> GetUserPageAsync(PageRequest request);
     }
 }

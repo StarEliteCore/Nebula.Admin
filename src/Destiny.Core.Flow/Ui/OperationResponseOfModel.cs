@@ -41,7 +41,7 @@ namespace Destiny.Core.Flow.Ui
         public OperationResponseType Type { get; set; }
 
    
-        public override bool  Successed => Type == OperationResponseType.Success;
+        public override bool Success => Type == OperationResponseType.Success;
 
         public bool Error()
         {
