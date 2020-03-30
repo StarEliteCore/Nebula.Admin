@@ -3,13 +3,11 @@ using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Ui;
-
-
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MNZ.CMS.Core.AspNetCore.Ui
+namespace Destiny.Core.Flow.AspNetCore.Ui
 {
    public static class AjaxResultExtensions
     {

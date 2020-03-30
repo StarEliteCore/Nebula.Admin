@@ -1,46 +1,80 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Destiny.Core.Flow.IServices.IRoleServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Destiny.Core.Flow.AspNetCore.Ui;
+using Destiny.Core.Flow.Dtos.RoleDtos;
+using Destiny.Core.Flow.AspNetCore.Api;
 
 namespace Destiny.Core.Flow.API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class RoleController : ControllerBase
+    /// <summary>
+    /// 角色管理
+    /// </summary>
+    [Description("角色管理")]
+    public class RoleController : ApiControllerBase
     {
+        private readonly IRoleManagerServices _roleManagerServices = null;
+
+        public RoleController(IRoleManagerServices roleManagerServices)
+        {
+            _roleManagerServices = roleManagerServices;
+        }
+
         // GET: api/Role
         [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
-
-        // GET: api/Role/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST: api/Role
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [Description("异步创建角色")]
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<AjaxResult> CreateAsync([FromBody] RoleInputDto dto)
         {
+            return (await _roleManagerServices.AddRoleAsync(dto)).ToAjaxResult();
         }
-
-        // PUT: api/Role/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dto"></param>
+        [Description("异步更新角色")]
+        [HttpPut]
+        public async Task<AjaxResult> UpdateAsync([FromBody] RoleInputDto dto)
         {
+            return (await _roleManagerServices.UpdateRoleAsync(dto)).ToAjaxResult();
         }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        /// <summary>
+        /// 删除角色
+        /// </summary>
+        /// <param name="id"></param>
+        [Description("异步删除角色")]
+        [HttpDelete]
+        public async Task<AjaxResult> Delete(Guid? id)
         {
+            return (await _roleManagerServices.DeleteAsync(id.Value)).ToAjaxResult();
+        }
+        /// <summary>
+        /// 删除角色
+        /// </summary>
+        /// <param name="dto"></param>
+        [Description("异步创建或添加角色")]
+        [HttpPost]
+        public async Task<AjaxResult> AddOrUpdateAsync([FromBody] RoleInputDto dto)
+        {
+            if(dto.Id==Guid.Empty)
+            {
+                return (await _roleManagerServices.AddRoleAsync(dto)).ToAjaxResult();
+            }
+            return (await _roleManagerServices.UpdateRoleAsync(dto)).ToAjaxResult();
         }
     }
 }
