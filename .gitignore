@@ -82,3 +82,5 @@
 /src/Destiny.Core.Flow.DTOs/bin
 /Destiny.Core.Tests/obj
 /Destiny.Core.Tests/bin
+/src/Destiny.Core.Flow.Repository/obj
+/src/Destiny.Core.Flow.Repository/bin
