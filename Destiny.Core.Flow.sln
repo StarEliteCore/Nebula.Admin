@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Log4Net",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.AutoMapper", "src\Destiny.Core.Flow.AutoMapper\Destiny.Core.Flow.AutoMapper.csproj", "{1BEA2CF0-145B-4B0C-ABDC-A429E40E5890}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Tests", "src\Destiny.Core.Tests\Destiny.Core.Tests.csproj", "{57C6446B-F401-402D-9BAD-4CB9302AA344}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Tests", "Destiny.Core.Tests\Destiny.Core.Tests.csproj", "{57C6446B-F401-402D-9BAD-4CB9302AA344}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.SeriLog", "src\Destiny.Core.Flow.SeriLog\Destiny.Core.Flow.SeriLog.csproj", "{41EB9B3E-C420-4EFD-86CB-6D292EDF7AEF}"
 EndProject
