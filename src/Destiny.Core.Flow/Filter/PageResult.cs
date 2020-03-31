@@ -12,11 +12,11 @@ namespace Destiny.Core.Flow.Filter
     public class PageResult<T>: ResultBase
     {
 
-        public PageResult() : this(new T[0], 0, "请求成功", true)
+        public PageResult() : this(new T[0], 0, "查询成功", true)
         {
 
         }
-        public PageResult(IEnumerable<T> data, int total, string message = "请求成功", bool success = true)
+        public PageResult(IEnumerable<T> data, int total, string message = "查询成功", bool success = true)
         {
             Data = data;
             Total = total;

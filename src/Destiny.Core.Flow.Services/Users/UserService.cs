@@ -2,6 +2,7 @@
 using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Enums;
+using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices.Users;
@@ -20,7 +21,6 @@ namespace Destiny.Core.Flow.Services.Users
     public class UserService : IUserService
     {
         private readonly UserManager<User> _userManager = null;
-
 
         public UserService(UserManager<User> userManager)
         {
@@ -89,8 +89,8 @@ namespace Destiny.Core.Flow.Services.Users
         {
 
             request.NotNull(nameof(request));
-
-             return  await  _userManager.Users.ToPageAsync<User, UserOutputPageListDto>(o=>true, request.PageParameters);
+            var expression = FilterHelp.GetExpression<User>(request.Filters);
+            return  await  _userManager.Users.ToPageAsync<User, UserOutputPageListDto>(expression, request.PageParameters);
 
         }
     }

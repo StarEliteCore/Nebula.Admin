@@ -44,6 +44,11 @@ namespace Destiny.Core.Flow.IServices.Users
         /// <returns></returns>
         Task<OperationResponse<UserOutputDto>> LoadFormUserAsync(Guid id);
 
+        /// <summary>
+        /// 异步得到用户分页
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         Task<PageResult<UserOutputPageListDto>> GetUserPageAsync(PageRequest request);
     }
 }
