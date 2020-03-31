@@ -111,9 +111,14 @@ namespace Destiny.Core.Flow.API.Controllers
             return (await _userService.UpdateAsync(dto)).ToAjaxResult();
         }
 
+        /// <summary>
+        /// 异步得到分页
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
         [Description("异步得到分页")]
-        public async Task<PageList<UserOutputPageListDto>> GetUserPageAsync(PageRequest request)
+        public async Task<PageList<UserOutputPageListDto>> GetUserPageAsync([FromBody]PageRequest request)
         {
 
             return (await _userService.GetUserPageAsync(request)).PageList();

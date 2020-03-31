@@ -1,6 +1,7 @@
 ﻿
 
 using Destiny.Core.Flow.Enums;
+using Destiny.Core.Flow.Helps;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -84,11 +85,24 @@ namespace Destiny.Core.Flow.AspNetCore.Ui
             return Type == AjaxResultType.Error;
         }
 
+        /// <summary>
+        /// 转成对象
+        /// </summary>
+        /// <returns></returns>
         public object ToObject()
         {
             return new { Data,Message, Success,Type};
         }
 
+        /// <summary>
+        /// 转成JSON
+        /// </summary>
+        /// <returns></returns>
+        public string ToJson()
+        {
+
+          return  this.ToObject().ToJson();
+        }
    
     }
 

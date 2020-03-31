@@ -8,11 +8,11 @@ namespace Destiny.Core.Flow.AspNetCore.Ui
     public class PageList<T> : ResultBase
     {
 
-        public PageList() : this(new T[0], 0, "请求成功", true)
+        public PageList() : this(new T[0], 0, "查询成功", true)
         {
 
         }
-        public PageList(IEnumerable<T> data, int total, string message = "请求成功", bool success = true)
+        public PageList(IEnumerable<T> data, int total, string message = "查询成功", bool success = true)
         {
             Data = data;
             Total = total;

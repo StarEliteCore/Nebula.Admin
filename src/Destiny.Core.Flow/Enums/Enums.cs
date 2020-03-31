@@ -93,11 +93,9 @@ namespace Destiny.Core.Flow.Enums
 
 
     [Description("过滤操作器")]
+    
     public enum FilterOperator
     {
-        [Description("包含")]
-
-        Contains,
 
         [FilterCode("==")]
         [Description("等于")]
@@ -125,7 +123,7 @@ namespace Destiny.Core.Flow.Enums
         
         [FilterCode("Contains")]
         [Description("包含")]
-        In
+        In,
     }
 
     [Description("过滤连接器")]

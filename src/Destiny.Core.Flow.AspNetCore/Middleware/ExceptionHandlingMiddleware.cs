@@ -44,7 +44,7 @@ namespace Destiny.Core.Flow.AspNetCore
                     }
                     context.Response.StatusCode = (int)HttpStatusCode.InternalServerError; context.Response.Clear();
                     context.Response.ContentType = "application/json; charset=utf-8";
-                    //await context.Response.WriteAsync(new AjaxResult(ex.Message, AjaxResultType.Error).ToJson());
+                    await context.Response.WriteAsync(new AjaxResult(ex.Message, AjaxResultType.Error).ToJson());
                     return;
                 }
                 throw;
