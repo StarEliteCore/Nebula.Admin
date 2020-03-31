@@ -80,3 +80,5 @@
 /.vs
 /src/Destiny.Core.Flow.DTOs/obj
 /src/Destiny.Core.Flow.DTOs/bin
+/Destiny.Core.Tests/obj
+/Destiny.Core.Tests/bin
