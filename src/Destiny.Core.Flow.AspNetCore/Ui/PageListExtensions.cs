@@ -15,7 +15,7 @@ namespace Destiny.Core.Flow.AspNetCore.Ui
     /// <summary>
     ///  分页集合Dto扩展
     /// </summary>
-    public static class PageListDtoExtensions
+    public static class PageListExtensions
     {
         /// <summary>
         /// 分页集合Dto
@@ -23,10 +23,10 @@ namespace Destiny.Core.Flow.AspNetCore.Ui
         /// <typeparam name="T"></typeparam>
         /// <param name="pageResult"></param>
         /// <returns></returns>
-        public static PageListDto<T> PageListDto<T>(this PageResult<T> pageResult)
+        public static PageList<T> PageList<T>(this PageResult<T> pageResult)
         {
             var result = pageResult;
-            return new PageListDto<T>() { Data= result.Data,Message= result.Message,Total= result.Total,Success= result.Success};
+            return new PageList<T>() { Data= result.Data,Message= result.Message,Total= result.Total,Success= result.Success};
         }
     }
 }
