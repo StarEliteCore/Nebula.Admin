@@ -1,12 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Destiny.Core.Flow;
+﻿using Destiny.Core.Flow.Dependency;
+using Destiny.Core.Flow.Model.Entities.Dictionary;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Destiny.Core.Flow.Repository.DictionaryRepository
 {
-    public class DataDictionnaryRepository: Repository
+    [Dependency(ServiceLifetime.Scoped)]
+    public class DataDictionnaryRepository : Repository<DataDictionary, Guid>,IDataDictionnaryRepository
     {
+        public DataDictionnaryRepository(IServiceProvider serviceProvider):base(serviceProvider)
+        {
 
+        }
+    }
+    public interface IDataDictionnaryRepository : IEFCoreRepository<DataDictionary, Guid>
+    { 
+    
+    
     }
 }
