@@ -37,7 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "web", "web", "{9A347066-1CE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Dtos", "src\Destiny.Core.Flow.Dtos\Destiny.Core.Flow.Dtos.csproj", "{9DFDA589-61A2-46E6-ACB6-6C8D1B987F0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.Repository", "src\Destiny.Core.Flow.Repository\Destiny.Core.Flow.Repository.csproj", "{88F5FAB5-5125-43FE-A889-510B7D085F7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Repository", "src\Destiny.Core.Flow.Repository\Destiny.Core.Flow.Repository.csproj", "{88F5FAB5-5125-43FE-A889-510B7D085F7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
