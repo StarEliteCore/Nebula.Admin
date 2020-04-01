@@ -1,6 +1,8 @@
 ﻿using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Dtos.DataDictionnary;
+using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices.IDataDictionnary;
 using Destiny.Core.Flow.Model.Entities.Dictionary;
 using Destiny.Core.Flow.Repository.DictionaryRepository;
@@ -31,6 +33,22 @@ namespace Destiny.Core.Flow.Services.DataDictionnary
             //operationResponse.Message = operationResponse.Success ? "添加成功" : "添加失败";
             return response;
         }
+        public async Task<OperationResponse> UpdateAsync(DataDictionnaryInputDto input)
+        {
+            input.NotNull(nameof(input));
+            var result = await _dataDictionnaryRepository.UpdateAsync(input);
+            return result;
+        }
+        public async Task<OperationResponse> DeleteAsync(Guid id)
+        {
+           return await _dataDictionnaryRepository.DeleteAsync(id);
+        }
 
+        public async Task<PageResult<DataDictionaryOutPageListDto>> GetDictionnnaryPageAsync(PageRequest request)
+        {
+            request.NotNull(nameof(request));
+            var expression = FilterHelp.GetExpression<DataDictionaryEntity>(request.Filters);
+            return await _dataDictionnaryRepository.TrackEntities.ToPageAsync<DataDictionaryEntity, DataDictionaryOutPageListDto>(expression, request.PageParameters);
+        }
     }
 }

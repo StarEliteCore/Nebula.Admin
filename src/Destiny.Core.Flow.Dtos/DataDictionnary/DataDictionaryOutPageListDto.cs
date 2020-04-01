@@ -1,5 +1,5 @@
-﻿using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.Mapping;
+﻿using AutoMapper;
+using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Model.Entities.Dictionary;
 using System;
 using System.Collections.Generic;
@@ -8,8 +8,8 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Dtos.DataDictionnary
 {
-    [AutoMapp(typeof(DataDictionaryEntity))]
-    public class DataDictionnaryInputDto: InputDto<Guid>
+    [AutoMap(typeof(DataDictionaryEntity))]
+    public class DataDictionaryOutPageListDto : IOutputDto
     {
         /// <summary>
         /// 数据字典标题

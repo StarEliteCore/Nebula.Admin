@@ -7,7 +7,7 @@ using System.Text;
 namespace Destiny.Core.Flow.Model.Entities.Dictionary
 {
     [DisplayName("数据字典")]
-    public class DataDictionary : EntityBase<Guid>,IFullAuditedEntity<Guid>
+    public class DataDictionaryEntity : EntityBase<Guid>,IFullAuditedEntity<Guid>
     {
         /// <summary>
         /// 数据字典标题

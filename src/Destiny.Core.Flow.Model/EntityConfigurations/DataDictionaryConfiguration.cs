@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Model.EntityConfigurations
 {
-    public class DataDictionaryConfiguration : EntityMappingConfiguration<DataDictionary, Guid>
+    public class DataDictionaryConfiguration : EntityMappingConfiguration<DataDictionaryEntity, Guid>
     {
-        public override void Map(EntityTypeBuilder<DataDictionary> b)
+        public override void Map(EntityTypeBuilder<DataDictionaryEntity> b)
         {
             b.HasKey(o => o.Id);
             b.Property(o => o.Title).HasMaxLength(50).IsRequired();
