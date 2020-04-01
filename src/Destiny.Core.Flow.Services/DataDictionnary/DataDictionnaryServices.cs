@@ -24,11 +24,12 @@ namespace Destiny.Core.Flow.Services.DataDictionnary
         public async Task<OperationResponse> CreateAsync(DataDictionnaryInputDto input)
         {
             input.NotNull(nameof(input));
-            var dictionnary = input.MapTo<DataDictionary>();
-            var operationResponse = new OperationResponse("添加成功", Enums.OperationResponseType.Success);
-            operationResponse.Success = await _dataDictionnaryRepository.InsertAsync(dictionnary) > 0;
-            operationResponse.Message = operationResponse.Success ? "添加成功" : "添加失败";
-            return operationResponse;
+            var response = await _dataDictionnaryRepository.InsertAsync(input);
+            //var dictionnary = input.MapTo<DataDictionary>();
+            //var operationResponse = new OperationResponse("添加成功", Enums.OperationResponseType.Success);
+            //operationResponse.Success = await _dataDictionnaryRepository.InsertAsync(dictionnary) > 0;
+            //operationResponse.Message = operationResponse.Success ? "添加成功" : "添加失败";
+            return response;
         }
 
     }

@@ -168,7 +168,7 @@ namespace Destiny.Core.Flow
             catch (Exception ex)
             {
 
-                throw ex;
+                return new OperationResponse(ex.Message, OperationResponseType.Error);
             }
 
 

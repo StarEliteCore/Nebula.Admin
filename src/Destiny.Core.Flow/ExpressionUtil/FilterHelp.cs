@@ -1,4 +1,6 @@
-﻿using Destiny.Core.Flow.Extensions;
+﻿using Destiny.Core.Flow.Enums;
+using Destiny.Core.Flow.Exceptions;
+using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
 using System;
 using System.Collections.Generic;
@@ -29,7 +31,10 @@ namespace Destiny.Core.Flow.ExpressionUtil
                 return expression;
             }
 
-             
+            if (filters.Any(o => o.Operator == FilterOperator.In))
+            {
+                throw new AppException("没有实现In查询方式!!");
+            }             
             string expressionStr = GetFilterExpression(filters);
 
             var expression1 =  DynamicExpressionParser.ParseLambda<T, bool>(ParsingConfig.Default,true, expressionStr, filters.Select(o => o.Value).ToArray());

@@ -9,11 +9,13 @@ using Destiny.Core.Flow.IServices.Users;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Ui;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Destiny.Core.Flow.Services.Users
 {
@@ -90,7 +92,7 @@ namespace Destiny.Core.Flow.Services.Users
 
             request.NotNull(nameof(request));
             var expression = FilterHelp.GetExpression<User>(request.Filters);
-            return  await  _userManager.Users.ToPageAsync<User, UserOutputPageListDto>(expression, request.PageParameters);
+            return  await  _userManager.Users.AsNoTracking().ToPageAsync<User, UserOutputPageListDto>(expression, request.PageParameters);
 
         }
     }

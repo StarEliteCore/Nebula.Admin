@@ -15,7 +15,7 @@ namespace Destiny.Core.Flow.Extensions
     /// <summary>
     /// Queryable扩展
     /// </summary>
-    public static partial class QueryableExtensions
+    public static partial class Extensions
     {
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Destiny.Core.Flow.Extensions
             {
                 source = source.Where(predicate);
             }
-            IOrderedQueryable<TEntity> orderSource = null;
+            IOrderedQueryable<TEntity> orderSource;
             if (orderConditions == null || orderConditions.Length == 0)
             {
                 orderSource = source.OrderBy("Id ascending");
