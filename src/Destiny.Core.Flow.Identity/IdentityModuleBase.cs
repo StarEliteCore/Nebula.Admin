@@ -30,8 +30,8 @@ namespace Destiny.Core.Flow
             var identityBuilder = services.AddIdentity<TUser, TRole>(identityOption);
 
             services.AddSingleton<IdentityErrorDescriber>(new IdentityErrorDescriberZhHans());
-            //UseIdentityBuilder(identityBuilder);
-            //AddAuthentication(services);
+            UseIdentityBuilder(identityBuilder);
+            AddAuthentication(services);
             return services;
         }
 

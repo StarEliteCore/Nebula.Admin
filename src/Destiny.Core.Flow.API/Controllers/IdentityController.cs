@@ -1,0 +1,47 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Threading.Tasks;
+using Destiny.Core.Flow.AspNetCore.Api;
+using Destiny.Core.Flow.AspNetCore.Ui;
+using Destiny.Core.Flow.Dtos.Identitys;
+using Destiny.Core.Flow.IServices.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Destiny.Core.Flow.API.Controllers
+{
+
+    /// <summary>
+    /// 身份管理
+    /// </summary>
+    [Description("身份管理")]
+    [AllowAnonymous]
+    public class IdentityController : ApiControllerBase
+    {
+        private readonly IIdentityServices _identityService = null;
+
+        public IdentityController(IIdentityServices identityService)
+        {
+            _identityService = identityService;
+        }
+
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="loginDto"></param>
+        /// <returns></returns>
+
+        [HttpPost]
+        [Description("登录")]
+
+        public async Task<AjaxResult> LoginAsync([FromBody]LoginDto loginDto)
+        {
+
+            var result = await _identityService.Login(loginDto);
+            return result.ToAjaxResult();
+        }
+    }
+}

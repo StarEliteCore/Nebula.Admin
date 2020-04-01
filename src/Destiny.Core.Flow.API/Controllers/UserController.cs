@@ -10,7 +10,7 @@ using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices.Users;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Authorization;
 namespace Destiny.Core.Flow.API.Controllers
 {
 
@@ -18,12 +18,13 @@ namespace Destiny.Core.Flow.API.Controllers
     /// 用户管理
     /// </summary>
     [Description("用户管理")]
+    [Authorize]
     public class UserController : ApiControllerBase
     {
 
-        private readonly IUserService _userService = null;
+        private readonly IUserServices _userService = null;
 
-        public UserController(IUserService userService)
+        public UserController(IUserServices userService)
         {
             _userService = userService;
         }

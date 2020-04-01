@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Destiny.Core.Flow.Options;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -37,7 +38,11 @@ namespace Destiny.Core.Flow.Extensions
         }
 
 
-
+        public static AppOptionSettings GetAppSettings(this IServiceProvider provider)
+        {
+            provider.NotNull(nameof(provider));
+            return provider.GetService<IOptions<AppOptionSettings>>()?.Value;
+        }
 
     }
 }

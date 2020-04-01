@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IServices.Users
 {
-   public interface IUserService
+   public interface IUserServices
     {
 
         /// <summary>
