@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Dtos.RoleDtos;
 using Destiny.Core.Flow.AspNetCore.Api;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Destiny.Core.Flow.API.Controllers
 {
@@ -16,6 +17,7 @@ namespace Destiny.Core.Flow.API.Controllers
     /// 角色管理
     /// </summary>
     [Description("角色管理")]
+    [Authorize]
     public class RoleController : ApiControllerBase
     {
         private readonly IRoleManagerServices _roleManagerServices = null;

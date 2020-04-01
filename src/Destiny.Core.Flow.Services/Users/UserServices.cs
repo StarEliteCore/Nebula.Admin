@@ -20,11 +20,11 @@ using System.Threading.Tasks;
 namespace Destiny.Core.Flow.Services.Users
 {
     [Dependency(ServiceLifetime.Scoped)]
-    public class UserService : IUserService
+    public class UserServices : IUserServices
     {
         private readonly UserManager<User> _userManager = null;
 
-        public UserService(UserManager<User> userManager)
+        public UserServices(UserManager<User> userManager)
         {
             _userManager = userManager;
         }

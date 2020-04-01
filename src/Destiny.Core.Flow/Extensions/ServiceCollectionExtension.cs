@@ -1,7 +1,9 @@
 ﻿
 using Destiny.Core.Flow.Helpers;
+using Destiny.Core.Flow.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -217,6 +219,19 @@ namespace Destiny.Core.Flow.Extensions
             }
 
             return type;
+        }
+
+
+        /// <summary>
+        /// 得到操作设置
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+
+        public static AppOptionSettings GetAppSettings(this IServiceCollection services)
+        {
+            services.NotNull(nameof(services));
+            return services.GetService<IOptions<AppOptionSettings>>()?.Value;
         }
 
         public static IConfiguration GetConfiguration(this IServiceCollection services)
