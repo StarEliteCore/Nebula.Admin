@@ -20,6 +20,7 @@ namespace Destiny.Core.Flow.API.Startups
         /// <returns></returns>
         public override IServiceCollection ConfigureServices(IServiceCollection services)
         {
+
             services.ConfigureDynamicProxy(
                 config =>
                 {
@@ -30,7 +31,7 @@ namespace Destiny.Core.Flow.API.Startups
                         if (item.BaseType == typeof(AbstractInterceptor))//判断是否继承AbstractInterceptor如果不是继承该类则不进行注册
                             config.Interceptors.AddTyped(item);
                     }
-                    //config.Interceptors.AddTyped<>();
+                    //config.Interceptors.AddTyped<TranAOP>();
                 });
 
             return services;

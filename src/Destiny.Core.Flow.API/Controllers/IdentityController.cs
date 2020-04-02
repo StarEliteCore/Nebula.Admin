@@ -19,6 +19,7 @@ namespace Destiny.Core.Flow.API.Controllers
     /// </summary>
     [Description("身份管理")]
     [AllowAnonymous]
+
     public class IdentityController : ApiControllerBase
     {
         private readonly IIdentityServices _identityService = null;
