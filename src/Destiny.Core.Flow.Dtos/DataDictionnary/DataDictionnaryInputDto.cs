@@ -36,5 +36,10 @@ namespace Destiny.Core.Flow.Dtos.DataDictionnary
         /// </summary>
         [DisplayName("排序")]
         public int Sort { get; set; }
+        /// <summary>
+        ///获取或设置 编码
+        /// </summary>
+        [DisplayName("编码")]
+        public string Code { get; set; }
     }
 }
