@@ -26,13 +26,15 @@ namespace Destiny.Core.Flow.AOP
 
             typeFinder.NotNull(nameof(typeFinder));
             var typs=  typeFinder.Find(o => o.IsClass && !o.IsAbstract && !o.IsInterface && o.IsSubclassOf(typeof(AbstractInterceptorAttribute)));
-
-
             if (typs?.Length > 0)
             {
                 foreach (var type in typs)
                 {
                     services.AddTransient(type);
+                    services.ConfigureDynamicProxy(cof =>
+                    {
+                        cof.Interceptors.AddTyped(type);
+                    });
                 }
             }
           
