@@ -198,6 +198,7 @@ namespace Destiny.Core.Flow.Extensions
         /// <returns></returns>
         public static TType GetService<TType>(this IServiceCollection services)
         {
+
             var provider = services.BuildServiceProvider();
             return provider.GetService<TType>();
         }
@@ -236,28 +237,10 @@ namespace Destiny.Core.Flow.Extensions
 
         public static IConfiguration GetConfiguration(this IServiceCollection services)
         {
-            return services.GetSingletonInstanceOrNull<IConfiguration>();
+
+            return services.GetService<IConfiguration>();
         }
 
-        /// <summary>
-        /// 获取单例注册服务对象
-        /// </summary>
-        public static T GetSingletonInstanceOrNull<T>(this IServiceCollection services)
-        {
-            ServiceDescriptor descriptor = services.FirstOrDefault(d => d.ServiceType == typeof(T) && d.Lifetime == ServiceLifetime.Singleton);
-
-            if (descriptor?.ImplementationInstance != null)
-            {
-                return (T)descriptor.ImplementationInstance;
-            }
-
-            if (descriptor?.ImplementationFactory != null)
-            {
-                return (T)descriptor.ImplementationFactory.Invoke(null);
-            }
-
-            return default;
-        }
 
     }
 }
