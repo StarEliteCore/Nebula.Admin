@@ -2,8 +2,11 @@
 using AspectCore.DynamicProxy;
 using AspectCore.Extensions.DependencyInjection;
 using Destiny.Core.Flow.AOP;
+using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Modules;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,20 +24,18 @@ namespace Destiny.Core.Flow.API.Startups
         public override IServiceCollection ConfigureServices(IServiceCollection services)
         {
 
-            services.ConfigureDynamicProxy(
-                config =>
-                {
-                    List<Type> types = new List<Type>();//通过反射获取到AOP实现
-                    types.Add(typeof(TranAOP));
-                    foreach (var item in types)
-                    {
-                        if (item.BaseType == typeof(AbstractInterceptor))//判断是否继承AbstractInterceptor如果不是继承该类则不进行注册
-                            config.Interceptors.AddTyped(item);
-                    }
-                    //config.Interceptors.AddTyped<TranAOP>();
-                });
+            //return services.AddSingleton<IAopManager>(provider =>
+            // {
 
+            //     var aopManager= new AopManager();
+            //     aopManager.AutoLoadAops(services);
+            //     return aopManager;
+            // });
             return services;
         }
+
+    
+
+
     }
 }

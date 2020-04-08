@@ -5,8 +5,15 @@ using System.Text;
 
 namespace Destiny.Core.Flow.AOP
 {
-   public interface IAopManager
+    /// <summary>
+    /// Aop管理
+    /// </summary>
+    public interface IAopManager
     {
-        void LoadAops();
+        /// <summary>
+        /// 自动注入AOP
+        /// </summary>
+        /// <param name="services"></param>
+        void AutoLoadAops(IServiceCollection services);
     }
 }
