@@ -5,7 +5,9 @@ using System.Text;
 
 namespace Destiny.Core.Flow.AspNetCore
 {
-   public class AspNetCoreAppModuleManager: AppModuleManager
+    public class AspNetCoreAppModuleManager: AppModuleManager
     {
+
+    
     }
 }

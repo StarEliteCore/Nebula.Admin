@@ -14,6 +14,9 @@ namespace Destiny.Core.Flow.AutoMapper
   public abstract  class AutoMapperModuleBase : AppModuleBase
     {
 
+
+
+
         public override IServiceCollection ConfigureServices(IServiceCollection services)
         {
             var assemblyFinder =  services.GetOrAddSingletonService<IAssemblyFinder, AssemblyFinder>();

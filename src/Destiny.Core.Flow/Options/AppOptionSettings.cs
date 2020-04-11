@@ -20,6 +20,8 @@ namespace Destiny.Core.Flow.Options
         /// </summary>
         public JwtOptions Jwt { get; set; }
 
+        public CorsOptions Cors { get; set; }
+
 
     }
 }
