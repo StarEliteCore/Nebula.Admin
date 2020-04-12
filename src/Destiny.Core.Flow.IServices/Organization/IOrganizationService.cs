@@ -1,5 +1,6 @@
 ﻿using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Dtos.Organization;
+using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Ui;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -29,5 +30,10 @@ namespace Destiny.Core.Flow.IServices.Organization
         /// <param name="id"></param>
         /// <returns></returns>
         Task<OperationResponse> DeleteAsync(Guid id);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        Task<TreeResult<OrganizationOutDto>> GetOrganization();
     }
 }

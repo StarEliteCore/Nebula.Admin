@@ -22,6 +22,25 @@ namespace Destiny.Core.Flow.API.Controllers.Organization
             _organization = organization;
         }
         /// <summary>
+        /// 获取组织架构
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Description("获取组织架构")]
+        public async Task<TreeData<OrganizationOutDto>> CreateAsync()
+        {
+
+            var result= await _organization.GetOrganization();
+            return new TreeData<OrganizationOutDto>()
+            {
+                Data = result.Data,
+                Message = result.Message,
+                Success = result.Success
+            };
+        }
+
+        /// <summary>
         /// 异步创建组织架构
         /// </summary>
         /// <param name="dto"></param>
