@@ -23,7 +23,7 @@ namespace Destiny.Core.Flow.Model.Entities.Organizational
         /// 部门领导
         /// </summary>
         [DisplayName("部门领导")]
-        public Guid? LadingCadre { get; set; }
+        public Guid LadingCadre { get; set; }
         /// <summary>
         /// 当前部门所有的父级
         /// </summary>
