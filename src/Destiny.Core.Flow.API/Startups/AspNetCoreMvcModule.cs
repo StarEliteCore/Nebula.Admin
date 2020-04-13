@@ -19,6 +19,7 @@ namespace Destiny.Core.Flow.API.Startups
 
         public override IServiceCollection ConfigureServices(IServiceCollection services)
         {
+        
             services.AddAuthorization();
             var configuration = services.GetConfiguration();
 

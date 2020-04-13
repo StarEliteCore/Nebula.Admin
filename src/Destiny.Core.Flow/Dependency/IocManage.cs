@@ -63,8 +63,8 @@ namespace Destiny.Core.Flow.Dependency
 
         public T GetService<T>()
         {
-
-
+            _provider.NotNull(nameof(_provider));
+            _services.NotNull(nameof(_services));
             return _provider.GetService<T>();
         }
 

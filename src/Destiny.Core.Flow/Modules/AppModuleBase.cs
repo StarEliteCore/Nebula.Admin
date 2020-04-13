@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Destiny.Core.Flow.Dependency;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -17,10 +18,9 @@ namespace Destiny.Core.Flow.Modules
         //    ServiceProvider = serviceProvider;
         //    Configuration = configuration;
         //}
-        protected internal IConfiguration Configuration { get; internal set; }
 
-        protected internal IServiceProvider ServiceProvider { get; internal set; }
 
+        protected internal IIocManager IocManager { get; internal set; }
         /// <summary>
         /// 将模块服务添加到依赖注入服务容器中
         /// </summary>

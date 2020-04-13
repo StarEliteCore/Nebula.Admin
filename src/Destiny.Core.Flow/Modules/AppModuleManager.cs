@@ -29,8 +29,8 @@ namespace Destiny.Core.Flow.Modules
         /// <returns></returns>
         public IServiceCollection LoadModules(IServiceCollection services)
         {
-     
 
+           
             var typeFinder = services.GetOrAddSingletonService<ITypeFinder, TypeFinder>();
             var baseType = typeof(AppModuleBase);
             var moduleTypes = typeFinder.Find(t=> t.IsSubclassOf(baseType)&&!t.IsAbstract).Distinct().ToArray();
@@ -47,7 +47,9 @@ namespace Destiny.Core.Flow.Modules
             {
             
                 services = module.ConfigureServices(services);
-           
+                module.IocManager = (IIocManager) services.BuildServiceProvider().GetService(typeof(IIocManager)); /*services.GetService<IIocManager>();*/
+
+
             }
             return services;
         }

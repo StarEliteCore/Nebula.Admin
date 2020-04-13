@@ -242,5 +242,53 @@ namespace Destiny.Core.Flow.Extensions
         }
 
 
+
+        public static T GetSingletonInstanceOrNull<T>(this IServiceCollection services)
+        {
+            return (T)services
+                .FirstOrDefault(d => d.ServiceType == typeof(T))
+                ?.ImplementationInstance;
+        }
+
+        public static T GetSingletonInstance<T>(this IServiceCollection services)
+        {
+            var service = services.GetSingletonInstanceOrNull<T>();
+            if (service == null)
+            {
+                throw new InvalidOperationException("找不到singleton服务: " + typeof(T).AssemblyQualifiedName);
+            }
+
+            return service;
+        }
+
+        public static IServiceProvider BuildServiceProviderFromFactory([NotNull] this IServiceCollection services)
+        {
+
+
+            foreach (var service in services)
+            {
+                var factoryInterface = service.ImplementationInstance?.GetType()
+                    .GetTypeInfo()
+                    .GetInterfaces()
+                    .FirstOrDefault(i => i.GetTypeInfo().IsGenericType &&
+                                         i.GetGenericTypeDefinition() == typeof(IServiceProviderFactory<>));
+
+                if (factoryInterface == null)
+                {
+                    continue;
+                }
+
+                var containerBuilderType = factoryInterface.GenericTypeArguments[0];
+                return (IServiceProvider)typeof(ServiceCollectionExtension)
+                    .GetTypeInfo()
+                    .GetMethods()
+                    .Single(m => m.Name == nameof(BuildServiceProviderFromFactory) && m.IsGenericMethod)
+                    .MakeGenericMethod(containerBuilderType)
+                    .Invoke(null, new object[] { services, null });
+            }
+
+            return services.BuildServiceProvider();
+        }
+
     }
 }

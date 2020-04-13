@@ -109,6 +109,7 @@ namespace Destiny.Core.Flow.Extensions
             {
                 source = source.Where(predicate);
             }
+
             IOrderedQueryable<TEntity> orderSource;
             if (orderConditions == null || orderConditions.Length == 0)
             {
