@@ -160,5 +160,35 @@ namespace Destiny.Core.Flow.Extensions
             return strWhere.Length > 0 ?source.Where(strWhere.ToString(), filterInfos.Select(o => o.Value).ToArray()): source;
         }
 
+
+        /// <summary>
+        /// 从集合中查询指定数据筛选的树数据
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="predicate"></param>
+        /// <param name="rootwhere"></param>
+        /// <param name="childswhere"></param>
+        /// <param name="addchilds"></param>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public static async Task<TreeResult<TResult>> ToTreeResultAsync<TEntity, TResult>(this IQueryable<TEntity> source,
+            Func<TResult, TResult, bool> rootwhere,
+            Func<TResult, TResult, bool> childswhere, Action<TResult, IEnumerable<TResult>> addchilds, TResult entity = default(TResult))
+        {
+
+            rootwhere.NotNull(nameof(rootwhere));
+            childswhere.NotNull(nameof(childswhere));
+            addchilds.NotNull(nameof(addchilds));
+            var list = await source.ToOutput<TResult>().ToListAsync();
+            var treeData = list.ToTree(rootwhere, childswhere, addchilds, entity);
+            return new TreeResult<TResult>
+            {
+                Data = treeData,
+            };
+        }
+
+
     }
 }
