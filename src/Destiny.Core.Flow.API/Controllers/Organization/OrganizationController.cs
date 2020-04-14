@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Destiny.Core.Flow.API.Controllers.Organization
 {
-    [ApiController]
+
     public class OrganizationController : ApiControllerBase
     {
         private readonly IOrganizationService _organization;

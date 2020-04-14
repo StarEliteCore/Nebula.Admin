@@ -173,7 +173,7 @@ namespace Destiny.Core.Flow.Extensions
             return name;
         }
         ///// <summary>
-        ///// 表达树and操作
+        ///// And操作
         ///// </summary>
         ///// <typeparam name="T"></typeparam>
         ///// <param name="expr1"></param>
@@ -191,13 +191,22 @@ namespace Destiny.Core.Flow.Extensions
             return Expression.Lambda<Func<T, bool>>(body, newParameter);
 
         }
-        public static Expression<Func<T, bool>> AndIf<T>(this Expression<Func<T, bool>> expr1, Expression<Func<T, bool>> expr2, Func<bool> conditionFunc)
+
+        /// <summary>
+        /// And操作
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="expr1"></param>
+        /// <param name="expr2"></param>
+        /// <param name="isAnd"></param>
+        /// <returns></returns>
+        public static Expression<Func<T, bool>> AndIf<T>(this Expression<Func<T, bool>> expr1, Expression<Func<T, bool>> expr2, bool isAnd)
         {
             if (expr1 == null)
             {
                 return expr2;
             }
-            if (!conditionFunc.Invoke())
+            if (!isAnd)
             {
                 return expr1;
             }
@@ -221,6 +230,28 @@ namespace Destiny.Core.Flow.Extensions
             var exp = ReplaceParameter(expr1, expr2, out ParameterExpression newParameter);
             var body = Expression.Or(exp.left, exp.right);
             return Expression.Lambda<Func<T, bool>>(body, newParameter);
+        }
+
+        /// <summary>
+        /// Or操作
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="expr1"></param>
+        /// <param name="expr2"></param>
+        /// <param name="isAnd"></param>
+        /// <returns></returns>
+        public static Expression<Func<T, bool>> OrIf<T>(this Expression<Func<T, bool>> expr1, Expression<Func<T, bool>> expr2, bool isAnd)
+        {
+            if (expr1 == null)
+            {
+                return expr2;
+            }
+            if (!isAnd)
+            {
+                return expr1;
+            }
+
+            return expr1.Or(expr2);
         }
         /// <summary>
         /// 替换参数

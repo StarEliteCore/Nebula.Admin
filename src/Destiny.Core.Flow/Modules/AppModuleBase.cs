@@ -13,14 +13,7 @@ namespace Destiny.Core.Flow.Modules
     /// </summary>
    public abstract class AppModuleBase
     {
-        //public AppModuleBase(IServiceProvider serviceProvider, IConfiguration configuration)
-        //{
-        //    ServiceProvider = serviceProvider;
-        //    Configuration = configuration;
-        //}
-
-
-        protected internal IIocManager IocManager { get; internal set; }
+  
         /// <summary>
         /// 将模块服务添加到依赖注入服务容器中
         /// </summary>
