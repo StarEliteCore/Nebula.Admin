@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Destiny.Core.Flow.Dependency;
+using Microsoft.AspNetCore.Mvc;
 
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,6 @@ namespace Destiny.Core.Flow.AspNetCore.Api
     public abstract  class ApiControllerBase : ControllerBase
     {
 
-
+        protected IocManage IocManage => IocManage.Instance;
     }
 }

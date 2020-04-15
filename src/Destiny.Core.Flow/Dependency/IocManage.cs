@@ -39,11 +39,12 @@ namespace Destiny.Core.Flow.Dependency
         internal void SetApplicationServiceProvider(IServiceProvider provider)
         {
             provider.NotNull(nameof(provider));
-           _provider = provider;
+            _provider = provider;
 
         }
 
-        internal void SetServiceCollection(IServiceCollection services) {
+        internal void SetServiceCollection(IServiceCollection services)
+        {
 
             services.NotNull(nameof(services));
             _services = services;
@@ -78,7 +79,7 @@ namespace Destiny.Core.Flow.Dependency
         public ILogger GetLogger<T>()
         {
             ILoggerFactory factory = _provider.GetService<ILoggerFactory>();
-             return factory.CreateLogger<T>();
+            return factory.CreateLogger<T>();
         }
 
     }

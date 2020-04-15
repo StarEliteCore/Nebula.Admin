@@ -94,8 +94,8 @@ namespace Destiny.Core.Flow.Swagger
                     }
                 });
 
-                s.SchemaFilter<AutoRestSchemaFilter>();
-                s.DocumentFilter<TagDescriptionsDocumentFilter>();
+                //s.SchemaFilter<AutoRestSchemaFilter>();
+                //s.DocumentFilter<TagDescriptionsDocumentFilter>();
 
 
             });
@@ -118,6 +118,7 @@ namespace Destiny.Core.Flow.Swagger
                 c.MaxDisplayedTags(5);
                 c.ShowExtensions();
                 c.EnableValidator();
+    
                 c.SwaggerEndpoint(_url, _title);
                 c.RoutePrefix = string.Empty;
             });
