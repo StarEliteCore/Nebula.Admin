@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.Logging;
+using Destiny.Core.Flow.ExpressionUtil;
 
 namespace Destiny.Core.Flow.API.Controllers
 {
@@ -72,12 +73,14 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <param name="id">主键</param>
         /// <returns></returns>
 
-        [HttpPost]
+        [HttpDelete]
         [Description("异步删除用户")]
-        public async Task<AjaxResult> DeleteAsync(Guid? id)
+        public async Task<AjaxResult> DeleteAsync(string id)
         {
 
-            return (await _userService.DeleteAsync(id.Value)).ToAjaxResult();
+            await Task.CompletedTask;
+            return new AjaxResult();
+            //return (await _userService.DeleteAsync(id.Value)).ToAjaxResult();
 
         }
 
@@ -126,7 +129,7 @@ namespace Destiny.Core.Flow.API.Controllers
         [Description("异步得到分页")]
         public async Task<PageList<UserOutputPageListDto>> GetUserPageAsync([FromBody]PageRequest request)
         {
-
+           
             //[FromBody]PageRequest request
             return (await _userService.GetUserPageAsync(request)).PageList();
         }

@@ -42,7 +42,7 @@ namespace Destiny.Core.Flow.API.Startups
             }
      
             services.AddHttpContextAccessor();
-            services.AddControllers().AddNewtonsoftJson(options => {
+            services.AddControllers(o => o.SuppressAsyncSuffixInActionNames = false).AddNewtonsoftJson(options => {
                 options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
             });
