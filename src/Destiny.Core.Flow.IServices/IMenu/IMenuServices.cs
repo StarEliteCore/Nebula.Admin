@@ -2,8 +2,6 @@
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Ui;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IServices.IMenu
@@ -37,5 +35,5 @@ namespace Destiny.Core.Flow.IServices.IMenu
         /// <param name="requst"></param>
         /// <returns></returns>
         Task<PageResult<MenuOutPageListDto>> GetMenuPageAsync(PageRequest requst);
-    } 
+    }
 }
