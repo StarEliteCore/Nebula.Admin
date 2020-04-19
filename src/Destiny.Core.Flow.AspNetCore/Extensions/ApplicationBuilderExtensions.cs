@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
+using Destiny.Core.Flow.Dependency;
+
 namespace Destiny.Core.Flow.AspNetCore
 {
    public static class ApplicationBuilderExtensions
@@ -11,7 +13,7 @@ namespace Destiny.Core.Flow.AspNetCore
         public static void UseAppModule<TModuleManager>(this IApplicationBuilder app)
            where TModuleManager : IAppModuleManager
         {
-
+     
             var moduleManager = app.ApplicationServices.GetService<IAppModuleManager>();
             var modules = moduleManager.SourceModules;
             foreach (var module in modules)

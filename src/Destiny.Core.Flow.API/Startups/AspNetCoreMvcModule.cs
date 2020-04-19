@@ -15,13 +15,32 @@ namespace Destiny.Core.Flow.API.Startups
 {
     public class AspNetCoreMvcModule: AppModuleBase
     {
+        private string _corePolicyName = string.Empty;
 
         public override IServiceCollection ConfigureServices(IServiceCollection services)
         {
+        
             services.AddAuthorization();
             var configuration = services.GetConfiguration();
 
             services.Configure<AppOptionSettings>(configuration.GetSection("Destiny"));
+            var settings =services.GetAppSettings();
+            if (!settings.Cors.PolicyName.IsNullOrEmpty() && !settings.Cors.Url.IsNullOrEmpty()) //添加跨域
+            {
+                _corePolicyName = settings.Cors.PolicyName;
+                services.AddCors(c =>
+                {
+
+                    c.AddPolicy(settings.Cors.PolicyName, policy =>
+                    {
+                        policy.WithOrigins(settings.Cors.Url
+                          .Split(",", StringSplitOptions.RemoveEmptyEntries).ToArray())
+                        //policy.WithOrigins("http://localhost:5001")//支持多个域名端口，注意端口号后不要带/斜杆：比如localhost:8000/，是错的
+                        .AllowAnyHeader().AllowAnyMethod().AllowCredentials();//允许cookie;
+                    });
+                });
+            }
+     
             services.AddHttpContextAccessor();
             services.AddControllers().AddNewtonsoftJson(options => {
                 options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
@@ -41,6 +60,10 @@ namespace Destiny.Core.Flow.API.Startups
        
 
             app.UseRouting();
+            if (!_corePolicyName.IsNullOrEmpty()) 
+            {
+                app.UseCors(_corePolicyName); //添加跨域中间件
+            }
             app.UseAuthentication(); //认证
             app.UseAuthorization();//授权
             app.UseEndpoints(endpoints =>

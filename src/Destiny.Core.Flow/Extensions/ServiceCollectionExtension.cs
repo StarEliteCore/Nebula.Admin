@@ -198,6 +198,7 @@ namespace Destiny.Core.Flow.Extensions
         /// <returns></returns>
         public static TType GetService<TType>(this IServiceCollection services)
         {
+
             var provider = services.BuildServiceProvider();
             return provider.GetService<TType>();
         }
@@ -236,27 +237,57 @@ namespace Destiny.Core.Flow.Extensions
 
         public static IConfiguration GetConfiguration(this IServiceCollection services)
         {
-            return services.GetSingletonInstanceOrNull<IConfiguration>();
+
+            return services.GetService<IConfiguration>();
         }
 
-        /// <summary>
-        /// 获取单例注册服务对象
-        /// </summary>
+
+
         public static T GetSingletonInstanceOrNull<T>(this IServiceCollection services)
         {
-            ServiceDescriptor descriptor = services.FirstOrDefault(d => d.ServiceType == typeof(T) && d.Lifetime == ServiceLifetime.Singleton);
+            return (T)services
+                .FirstOrDefault(d => d.ServiceType == typeof(T))
+                ?.ImplementationInstance;
+        }
 
-            if (descriptor?.ImplementationInstance != null)
+        public static T GetSingletonInstance<T>(this IServiceCollection services)
+        {
+            var service = services.GetSingletonInstanceOrNull<T>();
+            if (service == null)
             {
-                return (T)descriptor.ImplementationInstance;
+                throw new InvalidOperationException("找不到singleton服务: " + typeof(T).AssemblyQualifiedName);
             }
 
-            if (descriptor?.ImplementationFactory != null)
+            return service;
+        }
+
+        public static IServiceProvider BuildServiceProviderFromFactory([NotNull] this IServiceCollection services)
+        {
+
+
+            foreach (var service in services)
             {
-                return (T)descriptor.ImplementationFactory.Invoke(null);
+                var factoryInterface = service.ImplementationInstance?.GetType()
+                    .GetTypeInfo()
+                    .GetInterfaces()
+                    .FirstOrDefault(i => i.GetTypeInfo().IsGenericType &&
+                                         i.GetGenericTypeDefinition() == typeof(IServiceProviderFactory<>));
+
+                if (factoryInterface == null)
+                {
+                    continue;
+                }
+
+                var containerBuilderType = factoryInterface.GenericTypeArguments[0];
+                return (IServiceProvider)typeof(ServiceCollectionExtension)
+                    .GetTypeInfo()
+                    .GetMethods()
+                    .Single(m => m.Name == nameof(BuildServiceProviderFromFactory) && m.IsGenericMethod)
+                    .MakeGenericMethod(containerBuilderType)
+                    .Invoke(null, new object[] { services, null });
             }
 
-            return default;
+            return services.BuildServiceProvider();
         }
 
     }

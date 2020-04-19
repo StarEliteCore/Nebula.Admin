@@ -3,6 +3,7 @@ using Destiny.Core.Flow.Exceptions;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Reflection;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace Destiny.Core.Flow.Modules
  
     public class AppModuleManager: IAppModuleManager
     {
+
+
         public List<AppModuleBase> SourceModules { get; private set; }
         public AppModuleManager()
         {
@@ -26,6 +29,8 @@ namespace Destiny.Core.Flow.Modules
         /// <returns></returns>
         public IServiceCollection LoadModules(IServiceCollection services)
         {
+
+           
             var typeFinder = services.GetOrAddSingletonService<ITypeFinder, TypeFinder>();
             var baseType = typeof(AppModuleBase);
             var moduleTypes = typeFinder.Find(t=> t.IsSubclassOf(baseType)&&!t.IsAbstract).Distinct().ToArray();
@@ -37,9 +42,14 @@ namespace Destiny.Core.Flow.Modules
             var moduleBases = moduleTypes.Select(m => (AppModuleBase)Activator.CreateInstance(m));
             SourceModules.AddRange(moduleBases);
             List<AppModuleBase> modules = SourceModules.ToList();
+
             foreach (var module in modules)
             {
+            
                 services = module.ConfigureServices(services);
+                module.IocManager = (IIocManager) services.BuildServiceProvider().GetService(typeof(IIocManager)); /*services.GetService<IIocManager>();*/
+
+
             }
             return services;
         }

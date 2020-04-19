@@ -8,6 +8,7 @@ namespace Destiny.Core.Flow.AspNetCore.Api
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    //[EnableCors("Destiny.Core.Flow.API")]
     public abstract  class ApiControllerBase : ControllerBase
     {
 

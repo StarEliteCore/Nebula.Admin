@@ -89,7 +89,7 @@ namespace Destiny.Core.Flow.Services.Users
         /// <returns></returns>
         public async Task<PageResult<UserOutputPageListDto>> GetUserPageAsync(PageRequest request)
         {
-
+      
             request.NotNull(nameof(request));
             var expression = FilterHelp.GetExpression<User>(request.Filters);
             return  await  _userManager.Users.AsNoTracking().ToPageAsync<User, UserOutputPageListDto>(expression, request.PageParameters);

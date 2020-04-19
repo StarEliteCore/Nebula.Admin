@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Destiny.Core.Flow.Dependency;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -11,7 +13,14 @@ namespace Destiny.Core.Flow.Modules
     /// </summary>
    public abstract class AppModuleBase
     {
+        //public AppModuleBase(IServiceProvider serviceProvider, IConfiguration configuration)
+        //{
+        //    ServiceProvider = serviceProvider;
+        //    Configuration = configuration;
+        //}
 
+
+        protected internal IIocManager IocManager { get; internal set; }
         /// <summary>
         /// 将模块服务添加到依赖注入服务容器中
         /// </summary>

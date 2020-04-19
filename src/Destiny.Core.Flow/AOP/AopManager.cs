@@ -10,34 +10,34 @@ using System.Text;
 
 namespace Destiny.Core.Flow.AOP
 {
+    /// <summary>
+    /// Aop管理
+    /// </summary>
     public class AopManager : IAopManager
     {
-        private readonly IServiceCollection _services;
+        /// <summary>
+        /// 加载所有
+        /// </summary>
+        /// <param name="services"></param>
 
-        public AopManager(IServiceCollection services)
+        public void AutoLoadAops(IServiceCollection services)
         {
-            _services = services;
-        }
-
-        public void LoadAops()
-        {
-            var typeFinder = _services.GetOrAddSingletonService<ITypeFinder, TypeFinder>();
+            var typeFinder = services.GetOrAddSingletonService<ITypeFinder, TypeFinder>();
 
             typeFinder.NotNull(nameof(typeFinder));
-            var typs=  typeFinder.Find(o => o.IsClass && !o.IsAbstract && !o.IsInterface && o.IsSubclassOf(typeof(AbstractInterceptor)));
+            var typs=  typeFinder.Find(o => o.IsClass && !o.IsAbstract && !o.IsInterface && o.IsSubclassOf(typeof(AbstractInterceptorAttribute)));
             if (typs?.Length > 0)
             {
-                _services.ConfigureDynamicProxy(
-                 config =>
-                 {
-                
-                     foreach (var type in typs)
-                     {
-  
-                         config.Interceptors.AddTyped(type);
-                     }
-                });
+                foreach (var type in typs)
+                {
+                    services.AddTransient(type);
+                    services.ConfigureDynamicProxy(cof =>
+                    {
+                        cof.Interceptors.AddTyped(type);
+                    });
+                }
             }
+          
         }
     }
 }

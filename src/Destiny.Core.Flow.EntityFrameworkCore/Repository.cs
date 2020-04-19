@@ -37,8 +37,8 @@ namespace Destiny.Core.Flow
             UnitOfWork=(serviceProvider.GetService(typeof(IUnitOfWork)) as IUnitOfWork);
             _dbContext = UnitOfWork.GetDbContext();
             _dbSet = _dbContext.Set<TEntity>();
-        
-            _principal = serviceProvider.GetService<IPrincipal>();
+            _logger = serviceProvider.GetLogger<Repository<TEntity, TPrimaryKey>>();
+           _principal = serviceProvider.GetService<IPrincipal>();
         }
         #region 查询
 

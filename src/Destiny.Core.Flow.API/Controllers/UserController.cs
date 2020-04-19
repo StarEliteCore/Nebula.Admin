@@ -11,6 +11,8 @@ using Destiny.Core.Flow.IServices.Users;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
+
 namespace Destiny.Core.Flow.API.Controllers
 {
 
@@ -18,7 +20,8 @@ namespace Destiny.Core.Flow.API.Controllers
     /// 用户管理
     /// </summary>
     [Description("用户管理")]
-    [Authorize]
+    //[EnableCors("Destiny.Core.Flow.API")]  //这里可以
+    //[Authorize]
     public class UserController : ApiControllerBase
     {
 
@@ -117,12 +120,12 @@ namespace Destiny.Core.Flow.API.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [Description("异步得到分页")]
-        public async Task<PageList<UserOutputPageListDto>> GetUserPageAsync([FromBody]PageRequest request)
+        public async Task<PageList<UserOutputPageListDto>> GetUserPageAsync()
         {
 
-            return (await _userService.GetUserPageAsync(request)).PageList();
+            return (await _userService.GetUserPageAsync(new PageRequest() { })).PageList();
         }
     }
 }
