@@ -28,7 +28,7 @@ namespace Destiny.Core.Flow.API.Controllers.Organization
         /// <returns></returns>
         [HttpGet]
         [Description("获取组织架构")]
-        public async Task<TreeData<OrganizationOutDto>> CreateAsync()
+        public async Task<TreeData<OrganizationOutDto>> GetAsync()
         {
 
             var result= await _organization.GetOrganization();
