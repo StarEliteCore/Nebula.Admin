@@ -1,7 +1,9 @@
-﻿using Destiny.Core.Flow.Dtos.Menu;
+﻿using Destiny.Core.Flow.AspNetCore.Ui;
+using Destiny.Core.Flow.Dtos.Menu;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Ui;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IServices.IMenu
@@ -35,5 +37,17 @@ namespace Destiny.Core.Flow.IServices.IMenu
         /// <param name="requst"></param>
         /// <returns></returns>
         Task<PageResult<MenuOutPageListDto>> GetMenuPageAsync(PageRequest requst);
+
+        /// <summary>
+        /// 查询菜单
+        /// </summary>
+        /// <returns></returns>
+        Task<TreeResult<MenuOutDto>> GetMenuAsync();
+        /// <summary>
+        /// 返回表格
+        /// </summary>
+        /// <param name="requst"></param>
+        /// <returns></returns>
+        Task<PageResult<MenuTableOutDto>> GetMenuTableAsync(PageRequest requst);
     }
 }
