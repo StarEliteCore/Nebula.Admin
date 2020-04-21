@@ -45,8 +45,8 @@ namespace Destiny.Core.Flow.Services.Menu
         public async Task<PageResult<MenuOutPageListDto>> GetMenuPageAsync(PageRequest requst)
         {
             requst.NotNull(nameof(requst));
-            var expression = FilterHelp.GetExpression<MenuEntity>(requst.Filters);
-            return await _menuRepository.TrackEntities.ToPageAsync<MenuEntity, MenuOutPageListDto>(expression, requst.PageParameters);
+            var expression = FilterHelp.GetExpression<MenuEntity>(requst.FilterJson);
+            return await _menuRepository.TrackEntities.ToPageAsync<MenuEntity, MenuOutPageListDto>(expression, requst);
         }
 
         public async Task<TreeResult<MenuOutDto>> GetMenuAsync()
@@ -73,9 +73,9 @@ namespace Destiny.Core.Flow.Services.Menu
         public async Task<PageResult<MenuTableOutDto>> GetMenuTableAsync(PageRequest requst)
         {
             requst.NotNull(nameof(requst));
-            var expression = FilterHelp.GetExpression<MenuEntity>(requst.Filters);
+            var expression = FilterHelp.GetExpression<MenuEntity>(requst.FilterJson);
 
-            return await _menuRepository.TrackEntities.ToPageAsync<MenuEntity, MenuTableOutDto>(expression, requst.PageParameters);
+            return await _menuRepository.TrackEntities.ToPageAsync<MenuEntity, MenuTableOutDto>(expression, requst);
         }
     }
 }
