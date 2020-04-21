@@ -12,6 +12,8 @@ using System.Reflection;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.AspNetCore.Builder;
 using Destiny.Core.Flow.Exceptions;
+using Destiny.Core.Flow.Swagger.Filter;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Destiny.Core.Flow.Swagger
 {
@@ -46,6 +48,8 @@ namespace Destiny.Core.Flow.Swagger
        
             services.AddSwaggerGen(s =>
             {
+
+           
                 s.SwaggerDoc(version, new OpenApiInfo { Title = title, Version = version });
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
 
@@ -90,6 +94,10 @@ namespace Destiny.Core.Flow.Swagger
                     }
                 });
 
+                //s.SchemaFilter<AutoRestSchemaFilter>();
+                //s.DocumentFilter<TagDescriptionsDocumentFilter>();
+
+
             });
             return services;
         }
@@ -99,6 +107,18 @@ namespace Destiny.Core.Flow.Swagger
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
+                c.DefaultModelExpandDepth(2);
+                c.DefaultModelRendering(ModelRendering.Example);
+                c.DefaultModelsExpandDepth(-1);
+
+                c.DisplayRequestDuration();
+                c.DocExpansion(DocExpansion.None);
+                c.EnableDeepLinking();
+                c.EnableFilter();
+                c.MaxDisplayedTags(5);
+                c.ShowExtensions();
+                c.EnableValidator();
+    
                 c.SwaggerEndpoint(_url, _title);
                 c.RoutePrefix = string.Empty;
             });

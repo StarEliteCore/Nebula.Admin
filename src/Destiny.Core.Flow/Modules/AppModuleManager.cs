@@ -47,7 +47,7 @@ namespace Destiny.Core.Flow.Modules
             {
             
                 services = module.ConfigureServices(services);
-                module.IocManager = (IIocManager) services.BuildServiceProvider().GetService(typeof(IIocManager)); /*services.GetService<IIocManager>();*/
+               
 
 
             }

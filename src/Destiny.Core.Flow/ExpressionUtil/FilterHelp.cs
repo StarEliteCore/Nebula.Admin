@@ -8,6 +8,7 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using System.Text;
+using Destiny.Core.Flow.Helps;
 
 
 namespace Destiny.Core.Flow.ExpressionUtil
@@ -39,6 +40,21 @@ namespace Destiny.Core.Flow.ExpressionUtil
 
             var expression1 =  DynamicExpressionParser.ParseLambda<T, bool>(ParsingConfig.Default,true, expressionStr, filters.Select(o => o.Value).ToArray());
             return expression1;
+        }
+
+
+        public static Expression<Func<T, bool>> GetExpression<T>(string filterJson)
+        {
+
+            if (!filterJson.IsNullOrEmpty() || filterJson == "[]")
+            {
+                Expression<Func<T, bool>> expression = t => true;
+                return expression;
+            }
+            var filters=  filterJson.FromJson<FilterInfo[]>();
+
+           return FilterHelp.GetExpression<T>(filters);
+
         }
 
 

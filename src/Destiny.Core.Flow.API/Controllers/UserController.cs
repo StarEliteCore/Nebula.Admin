@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.Extensions.Logging;
+using Destiny.Core.Flow.ExpressionUtil;
 
 namespace Destiny.Core.Flow.API.Controllers
 {
@@ -20,16 +22,17 @@ namespace Destiny.Core.Flow.API.Controllers
     /// 用户管理
     /// </summary>
     [Description("用户管理")]
-    //[EnableCors("Destiny.Core.Flow.API")]  //这里可以
     //[Authorize]
     public class UserController : ApiControllerBase
     {
 
         private readonly IUserServices _userService = null;
+        private readonly ILogger _logger = null;
 
         public UserController(IUserServices userService)
         {
             _userService = userService;
+            _logger = IocManage.GetLogger<UserController>();
         }
 
 
@@ -70,12 +73,14 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <param name="id">主键</param>
         /// <returns></returns>
 
-        [HttpPost]
+        [HttpDelete]
         [Description("异步删除用户")]
-        public async Task<AjaxResult> DeleteAsync(Guid? id)
+        public async Task<AjaxResult> DeleteAsync(string id)
         {
 
-            return (await _userService.DeleteAsync(id.Value)).ToAjaxResult();
+            await Task.CompletedTask;
+            return new AjaxResult();
+            //return (await _userService.DeleteAsync(id.Value)).ToAjaxResult();
 
         }
 
@@ -120,12 +125,13 @@ namespace Destiny.Core.Flow.API.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         [Description("异步得到分页")]
-        public async Task<PageList<UserOutputPageListDto>> GetUserPageAsync()
+        public async Task<PageList<UserOutputPageListDto>> GetUserPageAsync([FromBody]PageRequest request)
         {
-
-            return (await _userService.GetUserPageAsync(new PageRequest() { })).PageList();
+           
+            //[FromBody]PageRequest request
+            return (await _userService.GetUserPageAsync(request)).PageList();
         }
     }
 }

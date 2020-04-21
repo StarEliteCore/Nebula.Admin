@@ -11,17 +11,17 @@ namespace Destiny.Core.Flow.Filter
     {
 
 
-        public PageParameters() : this(1, 10)
-        {
+        //public PageParameters() : this(1, 10)
+        //{
 
-        }
+        //}
 
-        public PageParameters(int pageIndex, int pageSize)
-        {
-            PageIndex = pageIndex;
-            PageSize = pageSize;
-            OrderConditions = new Filter.OrderCondition[] { };
-        }
+        //public PageParameters(int pageIndex, int pageSize)
+        //{
+        //    PageIndex = pageIndex;
+        //    PageSize = pageSize;
+        //    OrderConditions = new Filter.OrderCondition[] { };
+        //}
 
 
         /// <summary>

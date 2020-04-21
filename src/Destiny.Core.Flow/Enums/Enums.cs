@@ -93,10 +93,14 @@ namespace Destiny.Core.Flow.Enums
 
 
     [Description("过滤操作器")]
-    
+
+    //过滤操作器
     public enum FilterOperator
     {
 
+        /// <summary>
+        /// 
+        /// </summary>
         [FilterCode("==")]
         [Description("等于")]
         Equal,
