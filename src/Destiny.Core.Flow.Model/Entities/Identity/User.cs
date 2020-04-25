@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Destiny.Core.Flow.Data;
 using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Identity;
 using System;
@@ -13,7 +14,10 @@ namespace Destiny.Core.Flow.Model.Entities.Identity
     public class User : UserBase<Guid>, IFullAuditedEntity<Guid>
     {
 
-
+        public User()
+        {
+         Id=   ComnGuid.NewGuid();
+        }
         /// <summary>
         ///  获取或设置 最后修改用户
         /// </summary>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Destiny.Core.Flow.Filter.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,7 +8,7 @@ namespace Destiny.Core.Flow.Filter
     /// <summary>
     /// 分页所需的参数
     /// </summary>
-    public class PageParameters
+    public class PageParameters: IPagedRequest, IFilteredPagedRequest
     {
 
 
@@ -39,5 +40,6 @@ namespace Destiny.Core.Flow.Filter
         /// 排序条件集合
         /// </summary>
         public OrderCondition[] OrderConditions { get; set; }
+        public FilterInfo[] Filters { get; set; }
     }
 }

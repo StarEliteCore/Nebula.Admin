@@ -6,9 +6,12 @@ using Destiny.Core.Flow.IServices.IRoleServices;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Ui;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -60,6 +63,22 @@ namespace Destiny.Core.Flow.Services.RoleServices
                 return result.ToOperationResponse();
             }
             return new OperationResponse("更新成功!", Enums.OperationResponseType.Success);
+        }
+
+        /// <summary>
+        /// 得到角色把角色转成下拉
+        /// </summary>
+        /// <returns></returns>
+        public async Task<OperationResponse<IEnumerable<SelectListItem>>> GetRolesToSelectListItemAsync()
+        {
+            var roles = await _roleManager.Roles.AsNoTracking().Select(r => new SelectListItem
+            {
+                Value = r.Id.ToString().ToLower(),
+                Text = r.Name,
+                Selected = false,
+
+            }).ToListAsync();
+            return new OperationResponse<IEnumerable<SelectListItem>>("得到数据成功",roles,OperationResponseType.Success);
         }
     }
 }

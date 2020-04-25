@@ -12,16 +12,16 @@ namespace Destiny.Core.Flow.AspNetCore.Ui
         {
 
         }
-        public PageList(IEnumerable<T> data, int total, string message = "查询成功", bool success = true)
+        public PageList(IEnumerable<T> itemList, int total, string message = "查询成功", bool success = true)
         {
-            Data = data;
+            ItemList = itemList;
             Total = total;
             Success = success;
             this.Message = message;
         }
 
 
-        public IEnumerable<T> Data { get; set; }
+        public IEnumerable<T> ItemList { get; set; }
 
         public int Total { get; set; }
 
