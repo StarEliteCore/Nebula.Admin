@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Dtos.Menu;
 using Destiny.Core.Flow.Filter;
@@ -13,9 +14,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Destiny.Core.Flow.API.Controllers.Menu
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class MenuController : ControllerBase
+    //[ApiController]
+    public class MenuController : ApiControllerBase
     {
         private readonly IMenuServices _menuServices;
 
@@ -55,7 +55,7 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         /// 添加或修改
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPut]
         [Description("添加或修改")]
         public async Task<AjaxResult> AddMenuAsync([FromBody]MenuInputDto dto)
         {
@@ -69,7 +69,7 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         /// 删除
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpDelete]
         [Description("删除菜单")]
         public async Task<AjaxResult> Delete(Guid? id)
         {

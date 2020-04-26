@@ -49,12 +49,12 @@ namespace Destiny.Core.Flow.Services.Organization
                 return r.Id == c.ParentId;
             }, (r, datalist)=> {
 
-                if (r.Children == null)
+                if (r.children == null)
                 {
-                    r.Children = new List<OrganizationOutDto>();
+                    r.children = new List<OrganizationOutDto>();
                 }
 
-                r.Children.AddRange(datalist);
+                r.children.AddRange(datalist);
             
             });
              

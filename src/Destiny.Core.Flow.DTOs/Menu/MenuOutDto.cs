@@ -14,7 +14,7 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// <summary>
         /// 是否展开直子节点
         /// </summary>
-        public bool expand { get; set; }
+        public bool expand { get; set; } = true;
         /// <summary>
         /// 禁掉响应
         /// </summary>
@@ -31,6 +31,6 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// 当前节点以上所有组织架构
         /// </summary>
         public string ParenNumber { get; set; }
-        public List<MenuOutDto> Children { get; set; } = new List<MenuOutDto>();
+        public List<MenuOutDto> children { get; set; } = new List<MenuOutDto>();
     }
 }

@@ -115,7 +115,7 @@ namespace Destiny.Core.Flow.Swagger
                 c.DocExpansion(DocExpansion.None);
                 c.EnableDeepLinking();
                 c.EnableFilter();
-                c.MaxDisplayedTags(5);
+                c.MaxDisplayedTags(int.MaxValue);
                 c.ShowExtensions();
                 c.EnableValidator();
     

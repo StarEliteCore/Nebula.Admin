@@ -23,7 +23,7 @@ namespace Destiny.Core.Flow.Model.Entities.Menu
         /// 组件地址(前端)
         /// </summary>
         [DisplayName("组件地址(前端)")]
-        public int RouterPath { get; set; }
+        public string RouterPath { get; set; }
         /// <summary>
         /// 父级菜单ID
         /// </summary>
@@ -33,7 +33,7 @@ namespace Destiny.Core.Flow.Model.Entities.Menu
         /// 菜单图标
         /// </summary>
         [DisplayName("菜单图标")]
-        public Guid Iocn { get; set; }
+        public string Iocn { get; set; }
         /// <summary>
         ///  获取或设置 最后修改用户
         /// </summary>
@@ -64,5 +64,10 @@ namespace Destiny.Core.Flow.Model.Entities.Menu
         /// </summary>
         [DisplayName("描述")]
         public virtual string Description { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [DisplayName("当前菜单以上所有的父级")]
+        public string ParentNumber { get; set; }
     }
 }

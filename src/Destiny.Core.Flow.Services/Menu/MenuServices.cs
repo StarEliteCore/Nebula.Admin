@@ -60,12 +60,12 @@ namespace Destiny.Core.Flow.Services.Menu
                     return p.Id == q.ParentId;
                 }, (p, q) =>
                 {
-                    if (p.Children == null)
+                    if (p.children == null)
                     {
-                        p.Children = new List<MenuOutDto>();
+                        p.children = new List<MenuOutDto>();
                     }
 
-                    p.Children.AddRange(q);
+                    p.children.AddRange(q);
                 });
             return list;
         }

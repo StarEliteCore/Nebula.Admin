@@ -40,6 +40,6 @@ namespace Destiny.Core.Flow.Dtos.Organization
         /// <summary>
         /// 组织架构标题
         /// </summary>
-        public List<OrganizationOutDto> Children { get; set; } = new List<OrganizationOutDto>();
+        public List<OrganizationOutDto> children { get; set; } = new List<OrganizationOutDto>();
     }
 }
