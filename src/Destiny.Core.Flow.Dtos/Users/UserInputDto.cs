@@ -12,7 +12,7 @@ namespace Destiny.Core.Flow.Dtos
 {
 
     [AutoMapp(typeof(User))]
-    public class UserInputDto: InputDto<Guid>
+    public class UserInputDto : InputDto<Guid>
     {
         public UserInputDto()
         {
@@ -42,6 +42,8 @@ namespace Destiny.Core.Flow.Dtos
         /// 姓别
         /// </summary>
         public Sex Sex { get; set; }
+
+        public Guid[] RoleIds { get; set; }
 
     }
 }

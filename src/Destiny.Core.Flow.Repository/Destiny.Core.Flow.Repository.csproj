@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Destiny.Core.Flow.EntityFrameworkCore\Destiny.Core.Flow.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Destiny.Core.Flow.IServices\Destiny.Core.Flow.IServices.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Model\Destiny.Core.Flow.Model.csproj" />
   </ItemGroup>
 

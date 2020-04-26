@@ -1,6 +1,7 @@
 ﻿
 using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Filter;
+using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.Ui;
 using System;
 using System.Collections.Generic;
@@ -49,6 +50,6 @@ namespace Destiny.Core.Flow.IServices.Users
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        Task<PageResult<UserOutputPageListDto>> GetUserPageAsync(PageRequest request);
+        Task<IPagedResult<UserOutputPageListDto>> GetUserPageAsync(PageRequest request);
     }
 }

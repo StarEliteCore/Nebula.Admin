@@ -75,12 +75,11 @@ namespace Destiny.Core.Flow.API.Controllers
 
         [HttpDelete]
         [Description("异步删除用户")]
-        public async Task<AjaxResult> DeleteAsync(string id)
+        public async Task<AjaxResult> DeleteAsync(Guid id)
         {
 
-            await Task.CompletedTask;
-            return new AjaxResult();
-            //return (await _userService.DeleteAsync(id.Value)).ToAjaxResult();
+           
+            return (await _userService.DeleteAsync(id)).ToAjaxResult();
 
         }
 
@@ -92,7 +91,7 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <param name="id">主键</param>
         /// <returns></returns>
 
-        [HttpPost]
+        [HttpGet]
         [Description("异步加载用户")]
 
 

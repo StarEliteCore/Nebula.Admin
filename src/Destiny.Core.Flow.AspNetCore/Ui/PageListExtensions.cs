@@ -3,6 +3,7 @@ using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
+using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.Ui;
 
 
@@ -23,10 +24,10 @@ namespace Destiny.Core.Flow.AspNetCore.Ui
         /// <typeparam name="T"></typeparam>
         /// <param name="pageResult"></param>
         /// <returns></returns>
-        public static PageList<T> PageList<T>(this PageResult<T> pageResult)
+        public static PageList<T> PageList<T>(this IPagedResult<T> pageResult)
         {
             var result = pageResult;
-            return new PageList<T>() { Data= result.Data,Message= result.Message,Total= result.Total,Success= result.Success};
+            return new PageList<T>() { ItemList= result.ItemList,Message= result.Message,Total= result.Total,Success= result.Success};
         }
     }
 }

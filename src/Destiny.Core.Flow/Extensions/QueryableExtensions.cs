@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Destiny.Core.Flow.Entity;
+using Destiny.Core.Flow.Filter.Abstract;
 
 namespace Destiny.Core.Flow.Extensions
 {
@@ -47,12 +48,12 @@ namespace Destiny.Core.Flow.Extensions
         /// <param name="predicate">查询条件表达式</param>
         /// <param name="pageParameters">分页参数</param>
         /// <returns></returns>
-        public static async Task<PageResult<TEntity>> ToPageAsync<TEntity>(this IQueryable<TEntity> source, Expression<Func<TEntity, bool>> predicate, PageParameters pageParameters)
+        public static async Task<PageResult<TEntity>> ToPageAsync<TEntity>(this IQueryable<TEntity> source, Expression<Func<TEntity, bool>> predicate, IPagedRequest request)
 
         {
-            pageParameters.NotNull(nameof(pageParameters));
+            request.NotNull(nameof(request));
 
-            var result =await  source.WhereAsync(pageParameters.PageIndex, pageParameters.PageSize, predicate, pageParameters.OrderConditions);
+            var result = await source.WhereAsync(request.PageIndex, request.PageSize, predicate, request.OrderConditions);
             var list = await result.data.ToArrayAsync();
             var total = result.totalNumber;
             return new PageResult<TEntity>(list, total);
@@ -69,11 +70,11 @@ namespace Destiny.Core.Flow.Extensions
         /// <param name="pageParameters">分页参数</param>
         /// <param name="selector">数据筛选表达式</param>
         /// <returns></returns>
-        public static async Task<PageResult<TResult>> ToPageAsync<TEntity, TResult>(this IQueryable<TEntity> source, Expression<Func<TEntity, bool>> predicate, PageParameters pageParameters, Expression<Func<TEntity, TResult>> selector)
+        public static async Task<PageResult<TResult>> ToPageAsync<TEntity, TResult>(this IQueryable<TEntity> source, Expression<Func<TEntity, bool>> predicate, IPagedRequest request, Expression<Func<TEntity, TResult>> selector)
         {
-            pageParameters.NotNull(nameof(pageParameters));
+            request.NotNull(nameof(request));
             selector.NotNull(nameof(selector));
-            var result =await  source.WhereAsync(pageParameters.PageIndex, pageParameters.PageSize, predicate, pageParameters.OrderConditions);
+            var result = await source.WhereAsync(request.PageIndex, request.PageSize, predicate, request.OrderConditions);
             var list = await result.data.Select(selector).ToArrayAsync();
             var total = result.totalNumber;
             return new PageResult<TResult>(list, total);
@@ -94,12 +95,12 @@ namespace Destiny.Core.Flow.Extensions
         /// <param name="pageParameters">分页参数</param>
         /// <param name="selector">数据筛选表达式</param>
         /// <returns></returns>
-        public static async Task<PageResult<TEntity>> ToPageAsync<TEntity>(this IQueryable<TEntity> source,PageParameters pageParameters)
+        public static async Task<PageResult<TEntity>> ToPageAsync<TEntity>(this IQueryable<TEntity> source, IPagedRequest request)
         {
-            pageParameters.NotNull(nameof(pageParameters));
-       
-            var result = await source.WhereAsync(pageParameters.PageIndex, pageParameters.PageSize, null, pageParameters.OrderConditions);
-            var list =await result.data.ToArrayAsync();
+            request.NotNull(nameof(request));
+
+            var result = await source.WhereAsync(request.PageIndex, request.PageSize, null, request.OrderConditions);
+            var list = await result.data.ToArrayAsync();
             var total = result.totalNumber;
             return new PageResult<TEntity>(list, total);
         }
@@ -117,32 +118,32 @@ namespace Destiny.Core.Flow.Extensions
           where TOutputDto : IOutputDto
         {
             pageParameters.NotNull(nameof(pageParameters));
-            var result =await source.WhereAsync(pageParameters.PageIndex, pageParameters.PageSize, predicate, pageParameters.OrderConditions);
+            var result = await source.WhereAsync(pageParameters.PageIndex, pageParameters.PageSize, predicate, pageParameters.OrderConditions);
             var list = await result.data.ToOutput<TOutputDto>().ToArrayAsync();
             var total = result.totalNumber;
             return new PageResult<TOutputDto>(list, total);
         }
 
-        /// <summary>
-        /// 从集合中查询指定输出DTO的分页信息
-        /// </summary>
-        /// <typeparam name="TEntity">动态实体类型</typeparam>
-        /// <typeparam name="TOutputDto">输出DTO数据类型</typeparam>
-        /// <param name="source">数据源</param>
-        /// <param name="pageParameters">分页参数</param>
-        /// <returns></returns>
-        public static async Task<PageResult<TOutputDto>> ToPageAsync<TEntity, TOutputDto>(this IQueryable<TEntity> source, PageParameters pageParameters)
+        ///// <summary>
+        ///// 从集合中查询指定输出DTO的分页信息
+        ///// </summary>
+        ///// <typeparam name="TEntity">动态实体类型</typeparam>
+        ///// <typeparam name="TOutputDto">输出DTO数据类型</typeparam>
+        ///// <param name="source">数据源</param>
+        ///// <param name="pageParameters">分页参数</param>
+        ///// <returns></returns>
+        public static async Task<PageResult<TOutputDto>> ToPageAsync<TEntity, TOutputDto>(this IQueryable<TEntity> source, IPagedRequest request)
           where TOutputDto : IOutputDto
         {
-            pageParameters.NotNull(nameof(pageParameters));
-            var result = await source.WhereAsync(pageParameters.PageIndex, pageParameters.PageSize, null, pageParameters.OrderConditions);
+            request.NotNull(nameof(request));
+            var result = await source.WhereAsync(request.PageIndex, request.PageSize, null, request.OrderConditions);
             var list = await result.data.ToOutput<TOutputDto>().ToArrayAsync();
             var total = result.totalNumber;
             return new PageResult<TOutputDto>(list, total);
         }
 
-        private static async Task<(IQueryable<TEntity> data, int  totalNumber)> WhereAsync<TEntity>(this IQueryable<TEntity> source, int pageIndex,
-              int pageSize, Expression<Func<TEntity, bool>> predicate,OrderCondition[] orderConditions)
+        private static async Task<(IQueryable<TEntity> data, int totalNumber)> WhereAsync<TEntity>(this IQueryable<TEntity> source, int pageIndex,
+              int pageSize, Expression<Func<TEntity, bool>> predicate, OrderCondition[] orderConditions)
         {
             var total = !predicate.IsNull() ? await source.CountAsync(predicate) : await source.CountAsync();
             if (!predicate.IsNull())
@@ -164,8 +165,10 @@ namespace Destiny.Core.Flow.Extensions
             source = orderSource;
 
 
-            return (!source.IsNull() ? source.Skip(pageSize * (pageIndex - 1)).Take(pageSize) : Enumerable.Empty<TEntity>().AsQueryable(),total);
+            return (!source.IsNull() ? source.Skip(pageSize * (pageIndex - 1)).Take(pageSize) : Enumerable.Empty<TEntity>().AsQueryable(), total);
         }
+
+
 
 
         /// <summary>

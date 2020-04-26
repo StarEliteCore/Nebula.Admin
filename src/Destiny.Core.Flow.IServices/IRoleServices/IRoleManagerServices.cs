@@ -1,5 +1,6 @@
 ﻿using Destiny.Core.Flow.Dtos.RoleDtos;
 using Destiny.Core.Flow.Ui;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,5 +26,8 @@ namespace Destiny.Core.Flow.IServices.IRoleServices
         /// <param name="id"></param>
         /// <returns></returns>
         Task<OperationResponse> DeleteAsync(Guid id);
+
+
+        Task<OperationResponse<IEnumerable<SelectListItem>>> GetRolesToSelectListItemAsync();
     }
 }

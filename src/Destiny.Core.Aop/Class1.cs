@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Destiny.Core.Flow.Repository
+namespace Destiny.Core.Aop
 {
     public class Class1
     {

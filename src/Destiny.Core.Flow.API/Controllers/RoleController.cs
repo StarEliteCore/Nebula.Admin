@@ -78,5 +78,18 @@ namespace Destiny.Core.Flow.API.Controllers
             }
             return (await _roleManagerServices.UpdateRoleAsync(dto)).ToAjaxResult();
         }
+
+        /// <summary>
+        /// 异步得到角色下拉数据
+        /// </summary>
+        /// <returns></returns>
+        [Description("异步得到角色下拉数据")]
+        [HttpGet]
+        public async Task<AjaxResult> GetRoleSelectListAsync()
+        {
+
+
+            return (await _roleManagerServices.GetRolesToSelectListItemAsync()).ToAjaxResult();
+        }
     }
 }

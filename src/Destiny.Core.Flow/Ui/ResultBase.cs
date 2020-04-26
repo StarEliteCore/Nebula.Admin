@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Ui
 {
-  public abstract  class ResultBase
+  public abstract  class ResultBase: IResultBase
     {
 
 
@@ -14,5 +14,14 @@ namespace Destiny.Core.Flow.Ui
 
         public virtual string Message { get; set; }
 
+    }
+
+
+    public interface IResultBase
+    {
+          bool Success { get; set; }
+
+
+          string Message { get; set; }
     }
 }
