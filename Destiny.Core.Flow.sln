@@ -39,6 +39,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Dtos", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Repository", "src\Destiny.Core.Flow.Repository\Destiny.Core.Flow.Repository.csproj", "{88F5FAB5-5125-43FE-A889-510B7D085F7D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Aop", "src\Destiny.Core.Aop\Destiny.Core.Aop.csproj", "{DCC8964D-54DB-4E64-ADCD-93D392477766}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,10 @@ Global
 		{88F5FAB5-5125-43FE-A889-510B7D085F7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88F5FAB5-5125-43FE-A889-510B7D085F7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88F5FAB5-5125-43FE-A889-510B7D085F7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCC8964D-54DB-4E64-ADCD-93D392477766}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCC8964D-54DB-4E64-ADCD-93D392477766}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCC8964D-54DB-4E64-ADCD-93D392477766}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCC8964D-54DB-4E64-ADCD-93D392477766}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,6 +132,7 @@ Global
 		{9A347066-1CEA-4FD6-BD7E-598A7FF21E6C} = {1249687C-582B-4A3E-8090-2AAF36AA3284}
 		{9DFDA589-61A2-46E6-ACB6-6C8D1B987F0D} = {1249687C-582B-4A3E-8090-2AAF36AA3284}
 		{88F5FAB5-5125-43FE-A889-510B7D085F7D} = {1249687C-582B-4A3E-8090-2AAF36AA3284}
+		{DCC8964D-54DB-4E64-ADCD-93D392477766} = {1249687C-582B-4A3E-8090-2AAF36AA3284}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {468F450C-837F-4FCD-8E06-3E12690DDED6}
