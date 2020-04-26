@@ -32,7 +32,7 @@ namespace Destiny.Core.Aop
                     {
                         //var Enabled = service.GetConfiguration()[$"SuktCore:AopManager:{item.Name}:Enabled"].ObjToBool();
                         //if (Enabled)
-                            cof.Interceptors.AddTyped(item, Predicates.ForNameSpace("Destiny.Core.Flow.Services"));////这种是配置只需要代理的层
+                            cof.Interceptors.AddTyped(item, Predicates.ForNameSpace("Destiny.Core.Flow.Services"), Predicates.ForNameSpace("Destiny.Core.Flow.IServices"));////这种是配置只需要代理的层
                         //config.NonAspectPredicates.AddService("IUnitofWork");//需要过滤掉不需要代理的服务层  
                     });
                 }

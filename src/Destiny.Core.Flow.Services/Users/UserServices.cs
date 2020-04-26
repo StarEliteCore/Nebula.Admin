@@ -7,8 +7,8 @@ using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Filter.Abstract;
+using Destiny.Core.Flow.IServices;
 using Destiny.Core.Flow.IServices.UserRoles;
-using Destiny.Core.Flow.IServices.Users;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Ui;
 using Microsoft.AspNetCore.Identity;
@@ -21,7 +21,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Destiny.Core.Flow.Services.Users
+namespace Destiny.Core.Flow.Services
 {
     [Dependency(ServiceLifetime.Scoped)]
     public class UserServices : IUserServices

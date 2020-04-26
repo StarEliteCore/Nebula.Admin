@@ -7,7 +7,7 @@ using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Filter;
-using Destiny.Core.Flow.IServices.Users;
+using Destiny.Core.Flow.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
@@ -28,11 +28,13 @@ namespace Destiny.Core.Flow.API.Controllers
 
         private readonly IUserServices _userService = null;
         private readonly ILogger _logger = null;
+        private readonly ITest1 _test1;
 
-        public UserController(IUserServices userService)
+        public UserController(IUserServices userService, ITest1 test1)
         {
             _userService = userService;
             _logger = IocManage.GetLogger<UserController>();
+            _test1 = test1;
         }
 
 
@@ -128,7 +130,12 @@ namespace Destiny.Core.Flow.API.Controllers
         [Description("异步得到分页")]
         public async Task<PageList<UserOutputPageListDto>> GetUserPageAsync([FromBody]PageRequest request)
         {
-           
+
+            //await Task.CompletedTask;
+            //_test1.Tstes();
+
+            //return new PageList<UserOutputPageListDto>();
+
             //[FromBody]PageRequest request
             return (await _userService.GetUserPageAsync(request)).PageList();
         }

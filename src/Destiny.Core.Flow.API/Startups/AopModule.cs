@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.API.Startups
 {
-    public class AopModule: AopModuleBase
+    public class AopModule : AopModuleBase
     {
 
     }
