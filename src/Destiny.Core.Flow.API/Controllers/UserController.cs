@@ -28,13 +28,11 @@ namespace Destiny.Core.Flow.API.Controllers
 
         private readonly IUserServices _userService = null;
         private readonly ILogger _logger = null;
-        private readonly ITest1 _test1;
 
-        public UserController(IUserServices userService, ITest1 test1)
+        public UserController(IUserServices userService)
         {
             _userService = userService;
             _logger = IocManage.GetLogger<UserController>();
-            _test1 = test1;
         }
 
 

@@ -18,5 +18,19 @@ namespace Destiny.Core.Flow.Extensions
             TimeSpan ts = new TimeSpan(d2.Ticks - d1.Ticks);
             return Math.Round(ts.TotalMilliseconds).ToString();
         }
+        /// <summary>
+        /// 转换为Bool类型
+        /// </summary>
+        /// <param name="thisValue"></param>
+        /// <returns></returns>
+        public static bool ObjToBool(this object thisValue)
+        {
+            bool reval = false;
+            if (thisValue != null && thisValue != DBNull.Value && bool.TryParse(thisValue.ToString(), out reval))
+            {
+                return reval;
+            }
+            return reval;
+        }
     }
 }

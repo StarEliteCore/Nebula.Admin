@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Destiny.Core.Aop.AttributeAOP;
 using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.EntityFrameworkCore;
@@ -38,7 +39,7 @@ namespace Destiny.Core.Flow.Services
             _unitOfWork = unitOfWork;
             _userRoleService = userRoleService;
         }
-
+        //[NonGlobalAopTran]
         public async Task<OperationResponse> CreateAsync(UserInputDto dto)
         {
 
@@ -46,21 +47,25 @@ namespace Destiny.Core.Flow.Services
             var passwordHash = dto.PasswordHash;
 
             var user = dto.MapTo<User>();
-            return await _unitOfWork.UseTranAsync(async () =>
+            var result = passwordHash.IsNullOrEmpty() ? await _userManager.CreateAsync(user) : await _userManager.CreateAsync(user, passwordHash);
+            if (!result.Succeeded)
             {
-                var result = passwordHash.IsNullOrEmpty() ? await _userManager.CreateAsync(user) : await _userManager.CreateAsync(user, passwordHash);
-                if (!result.Succeeded)
-                {
-                    return result.ToOperationResponse();
-                }
+                return result.ToOperationResponse();
+            }
 
-                if (dto.RoleIds?.Any() == true)
-                {
-                    return await this.SetUserRoles(user, dto.RoleIds);
-                }
-                return new OperationResponse("添加用户成功", OperationResponseType.Success);
+            if (dto.RoleIds?.Any() == true)
+            {
+                return await this.SetUserRoles(user, dto.RoleIds);
+            }
+            return  new OperationResponse("添加用户成功", OperationResponseType.Success); ;
 
-            });
+            //return await _unitOfWork.UseTranAsync(async () =>
+            //{
+            //    var result = passwordHash.IsNullOrEmpty() ? await _userManager.CreateAsync(user) : await _userManager.CreateAsync(user, passwordHash);
+
+            //    return new OperationResponse("添加用户成功", OperationResponseType.Success);
+
+            //});
 
         }
 
