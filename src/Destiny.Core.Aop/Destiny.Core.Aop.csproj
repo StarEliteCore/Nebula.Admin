@@ -9,4 +9,8 @@
     <ProjectReference Include="..\Destiny.Core.Flow\Destiny.Core.Flow.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Aop\" />
+  </ItemGroup>
+
 </Project>

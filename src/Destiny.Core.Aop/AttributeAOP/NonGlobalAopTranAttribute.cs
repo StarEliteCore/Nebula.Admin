@@ -13,11 +13,11 @@ namespace Destiny.Core.Aop.AttributeAOP
     /// </summary>
     public class NonGlobalAopTranAttribute : AbstractInterceptorAttribute
     {
-        [FromServiceContext]
-        private IUnitOfWork _unitOfWork { get; set; }
+        //[FromServiceContext]
+        //private IUnitOfWork _unitOfWork { get; set; }
         public async override Task Invoke(AspectContext context, AspectDelegate next)
         {
-            //_unitOfWork = context.ServiceProvider.GetService(typeof(IUnitOfWork)) as IUnitOfWork;
+            var  _unitOfWork = context.ServiceProvider.GetService(typeof(IUnitOfWork)) as IUnitOfWork;
             try
             {
                
