@@ -15,7 +15,9 @@ namespace Destiny.Core.Aop.Aop
         {
             //_unitOfWork = context.ServiceProvider.GetService(typeof(IUnitOfWork)) as IUnitOfWork;
             //_unitOfWork.BeginTransaction();
+            Console.WriteLine("方法执行前");
             await next(context);
+            Console.WriteLine("方法执行后");
             //_unitOfWork.Commit();
         }
     }
