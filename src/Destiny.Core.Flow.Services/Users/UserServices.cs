@@ -47,25 +47,23 @@ namespace Destiny.Core.Flow.Services
             var passwordHash = dto.PasswordHash;
 
             var user = dto.MapTo<User>();
-            var result = passwordHash.IsNullOrEmpty() ? await _userManager.CreateAsync(user) : await _userManager.CreateAsync(user, passwordHash);
-            if (!result.Succeeded)
+
+
+            return await _unitOfWork.UseTranAsync(async () =>
             {
-                return result.ToOperationResponse();
-            }
+                var result = passwordHash.IsNullOrEmpty() ? await _userManager.CreateAsync(user) : await _userManager.CreateAsync(user, passwordHash);
+                if (!result.Succeeded)
+                {
+                    return result.ToOperationResponse();
+                }
 
-            if (dto.RoleIds?.Any() == true)
-            {
-                return await this.SetUserRoles(user, dto.RoleIds);
-            }
-            return  new OperationResponse("添加用户成功", OperationResponseType.Success); ;
+                if (dto.RoleIds?.Any() == true)
+                {
+                    return await this.SetUserRoles(user, dto.RoleIds);
+                }
+                return new OperationResponse("添加用户成功", OperationResponseType.Success); 
 
-            //return await _unitOfWork.UseTranAsync(async () =>
-            //{
-            //    var result = passwordHash.IsNullOrEmpty() ? await _userManager.CreateAsync(user) : await _userManager.CreateAsync(user, passwordHash);
-
-            //    return new OperationResponse("添加用户成功", OperationResponseType.Success);
-
-            //});
+            });
 
         }
 

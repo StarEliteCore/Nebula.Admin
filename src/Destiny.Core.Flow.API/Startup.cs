@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AspectCore.Configuration;
 using AspectCore.Extensions.DependencyInjection;
-using Destiny.Core.Aop.Aop;
+
 using Destiny.Core.Flow.AspNetCore;
 using Destiny.Core.Flow.IServices;
 using Destiny.Core.Flow.Services;
