@@ -12,6 +12,7 @@ using Destiny.Core.Flow.IServices;
 using Destiny.Core.Flow.IServices.UserRoles;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Ui;
+using Destiny.Core.Flow.Validation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,6 +41,7 @@ namespace Destiny.Core.Flow.Services
             _userRoleService = userRoleService;
         }
         //[NonGlobalAopTran]
+        [ValidationInterceptor]
         public async Task<OperationResponse> CreateAsync(UserInputDto dto)
         {
 

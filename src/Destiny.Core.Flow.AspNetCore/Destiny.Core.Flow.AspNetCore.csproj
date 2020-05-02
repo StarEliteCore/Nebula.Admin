@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <Folder Include="Middleware\" />
-    <Folder Include="Api\" />
   </ItemGroup>
 
 </Project>

@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.Logging;
 using Destiny.Core.Flow.ExpressionUtil;
+using Destiny.Core.Flow.Validation;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Destiny.Core.Flow.API.Controllers
 {
@@ -28,11 +30,13 @@ namespace Destiny.Core.Flow.API.Controllers
 
         private readonly IUserServices _userService = null;
         private readonly ILogger _logger = null;
+        private readonly IServiceProvider _serviceProvider = null;
 
-        public UserController(IUserServices userService)
+        public UserController(IUserServices userService, IServiceProvider serviceProvider)
         {
             _userService = userService;
             _logger = IocManage.GetLogger<UserController>();
+            _serviceProvider = serviceProvider;
         }
 
 
@@ -47,6 +51,9 @@ namespace Destiny.Core.Flow.API.Controllers
         public async Task<AjaxResult> CreateAsync([FromBody]UserInputDto dto)
         {
 
+            //var validator = _serviceProvider.GetService<IModelValidator<UserInputDto>>();
+
+            //var failures = validator.Validate(new UserInputDto());
             return (await _userService.CreateAsync(dto)).ToAjaxResult();
         }
 
@@ -128,13 +135,6 @@ namespace Destiny.Core.Flow.API.Controllers
         [Description("异步得到分页")]
         public async Task<PageList<UserOutputPageListDto>> GetUserPageAsync([FromBody]PageRequest request)
         {
-
-            //await Task.CompletedTask;
-            //_test1.Tstes();
-
-            //return new PageList<UserOutputPageListDto>();
-
-            //[FromBody]PageRequest request
             return (await _userService.GetUserPageAsync(request)).PageList();
         }
     }

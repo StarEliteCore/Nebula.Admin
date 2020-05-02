@@ -8,6 +8,7 @@ namespace Destiny.Core.Flow.Extensions
 {
     public static partial class Extensions
     {
+
         /// <summary>
         /// 根据Index下标移除
         /// </summary>
@@ -221,6 +222,24 @@ namespace Destiny.Core.Flow.Extensions
                 yield return (current.AsTo<TResult>());
             }
             yield break;
+        }
+
+
+        public static void AddRange<T>(this ICollection<T> initial, IEnumerable<T> other)
+        {
+            if (other == null)
+                return;
+
+            if (initial is List<T> list)
+            {
+                list.AddRange(other);
+                return;
+            }
+
+            foreach (var item in other)
+            {
+                initial.Add(item);
+            }
         }
     }
 }
