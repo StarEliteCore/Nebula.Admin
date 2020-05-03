@@ -15,7 +15,7 @@ namespace Destiny.Core.Flow.Validation
     {
         public override async Task Invoke(AspectContext context, AspectDelegate next)
         {
-            var validator=(MethodInvocationValidator)context.ServiceProvider.GetService(typeof(MethodInvocationValidator));
+            var validator = (MethodInvocationValidator)context.ServiceProvider.GetService(typeof(MethodInvocationValidator));
 
             MethodInfo method;
             try
@@ -32,7 +32,7 @@ namespace Destiny.Core.Flow.Validation
             var result = failures.ToResult();
             if (result.Success)
             {
-                await  next(context);
+                await next(context);
                 return;
             }
 
@@ -43,8 +43,24 @@ namespace Destiny.Core.Flow.Validation
                     ThrowValidationException(result);
                     //throw new Exception(result.Data.Select(o=>o.Message).ToJoin());
                 }
-                else {
-                    ThrowValidationException(result);
+                else
+                {
+                    var returnType = context.ImplementationMethod.ReturnType.GenericTypeArguments[0];
+                    if (typeof(IResultBase).IsAssignableFrom(returnType))
+                    {
+                        context.ReturnValue = Task.FromResult(new OperationResponse()
+                        {
+
+                            Message = result.Message.IsNullOrEmpty() ? result.Data.Select(o => o.Message).ToJoin() : result.Message,
+                            Type=Enums.OperationResponseType.Error
+                        });
+
+                    }
+                    else
+                    {
+                        ThrowValidationException(result);
+                    }
+                    //ThrowValidationException(result);
                 }
             }
 
@@ -52,6 +68,7 @@ namespace Destiny.Core.Flow.Validation
 
         private static void ThrowValidationException(OperationResponse<IEnumerable<ValidationFailure>> result)
         {
+
             throw new ValidationException(result.Message, result.Data);
         }
     }

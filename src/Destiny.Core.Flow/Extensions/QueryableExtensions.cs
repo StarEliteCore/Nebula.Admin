@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Filter.Abstract;
+using Destiny.Core.Flow.ExpressionUtil;
 
 namespace Destiny.Core.Flow.Extensions
 {
@@ -124,6 +125,10 @@ namespace Destiny.Core.Flow.Extensions
             return new PageResult<TOutputDto>(list, total);
         }
 
+
+
+  
+
         ///// <summary>
         ///// 从集合中查询指定输出DTO的分页信息
         ///// </summary>
@@ -136,7 +141,14 @@ namespace Destiny.Core.Flow.Extensions
           where TOutputDto : IOutputDto
         {
             request.NotNull(nameof(request));
-            var result = await source.WhereAsync(request.PageIndex, request.PageSize, null, request.OrderConditions);
+            var isFiltered = request is IFilteredPagedRequest;
+            Expression<Func<TEntity, bool>> expression = null;
+            if (isFiltered)
+            {
+                var filters = (request as IFilteredPagedRequest).Filters;
+                expression = FilterHelp.GetExpression<TEntity>(filters);
+            }
+            var result = await source.WhereAsync(request.PageIndex, request.PageSize, expression, request.OrderConditions);
             var list = await result.data.ToOutput<TOutputDto>().ToArrayAsync();
             var total = result.totalNumber;
             return new PageResult<TOutputDto>(list, total);

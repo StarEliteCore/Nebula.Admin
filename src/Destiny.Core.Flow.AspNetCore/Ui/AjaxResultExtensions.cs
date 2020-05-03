@@ -3,6 +3,7 @@ using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Ui;
+using Destiny.Core.Flow.Validation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,6 +18,8 @@ namespace Destiny.Core.Flow.AspNetCore.Ui
             AjaxResultType type = operationResponse.Type.ToAjaxResultType();
             return new AjaxResult(message, type, operationResponse.Data) { Success = operationResponse.Success };
         }
+
+
 
         public static AjaxResult ToAjaxResult<T>(this OperationResponse<T> operationResult)
         {
