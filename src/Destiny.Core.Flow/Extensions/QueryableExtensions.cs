@@ -137,7 +137,7 @@ namespace Destiny.Core.Flow.Extensions
         ///// <param name="source">数据源</param>
         ///// <param name="pageParameters">分页参数</param>
         ///// <returns></returns>
-        public static async Task<PageResult<TOutputDto>> ToPageAsync<TEntity, TOutputDto>(this IQueryable<TEntity> source, IPagedRequest request)
+        public static async Task<IPagedResult<TOutputDto>> ToPageAsync<TEntity, TOutputDto>(this IQueryable<TEntity> source, IPagedRequest request)
           where TOutputDto : IOutputDto
         {
             request.NotNull(nameof(request));
