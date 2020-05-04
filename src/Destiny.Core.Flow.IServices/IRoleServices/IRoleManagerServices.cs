@@ -1,4 +1,6 @@
 ﻿using Destiny.Core.Flow.Dtos.RoleDtos;
+using Destiny.Core.Flow.Filter;
+using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.Ui;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -29,5 +31,11 @@ namespace Destiny.Core.Flow.IServices.IRoleServices
 
 
         Task<OperationResponse<IEnumerable<SelectListItem>>> GetRolesToSelectListItemAsync();
+        /// <summary>
+        /// 分页查询角色
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<IPagedResult<RoleOutputPageListDto>> GetRolePageAsync(PageRequest request);
     }
 }

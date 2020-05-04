@@ -10,6 +10,7 @@ using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Dtos.RoleDtos;
 using Destiny.Core.Flow.AspNetCore.Api;
 using Microsoft.AspNetCore.Authorization;
+using Destiny.Core.Flow.Filter;
 
 namespace Destiny.Core.Flow.API.Controllers
 {
@@ -27,11 +28,15 @@ namespace Destiny.Core.Flow.API.Controllers
             _roleManagerServices = roleManagerServices;
         }
 
-        // GET: api/Role
-        [HttpGet]
-        public IEnumerable<string> Get()
+        /// <summary>
+        /// 异步得到分页
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [Description("异步创建角色")]
+        public async Task<PageList<RoleOutputPageListDto>> GetRolePageAsync([FromBody]PageRequest request)
         {
-            return new string[] { "value1", "value2" };
+            return (await _roleManagerServices.GetRolePageAsync(request)).PageList();
         }
         /// <summary>
         /// 

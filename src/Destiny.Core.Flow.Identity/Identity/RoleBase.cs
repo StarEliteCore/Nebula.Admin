@@ -28,7 +28,7 @@ namespace Destiny.Core.Flow.Identity
 
 
         /// <summary>
-        /// 角色名称
+        /// 版本标识
         /// </summary>
         [DisplayName("版本标识")]
         public string ConcurrencyStamp { get; set; } = Guid.NewGuid().ToString();

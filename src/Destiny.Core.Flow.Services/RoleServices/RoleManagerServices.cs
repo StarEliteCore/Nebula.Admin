@@ -1,7 +1,10 @@
 ﻿using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Dtos.RoleDtos;
 using Destiny.Core.Flow.Enums;
+using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.Filter;
+using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.IServices.IRoleServices;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Ui;
@@ -64,7 +67,18 @@ namespace Destiny.Core.Flow.Services.RoleServices
             }
             return new OperationResponse("更新成功!", Enums.OperationResponseType.Success);
         }
-
+        /// <summary>
+        /// 分页查询角色
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public async Task<IPagedResult<RoleOutputPageListDto>> GetRolePageAsync(PageRequest request)
+        {
+            request.NotNull(nameof(request));
+            Console.WriteLine("方法执行中");
+            var expression = FilterHelp.GetExpression<User>(request.Filters);
+            return await _roleManager.Roles.AsNoTracking().ToPageAsync<Role, RoleOutputPageListDto>(request);
+        }
         /// <summary>
         /// 得到角色把角色转成下拉
         /// </summary>
