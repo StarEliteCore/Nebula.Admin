@@ -38,6 +38,12 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// 描述
         /// </summary>
         public virtual string Description { get; set; }
+
+        /// <summary>
+        /// 深度
+        /// </summary>
+        [DisplayName("深度")]
+        public int Depth { get; set; }
         /// <summary>
         /// 
         /// </summary>

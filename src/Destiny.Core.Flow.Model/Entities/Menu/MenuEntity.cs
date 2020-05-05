@@ -69,5 +69,11 @@ namespace Destiny.Core.Flow.Model.Entities.Menu
         /// </summary>
         [DisplayName("当前菜单以上所有的父级")]
         public string ParentNumber { get; set; }
+
+        /// <summary>
+        /// 深度
+        /// </summary>
+        [DisplayName("深度")]
+        public int Depth { get; set; }
     }
 }

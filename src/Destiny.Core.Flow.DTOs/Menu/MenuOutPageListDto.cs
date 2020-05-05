@@ -24,7 +24,7 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// 组件地址(前端)
         /// </summary>
         [DisplayName("组件地址(前端)")]
-        public int RouterPath { get; set; }
+        public string RouterPath { get; set; }
 
         /// <summary>
         /// 父级菜单ID
@@ -37,6 +37,12 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// </summary>
         [DisplayName("菜单图标")]
         public Guid Iocn { get; set; }
+
+        /// <summary>
+        /// 深度
+        /// </summary>
+        [DisplayName("深度")]
+        public int Depth { get; set; }
         /// <summary>
         /// 菜单
         /// </summary>
