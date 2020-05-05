@@ -1,5 +1,6 @@
 ﻿using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Dtos.RoleDtos;
+using Destiny.Core.Flow.EntityFrameworkCore;
 using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
@@ -7,6 +8,7 @@ using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.IServices.IRoleServices;
 using Destiny.Core.Flow.Model.Entities.Identity;
+using Destiny.Core.Flow.Model.Entities.Rolemenu;
 using Destiny.Core.Flow.Ui;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -24,24 +26,47 @@ namespace Destiny.Core.Flow.Services.RoleServices
     public class RoleManagerServices: IRoleManagerServices
     {
         private readonly RoleManager<Role> _roleManager=null;
+        private readonly IEFCoreRepository<RolemenuEntity, Guid> _roleMenuRepository;
         /// <summary>
         /// 构造函数注入
         /// </summary>
         /// <param name="roleManager"></param>
-        public RoleManagerServices(RoleManager<Role> roleManager)
+        public RoleManagerServices(RoleManager<Role> roleManager, IEFCoreRepository<RolemenuEntity, Guid> roleMenuRepository)
         {
             _roleManager = roleManager;
+            _roleMenuRepository = roleMenuRepository;
         }
+        /// <summary>
+        /// 异步添加角色
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         public async Task<OperationResponse> AddRoleAsync(RoleInputDto dto)
         {
             dto.NotNull(nameof(dto));
             var role = dto.MapTo<Role>();
-            var result=await _roleManager.CreateAsync(role);
-            if(!result.Succeeded)
+            return await _roleMenuRepository.UnitOfWork.UseTranAsync(async () =>
             {
-                return result.ToOperationResponse();
-            }
-            return new OperationResponse("添加角色成功", Enums.OperationResponseType.Success);
+                var result = await _roleManager.CreateAsync(role);
+                if (!result.Succeeded)
+                {
+                    return result.ToOperationResponse();
+                }
+                if (dto.MenuIds?.Any() == true) {
+                    var list = dto.MenuIds.Select(x => new RolemenuEntity
+                    {
+                        MenuId = x,
+                        RoleId = role.Id,
+                    }).ToArray();
+                    int count = await _roleMenuRepository.InsertAsync(list);
+                    if (count <= 0)
+                    {
+                        return new OperationResponse("保存失败", OperationResponseType.Error);
+                    }
+                }
+                return new OperationResponse("保存成功", OperationResponseType.Success);
+
+            });
         }
         public async Task<OperationResponse> DeleteAsync(Guid id)
         {
@@ -58,14 +83,27 @@ namespace Destiny.Core.Flow.Services.RoleServices
         public async Task<OperationResponse> UpdateRoleAsync(RoleInputDto dto)
         {
             dto.NotNull(nameof(dto));
-            var role = await _roleManager.FindByIdAsync(dto.ToString());
-            role = dto.MapTo(role);
-            var result = await _roleManager.UpdateAsync(role);
-            if (!result.Succeeded)
+            var role = await _roleManager.FindByIdAsync(dto.Id.ToString());
+            role = dto.MapTo(role);//拿到所有角色的权限
+            return await _roleMenuRepository.UnitOfWork.UseTranAsync(async () =>
             {
-                return result.ToOperationResponse();
-            }
-            return new OperationResponse("更新成功!", Enums.OperationResponseType.Success);
+                var result = await _roleManager.UpdateAsync(role);
+                if (!result.Succeeded)
+                    return result.ToOperationResponse();
+                if (dto.MenuIds?.Any() == true)
+                {
+                    var list = dto.MenuIds.Select(x => new RolemenuEntity
+                    {
+                        MenuId = x,
+                        RoleId = role.Id,
+                    }).ToArray();
+                    int count = await _roleMenuRepository.DeleteBatchAsync(x => x.RoleId == role.Id);
+                    int insertcount = await _roleMenuRepository.InsertAsync(list);
+                    if(count<=0 && insertcount<=0)
+                        return new OperationResponse("保存失败", OperationResponseType.Error);
+                }   
+                return new OperationResponse("保存成功", OperationResponseType.Success);
+            });
         }
         /// <summary>
         /// 分页查询角色
@@ -75,8 +113,6 @@ namespace Destiny.Core.Flow.Services.RoleServices
         public async Task<IPagedResult<RoleOutputPageListDto>> GetRolePageAsync(PageRequest request)
         {
             request.NotNull(nameof(request));
-            Console.WriteLine("方法执行中");
-            var expression = FilterHelp.GetExpression<User>(request.Filters);
             return await _roleManager.Roles.AsNoTracking().ToPageAsync<Role, RoleOutputPageListDto>(request);
         }
         /// <summary>

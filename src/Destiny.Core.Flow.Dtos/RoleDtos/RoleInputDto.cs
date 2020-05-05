@@ -12,7 +12,10 @@ namespace Destiny.Core.Flow.Dtos.RoleDtos
     [AutoMapp(typeof(Role))]
     public class RoleInputDto : InputDto<Guid>
     {
-        public RoleInputDto() { }
+        public RoleInputDto() {
+
+            //MenuIds = new List<Guid>();
+        }
         /// <summary>
         ///获取或设置 描述
         /// </summary>
@@ -35,5 +38,9 @@ namespace Destiny.Core.Flow.Dtos.RoleDtos
         [DisplayName("是否管理员")]
 
         public bool IsAdmin { get; set; }
+        /// <summary>
+        /// 选中的所有菜单Id
+        /// </summary>
+        public List<Guid> MenuIds{ get; set; }
     }
 }
