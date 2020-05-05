@@ -1,6 +1,7 @@
 ﻿using Destiny.Core.Flow.Entity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace Destiny.Core.Flow.Dtos.Menu
@@ -31,6 +32,8 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// 当前节点以上所有组织架构
         /// </summary>
         public string ParenNumber { get; set; }
+
+
         public List<MenuOutDto> children { get; set; } = new List<MenuOutDto>();
     }
 }

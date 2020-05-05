@@ -37,6 +37,12 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// </summary>
         [DisplayName("菜单图标")]
         public Guid Iocn { get; set; }
+
+        /// <summary>
+        /// 深度
+        /// </summary>
+        [DisplayName("深度")]
+        public int Depth { get; set; }
         /// <summary>
         /// 菜单
         /// </summary>
