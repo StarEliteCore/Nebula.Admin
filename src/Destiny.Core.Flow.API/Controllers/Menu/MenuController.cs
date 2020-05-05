@@ -29,10 +29,8 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("GetAsync")]
         [Description("获取树形菜单信息")]
-
-        public async Task<TreeData<MenuOutDto>> GetAsync()
+        public async Task<TreeData<MenuOutDto>> GetTreeAsync()
         {
             var result = await _menuServices.GetMenuAsync();
             return new TreeData<MenuOutDto>()
@@ -48,7 +46,6 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         /// <returns></returns>
         [HttpGet]
         [Description("获取表格菜单信息")]
-        [Route("GetTableAsync")]
         public async Task<PageList<MenuTableOutDto>> GetTableAsync()
         {
             return (await _menuServices.GetMenuTableAsync(new PageRequest() { })).PageList();
@@ -61,7 +58,6 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         /// <returns></returns>
         [HttpPut]
         [Description("添加或修改")]
-        [Route("AddMenuAsync")]
         public async Task<AjaxResult> AddMenuAsync([FromBody]MenuInputDto dto)
         {
             if (dto.Id == Guid.Empty)
@@ -76,7 +72,6 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         /// <returns></returns>
         [HttpDelete]
         [Description("删除菜单")]
-        [Route("Delete")]
         public async Task<AjaxResult> Delete(Guid? id)
         {
             return (await _menuServices.DeleteAsync(id.Value)).ToAjaxResult();
