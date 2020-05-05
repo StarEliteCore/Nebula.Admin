@@ -10,6 +10,7 @@ using System.Linq.Expressions;
 using System.Text;
 
 using Destiny.Core.Flow.Helpers;
+using Microsoft.EntityFrameworkCore.DynamicLinq;
 
 namespace Destiny.Core.Flow.ExpressionUtil
 {
@@ -71,16 +72,25 @@ namespace Destiny.Core.Flow.ExpressionUtil
             {
                 var index = count + 1;
                 //"City == @0 and Orders.Count >= @1"
-                if (index != filters.Length)
+                //var index1 = filters.IndexOf(this);
+                if (filterInfo.Operator == FilterOperator.Like)
                 {
+                    
+                   
+                    strWhere.Append($"{filterInfo.Key}.{filterInfo.Operator.ToDescription<FilterCodeAttribute>()}(@{count}) ");
 
-                    strWhere.Append($"{filterInfo.Key} {filterInfo.Operator.ToDescription<FilterCodeAttribute>()} @{count} {filterInfo.Connect.ToDescription<FilterCodeAttribute>()} ");
                 }
                 else
                 {
-                    strWhere.Append($"{filterInfo.Key} {filterInfo.Operator.ToDescription<FilterCodeAttribute>()} @{count}");
+                    strWhere.Append($"{filterInfo.Key} {filterInfo.Operator.ToDescription<FilterCodeAttribute>()} ");
                 }
-                count++;
+
+                if (index != filters.Length)
+                {
+                    strWhere.Append($"{filterInfo.Connect.ToDescription<FilterCodeAttribute>()} ");
+                }
+             
+               count++;
             }
             return strWhere?.ToString();
         }

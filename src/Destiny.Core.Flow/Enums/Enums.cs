@@ -128,6 +128,10 @@ namespace Destiny.Core.Flow.Enums
         [FilterCode("Contains")]
         [Description("包含")]
         In,
+
+        [FilterCode("Contains")]
+        [Description("模糊查询")]
+        Like,
     }
 
     [Description("过滤连接器")]
