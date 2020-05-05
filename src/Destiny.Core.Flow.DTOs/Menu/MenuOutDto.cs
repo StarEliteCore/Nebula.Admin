@@ -32,8 +32,13 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// 当前节点以上所有组织架构
         /// </summary>
         public string ParenNumber { get; set; }
-
-
+        /// <summary>
+        /// 是否选中
+        /// </summary>
+        public bool @checked { get; set; } = false;
+        /// <summary>
+        /// 子级
+        /// </summary>
         public List<MenuOutDto> children { get; set; } = new List<MenuOutDto>();
     }
 }

@@ -25,14 +25,15 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         }
 
         /// <summary>
-        /// 获取树形菜单信息
+        /// 根据角色Id获取树形菜单信息
         /// </summary>
+        /// <param name="roleid">角色Id</param>
         /// <returns></returns>
         [HttpGet]
         [Description("获取树形菜单信息")]
-        public async Task<TreeData<MenuOutDto>> GetTreeAsync()
+        public async Task<TreeData<MenuOutDto>> GetTreeAsync(Guid roleid)
         {
-            var result = await _menuServices.GetMenuAsync();
+            var result = await _menuServices.GetMenuAsync(roleid);
             return new TreeData<MenuOutDto>()
             {
                 Data = result.Data,
