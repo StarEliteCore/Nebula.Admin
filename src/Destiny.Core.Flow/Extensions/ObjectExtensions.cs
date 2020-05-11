@@ -114,5 +114,17 @@ namespace Destiny.Core.Flow.Extensions
             return memberInfo.IsDefined(typeof(T), inherit);
         }
 
+
+        /// <summary>
+        /// 检查对象是否为泛型列表。
+        /// </summary>
+        /// <param name="o">要转换对象</param>
+        /// <returns>如果对象是泛型列表，则为true。</returns>
+        public static bool IsGenericList(this object o)
+        {
+            var oType = o.GetType();
+            return (oType.IsGenericType && (oType.GetGenericTypeDefinition() == typeof(System.Collections.Generic.List<>)));
+        }
+
     }
 }

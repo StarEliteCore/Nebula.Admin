@@ -34,24 +34,7 @@ namespace Destiny.Core.Flow.API
 
 
             services.AddAppModuleManager<AspNetCoreAppModuleManager>();
-            //services.AddScoped<ITest1, Test1>();
-            //services.ConfigureDynamicProxy(
-            //   config =>
-            //   {
-            //       List<Type> types = new List<Type>();
-            //       //types.Add(typeof(GlobalAopTran));
-            //       types.Add(typeof(AopTran));
-            //       //config.NonAspectPredicates.AddService("IUnitofWork");//需要过滤掉不需要代理的服务层
-            //       ///不建议做全局AOP  因为毕竟AOP用的比较少  做全局的话坑太大
-            //       foreach (var item in types)
-            //       {
-            //           config.Interceptors.AddTyped(item, Predicates.ForNameSpace("Destiny.Core.Flow.Services"),Predicates.ForNameSpace("Destiny.Core.Flow.IServices"));
-            //           //一下是配置需要代理的层或者不需要代理的层（二者选其一就好）
-            //           //config.Interceptors.AddTyped(item, Predicates.ForNameSpace("TestServices"),Predicates.ForNameSpace(""));//这种是配置只需要代理的层
-            //           //config.NonAspectPredicates.AddService("IUnitofWork");//需要过滤掉不需要代理的服务层  
-            //           //config.Interceptors.AddTyped(item);
-            //       }
-            //   });
+            
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
