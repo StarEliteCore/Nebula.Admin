@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.EntityFrameworkCore;
 using System.IO;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace Destiny.Core.Flow.API.Startups
 {
@@ -40,7 +41,11 @@ namespace Destiny.Core.Flow.API.Startups
             var Assembly = typeof(EntityFrameworkCoreMySqlModule).GetTypeInfo().Assembly.GetName().Name;//获取程序集
             
             services.AddDbContext<DefaultDbContext>(oprions => {
-                oprions.UseMySql(mysqlconn, assembly => { assembly.MigrationsAssembly("Destiny.Core.Flow.Model"); });
+                oprions.UseMySql(mysqlconn, assembly => { 
+                    assembly.MigrationsAssembly("Destiny.Core.Flow.Model");
+
+
+                });
             });
             return services;
         }
