@@ -20,24 +20,33 @@ namespace Destiny.Core.Flow.Extensions
     public static partial class Extensions
     {
 
+
         /// <summary>
-        /// 多排序方法
+        /// 把排序条件集合转成排序查询
         /// </summary>
         /// <typeparam name="TEntity">要排序实体</typeparam>
         /// <param name="source">源</param>
-        /// <param name="orderConditions">排序条件</param>
+        /// <param name="orderConditions">排序条件集合</param>
         /// <returns></returns>
         public static IOrderedQueryable<TEntity> OrderBy<TEntity>(this IQueryable<TEntity> source, OrderCondition[] orderConditions)
         {
-            orderConditions.NotNull(nameof(orderConditions));
-            string orderStr = string.Empty;
+            IOrderedQueryable<TEntity> orderSource = null;
+            if (orderConditions == null || orderConditions.Length == 0)
+            {
+                orderSource = CollectionPropertySorter<TEntity>.OrderBy(source, "Id", SortDirection.Ascending);
+            }
+
+            int count = 0;
 
             foreach (OrderCondition orderCondition in orderConditions)
             {
-                orderStr = orderStr + $"{orderCondition.SortField} {(orderCondition.SortDirection == SortDirection.Ascending ? "ascending" : "descending")}, ";
+                orderSource = count == 0
+                    ? CollectionPropertySorter<TEntity>.OrderBy(source, orderCondition.SortField, orderCondition.SortDirection)
+                    : CollectionPropertySorter<TEntity>.ThenBy(orderSource, orderCondition.SortField, orderCondition.SortDirection);
+                count++;
             }
-            orderStr = orderStr.TrimEnd(", ".ToCharArray());
-            return source.OrderBy(orderStr);
+
+            return orderSource;
         }
 
 
@@ -163,18 +172,7 @@ namespace Destiny.Core.Flow.Extensions
                 source = source.Where(predicate);
             }
 
-            IOrderedQueryable<TEntity> orderSource;
-            if (orderConditions == null || orderConditions.Length == 0)
-            {
-                orderSource = source.OrderBy("Id ascending");
-
-            }
-            else
-            {
-                orderSource = source.OrderBy(orderConditions);
-            }
-
-            source = orderSource;
+            source = source.OrderBy(orderConditions);
 
 
             return (!source.IsNull() ? source.Skip(pageSize * (pageIndex - 1)).Take(pageSize) : Enumerable.Empty<TEntity>().AsQueryable(), total);
