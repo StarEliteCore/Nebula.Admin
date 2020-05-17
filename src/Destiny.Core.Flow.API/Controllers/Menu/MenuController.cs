@@ -49,7 +49,7 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         [Description("获取表格菜单信息")]
         public async Task<PageList<MenuTableOutDto>> GetTableAsync()
         {
-            return (await _menuServices.GetMenuTableAsync(new PageRequest() { })).PageList();
+            return (await _menuServices.GetMenuTableAsync(new PageRequest() {PageIndex=1,PageSize=15 })).PageList();
         }
 
 

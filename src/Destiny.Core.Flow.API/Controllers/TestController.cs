@@ -20,7 +20,7 @@ namespace Destiny.Core.Flow.API.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { "🐕威威还是没用给我链接字符串", "🐕威威也没有给我远程仓库的权限,无法上传代码." };
         }
 
         // GET: api/Test/5
