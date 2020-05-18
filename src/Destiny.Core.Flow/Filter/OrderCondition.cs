@@ -66,11 +66,7 @@ namespace Destiny.Core.Flow.Filter
         /// </summary>
         private static string GetPropertyName(Expression<Func<T, object>> keySelector)
         {
-            //
-            //string param = keySelector.Parameters.First().Name;
-            //string operand = ((dynamic)keySelector.Body).Operand.ToString();
-            //operand = operand.Substring(param.Length + 1, operand.Length - param.Length - 1);
-            //return operand;
+        
             return keySelector.GetPropertyName();
         }
     }
