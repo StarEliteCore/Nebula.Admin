@@ -19,12 +19,12 @@ namespace Destiny.Core.Flow.API.Startups
 
         public override IServiceCollection ConfigureServices(IServiceCollection services)
         {
-        
+
             services.AddAuthorization();
             var configuration = services.GetConfiguration();
 
             services.Configure<AppOptionSettings>(configuration.GetSection("Destiny"));
-            var settings =services.GetAppSettings();
+            var settings = services.GetAppSettings();
             if (!settings.Cors.PolicyName.IsNullOrEmpty() && !settings.Cors.Url.IsNullOrEmpty()) //添加跨域
             {
                 _corePolicyName = settings.Cors.PolicyName;
@@ -40,12 +40,15 @@ namespace Destiny.Core.Flow.API.Startups
                     });
                 });
             }
-     
+
             services.AddHttpContextAccessor();
-            services.AddControllers(o => o.SuppressAsyncSuffixInActionNames = false).AddNewtonsoftJson(options => {
-                options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
-                options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
-            });
+            services.AddControllers(o => o.SuppressAsyncSuffixInActionNames = false)
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
+
+                    options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+                });
             services.AddTransient<IPrincipal>(provider =>
             {
                 IHttpContextAccessor accessor = provider.GetService<IHttpContextAccessor>();
