@@ -177,9 +177,8 @@ namespace Destiny.Core.Flow.Services
         {
 
             request.NotNull(nameof(request));
-            Console.WriteLine("方法执行中");
-            //var expression = FilterHelp.GetExpression<User>(request.Filters);
-            //var expression = FilterHelp.GetExpression<User>(request.Filters);
+            OrderCondition<User>[] orderConditions = new OrderCondition<User>[] { new OrderCondition<User>(o=>o.CreatedTime)};
+            request.OrderConditions = orderConditions;
             return await _userManager.Users.AsNoTracking().ToPageAsync<User, UserOutputPageListDto>(request);
 
         }
