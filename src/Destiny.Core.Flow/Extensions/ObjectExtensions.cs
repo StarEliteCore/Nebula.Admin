@@ -102,6 +102,8 @@ namespace Destiny.Core.Flow.Extensions
             return !value.IsNull();
         }
 
+  
+
         /// <summary>
         /// 判断特性相应是否存在
         /// </summary>
