@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.Enums;
+using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,19 +14,17 @@ namespace Destiny.Core.Flow.ExpressionUtil
     {
         public static Expression<Func<T, bool>> GetExpression<T>(QueryFilter filterItem)
         {
-
             ParameterExpression param = Expression.Parameter(typeof(T), "m");
 
-
             Expression expression = GetExpressionBody(param, filterItem);
-
             return Expression.Lambda<Func<T, bool>>(expression, param);
         }
+
         private static Expression GetExpressionBody(ParameterExpression param, QueryFilter filterItem)
         {
             List<Expression> expressions = new List<Expression>();
             Expression expression = Expression.Constant(true);
-            //expression = GetExpressionBody(param, filterItem.Filters, filterItem.Logic);
+
             foreach (var item in filterItem.Filters)
             {
                 expressions.Add(GetExpressionBody(param, item));
@@ -44,48 +43,36 @@ namespace Destiny.Core.Flow.ExpressionUtil
                 return expressions.Aggregate(Expression.OrElse);
             }
         }
-        private static Expression GetExpressionBody(ParameterExpression param, ICollection<FilterCondition> filters, FilterConnect logic)
-        {
-            Expression expression = Expression.Constant(true);
-            foreach (var filter in filters)
-            {
-                if (logic == FilterConnect.And)
-                {
-                    expression = Expression.AndAlso(expression, GetExpressionBody(param, filter));
-                }
-                else
-                {
-                    expression = Expression.AndAlso(expression, GetExpressionBody(param, filter));
-                }
-            }
-            return expression;
-        }
+
         private static Expression GetExpressionBody(ParameterExpression param, FilterCondition filter)
         {
-            try
+
+            var lambda = GetPropertyLambdaExpression(param, filter);
+            var constant = ChangeTypeToExpression(filter, lambda.Body.Type);
+
+            return GetOperateExpression(filter.Operator, lambda.Body, constant);
+
+        }
+
+
+        /// <summary>
+        /// 得到值
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="conversionType"></param>
+        /// <returns></returns>
+
+        private static Expression ChangeTypeToExpression(FilterCondition filter, Type conversionType)
+        {
+            var constant = Expression.Constant(true);
+
+            var value = filter.Value.AsTo(conversionType);
+            if ((filter.Value?.ToString().IsNullOrWhiteSpace() ?? false) ||(value.ToString()?.IsNullOrWhiteSpace() ?? false))
             {
-                var lambda = GetPropertyLambdaExpression(param, filter);
-                ConstantExpression constant = Expression.Constant(true);
-                //object value = null;
-                if (lambda.Body.Type == typeof(Guid))
-                {
-                    Guid.TryParse(filter.Value.ToString(), out var value);
-                    constant = Expression.Constant(value, lambda.Body.Type);
-                }
-                else
-                {
-                    constant = Expression.Constant(filter.Value, lambda.Body.Type);
-                }
-
-                return GetOperateExpression(filter.Operator, lambda.Body, constant);
-            }
-            catch (Exception ex)
-            {
-
-                throw;
+                return constant;
             }
 
-
+            return Expression.Constant(value, conversionType);
         }
         private static Expression GetOperateExpression(FilterOperator operate, Expression member, Expression expression2)
         {
