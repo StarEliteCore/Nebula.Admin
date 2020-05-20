@@ -174,7 +174,6 @@ namespace Destiny.Core.Flow.Extensions
 
             source = source.OrderBy(orderConditions);
 
-
             return (!source.IsNull() ? source.Skip(pageSize * (pageIndex - 1)).Take(pageSize) : Enumerable.Empty<TEntity>().AsQueryable(), total);
         }
 

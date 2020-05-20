@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.Enums;
+using Destiny.Core.Flow.Exceptions;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
 using Microsoft.EntityFrameworkCore;
@@ -128,6 +129,7 @@ namespace Destiny.Core.Flow.ExpressionUtil
             var property = type.GetProperty(filter.Field);
             if (property == null)
             {
+                throw new AppException($"没有得到{filter.Field}该名字!!!");
             }
             Expression propertyAccess = Expression.MakeMemberAccess(parameter, property);
             return Expression.Lambda(propertyAccess, parameter);

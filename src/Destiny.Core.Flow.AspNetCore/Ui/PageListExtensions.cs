@@ -10,6 +10,7 @@ using Destiny.Core.Flow.Ui;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.AspNetCore.Ui
 {
@@ -29,5 +30,6 @@ namespace Destiny.Core.Flow.AspNetCore.Ui
             var result = pageResult;
             return new PageList<T>() { ItemList= result.ItemList,Message= result.Message,Total= result.Total,Success= result.Success};
         }
+ 
     }
 }

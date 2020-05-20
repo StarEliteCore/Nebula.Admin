@@ -173,13 +173,13 @@ namespace Destiny.Core.Flow.Services
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<IPagedResult<UserOutputPageListDto>> GetUserPageAsync(PageRequest request)
+        public  Task<IPagedResult<UserOutputPageListDto>> GetUserPageAsync(PageRequest request)
         {
 
             request.NotNull(nameof(request));
             OrderCondition<User>[] orderConditions = new OrderCondition<User>[] { new OrderCondition<User>(o=>o.CreatedTime)};
             request.OrderConditions = orderConditions;
-            return await _userManager.Users.AsNoTracking().ToPageAsync<User, UserOutputPageListDto>(request);
+            return  _userManager.Users.AsNoTracking().ToPageAsync<User, UserOutputPageListDto>(request);
 
         }
     }
