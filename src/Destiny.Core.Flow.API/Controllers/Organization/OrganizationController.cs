@@ -34,7 +34,7 @@ namespace Destiny.Core.Flow.API.Controllers.Organization
             var result= await _organization.GetOrganization();
             return new TreeData<OrganizationOutDto>()
             {
-                Data = result.Data,
+                ItemList = result.ItemList,
                 Message = result.Message,
                 Success = result.Success
             };

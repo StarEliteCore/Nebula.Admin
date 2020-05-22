@@ -36,7 +36,7 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
             var result = await _menuServices.GetMenuAsync(roleid);
             return new TreeData<MenuOutDto>()
             {
-                Data = result.Data,
+                ItemList = result.ItemList,
                 Message = result.Message,
                 Success = result.Success
             };

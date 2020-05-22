@@ -7,6 +7,6 @@ namespace Destiny.Core.Flow.Filter
 {
     public abstract class ResultBase<TData> : ResultBase, IResultData<TData>
     {
-        public virtual IEnumerable<TData> Data { get;  set; }
+        public virtual TData Data { get;  set; }
     }
 }

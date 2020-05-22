@@ -237,7 +237,7 @@ namespace Destiny.Core.Flow.Extensions
             var treeData = list.ToTree(rootwhere, childswhere, addchilds, entity);
             return new TreeResult<TResult>
             {
-                Data = treeData,
+                ItemList = treeData,
             };
         }
 

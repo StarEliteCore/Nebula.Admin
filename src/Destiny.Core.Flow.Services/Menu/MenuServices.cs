@@ -81,7 +81,7 @@ namespace Destiny.Core.Flow.Services.Menu
             if(roleid!=Guid.Empty)
                 rolelist = await _roleMenuRepository.Query(x => x.RoleId == roleid).ToListAsync();
             if (rolelist.Any())
-                IscheckTree(rolelist,list.Data);
+                IscheckTree(rolelist,list.ItemList);
             return list;
         }
         /// <summary>

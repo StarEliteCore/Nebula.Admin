@@ -3,6 +3,7 @@ using Destiny.Core.Flow.Dtos.DataDictionnary;
 using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
+using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.IServices.IDataDictionnary;
 using Destiny.Core.Flow.Model.Entities.Dictionary;
 using Destiny.Core.Flow.Repository.DictionaryRepository;
@@ -44,12 +45,12 @@ namespace Destiny.Core.Flow.Services.DataDictionnary
            return await _dataDictionnaryRepository.DeleteAsync(id);
         }
 
-        public async Task<PageResult<DataDictionaryOutPageListDto>> GetDictionnnaryPageAsync(PageRequest request)
+        public async Task<IPagedResult<DataDictionaryOutPageListDto>> GetDictionnnaryPageAsync(PageRequest request)
         {
-            return new PageResult<DataDictionaryOutPageListDto>();
-            //request.NotNull(nameof(request));
-            //var expression = FilterHelp.GetExpression<DataDictionaryEntity>(request.Filters);
-            //return await _dataDictionnaryRepository.TrackEntities.ToPageAsync<DataDictionaryEntity, DataDictionaryOutPageListDto>(expression, request.PageParameters);
+
+            request.NotNull(nameof(request));
+            var expression = FilterHelp.GetExpression<DataDictionaryEntity>(request.Filters);
+            return await _dataDictionnaryRepository.TrackEntities.ToPageAsync<DataDictionaryEntity, DataDictionaryOutPageListDto>(request);
         }
     }
 }

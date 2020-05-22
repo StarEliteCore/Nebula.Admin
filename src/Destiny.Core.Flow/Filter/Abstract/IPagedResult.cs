@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Filter.Abstract
 {
-    public interface IPagedResult<out TModel>: IResultBase
+    public interface IPagedResult<TModel>: IResultBase, IListResult<TModel>
     {
 
-        IReadOnlyList<TModel> ItemList { get; }
+
         int Total { get; }
     }
 }

@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Destiny.Core.Flow.ExpressionUtil
 {
@@ -15,6 +14,7 @@ namespace Destiny.Core.Flow.ExpressionUtil
     {
         public static Expression<Func<T, bool>> GetExpression<T>(QueryFilter filterItem)
         {
+            filterItem.NotNull("filterItem");
             ParameterExpression param = Expression.Parameter(typeof(T), "m");
 
             Expression expression = GetExpressionBody(param, filterItem);
@@ -23,17 +23,18 @@ namespace Destiny.Core.Flow.ExpressionUtil
 
         private static Expression GetExpressionBody(ParameterExpression param, QueryFilter filterItem)
         {
+    
             List<Expression> expressions = new List<Expression>();
             Expression expression = Expression.Constant(true);
 
+            foreach (var item in filterItem.Conditions)
+            {
+                expressions.Add(GetExpressionBody(param, item));
+            }
             foreach (var item in filterItem.Filters)
             {
                 expressions.Add(GetExpressionBody(param, item));
             }
-            //foreach (var item in filterItem.FilterItems)
-            //{
-            //    expressions.Add(GetExpressionBody(param, item));
-            //}
 
             if (filterItem.FilterConnect == FilterConnect.And)
             {
@@ -101,7 +102,7 @@ namespace Destiny.Core.Flow.ExpressionUtil
 
                     return Like(member, expression2);
                 default:
-                    return null;
+                    throw new AppException($"此{operate}过滤条件不存在！！！");
 
             }
         }
