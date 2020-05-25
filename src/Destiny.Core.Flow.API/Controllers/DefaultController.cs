@@ -33,7 +33,7 @@ namespace Destiny.Core.Flow.API.Controllers
         [HttpGet]
         public async Task Get()
         {
-            FilterInfo[] filterInfos = new FilterInfo[] { new FilterInfo() { Value= "Test",Key="UserName" ,Operator=FilterOperator.Like} };
+        
 
 
 

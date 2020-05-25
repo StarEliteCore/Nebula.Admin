@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.ExpressionUtil;
+using JetBrains.Annotations;
 
 namespace Destiny.Core.Flow.Extensions
 {
@@ -154,13 +155,14 @@ namespace Destiny.Core.Flow.Extensions
             Expression<Func<TEntity, bool>> expression = null;
             if (isFiltered)
             {
-                var filters = (request as IFilteredPagedRequest).Filters;
-                expression = FilterHelp.GetExpression<TEntity>(filters);
+                var filter = (request as IFilteredPagedRequest).Filter;
+                expression = filter==null?null: FilterBuilder.GetExpression<TEntity>(filter);
             }
             var result = await source.WhereAsync(request.PageIndex, request.PageSize, expression, request.OrderConditions);
             var list = await result.data.ToOutput<TOutputDto>().ToArrayAsync();
             var total = result.totalNumber;
             return new PageResult<TOutputDto>(list, total);
+
         }
 
         private static async Task<(IQueryable<TEntity> data, int totalNumber)> WhereAsync<TEntity>(this IQueryable<TEntity> source, int pageIndex,
@@ -185,31 +187,15 @@ namespace Destiny.Core.Flow.Extensions
         /// </summary>
         /// <typeparam name="TEntity">要查询实体</typeparam>
         /// <param name="source">数据</param>
-        /// <param name="filterInfos">查询信息集合</param>
+        /// <param name="queryFilter"></param>
         /// <returns></returns>
-        public static IQueryable<TEntity> Filter<TEntity>(this IQueryable<TEntity> source, FilterInfo[] filterInfos)
+        public static IQueryable<TEntity> Filter<TEntity>(this IQueryable<TEntity> source, QueryFilter queryFilter)
         {
 
             source.NotNull(nameof(source));
-            filterInfos.NotNull(nameof(filterInfos));
-            StringBuilder strWhere = new StringBuilder();
-            int count = 0;
-            foreach (FilterInfo filterInfo in filterInfos)
-            {
-                var index = count + 1;
-                //"City == @0 and Orders.Count >= @1"
-                if (index != filterInfos.Length)
-                {
-
-                    strWhere.Append($"{filterInfo.Key} {filterInfo.Operator.ToDescription<FilterCodeAttribute>()} @{count} {filterInfo.Connect.ToDescription<FilterCodeAttribute>()} ");
-                }
-                else
-                {
-                    strWhere.Append($"{filterInfo.Key} {filterInfo.Operator.ToDescription<FilterCodeAttribute>()} @{count}");
-                }
-                count++;
-            }
-            return strWhere.Length > 0 ?source.Where(strWhere.ToString(), filterInfos.Select(o => o.Value).ToArray()): source;
+            queryFilter.NotNull(nameof(queryFilter));
+            var expression= FilterBuilder.GetExpression<TEntity>(queryFilter);
+             return source.Where(expression);
         }
 
 

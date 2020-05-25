@@ -11,11 +11,11 @@ namespace Destiny.Core.Flow.Filter
         public PagedRequestModel() {
 
             OrderConditions = new OrderCondition[] { };
-            Filters = new FilterInfo[] { };
+            Filter = new QueryFilter();
         }
         public int PageIndex { get; set; } = 1;
         public int PageSize { get; set; } = 10;
         public OrderCondition[] OrderConditions { get; set; }
-        public FilterInfo[] Filters { get; set; }
+        public QueryFilter Filter { get; set; }
     }
 }

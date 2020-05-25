@@ -49,7 +49,6 @@ namespace Destiny.Core.Flow.Services.DataDictionnary
         {
 
             request.NotNull(nameof(request));
-            var expression = FilterHelp.GetExpression<DataDictionaryEntity>(request.Filters);
             return await _dataDictionnaryRepository.TrackEntities.ToPageAsync<DataDictionaryEntity, DataDictionaryOutPageListDto>(request);
         }
     }
