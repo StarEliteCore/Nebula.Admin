@@ -12,7 +12,7 @@ namespace Destiny.Core.Flow.Filter
     {
 
 
-      
+
 
         /// <summary>
         /// 分页索引
@@ -23,7 +23,7 @@ namespace Destiny.Core.Flow.Filter
         /// <summary>
         /// 分页大小
         /// </summary>
-        public virtual int PageSize { get; set; }
+        public virtual int PageSize { get; set; } 
 
         /// <summary>
         /// 排序条件集合
