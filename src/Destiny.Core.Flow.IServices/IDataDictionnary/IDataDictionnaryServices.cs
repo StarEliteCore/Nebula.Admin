@@ -1,5 +1,6 @@
 ﻿using Destiny.Core.Flow.Dtos.DataDictionnary;
 using Destiny.Core.Flow.Filter;
+using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.Ui;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace Destiny.Core.Flow.IServices.IDataDictionnary
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        Task<PageResult<DataDictionaryOutPageListDto>> GetDictionnnaryPageAsync(PageRequest request);
+        Task<IPagedResult<DataDictionaryOutPageListDto>> GetDictionnnaryPageAsync(PageRequest request);
         /// <summary>
         /// 修改数据字典
         /// </summary>

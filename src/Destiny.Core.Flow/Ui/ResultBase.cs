@@ -14,6 +14,7 @@ namespace Destiny.Core.Flow.Ui
 
         public virtual string Message { get; set; }
 
+
     }
 
 

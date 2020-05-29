@@ -2,46 +2,39 @@
 using Serilog.Events;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Destiny.Core.Flow.SeriLog
 {
     public class SeriLogLogger
     {
-        private static ILogger _logger;
-        public static void SetSeriLog(ILogger logger)
-        {
-            _logger = logger;
-        }
+
         /// <summary>
         /// SeriLog记录日志到文件
         /// </summary>
-        /// <param name="MinimumLevel"></param>
-        /// <param name="filename"></param>
-        public static void SetSeriLoggerToFile(string MinimumLevel, string filename)
+        /// <param name="fileName"></param>
+        public static void SetSeriLoggerToFile(string fileName)
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
-                .MinimumLevel.Override(MinimumLevel, LogEventLevel.Information)
-                .Enrich.FromLogContext()
-                .WriteTo.File(filename, rollingInterval: RollingInterval.Day)
-                .CreateLogger();
-        }
-        /// <summary>
-        /// SeriLog记录日志到文件
-        /// </summary>
-        /// <param name="MinimumLevel"></param>
-        /// <param name="filename"></param>
-        public static void SetSeriLogToConsole(string MinimumLevel)
-        {
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Information()
-                .MinimumLevel.Override(MinimumLevel, LogEventLevel.Information)
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
+                .WriteTo.Map(le=>MapData(le),
+                (key,log)=>
+                 log.Async(o=>o.File(Path.Combine(fileName, @$"{key.time:yyyy-MM-dd}\{key.level.ToString().ToLower()}.txt"))))
                 .CreateLogger();
+
+            (DateTime time, LogEventLevel level) MapData(LogEvent logEvent)
+            {
+
+                return (new DateTime(logEvent.Timestamp.Year, logEvent.Timestamp.Month, logEvent.Timestamp.Day, logEvent.Timestamp.Hour, logEvent.Timestamp.Minute, logEvent.Timestamp.Second), logEvent.Level);
+            }
         }
 
+    
+      
 
     }
 }

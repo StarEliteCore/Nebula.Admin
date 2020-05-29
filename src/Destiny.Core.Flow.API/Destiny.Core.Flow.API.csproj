@@ -39,6 +39,7 @@
     <ProjectReference Include="..\Destiny.Core.Flow.FluentValidation\Destiny.Core.Flow.FluentValidation.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.IServices\Destiny.Core.Flow.IServices.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Model\Destiny.Core.Flow.Model.csproj" />
+    <ProjectReference Include="..\Destiny.Core.Flow.SeriLog\Destiny.Core.Flow.SeriLog.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Services\Destiny.Core.Flow.Services.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Swagger\Destiny.Core.Flow.Swagger.csproj" />
   </ItemGroup>

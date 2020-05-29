@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Dynamic.Core;
 using System.Linq.Dynamic.Core.CustomTypeProviders;
+using Microsoft.Extensions.Logging;
 
 namespace Destiny.Core.Flow.API.Controllers
 {
@@ -22,10 +23,11 @@ namespace Destiny.Core.Flow.API.Controllers
     public class DefaultController : ControllerBase
     {
         private readonly UserManager<User> _userManager = null;
-
-        public DefaultController(UserManager<User> userManager)
+        private readonly ILogger<DefaultController> _logger = null;
+        public DefaultController(UserManager<User> userManager, ILogger<DefaultController> logger)
         {
             _userManager = userManager;
+            _logger = logger;
         }
 
 
@@ -33,9 +35,9 @@ namespace Destiny.Core.Flow.API.Controllers
         [HttpGet]
         public async Task Get()
         {
-            FilterInfo[] filterInfos = new FilterInfo[] { new FilterInfo() { Value= "Test",Key="UserName" ,Operator=FilterOperator.Like} };
 
 
+            _logger.LogError("测试1212");
 
 
             await Task.CompletedTask;

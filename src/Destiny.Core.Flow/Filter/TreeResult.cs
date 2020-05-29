@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Destiny.Core.Flow.Ui;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,18 +8,20 @@ namespace Destiny.Core.Flow.Filter
     /// <summary>
     /// 树返回
     /// </summary>
-    public class TreeResult<TData> : ResultBase<TData>
+    public class TreeResult<TData> : ResultBase,IListResult<TData>
     {
         public TreeResult() : this(new TData[0], "成功返回数据", true)
         {
 
         }
-        public TreeResult(IEnumerable<TData> data, string message = "成功返回数据", bool success = true)
+        public TreeResult(IReadOnlyList<TData> itemList, string message = "成功返回数据", bool success = true)
         {
-            Data = data;
+            ItemList = itemList;
             Message = message;
             Success = success;
         }
+
+        public IReadOnlyList<TData> ItemList { get; set; }
 
 
         //public TreeData<TData> ToTreeData()

@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AspectCore.Extensions.Hosting;
+using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.SeriLog;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -17,13 +19,8 @@ namespace Destiny.Core.Flow.API
     {
         public static void Main(string[] args)
         {
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Information()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-                .Enrich.FromLogContext()
-                .WriteTo.Console()
-                .WriteTo.File(Path.Combine("logs", @"log.txt"), rollingInterval: RollingInterval.Day)
-                .CreateLogger();
+          
+            SeriLogLogger.SetSeriLoggerToFile("Logs");
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -33,11 +30,12 @@ namespace Destiny.Core.Flow.API
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>()
-                    .UseSerilog()//注入Serilog日志中间件//这里是配置log的
+                    .UseSerilog()
                    .ConfigureLogging((hostingContext, builder) =>
                    {
                        builder.ClearProviders();
                        builder.SetMinimumLevel(LogLevel.Information);
+
                        builder.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
                        builder.AddConsole();
                        builder.AddDebug();

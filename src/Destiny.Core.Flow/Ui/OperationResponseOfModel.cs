@@ -1,11 +1,12 @@
 ﻿using Destiny.Core.Flow.Enums;
+using Destiny.Core.Flow.Filter;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Destiny.Core.Flow.Ui
 {
-   public class OperationResponse<TData>: ResultBase
+   public class OperationResponse<TData>: ResultBase<TData>, IHasResultType<OperationResponseType>
     {
 
         public OperationResponse() : this(OperationResponseType.Success)
@@ -33,15 +34,36 @@ namespace Destiny.Core.Flow.Ui
 
 
 
-    
+   
 
-
-        public TData Data { get; set; }
-
-        public OperationResponseType Type { get; set; }
+        public virtual OperationResponseType Type { get; set; }
 
    
         public override bool Success => Type == OperationResponseType.Success;
+
+
+        /// <summary>
+        /// 是否成功
+        /// </summary>
+        /// <param name="message"></param>
+        public void IsSuccess(string message)
+        {
+            this.IsSuccess(message,default(TData));
+        }
+        public void IsSuccess(TData data)
+        {
+            this.IsSuccess(string.Empty,data);
+        }
+
+        public void IsSuccess(string message,TData data)
+        {
+            this.Type = OperationResponseType.Success;
+            this.Message = message;
+            this.Data = data;
+        }
+
+
+
 
         public bool Error()
         {

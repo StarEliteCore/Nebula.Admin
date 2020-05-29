@@ -15,8 +15,7 @@ namespace Destiny.Core.Flow.FluentValidation
 
         public override IServiceCollection ConfigureServices(IServiceCollection services)
         {
-            var mo= services.BuildServiceProvider().GetService<IMvcCoreBuilder>();
-            var mvcBuilder= services.BuildServiceProvider().GetService<IMvcBuilder>();
+       
             var assemblyFinder = services.GetOrAddSingletonService<IAssemblyFinder, AssemblyFinder>();
             assemblyFinder.NotNull(nameof(assemblyFinder));
             services.AddValidatorsFromAssemblies(assemblyFinder.FindAll());

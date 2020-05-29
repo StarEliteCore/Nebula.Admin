@@ -51,7 +51,7 @@ namespace Destiny.Core.Flow.Services.Menu
         public async Task<PageResult<MenuOutPageListDto>> GetMenuPageAsync(PageRequest requst)
         {
             requst.NotNull(nameof(requst));
-            var expression = FilterHelp.GetExpression<MenuEntity>(requst.Filters);
+            var expression = FilterBuilder.GetExpression<MenuEntity>(requst.Filter);
             return await _menuRepository.TrackEntities.ToPageAsync<MenuEntity, MenuOutPageListDto>(expression, requst);
         }
         /// <summary>
@@ -81,7 +81,7 @@ namespace Destiny.Core.Flow.Services.Menu
             if(roleid!=Guid.Empty)
                 rolelist = await _roleMenuRepository.Query(x => x.RoleId == roleid).ToListAsync();
             if (rolelist.Any())
-                IscheckTree(rolelist,list.Data);
+                IscheckTree(rolelist,list.ItemList);
             return list;
         }
         /// <summary>
@@ -102,7 +102,7 @@ namespace Destiny.Core.Flow.Services.Menu
         public async Task<PageResult<MenuTableOutDto>> GetMenuTableAsync(PageRequest requst)
         {
             requst.NotNull(nameof(requst));
-            var expression = FilterHelp.GetExpression<MenuEntity>(requst.Filters);
+            var expression = FilterBuilder.GetExpression<MenuEntity>(requst.Filter);
 
             return await _menuRepository.TrackEntities.ToPageAsync<MenuEntity, MenuTableOutDto>(expression, requst);
         }
