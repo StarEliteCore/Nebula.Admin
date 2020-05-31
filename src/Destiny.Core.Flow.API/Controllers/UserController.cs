@@ -24,7 +24,7 @@ namespace Destiny.Core.Flow.API.Controllers
     /// 用户管理
     /// </summary>
     [Description("用户管理")]
-    //[Authorize]
+    [Authorize]
     public class UserController : ApiControllerBase
     {
 

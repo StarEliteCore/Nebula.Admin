@@ -1,6 +1,6 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1.300 AS base
 WORKDIR /app
 EXPOSE 80
 
@@ -21,7 +21,7 @@ EXPOSE 80
 #COPY ["src/Destiny.Core.Flow.Services/Destiny.Core.Flow.Services.csproj", "src/Destiny.Core.Flow.Services/"]
 #COPY ["src/Destiny.Core.Flow.Repository/Destiny.Core.Flow.Repository.csproj", "src/Destiny.Core.Flow.Repository/"]
 #RUN dotnet restore "src/Destiny.Core.Flow.API/Destiny.Core.Flow.API.csproj"
-#COPY . .
+COPY . .
 #WORKDIR "/src/src/Destiny.Core.Flow.API"
 #RUN dotnet build "Destiny.Core.Flow.API.csproj" -c Release -o /app/build
 #
