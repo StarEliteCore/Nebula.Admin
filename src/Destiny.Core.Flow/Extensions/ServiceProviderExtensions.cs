@@ -43,6 +43,30 @@ namespace Destiny.Core.Flow.Extensions
             provider.NotNull(nameof(provider));
             return provider.GetService<IOptions<AppOptionSettings>>()?.Value;
         }
+        public static object GetInstance(this IServiceProvider provider, ServiceDescriptor descriptor)
+        {
+            if (descriptor.ImplementationInstance != null)
+            {
+                return descriptor.ImplementationInstance;
+            }
+
+            if (descriptor.ImplementationType != null)
+            {
+                return provider.GetServiceOrCreateInstance(descriptor.ImplementationType);
+            }
+
+            return descriptor.ImplementationFactory(provider);
+        }
+
+        public static object GetServiceOrCreateInstance(this IServiceProvider provider, Type type)
+        {
+            return ActivatorUtilities.GetServiceOrCreateInstance(provider, type);
+        }
+
+        public static object CreateInstance(this IServiceProvider provider, Type type, params object[] arguments)
+        {
+            return ActivatorUtilities.CreateInstance(provider, type, arguments);
+        }
 
     }
 }
