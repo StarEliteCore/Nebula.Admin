@@ -8,13 +8,15 @@ using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Dtos.Menu;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices.IMenu;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Destiny.Core.Flow.API.Controllers.Menu
 {
-    //[ApiController]
+    [Description("角色管理")]
+    [Authorize]
     public class MenuController : ApiControllerBase
     {
         private readonly IMenuServices _menuServices;

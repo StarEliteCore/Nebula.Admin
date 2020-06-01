@@ -35,7 +35,7 @@ namespace Destiny.Core.Flow.ExpressionUtil
     
             List<Expression> expressions = new List<Expression>();
             Expression expression = Expression.Constant(true);
-            if (queryFilter is null || queryFilter?.Conditions.Count() == 0|| queryFilter?.Filters.Count == 0) //为空
+            if (queryFilter is null || (queryFilter?.Conditions.Count() == 0&&queryFilter?.Filters.Count() == 0)) //为空
             {
                 return expression;
             }

@@ -615,30 +615,7 @@ namespace Destiny.Core.Flow.Extensions
             return ServiceDescriptor.Describe(descriptor.ServiceType, factory, descriptor.Lifetime);
         }
 
-        private static object GetInstance(this IServiceProvider provider, ServiceDescriptor descriptor)
-        {
-            if (descriptor.ImplementationInstance != null)
-            {
-                return descriptor.ImplementationInstance;
-            }
-
-            if (descriptor.ImplementationType != null)
-            {
-                return provider.GetServiceOrCreateInstance(descriptor.ImplementationType);
-            }
-
-            return descriptor.ImplementationFactory(provider);
-        }
-
-        private static object GetServiceOrCreateInstance(this IServiceProvider provider, Type type)
-        {
-            return ActivatorUtilities.GetServiceOrCreateInstance(provider, type);
-        }
-
-        private static object CreateInstance(this IServiceProvider provider, Type type, params object[] arguments)
-        {
-            return ActivatorUtilities.CreateInstance(provider, type, arguments);
-        }
+     
 
 
 

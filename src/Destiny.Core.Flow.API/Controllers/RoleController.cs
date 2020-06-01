@@ -18,7 +18,7 @@ namespace Destiny.Core.Flow.API.Controllers
     /// 角色管理
     /// </summary>
     [Description("角色管理")]
-    //[Authorize]
+    [Authorize]
     public class RoleController : ApiControllerBase
     {
         private readonly IRoleManagerServices _roleManagerServices = null;

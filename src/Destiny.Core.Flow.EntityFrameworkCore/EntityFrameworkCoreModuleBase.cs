@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow
 {
@@ -14,9 +15,7 @@ namespace Destiny.Core.Flow
 
 
         public override IServiceCollection ConfigureServices(IServiceCollection services)
-        {
-
-            
+        {            
             services = UseSql(services);
             services= AddUnitOfWork(services);
             services = AddRepository(services);
