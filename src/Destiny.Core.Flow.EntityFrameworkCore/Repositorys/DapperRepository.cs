@@ -10,17 +10,19 @@ namespace Destiny.Core.Flow.EntityFrameworkCore.Repositorys
     {
 
         private readonly IUnitOfWork _unitOfWork = null;
-        private readonly IDbConnection _dbConnection = null;
+   
 
         public DapperRepository(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _dbConnection = _unitOfWork.GetDbContext().Database.GetDbConnection();
+            DbConnection = _unitOfWork.GetDbContext().Database.GetDbConnection();
         }
+
+        public IDbConnection DbConnection { get; set; }
 
         public Task<IEnumerable<T>> QueryAsync<T>(string sql, object param)
         {
-            return _dbConnection.QueryAsync<T>(sql, param);
+            return DbConnection.QueryAsync<T>(sql, param);
         }
 
 
