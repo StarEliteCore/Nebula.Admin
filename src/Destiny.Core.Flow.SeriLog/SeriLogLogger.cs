@@ -1,5 +1,6 @@
 ﻿using Serilog;
 using Serilog.Events;
+using Serilog.Sinks.Elasticsearch;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,13 +15,16 @@ namespace Destiny.Core.Flow.SeriLog
         /// SeriLog记录日志到文件
         /// </summary>
         /// <param name="fileName"></param>
-        public static void SetSeriLoggerToFile(string fileName)
+        public static void SetSeriLoggerToFile(string fileName,string eshost)
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
+                .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(eshost)) { 
+                    AutoRegisterTemplate=true,
+                })
                 .WriteTo.Map(le=>MapData(le),
                 (key,log)=>
                  log.Async(o=>o.File(Path.Combine(fileName, @$"{key.time:yyyy-MM-dd}\{key.level.ToString().ToLower()}.txt"))))
