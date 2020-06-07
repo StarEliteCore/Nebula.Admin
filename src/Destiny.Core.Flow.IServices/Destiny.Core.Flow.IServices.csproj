@@ -5,13 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Destiny.Core.Flow.AspNetCore\Destiny.Core.Flow.AspNetCore.csproj" />
-    <ProjectReference Include="..\Destiny.Core.Flow.Dtos\Destiny.Core.Flow.Dtos.csproj" />
-    <ProjectReference Include="..\Destiny.Core.Flow\Destiny.Core.Flow.csproj" />
+    <Compile Remove="Te\**" />
+    <EmbeddedResource Remove="Te\**" />
+    <None Remove="Te\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Te\" />
+    <ProjectReference Include="..\Destiny.Core.Flow.AspNetCore\Destiny.Core.Flow.AspNetCore.csproj" />
+    <ProjectReference Include="..\Destiny.Core.Flow.Dtos\Destiny.Core.Flow.Dtos.csproj" />
+    <ProjectReference Include="..\Destiny.Core.Flow\Destiny.Core.Flow.csproj" />
   </ItemGroup>
 
 </Project>

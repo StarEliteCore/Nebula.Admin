@@ -33,15 +33,10 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         /// <returns></returns>
         [HttpGet]
         [Description("获取树形菜单信息")]
-        public async Task<TreeData<MenuOutDto>> GetTreeAsync(Guid roleid)
+        public async Task<TreeModel<MenuOutDto>> GetTreeAsync(Guid roleid)
         {
             var result = await _menuServices.GetMenuAsync(roleid);
-            return new TreeData<MenuOutDto>()
-            {
-                ItemList = result.ItemList,
-                Message = result.Message,
-                Success = result.Success
-            };
+            return result.ToTreeModel();
         }
         /// <summary>
         /// 获取表格菜单信息
@@ -51,7 +46,7 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         [Description("获取表格菜单信息")]
         public async Task<PageList<MenuTableOutDto>> GetTableAsync()
         {
-            return (await _menuServices.GetMenuTableAsync(new PageRequest() {PageIndex=1,PageSize=15 })).PageList();
+            return (await _menuServices.GetMenuTableAsync(new PageRequest() {PageIndex=1,PageSize=15 })).ToPageList();
         }
 
 
@@ -78,6 +73,18 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         public async Task<AjaxResult> Delete(Guid? id)
         {
             return (await _menuServices.DeleteAsync(id.Value)).ToAjaxResult();
+        }
+
+        /// <summary>
+        /// 异步得到菜单树数据
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Description("异步得到菜单树数据")]
+
+        public async Task<TreeModel<MenuEntityItem>> GetMenuTreeAsync()
+        {
+            return (await _menuServices.GetMenuTreeAsync()).ToTreeModel();
         }
     }
 }

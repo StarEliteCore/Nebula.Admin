@@ -10,6 +10,8 @@ namespace Destiny.Core.Flow.IServices.IMenu
 {
     public interface IMenuServices
     {
+
+        Task<OperationResponse> GetTreeSelectTreeDataAsync();
         /// <summary>
         /// 创建一个菜单
         /// </summary>
@@ -49,5 +51,12 @@ namespace Destiny.Core.Flow.IServices.IMenu
         /// <param name="requst"></param>
         /// <returns></returns>
         Task<PageResult<MenuTableOutDto>> GetMenuTableAsync(PageRequest requst);
+
+
+        /// <summary>
+        /// 异步得到菜单树
+        /// </summary>
+        /// <returns></returns>
+        Task<TreeResult<MenuEntityItem>> GetMenuTreeAsync();
     }
 }

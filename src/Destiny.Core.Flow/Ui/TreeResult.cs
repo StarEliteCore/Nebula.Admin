@@ -1,14 +1,15 @@
 ﻿using Destiny.Core.Flow.Ui;
+using Destiny.Core.Flow.Ui.Abstracts;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Destiny.Core.Flow.Filter
+namespace Destiny.Core.Flow.Ui
 {
     /// <summary>
     /// 树返回
     /// </summary>
-    public class TreeResult<TData> : ResultBase,IListResult<TData>
+    public class TreeResult<TData> : ResultBase, ITreeResult<TData>
     {
         public TreeResult() : this(new TData[0], "成功返回数据", true)
         {

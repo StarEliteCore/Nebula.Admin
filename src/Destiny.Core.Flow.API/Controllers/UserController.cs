@@ -135,7 +135,7 @@ namespace Destiny.Core.Flow.API.Controllers
         [Description("异步得到分页")]
         public async Task<PageList<UserOutputPageListDto>> GetUserPageAsync([FromBody]PageRequest request)
         {
-            return (await _userService.GetUserPageAsync(request)).PageList();
+            return (await _userService.GetUserPageAsync(request)).ToPageList();
         }
     }
 }

@@ -62,7 +62,7 @@ namespace Destiny.Core.Flow.Ui
             this.Data = data;
         }
 
-
+   
 
 
         public bool Error()

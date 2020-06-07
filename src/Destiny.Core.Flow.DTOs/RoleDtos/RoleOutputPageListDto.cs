@@ -36,11 +36,25 @@ namespace Destiny.Core.Flow.Dtos.RoleDtos
         ///获取或设置 编码
         /// </summary>
         [DisplayName("编码")]
-        public virtual string Code { get; set; }
+        public  string Code { get; set; }
         /// <summary>
         /// 版本标识
         /// </summary>
         [DisplayName("版本标识")]
         public string ConcurrencyStamp { get; set; }
+
+
+        /// <summary>
+        /// 获取或设置 最后修改时间
+        /// </summary>
+        [DisplayName("最后修改时间")]
+        public  DateTime? LastModifierTime { get; set; }
+
+
+        /// <summary>
+        ///获取或设置 创建时间
+        /// </summary>
+        [DisplayName("创建时间")]
+        public  DateTime CreatedTime { get; set; }
     }
 }

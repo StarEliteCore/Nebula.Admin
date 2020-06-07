@@ -8,6 +8,7 @@ using Destiny.Core.Flow.Model.Entities.Menu;
 using Destiny.Core.Flow.Model.Entities.Rolemenu;
 using Destiny.Core.Flow.Repository.MenuRepository;
 using Destiny.Core.Flow.Ui;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -84,6 +85,40 @@ namespace Destiny.Core.Flow.Services.Menu
                 IscheckTree(rolelist,list.ItemList);
             return list;
         }
+
+        public async Task<OperationResponse> GetTreeSelectTreeDataAsync()
+        {
+            OperationResponse response = new OperationResponse();
+            var list=  await _menuRepository.Entities.ToListAsync();
+            var permissionTreeItems = await GetMenuTreeAsync();
+
+
+            response.IsSuccess("查询成功", new
+            {
+                TreeItemData = list,
+                SelectTreeItems = permissionTreeItems
+            });
+            return response;
+        }
+
+
+
+
+        public  Task<TreeResult<MenuEntityItem>> GetMenuTreeAsync()
+        {
+             return _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuEntityItem>((r, c) => {
+                c.Key = c.Id.ToString();
+                c.Title = c.Name;
+                return c.ParentId == null || c.ParentId == Guid.Empty;
+            }, (p, q) => {
+                p.Key = p.Id.ToString();
+                p.Title = p.Name;
+                return p.Id == q.ParentId;
+            }, (p, q) => {
+                p.Children.AddRange(q);
+            });
+        }
+
         /// <summary>
         /// 处理角色权限数据
         /// </summary>
@@ -107,4 +142,6 @@ namespace Destiny.Core.Flow.Services.Menu
             return await _menuRepository.TrackEntities.ToPageAsync<MenuEntity, MenuTableOutDto>(expression, requst);
         }
     }
+
+
 }

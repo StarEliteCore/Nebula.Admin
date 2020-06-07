@@ -31,7 +31,7 @@ namespace Destiny.Core.Flow.API.Controllers.DataDictionary
         [Description("分页获取数据字典")]
         public async Task<PageList<DataDictionaryOutPageListDto>> GetPageListAsync([FromBody]PageRequest request)
         {
-            return (await _dataDictionnaryServices.GetDictionnnaryPageAsync(request)).PageList();
+            return (await _dataDictionnaryServices.GetDictionnnaryPageAsync(request)).ToPageList();
         }
         /// <summary>
         /// 修改数据字典

@@ -36,7 +36,8 @@ namespace Destiny.Core.Flow.API.Controllers
         [Description("异步创建角色")]
         public async Task<PageList<RoleOutputPageListDto>> GetRolePageAsync([FromBody]PageRequest request)
         {
-            return (await _roleManagerServices.GetRolePageAsync(request)).PageList();
+
+            return (await _roleManagerServices.GetRolePageAsync(request)).ToPageList();
         }
         /// <summary>
         /// 
@@ -65,9 +66,9 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <param name="id"></param>
         [Description("异步删除角色")]
         [HttpDelete]
-        public async Task<AjaxResult> Delete(Guid? id)
+        public async Task<AjaxResult> DeleteAsync(Guid id)
         {
-            return (await _roleManagerServices.DeleteAsync(id.Value)).ToAjaxResult();
+            return (await _roleManagerServices.DeleteAsync(id)).ToAjaxResult();
         }
         /// <summary>
         /// 删除角色

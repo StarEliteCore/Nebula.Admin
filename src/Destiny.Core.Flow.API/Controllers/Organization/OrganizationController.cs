@@ -30,11 +30,11 @@ namespace Destiny.Core.Flow.API.Controllers.Organization
         /// <returns></returns>
         [HttpGet]
         [Description("获取组织架构")]
-        public async Task<TreeData<OrganizationOutDto>> GetAsync()
+        public async Task<TreeModel<OrganizationOutDto>> GetAsync()
         {
 
             var result= await _organization.GetOrganization();
-            return new TreeData<OrganizationOutDto>()
+            return new TreeModel<OrganizationOutDto>()
             {
                 ItemList = result.ItemList,
                 Message = result.Message,

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
+using Destiny.Core.Flow.Extensions;
 
 namespace Destiny.Core.Flow.Identity
 {   
@@ -94,7 +95,11 @@ namespace Destiny.Core.Flow.Identity
         {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
-          
+
+            if (role.IsAdmin)
+            {
+                return new IdentityResult().Failed($"角色“{role.Name}”是管理员，不能删除");
+            }
             await _roleRepository.DeleteAsync(role);
             return IdentityResult.Success;
         }
