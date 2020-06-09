@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Enums;
+﻿using AutoMapper.QueryableExtensions;
+using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Exceptions;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Destiny.Core.Flow.ExpressionUtil
 {
@@ -81,7 +83,7 @@ namespace Destiny.Core.Flow.ExpressionUtil
             var constant = Expression.Constant(true);
 
             var value = filter.Value.AsTo(conversionType);
-            if ((filter.Value?.ToString().IsNullOrWhiteSpace() ?? false) ||(value.ToString()?.IsNullOrWhiteSpace() ?? false))
+            if (value==null)
             {
                 return constant;
             }
@@ -140,12 +142,12 @@ namespace Destiny.Core.Flow.ExpressionUtil
         private static LambdaExpression GetPropertyLambdaExpression(ParameterExpression parameter, FilterCondition filter)
         {
             var type = parameter.Type;
-            var property = type.GetProperty(filter.Field);
+            var property = type.GetProperty(filter.Field, BindingFlags.Public | BindingFlags.IgnoreCase | BindingFlags.Instance);
             if (property == null)
             {
                 throw new AppException($"没有得到{filter.Field}该名字!!!");
             }
-            Expression propertyAccess = Expression.MakeMemberAccess(parameter, property);
+            MemberExpression propertyAccess = Expression.MakeMemberAccess(parameter, property);
             return Expression.Lambda(propertyAccess, parameter);
         }
     }
