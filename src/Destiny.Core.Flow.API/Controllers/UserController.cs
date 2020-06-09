@@ -85,8 +85,7 @@ namespace Destiny.Core.Flow.API.Controllers
         public async Task<AjaxResult> DeleteAsync(Guid id)
         {
 
-           
-            return (await _userService.DeleteAsync(id)).ToAjaxResult();
+                            return (await _userService.DeleteAsync(id)).ToAjaxResult();
 
         }
 
