@@ -17,11 +17,7 @@ namespace Destiny.Core.Flow.Dtos.RoleDtos
         /// </summary>
         [DisplayName("角色名称")]
         public string Name { get; set; }
-        /// <summary>
-        /// 标准化角色名称
-        /// </summary>
-        [DisplayName("标准化角色名称")]
-        public string NormalizedName { get; set; }
+
         /// <summary>
         /// 是否管理员
         /// </summary>
@@ -37,11 +33,7 @@ namespace Destiny.Core.Flow.Dtos.RoleDtos
         /// </summary>
         [DisplayName("编码")]
         public  string Code { get; set; }
-        /// <summary>
-        /// 版本标识
-        /// </summary>
-        [DisplayName("版本标识")]
-        public string ConcurrencyStamp { get; set; }
+
 
 
         /// <summary>
