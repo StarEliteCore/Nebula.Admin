@@ -28,7 +28,7 @@ namespace Destiny.Core.Flow.Dtos
         public string PasswordHash { get; set; }
 
 
-        public DateTime CreatedTime { get; set; }
+
 
         public bool IsSystem { get; set; }
 

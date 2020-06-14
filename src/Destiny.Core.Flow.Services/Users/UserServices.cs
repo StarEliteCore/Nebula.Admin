@@ -59,7 +59,7 @@ namespace Destiny.Core.Flow.Services
                     return result.ToOperationResponse();
                 }
 
-                if (dto.RoleIds?.Any() == true)
+                if (dto.RoleIds.Any() == true)
                 {
                     return await this.SetUserRoles(user, dto.RoleIds);
                 }
@@ -67,6 +67,18 @@ namespace Destiny.Core.Flow.Services
 
             });
 
+        }
+
+        private async Task<OperationResponse> DeleteUserRoleAsync(User user)
+        {
+            IList<string> existRoleNames = await _userManager.GetRolesAsync(user);
+            IdentityResult result = await _userManager.RemoveFromRolesAsync(user, existRoleNames);
+
+            if (!result.Succeeded)
+            {
+                return result.ToOperationResponse();
+            }
+            return result.ToOperationResponse();
         }
 
         /// <summary>
@@ -121,13 +133,15 @@ namespace Destiny.Core.Flow.Services
                     return result.ToOperationResponse();
                 }
 
-                if (dto.RoleIds?.Any() == true)
+
+                if (dto.RoleIds.Any() == true)
                 {
                     return await this.SetUserRoles(user, dto.RoleIds);
                 }
+                else {
 
-                return new OperationResponse("更新成功!!", OperationResponseType.Success);
-
+                    return await this.DeleteUserRoleAsync(user);
+                }
             });
 
         }
@@ -141,17 +155,21 @@ namespace Destiny.Core.Flow.Services
         /// <returns></returns>
         private async Task<OperationResponse> SetUserRoles(User user, Guid[] roleIds)
         {
-            IList<string> roleNames = await _roleManager.Roles.Where(m => roleIds.Contains(m.Id)).Select(m => m.Name).ToListAsync();
+        
 
             IList<string> existRoleNames = await _userManager.GetRolesAsync(user);
             try
             {
 
                 IdentityResult result = await _userManager.RemoveFromRolesAsync(user, existRoleNames);
+
                 if (!result.Succeeded)
                 {
                     return result.ToOperationResponse();
                 }
+                IList<string> roleNames = await _roleManager.Roles.Where(m => roleIds.Contains(m.Id)).Select(m => m.Name).ToListAsync();
+
+            
                 result = await _userManager.AddToRolesAsync(user, roleNames);
 
                 if (!result.Succeeded)
@@ -177,7 +195,7 @@ namespace Destiny.Core.Flow.Services
         {
 
             request.NotNull(nameof(request));
-            OrderCondition<User>[] orderConditions = new OrderCondition<User>[] { new OrderCondition<User>(o=>o.CreatedTime)};
+            OrderCondition<User>[] orderConditions = new OrderCondition<User>[] { new OrderCondition<User>(o=>o.CreatedTime,SortDirection.Descending)};
             request.OrderConditions = orderConditions;
             return  _userManager.Users.AsNoTracking().ToPageAsync<User, UserOutputPageListDto>(request);
 
