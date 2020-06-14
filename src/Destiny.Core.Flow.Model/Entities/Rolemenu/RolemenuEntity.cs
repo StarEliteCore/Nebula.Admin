@@ -22,4 +22,5 @@ namespace Destiny.Core.Flow.Model.Entities.Rolemenu
         public Guid MenuId { get; set; }
     }
 
+
 }
