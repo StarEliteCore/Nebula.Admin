@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
+using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Dtos.Menu;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices.IMenu;

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Destiny.Core.Flow.Dtos.Menu
+namespace Destiny.Core.Flow.Dtos
 {
     [AutoMapp(typeof(MenuEntity))]
     public class MenuEntityItem : MenuEntity

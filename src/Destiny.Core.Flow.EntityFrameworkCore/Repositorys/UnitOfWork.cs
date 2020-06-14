@@ -217,7 +217,6 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
             {
                 return;
             }
-            throw new Exception("报错了");
             _transaction.Commit();
             _dbContext.Database.CurrentTransaction.Dispose();
             HasCommitted = true;

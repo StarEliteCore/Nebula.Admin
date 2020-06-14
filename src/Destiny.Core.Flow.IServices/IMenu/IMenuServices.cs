@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.AspNetCore.Ui;
+using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Dtos.Menu;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Ui;

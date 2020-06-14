@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Model.EntityConfigurations
 {
-    public class RolemenuConfiguration : EntityMappingConfiguration<RolemenuEntity, Guid>
+    public class RoleMenuConfiguration : EntityMappingConfiguration<RoleMenuEntity, Guid>
     {
-        public override void Map(EntityTypeBuilder<RolemenuEntity> b)
+        public override void Map(EntityTypeBuilder<RoleMenuEntity> b)
         {
             b.HasKey(p => p.Id);
             b.Property(p => p.RoleId);
