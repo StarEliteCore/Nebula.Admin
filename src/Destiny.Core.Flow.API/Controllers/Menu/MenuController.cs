@@ -42,12 +42,13 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         /// <summary>
         /// 获取表格菜单信息
         /// </summary>
+        /// <param name="request"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         [Description("获取表格菜单信息")]
-        public async Task<PageList<MenuTableOutDto>> GetTableAsync()
+        public async Task<PageList<MenuTableOutDto>> GetTableAsync([FromBody] PageRequest request)
         {
-            return (await _menuServices.GetMenuTableAsync(new PageRequest() {PageIndex=1,PageSize=15 })).ToPageList();
+            return (await _menuServices.GetMenuTableAsync(request)).ToPageList();
         }
 
 
