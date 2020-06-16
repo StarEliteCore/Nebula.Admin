@@ -82,5 +82,11 @@ namespace Destiny.Core.Flow.Model.Entities.Function
         [DisplayName("是否可用")]
         public bool IsEnabled { get; set; }
 
+        /// <summary>
+        /// 描述
+        /// </summary>
+        [DisplayName("描述")]
+        public string Description { get; set; }
+
     }
 }
