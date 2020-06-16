@@ -3,11 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Destiny.Core.Flow.Model.Migrations
 {
-<<<<<<< HEAD:src/Destiny.Core.Flow.Model/Migrations/20200616142105_wzw20200616_v2.cs
+
     public partial class wzw20200616_v2 : Migration
-=======
-    public partial class dhg20200616 : Migration
->>>>>>> d19b1672b90e1c54a0cf7946604a0a668f91caf6:src/Destiny.Core.Flow.Model/Migrations/20200616141818_dhg20200616.cs
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -35,8 +32,7 @@ namespace Destiny.Core.Flow.Model.Migrations
                 });
 
             migrationBuilder.CreateTable(
-<<<<<<< HEAD:src/Destiny.Core.Flow.Model/Migrations/20200616142105_wzw20200616_v2.cs
-=======
+
                 name: "Function",
                 columns: table => new
                 {
@@ -59,14 +55,13 @@ namespace Destiny.Core.Flow.Model.Migrations
                 });
 
             migrationBuilder.CreateTable(
->>>>>>> d19b1672b90e1c54a0cf7946604a0a668f91caf6:src/Destiny.Core.Flow.Model/Migrations/20200616141818_dhg20200616.cs
+
                 name: "Menu",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     Sort = table.Column<int>(nullable: false, defaultValue: 0),
-<<<<<<< HEAD:src/Destiny.Core.Flow.Model/Migrations/20200616142105_wzw20200616_v2.cs
                     Path = table.Column<string>(maxLength: 200, nullable: false),
                     ParentId = table.Column<Guid>(nullable: false, defaultValue: new Guid("00000000-0000-0000-0000-000000000000")),
                     Icon = table.Column<string>(maxLength: 50, nullable: true),
@@ -74,23 +69,18 @@ namespace Destiny.Core.Flow.Model.Migrations
                     ParentNumber = table.Column<string>(nullable: true),
                     Component = table.Column<string>(maxLength: 400, nullable: false),
                     Depth = table.Column<int>(nullable: false),
-=======
+
                     RouterPath = table.Column<string>(maxLength: 200, nullable: false),
-                    ParentId = table.Column<Guid>(nullable: false, defaultValue: new Guid("00000000-0000-0000-0000-000000000000")),
+
                     Iocn = table.Column<string>(maxLength: 50, nullable: true),
->>>>>>> d19b1672b90e1c54a0cf7946604a0a668f91caf6:src/Destiny.Core.Flow.Model/Migrations/20200616141818_dhg20200616.cs
+
                     LastModifierUserId = table.Column<Guid>(nullable: true),
                     LastModifierTime = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
                     CreatorUserId = table.Column<Guid>(nullable: true),
-<<<<<<< HEAD:src/Destiny.Core.Flow.Model/Migrations/20200616142105_wzw20200616_v2.cs
+
                     CreatedTime = table.Column<DateTime>(nullable: false)
-=======
-                    CreatedTime = table.Column<DateTime>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    ParentNumber = table.Column<string>(nullable: true),
-                    Depth = table.Column<int>(nullable: false)
->>>>>>> d19b1672b90e1c54a0cf7946604a0a668f91caf6:src/Destiny.Core.Flow.Model/Migrations/20200616141818_dhg20200616.cs
+
                 },
                 constraints: table =>
                 {
@@ -268,34 +258,25 @@ namespace Destiny.Core.Flow.Model.Migrations
             migrationBuilder.InsertData(
                 table: "Role",
                 columns: new[] { "Id", "Code", "ConcurrencyStamp", "CreatedTime", "CreatorUserId", "Description", "IsAdmin", "LastModifierTime", "LastModifierUserId", "Name", "NormalizedName" },
-<<<<<<< HEAD:src/Destiny.Core.Flow.Model/Migrations/20200616142105_wzw20200616_v2.cs
-                values: new object[] { new Guid("b8551e97-0723-47fc-bd7e-aff35bb1b1e7"), null, "0335d7b4-90b9-457f-8f8d-13f2e042a228", new DateTime(2020, 6, 16, 22, 21, 5, 611, DateTimeKind.Local).AddTicks(2687), new Guid("a1e89f45-4fa8-4751-9df9-dec86f7e6c14"), "拥有系统上所有有权限请不要删除!", true, null, null, "系统管理员", "系统管理员" });
-=======
+
                 values: new object[] { new Guid("b8551e97-0723-47fc-bd7e-aff35bb1b1e7"), null, "da799575-f785-4e10-86ef-46eb530774a9", new DateTime(2020, 6, 16, 22, 18, 17, 537, DateTimeKind.Local).AddTicks(1488), new Guid("a1e89f45-4fa8-4751-9df9-dec86f7e6c14"), "拥有系统上所有有权限请不要删除!", true, null, null, "系统管理员", "系统管理员" });
->>>>>>> d19b1672b90e1c54a0cf7946604a0a668f91caf6:src/Destiny.Core.Flow.Model/Migrations/20200616141818_dhg20200616.cs
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedTime", "CreatorUserId", "Description", "Email", "EmailConfirmed", "HeadImg", "IsSystem", "LastModifierTime", "LastModifierUserId", "LockoutEnabled", "LockoutEnd", "NickName", "NormalizeEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Sex", "TwoFactorEnabled", "UserName" },
-<<<<<<< HEAD:src/Destiny.Core.Flow.Model/Migrations/20200616142105_wzw20200616_v2.cs
-                values: new object[] { new Guid("a1e89f45-4fa8-4751-9df9-dec86f7e6c14"), "0286cab6-8a4a-44ed-9a97-86b0506c65c3", new DateTime(2020, 6, 16, 22, 21, 5, 635, DateTimeKind.Local).AddTicks(1257), null, "系统管理员拥有所有权限", null, false, null, true, null, null, true, null, "管理员", null, "ADMIN", "AQAAAAEAACcQAAAAEEPWhHPCHU1i6Z0ayoApKGbPlZUb38RUdJg4QjUcccVhUSto0sRZtLOXfwWUJ+P2Xw==", null, false, "3OWMGQAK5ZTXMSV6OFSGIWWWNIWJ2SX6", 0, false, "Admin" });
-=======
-                values: new object[] { new Guid("a1e89f45-4fa8-4751-9df9-dec86f7e6c14"), "0286cab6-8a4a-44ed-9a97-86b0506c65c3", new DateTime(2020, 6, 16, 22, 18, 17, 579, DateTimeKind.Local).AddTicks(3868), null, "系统管理员拥有所有权限", null, false, null, true, null, null, true, null, "管理员", null, "ADMIN", "AQAAAAEAACcQAAAAEEPWhHPCHU1i6Z0ayoApKGbPlZUb38RUdJg4QjUcccVhUSto0sRZtLOXfwWUJ+P2Xw==", null, false, "3OWMGQAK5ZTXMSV6OFSGIWWWNIWJ2SX6", 0, false, "Admin" });
->>>>>>> d19b1672b90e1c54a0cf7946604a0a668f91caf6:src/Destiny.Core.Flow.Model/Migrations/20200616141818_dhg20200616.cs
-        }
 
+                values: new object[] { new Guid("a1e89f45-4fa8-4751-9df9-dec86f7e6c14"), "0286cab6-8a4a-44ed-9a97-86b0506c65c3", new DateTime(2020, 6, 16, 22, 18, 17, 579, DateTimeKind.Local).AddTicks(3868), null, "系统管理员拥有所有权限", null, false, null, true, null, null, true, null, "管理员", null, "ADMIN", "AQAAAAEAACcQAAAAEEPWhHPCHU1i6Z0ayoApKGbPlZUb38RUdJg4QjUcccVhUSto0sRZtLOXfwWUJ+P2Xw==", null, false, "3OWMGQAK5ZTXMSV6OFSGIWWWNIWJ2SX6", 0, false, "Admin" });
+
+        }
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "DataDictionary");
 
             migrationBuilder.DropTable(
-<<<<<<< HEAD:src/Destiny.Core.Flow.Model/Migrations/20200616142105_wzw20200616_v2.cs
-=======
                 name: "Function");
 
             migrationBuilder.DropTable(
->>>>>>> d19b1672b90e1c54a0cf7946604a0a668f91caf6:src/Destiny.Core.Flow.Model/Migrations/20200616141818_dhg20200616.cs
                 name: "Menu");
 
             migrationBuilder.DropTable(

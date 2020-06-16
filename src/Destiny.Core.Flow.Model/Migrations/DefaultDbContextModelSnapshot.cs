@@ -181,13 +181,8 @@ namespace Destiny.Core.Flow.Model.Migrations
                         new
                         {
                             Id = new Guid("b8551e97-0723-47fc-bd7e-aff35bb1b1e7"),
-<<<<<<< HEAD
-                            ConcurrencyStamp = "0335d7b4-90b9-457f-8f8d-13f2e042a228",
-                            CreatedTime = new DateTime(2020, 6, 16, 22, 21, 5, 611, DateTimeKind.Local).AddTicks(2687),
-=======
-                            ConcurrencyStamp = "da799575-f785-4e10-86ef-46eb530774a9",
-                            CreatedTime = new DateTime(2020, 6, 16, 22, 18, 17, 537, DateTimeKind.Local).AddTicks(1488),
->>>>>>> d19b1672b90e1c54a0cf7946604a0a668f91caf6
+                            ConcurrencyStamp = "08f674c0-2296-42ff-8df1-b9a0d33a8583",
+                            CreatedTime = new DateTime(2020, 6, 16, 22, 38, 12, 57, DateTimeKind.Local).AddTicks(3923),
                             CreatorUserId = new Guid("a1e89f45-4fa8-4751-9df9-dec86f7e6c14"),
                             Description = "拥有系统上所有有权限请不要删除!",
                             IsAdmin = true,
@@ -337,11 +332,7 @@ namespace Destiny.Core.Flow.Model.Migrations
                             Id = new Guid("a1e89f45-4fa8-4751-9df9-dec86f7e6c14"),
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "0286cab6-8a4a-44ed-9a97-86b0506c65c3",
-<<<<<<< HEAD
-                            CreatedTime = new DateTime(2020, 6, 16, 22, 21, 5, 635, DateTimeKind.Local).AddTicks(1257),
-=======
-                            CreatedTime = new DateTime(2020, 6, 16, 22, 18, 17, 579, DateTimeKind.Local).AddTicks(3868),
->>>>>>> d19b1672b90e1c54a0cf7946604a0a668f91caf6
+                            CreatedTime = new DateTime(2020, 6, 16, 22, 38, 12, 95, DateTimeKind.Local).AddTicks(396),
                             Description = "系统管理员拥有所有权限",
                             EmailConfirmed = false,
                             IsDeleted = false,
