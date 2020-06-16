@@ -17,7 +17,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace Destiny.Core.Flow.API.Controllers.Menu
 {
     [Description("角色管理")]
-    [Authorize]
+    //[Authorize]
     public class MenuController : ApiControllerBase
     {
         private readonly IMenuServices _menuServices;
@@ -44,11 +44,17 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [Description("获取表格菜单信息")]
-        public async Task<PageList<MenuTableOutDto>> GetTableAsync([FromBody] PageRequest request)
+        public async Task<TreeModel<MenuTableOutDto>> GetTableAsync()
         {
-            return (await _menuServices.GetMenuTableAsync(request)).ToPageList();
+            var result = await _menuServices.GetMenuTableAsync();
+            return new TreeModel<MenuTableOutDto>()
+            {
+                ItemList = result.ItemList,
+                Message = result.Message,
+                Success = result.Success
+            };
         }
 
 

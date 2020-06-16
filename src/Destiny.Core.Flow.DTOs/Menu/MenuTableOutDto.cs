@@ -1,5 +1,6 @@
 ﻿using Destiny.Core.Flow.Entity;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Destiny.Core.Flow.Dtos.Menu
@@ -27,12 +28,12 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// <summary>
         /// 组件地址(前端)
         /// </summary>
-        public string RouterPath { get; set; }
+        public string Path { get; set; }
 
         /// <summary>
         /// 菜单图标
         /// </summary>
-        public string Iocn { get; set; }
+        public string Icon { get; set; }
 
         /// <summary>
         /// 描述
@@ -49,5 +50,14 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// </summary>
         [DisplayName("当前菜单以上所有的父级")]
         public string ParentNumber { get; set; }
+        /// <summary>
+        /// 组件地址
+        /// </summary>
+        [DisplayName("组件地址")]
+        public string Component { get; set; }
+        /// <summary>
+        /// 子级
+        /// </summary>
+        public List<MenuTableOutDto> children { get; set; } = new List<MenuTableOutDto>();
     }
 }

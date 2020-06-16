@@ -33,14 +33,6 @@ namespace Destiny.Core.Flow.IServices.IMenu
         /// <param name="input"></param>
         /// <returns></returns>
         Task<OperationResponse> UpdateAsync(MenuInputDto input);
-
-        /// <summary>
-        /// 分页查询菜单
-        /// </summary>
-        /// <param name="requst"></param>
-        /// <returns></returns>
-        Task<PageResult<MenuOutPageListDto>> GetMenuPageAsync(PageRequest requst);
-
         /// <summary>
         /// 查询菜单
         /// </summary>
@@ -51,7 +43,7 @@ namespace Destiny.Core.Flow.IServices.IMenu
         /// </summary>
         /// <param name="requst"></param>
         /// <returns></returns>
-        Task<PageResult<MenuTableOutDto>> GetMenuTableAsync(PageRequest requst);
+        Task<TreeResult<MenuTableOutDto>> GetMenuTableAsync();
 
 
         /// <summary>
