@@ -181,8 +181,8 @@ namespace Destiny.Core.Flow.Model.Migrations
                         new
                         {
                             Id = new Guid("b8551e97-0723-47fc-bd7e-aff35bb1b1e7"),
-                            ConcurrencyStamp = "08f674c0-2296-42ff-8df1-b9a0d33a8583",
-                            CreatedTime = new DateTime(2020, 6, 16, 22, 38, 12, 57, DateTimeKind.Local).AddTicks(3923),
+                            ConcurrencyStamp = "80f5a83b-a875-42a7-b72d-916fa8748c46",
+                            CreatedTime = new DateTime(2020, 6, 16, 22, 45, 32, 665, DateTimeKind.Local).AddTicks(2714),
                             CreatorUserId = new Guid("a1e89f45-4fa8-4751-9df9-dec86f7e6c14"),
                             Description = "拥有系统上所有有权限请不要删除!",
                             IsAdmin = true,
@@ -332,7 +332,7 @@ namespace Destiny.Core.Flow.Model.Migrations
                             Id = new Guid("a1e89f45-4fa8-4751-9df9-dec86f7e6c14"),
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "0286cab6-8a4a-44ed-9a97-86b0506c65c3",
-                            CreatedTime = new DateTime(2020, 6, 16, 22, 38, 12, 95, DateTimeKind.Local).AddTicks(396),
+                            CreatedTime = new DateTime(2020, 6, 16, 22, 45, 32, 709, DateTimeKind.Local).AddTicks(6230),
                             Description = "系统管理员拥有所有权限",
                             EmailConfirmed = false,
                             IsDeleted = false,
