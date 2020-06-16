@@ -21,7 +21,7 @@ namespace Destiny.Core.Flow.Services.RoleMenu
 
         public async Task<OperationResponse> CareateAsync()
         {
-            var response = await _roleMenuRepository.InsertAsync(new RolemenuEntity());
+            var response = await _roleMenuRepository.InsertAsync(new RoleMenuEntity());
 
             return new OperationResponse()
             {

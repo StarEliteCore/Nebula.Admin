@@ -26,12 +26,12 @@ namespace Destiny.Core.Flow.Services.RoleServices
     public class RoleManagerServices: IRoleManagerServices
     {
         private readonly RoleManager<Role> _roleManager=null;
-        private readonly IEFCoreRepository<RolemenuEntity, Guid> _roleMenuRepository;
+        private readonly IEFCoreRepository<RoleMenuEntity, Guid> _roleMenuRepository;
         /// <summary>
         /// 构造函数注入
         /// </summary>
         /// <param name="roleManager"></param>
-        public RoleManagerServices(RoleManager<Role> roleManager, IEFCoreRepository<RolemenuEntity, Guid> roleMenuRepository)
+        public RoleManagerServices(RoleManager<Role> roleManager, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository)
         {
             _roleManager = roleManager;
             _roleMenuRepository = roleMenuRepository;
@@ -53,7 +53,7 @@ namespace Destiny.Core.Flow.Services.RoleServices
                     return result.ToOperationResponse();
                 }
                 if (dto.MenuIds?.Any() == true) {
-                    var list = dto.MenuIds.Select(x => new RolemenuEntity
+                    var list = dto.MenuIds.Select(x => new RoleMenuEntity
                     {
                         MenuId = x,
                         RoleId = role.Id,
@@ -92,7 +92,7 @@ namespace Destiny.Core.Flow.Services.RoleServices
                     return result.ToOperationResponse();
                 if (dto.MenuIds?.Any() == true)
                 {
-                    var list = dto.MenuIds.Select(x => new RolemenuEntity
+                    var list = dto.MenuIds.Select(x => new RoleMenuEntity
                     {
                         MenuId = x,
                         RoleId = role.Id,

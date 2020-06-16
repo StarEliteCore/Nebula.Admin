@@ -6,14 +6,14 @@ using System;
 namespace Destiny.Core.Flow.Repository.RoleMenuRepository
 {
     [Dependency(ServiceLifetime.Scoped)]
-    public class RoleMenuRepository : Repository<RolemenuEntity, Guid>, IRoleMenuRepository
+    public class RoleMenuRepository : Repository<RoleMenuEntity, Guid>, IRoleMenuRepository
     {
         public RoleMenuRepository(IServiceProvider serviceProvider) : base(serviceProvider)
         {
         }
     }
 
-    public interface IRoleMenuRepository : IEFCoreRepository<RolemenuEntity, Guid>
+    public interface IRoleMenuRepository : IEFCoreRepository<RoleMenuEntity, Guid>
     {
     }
 }

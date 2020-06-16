@@ -23,9 +23,9 @@ namespace Destiny.Core.Flow.Services.Menu
     public class MenuServices : IMenuServices
     {
         private readonly IMenuRepository _menuRepository = null;
-        private readonly IEFCoreRepository<RolemenuEntity, Guid> _roleMenuRepository;
+        private readonly IEFCoreRepository<RoleMenuEntity, Guid> _roleMenuRepository;
 
-        public MenuServices(IMenuRepository menuRepository, IEFCoreRepository<RolemenuEntity, Guid> roleMenuRepository)
+        public MenuServices(IMenuRepository menuRepository, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository)
         {
             _menuRepository = menuRepository;
             _roleMenuRepository = roleMenuRepository;
@@ -62,7 +62,7 @@ namespace Destiny.Core.Flow.Services.Menu
         /// <returns></returns>
         public async Task<TreeResult<MenuOutDto>> GetMenuAsync(Guid roleid)
         {
-            var rolelist = new List<RolemenuEntity>();
+            var rolelist = new List<RoleMenuEntity>();
             var list = await _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuOutDto>(
                 (r, c) =>
                 {
@@ -124,7 +124,7 @@ namespace Destiny.Core.Flow.Services.Menu
         /// </summary>
         /// <param name="rolelist"></param>
         /// <param name="list"></param>
-        private void IscheckTree(List<RolemenuEntity> rolelist, IEnumerable<MenuOutDto> list)
+        private void IscheckTree(List<RoleMenuEntity> rolelist, IEnumerable<MenuOutDto> list)
         {
             foreach (var item in list)
             {
