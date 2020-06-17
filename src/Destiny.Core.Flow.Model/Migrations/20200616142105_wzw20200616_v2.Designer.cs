@@ -9,14 +9,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Destiny.Core.Flow.Model.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    [Migration("20200421143440_wzw20200421")]
-    partial class wzw20200421
+    [Migration("20200616142105_wzw20200616_v2")]
+    partial class wzw20200616_v2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.3")
+                .HasAnnotation("ProductVersion", "3.1.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Destiny.Core.Flow.Model.Entities.Dictionary.DataDictionaryEntity", b =>
@@ -71,6 +71,60 @@ namespace Destiny.Core.Flow.Model.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DataDictionary");
+                });
+
+            modelBuilder.Entity("Destiny.Core.Flow.Model.Entities.Function.Function", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Action")
+                        .HasColumnType("varchar(30) CHARACTER SET utf8mb4")
+                        .HasMaxLength(30);
+
+                    b.Property<string>("Area")
+                        .HasColumnType("varchar(25) CHARACTER SET utf8mb4")
+                        .HasMaxLength(25);
+
+                    b.Property<string>("Controller")
+                        .HasColumnType("varchar(30) CHARACTER SET utf8mb4")
+                        .HasMaxLength(30);
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid?>("CreatorUserId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("varchar(1000) CHARACTER SET utf8mb4")
+                        .HasMaxLength(1000);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("IsEnabled")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(true);
+
+                    b.Property<DateTime?>("LastModifierTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid?>("LastModifierUserId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Function");
                 });
 
             modelBuilder.Entity("Destiny.Core.Flow.Model.Entities.Identity.Role", b =>
@@ -129,8 +183,9 @@ namespace Destiny.Core.Flow.Model.Migrations
                         new
                         {
                             Id = new Guid("b8551e97-0723-47fc-bd7e-aff35bb1b1e7"),
-                            ConcurrencyStamp = "db41a365-7d9f-4c84-a4ad-44723228f392",
-                            CreatedTime = new DateTime(2020, 4, 21, 22, 34, 39, 954, DateTimeKind.Local).AddTicks(2980),
+
+                            ConcurrencyStamp = "0335d7b4-90b9-457f-8f8d-13f2e042a228",
+                            CreatedTime = new DateTime(2020, 6, 16, 22, 21, 5, 611, DateTimeKind.Local).AddTicks(2687),
                             CreatorUserId = new Guid("a1e89f45-4fa8-4751-9df9-dec86f7e6c14"),
                             Description = "拥有系统上所有有权限请不要删除!",
                             IsAdmin = true,
@@ -280,7 +335,7 @@ namespace Destiny.Core.Flow.Model.Migrations
                             Id = new Guid("a1e89f45-4fa8-4751-9df9-dec86f7e6c14"),
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "0286cab6-8a4a-44ed-9a97-86b0506c65c3",
-                            CreatedTime = new DateTime(2020, 4, 21, 22, 34, 39, 978, DateTimeKind.Local).AddTicks(4634),
+                            CreatedTime = new DateTime(2020, 6, 16, 22, 18, 17, 579, DateTimeKind.Local).AddTicks(3868),
                             Description = "系统管理员拥有所有权限",
                             EmailConfirmed = false,
                             IsDeleted = false,
@@ -417,16 +472,24 @@ namespace Destiny.Core.Flow.Model.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<string>("Component")
+                        .IsRequired()
+                        .HasColumnType("varchar(400) CHARACTER SET utf8mb4")
+                        .HasMaxLength(400);
+
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime(6)");
 
                     b.Property<Guid?>("CreatorUserId")
                         .HasColumnType("char(36)");
 
+                    b.Property<int>("Depth")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Iocn")
+                    b.Property<string>("Icon")
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
                         .HasMaxLength(50);
 
@@ -454,7 +517,7 @@ namespace Destiny.Core.Flow.Model.Migrations
                     b.Property<string>("ParentNumber")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("RouterPath")
+                    b.Property<string>("Path")
                         .IsRequired()
                         .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
                         .HasMaxLength(200);
@@ -521,7 +584,7 @@ namespace Destiny.Core.Flow.Model.Migrations
                     b.ToTable("Organizated");
                 });
 
-            modelBuilder.Entity("Destiny.Core.Flow.Model.Entities.Rolemenu.RolemenuEntity", b =>
+            modelBuilder.Entity("Destiny.Core.Flow.Model.Entities.Rolemenu.RoleMenuEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

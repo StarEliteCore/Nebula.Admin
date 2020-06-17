@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.Dependency;
+using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Dtos.Menu;
 using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
@@ -47,13 +48,6 @@ namespace Destiny.Core.Flow.Services.Menu
         {
             input.NotNull(nameof(input));
             return await _menuRepository.UpdateAsync(input);
-        }
-
-        public async Task<PageResult<MenuOutPageListDto>> GetMenuPageAsync(PageRequest requst)
-        {
-            requst.NotNull(nameof(requst));
-            var expression = FilterBuilder.GetExpression<MenuEntity>(requst.Filter);
-            return await _menuRepository.TrackEntities.ToPageAsync<MenuEntity, MenuOutPageListDto>(expression, requst);
         }
         /// <summary>
         /// 
@@ -134,12 +128,24 @@ namespace Destiny.Core.Flow.Services.Menu
                 IscheckTree( rolelist, item.children);
             }
         }
-        public async Task<PageResult<MenuTableOutDto>> GetMenuTableAsync(PageRequest requst)
+        public async Task<TreeResult<MenuTableOutDto>> GetMenuTableAsync()
         {
-            requst.NotNull(nameof(requst));
-            var expression = FilterBuilder.GetExpression<MenuEntity>(requst.Filter);
-
-            return await _menuRepository.TrackEntities.ToPageAsync<MenuEntity, MenuTableOutDto>(expression, requst);
+            return await _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuTableOutDto>(
+                (p, c) =>
+                {
+                    return c.ParentId == null || c.ParentId == Guid.Empty;
+                },
+                (p, c) =>
+                {
+                    return p.Id == c.ParentId;
+                },
+                (p, children) =>
+                {
+                    if (p.children == null)
+                        p.children = new List<MenuTableOutDto>();
+                    p.children.AddRange(children);
+                }
+                );
         }
     }
 
