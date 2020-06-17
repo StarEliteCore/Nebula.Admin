@@ -32,6 +32,7 @@ namespace Destiny.Core.Flow.API.Controllers
         /// 异步得到权限集合
         /// </summary>
         [Description("异步得到权限集合")]
+        [HttpGet]
         public async Task<AjaxResult> GetPermissionListAsync()
         {
            return (await _permissionService.GetRolePermissionListAsync()).ToAjaxResult();
