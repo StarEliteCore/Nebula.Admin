@@ -30,6 +30,50 @@ namespace Destiny.Core.Flow.API.Controllers
         }
 
 
+        /// <summary>
+        /// 异步创建功能
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Description("异步创建功能")]
+
+        public async Task<AjaxResult> CreateAsync([FromBody] FunctionInputDto dto)
+        {
+        
+            return (await _functionService.CreateAsync(dto)).ToAjaxResult();
+        }
+
+
+        /// <summary>
+        /// 异步更新功能
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+
+        [HttpPost]
+        [Description("异步更新功能")]
+
+        public async Task<AjaxResult> UpdateAsync([FromBody] FunctionInputDto dto)
+        {
+
+            return (await _functionService.UpdateAsync(dto)).ToAjaxResult();
+        }
+
+        /// <summary>
+        /// 异步删除功能
+        /// </summary>
+        /// <param name="id">主键</param>
+        /// <returns></returns>
+
+        [HttpDelete]
+        [Description("异步删除功能")]
+        public async Task<AjaxResult> DeleteAsync(Guid id)
+        {
+
+            return (await _functionService.DeleteAsync(id)).ToAjaxResult();
+
+        }
 
         /// <summary>
         /// 异步得到功能分页
