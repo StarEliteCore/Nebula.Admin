@@ -56,14 +56,12 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
                 Success = result.Success
             };
         }
-
-
         /// <summary>
-        /// 添加或修改
+        /// 添加菜单
         /// </summary>
         /// <returns></returns>
-        [HttpPut]
-        [Description("添加或修改")]
+        [HttpPost]
+        [Description("添加菜单")]
         public async Task<AjaxResult> AddMenuAsync([FromBody]MenuInputDto dto)
         {
             if (dto.Id == Guid.Empty)
@@ -73,12 +71,22 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
             return (await _menuServices.UpdateAsync(dto)).ToAjaxResult();
         }
         /// <summary>
+        /// 修改菜单
+        /// </summary>
+        /// <returns></returns>
+        [HttpPut]
+        [Description("修改菜单")]
+        public async Task<AjaxResult> UpdateMenuAsync([FromBody] MenuInputDto dto)
+        {
+            return (await _menuServices.UpdateAsync(dto)).ToAjaxResult();
+        }
+        /// <summary>
         /// 删除
         /// </summary>
         /// <returns></returns>
         [HttpDelete]
         [Description("删除菜单")]
-        public async Task<AjaxResult> Delete(Guid? id)
+        public async Task<AjaxResult> DeleteAsync(Guid? id)
         {
             return (await _menuServices.DeleteAsync(id.Value)).ToAjaxResult();
         }
