@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Destiny.Core.Flow.API.Controllers.Menu
 {
-    [Description("角色管理")]
+    [Description("菜单管理")]
     //[Authorize]
     public class MenuController : ApiControllerBase
     {
