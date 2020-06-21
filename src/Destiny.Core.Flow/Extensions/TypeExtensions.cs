@@ -52,6 +52,20 @@ namespace Destiny.Core.Flow.Extensions
             baseType.NotNull(nameof(baseType));
             return type.IsClass && (!canAbstract && !type.IsAbstract) && type.IsBaseOn(baseType);
         }
+
+
+        /// <summary>
+        /// 返回当前类型是否是指定基类的派生类
+        /// </summary>
+        /// <typeparam name="BaseType">要判断的基类型</typeparam>
+        /// <param name="type">当前类型</param>
+        /// <returns></returns>
+        public static bool IsBaseOn<BaseType>(this Type type)
+        {
+
+            return type.IsBaseOn(typeof(BaseType));
+        }
+
         /// <summary>
         /// 返回当前类型是否是指定基类的派生类
         /// </summary>
@@ -234,7 +248,7 @@ namespace Destiny.Core.Flow.Extensions
         /// <summary>
         /// 基础类型
         /// </summary>
-        private static readonly Type[] BasicTypes =
+        private static readonly Type[] _basicTypes =
         {
             typeof(bool),
 
@@ -296,11 +310,11 @@ namespace Destiny.Core.Flow.Extensions
 
         public static bool IsPrimitiveType<T>() => typeof(T).IsPrimitiveType();
 
-        public static bool IsBasicType([NotNull]this Type type) => BasicTypes.Contains(type) || type.IsEnum;
+        public static bool IsBasicType([NotNull]this Type type) => _basicTypes.Contains(type) || type.IsEnum;
 
         public static bool IsBasicType<T>() => typeof(T).IsBasicType();
 
-        public static bool IsBasicType<T>(this T value) => typeof(T).IsBasicType();
+        public static bool IsBasicType<T>(this T value) => value.IsBasicType();
 
         /// <summary>
         /// Finds best constructor, least parameter

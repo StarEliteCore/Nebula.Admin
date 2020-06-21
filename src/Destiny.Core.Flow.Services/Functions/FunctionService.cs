@@ -63,10 +63,16 @@ namespace Destiny.Core.Flow.Services.Functions
             return new OperationResponse<FunctionOutputDto>("加载成功", functionDto, OperationResponseType.Success);
         }
 
-        public Task<OperationResponse> UpdateAsync(FunctionInputDto dto)
+        public async Task<OperationResponse> UpdateAsync(FunctionInputDto dto)
         {
             dto.NotNull(nameof(dto));
-            return _functionRepository.UpdateAsync(dto);
+            return await _functionRepository.UpdateAsync(dto,async (f,e)=> {
+                bool isExist = await this.Entities.Where(o =>o.Id!=f.Id&& o.Controller.ToLower() == f.Controller.ToLower() && o.Action.ToLower() == f.Action.ToLower()).AnyAsync();
+                if (isExist)
+                {
+                    throw new AppException("此功能已存在!!!");
+                }
+            });
         }
     }
 }

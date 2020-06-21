@@ -59,7 +59,7 @@ namespace Destiny.Core.Flow.EventBus
 
         public List<Type> GetEventHandlerTtyps<TEventData>() where TEventData : IEventData
         {
-            if (!_handlerList.Any())
+            if (_handlerList.Count==0)
             {
                 return new List<Type>();
             }

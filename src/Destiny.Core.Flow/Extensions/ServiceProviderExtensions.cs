@@ -68,5 +68,92 @@ namespace Destiny.Core.Flow.Extensions
             return ActivatorUtilities.CreateInstance(provider, type, arguments);
         }
 
+        public static void GetService<T>(this IServiceProvider provider,Action<T> action)
+        {
+            action.NotNull(nameof(action));
+            var t= provider.GetService<T>();
+            action(t);
+        }
+
+
+        /// <summary>
+        ///创建一个IServiceScope，其中包含一个IServiceProvider，用于从新创建的作用域解析依赖项，然后运行关联的回调。
+        /// </summary>
+        public static void CreateScoped<T, TS>(this IServiceProvider provider, Action<TS, T> callback)
+        {
+            using var scope = provider.CreateScope();
+            var service = scope.ServiceProvider.GetRequiredService<TS>();
+
+            callback(service, scope.ServiceProvider.GetRequiredService<T>());
+            if (service is IDisposable disposable)
+            {
+                disposable.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// 创建一个IServiceScope，其中包含一个IServiceProvider，用于从新创建的作用域解析依赖项，然后运行关联的回调。
+        /// </summary>
+        public static void CreateScoped<TS>(this IServiceProvider provider, Action<TS> callback)
+        {
+            using var scope = provider.CreateScope();
+            var service = scope.ServiceProvider.GetRequiredService<TS>();
+            callback(service);
+            if (service is IDisposable disposable)
+            {
+                disposable.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// 创建一个IServiceScope，其中包含一个IServiceProvider，用于从新创建的作用域解析依赖项，然后运行关联的回调。
+        /// </summary>
+        public static T CreateScoped<T, TS>(this IServiceProvider provider, Func<TS, T> callback)
+        {
+            using var scope = provider.CreateScope();
+            var service = scope.ServiceProvider.GetRequiredService<TS>();
+            return callback(service);
+        }
+
+        /// <summary>
+        /// 创建一个IServiceScope，其中包含一个IServiceProvider，用于从新创建的作用域解析依赖项，然后运行关联的回调。
+        /// </summary>
+        public static async Task CreateScopedAsync<T, TS>(this IServiceProvider provider, Func<TS, T, Task> callback)
+        {
+            using var scope = provider.GetRequiredService<IServiceScopeFactory>().CreateScope();
+            var service = scope.ServiceProvider.GetRequiredService<TS>();
+
+            await callback(service, scope.ServiceProvider.GetRequiredService<T>());
+            if (service is IDisposable disposable)
+            {
+                disposable.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// 创建一个IServiceScope，其中包含一个IServiceProvider，用于从新创建的作用域解析依赖项，然后运行关联的回调。
+        /// </summary>
+        public static async Task CreateScopedAsync<TS>(this IServiceProvider provider, Func<TS, Task> callback)
+        {
+            using var scope = provider.GetRequiredService<IServiceScopeFactory>().CreateScope();
+            var service = scope.ServiceProvider.GetRequiredService<TS>();
+            await callback(service);
+            if (service is IDisposable disposable)
+            {
+                disposable.Dispose();
+            }
+        }
+
+        /// <summary>
+        ///创建一个IServiceScope，其中包含一个IServiceProvider，用于从新创建的作用域解析依赖项，然后运行关联的回调。
+        /// </summary>
+        public static async Task<T> CreateScopedAsync<T, TS>(this IServiceProvider provider, Func<TS, Task<T>> callback)
+        {
+            using var scope = provider.GetRequiredService<IServiceScopeFactory>().CreateScope();
+            var service = scope.ServiceProvider.GetRequiredService<TS>();
+            return await callback(service);
+        }
+
+
     }
 }

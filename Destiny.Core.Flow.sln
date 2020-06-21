@@ -41,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Repositor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Aop", "src\Destiny.Core.Aop\Destiny.Core.Aop.csproj", "{DCC8964D-54DB-4E64-ADCD-93D392477766}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.FluentValidation", "src\Destiny.Core.Flow.FluentValidation\Destiny.Core.Flow.FluentValidation.csproj", "{C59766D4-9399-4048-81AD-67626B3CD87B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.FluentValidation", "src\Destiny.Core.Flow.FluentValidation\Destiny.Core.Flow.FluentValidation.csproj", "{C59766D4-9399-4048-81AD-67626B3CD87B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

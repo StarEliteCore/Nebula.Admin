@@ -49,6 +49,7 @@ namespace Destiny.Core.Flow.API.Controllers.DataDictionary
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
+        [Description("异步创建菜单")]
         public async Task<AjaxResult> CreateAsync([FromBody]DataDictionnaryInputDto dto)
         {
             return (await _dataDictionnaryServices.CreateAsync(dto)).ToAjaxResult();

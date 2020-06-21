@@ -568,6 +568,14 @@ namespace Destiny.Core.Flow.Extensions
             throw error;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="serviceType"></param>
+        /// <param name="error"></param>
+        /// <param name="decorator"></param>
+        /// <returns></returns>
         private static bool TryDecorateDescriptors(this IServiceCollection services, Type serviceType, [NotNullWhen(false)] out Exception? error, Func<ServiceDescriptor, ServiceDescriptor> decorator)
         {
             if (!services.TryGetDescriptors(serviceType, out var descriptors))
@@ -615,8 +623,23 @@ namespace Destiny.Core.Flow.Extensions
             return ServiceDescriptor.Describe(descriptor.ServiceType, factory, descriptor.Lifetime);
         }
 
-     
 
+        public static Type GetImplementationType(this ServiceDescriptor descriptor)
+        {
+ 
+
+            if (descriptor.ImplementationType != null)
+            {
+                return descriptor.ImplementationType;
+            }
+
+            if (descriptor.ImplementationInstance != null)
+            {
+                return descriptor.ImplementationInstance.GetType();
+            }
+
+            return descriptor.ImplementationFactory?.GetType().GetTypeInfo().GenericTypeArguments[1];
+        }
 
 
     }
