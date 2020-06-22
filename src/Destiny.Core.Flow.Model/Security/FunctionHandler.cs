@@ -120,7 +120,11 @@ namespace Destiny.Core.Flow.Model.Security
                     isUpdate = true;
                     function.Name = functionInfo.Name;
                 }
-
+                if (function.Url?.ToUpper() != functionInfo.Url?.ToUpper())
+                {
+                    isUpdate = true;
+                    function.Url = functionInfo.Url;
+                }
                 if (isUpdate)
                 {
                     repository.Update(function);
@@ -150,6 +154,7 @@ namespace Destiny.Core.Flow.Model.Security
                 Action = model.Action,
                 Description = model.Description,
                 IsEnabled = true,
+                Url=model.Url.ToUpper()
             };
         }
         private FunctionInfo[] GetFunctions(Type[] types)
@@ -212,6 +217,7 @@ namespace Destiny.Core.Flow.Model.Security
             {
                 Name = type.ToDescription(),
                 Controller = controller,
+                Url= controller
 
             };
         }
@@ -223,6 +229,7 @@ namespace Destiny.Core.Flow.Model.Security
                 Name = $"{function.Name}-{method.ToDescription()}",
                 Controller = function.Controller,
                 Action = method.Name,
+                Url=$"{function.Controller}/{method.Name}"
             };
         }
 

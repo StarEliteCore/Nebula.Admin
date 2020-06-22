@@ -88,5 +88,12 @@ namespace Destiny.Core.Flow.Model.Entities.Function
         [DisplayName("描述")]
         public string Description { get; set; }
 
+        /// <summary>
+        /// 链接
+        /// </summary>
+        [DisplayName("链接")]
+        public string Url { get; set; }
+
+
     }
 }

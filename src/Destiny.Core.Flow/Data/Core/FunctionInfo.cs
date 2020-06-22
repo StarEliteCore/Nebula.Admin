@@ -18,5 +18,7 @@ namespace Destiny.Core.Flow.Data.Core
         public bool IsEnabled { get; set; }
 
         public string Description { get; set; }
+
+        public string Url { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Model.Entities.Menu
 {
-    [DisplayName("菜单实体")]
+    [DisplayName("菜单")]
     public class MenuEntity : EntityBase<Guid>, IFullAuditedEntity<Guid>
     {
         /// <summary>
