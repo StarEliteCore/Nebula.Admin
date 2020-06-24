@@ -14,6 +14,7 @@ using System.Security.Cryptography;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Destiny.Core.Flow.Model.Entities.Function;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Controllers;
 
 namespace Destiny.Core.Flow.Model.Security
 {
@@ -42,6 +43,10 @@ namespace Destiny.Core.Flow.Model.Security
         /// <typeparam name="BaseType"></typeparam>
         public void Initialize<BaseType>()
         {
+            foreach (var item in _actionProvider.ActionDescriptors.Items.Cast<ControllerActionDescriptor>().Where(o=>o.ControllerTypeInfo.HasAttribute<FunctionAttribute>()))
+            {
+                
+            }
             var tyeps = _assemblyFinder.FindAll().SelectMany(o => o.GetTypes()).Where(o => o.IsController() && o.IsBaseOn<BaseType>()).ToArray();
             var functionInfos = GetFunctions(tyeps);
             this.SavaData(functionInfos);
