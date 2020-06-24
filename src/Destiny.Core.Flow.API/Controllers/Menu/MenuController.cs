@@ -66,7 +66,7 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         {
             if (dto.Id == Guid.Empty)
             {
-                return (await _menuServices.CareateAsync(dto)).ToAjaxResult();
+                return (await _menuServices.CreateAsync(dto)).ToAjaxResult();
             }
             return (await _menuServices.UpdateAsync(dto)).ToAjaxResult();
         }
@@ -90,7 +90,12 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         {
             return (await _menuServices.DeleteAsync(id.Value)).ToAjaxResult();
         }
-
+        [HttpGet]
+        [Description("根据菜单获取功能")]
+        public async Task<AjaxResult> LoadFormMenuAsync(Guid Id)
+        {
+            return (await _menuServices.LoadFormMenuAsync(Id)).ToAjaxResult();
+        }
         /// <summary>
         /// 异步得到菜单树数据
         /// </summary>

@@ -18,7 +18,7 @@ namespace Destiny.Core.Flow.IServices.IMenu
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<OperationResponse> CareateAsync(MenuInputDto input);
+        Task<OperationResponse> CreateAsync(MenuInputDto input);
 
         /// <summary>
         /// 删除一个菜单
@@ -44,12 +44,16 @@ namespace Destiny.Core.Flow.IServices.IMenu
         /// <param name="requst"></param>
         /// <returns></returns>
         Task<TreeResult<MenuTableOutDto>> GetMenuTableAsync();
-
-
         /// <summary>
         /// 异步得到菜单树
         /// </summary>
         /// <returns></returns>
         Task<TreeResult<MenuEntityItem>> GetMenuTreeAsync();
+        /// <summary>
+        /// 根据ID获取一个菜单
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        Task<OperationResponse<MenuOutputLoadDto>> LoadFormMenuAsync(Guid Id);
     }
 }

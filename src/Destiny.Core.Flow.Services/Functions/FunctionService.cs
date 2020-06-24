@@ -8,6 +8,7 @@ using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.IServices.Functions;
 using Destiny.Core.Flow.Model.Entities.Function;
 using Destiny.Core.Flow.Ui;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -73,6 +74,17 @@ namespace Destiny.Core.Flow.Services.Functions
                     throw new AppException("此功能已存在!!!");
                 }
             });
+        }
+
+        public async Task<OperationResponse<IEnumerable<SelectListItem>>> GetFunctionSelectListItemAsync()
+        {
+
+            var functions = await _functionRepository.Entities.Where(x => x.IsDeleted == false).Select(x => new SelectListItem {
+                Value = x.Id.ToString().ToLower(),
+                Text = x.Name,
+                Selected = false
+            }).ToListAsync();
+            return new OperationResponse<IEnumerable<SelectListItem>>(MessageDefinitionType.DataSuccess, functions, OperationResponseType.Success);
         }
     }
 }

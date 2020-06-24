@@ -2,6 +2,7 @@
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.Ui;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -52,5 +53,10 @@ namespace Destiny.Core.Flow.IServices.Functions
         /// <param name="request"></param>
         /// <returns></returns>
         Task<IPagedResult<FunctionOutputPageList>> GetFunctionPageAsync(PageRequest request);
+        /// <summary>
+        /// 获取功能下拉框列表
+        /// </summary>
+        /// <returns></returns>
+        Task<OperationResponse<IEnumerable<SelectListItem>>> GetFunctionSelectListItemAsync();
     }
 }

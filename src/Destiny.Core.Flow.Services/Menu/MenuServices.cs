@@ -1,6 +1,8 @@
 ﻿using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Dtos.Menu;
+using Destiny.Core.Flow.EntityFrameworkCore;
+using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
@@ -25,18 +27,32 @@ namespace Destiny.Core.Flow.Services.Menu
     {
         private readonly IMenuRepository _menuRepository = null;
         private readonly IEFCoreRepository<RoleMenuEntity, Guid> _roleMenuRepository;
-
-        public MenuServices(IMenuRepository menuRepository, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository)
+        private readonly IMenuFunctionRepository _menuFunction=null;
+        private readonly IUnitOfWork _unitOfWork = null;
+        public MenuServices(IMenuRepository menuRepository, IUnitOfWork unitOfWork, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository, IMenuFunctionRepository menuFunction)
         {
             _menuRepository = menuRepository;
             _roleMenuRepository = roleMenuRepository;
+            this._menuFunction = menuFunction;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<OperationResponse> CareateAsync(MenuInputDto input)
+        public async Task<OperationResponse> CreateAsync(MenuInputDto input)
         {
             input.NotNull(nameof(input));
-            var response = await _menuRepository.InsertAsync(input);
-            return response;
+            return await _unitOfWork.UseTranAsync(async () =>
+            {
+                var result = await _menuRepository.InsertAsync(input);
+                if(input.FunctionId?.Any()==true)
+                {
+                    int count= await _menuFunction.InsertAsync(input.FunctionId.Select(x => new MenuFunction
+                    {
+                        MenuId = input.Id,
+                        FunctionId = x
+                    }).ToArray());
+                }
+                return new OperationResponse("保存成功", OperationResponseType.Success);
+            });
         }
 
         public async Task<OperationResponse> DeleteAsync(Guid id)
@@ -47,7 +63,20 @@ namespace Destiny.Core.Flow.Services.Menu
         public async Task<OperationResponse> UpdateAsync(MenuInputDto input)
         {
             input.NotNull(nameof(input));
-            return await _menuRepository.UpdateAsync(input);
+            return await _unitOfWork.UseTranAsync(async () =>
+            {
+                var result = await _menuRepository.UpdateAsync(input);
+                await _menuFunction.DeleteBatchAsync(x => x.MenuId == input.Id);
+                if (input.FunctionId?.Any() == true)
+                {
+                    int count = await _menuFunction.InsertAsync(input.FunctionId.Select(x => new MenuFunction
+                    {
+                        MenuId = input.Id,
+                        FunctionId = x
+                    }).ToArray());
+                }
+                return new OperationResponse("保存成功", OperationResponseType.Success);
+            });
         }
         /// <summary>
         /// 
@@ -94,10 +123,18 @@ namespace Destiny.Core.Flow.Services.Menu
             });
             return response;
         }
-
-
-
-
+        /// <summary>
+        /// 根据ID获取一个菜单
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public async Task<OperationResponse<MenuOutputLoadDto>> LoadFormMenuAsync(Guid Id)
+        {
+            var menu = await _menuRepository.GetByIdAsync(Id);
+            var menudto = menu.MapTo<MenuOutputLoadDto>();
+            menudto.FunctionIds = (await _menuFunction.Entities.Where(x => x.MenuId == Id && x.IsDeleted == false).ToListAsync()).Select(x => x.FunctionId).ToArray();
+            return new OperationResponse<MenuOutputLoadDto>(MessageDefinitionType.LoadSucces, menudto,OperationResponseType.Success);
+        }
         public  Task<TreeResult<MenuEntityItem>> GetMenuTreeAsync()
         {
              return _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuEntityItem>((r, c) => {

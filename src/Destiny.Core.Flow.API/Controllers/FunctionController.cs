@@ -85,7 +85,17 @@ namespace Destiny.Core.Flow.API.Controllers
         public async Task<PageList<FunctionOutputPageList>> GetFunctionPageAsync([FromBody] PageRequest request)
         {
             return (await _functionService.GetFunctionPageAsync(request)).ToPageList();
-        
         }
+        /// <summary>
+        /// 异步获取功能下拉框列表
+        /// </summary>
+        /// <returns></returns>
+        [Description("异步获取功能下拉框列表")]
+        [HttpGet]
+        public async Task<AjaxResult> GetFunctionSelectListItemAsync()
+        {
+            return (await _functionService.GetFunctionSelectListItemAsync()).ToAjaxResult();
+        }
+        
     }
 }
