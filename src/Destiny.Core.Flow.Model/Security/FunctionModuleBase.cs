@@ -26,7 +26,7 @@ namespace Destiny.Core.Flow.Model.Security
 
         public override void Configure(IApplicationBuilder applicationBuilder)
         {
-            applicationBuilder.ApplicationServices.GetService<IFunctionHandler>(t => t.Initialize<BaseType>());
+            //applicationBuilder.ApplicationServices.GetService<IFunctionHandler>(t => t.Initialize<BaseType>());
         }
     }
 }

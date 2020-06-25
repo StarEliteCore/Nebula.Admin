@@ -7,6 +7,7 @@ using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Dtos.Menu;
+using Destiny.Core.Flow.Dtos.MenuFunction;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices.IMenu;
 using Microsoft.AspNetCore.Authorization;
@@ -21,11 +22,14 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
     public class MenuController : ApiControllerBase
     {
         private readonly IMenuServices _menuServices;
+        private readonly IMenuFunctionServices _menuFunctionServices;
 
-        public MenuController(IMenuServices menuServices)
+        public MenuController(IMenuServices menuServices, IMenuFunctionServices menuFunctionServices)
         {
             _menuServices = menuServices;
+            _menuFunctionServices = menuFunctionServices;
         }
+
 
         /// <summary>
         /// 根据角色Id获取树形菜单信息
@@ -106,6 +110,18 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         public async Task<TreeModel<MenuEntityItem>> GetMenuTreeAsync()
         {
             return (await _menuServices.GetMenuTreeAsync()).ToTreeModel();
+        }
+
+        /// <summary>
+        /// 异步到菜单功能集合
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Description("异步到菜单功能集合")]
+
+        public async Task<PageList<MenuFunctionOutPageListDto>> GetMenuFunctionListAsync(Guid id)
+        {
+            return (await _menuFunctionServices.GetMenuFunctionListAsync(id)).ToPageList();
         }
     }
 }
