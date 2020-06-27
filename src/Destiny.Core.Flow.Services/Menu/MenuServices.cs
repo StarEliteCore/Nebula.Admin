@@ -83,10 +83,10 @@ namespace Destiny.Core.Flow.Services.Menu
         /// </summary>
         /// <param name="roleid">角色Id</param>
         /// <returns></returns>
-        public async Task<TreeResult<MenuOutDto>> GetMenuAsync(Guid roleid)
+        public async Task<TreeResult<MenuTreeOutDto>> GetMenuTreeAsync()
         {
             var rolelist = new List<RoleMenuEntity>();
-            var list = await _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuOutDto>(
+            var list = await _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuTreeOutDto>(
                 (r, c) =>
                 {
                     return c.ParentId == null || c.ParentId == Guid.Empty;
@@ -97,32 +97,28 @@ namespace Destiny.Core.Flow.Services.Menu
                 {
                     if (p.children == null)
                     {
-                        p.children = new List<MenuOutDto>();
+                        p.children = new List<MenuTreeOutDto>();
                     }
 
                     p.children.AddRange(q);
                 });
-            if(roleid!=Guid.Empty)
-                rolelist = await _roleMenuRepository.Query(x => x.RoleId == roleid).ToListAsync();
-            if (rolelist.Any())
-                IscheckTree(rolelist,list.ItemList);
             return list;
         }
 
-        public async Task<OperationResponse> GetTreeSelectTreeDataAsync()
-        {
-            OperationResponse response = new OperationResponse();
-            var list=  await _menuRepository.Entities.ToListAsync();
-            var permissionTreeItems = await GetMenuTreeAsync();
+        //public async Task<OperationResponse> GetTreeSelectTreeDataAsync()
+        //{
+        //    OperationResponse response = new OperationResponse();
+        //    var list=  await _menuRepository.Entities.ToListAsync();
+        //    var permissionTreeItems = await GetMenuTreeAsync();
 
 
-            response.IsSuccess("查询成功", new
-            {
-                TreeItemData = list,
-                SelectTreeItems = permissionTreeItems
-            });
-            return response;
-        }
+        //    response.IsSuccess("查询成功", new
+        //    {
+        //        TreeItemData = list,
+        //        SelectTreeItems = permissionTreeItems
+        //    });
+        //    return response;
+        //}
         /// <summary>
         /// 根据ID获取一个菜单
         /// </summary>
@@ -135,36 +131,39 @@ namespace Destiny.Core.Flow.Services.Menu
             menudto.FunctionIds = (await _menuFunction.Entities.Where(x => x.MenuId == Id && x.IsDeleted == false).ToListAsync()).Select(x => x.FunctionId).ToArray();
             return new OperationResponse<MenuOutputLoadDto>(MessageDefinitionType.LoadSucces, menudto,OperationResponseType.Success);
         }
-        public  Task<TreeResult<MenuEntityItem>> GetMenuTreeAsync()
-        {
-             return _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuEntityItem>((r, c) => {
-                c.Key = c.Id.ToString();
-                c.Title = c.Name;
-                return c.ParentId == null || c.ParentId == Guid.Empty;
-            }, (p, q) => {
-                p.Key = p.Id.ToString();
-                p.Title = p.Name;
-                return p.Id == q.ParentId;
-            }, (p, q) => {
-                p.Children.AddRange(q);
-            });
-        }
+        //public Task<TreeResult<MenuEntityItem>> GetMenuTreeAsync()
+        //{
+        //    return _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuEntityItem>((r, c) =>
+        //    {
+        //        c.Key = c.Id.ToString();
+        //        c.Title = c.Name;
+        //        return c.ParentId == null || c.ParentId == Guid.Empty;
+        //    }, (p, q) =>
+        //    {
+        //        p.Key = p.Id.ToString();
+        //        p.Title = p.Name;
+        //        return p.Id == q.ParentId;
+        //    }, (p, q) =>
+        //    {
+        //        p.Children.AddRange(q);
+        //    });
+        //}
 
-        /// <summary>
-        /// 处理角色权限数据
-        /// </summary>
-        /// <param name="rolelist"></param>
-        /// <param name="list"></param>
-        private void IscheckTree(List<RoleMenuEntity> rolelist, IEnumerable<MenuOutDto> list)
-        {
-            foreach (var item in list)
-            {
-                var model = rolelist.Where(s => s.MenuId == item.Id).FirstOrDefault();
-                if (model != null)
-                    item.@checked = true;
-                IscheckTree( rolelist, item.children);
-            }
-        }
+        ///// <summary>
+        ///// 处理角色权限数据
+        ///// </summary>
+        ///// <param name="rolelist"></param>
+        ///// <param name="list"></param>
+        //private void IscheckTree(List<RoleMenuEntity> rolelist, IEnumerable<MenuTreeOutDto> list)
+        //{
+        //    foreach (var item in list)
+        //    {
+        //        var model = rolelist.Where(s => s.MenuId == item.Id).FirstOrDefault();
+        //        if (model != null)
+        //            item.@checked = true;
+        //        IscheckTree( rolelist, item.children);
+        //    }
+        //}
         public async Task<TreeResult<MenuTableOutDto>> GetMenuTableAsync()
         {
             return await _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuTableOutDto>(

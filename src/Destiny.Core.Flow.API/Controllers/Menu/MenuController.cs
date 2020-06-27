@@ -31,18 +31,18 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         }
 
 
-        /// <summary>
-        /// 根据角色Id获取树形菜单信息
-        /// </summary>
-        /// <param name="roleid">角色Id</param>
-        /// <returns></returns>
-        [HttpGet]
-        [Description("获取树形菜单信息")]
-        public async Task<TreeModel<MenuOutDto>> GetTreeAsync(Guid roleid)
-        {
-            var result = await _menuServices.GetMenuAsync(roleid);
-            return result.ToTreeModel();
-        }
+        ///// <summary>
+        ///// 根据角色Id获取树形菜单信息
+        ///// </summary>
+        ///// <param name="roleid">角色Id</param>
+        ///// <returns></returns>
+        //[HttpGet]
+        //[Description("获取树形菜单信息")]
+        //public async Task<TreeModel<MenuOutDto>> GetTreeAsync(Guid roleid)
+        //{
+        //    var result = await _menuServices.GetMenuAsync(roleid);
+        //    return result.ToTreeModel();
+        //}
         /// <summary>
         /// 获取表格菜单信息
         /// </summary>
@@ -107,7 +107,7 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         [HttpGet]
         [Description("异步得到菜单树数据")]
 
-        public async Task<TreeModel<MenuEntityItem>> GetMenuTreeAsync()
+        public async Task<TreeModel<MenuTreeOutDto>> GetMenuTreeAsync()
         {
             return (await _menuServices.GetMenuTreeAsync()).ToTreeModel();
         }

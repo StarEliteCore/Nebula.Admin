@@ -10,7 +10,9 @@ namespace Destiny.Core.Flow.Dtos.Menu
     {
         public MenuProfile()
         {
-            CreateMap<MenuEntity, MenuOutDto>().ForMember(x => x.title, opt => opt.MapFrom(x => x.Name));
+            CreateMap<MenuEntity, MenuTreeOutDto>().
+                ForMember(x => x.title, opt => opt.MapFrom(x => x.Name))
+                .ForMember(x=>x.Key,opt=>opt.MapFrom(x=>x.Id));
         }
                 
     }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Dtos.Menu
 {
-    public class MenuOutDto : OutputDto<Guid>
+    public class MenuTreeOutDto : OutputDto<Guid>
     {
         /// <summary>
         /// 菜单标题
@@ -16,6 +16,10 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// 是否展开直子节点
         /// </summary>
         public bool expand { get; set; } = true;
+        /// <summary>
+        /// 是否展开直子节点
+        /// </summary>
+        public Guid Key { get; set; }
         /// <summary>
         /// 禁掉响应
         /// </summary>
@@ -39,6 +43,6 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// <summary>
         /// 子级
         /// </summary>
-        public List<MenuOutDto> children { get; set; } = new List<MenuOutDto>();
+        public List<MenuTreeOutDto> children { get; set; } = new List<MenuTreeOutDto>();
     }
 }
