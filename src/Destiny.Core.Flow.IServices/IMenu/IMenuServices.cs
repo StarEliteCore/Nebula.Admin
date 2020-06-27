@@ -12,7 +12,7 @@ namespace Destiny.Core.Flow.IServices.IMenu
     public interface IMenuServices
     {
 
-        Task<OperationResponse> GetTreeSelectTreeDataAsync();
+        //Task<OperationResponse> GetTreeSelectTreeDataAsync();
         /// <summary>
         /// 创建一个菜单
         /// </summary>
@@ -37,18 +37,18 @@ namespace Destiny.Core.Flow.IServices.IMenu
         /// 查询菜单
         /// </summary>
         /// <returns></returns>
-        Task<TreeResult<MenuOutDto>> GetMenuAsync(Guid roleid);
+        Task<TreeResult<MenuTreeOutDto>> GetMenuTreeAsync();
         /// <summary>
         /// 返回表格
         /// </summary>
         /// <param name="requst"></param>
         /// <returns></returns>
         Task<TreeResult<MenuTableOutDto>> GetMenuTableAsync();
-        /// <summary>
-        /// 异步得到菜单树
-        /// </summary>
-        /// <returns></returns>
-        Task<TreeResult<MenuEntityItem>> GetMenuTreeAsync();
+        ///// <summary>
+        ///// 异步得到菜单树
+        ///// </summary>
+        ///// <returns></returns>
+        //Task<TreeResult<MenuEntityItem>> GetMenuTreeAsync();
         /// <summary>
         /// 根据ID获取一个菜单
         /// </summary>
