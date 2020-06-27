@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Destiny.Core.Flow.Modules
@@ -39,7 +40,8 @@ namespace Destiny.Core.Flow.Modules
                 throw new AppException("没有找到要加载的模块!!");
             }
             SourceModules.Clear();
-            var moduleBases = moduleTypes.Select(m => (AppModuleBase)Activator.CreateInstance(m));
+    
+            var moduleBases = moduleTypes.Select(m =>(AppModuleBase)Expression.Lambda(Expression.New(m)).Compile().DynamicInvoke()).OrderBy(o=>o.Order);
             SourceModules.AddRange(moduleBases);
             List<AppModuleBase> modules = SourceModules.ToList();
 

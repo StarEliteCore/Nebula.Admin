@@ -13,7 +13,12 @@ namespace Destiny.Core.Flow.Modules
     /// </summary>
    public abstract class AppModuleBase
     {
+        /// <summary>
+        /// 排序
+        /// </summary>
   
+        public virtual int Order { get; set; }
+
         /// <summary>
         /// 将模块服务添加到依赖注入服务容器中
         /// </summary>
