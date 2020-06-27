@@ -35,7 +35,7 @@ namespace Destiny.Core.Flow.Services.Functions
 
             return await _functionRepository.InsertAsync(dto, async f =>
             {
-                bool isExist = await this.Entities.Where(o => o.Controller.ToLower() == dto.Controller.ToLower() && o.Action.ToLower() == dto.Action.ToLower()).AnyAsync();
+                bool isExist = await this.Entities.Where(o => o.LinkUrl.ToLower() == dto.LinkUrl.ToLower()).AnyAsync();
                 if (isExist)
                 {
                     throw new AppException("此功能已存在!!!");
@@ -68,7 +68,7 @@ namespace Destiny.Core.Flow.Services.Functions
         {
             dto.NotNull(nameof(dto));
             return await _functionRepository.UpdateAsync(dto,async (f,e)=> {
-                bool isExist = await this.Entities.Where(o =>o.Id!=f.Id&& o.Controller.ToLower() == f.Controller.ToLower() && o.Action.ToLower() == f.Action.ToLower()).AnyAsync();
+                bool isExist = await this.Entities.Where(o =>o.Id!=f.Id&& o.LinkUrl.ToLower() == f.LinkUrl.ToLower()).AnyAsync();
                 if (isExist)
                 {
                     throw new AppException("此功能已存在!!!");

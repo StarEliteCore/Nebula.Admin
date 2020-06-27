@@ -11,16 +11,7 @@ namespace Destiny.Core.Flow.Dtos.Functions
        /// </summary>
         public string Name { get; set; }
 
-        /// <summary>
-        /// 控制器
-        /// </summary>
-        public string Controller { get; set; }
-
-
-        /// <summary>
-        /// 方法
-        /// </summary>
-        public string Action { get; set; }
+    
 
         /// <summary>
         /// 是否可用
@@ -31,5 +22,10 @@ namespace Destiny.Core.Flow.Dtos.Functions
         /// 描述
         /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// 链接Url
+        /// </summary>
+        public string LinkUrl { get; set; }
     }
 }

@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Destiny.Core.Flow.Model.Entities.Function;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.Abstractions;
+using System.ComponentModel;
 
 namespace Destiny.Core.Flow.Model.Security
 {
@@ -43,12 +45,9 @@ namespace Destiny.Core.Flow.Model.Security
         /// <typeparam name="BaseType"></typeparam>
         public void Initialize<BaseType>()
         {
-            //foreach (var item in _actionProvider.ActionDescriptors.Items.Cast<ControllerActionDescriptor>().Where(o=>o.ControllerTypeInfo.HasAttribute<FunctionAttribute>()))
-            //{
-                
-            //}
-            var tyeps = _assemblyFinder.FindAll().SelectMany(o => o.GetTypes()).Where(o => o.IsController() && o.IsBaseOn<BaseType>()).ToArray();
-            var functionInfos = GetFunctions(tyeps);
+            var controllerActionDescriptorList = _actionProvider.ActionDescriptors.Items.Cast<ControllerActionDescriptor>().Where(o => o.ControllerTypeInfo.IsBaseOn<BaseType>());
+
+            var functionInfos= GetFunctions(controllerActionDescriptorList.ToArray());
             this.SavaData(functionInfos);
         }
 
@@ -60,10 +59,10 @@ namespace Destiny.Core.Flow.Model.Security
             }
             _serviceProvider.CreateScoped<IEFCoreRepository<Function, Guid>>(repository =>
             {
-                var fcutionSelector = functionInfos.Select(o => o.Controller + o.Action);
+                var fcutionSelector = functionInfos.Select(o => o.LinkUrl);
                 var dbFcutions = repository.Entities.ToList();
-                var deleteDbFcutions = dbFcutions.Where(o => !fcutionSelector.Contains(o.Controller + o.Action)).ToArray();
-                var addDbActions = functionInfos.Where(db => !dbFcutions.Select(o => o.Controller + o.Action).Contains(db.Controller + db.Action)).ToArray();
+                var deleteDbFcutions = dbFcutions.Where(o => !fcutionSelector.Contains(o.LinkUrl)).ToArray();
+                var addDbActions = functionInfos.Where(db => !dbFcutions.Select(o => o.LinkUrl).Contains(db.LinkUrl)).ToArray();
                 repository.UnitOfWork.BeginTransaction();
                 if (deleteDbFcutions.Any())
                 {
@@ -98,8 +97,8 @@ namespace Destiny.Core.Flow.Model.Security
 
 
                 FunctionInfo functionInfo = functionInfos.FirstOrDefault(o =>
-                    string.Equals(o.Controller, function.Controller, StringComparison.OrdinalIgnoreCase)
-                    && string.Equals(o.Action, function.Action, StringComparison.OrdinalIgnoreCase)
+                    string.Equals(o.LinkUrl, function.LinkUrl, StringComparison.OrdinalIgnoreCase)
+                  
                      );
                 if (functionInfo == null)
                 {
@@ -108,32 +107,21 @@ namespace Destiny.Core.Flow.Model.Security
 
                 bool isUpdate = false;
 
-                if (function.Controller != functionInfo.Controller)
-                {
-                    isUpdate = true;
-                    function.Controller = functionInfo.Controller;
-                }
-
-                if (function.Action != functionInfo.Action)
-                {
-                    isUpdate = true;
-                    function.Action = functionInfo.Action;
-                }
-
+             
                 if (function.Name != functionInfo.Name)
                 {
                     isUpdate = true;
                     function.Name = functionInfo.Name;
                 }
-                if (function.Url?.ToUpper() != functionInfo.Url?.ToUpper())
+                if (function.LinkUrl?.ToLower() != functionInfo.LinkUrl?.ToLower())
                 {
                     isUpdate = true;
-                    function.Url = functionInfo.Url;
+                    function.LinkUrl = functionInfo.LinkUrl;
                 }
                 if (isUpdate)
                 {
                     repository.Update(function);
-                    _logger.LogInformation($"更新【{function.Name}】名字，控制器：【{function.Controller}】,方法：【{function.Action}】功能");
+                    _logger.LogInformation($"更新【{function.Name}】名字，链接Url：【{function.LinkUrl}】");
                 }
                 
             }
@@ -155,86 +143,67 @@ namespace Destiny.Core.Flow.Model.Security
             return new Function
             {
                 Name = model.Name,
-                Controller = model.Controller,
-                Action = model.Action,
+               
                 Description = model.Description,
                 IsEnabled = true,
-                Url=model.Url.ToUpper()
+                LinkUrl = model.LinkUrl.ToLower()
             };
         }
-        private FunctionInfo[] GetFunctions(Type[] types)
+
+
+        private FunctionInfo[] GetFunctions(ControllerActionDescriptor[] controllers)
         {
             List<FunctionInfo> functions = new List<FunctionInfo>();
-            foreach (var type in types.OrderBy(o => o.FullName))
+            foreach (var controllerDescriptor in controllers.OrderBy(o=>o.ControllerName))
             {
-                var controller = GetController(type);
+                var controller = GetController(controllerDescriptor);
                 if (controller is null)
                 {
                     continue;
                 }
-                if (!functions.Any(o => controller.Name.Equals(o.Name, StringComparison.OrdinalIgnoreCase) &&
-                     controller.Controller.Equals(o.Controller, StringComparison.OrdinalIgnoreCase)))
+
+                var action = this.GetAction(controller, controllerDescriptor.MethodInfo, controllerDescriptor);
+                if (action is null)
                 {
-                    functions.Add(controller);
+                    continue;
                 }
-
-                var actions = this.GetControllerActions(type);
-
-                foreach (var method in actions)
+                if (!functions.Any(o => action.Name.Equals(o.Name, StringComparison.OrdinalIgnoreCase) &&
+                action.LinkUrl.Equals(o.LinkUrl, StringComparison.OrdinalIgnoreCase)))
                 {
-                    var action = this.GetAction(controller, method);
-                    if (action is null)
-                    {
-                        continue;
-                    }
-                    if (!functions.Any(o => action.Name.Equals(o.Name, StringComparison.OrdinalIgnoreCase) &&
-                    action.Controller.Equals(o.Controller, StringComparison.OrdinalIgnoreCase)))
-                    {
-                        functions.Add(action);
-                    }
-
+                    functions.Add(action);
                 }
-
+                //if (!functions.Any(o => controller.Name.Equals(o.Name, StringComparison.OrdinalIgnoreCase) &&
+                //   controller.LinkUrl.Equals(o.LinkUrl, StringComparison.OrdinalIgnoreCase)))
+                //{
+                //    functions.Add(controller);
+                //}
             }
-            return functions.ToArray();
+             return functions.ToArray();
         }
 
-        /// <summary>
-        /// 得到控制下所有方法集合
-        /// </summary>
-        /// <returns></returns>
-        private IEnumerable<MethodInfo> GetControllerActions(Type type)
-        {
-            return type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-        }
 
-        private FunctionInfo GetController(Type type)
+   
+
+        private FunctionInfo GetController(ControllerActionDescriptor  controller)
         {
 
-            if (!type.IsController())
-            {
-
-                throw new AppException($"此类型{type.FullName}不是控制器!");
-            }
-
-            var controller = type.Name.Replace("ControllerBase", string.Empty).Replace("Controller", string.Empty);
+        
             return new FunctionInfo()
             {
-                Name = type.ToDescription(),
-                Controller = controller,
-                Url= controller
+                Name = controller.ControllerTypeInfo.ToDescription(),
+
+                LinkUrl = controller.ControllerName
 
             };
         }
+     
 
-        private FunctionInfo GetAction(FunctionInfo function, MethodInfo method)
+        private FunctionInfo GetAction(FunctionInfo function, MethodInfo method, ControllerActionDescriptor controller)
         {
             return new FunctionInfo
             {
                 Name = $"{function.Name}-{method.ToDescription()}",
-                Controller = function.Controller,
-                Action = method.Name,
-                Url=$"{function.Controller}/{method.Name}"
+                 LinkUrl= $"{controller.ControllerName}/{controller.ActionName}".ToLower()
             };
         }
 

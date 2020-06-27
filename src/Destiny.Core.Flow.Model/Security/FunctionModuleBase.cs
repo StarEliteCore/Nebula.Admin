@@ -13,12 +13,17 @@ namespace Destiny.Core.Flow.Model.Security
     /// 
     /// </summary>
     /// <typeparam name="BaseType"></typeparam>
-     public abstract class FunctionModuleBase<BaseType> : AppModuleBase
+    public abstract class FunctionModuleBase<BaseType> : AppModuleBase
     {
-
+        private bool IsAutoAddFunction { get; set; } = false;
         public override IServiceCollection ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IFunctionHandler, FunctionHandler>();
+            IsAutoAddFunction = services.GetAppSettings().IsAutoAddFunction;
+            if (IsAutoAddFunction)
+            {
+                services.AddSingleton<IFunctionHandler, FunctionHandler>();
+            }
+            
 
        
             return services;
@@ -26,7 +31,11 @@ namespace Destiny.Core.Flow.Model.Security
 
         public override void Configure(IApplicationBuilder applicationBuilder)
         {
-            //applicationBuilder.ApplicationServices.GetService<IFunctionHandler>(t => t.Initialize<BaseType>());
+            if (IsAutoAddFunction)
+            {
+                applicationBuilder.ApplicationServices.GetService<IFunctionHandler>(t => t.Initialize<BaseType>());
+            }
+        
         }
     }
 }

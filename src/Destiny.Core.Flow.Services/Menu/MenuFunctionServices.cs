@@ -63,7 +63,7 @@ namespace Destiny.Core.Flow.Services.Menu
             var functionList =await _functionRepository.Entities.Where(f=> functionIds.Contains(f.Id)).Select(o=>new MenuFunctionOutPageListDto() { 
             
               Description=o.Description,
-              LinkUrl=o.Url,
+              LinkUrl=o.LinkUrl,
               Name=o.Name
             }).ToListAsync();
             return new PageResult<MenuFunctionOutPageListDto>()

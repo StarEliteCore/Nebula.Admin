@@ -22,6 +22,9 @@ namespace Destiny.Core.Flow.Options
 
         public CorsOptions Cors { get; set; }
 
-
+        /// <summary>
+        /// 是否自动添加功能
+        /// </summary>
+        public bool IsAutoAddFunction { get; set; }
     }
 }

@@ -24,26 +24,7 @@ namespace Destiny.Core.Flow.Model.Entities.Function
         public string Name { get; set; }
 
 
-        /// <summary>
-        /// 区域
-        /// </summary>
-        [DisplayName("区域")]
-        public string Area { get; set; }
-
-
-        /// <summary>
-        /// 控制器
-        /// </summary>
-        [DisplayName("控制器")]
-        public string Controller { get; set; }
-
-
-        /// <summary>
-        /// 方法
-        /// </summary>
-        [DisplayName("方法")]
-        public string Action { get; set; }
-
+      
         /// <summary>
         /// 创建者
         /// </summary>
@@ -89,10 +70,10 @@ namespace Destiny.Core.Flow.Model.Entities.Function
         public string Description { get; set; }
 
         /// <summary>
-        /// 链接
+        /// 链接Url
         /// </summary>
-        [DisplayName("链接")]
-        public string Url { get; set; }
+        [DisplayName("链接Url")]
+        public string LinkUrl { get; set; }
 
 
     }
