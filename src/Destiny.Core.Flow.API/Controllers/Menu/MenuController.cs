@@ -107,9 +107,9 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         [HttpGet]
         [Description("异步得到菜单树数据")]
 
-        public async Task<TreeModel<MenuTreeOutDto>> GetMenuTreeAsync()
+        public async Task<AjaxResult> GetMenuTreeAsync(Guid? roleId)
         {
-            return (await _menuServices.GetMenuTreeAsync()).ToTreeModel();
+            return (await _menuServices.GetMenuTreeAsync(roleId)).ToAjaxResult();
         }
 
         /// <summary>
