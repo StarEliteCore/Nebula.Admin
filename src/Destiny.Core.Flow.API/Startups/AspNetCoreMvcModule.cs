@@ -1,14 +1,19 @@
 ﻿using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Modules;
 using Destiny.Core.Flow.Options;
+using Destiny.Core.Flow.Permission;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Principal;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.API.Startups
@@ -20,11 +25,44 @@ namespace Destiny.Core.Flow.API.Startups
         public override IServiceCollection ConfigureServices(IServiceCollection services)
         {
 
-            services.AddAuthorization();
+            
             var configuration = services.GetConfiguration();
-
             services.Configure<AppOptionSettings>(configuration.GetSection("Destiny"));
             var settings = services.GetAppSettings();
+            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.Jwt.SecretKey));
+            var tokenParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey=true,
+                ValidIssuer = settings.Jwt.Issuer,
+                ValidAudience = settings.Jwt.Audience,
+                IssuerSigningKey= signingKey,
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero,
+                RequireExpirationTime = true,
+            };
+            var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
+            var Permission = new PermissionDto(
+                    "/api/denied",
+                    ClaimTypes.Role,
+                    "",
+                    settings.Jwt.Issuer,
+                    settings.Jwt.Audience,
+                    TimeSpan.FromSeconds(settings.Jwt.ExpireMins),
+                    signingCredentials
+                    );
+            services.AddAuthorization(opt => {
+                opt.AddPolicy(PermissionAuthorize.Name, policy => policy.Requirements.Add(Permission));
+            });
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(jwt=>{
+                jwt.TokenValidationParameters = tokenParameters;
+            });
+            services.AddSingleton(Permission);
             if (!settings.Cors.PolicyName.IsNullOrEmpty() && !settings.Cors.Url.IsNullOrEmpty()) //添加跨域
             {
                 _corePolicyName = settings.Cors.PolicyName;
