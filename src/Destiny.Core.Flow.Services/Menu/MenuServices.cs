@@ -106,6 +106,7 @@ namespace Destiny.Core.Flow.Services.Menu
                 });
             SelectedItem<MenuTreeOutDto, Guid> selectedItem = new SelectedItem<MenuTreeOutDto, Guid>();
             selectedItem.ItemList = list.ItemList.ToList();
+            selectedItem.Selected = new List<Guid>();
             if (roleId.HasValue)
             {
                 selectedItem.Selected= await _roleMenuRepository.Entities.Where(o => o.RoleId == roleId.Value).Select(o => o.MenuId).ToListAsync();

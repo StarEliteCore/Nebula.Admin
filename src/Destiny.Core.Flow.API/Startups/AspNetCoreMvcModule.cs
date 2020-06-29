@@ -52,16 +52,18 @@ namespace Destiny.Core.Flow.API.Startups
                     TimeSpan.FromSeconds(settings.Jwt.ExpireMins),
                     signingCredentials
                     );
-            services.AddAuthorization(opt => {
-                opt.AddPolicy(PermissionAuthorize.Name, policy => policy.Requirements.Add(Permission));
-            });
-            services.AddAuthentication(opt =>
-            {
-                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(jwt=>{
-                jwt.TokenValidationParameters = tokenParameters;
-            });
+            services.AddAuthorization(
+            //    opt => {
+            //    opt.AddPolicy(PermissionAuthorize.Name, policy => policy.Requirements.Add(Permission));
+            //}
+            );
+            //services.AddAuthentication(opt =>
+            //{
+            //    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //}).AddJwtBearer(jwt=>{
+            //    jwt.TokenValidationParameters = tokenParameters;
+            //});
             services.AddSingleton(Permission);
             if (!settings.Cors.PolicyName.IsNullOrEmpty() && !settings.Cors.Url.IsNullOrEmpty()) //添加跨域
             {
