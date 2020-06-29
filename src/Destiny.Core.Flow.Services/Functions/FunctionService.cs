@@ -79,7 +79,7 @@ namespace Destiny.Core.Flow.Services.Functions
         public async Task<OperationResponse<IEnumerable<SelectListItem>>> GetFunctionSelectListItemAsync()
         {
 
-            var functions = await _functionRepository.Entities.Where(x => x.IsDeleted == false).Select(x => new SelectListItem {
+            var functions = await _functionRepository.Entities.OrderBy(o=>o.Name).Select(x => new SelectListItem {
                 Value = x.Id.ToString().ToLower(),
                 Text = x.Name,
                 Selected = false

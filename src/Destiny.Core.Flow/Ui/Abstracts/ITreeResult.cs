@@ -10,5 +10,18 @@ namespace Destiny.Core.Flow.Ui.Abstracts
     /// <typeparam name="TData"></typeparam>
     public interface ITreeResult<TData>:IResultBase,IListResult<TData>
     {
+
+
+       
     }
+
+
+    public interface ITreeResult<TData, TSelectedType> : IResultBase, IListResult<TData>
+    {
+        IReadOnlyList<TSelectedType> SelectedList { get; set; }
+
+    }
+
+
+
 }

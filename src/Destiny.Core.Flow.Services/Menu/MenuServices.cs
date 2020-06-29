@@ -12,6 +12,7 @@ using Destiny.Core.Flow.Model.Entities.Rolemenu;
 using Destiny.Core.Flow.Repository.MenuRepository;
 using Destiny.Core.Flow.Ui;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -83,8 +84,9 @@ namespace Destiny.Core.Flow.Services.Menu
         /// </summary>
         /// <param name="roleid">角色Id</param>
         /// <returns></returns>
-        public async Task<TreeResult<MenuTreeOutDto>> GetMenuTreeAsync()
+        public async Task<OperationResponse<SelectedItem<MenuTreeOutDto, Guid>>> GetMenuTreeAsync(Guid? roleId)
         {
+           
             var rolelist = new List<RoleMenuEntity>();
             var list = await _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuTreeOutDto>(
                 (r, c) =>
@@ -102,7 +104,17 @@ namespace Destiny.Core.Flow.Services.Menu
 
                     p.children.AddRange(q);
                 });
-            return list;
+            SelectedItem<MenuTreeOutDto, Guid> selectedItem = new SelectedItem<MenuTreeOutDto, Guid>();
+            selectedItem.ItemList = list.ItemList.ToList();
+            if (roleId.HasValue)
+            {
+                selectedItem.Selected= await _roleMenuRepository.Entities.Where(o => o.RoleId == roleId.Value).Select(o => o.MenuId).ToListAsync();
+            }
+            OperationResponse<SelectedItem<MenuTreeOutDto, Guid>> operationResponse = new OperationResponse<SelectedItem<MenuTreeOutDto, Guid>>();
+            operationResponse.Type = OperationResponseType.Success;
+            operationResponse.Data= selectedItem;
+
+            return operationResponse;
         }
 
         //public async Task<OperationResponse> GetTreeSelectTreeDataAsync()

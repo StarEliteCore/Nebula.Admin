@@ -37,7 +37,7 @@ namespace Destiny.Core.Flow.IServices.IMenu
         /// 查询菜单
         /// </summary>
         /// <returns></returns>
-        Task<TreeResult<MenuTreeOutDto>> GetMenuTreeAsync();
+        Task<OperationResponse<SelectedItem<MenuTreeOutDto, Guid>>> GetMenuTreeAsync(Guid? roleId);
         /// <summary>
         /// 返回表格
         /// </summary>
