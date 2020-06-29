@@ -37,10 +37,12 @@ namespace Destiny.Core.Flow.Security.Jwt
                 new Claim(ClaimTypes.Name, userName),
             };
             var(token, accessExpires) =this.BuildJwtToken(claims, _jwtOptions);
+            
             return new JwtResult()
             {
                 AccessToken = token,
                 AccessExpires = accessExpires.UnixTicks().AsTo<long>(),
+                claims=claims,
             };
         }
 

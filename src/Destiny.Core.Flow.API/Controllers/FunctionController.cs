@@ -8,6 +8,7 @@ using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Dtos.Functions;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices.Functions;
+using Destiny.Core.Flow.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ namespace Destiny.Core.Flow.API.Controllers
     /// 功能管理
     /// </summary>
     [Description("功能管理")]
-    [Authorize]
+    [Authorize(PermissionAuthorize.Name)]
     public class FunctionController : ApiControllerBase
     {
 

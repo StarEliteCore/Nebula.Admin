@@ -3,6 +3,7 @@ using Destiny.Core.Flow.Dtos.Identitys;
 using Destiny.Core.Flow.Ui;
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +16,6 @@ namespace Destiny.Core.Flow.IServices.Identity
     public interface IIdentityServices
     {
         //[ServiceInterceptor(typeof(TransactionalAttribute))]
-        Task<OperationResponse> Login(LoginDto loginDto);
+        Task<(OperationResponse item, Claim[] cliams)> Login(LoginDto loginDto);
     }
 }

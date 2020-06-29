@@ -7,6 +7,7 @@ using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Dtos.Organization;
 using Destiny.Core.Flow.IServices.Organization;
+using Destiny.Core.Flow.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Destiny.Core.Flow.API.Controllers.Organization
 {
     [Description("角色管理")]
-    [Authorize]
+    [Authorize(PermissionAuthorize.Name)]
     public class OrganizationController : ApiControllerBase
     {
         private readonly IOrganizationService _organization;

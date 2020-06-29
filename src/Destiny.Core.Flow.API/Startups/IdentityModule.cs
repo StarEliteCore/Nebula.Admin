@@ -2,6 +2,7 @@
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Model.Security;
 using Destiny.Core.Flow.Options;
+using Destiny.Core.Flow.Permission;
 using Destiny.Core.Flow.Security.Jwt;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -12,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -68,7 +70,7 @@ namespace Destiny.Core.Flow.API.Startups
 
             var keyByteArray = Encoding.UTF8.GetBytes(jwt.SecretKey);
             var signingKey = new SymmetricSecurityKey(keyByteArray);
-
+            var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
             var tokenValidationParameters = new TokenValidationParameters
             {
 
@@ -79,7 +81,21 @@ namespace Destiny.Core.Flow.API.Startups
                 ClockSkew = TimeSpan.Zero, ////允许的服务器时间偏移量
                 LifetimeValidator = (nbf, exp, token, param) => exp > DateTime.UtcNow
             };
-
+            var Permission = new PermissionDto(
+                    "/api/denied",
+                    ClaimTypes.Role,
+                    "",
+                    settings.Jwt.Issuer,
+                    settings.Jwt.Audience,
+                    TimeSpan.FromSeconds(settings.Jwt.ExpireMins),
+                    signingCredentials
+                    );
+            services.AddAuthorization(
+                opt =>
+                {
+                    opt.AddPolicy(PermissionAuthorize.Name, policy => policy.Requirements.Add(Permission));
+                }
+            );
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -107,9 +123,9 @@ namespace Destiny.Core.Flow.API.Startups
                 };
 
             });
+            services.AddSingleton(Permission);
             services.AddScoped<IJwtBearerService, JwtBearerService>();
         }
-
         protected override IdentityBuilder UseIdentityBuilder(IdentityBuilder identityBuilder)
         {
             return identityBuilder.AddDefaultTokenProviders();

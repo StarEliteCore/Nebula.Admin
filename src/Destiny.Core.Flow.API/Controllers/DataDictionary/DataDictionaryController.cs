@@ -8,13 +8,14 @@ using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Dtos.DataDictionnary;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices.IDataDictionnary;
+using Destiny.Core.Flow.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 namespace Destiny.Core.Flow.API.Controllers.DataDictionary
 {
     [Description("角色管理")]
-    [Authorize]
+    [Authorize(PermissionAuthorize.Name)]
     public class DataDictionaryController : ApiControllerBase
     {
         private readonly IDataDictionnaryServices _dataDictionnaryServices  = null;

@@ -24,53 +24,14 @@ namespace Destiny.Core.Flow.API.Startups
 
         public override IServiceCollection ConfigureServices(IServiceCollection services)
         {
-
-            
             var configuration = services.GetConfiguration();
             services.Configure<AppOptionSettings>(configuration.GetSection("Destiny"));
-            var settings = services.GetAppSettings();
-            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.Jwt.SecretKey));
-            var tokenParameters = new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey=true,
-                ValidIssuer = settings.Jwt.Issuer,
-                ValidAudience = settings.Jwt.Audience,
-                IssuerSigningKey= signingKey,
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ClockSkew = TimeSpan.Zero,
-                RequireExpirationTime = true,
-            };
-            var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
-            var Permission = new PermissionDto(
-                    "/api/denied",
-                    ClaimTypes.Role,
-                    "",
-                    settings.Jwt.Issuer,
-                    settings.Jwt.Audience,
-                    TimeSpan.FromSeconds(settings.Jwt.ExpireMins),
-                    signingCredentials
-                    );
-            services.AddAuthorization(
-            //    opt => {
-            //    opt.AddPolicy(PermissionAuthorize.Name, policy => policy.Requirements.Add(Permission));
-            //}
-            );
-            //services.AddAuthentication(opt =>
-            //{
-            //    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //}).AddJwtBearer(jwt=>{
-            //    jwt.TokenValidationParameters = tokenParameters;
-            //});
-            services.AddSingleton(Permission);
+            var settings = services.GetAppSettings();            
             if (!settings.Cors.PolicyName.IsNullOrEmpty() && !settings.Cors.Url.IsNullOrEmpty()) //添加跨域
             {
                 _corePolicyName = settings.Cors.PolicyName;
                 services.AddCors(c =>
                 {
-
                     c.AddPolicy(settings.Cors.PolicyName, policy =>
                     {
                         policy.WithOrigins(settings.Cors.Url
@@ -80,7 +41,6 @@ namespace Destiny.Core.Flow.API.Startups
                     });
                 });
             }
-
             services.AddHttpContextAccessor();
             services.AddControllers(o => o.SuppressAsyncSuffixInActionNames = false)
                 .AddNewtonsoftJson(options =>
@@ -94,14 +54,10 @@ namespace Destiny.Core.Flow.API.Startups
                 IHttpContextAccessor accessor = provider.GetService<IHttpContextAccessor>();
                 return accessor?.HttpContext?.User;
             });
-
             return services;
         }
-
         public override void Configure(IApplicationBuilder app)
         {
-       
-
             app.UseRouting();
             if (!_corePolicyName.IsNullOrEmpty()) 
             {

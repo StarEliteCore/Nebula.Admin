@@ -10,6 +10,7 @@ using Destiny.Core.Flow.Dtos.Menu;
 using Destiny.Core.Flow.Dtos.MenuFunction;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices.IMenu;
+using Destiny.Core.Flow.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace Destiny.Core.Flow.API.Controllers.Menu
 {
     [Description("菜单管理")]
-    //[Authorize]
+    [Authorize(PermissionAuthorize.Name)]
     public class MenuController : ApiControllerBase
     {
         private readonly IMenuServices _menuServices;
