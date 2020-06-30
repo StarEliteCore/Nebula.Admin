@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.Entity;
+using Destiny.Core.Flow.Model.Entities.Menu;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -55,6 +56,11 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// </summary>
         [DisplayName("组件地址")]
         public string Component { get; set; }
+        /// <summary>
+        /// 类型
+        /// </summary>
+        [DisplayName("类型")]
+        public MenuEnum Type { get; set; }
         /// <summary>
         /// 子级
         /// </summary>

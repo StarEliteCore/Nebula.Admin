@@ -54,6 +54,8 @@ namespace Destiny.Core.Flow.Model.Entities.Menu
         /// </summary>
         [DisplayName("深度")]
         public int Depth { get; set; }
+        [DisplayName("类型")]
+        public MenuEnum Type { get; set; }
         #region 公共字段
         /// <summary>
         ///  获取或设置 最后修改用户
