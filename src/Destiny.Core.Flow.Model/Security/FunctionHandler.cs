@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using System.ComponentModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Destiny.Core.Flow.Model.Security
 {
@@ -45,7 +46,7 @@ namespace Destiny.Core.Flow.Model.Security
         /// <typeparam name="BaseType"></typeparam>
         public void Initialize<BaseType>()
         {
-            var controllerActionDescriptorList = _actionProvider.ActionDescriptors.Items.Cast<ControllerActionDescriptor>().Where(o => o.ControllerTypeInfo.IsBaseOn<BaseType>());
+            var controllerActionDescriptorList = _actionProvider.ActionDescriptors.Items.Cast<ControllerActionDescriptor>().Where(o => o.ControllerTypeInfo.IsBaseOn<BaseType>()&&!o.ControllerTypeInfo.HasAttribute<AllowAnonymousAttribute>());
 
             var functionInfos= GetFunctions(controllerActionDescriptorList.ToArray());
             this.SavaData(functionInfos);
@@ -162,6 +163,11 @@ namespace Destiny.Core.Flow.Model.Security
                     continue;
                 }
 
+                if (controllerDescriptor.MethodInfo.HasAttribute<AllowAnonymousAttribute>())
+                {
+                    continue;
+                }
+
                 var action = this.GetAction(controller, controllerDescriptor.MethodInfo, controllerDescriptor);
                 if (action is null)
                 {
@@ -203,7 +209,7 @@ namespace Destiny.Core.Flow.Model.Security
             return new FunctionInfo
             {
                 Name = $"{function.Name}-{method.ToDescription()}",
-                 LinkUrl= $"{controller.ControllerName}/{controller.ActionName}".ToLower()
+               LinkUrl= $"{controller.ControllerName}/{controller.ActionName}".ToLower()
             };
         }
 
