@@ -88,3 +88,5 @@
 /src/Destiny.Core.Aop/bin
 /src/Destiny.Core.Flow.FluentValidation/bin
 /src/Destiny.Core.Flow.FluentValidation/obj
+/src/Destiny.Core.Flow.CodeGenerator/bin
+/src/Destiny.Core.Flow.CodeGenerator/obj

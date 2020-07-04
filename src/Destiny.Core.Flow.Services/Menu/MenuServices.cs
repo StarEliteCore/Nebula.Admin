@@ -7,6 +7,7 @@ using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices.IMenu;
+using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Model.Entities.Menu;
 using Destiny.Core.Flow.Model.Entities.Rolemenu;
 using Destiny.Core.Flow.Repository.MenuRepository;
@@ -19,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.Menu
@@ -30,12 +32,14 @@ namespace Destiny.Core.Flow.Services.Menu
         private readonly IEFCoreRepository<RoleMenuEntity, Guid> _roleMenuRepository;
         private readonly IMenuFunctionRepository _menuFunction=null;
         private readonly IUnitOfWork _unitOfWork = null;
-        public MenuServices(IMenuRepository menuRepository, IUnitOfWork unitOfWork, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository, IMenuFunctionRepository menuFunction)
+        private readonly IIdentity _iIdentity = null;
+        public MenuServices(IMenuRepository menuRepository, IUnitOfWork unitOfWork, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository, IMenuFunctionRepository menuFunction, IPrincipal principal)
         {
             _menuRepository = menuRepository;
             _roleMenuRepository = roleMenuRepository;
             this._menuFunction = menuFunction;
             _unitOfWork = unitOfWork;
+            _iIdentity = principal.Identity;
         }
 
         public async Task<OperationResponse> CreateAsync(MenuInputDto input)
@@ -144,39 +148,7 @@ namespace Destiny.Core.Flow.Services.Menu
             menudto.FunctionIds = (await _menuFunction.Entities.Where(x => x.MenuId == Id && x.IsDeleted == false).ToListAsync()).Select(x => x.FunctionId).ToArray();
             return new OperationResponse<MenuOutputLoadDto>(MessageDefinitionType.LoadSucces, menudto,OperationResponseType.Success);
         }
-        //public Task<TreeResult<MenuEntityItem>> GetMenuTreeAsync()
-        //{
-        //    return _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuEntityItem>((r, c) =>
-        //    {
-        //        c.Key = c.Id.ToString();
-        //        c.Title = c.Name;
-        //        return c.ParentId == null || c.ParentId == Guid.Empty;
-        //    }, (p, q) =>
-        //    {
-        //        p.Key = p.Id.ToString();
-        //        p.Title = p.Name;
-        //        return p.Id == q.ParentId;
-        //    }, (p, q) =>
-        //    {
-        //        p.Children.AddRange(q);
-        //    });
-        //}
-
-        ///// <summary>
-        ///// 处理角色权限数据
-        ///// </summary>
-        ///// <param name="rolelist"></param>
-        ///// <param name="list"></param>
-        //private void IscheckTree(List<RoleMenuEntity> rolelist, IEnumerable<MenuTreeOutDto> list)
-        //{
-        //    foreach (var item in list)
-        //    {
-        //        var model = rolelist.Where(s => s.MenuId == item.Id).FirstOrDefault();
-        //        if (model != null)
-        //            item.@checked = true;
-        //        IscheckTree( rolelist, item.children);
-        //    }
-        //}
+      
         public async Task<TreeResult<MenuTableOutDto>> GetMenuTableAsync()
         {
             return await _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuTableOutDto>(
@@ -196,6 +168,9 @@ namespace Destiny.Core.Flow.Services.Menu
                 }
                 );
         }
+
+
+   
     }
 
 
