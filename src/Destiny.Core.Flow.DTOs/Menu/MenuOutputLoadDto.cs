@@ -67,5 +67,7 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// </summary>
         [DisplayName("父级菜单ID")]
         public Guid ParentId { get; set; }
+        [DisplayName("类型")]
+        public MenuEnum Type { get; set; }
     }
 }

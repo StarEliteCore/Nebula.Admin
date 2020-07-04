@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.Entity;
+using Destiny.Core.Flow.Model.Entities.Menu;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,6 +41,8 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// 是否选中
         /// </summary>
         public bool @checked { get; set; } = false;
+        [DisplayName("类型")]
+        public MenuEnum Type { get; set; }
         /// <summary>
         /// 子级
         /// </summary>
