@@ -28,12 +28,12 @@ namespace Destiny.Core.Flow.Security.Jwt
         /// <param name="userId"></param>
         /// <param name="userName"></param>
         /// <returns></returns>
-        public JwtResult CreateToken(string userId, string userName)
+        public JwtResult CreateToken(Guid userId, string userName)
         {
          
             Claim[] claims =
             {
-                new Claim(ClaimTypes.NameIdentifier, userId),
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
                 new Claim(ClaimTypes.Name, userName),
             };
             var(token, accessExpires) =this.BuildJwtToken(claims, _jwtOptions);

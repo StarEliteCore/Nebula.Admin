@@ -10,6 +10,6 @@ namespace Destiny.Core.Flow.Security.Jwt
     /// </summary>
     public interface IJwtBearerService
     {
-        JwtResult CreateToken(string userId, string userName);
+        JwtResult CreateToken(Guid userId, string userName);
     }
 }

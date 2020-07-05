@@ -1,7 +1,7 @@
 ﻿using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Modules;
 using Destiny.Core.Flow.Options;
-using Destiny.Core.Flow.Permission;
+using Destiny.Core.Flow.API.Permission;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -15,6 +15,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using Destiny.Core.Flow.AspNetCore.Mvc.Filters;
 
 namespace Destiny.Core.Flow.API.Startups
 {
@@ -42,7 +43,12 @@ namespace Destiny.Core.Flow.API.Startups
                 });
             }
             services.AddHttpContextAccessor();
-            services.AddControllers(o => o.SuppressAsyncSuffixInActionNames = false)
+            services.AddControllers(o => {
+
+                o.SuppressAsyncSuffixInActionNames = false;
+                //o.Filters.Add<AA>();
+                o.Filters.Add<PermissionAuthorizationFilter>();
+            })
                 .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
