@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Destiny.Core.Flow.Permission
+namespace Destiny.Core.Flow.API.Permission
 {
     /// <summary>
     /// 必要参数类，

@@ -16,7 +16,7 @@ using Microsoft.Extensions.Logging;
 using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Validation;
 using Microsoft.Extensions.DependencyInjection;
-using Destiny.Core.Flow.Permission;
+using Destiny.Core.Flow.API.Permission;
 
 namespace Destiny.Core.Flow.API.Controllers
 {
@@ -25,7 +25,7 @@ namespace Destiny.Core.Flow.API.Controllers
     /// 用户管理
     /// </summary>
     [Description("用户管理")]
-    [Authorize(PermissionAuthorize.Name)]
+    [Authorize]
  
     public class UserController : ApiControllerBase
     {
@@ -33,7 +33,6 @@ namespace Destiny.Core.Flow.API.Controllers
         private readonly IUserServices _userService = null;
         private readonly ILogger _logger = null;
         private readonly IServiceProvider _serviceProvider = null;
-
         public UserController(IUserServices userService, IServiceProvider serviceProvider)
         {
             _userService = userService;

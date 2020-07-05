@@ -2,7 +2,7 @@
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Model.Security;
 using Destiny.Core.Flow.Options;
-using Destiny.Core.Flow.Permission;
+using Destiny.Core.Flow.API.Permission;
 using Destiny.Core.Flow.Security.Jwt;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
