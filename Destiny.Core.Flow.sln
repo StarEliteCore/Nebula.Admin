@@ -49,7 +49,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{5D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{968F74F4-4D0A-4832-A7EA-5CB2BA08AF8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.CodeGenerator", "src\Destiny.Core.Flow.CodeGenerator\Destiny.Core.Flow.CodeGenerator.csproj", "{6DC5B2C0-756B-4BCC-8614-9C21D5671F8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.CodeGenerator", "src\Destiny.Core.Flow.CodeGenerator\Destiny.Core.Flow.CodeGenerator.csproj", "{6DC5B2C0-756B-4BCC-8614-9C21D5671F8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

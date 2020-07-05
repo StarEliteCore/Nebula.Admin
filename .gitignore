@@ -90,3 +90,7 @@
 /src/Destiny.Core.Flow.FluentValidation/obj
 /src/Destiny.Core.Flow.CodeGenerator/bin
 /src/Destiny.Core.Flow.CodeGenerator/obj
+/src/Destiny.Core.Flow.MediatR/obj
+/src/Destiny.Core.Flow.MediatR/bin
+/src/Destiny.Core.Flow.Events/obj
+/src/Destiny.Core.Flow.Events/bin
