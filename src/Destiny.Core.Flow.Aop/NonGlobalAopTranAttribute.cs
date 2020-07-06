@@ -1,26 +1,20 @@
-﻿using AspectCore.DependencyInjection;
-using AspectCore.DynamicProxy;
+﻿using AspectCore.DynamicProxy;
 using Destiny.Core.Flow.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Destiny.Core.Aop.AttributeAOP
+namespace Destiny.Core.Flow.Aop
 {
-    /// <summary>
-    /// 特性AOP；在需要使用的方法上配置次特性就好
-    /// </summary>
-    public class NonGlobalAopTranAttribute : AbstractInterceptorAttribute
+    public class NonGlobalAopTranAttribute: AbstractInterceptorAttribute
     {
         //[FromServiceContext]
         //private IUnitOfWork _unitOfWork { get; set; }
         public async override Task Invoke(AspectContext context, AspectDelegate next)
         {
-            var  _unitOfWork = context.ServiceProvider.GetService(typeof(IUnitOfWork)) as IUnitOfWork;
+            var _unitOfWork = context.ServiceProvider.GetService(typeof(IUnitOfWork)) as IUnitOfWork;
             try
             {
-               
+
 
 
                 _unitOfWork.BeginTransaction();
@@ -34,7 +28,7 @@ namespace Destiny.Core.Aop.AttributeAOP
                 _unitOfWork.Rollback();
                 throw ex;
             }
-            
+
         }
     }
 }

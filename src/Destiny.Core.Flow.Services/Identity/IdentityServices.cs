@@ -3,6 +3,7 @@ using Destiny.Core.Flow.Dtos.Identitys;
 using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.IServices.Identity;
+using Destiny.Core.Flow.IServices.UserRoles;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Security.Jwt;
 using Destiny.Core.Flow.Ui;
@@ -22,7 +23,7 @@ namespace Destiny.Core.Flow.Services.Identity
         private readonly SignInManager<User> _signInManager = null;
         private readonly UserManager<User> _userManager = null;
         private readonly IJwtBearerService _jwtBearerService = null;
-
+        private readonly IUserRoleService _userRole;
         public IdentityServices(SignInManager<User> signInManager, UserManager<User> userManager, IJwtBearerService jwtBearerService)
         {
             _signInManager = signInManager;
@@ -30,7 +31,7 @@ namespace Destiny.Core.Flow.Services.Identity
             _jwtBearerService = jwtBearerService;
         }
 
-        public async Task<(OperationResponse item,Claim[] cliams)> Login(LoginDto loginDto)
+        public async Task<(OperationResponse item, Claim[] cliams)> Login(LoginDto loginDto)
         {
             loginDto.NotNull(nameof(loginDto));
             var user = await _userManager.FindByNameAsync(loginDto.UserName);
@@ -51,7 +52,8 @@ namespace Destiny.Core.Flow.Services.Identity
                 }
                 return (new OperationResponse("登录失败，用户名或账号无效。", OperationResponseType.Error), new Claim[] { });
             }
-           var jwtToken=  _jwtBearerService.CreateToken(user.Id.ToString(),user.UserName);
+            //var Role= await _userManager.GetRolesAsync(user);
+            var jwtToken = _jwtBearerService.CreateToken(user.Id, user.UserName);
             return (new OperationResponse("登录成功", new
             {
                 AccessToken = jwtToken.AccessToken,

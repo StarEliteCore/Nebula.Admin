@@ -104,14 +104,13 @@ namespace Destiny.Core.Flow.Extensions
         /// <returns></returns>
         public static string[] GetRoles<T>(this IIdentity identity, string type = ClaimTypes.Role)
         {
-
             identity.NotNull(nameof(identity));
             if (!(identity is ClaimsIdentity claimsIdentity))
             {
                 return new string[0];
             }
             string value = claimsIdentity.FindFirst(type)?.Value;
-            return value.Split();
+            return value != null? value.Split():new string [0];
         }
     }
 }
