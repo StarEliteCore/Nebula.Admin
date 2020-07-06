@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Destiny.Core.Flow.API.Controllers.DataDictionary
 {
     [Description("角色管理")]
-    [Authorize(PermissionAuthorize.Name)]
+    //[Authorize(PermissionAuthorize.Name)]
     public class DataDictionaryController : ApiControllerBase
     {
         private readonly IDataDictionnaryServices _dataDictionnaryServices  = null;
@@ -65,6 +65,25 @@ namespace Destiny.Core.Flow.API.Controllers.DataDictionary
         public async Task<AjaxResult> DeleteAsyc(Guid? id)
         {
             return (await _dataDictionnaryServices.DeleteAsync(id.Value)).ToAjaxResult();
+        }
+
+        /// <summary>
+        /// 获取数据字典
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [Description("异步查询数据字典")]
+        [HttpGet]
+        public async Task<TreeModel<DataDictionaryOutDto>> GetTableAsync()
+        {
+            var result = await _dataDictionnaryServices.GetDictionnnaryAsync();
+
+            return new TreeModel<DataDictionaryOutDto>
+            {
+                ItemList = result.ItemList,
+                Message = result.Message,
+                Success = result.Success
+            };
         }
     }
 }

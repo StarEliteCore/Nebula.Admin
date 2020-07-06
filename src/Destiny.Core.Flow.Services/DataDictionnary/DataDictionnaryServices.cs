@@ -51,5 +51,27 @@ namespace Destiny.Core.Flow.Services.DataDictionnary
             request.NotNull(nameof(request));
             return await _dataDictionnaryRepository.TrackEntities.ToPageAsync<DataDictionaryEntity, DataDictionaryOutPageListDto>(request);
         }
+
+        public async Task<TreeResult<DataDictionaryOutDto>> GetDictionnnaryAsync()
+        {
+            return await _dataDictionnaryRepository.Entities.ToTreeResultAsync<DataDictionaryEntity, DataDictionaryOutDto>(
+                (p, c) =>
+                {
+                    return c.ParentId == null || c.ParentId == Guid.Empty;
+                },
+                (p, c) =>
+                {
+                    return p.Id == c.ParentId;
+                },
+                (p, children) =>
+                {
+                    if (p.children == null)
+                    {
+                        p.children = new List<DataDictionaryOutDto>();
+                    }
+                    p.children.AddRange(children);
+                }
+                );
+        }
     }
 }
