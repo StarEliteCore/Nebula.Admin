@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Destiny.Core.Aop\Destiny.Core.Aop.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.AspNetCore\Destiny.Core.Flow.AspNetCore.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Dtos\Destiny.Core.Flow.Dtos.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.IServices\Destiny.Core.Flow.IServices.csproj" />

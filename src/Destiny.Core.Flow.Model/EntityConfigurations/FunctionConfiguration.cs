@@ -17,7 +17,7 @@ namespace Destiny.Core.Flow.Model.EntityConfigurations
       
             b.Property(o => o.LinkUrl).HasMaxLength(500);
             b.Property(o => o.IsDeleted).HasDefaultValue(false).IsRequired();
-            b.Property(o=>o.IsEnabled).HasDefaultValue(true).IsRequired(); ;
+            b.Property(o => o.IsEnabled).HasDefaultValue(true);
             b.Property(o => o.Description).HasMaxLength(1000);
             b.ToTable("Function");
         }

@@ -46,7 +46,6 @@ namespace Destiny.Core.Flow.API.Startups
             services.AddControllers(o => {
 
                 o.SuppressAsyncSuffixInActionNames = false;
-                //o.Filters.Add<AA>();
                 o.Filters.Add<PermissionAuthorizationFilter>();
             })
                 .AddNewtonsoftJson(options =>
@@ -60,6 +59,8 @@ namespace Destiny.Core.Flow.API.Startups
                 IHttpContextAccessor accessor = provider.GetService<IHttpContextAccessor>();
                 return accessor?.HttpContext?.User;
             });
+
+
             return services;
         }
         public override void Configure(IApplicationBuilder app)

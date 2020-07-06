@@ -1,0 +1,30 @@
+﻿using Destiny.Core.Flow.Events;
+using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.Helpers;
+using Destiny.Core.Flow.Services.Identity.Events;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Destiny.Core.Flow.Services.Identity.EventHandlers
+{
+    public class IdentityEventHandler : NotificationHandlerBase<IdentityEvent>
+    {
+        private IServiceProvider _serviceProvider = null;
+        private readonly ILogger _logger = null;
+        public IdentityEventHandler(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+            _logger = serviceProvider.GetLogger<IdentityEventHandler>();
+        }
+
+        public override Task Handle(IdentityEvent @event, CancellationToken cancellationToken)
+        {
+            _logger.LogInformation($"事件信息:{@event.ToJson()}");
+            return Task.CompletedTask;
+        }
+    }
+}
