@@ -31,6 +31,13 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.DataDictionary.DataDictionaryController.GetTableAsync">
+            <summary>
+            获取数据字典
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.FunctionController">
             <summary>
             功能管理
