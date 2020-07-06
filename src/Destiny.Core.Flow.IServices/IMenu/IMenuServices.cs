@@ -2,6 +2,7 @@
 using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Dtos.Menu;
 using Destiny.Core.Flow.Filter;
+using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.Ui;
 using System;
 using System.Collections.Generic;
@@ -55,5 +56,10 @@ namespace Destiny.Core.Flow.IServices.IMenu
         /// <param name="Id"></param>
         /// <returns></returns>
         Task<OperationResponse<MenuOutputLoadDto>> LoadFormMenuAsync(Guid Id);
+        /// <summary>
+        /// 根据登录的用户获取角色并获取菜单
+        /// </summary>
+        /// <returns></returns>
+        Task<IPagedResult<MenuPermissionsOutDto>> GetMenuAsync();
     }
 }

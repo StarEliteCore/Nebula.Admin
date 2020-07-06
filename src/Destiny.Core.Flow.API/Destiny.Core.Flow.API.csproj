@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -8,7 +8,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <NoWarn>1701;1702;1591;1572</NoWarn>
-    <DocumentationFile>bin\Debug\netcoreapp3.1\Destiny.Core.Flow.API.xml</DocumentationFile>
+    <DocumentationFile>.\Destiny.Core.Flow.API.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,7 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Destiny.Core.Aop\Destiny.Core.Aop.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.AspNetCore\Destiny.Core.Flow.AspNetCore.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.AutoMapper\Destiny.Core.Flow.AutoMapper.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Dtos\Destiny.Core.Flow.Dtos.csproj" />
@@ -49,6 +48,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Destiny.Core.Flow.API.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="DestinyCoreDb.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

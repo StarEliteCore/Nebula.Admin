@@ -1,0 +1,315 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Destiny.Core.Flow.API</name>
+    </assembly>
+    <members>
+        <member name="M:Destiny.Core.Flow.API.Controllers.DataDictionary.DataDictionaryController.GetPageListAsync(Destiny.Core.Flow.Filter.PageRequest)">
+            <summary>
+            分页获取数据字典
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.DataDictionary.DataDictionaryController.UpdateAsync(Destiny.Core.Flow.Dtos.DataDictionnary.DataDictionnaryInputDto)">
+            <summary>
+            修改数据字典
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.DataDictionary.DataDictionaryController.CreateAsync(Destiny.Core.Flow.Dtos.DataDictionnary.DataDictionnaryInputDto)">
+            <summary>
+            添加数据一个数据字典
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.DataDictionary.DataDictionaryController.DeleteAsyc(System.Nullable{System.Guid})">
+            <summary>
+            根据Id删除数据字典
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Destiny.Core.Flow.API.Controllers.FunctionController">
+            <summary>
+            功能管理
+            </summary>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.FunctionController.CreateAsync(Destiny.Core.Flow.Dtos.Functions.FunctionInputDto)">
+            <summary>
+            异步创建功能
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.FunctionController.UpdateAsync(Destiny.Core.Flow.Dtos.Functions.FunctionInputDto)">
+            <summary>
+            异步更新功能
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.FunctionController.DeleteAsync(System.Guid)">
+            <summary>
+            异步删除功能
+            </summary>
+            <param name="id">主键</param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.FunctionController.GetFunctionPageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+            <summary>
+            异步得到功能分页
+            </summary>
+            <param name="request">请求分页参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.FunctionController.GetFunctionSelectListItemAsync">
+            <summary>
+            异步获取功能下拉框列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Destiny.Core.Flow.API.Controllers.IdentityController">
+            <summary>
+            身份管理
+            </summary>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityController.LoginAsync(Destiny.Core.Flow.Dtos.Identitys.LoginDto)">
+            <summary>
+            登录
+            </summary>
+            <param name="loginDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetTableAsync">
+            <summary>
+            获取表格菜单信息
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.AddMenuAsync(Destiny.Core.Flow.Dtos.Menu.MenuInputDto)">
+            <summary>
+            添加菜单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.UpdateMenuAsync(Destiny.Core.Flow.Dtos.Menu.MenuInputDto)">
+            <summary>
+            修改菜单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.DeleteAsync(System.Nullable{System.Guid})">
+            <summary>
+            删除
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetMenuAsync">
+            <summary>
+            登录成功之后获取菜单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetMenuTreeAsync(System.Nullable{System.Guid})">
+            <summary>
+            异步得到菜单树数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetMenuFunctionListAsync(System.Guid)">
+            <summary>
+            异步到菜单功能集合
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Organization.OrganizationController.GetAsync">
+            <summary>
+            获取组织架构
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Organization.OrganizationController.CreateAsync(Destiny.Core.Flow.Dtos.Organization.OrganizationInputDto)">
+            <summary>
+            异步创建组织架构
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Organization.OrganizationController.UpdateAsync(Destiny.Core.Flow.Dtos.Organization.OrganizationInputDto)">
+            <summary>
+            异步修改组织架构
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Organization.OrganizationController.DeleteAsync(System.Guid)">
+            <summary>
+            异步删除组织架构
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Destiny.Core.Flow.API.Controllers.PermissionController">
+            <summary>
+            权限管理
+            </summary>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.PermissionController.GetPermissionListAsync">
+            <summary>
+            异步得到权限集合
+            </summary>
+        </member>
+        <member name="T:Destiny.Core.Flow.API.Controllers.RoleController">
+            <summary>
+            角色管理
+            </summary>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.RoleController.GetRolePageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+            <summary>
+            异步得到分页
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.RoleController.CreateAsync(Destiny.Core.Flow.Dtos.RoleDtos.RoleInputDto)">
+            <summary>
+            
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.RoleController.UpdateAsync(Destiny.Core.Flow.Dtos.RoleDtos.RoleInputDto)">
+            <summary>
+            
+            </summary>
+            <param name="dto"></param>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.RoleController.DeleteAsync(System.Guid)">
+            <summary>
+            删除角色
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.RoleController.AddOrUpdateAsync(Destiny.Core.Flow.Dtos.RoleDtos.RoleInputDto)">
+            <summary>
+            删除角色
+            </summary>
+            <param name="dto"></param>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.RoleController.GetRoleSelectListAsync">
+            <summary>
+            异步得到角色下拉数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Destiny.Core.Flow.API.Controllers.UserController">
+            <summary>
+            用户管理
+            </summary>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.UserController.CreateAsync(Destiny.Core.Flow.Dtos.UserInputDto)">
+            <summary>
+            异步创建用户
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.UserController.UpdateAsync(Destiny.Core.Flow.Dtos.UserInputDto)">
+            <summary>
+            异步更新用户
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.UserController.DeleteAsync(System.Guid)">
+            <summary>
+            异步删除用户
+            </summary>
+            <param name="id">主键</param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.UserController.LoadAsync(System.Guid)">
+            <summary>
+            异步加载用户
+            </summary>
+            <param name="id">主键</param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.UserController.AddOrUpdateAsync(Destiny.Core.Flow.Dtos.UserInputDto)">
+             <summary>
+            异步添加或更新
+             </summary>
+             <param name="dto"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.UserController.GetUserPageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+            <summary>
+            异步得到分页
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Destiny.Core.Flow.API.Permission.PermissionDto">
+            <summary>
+            必要参数类，
+            继承 IAuthorizationRequirement，用于设计自定义权限处理器PermissionHandler
+            因为AuthorizationHandler 中的泛型参数 TRequirement 必须继承 IAuthorizationRequirement
+            </summary>
+        </member>
+        <member name="P:Destiny.Core.Flow.API.Permission.PermissionDto.DeniedAction">
+            <summary>
+            无权限action
+            </summary>
+        </member>
+        <member name="P:Destiny.Core.Flow.API.Permission.PermissionDto.ClaimType">
+            <summary>
+            认证授权类型
+            </summary>
+        </member>
+        <member name="P:Destiny.Core.Flow.API.Permission.PermissionDto.LoginPath">
+            <summary>
+            请求路径
+            </summary>
+        </member>
+        <member name="P:Destiny.Core.Flow.API.Permission.PermissionDto.Issuer">
+            <summary>
+            发行人
+            </summary>
+        </member>
+        <member name="P:Destiny.Core.Flow.API.Permission.PermissionDto.Audience">
+            <summary>
+            订阅人
+            </summary>
+        </member>
+        <member name="P:Destiny.Core.Flow.API.Permission.PermissionDto.Expiration">
+            <summary>
+            过期时间
+            </summary>
+        </member>
+        <member name="P:Destiny.Core.Flow.API.Permission.PermissionDto.SigningCredentials">
+            <summary>
+            签名验证
+            </summary>
+        </member>
+        <member name="P:Destiny.Core.Flow.API.Permission.PermissionDto.PermissionsUrl">
+            <summary>
+            用户权限集合
+            </summary>
+        </member>
+        <member name="P:Destiny.Core.Flow.API.Permission.PermissionHandler._Schemes">
+            <summary>
+            验证方案提供对象
+            </summary>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Startups.AspNetCoreAOPModule.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            AOP事务
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
