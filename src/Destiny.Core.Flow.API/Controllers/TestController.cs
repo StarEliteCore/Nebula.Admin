@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AspectCore.DynamicProxy;
+using Destiny.Core.Flow.Events;
+using Destiny.Core.Flow.Events.EventBus;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Model.RepositoryBase;
 using Microsoft.AspNetCore.Authorization;
@@ -18,10 +21,13 @@ namespace Destiny.Core.Flow.API.Controllers
     {
 
 
+    
+
         [Route("GetPage")]
         [HttpGet]
         public IEnumerable<string> Get()
         {
+         
             return new string[] { "🐕威威还是没用给我链接字符串", "🐕威威也没有给我远程仓库的权限,无法上传代码." };
         }
 
@@ -51,3 +57,5 @@ namespace Destiny.Core.Flow.API.Controllers
         }
     }
 }
+
+
