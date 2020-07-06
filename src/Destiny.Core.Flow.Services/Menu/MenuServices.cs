@@ -6,12 +6,14 @@ using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
+using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.IServices.IMenu;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Model.Entities.Menu;
 using Destiny.Core.Flow.Model.Entities.Rolemenu;
 using Destiny.Core.Flow.Repository.MenuRepository;
 using Destiny.Core.Flow.Ui;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -33,13 +35,18 @@ namespace Destiny.Core.Flow.Services.Menu
         private readonly IMenuFunctionRepository _menuFunction=null;
         private readonly IUnitOfWork _unitOfWork = null;
         private readonly IIdentity _iIdentity = null;
-        public MenuServices(IMenuRepository menuRepository, IUnitOfWork unitOfWork, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository, IMenuFunctionRepository menuFunction, IPrincipal principal)
+        private readonly IEFCoreRepository<UserRole, Guid> _repositoryUserRole = null;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<Role> _roleManager;
+        public MenuServices(IMenuRepository menuRepository, IUnitOfWork unitOfWork, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository, IMenuFunctionRepository menuFunction, IPrincipal principal, UserManager<User> userManager, RoleManager<Role>  roleManager)
         {
             _menuRepository = menuRepository;
             _roleMenuRepository = roleMenuRepository;
             this._menuFunction = menuFunction;
             _unitOfWork = unitOfWork;
             _iIdentity = principal.Identity;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public async Task<OperationResponse> CreateAsync(MenuInputDto input)
@@ -168,10 +175,44 @@ namespace Destiny.Core.Flow.Services.Menu
                 }
                 );
         }
-
-
-   
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IPagedResult<MenuPermissionsOutDto>> GetMenuAsync()
+        {
+            var menulist = new List<MenuPermissionsOutDto>();
+            var userId= _iIdentity.GetUesrId<Guid>();
+            var usermodel= await  _userManager.FindByIdAsync(userId.ToString());
+            var roleids = (await _repositoryUserRole.Entities.Where(x => x.UserId == userId).ToListAsync()).Select(x => x.RoleId);
+            var menuId = (await _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).ToListAsync()).Select(x => x.MenuId);
+            if (usermodel.IsSystem && _roleManager.Roles.Where(x=>x.IsAdmin==true && roleids.Contains(x.Id)).Any())
+            {
+                menulist = await _menuRepository.Entities.Select(x => new MenuPermissionsOutDto
+                {
+                    Name = x.Name,
+                    RouterPath = x.Path,
+                    Id = x.Id,
+                    Sort = x.Sort,
+                }).ToListAsync();
+                return new PageResult<MenuPermissionsOutDto>()
+                {
+                    ItemList = menulist,
+                    Total = menulist.Count,
+                };
+            }
+            menulist= await _menuRepository.Entities.Where(x => menuId.Contains(x.Id)).Select(x => new MenuPermissionsOutDto
+            {
+                Name = x.Name,
+                RouterPath = x.Path,
+                Id = x.Id,
+                Sort = x.Sort,
+            }).ToListAsync();
+            return new PageResult<MenuPermissionsOutDto>()
+            {
+                ItemList = menulist,
+                Total = menulist.Count,
+            };
+        }
     }
-
-
 }

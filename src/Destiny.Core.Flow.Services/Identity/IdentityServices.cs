@@ -45,10 +45,10 @@ namespace Destiny.Core.Flow.Services.Identity
             var signInResult = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, true);
             if (!signInResult.Succeeded)
             {
-                if (signInResult.IsLockedOut)
-                {
-                    return (new OperationResponse($"用户因密码错误次数过多而被锁定 {_userManager.Options.Lockout.DefaultLockoutTimeSpan.TotalMinutes} 分钟，请稍后重试", OperationResponseType.Error), new Claim[] { });
-                }
+                //if (signInResult.IsLockedOut)
+                //{
+                //    return (new OperationResponse($"用户因密码错误次数过多而被锁定 {_userManager.Options.Lockout.DefaultLockoutTimeSpan.TotalMinutes} 分钟，请稍后重试", OperationResponseType.Error), new Claim[] { });
+                //}
                 if (signInResult.IsNotAllowed)
                 {
                     return (new OperationResponse("不允许登录。", OperationResponseType.Error), new Claim[] { });
