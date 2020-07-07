@@ -28,7 +28,7 @@ jobs:
           registry: registry.cn-shanghai.aliyuncs.com
           repository: destinycore/destinyflowapi
           tags: latest
-          path: src/Destiny.Core.Flow.API/app
-          dockerfile: src/Destiny.Core.Flow.API/app/Dockerfile
+          path: /home/runner/work/Destiny.Core.Flow/Destiny.Core.Flow/app
+          dockerfile: /home/runner/work/Destiny.Core.Flow/Destiny.Core.Flow/app/Dockerfile
 #    - name: Test
 #      run: dotnet test --no-restore --verbosity normal
