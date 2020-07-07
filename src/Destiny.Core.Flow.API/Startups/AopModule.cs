@@ -1,13 +1,8 @@
-﻿using Destiny.Core.Aop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Destiny.Core.Flow.Modules;
 
 namespace Destiny.Core.Flow.API.Startups
 {
-    public class AopModule : AopModuleBase
+    public class AopModule : AppModuleBase
     {
-
     }
 }

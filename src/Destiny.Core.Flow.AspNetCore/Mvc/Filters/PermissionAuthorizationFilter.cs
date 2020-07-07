@@ -56,8 +56,15 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
             var isAllowAnonymous = action.ControllerTypeInfo.GetCustomAttribute<AllowAnonymousAttribute>();//获取Action中的特性
             var linkurl= context.HttpContext.Request.Path.Value.Replace("/api/", "");
             var result = new AjaxResult(MessageDefinitionType.Unauthorized, Enums.AjaxResultType.Unauthorized);
+
             if (!action .EndpointMetadata.Any(x=>x is AllowAnonymousAttribute))
             {
+                if (!_principal.Identity.IsAuthenticated)
+                {
+                    context.HttpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                    context.Result = new JsonResult(result);
+                    return;
+                }
                 var Id = _principal?.Identity.GetUesrId<Guid>();//获取登录用户Id 
                 var role = await _repositoryUserRole.Entities.Where(x => x.UserId == Id.Value).Select(x => x.RoleId).ToListAsync();//获取用户角色
                 var menu=await _roleMenuRepository.Entities.Where(x => role.Contains(x.RoleId)).Select(x => x.MenuId).ToListAsync();//获取MenuId
@@ -74,6 +81,7 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
                         result.Message = MessageDefinitionType.Uncertified;
                         context.HttpContext.Response.StatusCode = StatusCodes.Status403Forbidden;
                         context.Result = new JsonResult(result);
+                        return;
                     }
                 }
             }

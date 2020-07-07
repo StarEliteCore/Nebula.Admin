@@ -34,5 +34,10 @@ namespace Destiny.Core.Flow.IServices.IDataDictionnary
         /// <param name="id"></param>
         /// <returns></returns>
         Task<OperationResponse> DeleteAsync(Guid id);
+        /// <summary>
+        /// 查询数据字典
+        /// </summary>
+        /// <returns></returns>
+        Task<TreeResult<DataDictionaryOutDto>> GetDictionnnaryAsync();
     }
 }
