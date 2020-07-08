@@ -1,6 +1,7 @@
 ﻿using Destiny.Core.Flow.Events.EventBus;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -11,11 +12,11 @@ namespace Destiny.Core.Flow.Events
   public static  class EventBusExtensions
     {
 
-        public static IServiceCollection AddEventBusDefaults(this IServiceCollection services,params Assembly[] assemblies)
+        public static IServiceCollection AddEvents(this IServiceCollection services)
         {
-            services.AddMediatR(assemblies);
-            services.AddScoped<IEventBus, InMemoryDefaultBus>();
+            services.TryAddSingleton<IEventBus, InMemoryDefaultBus>();
             return services;
         }
+    
     }
 }
