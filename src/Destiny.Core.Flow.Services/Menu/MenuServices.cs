@@ -38,7 +38,7 @@ namespace Destiny.Core.Flow.Services.Menu
         private readonly IEFCoreRepository<UserRole, Guid> _repositoryUserRole = null;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
-        public MenuServices(IMenuRepository menuRepository, IUnitOfWork unitOfWork, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository, IMenuFunctionRepository menuFunction, IPrincipal principal, UserManager<User> userManager, RoleManager<Role>  roleManager)
+        public MenuServices(IMenuRepository menuRepository, IUnitOfWork unitOfWork, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository, IMenuFunctionRepository menuFunction, IPrincipal principal, UserManager<User> userManager, RoleManager<Role>  roleManager, IEFCoreRepository<UserRole, Guid> repositoryUserRole)
         {
             _menuRepository = menuRepository;
             _roleMenuRepository = roleMenuRepository;
@@ -47,6 +47,7 @@ namespace Destiny.Core.Flow.Services.Menu
             _iIdentity = principal.Identity;
             _userManager = userManager;
             _roleManager = roleManager;
+            _repositoryUserRole=repositoryUserRole;
         }
 
         public async Task<OperationResponse> CreateAsync(MenuInputDto input)
