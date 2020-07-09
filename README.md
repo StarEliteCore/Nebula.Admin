@@ -1,5 +1,5 @@
 # Destiny.Core.Flow
-
+![.NET Core](https://github.com/DestinyCore/Destiny.Core.Flow/workflows/.NET%20Core/badge.svg)
 + Destiny.Core.Flow是一个基于`.net core3.1`平台下的后台Admin管理应用框架，旨在提升团队的快速开发输出能力，由常用公共操作类（工具类、帮助类）、分层架构基类，第三方组件封装等组成。
 + 技术栈标记红色的功能未实现，但是环境都已经有了！！
 
