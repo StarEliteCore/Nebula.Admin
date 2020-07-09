@@ -47,7 +47,7 @@ jobs:
                 ports:
                 - 5002:80
                 volumes:
-                - /home/wzw/scret/DestinyCoreDb.txt:/app/DestinyCoreDb.txt
+                - /home/wzw/DestinyCore/DestinyFlow/DestinyCoreDb.txt:/app/DestinyCoreDb.txt
                 
 #    - name: Test
 #      run: dotnet test --no-restore --verbosity normal
