@@ -25,8 +25,7 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        registry: registry.cn-shanghai.aliyuncs.com
-        repository: destinycore/destinyflowapi
+        repository: 18790997531/destinycore
         tags: latest
         path: /home/runner/work/Destiny.Core.Flow/Destiny.Core.Flow/app
         dockerfile: /home/runner/work/Destiny.Core.Flow/Destiny.Core.Flow/app/Dockerfile
@@ -42,7 +41,7 @@ jobs:
           version: "2"
           services:
             destinyapi:
-              image: registry.cn-shanghai.aliyuncs.com/destinycore/destinyflowapi
+              image:  18790997531/destinycore
               container_name: DestinyFlowAPI_From_GithubAction
               ports:
               - 5002:80
