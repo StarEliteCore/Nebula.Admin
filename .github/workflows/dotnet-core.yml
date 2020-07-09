@@ -44,7 +44,7 @@ jobs:
               image:  18790997531/destinycore
               container_name: DestinyFlowAPI_From_GithubAction
               ports:
-              - 5002:80
+              - 5000:80
               volumes:
               - /home/wzw/DestinyCore/DestinyFlow/DestinyCoreDb.txt:/app/DestinyCoreDb.txt
                 
