@@ -30,5 +30,22 @@ jobs:
           tags: latest
           path: /home/runner/work/Destiny.Core.Flow/Destiny.Core.Flow/app
           dockerfile: /home/runner/work/Destiny.Core.Flow/Destiny.Core.Flow/app/Dockerfile
+      - name: deploy to portainer
+        uses: LGinC/portainer-stack-deploy@master
+        with: 
+          serverurl: http://1065.cloud:8862
+          username: ${{ secrets.PORTAINER_USERNAME }}
+          password: ${{ secrets.PORTAINER_PASSWORD }}
+          endpointId: 1
+          stackname: flowApi
+          docker_compose: |
+            version: "2"
+            services:
+              api:
+                image: registry.cn-shanghai.aliyuncs.com/destinycore/destinyflowapi
+                container_name: DestinyFlowAPI
+                ports:
+                - 5000:80
+                
 #    - name: Test
 #      run: dotnet test --no-restore --verbosity normal
