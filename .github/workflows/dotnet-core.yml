@@ -46,6 +46,8 @@ jobs:
                 container_name: DestinyFlowAPI_From_GithubAction
                 ports:
                 - 5002:80
+                volumes:
+                - /home/wzw/scret/DestinyCoreDb.txt:/app/DestinyCoreDb.txt
                 
 #    - name: Test
 #      run: dotnet test --no-restore --verbosity normal
