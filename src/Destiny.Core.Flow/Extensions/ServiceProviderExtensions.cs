@@ -115,6 +115,12 @@ namespace Destiny.Core.Flow.Extensions
             return callback(service);
         }
 
+        public static void CreateScoped(this IServiceProvider provider, Action<IServiceProvider> callback)
+        {
+            using var scope = provider.CreateScope();
+            callback(scope.ServiceProvider);
+        }
+
         /// <summary>
         /// 创建一个IServiceScope，其中包含一个IServiceProvider，用于从新创建的作用域解析依赖项，然后运行关联的回调。
         /// </summary>
@@ -154,6 +160,16 @@ namespace Destiny.Core.Flow.Extensions
             return await callback(service);
         }
 
+        public static async Task<TResult> CreateScopedAsync<TResult>(this IServiceProvider provider, Func<IServiceProvider, Task<TResult>> callback)
+        {
+            using var scope = provider.CreateScope();
+            return await callback(scope.ServiceProvider);
+        }
 
+        public static async Task CreateScopedAsync(this IServiceProvider provider, Func<IServiceProvider, Task> callback)
+        {
+            using var scope = provider.CreateScope();
+            await callback(scope.ServiceProvider);
+        }
     }
 }
