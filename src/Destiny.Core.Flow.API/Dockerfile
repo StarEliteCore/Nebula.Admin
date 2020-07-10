@@ -31,4 +31,4 @@ COPY . .
 #FROM base AS final   
 #WORKDIR /app   
 #COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Destiny.Core.Flow.API.dll"]
+ENTRYPOINT ["dotnet", "Destiny.Core.Flow.API.dll"]   
