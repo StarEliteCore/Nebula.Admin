@@ -154,8 +154,8 @@ namespace Destiny.Core.Flow.Services
         /// <returns></returns>
         private async Task<OperationResponse> SetUserRoles(User user, Guid[] roleIds)
         {
-        
 
+            
             IList<string> existRoleNames = await _userManager.GetRolesAsync(user);
             try
             {

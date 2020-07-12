@@ -23,18 +23,18 @@ namespace Destiny.Core.Flow.Model.EntityConfigurations
 
 
 
-            b.HasData(new Role()
-            {
-              Id=Guid.Parse("B8551E97-0723-47FC-BD7E-AFF35BB1B1E7"),
-              Name= "系统管理员",
-              NormalizedName= "系统管理员",
-              ConcurrencyStamp=Guid.NewGuid().ToString(),
-              CreatorUserId= Guid.Parse("a1e89f45-4fa8-4751-9df9-dec86f7e6c14"),
-              CreatedTime=DateTime.Now,
-              IsDeleted=false,
-              Description="拥有系统上所有有权限请不要删除!",
-              IsAdmin=true
-            });
+            //b.HasData(new Role()
+            //{
+            //  Id=Guid.Parse("B8551E97-0723-47FC-BD7E-AFF35BB1B1E7"),
+            //  Name= "系统管理员",
+            //  NormalizedName= "系统管理员",
+            //  ConcurrencyStamp=Guid.NewGuid().ToString(),
+            //  CreatorUserId= Guid.Parse("a1e89f45-4fa8-4751-9df9-dec86f7e6c14"),
+            //  CreatedTime=DateTime.Now,
+            //  IsDeleted=false,
+            //  Description="拥有系统上所有有权限请不要删除!",
+            //  IsAdmin=true
+            //});
         }
     }
 }

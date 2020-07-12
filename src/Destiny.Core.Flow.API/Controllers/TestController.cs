@@ -7,7 +7,7 @@ using AspectCore.DynamicProxy;
 using Destiny.Core.Flow.Events;
 using Destiny.Core.Flow.Events.EventBus;
 using Destiny.Core.Flow.Model.Entities.Identity;
-using Destiny.Core.Flow.Model.RepositoryBase;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

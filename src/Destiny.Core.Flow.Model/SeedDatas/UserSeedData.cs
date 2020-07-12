@@ -11,15 +11,17 @@ using Destiny.Core.Flow.Extensions;
 using System.Linq.Expressions;
 using System.Linq;
 using Microsoft.Extensions.Logging;
+using Destiny.Core.Flow.Dependency;
 
 namespace Destiny.Core.Flow.Model.SeedDatas
 {
-    public class UserSeedData : SeedDataBase<User, Guid>
+    [Dependency(ServiceLifetime.Transient)]
+    public class UserSeedData : SeedDataDefaults<User, Guid>
     {
-        private ILogger _logger = null;
+     
         public UserSeedData(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _logger = serviceProvider.GetLogger(GetType());
+           
         }
 
         
@@ -32,34 +34,7 @@ namespace Destiny.Core.Flow.Model.SeedDatas
             return o => o.UserName == entity.UserName && o.NickName == entity.NickName;
         }
 
-        protected override void SaveDatabase(User[] entities)
-        {
-            if (entities == null || entities.Length == 0)
-            {
-
-                return;
-            }
-            _serviceProvider.CreateScoped(provider =>
-            {
-                var repository = provider.GetService<IEFCoreRepository<User, Guid>>();
-                var unitOfWork = provider.GetService<IUnitOfWork>();
-                unitOfWork.BeginTransaction();
-                foreach (var entitie in entities)
-                {
-                    if (repository.TrackEntities.Where(Expression(entitie)).Any())
-                    {
-                        continue;
-                    }
-                    repository.Insert(entities);
-
-
-                }
-                unitOfWork.Commit();
-            });
-
-
-        }
-
+   
         protected override User[] SetSeedData()
         {
             return new User[] {
