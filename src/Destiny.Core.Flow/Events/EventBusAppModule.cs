@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Extensions;
+﻿using Destiny.Core.Flow.Dependency;
+using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Modules;
 using Destiny.Core.Flow.Reflection;
 using MediatR;
@@ -11,6 +12,7 @@ namespace Destiny.Core.Flow.Events
 {
   public abstract  class EventBusAppModuleBase : AppModuleBase
     {
+ 
 
         public override IServiceCollection ConfigureServices(IServiceCollection services)
         {

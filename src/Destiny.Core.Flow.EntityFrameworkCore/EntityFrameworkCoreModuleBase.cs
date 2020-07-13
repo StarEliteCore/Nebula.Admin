@@ -1,4 +1,5 @@
 ﻿
+using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.EntityFrameworkCore;
 using Destiny.Core.Flow.Modules;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,9 +12,7 @@ namespace Destiny.Core.Flow
 {
     public  abstract class EntityFrameworkCoreModuleBase: AppModuleBase
     {
-
-
-
+   
         public override IServiceCollection ConfigureServices(IServiceCollection services)
         {            
             services = UseSql(services);

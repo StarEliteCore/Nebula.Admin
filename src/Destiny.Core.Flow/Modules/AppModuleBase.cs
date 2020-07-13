@@ -13,10 +13,15 @@ namespace Destiny.Core.Flow.Modules
     /// </summary>
    public abstract class AppModuleBase
     {
+        //public AppModuleBase(IIocManager iocManager)
+        //{
+        //    IocManager = iocManager;
+        //}
+        //private IIocManager IocManager { get; set; }
         /// <summary>
         /// 排序
         /// </summary>
-  
+
         public virtual int Order { get; set; }
 
         /// <summary>

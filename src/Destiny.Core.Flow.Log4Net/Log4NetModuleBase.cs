@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Modules;
+﻿using Destiny.Core.Flow.Dependency;
+using Destiny.Core.Flow.Modules;
 using log4net.Repository.Hierarchy;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -10,6 +11,7 @@ namespace Destiny.Core.Flow.Log4Net
 {
     public abstract  class Log4NetModuleBase : AppModuleBase
     {
+ 
 
         public override IServiceCollection ConfigureServices(IServiceCollection services)
         {
