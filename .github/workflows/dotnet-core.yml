@@ -11,24 +11,42 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 3.1.101
-      - name: Install dependencies
-        run: dotnet restore src/Destiny.Core.Flow.API
-      - name: publish
-        run: dotnet publish src/Destiny.Core.Flow.API --configuration Release --no-restore -o app
-      - name: build image
-        uses: docker/build-push-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          registry: registry.cn-shanghai.aliyuncs.com
-          repository: destinycore/destinyflowapi
-          tags: latest
-          path: /home/runner/work/Destiny.Core.Flow/Destiny.Core.Flow/app
-          dockerfile: /home/runner/work/Destiny.Core.Flow/Destiny.Core.Flow/app/Dockerfile
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+    - name: Install dependencies
+      run: dotnet restore src/Destiny.Core.Flow.API
+    - name: publish
+      run: dotnet publish src/Destiny.Core.Flow.API --configuration Release --no-restore -o app
+    - name: build image
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: 18790997531/destinycore
+        tags: latest
+        path: /home/runner/work/Destiny.Core.Flow/Destiny.Core.Flow/app
+        dockerfile: /home/runner/work/Destiny.Core.Flow/Destiny.Core.Flow/app/Dockerfile
+    - name: deploy to portainer
+      uses: LGinC/portainer-stack-deploy@master
+      with: 
+        serverurl: http://1065.cloud:8862
+        username: ${{ secrets.PORTAINER_USERNAME }}
+        password: ${{ secrets.PORTAINER_PASSWORD }}
+        endpointId: 1
+        stackname: destinyapi
+        docker_compose: |
+          version: "2"
+          services:
+            destinyapi:
+              image:  18790997531/destinycore
+              container_name: DestinyFlowAPI_From_GithubAction
+              ports:
+              - 5000:80
+              volumes:
+              - /home/wzw/DestinyCore/DestinyFlow/DestinyCoreDb.txt:/app/DestinyCoreDb.txt
+                
 #    - name: Test
 #      run: dotnet test --no-restore --verbosity normal

@@ -32,7 +32,7 @@ namespace Destiny.Core.Flow.API
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseErrorHandling();
+            app.UseErrorHandling();    
             //app.UseRouting();
 
             //app.UseAuthorization();
