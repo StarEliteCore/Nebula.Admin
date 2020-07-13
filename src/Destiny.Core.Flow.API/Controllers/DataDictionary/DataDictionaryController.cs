@@ -93,7 +93,7 @@ namespace Destiny.Core.Flow.API.Controllers.DataDictionary
         [Description("根据id获取数据字典详情")]
         [HttpGet]
         public async Task<AjaxResult> GetDataDictionnnaryListAsync(Guid Id)
-        {
+        {    
             return (await _dataDictionnaryServices.GetLoadDictionnnary(Id)).ToAjaxResult();
         }
     }
