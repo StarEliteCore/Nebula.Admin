@@ -45,7 +45,7 @@ namespace Destiny.Core.Flow.Services
         {
 
             dto.NotNull(nameof(dto));
-            var passwordHash = dto.PasswordHash;
+            var passwordHash ="123456";
 
             var user = dto.MapTo<User>();
 
