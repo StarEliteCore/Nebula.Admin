@@ -38,6 +38,13 @@
             <param name="dto"></param>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.DataDictionary.DataDictionaryController.GetDataDictionnnaryListAsync(System.Guid)">
+            <summary>
+            根据ID获取数据字典
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.FunctionController">
             <summary>
             功能管理
