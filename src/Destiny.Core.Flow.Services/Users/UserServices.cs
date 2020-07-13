@@ -57,7 +57,7 @@ namespace Destiny.Core.Flow.Services
                 {
                     return result.ToOperationResponse();
                 }
-
+                  
                 if (dto.RoleIds.Any() == true)
                 {
                     return await this.SetUserRoles(user, dto.RoleIds);
