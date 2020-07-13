@@ -39,5 +39,12 @@ namespace Destiny.Core.Flow.IServices.IDataDictionnary
         /// </summary>
         /// <returns></returns>
         Task<TreeResult<DataDictionaryOutDto>> GetDictionnnaryAsync();
+
+        /// <summary>
+        /// 根据ID获取一个数据字典
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        Task<OperationResponse<DataDictionnaryLoadDto>> GetLoadDictionnnary(Guid Id);
     }
 }

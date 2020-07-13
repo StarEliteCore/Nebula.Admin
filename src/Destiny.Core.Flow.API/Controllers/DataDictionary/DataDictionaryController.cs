@@ -50,7 +50,7 @@ namespace Destiny.Core.Flow.API.Controllers.DataDictionary
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
-        [Description("异步创建菜单")]
+        [Description("异步创建数据字典")]
         public async Task<AjaxResult> CreateAsync([FromBody]DataDictionnaryInputDto dto)
         {
             return (await _dataDictionnaryServices.CreateAsync(dto)).ToAjaxResult();
@@ -84,6 +84,17 @@ namespace Destiny.Core.Flow.API.Controllers.DataDictionary
                 Message = result.Message,
                 Success = result.Success
             };
+        }
+        /// <summary>
+        /// 根据ID获取数据字典
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [Description("根据id获取数据字典详情")]
+        [HttpGet]
+        public async Task<AjaxResult> GetDataDictionnnaryListAsync(Guid Id)
+        {
+            return (await _dataDictionnaryServices.GetLoadDictionnnary(Id)).ToAjaxResult();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Dtos.DataDictionnary;
+using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
@@ -72,6 +73,18 @@ namespace Destiny.Core.Flow.Services.DataDictionnary
                     p.children.AddRange(children);
                 }
                 );
+        }
+
+        /// <summary>
+        /// 根据ID获取一个数据字典
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public async Task<OperationResponse<DataDictionnaryLoadDto>> GetLoadDictionnnary(Guid Id)
+        {
+            var data = await _dataDictionnaryRepository.GetByIdAsync(Id);
+            var dataDto = data.MapTo<DataDictionnaryLoadDto>();
+            return new OperationResponse<DataDictionnaryLoadDto>(MessageDefinitionType.LoadSucces,dataDto, OperationResponseType.Success);
         }
     }
 }
