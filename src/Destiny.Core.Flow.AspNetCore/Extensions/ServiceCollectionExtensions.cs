@@ -18,15 +18,21 @@ namespace Destiny.Core.Flow.AspNetCore
         /// <typeparam name="TAppModuleManager"></typeparam>
         /// <param name="services"></param>
         public static IServiceCollection AddAppModuleManager<TAppModuleManager>(this IServiceCollection services)
-            where TAppModuleManager : IAppModuleManager, new()
+            where TAppModuleManager : IAppModuleManager
         {
             services.NotNull(nameof(services));
             services.AddSingleton<IAssemblyFinder, AssemblyFinder>();
-            TAppModuleManager module = new TAppModuleManager();
-            services.AddSingleton<IIocManager, IocManager>();
-            services.AddSingleton<IAppModuleManager>(module);
 
-            module.LoadModules(services);
+
+            services.AddSingleton<IIocManager, IocManager>();
+            services.AddSingleton<IAppModuleManager>(o => {
+
+               var module=  (IAppModuleManager) Activator.CreateInstance(typeof(TAppModuleManager),o.GetService<IIocManager>());
+                module.LoadModules(services);
+                return module;
+            });
+
+  
             return services;
 
         }

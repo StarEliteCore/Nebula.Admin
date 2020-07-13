@@ -16,13 +16,16 @@ namespace Destiny.Core.Flow.Modules
  
     public class AppModuleManager: IAppModuleManager
     {
+       private IIocManager _iocManager = null;
 
-
-        public List<AppModuleBase> SourceModules { get; private set; }
-        public AppModuleManager()
+        public AppModuleManager(IIocManager iocManager)
         {
+            _iocManager = iocManager;
             SourceModules = new List<AppModuleBase>();
         }
+
+        public List<AppModuleBase> SourceModules { get; private set; }
+  
         /// <summary>
         /// 加载模块(注册模块ss)
         /// </summary>
@@ -40,8 +43,11 @@ namespace Destiny.Core.Flow.Modules
                 throw new AppException("没有找到要加载的模块!!");
             }
             SourceModules.Clear();
-    
-            var moduleBases = moduleTypes.Select(m =>(AppModuleBase)Expression.Lambda(Expression.New(m)).Compile().DynamicInvoke()).OrderBy(o=>o.Order);
+
+            var moduleBases = moduleTypes.Select(m =>
+            
+            (AppModuleBase)Expression.Lambda(Expression.New(m)).Compile().DynamicInvoke()
+            ).OrderBy(o=>o.Order);
             SourceModules.AddRange(moduleBases);
             List<AppModuleBase> modules = SourceModules.ToList();
 
@@ -49,7 +55,6 @@ namespace Destiny.Core.Flow.Modules
             {
             
                 services = module.ConfigureServices(services);
-               
 
 
             }

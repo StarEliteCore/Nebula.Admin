@@ -19,6 +19,9 @@ namespace Destiny.Core.Flow.Swagger
 {
     public abstract class SwaggerModuleBase : AppModuleBase
     {
+
+
+
         private string _url = string.Empty;
         private string _title = string.Empty;
         public override IServiceCollection ConfigureServices(IServiceCollection services)

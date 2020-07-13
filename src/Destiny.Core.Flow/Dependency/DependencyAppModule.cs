@@ -16,6 +16,7 @@ namespace Destiny.Core.Flow.Dependency
     /// </summary>
     public class DependencyAppModule: AppModuleBase
     {
+    
         public override IServiceCollection ConfigureServices(IServiceCollection services)
         {
             IocManage.Instance.SetServiceCollection(services);
