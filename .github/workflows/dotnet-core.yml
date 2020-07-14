@@ -37,12 +37,13 @@ jobs:
         password: ${{ secrets.PORTAINER_PASSWORD }}
         endpointId: 1
         stackname: destinyapi
+        imagename: 18790997531/destinycore:latest
         docker_compose: |
           version: "2"
           services:
             destinyapi:
               image:  18790997531/destinycore
-              container_name: DestinyFlowAPI_From_GithubAction
+              container_name: DestinyFlowAPI_From_GithubAction             
               ports:
               - 5000:80
               volumes:
