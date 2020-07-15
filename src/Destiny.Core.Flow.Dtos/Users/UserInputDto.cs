@@ -25,7 +25,6 @@ namespace Destiny.Core.Flow.Dtos
 
 
 
-        public string PasswordHash { get; set; }
 
 
 

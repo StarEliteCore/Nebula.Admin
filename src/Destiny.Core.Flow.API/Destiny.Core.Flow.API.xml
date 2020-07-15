@@ -42,7 +42,7 @@
             <summary>
             根据ID获取数据字典
             </summary>
-            <param name="dto"></param>
+            <param name="Id"></param>
             <returns></returns>
         </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.FunctionController">
