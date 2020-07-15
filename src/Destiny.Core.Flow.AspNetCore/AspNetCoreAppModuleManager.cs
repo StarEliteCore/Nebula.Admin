@@ -10,7 +10,7 @@ namespace Destiny.Core.Flow.AspNetCore
     {
 
 
-        public AspNetCoreAppModuleManager(IIocManager iocManager):base(iocManager)
+        public AspNetCoreAppModuleManager()
         {
 
         }

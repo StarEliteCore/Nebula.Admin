@@ -16,11 +16,11 @@ namespace Destiny.Core.Flow.Modules
  
     public class AppModuleManager: IAppModuleManager
     {
-       private IIocManager _iocManager = null;
 
-        public AppModuleManager(IIocManager iocManager)
+
+        public AppModuleManager()
         {
-            _iocManager = iocManager;
+
             SourceModules = new List<AppModuleBase>();
         }
 
@@ -34,7 +34,7 @@ namespace Destiny.Core.Flow.Modules
         public IServiceCollection LoadModules(IServiceCollection services)
         {
 
-           
+            
             var typeFinder = services.GetOrAddSingletonService<ITypeFinder, TypeFinder>();
             var baseType = typeof(AppModuleBase);
             var moduleTypes = typeFinder.Find(t=> t.IsSubclassOf(baseType)&&!t.IsAbstract).Distinct().ToArray();
