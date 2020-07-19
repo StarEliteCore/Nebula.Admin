@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Dependency;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Destiny.Core.Flow.AspNetCore
 {
@@ -22,8 +23,8 @@ namespace Destiny.Core.Flow.AspNetCore
         {
             services.NotNull(nameof(services));
             services.AddSingleton<IAssemblyFinder, AssemblyFinder>();
-
-
+            services.TryAddScoped(typeof(DictionaryAccessor<,>));
+            services.TryAddScoped(typeof(DictionaryAccessor));
             services.AddSingleton<IIocManager, IocManager>();
             TAppModuleManager module = new TAppModuleManager();
             services.AddSingleton<IAppModuleManager>(module);
