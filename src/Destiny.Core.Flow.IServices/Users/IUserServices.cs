@@ -35,7 +35,7 @@ namespace Destiny.Core.Flow.IServices
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        Task<OperationResponse> UpdateAsync(UserInputDto dto);
+        Task<OperationResponse> UpdateAsync(UserUpdateInputDto dto);
 
 
         /// <summary>
