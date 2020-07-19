@@ -45,7 +45,7 @@ namespace Destiny.Core.Flow.Services
         {
 
             dto.NotNull(nameof(dto));
-            var passwordHash ="123456";
+            var passwordHash = dto.PasswordHash;
 
             var user = dto.MapTo<User>();
 
@@ -119,7 +119,7 @@ namespace Destiny.Core.Flow.Services
             return new OperationResponse<UserOutputDto>("加载成功", userDto, OperationResponseType.Success);
         }
 
-        public async Task<OperationResponse> UpdateAsync(UserInputDto dto)
+        public async Task<OperationResponse> UpdateAsync(UserUpdateInputDto dto)
         {
             dto.NotNull(nameof(dto));
             var user = await _userManager.FindByIdAsync(dto.Id.ToString());

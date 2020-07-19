@@ -69,7 +69,7 @@ namespace Destiny.Core.Flow.API.Controllers
         [HttpPost]
         [Description("异步更新用户")]
 
-        public async Task<AjaxResult> UpdateAsync([FromBody]UserInputDto dto)
+        public async Task<AjaxResult> UpdateAsync([FromBody] UserUpdateInputDto dto)
         {
 
             return (await _userService.UpdateAsync(dto)).ToAjaxResult();
@@ -109,22 +109,23 @@ namespace Destiny.Core.Flow.API.Controllers
 
         }
 
-        /// <summary>
-        ///异步添加或更新
-        /// </summary>
-        /// <param name="dto"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [Description("异步添加或更新")]
+        ///// <summary>
+        /////异步添加或更新
+        ///// </summary>
+        ///// <param name="dto"></param>
+        ///// <returns></returns>
+        //[HttpPost]
+        //[Description("异步添加或更新")]
 
-        public async Task<AjaxResult> AddOrUpdateAsync([FromBody]UserInputDto dto)
-        {
-            if (dto.Id == Guid.Empty)
-            {
-                return (await _userService.CreateAsync(dto)).ToAjaxResult();
-            }
-            return (await _userService.UpdateAsync(dto)).ToAjaxResult();
-        }
+        //public async Task<AjaxResult> AddOrUpdateAsync([FromBody]UserInputDto dto)
+        //{
+            
+        //    //if (dto.Id == Guid.Empty)
+        //    //{
+        //    //    return (await _userService.CreateAsync(dto)).ToAjaxResult();
+        //    //}
+        //    //return (await _userService.UpdateAsync(dto)).ToAjaxResult();
+        //}
 
         /// <summary>
         /// 异步得到分页
