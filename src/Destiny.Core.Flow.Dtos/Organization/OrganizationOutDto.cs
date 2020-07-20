@@ -37,6 +37,16 @@ namespace Destiny.Core.Flow.Dtos.Organization
         /// 当前节点以上所有组织架构
         /// </summary>
         public string ParenNumber { get; set; }
+
+        /// <summary>
+        /// 第一负责人
+        /// </summary>
+        public Guid? FirstLeader { get; set; }
+
+        /// <summary>
+        /// 第二负责人
+        /// </summary>
+        public Guid? SecondLeader { get; set; }
         /// <summary>
         /// 组织架构标题
         /// </summary>
