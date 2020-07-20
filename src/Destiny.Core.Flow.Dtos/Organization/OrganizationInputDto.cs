@@ -37,5 +37,18 @@ namespace Destiny.Core.Flow.Dtos.Organization
         /// </summary>
         [DisplayName("当前部门深度")]
         public int Depth { get; set; }
+
+        /// <summary>
+        /// 第一负责人
+        /// </summary>
+        [DisplayName("第一负责人")]
+        public Guid? FirstLeader { get; set; }
+
+        /// <summary>
+        /// 第二负责人
+        /// </summary>
+
+        [DisplayName("第二负责人")]
+        public Guid? SecondLeader { get; set; }
     }
 }

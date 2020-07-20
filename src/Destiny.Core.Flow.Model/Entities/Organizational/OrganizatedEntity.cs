@@ -65,5 +65,18 @@ namespace Destiny.Core.Flow.Model.Entities.Organizational
         /// </summary>
         [DisplayName("描述")]
         public virtual string Description { get; set; }
+
+        /// <summary>
+        /// 第一负责人
+        /// </summary>
+        [DisplayName("第一负责人")]
+        public virtual Guid? FirstLeader { get; set; }
+
+        /// <summary>
+        /// 第二负责人
+        /// </summary>
+
+        [DisplayName("第二负责人")]
+        public virtual Guid? SecondLeader { get; set; }
     }
 }
