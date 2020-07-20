@@ -43,13 +43,9 @@ namespace Destiny.Core.Flow.Services
         //[ValidationInterceptor]
         public async Task<OperationResponse> CreateAsync(UserInputDto dto)
         {
-
             dto.NotNull(nameof(dto));
             var passwordHash = dto.PasswordHash;
-
             var user = dto.MapTo<User>();
-
-
             return await _unitOfWork.UseTranAsync(async () =>
             {
                 var result = passwordHash.IsNullOrEmpty() ? await _userManager.CreateAsync(user) : await _userManager.CreateAsync(user, passwordHash);
