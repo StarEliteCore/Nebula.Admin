@@ -23,10 +23,12 @@ namespace Destiny.Core.Flow.API.Controllers
 
 
         private ICache<Test> _cache = null;
+        private ICache _cache1 = null;
 
-        public TestController(ICache<Test> cache)
+        public TestController(ICache<Test> cache, ICache cache1)
         {
             _cache = cache;
+            _cache1 = cache1;
         }
 
         [Route("GetPage")]
@@ -40,8 +42,10 @@ namespace Destiny.Core.Flow.API.Controllers
             {
                 test.Add(new Test{Name=i.ToString() });
             }
-            _cache.Set("_test",new Test { Name="大黄瓜"});
-            var value= _cache.Get("_test");
+            _cache.Set("_test", new Test { Name = "大黄瓜" });
+            var value = _cache.Get("_test");
+            _cache1.Set("aa",test);
+            var values= _cache1.Get<List<Test>>("aa");
             return new string[] { "🐕威威还是没用给我链接字符串", "🐕威威也没有给我远程仓库的权限,无法上传代码." };
         }
 

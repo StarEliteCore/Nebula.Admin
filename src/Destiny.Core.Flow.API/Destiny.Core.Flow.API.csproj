@@ -34,8 +34,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Destiny.Core.Flow.AspNetCore\Destiny.Core.Flow.AspNetCore.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.AutoMapper\Destiny.Core.Flow.AutoMapper.csproj" />
+    <ProjectReference Include="..\Destiny.Core.Flow.Caching.CSRedis\Destiny.Core.Flow.Caching.CSRedis.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Caching\Destiny.Core.Flow.Caching.csproj" />
-    <ProjectReference Include="..\Destiny.Core.Flow.CSRedis\Destiny.Core.Flow.CSRedis.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Dtos\Destiny.Core.Flow.Dtos.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.FluentValidation\Destiny.Core.Flow.FluentValidation.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.IServices\Destiny.Core.Flow.IServices.csproj" />

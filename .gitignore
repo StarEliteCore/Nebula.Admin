@@ -99,3 +99,5 @@
 /src/Destiny.Core.Flow.CSRedis/obj
 /src/Destiny.Core.Flow.CSRedis/bin
 /src/Destiny.Core.Flow.API/DestinyCoreRedis.txt
+/src/Destiny.Core.Flow.Caching.CSRedis/bin
+/src/Destiny.Core.Flow.Caching.CSRedis/obj
