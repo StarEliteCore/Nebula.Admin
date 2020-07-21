@@ -92,3 +92,9 @@
 /src/Destiny.Core.Flow.CodeGenerator/obj
 /src/Destiny.Core.Flow.Aop/obj
 /src/Destiny.Core.Flow.Aop/bin
+/src/Destiny.Core.Flow.Caching/obj
+/src/Destiny.Core.Flow.Caching/bin
+/src/Destiny.Core.Flow.Redis/bin
+/src/Destiny.Core.Flow.Redis/obj
+/src/Destiny.Core.Flow.CSRedis/obj
+/src/Destiny.Core.Flow.CSRedis/bin
