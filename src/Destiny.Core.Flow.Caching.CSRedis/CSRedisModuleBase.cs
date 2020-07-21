@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Destiny.Core.Flow.CSRedis
+namespace Destiny.Core.Flow.Caching.CSRedis
 {
   public abstract  class CSRedisModuleBase : AppModuleBase
     {
@@ -27,8 +27,9 @@ namespace Destiny.Core.Flow.CSRedis
             var connStr = File.ReadAllText(redisConn).Trim();
             var csredis = new CSRedisClient(connStr);
             RedisHelper.Initialization(csredis);
-            services.TryAddTransient(typeof(ICache<>), typeof(CSRedis<>));
-            services.TryAddTransient(typeof(ICache<,>), typeof(CSRedis<,>));
+            services.TryAddTransient(typeof(ICache<>), typeof(CSRedisCache<>));
+            services.TryAddTransient(typeof(ICache<,>), typeof(CSRedisCache<,>));
+            services.TryAddTransient<ICache, CSRedisCache>();
             return services;
         }
        
