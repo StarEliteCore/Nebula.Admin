@@ -11,24 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.302
-    - name: Install dependencies
-      run: dotnet restore src/Destiny.Core.Flow.API
-    - name: publish
-      run: dotnet publish src/Destiny.Core.Flow.API --configuration Release --no-restore -o app
-    - name: build image
-      uses: docker/build-push-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: 18790997531/destinycore
-        tags: latest
-        path: /home/runner/work/Destiny.Core.Flow/Destiny.Core.Flow/app
-        dockerfile: /home/runner/work/Destiny.Core.Flow/Destiny.Core.Flow/app/Dockerfile
     - name: deploy to portainer
       uses: LGinC/portainer-stack-deploy@master
       with: 
