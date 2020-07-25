@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Caching.CSRedis
 {
-    internal class Helper
+    internal class CacheHelper
     {
         private static string GetKey<TKey>(TKey key)
         {
