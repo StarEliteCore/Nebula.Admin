@@ -99,3 +99,13 @@
 /src/Destiny.Core.Flow.CSRedis/obj
 /src/Destiny.Core.Flow.CSRedis/bin
 /src/Destiny.Core.Flow.API/DestinyCoreRedis.txt
+/src/Destiny.Core.Flow.Caching.CSRedis/obj/Debug/netstandard2.1/.NETStandard,Version=v2.1.AssemblyAttributes.cs
+/src/Destiny.Core.Flow.Caching.CSRedis/obj/Debug/netstandard2.1/Destiny.Core.Flow.Caching.CSRedis.AssemblyInfo.cs
+/src/Destiny.Core.Flow.Caching.CSRedis/obj/Debug/netstandard2.1/Destiny.Core.Flow.Caching.CSRedis.AssemblyInfoInputs.cache
+/src/Destiny.Core.Flow.Caching.CSRedis/obj/Debug/netstandard2.1/Destiny.Core.Flow.Caching.CSRedis.assets.cache
+/src/Destiny.Core.Flow.Caching.CSRedis/obj/Debug/netstandard2.1/Destiny.Core.Flow.Caching.CSRedis.csprojAssemblyReference.cache
+/src/Destiny.Core.Flow.Caching.CSRedis/obj/Destiny.Core.Flow.Caching.CSRedis.csproj.nuget.dgspec.json
+/src/Destiny.Core.Flow.Caching.CSRedis/obj/Destiny.Core.Flow.Caching.CSRedis.csproj.nuget.g.props
+/src/Destiny.Core.Flow.Caching.CSRedis/obj/Destiny.Core.Flow.Caching.CSRedis.csproj.nuget.g.targets
+/src/Destiny.Core.Flow.Caching.CSRedis/obj/project.assets.json
+/src/Destiny.Core.Flow.Caching.CSRedis/obj/project.nuget.cache
