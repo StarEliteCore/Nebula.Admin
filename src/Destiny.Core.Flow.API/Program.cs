@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AspectCore.Extensions.Hosting;
+using Com.Ctrip.Framework.Apollo;
+using Com.Ctrip.Framework.Apollo.Enums;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.SeriLog;
 using Microsoft.AspNetCore.Hosting;
@@ -26,7 +28,14 @@ namespace Destiny.Core.Flow.API
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-
+            .ConfigureAppConfiguration((context, builder) =>
+            {
+                // ÅäÖÃÏîÒýÈëapollo
+                builder.AddApollo(builder.Build().GetSection("apollo"))
+                .AddNamespace("application")
+                 .AddDefault(ConfigFileFormat.Json)
+                .AddDefault();
+            })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>()

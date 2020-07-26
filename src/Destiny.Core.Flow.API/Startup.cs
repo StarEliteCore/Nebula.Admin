@@ -21,7 +21,7 @@ namespace Destiny.Core.Flow.API
         public void ConfigureServices(IServiceCollection services)
         {
 
-
+            services.AddOptions<string>(Configuration["MysqlConnectionString"]);
             services.AddAppModuleManager<AspNetCoreAppModuleManager>();
             
         }

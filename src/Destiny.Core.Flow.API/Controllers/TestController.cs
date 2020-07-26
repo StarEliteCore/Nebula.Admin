@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Destiny.Core.Flow.Caching;
+using Microsoft.Extensions.Configuration;
+
 namespace Destiny.Core.Flow.API.Controllers
 {
     [Route("api/test")]
@@ -24,18 +26,21 @@ namespace Destiny.Core.Flow.API.Controllers
 
         private ICache<Test> _cache = null;
         private ICache _cache1 = null;
-
-        public TestController(ICache<Test> cache, ICache cache1)
+        private IConfiguration _configuration;
+        public TestController(ICache<Test> cache, ICache cache1, IConfiguration configuration)
         {
             _cache = cache;
             _cache1 = cache1;
+            _configuration = configuration;
         }
 
         [Route("GetPage")]
         [HttpGet]
         public IEnumerable<string> Get()
         {
-
+            Console.WriteLine($"client: {_configuration["MysqlConnectionString"]}");
+            var item = _configuration.GetValue<string>("TEST1.Destiny_Apollo:MysqlConnectionString");
+            Console.WriteLine(item);
             List<Test> test = new List<Test>();
 
             for (int i = 0; i < 10; i++)
