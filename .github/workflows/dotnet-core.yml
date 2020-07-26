@@ -15,7 +15,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.101
+        dotnet-version: 3.1.302
     - name: Install dependencies
       run: dotnet restore src/Destiny.Core.Flow.API
     - name: publish
@@ -48,6 +48,6 @@ jobs:
               - 5000:80
               volumes:
               - /home/wzw/DestinyCore/DestinyFlow/DestinyCoreDb.txt:/app/DestinyCoreDb.txt
-                
+              - /home/wzw/DestinyCore/DestinyFlow/DestinyCoreRedis.txt:/app/DestinyCoreRedis.txt
 #    - name: Test
 #      run: dotnet test --no-restore --verbosity normal
