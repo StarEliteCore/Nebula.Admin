@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\src\Destiny.Core.Flow.AutoMapper\Destiny.Core.Flow.AutoMapper.csproj" />
+    <ProjectReference Include="..\src\Destiny.Core.Flow.TestBase\Destiny.Core.Flow.TestBase.csproj" />
     <ProjectReference Include="..\src\Destiny.Core.Flow\Destiny.Core.Flow.csproj" />
   </ItemGroup>
 

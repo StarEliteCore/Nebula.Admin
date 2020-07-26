@@ -100,3 +100,5 @@
 /src/Destiny.Core.Flow.CSRedis/bin
 /src/Destiny.Core.Flow.Caching.CSRedis/bin
 /src/Destiny.Core.Flow.Caching.CSRedis/obj
+/src/Destiny.Core.Flow.TestBase/bin
+/src/Destiny.Core.Flow.TestBase/obj
