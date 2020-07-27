@@ -12,10 +12,10 @@ namespace Destiny.Core.Tests
 {
    public class StartupModulesTest: IntegratedTest<TestModules>
     {
-
+        TestModules test = null;
         public StartupModulesTest()
         {
-            var test = ServiceProvider.GetService<TestModules>();
+             test = ServiceProvider.GetService<TestModules>();
         }
 
        
@@ -23,13 +23,10 @@ namespace Destiny.Core.Tests
         [Fact]
         public void Test_AddApplication()
         {
-          
-            //_services.AddApplication<TestModules>();
-            //var runner= _services.BuildServiceProvider().GetRequiredService<IStartupModuleRunner>();
-            //runner.Initialize(_services.BuildServiceProvider());
-            // var test= _services.BuildServiceProvider().GetRequiredService<TestModules>();
-            //Assert.True(test.ApplicationInitializationIsCalled);
-            //Assert.True(test.ConfigureServicesIsCalled);
+
+         
+            Assert.True(test.ApplicationInitializationIsCalled);
+            Assert.True(test.ConfigureServicesIsCalled);
         }
     }
 

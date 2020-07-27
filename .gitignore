@@ -109,3 +109,5 @@
 /src/Destiny.Core.Flow.Caching.CSRedis/obj/Destiny.Core.Flow.Caching.CSRedis.csproj.nuget.g.targets
 /src/Destiny.Core.Flow.Caching.CSRedis/obj/project.assets.json
 /src/Destiny.Core.Flow.Caching.CSRedis/obj/project.nuget.cache
+/src/Destiny.Core.Flow.TestBase/bin
+/src/Destiny.Core.Flow.TestBase/obj
