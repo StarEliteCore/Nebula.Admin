@@ -55,7 +55,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Caching",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Caching.CSRedis", "src\Destiny.Core.Flow.Caching.CSRedis\Destiny.Core.Flow.Caching.CSRedis.csproj", "{46A314B5-8323-4562-8A95-03A243E0A39C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.TestBase", "src\Destiny.Core.Flow.TestBase\Destiny.Core.Flow.TestBase.csproj", "{FF2E379E-9F78-4DC7-A454-CFCF6200ABBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.TestBase", "src\Destiny.Core.Flow.TestBase\Destiny.Core.Flow.TestBase.csproj", "{FF2E379E-9F78-4DC7-A454-CFCF6200ABBE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5FF5E8E6-1CD3-4223-94DC-E5791332D9BB}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
