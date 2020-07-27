@@ -1,4 +1,5 @@
 ﻿using AspectCore.DynamicProxy;
+using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;

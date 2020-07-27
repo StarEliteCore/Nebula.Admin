@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="AutoMapperTest.cs" />
+    <Compile Remove="CustomWebApplicationFactory.cs" />
+    <Compile Remove="DependencyTest.cs" />
+    <Compile Remove="ExpressionTest.cs" />
+    <Compile Remove="MediatRTest.cs" />
+    <Compile Remove="TestBase.cs" />
+    <Compile Remove="TestServerFixtureBase.cs" />
+    <Compile Remove="TestStartup.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.1.5" />

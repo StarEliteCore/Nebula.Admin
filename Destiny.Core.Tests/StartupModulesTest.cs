@@ -21,7 +21,7 @@ namespace Destiny.Core.Tests
        
 
         [Fact]
-        public void Test_AddApplication()
+        public void Test_TestModules()
         {
 
          

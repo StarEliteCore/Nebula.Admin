@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Destiny.Core.Flow.EntityFrameworkCore
+namespace Destiny.Core.Flow.Entity
 {
     /// <summary>
     /// 工作单元

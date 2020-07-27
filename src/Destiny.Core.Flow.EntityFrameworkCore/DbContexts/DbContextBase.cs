@@ -10,6 +10,7 @@ using Destiny.Core.Flow.EntityFrameworkCore;
 using Destiny.Core.Flow.Reflection;
 using Destiny.Core.Flow.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using Destiny.Core.Flow.Entity;
 
 namespace Destiny.Core.Flow
 {
