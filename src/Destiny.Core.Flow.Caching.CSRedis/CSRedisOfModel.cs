@@ -24,48 +24,48 @@ namespace Destiny.Core.Flow.Caching.CSRedis
         public TCacheData Get(TKey key)
         {
 
-            return Helper.Get<TKey,TCacheData>(key);
+            return CacheHelper.Get<TKey,TCacheData>(key);
         }
 
         public async Task<TCacheData> GetAsync(TKey key, CancellationToken token = default)
         {
 
-            return await Helper.GetAsync<TKey, TCacheData>(key);
+            return await CacheHelper.GetAsync<TKey, TCacheData>(key);
         }
 
         public TCacheData GetOrAdd(TKey key, Func<TCacheData> func)
         {
 
-            return Helper.GetOrAdd(key,func);
+            return CacheHelper.GetOrAdd(key,func);
         }
 
         public async Task<TCacheData> GetOrAddAsync([NotNull] TKey key, Func<Task<TCacheData>> func, CancellationToken token = default)
         {
 
 
-            return await Helper.GetOrAddAsync(key, func);
+            return await CacheHelper.GetOrAddAsync(key, func);
         }
 
         public void Remove(TKey key)
         {
 
-            Helper.Remove(key);
+            CacheHelper.Remove(key);
         }
 
         public async Task RemoveAsync(TKey key, CancellationToken token = default)
         {
 
-             await Helper.RemoveAsync(key);
+             await CacheHelper.RemoveAsync(key);
         }
 
         public void Set(TKey key, TCacheData value)
         {
-            Helper.Set(key,value);
+            CacheHelper.Set(key,value);
         }
 
         public async Task SetAsync(TKey key, TCacheData value, CancellationToken token = default)
         {
-            await Helper.SetAsync(key, value);
+            await CacheHelper.SetAsync(key, value);
         }
     }
 }
