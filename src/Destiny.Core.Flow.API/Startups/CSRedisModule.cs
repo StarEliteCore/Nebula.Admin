@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.API.Startups
 {
-    public class CSRedisModule: CSRedisModuleBase
+    public class CSRedisModule : CSRedisModuleBase
     {
     }
 }
