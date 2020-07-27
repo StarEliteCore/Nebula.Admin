@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 
@@ -240,6 +241,19 @@ namespace Destiny.Core.Flow.Extensions
             {
                 initial.Add(item);
             }
+        }
+
+        public static bool AddIfNotContains<T>([NotNull] this ICollection<T> source, T item)
+        {
+            source.NotNull(nameof(source));
+
+            if (source.Contains(item))
+            {
+                return false;
+            }
+
+            source.Add(item);
+            return true;
         }
     }
 }
