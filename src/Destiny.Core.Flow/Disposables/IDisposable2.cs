@@ -24,9 +24,9 @@ namespace Destiny.Core.Flow
 
     public class DisposeBase : IDisposable2
     {
-        public bool Disposed => throw new NotImplementedException();
+        public bool Disposed => _disposed>0;
 
-        public event EventHandler? OnDisposed;
+        public event EventHandler OnDisposed;
 
         private Int32 _disposed = 0;
         public void Dispose()
