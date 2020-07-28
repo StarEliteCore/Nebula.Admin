@@ -18,6 +18,7 @@ namespace Destiny.Core.Flow.API.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+            Console.WriteLine("我被Consul调用了");
             return Ok("ok");
         }
     }
