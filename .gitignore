@@ -111,3 +111,5 @@
 /src/Destiny.Core.Flow.Caching.CSRedis/obj/project.nuget.cache
 /src/Destiny.Core.Flow.TestBase/bin
 /src/Destiny.Core.Flow.TestBase/obj
+/src/Destiny.Core.Flow.Consul/bin
+/src/Destiny.Core.Flow.Consul/obj
