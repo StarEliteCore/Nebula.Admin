@@ -66,9 +66,9 @@ namespace Destiny.Core.Flow.Consul
                 DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(5),//服务启动多久后注册
                 Interval = TimeSpan.FromSeconds(10),//健康检查时间间隔，或者称为心跳间隔
                 HTTP = $"http://{serviceEntity.IP}:{serviceEntity.Port}/api/health",//健康检查地址
-                Timeout = TimeSpan.FromSeconds(5)
+                Timeout = TimeSpan.FromSeconds(1)
             };
-
+            Console.WriteLine($"我是服务IP和端口：{serviceEntity.IP}:{serviceEntity.Port}");
             // Register service with consul
             var registration = new AgentServiceRegistration()
             {
