@@ -47,7 +47,7 @@ jobs:
               ports:
               - 5000:80
               environment: 
-              - TZ: Asia/Shanghai
+                TZ: Asia/Shanghai
               volumes:
               - /home/wzw/DestinyCore/DestinyFlow/DestinyCoreDb.txt:/app/DestinyCoreDb.txt
               - /home/wzw/DestinyCore/DestinyFlow/DestinyCoreRedis.txt:/app/DestinyCoreRedis.txt
