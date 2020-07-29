@@ -84,6 +84,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.HealthController.Get">
+            <summary>
+            健康监测
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.IdentityController">
             <summary>
             身份管理

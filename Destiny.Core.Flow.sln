@@ -62,6 +62,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.Consul", "src\Destiny.Core.Flow.Consul\Destiny.Core.Flow.Consul.csproj", "{E6E94B5B-54C7-4AF7-AB12-6A7A8BF948D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -152,6 +154,10 @@ Global
 		{FF2E379E-9F78-4DC7-A454-CFCF6200ABBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF2E379E-9F78-4DC7-A454-CFCF6200ABBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF2E379E-9F78-4DC7-A454-CFCF6200ABBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6E94B5B-54C7-4AF7-AB12-6A7A8BF948D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6E94B5B-54C7-4AF7-AB12-6A7A8BF948D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6E94B5B-54C7-4AF7-AB12-6A7A8BF948D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6E94B5B-54C7-4AF7-AB12-6A7A8BF948D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -182,6 +188,7 @@ Global
 		{6A967B53-A200-42CC-BC44-815780A8E1F1} = {D49782B1-99E0-442F-98DD-6D30CD09F6BA}
 		{46A314B5-8323-4562-8A95-03A243E0A39C} = {D49782B1-99E0-442F-98DD-6D30CD09F6BA}
 		{FF2E379E-9F78-4DC7-A454-CFCF6200ABBE} = {D49782B1-99E0-442F-98DD-6D30CD09F6BA}
+		{E6E94B5B-54C7-4AF7-AB12-6A7A8BF948D0} = {D49782B1-99E0-442F-98DD-6D30CD09F6BA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {468F450C-837F-4FCD-8E06-3E12690DDED6}
