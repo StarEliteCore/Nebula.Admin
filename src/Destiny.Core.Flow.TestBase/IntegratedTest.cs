@@ -56,5 +56,14 @@ namespace Destiny.Core.Flow.TestBase
         {
             return services.BuildServiceProviderFromFactory();
         }
+
+        protected virtual IServiceProvider ConfigureProvider(Action<IServiceCollection> configure)
+        {
+            var services = new ServiceCollection();
+
+            configure(services);
+
+            return services.BuildServiceProviderFromFactory();
+        }
     }
 }
