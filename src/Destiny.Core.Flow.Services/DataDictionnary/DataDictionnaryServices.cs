@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.DataDictionnary
 {
-    [Dependency(ServiceLifetime.Scoped)]
+   
     public class DataDictionnaryServices: IDataDictionnaryServices
     {
         private readonly IDataDictionnaryRepository _dataDictionnaryRepository = null;

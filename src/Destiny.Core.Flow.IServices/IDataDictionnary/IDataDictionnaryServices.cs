@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Dtos.DataDictionnary;
+﻿using Destiny.Core.Flow.Dependency;
+using Destiny.Core.Flow.Dtos.DataDictionnary;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.Ui;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IServices.IDataDictionnary
 {
-    public interface IDataDictionnaryServices
+    public interface IDataDictionnaryServices : IScopedDependency
     {
         /// <summary>
         /// 创建一个数据字典
