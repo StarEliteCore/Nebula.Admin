@@ -5,18 +5,18 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Dependency
 {
-    public interface IObjects<TType>
+    public interface IObjectAccessor<TType>
     {
         TType Value { get; set; }
     }
 
-    public class Objects<TType> : IObjects<TType>
+    public class ObjectAccessor<TType> : IObjectAccessor<TType>
     {
-        public Objects([CanBeNull] TType obj)
+        public ObjectAccessor([CanBeNull] TType obj)
         {
             Value = obj;
         }
-        public Objects()
+        public ObjectAccessor()
         {
 
         }

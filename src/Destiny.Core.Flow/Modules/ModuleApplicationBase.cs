@@ -29,7 +29,7 @@ namespace Destiny.Core.Flow.Modules
             services.TryAddSingleton<IAssemblyFinder, AssemblyFinder>();
             services.TryAddSingleton<ITypeFinder, TypeFinder>();
             services.AddSingleton<IModuleApplication>(this);
-            services.TryAddObjects<IServiceProvider>();
+            services.TryAddObjectAccessor<IServiceProvider>();
             _source = this.GetAllModule(services);
            
             Modules = LoadModules();
@@ -47,7 +47,7 @@ namespace Destiny.Core.Flow.Modules
         protected virtual void SetServiceProvider(IServiceProvider serviceProvider)
         {
             ServiceProvider = serviceProvider;
-            ServiceProvider.GetRequiredService<Objects<IServiceProvider>>().Value = ServiceProvider;
+            ServiceProvider.GetRequiredService<ObjectAccessor<IServiceProvider>>().Value = ServiceProvider;
         }
         private IReadOnlyList<IAppModule> LoadModules()
         {

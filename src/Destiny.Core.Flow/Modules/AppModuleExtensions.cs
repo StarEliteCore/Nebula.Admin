@@ -28,9 +28,9 @@ namespace Destiny.Core.Flow.Modules
 
     
    
-            var obj = new Objects<IApplicationBuilder>();
-            services.Add(ServiceDescriptor.Singleton(typeof(Objects<IApplicationBuilder>), obj));
-            services.Add(ServiceDescriptor.Singleton(typeof(IObjects<IApplicationBuilder>), obj));
+            var obj = new ObjectAccessor<IApplicationBuilder>();
+            services.Add(ServiceDescriptor.Singleton(typeof(ObjectAccessor<IApplicationBuilder>), obj));
+            services.Add(ServiceDescriptor.Singleton(typeof(IObjectAccessor<IApplicationBuilder>), obj));
 
             IStartupModuleRunner runner = new StartupModuleRunner(type,services);
             runner.ConfigureServices(services);
@@ -41,7 +41,7 @@ namespace Destiny.Core.Flow.Modules
 
         public static IApplicationBuilder InitializeApplication(this IApplicationBuilder builder)
         {
-            builder.ApplicationServices.GetRequiredService<Objects<IApplicationBuilder>>().Value = builder;
+            builder.ApplicationServices.GetRequiredService<ObjectAccessor<IApplicationBuilder>>().Value = builder;
             var runner = builder.ApplicationServices.GetRequiredService<StartupModuleRunner>();
             runner.Initialize(builder.ApplicationServices);
             return builder;
