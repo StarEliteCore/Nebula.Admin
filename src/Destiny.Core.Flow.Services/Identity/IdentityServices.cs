@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.Identity
 {
-    [Dependency(ServiceLifetime.Scoped)]
+ 
     public class IdentityServices : IIdentityServices
     {
         private readonly SignInManager<User> _signInManager = null;

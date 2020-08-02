@@ -1,4 +1,5 @@
 ﻿using AspectCore.DynamicProxy;
+using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Dtos.Identitys;
 using Destiny.Core.Flow.Ui;
 using System;
@@ -13,7 +14,7 @@ namespace Destiny.Core.Flow.IServices.Identity
     /// 身份接口
     /// </summary>
 
-    public interface IIdentityServices
+    public interface IIdentityServices: IScopedDependency
     {
         //[ServiceInterceptor(typeof(TransactionalAttribute))]
         Task<(OperationResponse item, Claim[] cliams)> Login(LoginDto loginDto);

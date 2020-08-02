@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.Organization
 {
-    [Dependency(ServiceLifetime.Scoped)]
+
     public class OrganizationService: IOrganizationService
     {
         private readonly IOrganizatedRepository _organizated;

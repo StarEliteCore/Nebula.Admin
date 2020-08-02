@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.RoleMenu
 {
-    [Dependency(ServiceLifetime.Scoped)]
+
     public class RoleMenuServices : IRoleMenuServices
     {
         private readonly IRoleMenuRepository _roleMenuRepository = null;

@@ -9,8 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IServices.Organization
-{    
-    public interface IOrganizationService
+{
+    
+    public interface IOrganizationService: IScopedDependency
     {
         /// <summary>
         /// 新增组织架构

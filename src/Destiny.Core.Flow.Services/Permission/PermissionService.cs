@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.Permission
 {
-    [Dependency(ServiceLifetime.Scoped)]
+
     public class PermissionService : IPermissionService
     {
         private readonly RoleManager<Role> _roleManager = null;

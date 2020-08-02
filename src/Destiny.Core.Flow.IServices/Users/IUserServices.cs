@@ -1,4 +1,5 @@
 ﻿
+using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Filter.Abstract;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IServices
 {
-   public interface IUserServices
+   public interface IUserServices: IScopedDependency
     {
 
         /// <summary>

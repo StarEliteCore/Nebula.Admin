@@ -28,7 +28,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.Menu
 {
-    [Dependency(ServiceLifetime.Scoped)]
+ 
     public class MenuServices : IMenuServices
     {
         private readonly IMenuRepository _menuRepository = null;

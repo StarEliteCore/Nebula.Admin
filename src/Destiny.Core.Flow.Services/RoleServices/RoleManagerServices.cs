@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.RoleServices
 {
-    [Dependency(ServiceLifetime.Scoped)]
+  
     public class RoleManagerServices: IRoleManagerServices
     {
         private readonly RoleManager<Role> _roleManager=null;

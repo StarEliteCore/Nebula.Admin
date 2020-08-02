@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.AspNetCore.Ui;
+using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Dtos.Menu;
 using Destiny.Core.Flow.Filter;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IServices.IMenu
 {
-    public interface IMenuServices
+    public interface IMenuServices : IScopedDependency
     {
 
         //Task<OperationResponse> GetTreeSelectTreeDataAsync();

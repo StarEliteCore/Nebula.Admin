@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Dtos.Functions;
+﻿using Destiny.Core.Flow.Dependency;
+using Destiny.Core.Flow.Dtos.Functions;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.Ui;
@@ -13,7 +14,7 @@ namespace Destiny.Core.Flow.IServices.Functions
     /// <summary>
     /// 功能
     /// </summary>
-   public interface IFunctionService
+   public interface IFunctionService: IScopedDependency
     {
         /// <summary>
         /// 异步创建功能

@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.Functions
 {
-    [Dependency(ServiceLifetime.Scoped)]
+
     public class FunctionService : IFunctionService
     {
         private readonly IEFCoreRepository<Function, Guid> _functionRepository;

@@ -17,7 +17,6 @@ namespace Destiny.Core.Flow.Services.UserRoles
     /// <summary>
     /// 用户角色
     /// </summary>
-    [Dependency(ServiceLifetime.Scoped)]
     public class UserRoleService: IUserRoleService
     {
         private readonly IEFCoreRepository<UserRole, Guid> _repositoryUserRole = null;

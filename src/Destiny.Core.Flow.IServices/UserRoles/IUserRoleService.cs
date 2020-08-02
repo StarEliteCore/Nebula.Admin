@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Model.Entities.Identity;
+﻿using Destiny.Core.Flow.Dependency;
+using Destiny.Core.Flow.Model.Entities.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IServices.UserRoles
 {
-   public interface IUserRoleService
+   public interface IUserRoleService: IScopedDependency
     {
 
 

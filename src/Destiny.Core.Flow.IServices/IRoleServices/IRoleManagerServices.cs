@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Dtos.RoleDtos;
+﻿using Destiny.Core.Flow.Dependency;
+using Destiny.Core.Flow.Dtos.RoleDtos;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.Ui;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IServices.IRoleServices
 {
-    public interface IRoleManagerServices
+    public interface IRoleManagerServices: IScopedDependency
     {
         /// <summary>
         /// 添加角色

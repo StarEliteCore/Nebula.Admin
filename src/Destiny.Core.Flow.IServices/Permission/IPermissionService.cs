@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Dtos.Permissions;
+﻿using Destiny.Core.Flow.Dependency;
+using Destiny.Core.Flow.Dtos.Permissions;
 using Destiny.Core.Flow.Dtos.RoleDtos;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Filter.Abstract;
@@ -13,7 +14,7 @@ namespace Destiny.Core.Flow.IServices.Permission
     /// <summary>
     /// 权限接口
     /// </summary>
-    public interface IPermissionService
+    public interface IPermissionService: IScopedDependency
     {
 
         Task<OperationResponse<RolePermissionOutputDto[]>> GetRolePermissionListAsync();

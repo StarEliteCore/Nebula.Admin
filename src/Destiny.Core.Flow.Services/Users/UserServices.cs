@@ -25,7 +25,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services
 {
-    [Dependency(ServiceLifetime.Scoped)]
+
     public class UserServices : IUserServices
     {
         private readonly UserManager<User> _userManager = null;
