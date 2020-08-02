@@ -19,6 +19,12 @@ namespace Destiny.Core.Flow.Dependency
     public class DependencyAppModule: AppModuleBase
     {
 
+        public override IServiceCollection ConfigureServices(IServiceCollection services)
+        {
+            IocManage.Instance.SetServiceCollection(services);
+            services = AddAutoInjection(services);
+            return services;
+        }
 
         private  IServiceCollection AddAutoInjection(IServiceCollection services)
         {
@@ -57,33 +63,34 @@ namespace Destiny.Core.Flow.Dependency
             return services;
         }
 
-        /// <summary>
-        /// 将服务实现类型注册到服务集合中
-        /// </summary>
-        /// <param name="services">服务集合</param>
-        /// <param name="implementationType">要注册的服务实例类型</param>
-        protected virtual void AddToServices(IServiceCollection services, Type implementationType)
+
+        private ServiceLifetime? GetServiceLifetime(Type type)
         {
-
-            var atrr = implementationType.GetAttribute<DependencyAttribute>();
-            Type[] serviceTypes = implementationType.GetImplementedInterfaces().Where(o=>!o.HasAttribute<IgnoreDependencyAttribute>()).ToArray();
-
-            if (serviceTypes.Length == 0)
+            var attr = type.GetCustomAttribute<DependencyAttribute>();
+            if (attr != null)
             {
-                services.TryAdd(new ServiceDescriptor(implementationType, implementationType, atrr.Lifetime));
-                return;
+                return attr.Lifetime;
             }
 
-            if (atrr?.AddSelf == true)
+            if (typeof(IScopedDependency).IsAssignableFrom(type))
             {
-                services.TryAdd(new ServiceDescriptor(implementationType, implementationType, atrr.Lifetime));
+                return ServiceLifetime.Scoped;
             }
 
-            foreach (var interfaceType in serviceTypes)
+            if (typeof(ITransientDependency).IsAssignableFrom(type))
             {
-                services.Add(new ServiceDescriptor(interfaceType, implementationType, atrr.Lifetime));
+                return ServiceLifetime.Transient;
             }
+
+
+            if (typeof(ISingletonDependency).IsAssignableFrom(type))
+            {
+                return ServiceLifetime.Singleton;
+            }
+
+            return null;
         }
+
 
         public override void Configure(IApplicationBuilder applicationBuilder)
         {
