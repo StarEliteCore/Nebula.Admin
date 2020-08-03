@@ -317,12 +317,5 @@
             验证方案提供对象
             </summary>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Startups.AspNetCoreAOPModule.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            AOP事务
-            </summary>
-            <param name="services"></param>
-            <returns></returns>
-        </member>
     </members>
 </doc>

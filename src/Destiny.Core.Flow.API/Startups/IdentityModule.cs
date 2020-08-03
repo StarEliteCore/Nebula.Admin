@@ -16,26 +16,14 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Destiny.Core.Flow.Modules;
 
 namespace Destiny.Core.Flow.API.Startups
 {
     public class IdentityModule : IdentityModuleBase<UserStore, RoleStore, User, UserRole, Role, Guid, Guid>
     {
 
-        public override IServiceCollection ConfigureServices(IServiceCollection services)
-        {
-            var services1 = base.ConfigureServices(services);
-
-
-            return services1;
-        }
-        public override void Configure(IApplicationBuilder app)
-        {
-
-            //app.UseAuthentication();
-
-        }
-
+  
         protected override Action<IdentityOptions> IdentityOption()
         {
             return options =>

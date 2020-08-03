@@ -10,17 +10,19 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Events
 {
-  public abstract  class EventBusAppModuleBase : AppModuleBase
+  public   class EventBusAppModule : AppModule
     {
- 
 
-        public override IServiceCollection ConfigureServices(IServiceCollection services)
+
+        public override void ConfigureServices(ConfigureServicesContext context)
         {
-            var assemblys=  services.GetOrAddSingletonService<IAssemblyFinder, AssemblyFinder>()?.FindAll();
+            var services = context.Services;
+            var assemblys = services.GetOrAddSingletonService<IAssemblyFinder, AssemblyFinder>()?.FindAll();
             services.AddMediatR(assemblys);
             services.AddEvents();
-            return services;
         }
+
+     
 
     }
 }

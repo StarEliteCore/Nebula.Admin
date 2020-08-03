@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow
 {
-    public abstract class IdentityModuleBase<TUserStore, TRoleStore, TUser, TUserRole, TRole, TUserKey, TRoleKey> :AppModuleBase
+    public abstract class IdentityModuleBase<TUserStore, TRoleStore, TUser, TUserRole, TRole, TUserKey, TRoleKey> : AppModule
           where TUserStore : class, IUserStore<TUser>
           where TRoleStore : class, IRoleStore<TRole>
           where TUser : UserBase<TUserKey>
@@ -18,22 +18,21 @@ namespace Destiny.Core.Flow
           where TUserKey : IEquatable<TUserKey>
           where TRoleKey : IEquatable<TRoleKey>
     {
- 
 
 
-        public override IServiceCollection ConfigureServices(IServiceCollection services)
+        public override void ConfigureServices(ConfigureServicesContext context)
         {
-            services.AddScoped<IUserStore<TUser>, TUserStore>();
+            context.Services.AddScoped<IUserStore<TUser>, TUserStore>();
 
-            services.AddScoped<IRoleStore<TRole>, TRoleStore>();
+            context.Services.AddScoped<IRoleStore<TRole>, TRoleStore>();
             Action<IdentityOptions> identityOption = IdentityOption();
-            var identityBuilder = services.AddIdentity<TUser, TRole>(identityOption);
+            var identityBuilder = context.Services.AddIdentity<TUser, TRole>(identityOption);
 
-            services.AddSingleton<IdentityErrorDescriber>(new IdentityErrorDescriberZhHans());
+            context.Services.AddSingleton<IdentityErrorDescriber>(new IdentityErrorDescriberZhHans());
             UseIdentityBuilder(identityBuilder);
-            AddAuthentication(services);
-            return services;
+            AddAuthentication(context.Services);
         }
+    
 
 
         protected abstract Action<IdentityOptions> IdentityOption();
@@ -43,10 +42,7 @@ namespace Destiny.Core.Flow
 
         protected abstract IdentityBuilder UseIdentityBuilder(IdentityBuilder identityBuilder);
 
-        public override void Configure(IApplicationBuilder app)
-        {
-            // app.UseAuthentication();
-        }
+    
 
 
 

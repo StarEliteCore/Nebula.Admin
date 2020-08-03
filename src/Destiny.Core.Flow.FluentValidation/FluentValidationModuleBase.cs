@@ -10,19 +10,18 @@ using System.Text;
 
 namespace Destiny.Core.Flow.FluentValidation
 {
-  public abstract  class FluentValidationModuleBase : AppModuleBase
+  public   class FluentValidationModuleBase : AppModule
     {
 
-        public override IServiceCollection ConfigureServices(IServiceCollection services)
+        public override void ConfigureServices(ConfigureServicesContext context)
         {
-       
-            var assemblyFinder = services.GetOrAddSingletonService<IAssemblyFinder, AssemblyFinder>();
+            var assemblyFinder = context.Services.GetOrAddSingletonService<IAssemblyFinder, AssemblyFinder>();
             assemblyFinder.NotNull(nameof(assemblyFinder));
-            services.AddValidatorsFromAssemblies(assemblyFinder.FindAll());
-            services.WithFluentValidation();
-            services.WithModelValidation();
-            return services;
+            context.Services.AddValidatorsFromAssemblies(assemblyFinder.FindAll());
+            context.Services.WithFluentValidation();
+            context.Services.WithModelValidation();
         }
+    
 
   
     }

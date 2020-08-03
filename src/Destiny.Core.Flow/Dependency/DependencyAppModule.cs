@@ -16,17 +16,19 @@ namespace Destiny.Core.Flow.Dependency
     /// <summary>
     /// 自动注入模块
     /// </summary>
-    public class DependencyAppModule: AppModuleBase
+    public class DependencyAppModule: AppModule
     {
 
-        public override IServiceCollection ConfigureServices(IServiceCollection services)
+        public override void ConfigureServices(ConfigureServicesContext context)
         {
-            IocManage.Instance.SetServiceCollection(services);
-            services = AddAutoInjection(services);
-            return services;
+            var services = context.Services;
+       
+            AddAutoInjection(services);
+
         }
 
-        private  IServiceCollection AddAutoInjection(IServiceCollection services)
+
+        private  void AddAutoInjection(IServiceCollection services)
         {
             var typeFinder = services.GetOrAddSingletonService<ITypeFinder, TypeFinder>();
             var baseTypes = new Type[] { typeof(IScopedDependency), typeof(ITransientDependency), typeof(ISingletonDependency) };
@@ -60,7 +62,6 @@ namespace Destiny.Core.Flow.Dependency
 
                 }
             }
-            return services;
         }
 
 
@@ -91,12 +92,13 @@ namespace Destiny.Core.Flow.Dependency
             return null;
         }
 
-
-        public override void Configure(IApplicationBuilder applicationBuilder)
+        public override void ApplicationInitialization(ApplicationContext context)
         {
-            IocManage.Instance.SetApplicationServiceProvider(applicationBuilder.ApplicationServices);
-            base.Configure(applicationBuilder);
+            var app= context.GetApplicationBuilder();
+
+          
         }
+   
 
     }
 }

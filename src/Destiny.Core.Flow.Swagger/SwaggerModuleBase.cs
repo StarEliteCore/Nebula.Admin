@@ -17,16 +17,17 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Destiny.Core.Flow.Swagger
 {
-    public abstract class SwaggerModuleBase : AppModuleBase
+    public  class SwaggerModule : AppModule
     {
 
 
 
         private string _url = string.Empty;
         private string _title = string.Empty;
-        public override IServiceCollection ConfigureServices(IServiceCollection services)
+
+        public override void ConfigureServices(ConfigureServicesContext context)
         {
-            IConfiguration configuration = services.GetConfiguration();
+            IConfiguration configuration = context.Services.GetConfiguration();
             var title = configuration["Destiny:Swagger:Title"];
             var version = configuration["Destiny:Swagger:Version"];
             var url = configuration["Destiny:Swagger:Url"];
@@ -49,7 +50,7 @@ namespace Destiny.Core.Flow.Swagger
             _url = url;
             _title = title;
 
-            services.AddSwaggerGen(s =>
+            context.Services.AddSwaggerGen(s =>
             {
 
 
@@ -102,11 +103,13 @@ namespace Destiny.Core.Flow.Swagger
 
 
             });
-            return services;
         }
 
-        public override void Configure(IApplicationBuilder app)
+
+        public override void ApplicationInitialization(ApplicationContext context)
         {
+
+           var app=  context.GetApplicationBuilder();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -126,5 +129,7 @@ namespace Destiny.Core.Flow.Swagger
                 c.RoutePrefix = string.Empty;
             });
         }
+
+      
     }
 }
