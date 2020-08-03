@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.IServices.Permission;
-using Destiny.Core.Flow.API.Permission;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

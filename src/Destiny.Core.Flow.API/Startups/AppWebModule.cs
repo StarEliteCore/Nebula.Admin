@@ -1,6 +1,6 @@
 ﻿using Destiny.Core.Flow.AspNetCore.Mvc.Filters;
 using Destiny.Core.Flow.AutoMapper;
-
+using Destiny.Core.Flow.Caching.CSRedis;
 using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Events;
 using Destiny.Core.Flow.Extensions;
@@ -24,8 +24,8 @@ namespace Destiny.Core.Flow.API.Startups
                typeof(FunctionModule),
                typeof(EventBusAppModule),
                typeof(EntityFrameworkCoreMySqlModule),
-               typeof(AutoMapperModule)
-               //typeof(CSRedisModule)
+               typeof(AutoMapperModule),
+               typeof(CSRedisModule)
         )]
     public class AppWebModule: AppModule
     {

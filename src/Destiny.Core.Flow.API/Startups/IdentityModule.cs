@@ -2,7 +2,7 @@
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Model.Security;
 using Destiny.Core.Flow.Options;
-using Destiny.Core.Flow.API.Permission;
+
 using Destiny.Core.Flow.Security.Jwt;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -69,21 +69,8 @@ namespace Destiny.Core.Flow.API.Startups
                 ClockSkew = TimeSpan.Zero, ////允许的服务器时间偏移量
                 LifetimeValidator = (nbf, exp, token, param) => exp > DateTime.UtcNow
             };
-            var Permission = new PermissionDto(
-                    "/api/denied",
-                    ClaimTypes.Role,
-                    "",
-                    settings.Jwt.Issuer,
-                    settings.Jwt.Audience,
-                    TimeSpan.FromSeconds(settings.Jwt.ExpireMins),
-                    signingCredentials
-                    );
-            services.AddAuthorization(
-                opt =>
-                {
-                    opt.AddPolicy(PermissionAuthorize.Name, policy => policy.Requirements.Add(Permission));
-                }
-            );
+           
+            services.AddAuthorization();
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -111,7 +98,6 @@ namespace Destiny.Core.Flow.API.Startups
                 };
 
             });
-            services.AddSingleton(Permission);
             services.AddScoped<IJwtBearerService, JwtBearerService>();
         }
         protected override IdentityBuilder UseIdentityBuilder(IdentityBuilder identityBuilder)
