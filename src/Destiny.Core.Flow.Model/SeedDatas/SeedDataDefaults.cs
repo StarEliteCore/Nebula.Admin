@@ -15,7 +15,7 @@ namespace Destiny.Core.Flow.Model.SeedDatas
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     /// <typeparam name="TKey"></typeparam>
-    [IgnoreDependency]
+
    public abstract class SeedDataDefaults<TEntity, TKey> : SeedDataBase<TEntity, TKey>
             where TEntity : IEntity<TKey>
           where TKey : IEquatable<TKey>
