@@ -139,6 +139,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetMenuChildrenButtonAsync(System.Nullable{System.Guid})">
+            <summary>
+            异步得到菜单下的按钮
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetMenuFunctionListAsync(System.Guid)">
             <summary>
             异步到菜单功能集合

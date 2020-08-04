@@ -28,18 +28,18 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.Menu
 {
- 
+
     public class MenuServices : IMenuServices
     {
         private readonly IMenuRepository _menuRepository = null;
         private readonly IEFCoreRepository<RoleMenuEntity, Guid> _roleMenuRepository;
-        private readonly IMenuFunctionRepository _menuFunction=null;
+        private readonly IMenuFunctionRepository _menuFunction = null;
         private readonly IUnitOfWork _unitOfWork = null;
         private readonly IIdentity _iIdentity = null;
         private readonly IEFCoreRepository<UserRole, Guid> _repositoryUserRole = null;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
-        public MenuServices(IMenuRepository menuRepository, IUnitOfWork unitOfWork, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository, IMenuFunctionRepository menuFunction, IPrincipal principal, UserManager<User> userManager, RoleManager<Role>  roleManager, IEFCoreRepository<UserRole, Guid> repositoryUserRole)
+        public MenuServices(IMenuRepository menuRepository, IUnitOfWork unitOfWork, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository, IMenuFunctionRepository menuFunction, IPrincipal principal, UserManager<User> userManager, RoleManager<Role> roleManager, IEFCoreRepository<UserRole, Guid> repositoryUserRole)
         {
             _menuRepository = menuRepository;
             _roleMenuRepository = roleMenuRepository;
@@ -48,7 +48,7 @@ namespace Destiny.Core.Flow.Services.Menu
             _iIdentity = principal.Identity;
             _userManager = userManager;
             _roleManager = roleManager;
-            _repositoryUserRole=repositoryUserRole;
+            _repositoryUserRole = repositoryUserRole;
         }
 
         public async Task<OperationResponse> CreateAsync(MenuInputDto input)
@@ -57,9 +57,9 @@ namespace Destiny.Core.Flow.Services.Menu
             return await _unitOfWork.UseTranAsync(async () =>
             {
                 var result = await _menuRepository.InsertAsync(input);
-                if(input.FunctionId?.Any()==true)
+                if (input.FunctionId?.Any() == true)
                 {
-                    int count= await _menuFunction.InsertAsync(input.FunctionId.Select(x => new MenuFunction
+                    int count = await _menuFunction.InsertAsync(input.FunctionId.Select(x => new MenuFunction
                     {
                         MenuId = input.Id,
                         FunctionId = x
@@ -99,7 +99,7 @@ namespace Destiny.Core.Flow.Services.Menu
         /// <returns></returns>
         public async Task<OperationResponse<SelectedItem<MenuTreeOutDto, Guid>>> GetMenuTreeAsync(Guid? roleId)
         {
-           
+
             var rolelist = new List<RoleMenuEntity>();
             var list = await _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuTreeOutDto>(
                 (r, c) =>
@@ -122,11 +122,11 @@ namespace Destiny.Core.Flow.Services.Menu
             selectedItem.Selected = new List<Guid>();
             if (roleId.HasValue)
             {
-                selectedItem.Selected= await _roleMenuRepository.Entities.Where(o => o.RoleId == roleId.Value).Select(o => o.MenuId).ToListAsync();
+                selectedItem.Selected = await _roleMenuRepository.Entities.Where(o => o.RoleId == roleId.Value).Select(o => o.MenuId).ToListAsync();
             }
             OperationResponse<SelectedItem<MenuTreeOutDto, Guid>> operationResponse = new OperationResponse<SelectedItem<MenuTreeOutDto, Guid>>();
             operationResponse.Type = OperationResponseType.Success;
-            operationResponse.Data= selectedItem;
+            operationResponse.Data = selectedItem;
 
             return operationResponse;
         }
@@ -155,9 +155,22 @@ namespace Destiny.Core.Flow.Services.Menu
             var menu = await _menuRepository.GetByIdAsync(Id);
             var menudto = menu.MapTo<MenuOutputLoadDto>();
             menudto.FunctionIds = (await _menuFunction.Entities.Where(x => x.MenuId == Id && x.IsDeleted == false).ToListAsync()).Select(x => x.FunctionId).ToArray();
-            return new OperationResponse<MenuOutputLoadDto>(MessageDefinitionType.LoadSucces, menudto,OperationResponseType.Success);
+            return new OperationResponse<MenuOutputLoadDto>(MessageDefinitionType.LoadSucces, menudto, OperationResponseType.Success);
         }
-      
+        /// <summary>
+        /// 根据ID获取一个菜单
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public async Task<OperationResponse<List<MenuOutputLoadDto>>> GetMenuChildrenButton(Guid Id)
+        {
+            var menu = await _menuRepository.Entities.Where(x => x.ParentId == Id && x.Type == MenuEnum.Button).Select(a => new MenuOutputLoadDto
+            {
+                Name = a.Name,
+                Path = a.Path,
+            }).ToListAsync();
+            return new OperationResponse<List<MenuOutputLoadDto>>(MessageDefinitionType.LoadSucces, menu, OperationResponseType.Success);
+        }
         public async Task<TreeResult<MenuTableOutDto>> GetMenuTableAsync()
         {
             return await _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuTableOutDto>(
@@ -184,11 +197,11 @@ namespace Destiny.Core.Flow.Services.Menu
         public async Task<IPagedResult<MenuPermissionsOutDto>> GetMenuAsync()
         {
             var menulist = new List<MenuPermissionsOutDto>();
-            var userId= _iIdentity.GetUesrId<Guid>();
-            var usermodel= await  _userManager.FindByIdAsync(userId.ToString());
+            var userId = _iIdentity.GetUesrId<Guid>();
+            var usermodel = await _userManager.FindByIdAsync(userId.ToString());
             var roleids = (await _repositoryUserRole.Entities.Where(x => x.UserId == userId).ToListAsync()).Select(x => x.RoleId);
             var menuId = (await _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).ToListAsync()).Select(x => x.MenuId);
-            if (usermodel.IsSystem && _roleManager.Roles.Where(x=>x.IsAdmin==true && roleids.Contains(x.Id)).Any())
+            if (usermodel.IsSystem && _roleManager.Roles.Where(x => x.IsAdmin == true && roleids.Contains(x.Id)).Any())
             {
                 menulist = await _menuRepository.Entities.Select(x => new MenuPermissionsOutDto
                 {
@@ -203,7 +216,7 @@ namespace Destiny.Core.Flow.Services.Menu
                     Total = menulist.Count,
                 };
             }
-            menulist= await _menuRepository.Entities.Where(x => menuId.Contains(x.Id)).Select(x => new MenuPermissionsOutDto
+            menulist = await _menuRepository.Entities.Where(x => menuId.Contains(x.Id)).Select(x => new MenuPermissionsOutDto
             {
                 Name = x.Name,
                 RouterPath = x.Path,

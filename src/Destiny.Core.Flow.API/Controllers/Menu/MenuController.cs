@@ -123,7 +123,17 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         {
             return (await _menuServices.GetMenuTreeAsync(roleId)).ToAjaxResult();
         }
+        /// <summary>
+        /// 异步得到菜单下的按钮
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Description("异步得到菜单下的按钮")]
 
+        public async Task<AjaxResult> GetMenuChildrenButtonAsync(Guid? menuId)
+        {
+            return (await _menuServices.GetMenuChildrenButton(menuId.Value)).ToAjaxResult();
+        }
         /// <summary>
         /// 异步到菜单功能集合
         /// </summary>

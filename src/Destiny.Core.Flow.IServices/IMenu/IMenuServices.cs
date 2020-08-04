@@ -62,5 +62,11 @@ namespace Destiny.Core.Flow.IServices.IMenu
         /// </summary>
         /// <returns></returns>
         Task<IPagedResult<MenuPermissionsOutDto>> GetMenuAsync();
+        /// <summary>
+        /// 异步得到菜单下的按钮
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        Task<OperationResponse<List<MenuOutputLoadDto>>> GetMenuChildrenButton(Guid Id);
     }
 }
