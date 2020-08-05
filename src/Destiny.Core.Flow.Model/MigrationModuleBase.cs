@@ -13,16 +13,18 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Model
 {
-    public abstract  class MigrationModuleBase : AppModuleBase
+    public   class MigrationModuleBase : AppModule
     {
 
-        public override void Configure(IApplicationBuilder applicationBuilder)
+
+        public override void ApplicationInitialization(ApplicationContext context)
         {
-           var configuration=  applicationBuilder.ApplicationServices.GetService<IConfiguration>();
-           var isAutoMigration=  configuration["Destiny:Migrations:IsAutoMigration"].AsTo<bool>();
-            if(isAutoMigration)
+            var app = context.GetApplicationBuilder();
+            var configuration = context.ServiceProvider.GetService<IConfiguration>();
+            var isAutoMigration = configuration["Destiny:Migrations:IsAutoMigration"].AsTo<bool>();
+            if (isAutoMigration)
             {
-                applicationBuilder.ApplicationServices.CreateScoped(provider => {
+                context.ServiceProvider.CreateScoped(provider => {
                     var unitOfWork = provider.GetService<IUnitOfWork>();
                     var dbContext = unitOfWork.GetDbContext();
                     string[] migrations = dbContext.Database.GetPendingMigrations().ToArray();
@@ -39,15 +41,14 @@ namespace Destiny.Core.Flow.Model
             var isAddSeedData = configuration["Destiny:Migrations:IsAddSeedData"].AsTo<bool>();
             if (isAddSeedData)
             {
-                var seedDatas = applicationBuilder.ApplicationServices.GetServices<ISeedData>();
+                var seedDatas = context.ServiceProvider.GetServices<ISeedData>();
 
                 foreach (var seed in seedDatas?.OrderBy(o => o.Order).Where(o => !o.Disable))
                 {
                     seed.Initialize();
                 }
             }
-         
-
         }
+    
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
@@ -55,5 +56,31 @@ namespace Destiny.Core.Flow.Reflection
         {
             return GetAllAssemblies().ToArray();
         }
+        /// <summary>
+        /// 根据程序集名字得到程序集
+        /// </summary>
+        /// <param name="assemblyNames"></param>
+        /// <returns></returns>
+
+        public static IEnumerable<Assembly> GetAssembliesByName(params string[] assemblyNames)
+        {
+            var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath; //获取项目路径
+            return assemblyNames.Select(o=>AssemblyLoadContext.Default.LoadFromAssemblyPath(Path.Combine(basePath,$"{o}.dll")));
+        }
+
+        //public static List<Assembly> LoadAssemblies(string folderPath, SearchOption searchOption)
+        //{
+        //    return GetAssemblyFiles(folderPath, searchOption)
+        //        .Select(AssemblyLoadContext.Default.LoadFromAssemblyPath)
+        //        .ToList();
+        //}
+
+        //public static IEnumerable<string> GetAssemblyFiles(string folderPath, SearchOption searchOption)
+        //{
+        //    return Directory
+        //        .EnumerateFiles(folderPath, "*.*", searchOption)
+        //        .Where(s => s.EndsWith(".dll") || s.EndsWith(".exe"));
+        //}
+
     }
 }

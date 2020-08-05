@@ -11,26 +11,25 @@ using System.Reflection;
 
 namespace Destiny.Core.Flow.AutoMapper
 {
-  public abstract  class AutoMapperModuleBase : AppModuleBase
+  public   class AutoMapperModule: AppModule
     {
 
 
 
-
-        public override IServiceCollection ConfigureServices(IServiceCollection services)
+        public override void ConfigureServices(ConfigureServicesContext context)
         {
-            var assemblyFinder =  services.GetOrAddSingletonService<IAssemblyFinder, AssemblyFinder>();
+            var assemblyFinder = context.Services.GetOrAddSingletonService<IAssemblyFinder, AssemblyFinder>();
             var assemblys = assemblyFinder.FindAll();
             var myAutoMapTypes = assemblys.SelectMany(o => o.GetTypes()).Where(t => t.IsClass && !t.IsAbstract && t.HasAttribute<AutoMappAttribute>(true)).Distinct().ToArray();
-            services.AddAutoMapper(mapper => {
+            context.Services.AddAutoMapper(mapper => {
 
-                this.CreateMapping<AutoMappAttribute>(myAutoMapTypes,mapper);
+                this.CreateMapping<AutoMappAttribute>(myAutoMapTypes, mapper);
 
-            },assemblys, ServiceLifetime.Singleton);
-            var mapper= services.GetService<IMapper>();
-            Destiny.Core.Flow.Extensions.Extensions.SetMapper(mapper); 
-            return services;
+            }, assemblys, ServiceLifetime.Singleton);
+            var mapper = context.Services.GetService<IMapper>();
+            Destiny.Core.Flow.Extensions.Extensions.SetMapper(mapper);
         }
+    
 
         private void CreateMapping<TAttribute>(Type[] sourceTypes, IMapperConfigurationExpression mapperConfigurationExpression)
      where TAttribute : AutoMappAttribute

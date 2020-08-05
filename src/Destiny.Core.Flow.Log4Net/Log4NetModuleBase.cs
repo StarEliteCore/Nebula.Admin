@@ -9,18 +9,15 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Log4Net
 {
-    public abstract  class Log4NetModuleBase : AppModuleBase
+    public   class Log4NetModule :AppModule
     {
- 
 
-        public override IServiceCollection ConfigureServices(IServiceCollection services)
+        public override void ConfigureServices(ConfigureServicesContext context)
         {
-            ///第一种用法
-         
-            services.AddTransient<Microsoft.Extensions.Logging.ILoggerFactory, LoggerFactory>();
-            services.AddSingleton<ILoggerProvider, Log4NetProvider>();
-
-            return services;
+            context.Services.AddTransient<Microsoft.Extensions.Logging.ILoggerFactory, LoggerFactory>();
+            context.Services.AddSingleton<ILoggerProvider, Log4NetProvider>();
         }
+
+     
     }
 }

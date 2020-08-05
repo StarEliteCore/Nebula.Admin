@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Model.SeedDatas
 {
-    [Dependency(ServiceLifetime.Transient)]
+    [Dependency(ServiceLifetime.Singleton)]
     public class RoleSeedData : SeedDataDefaults<Role, Guid>
     {
         

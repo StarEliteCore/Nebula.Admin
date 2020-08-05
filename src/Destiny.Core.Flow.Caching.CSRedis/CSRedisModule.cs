@@ -12,12 +12,12 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Caching.CSRedis
 {
-  public abstract  class CSRedisModuleBase : AppModuleBase
+  public   class CSRedisModule : AppModule
     {
-        public override IServiceCollection ConfigureServices(IServiceCollection services)
+
+        public override void ConfigureServices(ConfigureServicesContext context)
         {
- 
-            var redisPath = services.GetConfiguration()["Destiny:Redis:ConnectionString"];
+            var redisPath = context.Services.GetConfiguration()["Destiny:Redis:ConnectionString"];
             var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath; //获取项目路径
             var redisConn = Path.Combine(basePath, redisPath);
             if (!File.Exists(redisConn))
@@ -27,11 +27,11 @@ namespace Destiny.Core.Flow.Caching.CSRedis
             var connStr = File.ReadAllText(redisConn).Trim();
             var csredis = new CSRedisClient(connStr);
             RedisHelper.Initialization(csredis);
-            services.TryAddTransient(typeof(ICache<>), typeof(CSRedisCache<>));
-            services.TryAddTransient(typeof(ICache<,>), typeof(CSRedisCache<,>));
-            services.TryAddTransient<ICache, CSRedisCache>();
-            return services;
+            context.Services.TryAddTransient(typeof(ICache<>), typeof(CSRedisCache<>));
+            context.Services.TryAddTransient(typeof(ICache<,>), typeof(CSRedisCache<,>));
+            context.Services.TryAddTransient<ICache, CSRedisCache>();
         }
+      
        
     }
 }

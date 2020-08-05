@@ -10,7 +10,7 @@ using Destiny.Core.Flow.Dependency;
 
 namespace Destiny.Core.Flow.Entity
 {
-    [IgnoreDependency]
+  
     public abstract class SeedDataBase<TEntity, TKey> : ISeedData
             where TEntity : IEntity<TKey>
           where TKey : IEquatable<TKey>

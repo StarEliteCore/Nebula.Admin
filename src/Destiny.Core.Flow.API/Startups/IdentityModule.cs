@@ -2,7 +2,7 @@
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Model.Security;
 using Destiny.Core.Flow.Options;
-using Destiny.Core.Flow.API.Permission;
+
 using Destiny.Core.Flow.Security.Jwt;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -16,26 +16,14 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Destiny.Core.Flow.Modules;
 
 namespace Destiny.Core.Flow.API.Startups
 {
     public class IdentityModule : IdentityModuleBase<UserStore, RoleStore, User, UserRole, Role, Guid, Guid>
     {
 
-        public override IServiceCollection ConfigureServices(IServiceCollection services)
-        {
-            var services1 = base.ConfigureServices(services);
-
-
-            return services1;
-        }
-        public override void Configure(IApplicationBuilder app)
-        {
-
-            //app.UseAuthentication();
-
-        }
-
+  
         protected override Action<IdentityOptions> IdentityOption()
         {
             return options =>
@@ -81,21 +69,8 @@ namespace Destiny.Core.Flow.API.Startups
                 ClockSkew = TimeSpan.Zero, ////允许的服务器时间偏移量
                 LifetimeValidator = (nbf, exp, token, param) => exp > DateTime.UtcNow
             };
-            var Permission = new PermissionDto(
-                    "/api/denied",
-                    ClaimTypes.Role,
-                    "",
-                    settings.Jwt.Issuer,
-                    settings.Jwt.Audience,
-                    TimeSpan.FromSeconds(settings.Jwt.ExpireMins),
-                    signingCredentials
-                    );
-            services.AddAuthorization(
-                opt =>
-                {
-                    opt.AddPolicy(PermissionAuthorize.Name, policy => policy.Requirements.Add(Permission));
-                }
-            );
+           
+            services.AddAuthorization();
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -123,7 +98,6 @@ namespace Destiny.Core.Flow.API.Startups
                 };
 
             });
-            services.AddSingleton(Permission);
             services.AddScoped<IJwtBearerService, JwtBearerService>();
         }
         protected override IdentityBuilder UseIdentityBuilder(IdentityBuilder identityBuilder)

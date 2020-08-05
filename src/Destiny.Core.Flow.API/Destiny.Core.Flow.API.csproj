@@ -12,6 +12,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="StartupExtension\**" />
+    <Content Remove="StartupExtension\**" />
+    <EmbeddedResource Remove="StartupExtension\**" />
+    <None Remove="StartupExtension\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AspectCore.Extensions.DependencyInjection" Version="2.1.0" />
     <PackageReference Include="AspectCore.Extensions.Hosting" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.6" />
@@ -38,18 +45,11 @@
     <ProjectReference Include="..\Destiny.Core.Flow.AutoMapper\Destiny.Core.Flow.AutoMapper.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Caching.CSRedis\Destiny.Core.Flow.Caching.CSRedis.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Caching\Destiny.Core.Flow.Caching.csproj" />
-    <ProjectReference Include="..\Destiny.Core.Flow.Consul\Destiny.Core.Flow.Consul.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Dtos\Destiny.Core.Flow.Dtos.csproj" />
-    <ProjectReference Include="..\Destiny.Core.Flow.FluentValidation\Destiny.Core.Flow.FluentValidation.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.IServices\Destiny.Core.Flow.IServices.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Model\Destiny.Core.Flow.Model.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.SeriLog\Destiny.Core.Flow.SeriLog.csproj" />
-    <ProjectReference Include="..\Destiny.Core.Flow.Services\Destiny.Core.Flow.Services.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Swagger\Destiny.Core.Flow.Swagger.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="StartupExtension\" />
   </ItemGroup>
 
   <ItemGroup>
