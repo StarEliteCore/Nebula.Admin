@@ -21,6 +21,7 @@ using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Ui;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Destiny.Core.Flow.Caching;
 
 namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
 {
@@ -36,8 +37,9 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
         private readonly IEFCoreRepository<Function, Guid> _funcRepository = null;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
+        private ICache _cache1 = null;
         public PermissionAuthorizationFilter(IPrincipal principal, IEFCoreRepository<UserRole, Guid> repositoryUserRole, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository
-            , IEFCoreRepository<MenuFunction, Guid> menuFuncRepository, IEFCoreRepository<Function, Guid> funcRepository, UserManager<User> userManager, RoleManager<Role> roleManager
+            , IEFCoreRepository<MenuFunction, Guid> menuFuncRepository, IEFCoreRepository<Function, Guid> funcRepository, UserManager<User> userManager, RoleManager<Role> roleManager, ICache cache1
 
             )
         {
@@ -48,6 +50,7 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
             _funcRepository = funcRepository;
             _userManager = userManager;
             _roleManager = roleManager;
+            _cache1 = cache1;
         }
 
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
@@ -56,7 +59,7 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
             var isAllowAnonymous = action.ControllerTypeInfo.GetCustomAttribute<AllowAnonymousAttribute>();//获取Action中的特性
             var linkurl= context.HttpContext.Request.Path.Value.Replace("/api/", "");
             var result = new AjaxResult(MessageDefinitionType.Unauthorized, Enums.AjaxResultType.Unauthorized);
-
+            //_cache1.Get <>
             if (!action .EndpointMetadata.Any(x=>x is AllowAnonymousAttribute))
             {
                 if (!_principal.Identity.IsAuthenticated)

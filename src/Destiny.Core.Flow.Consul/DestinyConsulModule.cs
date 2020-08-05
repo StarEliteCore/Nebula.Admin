@@ -14,11 +14,11 @@ namespace Destiny.Core.Flow.Consul
     /// <summary>
     /// Consul服务发现模块
     /// </summary>
-    public abstract class DestinyConsulModule : AppModule
+    public abstract  class DestinyConsulModule : AppModule
     {
         /// <summary>
         /// 服务地址
-        /// </summary>
+        /// </summaryabababz
         private string _serviceName = string.Empty;
         /// <summary>
         /// Consul服务地址
@@ -31,7 +31,7 @@ namespace Destiny.Core.Flow.Consul
         /// <summary>
         /// docker容器内部端口
         /// </summary>
-        private int _Prot = 80;
+        private int _prot = 80;
         /// <summary>
         /// 获取配置文件
         /// </summary>
@@ -43,7 +43,7 @@ namespace Destiny.Core.Flow.Consul
             IConfiguration configuration = context.Services.GetConfiguration();
             _consulIp = configuration["Consul:IP"];
             _consulPort = /*Convert.ToInt32(configuration["Consul:Port"])*/configuration["Consul:Port"].AsTo<Int32>();
-            _Prot = /*Convert.ToInt32(configuration["Service:Port"])*/configuration["Service:Port"].AsTo<Int32>();
+            _prot = /*Convert.ToInt32(configuration["Service:Port"])*/configuration["Service:Port"].AsTo<Int32>();
             _serviceName = configuration["Service:Name"];
         }
 
@@ -58,7 +58,7 @@ namespace Destiny.Core.Flow.Consul
             ServiceEntity serviceEntity = new ServiceEntity
             {
                 IP = NetworkHelper.LocalIPAddress,
-                Port = _Prot,//如果使用的是docker 进行部署这个需要和dockerfile中的端口保证一致
+                Port = _prot,//如果使用的是docker 进行部署这个需要和dockerfile中的端口保证一致
                 ServiceName = _serviceName,
                 ConsulIP = _consulIp,
                 ConsulPort = _consulPort
