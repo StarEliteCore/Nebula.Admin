@@ -1,6 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿
+using Destiny.Core.Flow.Extensions;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Destiny.Core.Flow.Modules
@@ -16,5 +20,13 @@ namespace Destiny.Core.Flow.Modules
 
         }
         public IServiceCollection Services { get; }
+
+
+        public IConfiguration GetConfiguration()
+        {
+         
+           var implemenInstance= Services.GetSingletonInstanceOrNull<IConfiguration>();
+           return implemenInstance;
+        }
     }
 }

@@ -27,7 +27,7 @@ namespace Destiny.Core.Flow.Swagger
 
         public override void ConfigureServices(ConfigureServicesContext context)
         {
-            IConfiguration configuration = context.Services.GetConfiguration();
+            IConfiguration configuration = context.GetConfiguration();
             var title = configuration["Destiny:Swagger:Title"];
             var version = configuration["Destiny:Swagger:Version"];
             var url = configuration["Destiny:Swagger:Url"];
