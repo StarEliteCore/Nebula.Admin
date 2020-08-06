@@ -131,6 +131,7 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         /// <returns></returns>
         [HttpGet]
         [Description("异步得到菜单下的按钮")]
+        [NoAuthorityVerification]
 
         public async Task<AjaxResult> GetMenuChildrenButtonAsync(Guid? menuId)
         {
