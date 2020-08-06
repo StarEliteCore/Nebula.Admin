@@ -5,7 +5,7 @@ using System;
 
 namespace Destiny.Core.Flow.Repository.MenuRepository
 {
-    [Dependency(ServiceLifetime.Scoped)]
+  
     public class MenuRepository : Repository<MenuEntity, Guid>, IMenuRepository
     {
         public MenuRepository(IServiceProvider serviceProvider) : base(serviceProvider)
@@ -14,7 +14,7 @@ namespace Destiny.Core.Flow.Repository.MenuRepository
         }
     }
 
-    public interface IMenuRepository : IEFCoreRepository<MenuEntity, Guid>
+    public interface IMenuRepository : IEFCoreRepository<MenuEntity, Guid>,IScopedDependency
     {
     }
 }

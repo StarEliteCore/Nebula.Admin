@@ -50,10 +50,5 @@ namespace Destiny.Core.Flow.Dtos.DataDictionnary
         /// </summary>
         [DisplayName("编码")]
         public string Code { get; set; }
-        /// <summary>
-        /// id
-        /// </summary>
-        [DisplayName("Id")]
-        public Guid Id { get; set; }
     }
 }
