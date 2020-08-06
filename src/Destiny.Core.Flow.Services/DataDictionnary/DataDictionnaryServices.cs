@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 namespace Destiny.Core.Flow.Services.DataDictionnary
 {
    
-    public class DataDictionnaryServices: IDataDictionnaryServices
+    public class DataDictionnaryServices : IDataDictionnaryServices
     {
         private readonly IDataDictionnaryRepository _dataDictionnaryRepository = null;
         public DataDictionnaryServices(IDataDictionnaryRepository dataDictionnaryRepository)

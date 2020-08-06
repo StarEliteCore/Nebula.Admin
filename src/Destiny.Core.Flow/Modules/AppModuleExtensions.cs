@@ -42,7 +42,7 @@ namespace Destiny.Core.Flow.Modules
         public static IApplicationBuilder InitializeApplication(this IApplicationBuilder builder)
         {
             builder.ApplicationServices.GetRequiredService<ObjectAccessor<IApplicationBuilder>>().Value = builder;
-            var runner = builder.ApplicationServices.GetRequiredService<StartupModuleRunner>();
+            var runner = builder.ApplicationServices.GetRequiredService<IStartupModuleRunner>();
             runner.Initialize(builder.ApplicationServices);
             return builder;
         }

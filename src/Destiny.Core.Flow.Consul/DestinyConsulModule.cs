@@ -14,11 +14,11 @@ namespace Destiny.Core.Flow.Consul
     /// <summary>
     /// Consul服务发现模块
     /// </summary>
-    public abstract class DestinyConsulModule : AppModuleBase
+    public abstract  class DestinyConsulModule : AppModule
     {
         /// <summary>
         /// 服务地址
-        /// </summary>
+        /// </summaryabababz
         private string _serviceName = string.Empty;
         /// <summary>
         /// Consul服务地址
@@ -31,31 +31,34 @@ namespace Destiny.Core.Flow.Consul
         /// <summary>
         /// docker容器内部端口
         /// </summary>
-        private int _Prot = 80;
+        private int _prot = 80;
         /// <summary>
         /// 获取配置文件
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
-        public override IServiceCollection ConfigureServices(IServiceCollection services)
+        /// 
+        public override void ConfigureServices(ConfigureServicesContext context)
         {
-            IConfiguration configuration = services.GetConfiguration();
+            IConfiguration configuration = context.Services.GetConfiguration();
             _consulIp = configuration["Consul:IP"];
-            _consulPort = Convert.ToInt32(configuration["Consul:Port"]);
-            _Prot = Convert.ToInt32(configuration["Service:Port"]);
+            _consulPort = /*Convert.ToInt32(configuration["Consul:Port"])*/configuration["Consul:Port"].AsTo<Int32>();
+            _prot = /*Convert.ToInt32(configuration["Service:Port"])*/configuration["Service:Port"].AsTo<Int32>();
             _serviceName = configuration["Service:Name"];
-            return services;
         }
+
+
         /// <summary>
         /// 注册Consul
         /// </summary>
-        /// <param name="app"></param>
-        public override void Configure(IApplicationBuilder app)
+        /// <param name="context"></param>
+        public override void ApplicationInitialization(ApplicationContext context)
         {
+            var app = context.GetApplicationBuilder();
             ServiceEntity serviceEntity = new ServiceEntity
             {
                 IP = NetworkHelper.LocalIPAddress,
-                Port = _Prot,//如果使用的是docker 进行部署这个需要和dockerfile中的端口保证一致
+                Port = _prot,//如果使用的是docker 进行部署这个需要和dockerfile中的端口保证一致
                 ServiceName = _serviceName,
                 ConsulIP = _consulIp,
                 ConsulPort = _consulPort
@@ -80,11 +83,13 @@ namespace Destiny.Core.Flow.Consul
                 Tags = new[] { $"urlprefix-/{serviceEntity.ServiceName}" }//添加 urlprefix-/servicename 格式的 tag 标签，以便 Fabio 识别
             };
             consulClient.Agent.ServiceRegister(registration).Wait();//服务启动时注册，内部实现其实就是使用 Consul API 进行注册（HttpClient发起）
-            var lifetime = app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
+            var lifetime =context.ServiceProvider.GetRequiredService<IHostApplicationLifetime>();
             lifetime.ApplicationStopping.Register(() =>
             {
                 consulClient.Agent.ServiceDeregister(registration.ID).Wait();//服务停止时取消注册
             });
         }
+
+      
     }
 }

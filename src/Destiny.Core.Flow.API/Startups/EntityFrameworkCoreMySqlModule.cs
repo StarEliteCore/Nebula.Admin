@@ -13,9 +13,15 @@ using Destiny.Core.Flow.EntityFrameworkCore;
 using System.IO;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Destiny.Core.Flow.Entity;
+using Destiny.Core.Flow.Modules;
+using Destiny.Core.Flow.Events;
 
 namespace Destiny.Core.Flow.API.Startups
 {
+    [DependsOn(
+              typeof(EventBusAppModule)
+
+       )]
     public class EntityFrameworkCoreMySqlModule : EntityFrameworkCoreModuleBase
     {
         protected override IServiceCollection AddRepository(IServiceCollection services)

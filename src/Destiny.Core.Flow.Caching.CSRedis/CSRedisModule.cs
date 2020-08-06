@@ -1,5 +1,6 @@
 ﻿using CSRedis;
 using Destiny.Core.Flow.Caching;
+using Destiny.Core.Flow.Exceptions;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Modules;
 using Microsoft.AspNetCore.Builder;
@@ -12,26 +13,26 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Caching.CSRedis
 {
-  public abstract  class CSRedisModuleBase : AppModuleBase
+  public   class CSRedisModule : AppModule
     {
-        public override IServiceCollection ConfigureServices(IServiceCollection services)
+
+        public override void ConfigureServices(ConfigureServicesContext context)
         {
- 
-            var redisPath = services.GetConfiguration()["Destiny:Redis:ConnectionString"];
+            var redisPath = context.Services.GetConfiguration()["Destiny:Redis:ConnectionString"];
             var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath; //获取项目路径
             var redisConn = Path.Combine(basePath, redisPath);
             if (!File.Exists(redisConn))
             {
-                throw new Exception("未找到存放Rdis链接的文件");
+                throw new AppException("未找到存放Rdis链接的文件");
             }
             var connStr = File.ReadAllText(redisConn).Trim();
             var csredis = new CSRedisClient(connStr);
             RedisHelper.Initialization(csredis);
-            services.TryAddTransient(typeof(ICache<>), typeof(CSRedisCache<>));
-            services.TryAddTransient(typeof(ICache<,>), typeof(CSRedisCache<,>));
-            services.TryAddTransient<ICache, CSRedisCache>();
-            return services;
+            context.Services.TryAddSingleton(typeof(ICache<>), typeof(CSRedisCache<>));
+            context.Services.TryAddSingleton(typeof(ICache<,>), typeof(CSRedisCache<,>));
+            context.Services.TryAddSingleton<ICache, CSRedisCache>();
         }
+      
        
     }
 }

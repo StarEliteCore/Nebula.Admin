@@ -10,16 +10,23 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow
 {
-    public  abstract class EntityFrameworkCoreModuleBase: AppModuleBase
+    public  abstract class EntityFrameworkCoreModuleBase: AppModule
     {
-   
-        public override IServiceCollection ConfigureServices(IServiceCollection services)
-        {            
-            services = UseSql(services);
-            services= AddUnitOfWork(services);
-            services = AddRepository(services);
-            return services;
+
+        public override void ConfigureServices(ConfigureServicesContext context)
+        {
+      
+             UseSql(context.Services);
+             AddUnitOfWork(context.Services);
+             AddRepository(context.Services);
         }
+        //public override IServiceCollection ConfigureServices(IServiceCollection services)
+        //{            
+        //    services = UseSql(services);
+        //    services= AddUnitOfWork(services);
+        //    services = AddRepository(services);
+        //    return services;
+        //}
 
         protected abstract IServiceCollection AddUnitOfWork(IServiceCollection services);
 

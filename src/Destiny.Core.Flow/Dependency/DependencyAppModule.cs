@@ -7,8 +7,11 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.Loader;
 using System.Text;
 
 namespace Destiny.Core.Flow.Dependency
@@ -16,37 +19,45 @@ namespace Destiny.Core.Flow.Dependency
     /// <summary>
     /// 自动注入模块
     /// </summary>
-    public class DependencyAppModule: AppModuleBase
+    public class DependencyAppModule: AppModule
     {
 
-        public override IServiceCollection ConfigureServices(IServiceCollection services)
+        public override void ConfigureServices(ConfigureServicesContext context)
         {
-            IocManage.Instance.SetServiceCollection(services);
-            services = AddAutoInjection(services);
-            return services;
+            var services = context.Services;
+       
+            AddAutoInjection(services);
+
         }
 
-        private  IServiceCollection AddAutoInjection(IServiceCollection services)
+
+        private  void AddAutoInjection(IServiceCollection services)
         {
+     
+            var servicesTypes = AssemblyHelper.GetAssembliesByName("Destiny.Core.Flow.Services", "Destiny.Core.Flow.Repository").SelectMany(type=>type.DefinedTypes);
+
             var typeFinder = services.GetOrAddSingletonService<ITypeFinder, TypeFinder>();
             var baseTypes = new Type[] { typeof(IScopedDependency), typeof(ITransientDependency), typeof(ISingletonDependency) };
-            var types = typeFinder.FindAll().Where(type => type.IsClass && !type.IsAbstract && (baseTypes.Any(b => b.IsAssignableFrom(type))) || type.GetCustomAttribute<DependencyAttribute>() != null);
-            foreach (var implementedInterType in types.Where(o=>!o.HasAttribute<IgnoreDependencyAttribute>()))
+
+            var types = typeFinder.FindAll()?.Concat(servicesTypes).Distinct();
+        
+            types = types.Where(type =>type.IsClass&& !type.IsAbstract && (baseTypes.Any(b => b.IsAssignableFrom(type))) || type.GetCustomAttribute<DependencyAttribute>() != null);
+            foreach (var implementedInterType in types)
             {
                 var attr = implementedInterType.GetCustomAttribute<DependencyAttribute>();
                 var typeInfo = implementedInterType.GetTypeInfo();
-                var serviceTypes = typeInfo.ImplementedInterfaces.Where(x => x.HasMatchingGenericArity(typeInfo)).Select(t => t.GetRegistrationType(typeInfo));
+                var serviceTypes = typeInfo.ImplementedInterfaces.Where(x => x.HasMatchingGenericArity(typeInfo)&&!x.HasAttribute<IgnoreDependencyAttribute>()&& x!=typeof(IDisposable)).Select(t => t.GetRegistrationType(typeInfo));
 
                 var lifetime = GetServiceLifetime(implementedInterType);
 
                 if (lifetime == null)
                 {
-                    break;
+                     break;
                 }
                 if (serviceTypes.Count() == 0)
                 {
                     services.Add(new ServiceDescriptor(implementedInterType, implementedInterType, lifetime.Value));
-                    break;
+                    continue;
                 }
 
                 if (attr?.AddSelf == true)
@@ -59,8 +70,8 @@ namespace Destiny.Core.Flow.Dependency
                     services.Add(new ServiceDescriptor(serviceType, implementedInterType, lifetime.Value));
 
                 }
+               
             }
-            return services;
         }
 
 
@@ -91,12 +102,13 @@ namespace Destiny.Core.Flow.Dependency
             return null;
         }
 
-
-        public override void Configure(IApplicationBuilder applicationBuilder)
+        public override void ApplicationInitialization(ApplicationContext context)
         {
-            IocManage.Instance.SetApplicationServiceProvider(applicationBuilder.ApplicationServices);
-            base.Configure(applicationBuilder);
+            var app= context.GetApplicationBuilder();
+
+          
         }
+   
 
     }
 }

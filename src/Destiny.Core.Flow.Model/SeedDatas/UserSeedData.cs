@@ -15,7 +15,7 @@ using Destiny.Core.Flow.Dependency;
 
 namespace Destiny.Core.Flow.Model.SeedDatas
 {
-    [Dependency(ServiceLifetime.Transient)]
+    [Dependency(ServiceLifetime.Singleton)]
     public class UserSeedData : SeedDataDefaults<User, Guid>
     {
      

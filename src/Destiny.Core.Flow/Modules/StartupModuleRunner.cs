@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Destiny.Core.Flow.Dependency;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +17,7 @@ namespace Destiny.Core.Flow.Modules
         }
         public void ConfigureServices(IServiceCollection services)
         {
+            IocManage.Instance.SetServiceCollection(services);
             var ctx = new ConfigureServicesContext(services);
             services.AddSingleton(ctx);
             foreach (var cfg in Modules)
@@ -27,6 +29,7 @@ namespace Destiny.Core.Flow.Modules
 
         public void Initialize(IServiceProvider service)
         {
+            IocManage.Instance.SetApplicationServiceProvider(service);
             SetServiceProvider(service);
             using var scope = ServiceProvider.CreateScope();
             //using var scope = service.CreateScope();
