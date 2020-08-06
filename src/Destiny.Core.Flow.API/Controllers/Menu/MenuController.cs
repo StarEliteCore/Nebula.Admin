@@ -11,6 +11,7 @@ using Destiny.Core.Flow.Dtos.Menu;
 using Destiny.Core.Flow.Dtos.MenuFunction;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices.IMenu;
+using Destiny.Core.Flow.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -107,6 +108,7 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         /// <returns></returns>
         [HttpGet]
         [Description("根据登录账号获取菜单")]
+        [NoAuthorityVerification]
         public async Task<PageList<MenuPermissionsOutDto>> GetMenuAsync()
         {
             return (await _menuServices.GetMenuAsync()).ToPageList();
