@@ -10,8 +10,4 @@
     <ProjectReference Include="..\Destiny.Core.Flow.Model\Destiny.Core.Flow.Model.csproj" />
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;$(SolutionDir)src\Destiny.Core.Flow.API\bin\Debug\netcoreapp3.1" />
-  </Target>
-
 </Project>
