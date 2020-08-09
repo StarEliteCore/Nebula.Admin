@@ -10,11 +10,14 @@ using Destiny.Core.Flow.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using System.Reflection;
+using Microsoft.Extensions.Configuration;
 
 namespace Destiny.Core.Flow.API.Startups
 {
@@ -37,7 +40,9 @@ namespace Destiny.Core.Flow.API.Startups
 
             var configuration = context.GetConfiguration();
             context.Services.Configure<AppOptionSettings>(configuration.GetSection("Destiny"));
-            var settings = context.Services.GetAppSettings();
+           
+             var settings =context.GetConfiguration<AppOptionSettings>("Destiny");
+             context.Services.AddObjectAccessor<AppOptionSettings>(settings);
             if (!settings.Cors.PolicyName.IsNullOrEmpty() && !settings.Cors.Url.IsNullOrEmpty()) //添加跨域
             {
                 _corePolicyName = settings.Cors.PolicyName;

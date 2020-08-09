@@ -14,10 +14,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Extensions
 {
-    public interface IServiceModule
-    {
-        void ConfigureServices(IServiceCollection services);
-    }
+
     public static partial class Extensions
     {
   
