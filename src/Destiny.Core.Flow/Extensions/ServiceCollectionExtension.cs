@@ -102,9 +102,19 @@ where TImplementation : class, TServiceType
 
         public static T GetSingletonInstanceOrNull<T>(this IServiceCollection services)
         {
-            return (T)services
-                .FirstOrDefault(d => d.ServiceType == typeof(T))
-                ?.ImplementationInstance;
+            var servictType= services
+                .FirstOrDefault(d => d.ServiceType == typeof(T)&&d.Lifetime== ServiceLifetime.Singleton);
+            if (servictType?.ImplementationInstance != null)
+            {
+                return (T)servictType.ImplementationInstance;
+            }
+
+            if (servictType?.ImplementationFactory != null)
+            {
+                return (T)servictType.ImplementationFactory.Invoke(null);
+            }
+
+            return default(T);
         }
 
         public static T GetSingletonInstance<T>(this IServiceCollection services)

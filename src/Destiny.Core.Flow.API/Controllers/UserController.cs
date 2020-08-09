@@ -16,8 +16,7 @@ using Microsoft.Extensions.Logging;
 using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Validation;
 using Microsoft.Extensions.DependencyInjection;
-
-
+using Destiny.Core.Flow.Permission;
 namespace Destiny.Core.Flow.API.Controllers
 {
 
@@ -100,7 +99,7 @@ namespace Destiny.Core.Flow.API.Controllers
 
         [HttpGet]
         [Description("异步加载用户")]
-
+        [NoAuthorityVerification]
 
         public async Task<AjaxResult> LoadAsync(Guid id)
         {

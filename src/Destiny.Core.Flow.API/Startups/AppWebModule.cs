@@ -34,7 +34,8 @@ namespace Destiny.Core.Flow.API.Startups
 
         public override void ConfigureServices(ConfigureServicesContext context)
         {
-            var configuration = context.Services.GetConfiguration();
+
+            var configuration = context.GetConfiguration();
             context.Services.Configure<AppOptionSettings>(configuration.GetSection("Destiny"));
             var settings = context.Services.GetAppSettings();
             if (!settings.Cors.PolicyName.IsNullOrEmpty() && !settings.Cors.Url.IsNullOrEmpty()) //添加跨域
