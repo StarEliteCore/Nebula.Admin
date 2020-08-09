@@ -168,6 +168,7 @@ namespace Destiny.Core.Flow.Services.Menu
             {
                 Name = a.Name,
                 Path = a.Path,
+                Icon=a.Icon
             }).ToListAsync();
             return new OperationResponse<List<MenuOutputLoadDto>>(MessageDefinitionType.LoadSucces, menu, OperationResponseType.Success);
         }
