@@ -2,6 +2,7 @@
 using Destiny.Core.Flow.Dtos.RoleDtos;
 using Destiny.Core.Flow.EntityFrameworkCore;
 using Destiny.Core.Flow.Enums;
+using Destiny.Core.Flow.Events.EventBus;
 using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
@@ -9,6 +10,8 @@ using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.IServices.IRoleServices;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Model.Entities.Rolemenu;
+using Destiny.Core.Flow.Services.RoleServices.EventHandlers;
+using Destiny.Core.Flow.Services.RoleServices.Events;
 using Destiny.Core.Flow.Ui;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -27,14 +30,16 @@ namespace Destiny.Core.Flow.Services.RoleServices
     {
         private readonly RoleManager<Role> _roleManager=null;
         private readonly IEFCoreRepository<RoleMenuEntity, Guid> _roleMenuRepository;
+        private readonly IEventBus _eventBus = null;
         /// <summary>
         /// 构造函数注入
         /// </summary>
         /// <param name="roleManager"></param>
-        public RoleManagerServices(RoleManager<Role> roleManager, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository)
+        public RoleManagerServices(RoleManager<Role> roleManager, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository, IEventBus eventBus)
         {
             _roleManager = roleManager;
             _roleMenuRepository = roleMenuRepository;
+            _eventBus = eventBus;
         }
         /// <summary>
         /// 异步添加角色
@@ -59,6 +64,7 @@ namespace Destiny.Core.Flow.Services.RoleServices
                         RoleId = role.Id,
                     }).ToArray();
                     int count = await _roleMenuRepository.InsertAsync(list);
+                    await _eventBus?.PublishAsync(new RoleMenuCacheAddOrUpdateEvent() { RoleId=role.Id,MenuIds=dto.MenuIds});
                     if (count <= 0)
                     {
                         return new OperationResponse("保存失败", OperationResponseType.Error);
@@ -77,6 +83,7 @@ namespace Destiny.Core.Flow.Services.RoleServices
             {
                 return result.ToOperationResponse();
             }
+            _eventBus?.PublishAsync(new RoleMenuEventCacehDeleteEvent() { RoleId=id});
             return new OperationResponse("删除成功!!", OperationResponseType.Success);
 
         }
@@ -101,6 +108,7 @@ namespace Destiny.Core.Flow.Services.RoleServices
                     int insertcount = await _roleMenuRepository.InsertAsync(list);
                     if(count<=0 && insertcount<=0)
                         return new OperationResponse("保存失败", OperationResponseType.Error);
+                    await _eventBus?.PublishAsync(new RoleMenuCacheAddOrUpdateEvent() { RoleId = role.Id, MenuIds = dto.MenuIds,IsAdd=false });
                 }   
                 return new OperationResponse("保存成功", OperationResponseType.Success);
             });
