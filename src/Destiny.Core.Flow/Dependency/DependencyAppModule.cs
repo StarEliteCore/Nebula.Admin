@@ -35,8 +35,8 @@ namespace Destiny.Core.Flow.Dependency
         {
      
             var servicesTypes = AssemblyHelper.GetAssembliesByName("Destiny.Core.Flow.Services").SelectMany(type=>type.DefinedTypes);
-
             var typeFinder = services.GetOrAddSingletonService<ITypeFinder, TypeFinder>();
+           
             var baseTypes = new Type[] { typeof(IScopedDependency), typeof(ITransientDependency), typeof(ISingletonDependency) };
 
             var types = typeFinder.FindAll()?.Concat(servicesTypes).Distinct();

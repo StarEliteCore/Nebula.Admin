@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Destiny.Core.Flow.Caching;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.FileProviders;
 
 namespace Destiny.Core.Flow.API.Controllers
 {
@@ -27,6 +28,7 @@ namespace Destiny.Core.Flow.API.Controllers
         private ICache<Test> _cache = null;
         private ICache _cache1 = null;
         private IConfiguration _configuration;
+
         public TestController(ICache<Test> cache, ICache cache1, IConfiguration configuration)
         {
             _cache = cache;
