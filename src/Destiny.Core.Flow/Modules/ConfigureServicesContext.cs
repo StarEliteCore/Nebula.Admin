@@ -28,5 +28,17 @@ namespace Destiny.Core.Flow.Modules
            var implemenInstance= Services.GetSingletonInstanceOrNull<IConfiguration>();
            return implemenInstance;
         }
+
+
+        public TValue GetConfiguration<TValue>(string key)
+        {
+
+          return  GetConfigurationSection(key).Get<TValue>();
+        }
+        public IConfigurationSection GetConfigurationSection(string key)
+        {
+            key.NotNullOrEmpty(nameof(key));
+            return this.GetConfiguration()?.GetSection(key);
+        }
     }
 }

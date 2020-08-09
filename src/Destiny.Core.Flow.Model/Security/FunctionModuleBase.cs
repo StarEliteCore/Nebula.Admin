@@ -18,7 +18,7 @@ namespace Destiny.Core.Flow.Model.Security
 
         public override void ConfigureServices(ConfigureServicesContext context)
         {
-            IsAutoAddFunction = context.Services.GetAppSettings().IsAutoAddFunction;
+            IsAutoAddFunction = context.GetAppSettings().IsAutoAddFunction;
             if (IsAutoAddFunction)
             {
                 context.Services.AddSingleton<IFunctionHandler, FunctionHandler>();

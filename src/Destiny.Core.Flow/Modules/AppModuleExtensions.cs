@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.Dependency;
+using Destiny.Core.Flow.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -26,13 +27,11 @@ namespace Destiny.Core.Flow.Modules
                 throw new ArgumentNullException(nameof(services));
             }
 
-    
-   
             var obj = new ObjectAccessor<IApplicationBuilder>();
-            services.Add(ServiceDescriptor.Singleton(typeof(ObjectAccessor<IApplicationBuilder>), obj));
-            services.Add(ServiceDescriptor.Singleton(typeof(IObjectAccessor<IApplicationBuilder>), obj));
+            services.AddObjectAccessor(obj);
 
-            IStartupModuleRunner runner = new StartupModuleRunner(type,services);
+
+                     IStartupModuleRunner runner = new StartupModuleRunner(type,services);
             runner.ConfigureServices(services);
 
             return services;
