@@ -32,7 +32,8 @@ namespace Destiny.Core.Flow
         }
 
         public IUnitOfWork UnitOfWork { get;  set; }
-
+        protected virtual Task BeforeSaveChanges() => Task.CompletedTask;
+        protected virtual Task AfterSaveChanges() => Task.CompletedTask;
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
