@@ -1,5 +1,6 @@
 ﻿using Destiny.Core.Flow.Events.Abstractions;
 using MediatR;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -28,8 +29,12 @@ namespace Destiny.Core.Flow.Events
             EventId = eventId;
             EventAt = eventAt;
         }
-        public DateTimeOffset EventAt { get; private set; }
 
-        public string EventId { get; private set; }
+
+        [JsonIgnore]
+        public virtual DateTimeOffset EventAt { get; private set; }
+
+        [JsonIgnore]
+        public virtual string EventId { get; private set; }
     }
 }
