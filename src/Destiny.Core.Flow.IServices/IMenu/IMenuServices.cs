@@ -68,5 +68,10 @@ namespace Destiny.Core.Flow.IServices.IMenu
         /// <param name="Id"></param>
         /// <returns></returns>
         Task<OperationResponse<List<MenuOutputLoadDto>>> GetMenuChildrenButton(Guid Id);
+        /// <summary>
+        /// 获取菜单树形
+        /// </summary>
+        /// <returns></returns>
+        Task<OperationResponse> GetUserMenuTreeAsync();
     }
 }

@@ -62,6 +62,7 @@ namespace Destiny.Core.Flow.API.Startups
 
                 o.SuppressAsyncSuffixInActionNames = false;
                 o.Filters.Add<PermissionAuthorizationFilter>();
+                o.Filters.Add<AuditLogFilter>(); 
             })
                 .AddNewtonsoftJson(options =>
                 {

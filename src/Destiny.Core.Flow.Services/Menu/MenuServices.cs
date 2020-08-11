@@ -237,5 +237,57 @@ namespace Destiny.Core.Flow.Services.Menu
                 Total = menulist.Count,
             };
         }
+        /// <summary>
+        /// 获取菜单树形
+        /// </summary>
+        /// <returns></returns>
+        public async Task<OperationResponse> GetUserMenuTreeAsync()
+        {
+            var menulist = new List<MenuPermissionsTreeOutDto>();
+            var userId = _iIdentity.GetUesrId<Guid>();
+            var usermodel = await _userManager.FindByIdAsync(userId.ToString());
+            var roleids = (await _repositoryUserRole.Entities.Where(x => x.UserId == userId).ToListAsync()).Select(x => x.RoleId);
+            var menuId = (await _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).ToListAsync()).Select(x => x.MenuId);
+            if (usermodel.IsSystem && _roleManager.Roles.Where(x => x.IsAdmin == true && roleids.Contains(x.Id)).Any())
+            {
+                var list = await _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuPermissionsTreeOutDto>((p, c) =>
+                {
+                    return c.ParentId == null || c.ParentId == Guid.Empty;
+                },
+                 (p, c) =>
+                 {
+                     return p.Id == c.ParentId;
+                 },
+                 (p, children) =>
+                 {
+                     if (p.routes == null)
+                         p.routes = new List<MenuPermissionsTreeOutDto>();
+                     p.routes.AddRange(children);
+                 });
+                menulist.AddRange(list.ItemList);
+                return new OperationResponse(MessageDefinitionType.LoadSucces, menulist, OperationResponseType.Success);
+                //return new PageResult<MenuPermissionsOutDto>()
+                //{
+                //    ItemList = menulist,
+                //    Total = menulist.Count,
+                //};
+            }
+            var result = await _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuPermissionsTreeOutDto>((p, c) =>
+            {
+                return c.ParentId == null || c.ParentId == Guid.Empty;
+            },
+                 (p, c) =>
+                 {
+                     return p.Id == c.ParentId;
+                 },
+                 (p, children) =>
+                 {
+                     if (p.routes == null)
+                         p.routes = new List<MenuPermissionsTreeOutDto>();
+                     p.routes.AddRange(children);
+                 });
+            menulist.AddRange(result.ItemList);
+            return new OperationResponse(MessageDefinitionType.LoadSucces, menulist, OperationResponseType.Success);
+        }
     }
 }

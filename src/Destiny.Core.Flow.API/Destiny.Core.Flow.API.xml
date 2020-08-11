@@ -133,6 +133,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetUserMenuTreeAsync">
+            <summary>
+            登录成功之后获取用户菜单树
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetMenuTreeAsync(System.Nullable{System.Guid})">
             <summary>
             异步得到菜单树数据

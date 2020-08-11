@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
@@ -6,21 +7,17 @@ using System.Text;
 namespace Destiny.Core.Flow.Dependency
 {
 
-    public class DictionaryAccessor<TKey, TValue> : ConcurrentDictionary<TKey, TValue>, IDisposable
-    {
 
-     
+    [Dependency(ServiceLifetime.Scoped,AddSelf =true)]
+
+    public class DictionaryAccessor : ConcurrentDictionary<string, object>, IDisposable
+    {
+        public bool ddd { get; set; }
+
         public virtual void Dispose()
         {
             this.Clear();
         }
-    }
 
-
-    public class DictionaryAccessor : ConcurrentDictionary<string, object>
-    { 
-    
-
-        
     }
 }

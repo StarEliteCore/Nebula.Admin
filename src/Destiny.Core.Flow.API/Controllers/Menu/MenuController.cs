@@ -113,7 +113,17 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         {
             return (await _menuServices.GetMenuAsync()).ToPageList();
         }
-
+        /// <summary>
+        /// 登录成功之后获取用户菜单树
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Description("登录成功之后获取用户菜单树")]
+        [NoAuthorityVerification]
+        public async Task<AjaxResult> GetUserMenuTreeAsync()
+        {
+            return (await _menuServices.GetUserMenuTreeAsync()).ToAjaxResult();
+        }
         /// <summary>
         /// 异步得到菜单树数据
         /// </summary>

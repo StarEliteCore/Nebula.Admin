@@ -36,6 +36,7 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
         {
             _authority = authority;
             _principal = principal;
+            
         }
 
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
