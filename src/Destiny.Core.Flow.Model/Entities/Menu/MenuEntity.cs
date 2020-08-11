@@ -50,6 +50,11 @@ namespace Destiny.Core.Flow.Model.Entities.Menu
         [DisplayName("组件地址")]
         public string Component { get; set; }
         /// <summary>
+        /// 组件地址
+        /// </summary>
+        [DisplayName("组件地址")]
+        public string Redirect { get; set; }
+        /// <summary>
         /// 深度
         /// </summary>
         [DisplayName("深度")]
