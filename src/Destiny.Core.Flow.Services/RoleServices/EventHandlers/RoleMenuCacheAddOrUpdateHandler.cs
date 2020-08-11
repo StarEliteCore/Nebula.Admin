@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Destiny.Core.Flow.Caching;
 using Microsoft.EntityFrameworkCore.Internal;
+using Destiny.Core.Flow.Model.Entities.Rolemenu;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Destiny.Core.Flow.Services.RoleServices.EventHandlers
 {
@@ -17,10 +20,12 @@ namespace Destiny.Core.Flow.Services.RoleServices.EventHandlers
 
         private IServiceProvider _serviceProvider = null;
         private ICache _cache = null;
+        //private readonly IEFCoreRepository<RoleMenuEntity, Guid> _roleMenuRepository;
         public RoleMenuCacheAddOrUpdateHandler(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             _cache = serviceProvider.GetService<ICache>();
+            //_roleMenuRepository = serviceProvider.GetService<IEFCoreRepository<RoleMenuEntity, Guid>>();
 
         }
         public override async Task Handle(RoleMenuCacheAddOrUpdateEvent notification, CancellationToken cancellationToken)
@@ -28,6 +33,8 @@ namespace Destiny.Core.Flow.Services.RoleServices.EventHandlers
    
             var key = notification.GetCacheKey();
             RoleMenuItem roleMenuItem = new RoleMenuItem();
+
+            //var ss = _roleMenuRepository.Entities.Where(x => x.RoleId == notification.RoleId).ToListAsync();
             roleMenuItem.RoleId = notification.RoleId;
             roleMenuItem.MenuIds = notification.MenuIds;
 

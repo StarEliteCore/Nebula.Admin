@@ -4,6 +4,7 @@ using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.EntityFrameworkCore;
 using Destiny.Core.Flow.Enums;
+using Destiny.Core.Flow.Events.EventBus;
 using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
@@ -11,6 +12,7 @@ using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.IServices;
 using Destiny.Core.Flow.IServices.UserRoles;
 using Destiny.Core.Flow.Model.Entities.Identity;
+using Destiny.Core.Flow.Services.Users.Events;
 using Destiny.Core.Flow.Ui;
 using Destiny.Core.Flow.Validation;
 using Microsoft.AspNetCore.Identity;
@@ -32,13 +34,15 @@ namespace Destiny.Core.Flow.Services
         private readonly RoleManager<Role> _roleManager = null;
         private readonly IUnitOfWork _unitOfWork = null;
         private readonly IUserRoleService _userRoleService = null;
+        private readonly IEventBus _bus = null;
 
-        public UserServices(UserManager<User> userManager, RoleManager<Role> roleManager, IUnitOfWork unitOfWork, IUserRoleService userRoleService)
+        public UserServices(UserManager<User> userManager, RoleManager<Role> roleManager, IUnitOfWork unitOfWork, IUserRoleService userRoleService, IEventBus bus)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _unitOfWork = unitOfWork;
             _userRoleService = userRoleService;
+            _bus = bus;
         }
         //[NonGlobalAopTran]
         //[ValidationInterceptor]
@@ -74,6 +78,7 @@ namespace Destiny.Core.Flow.Services
             {
                 return result.ToOperationResponse();
             }
+            _bus?.PublishAsync(new UserRoleCacheDeleteEvent() {UserId=user.Id });
             return result.ToOperationResponse();
         }
 
@@ -86,7 +91,7 @@ namespace Destiny.Core.Flow.Services
         {
             id.NotNull(nameof(id));
             var user = await _userManager.FindByIdAsync(id.ToString());
-            IList<string> existRoleNames = await _userManager.GetRolesAsync(user);
+           // IList<string> existRoleNames = await _userManager.GetRolesAsync(user);
             return await _unitOfWork.UseTranAsync(async () =>
             {
                 var result = await _userManager.DeleteAsync(user);
@@ -94,13 +99,14 @@ namespace Destiny.Core.Flow.Services
                 {
                     return result.ToOperationResponse();
                 }
-                result = await _userManager.RemoveFromRolesAsync(user, existRoleNames);
-                if (!result.Succeeded)
+
+                var  result1 = await this.DeleteUserRoleAsync(user);
+                if (!result1.Success)
                 {
-                    return result.ToOperationResponse();
+                    return result1;
                 }
                 return new OperationResponse("删除用户成功", OperationResponseType.Success);
-            }); ;
+            });
 
         }
 
@@ -132,7 +138,7 @@ namespace Destiny.Core.Flow.Services
 
                 if (dto.RoleIds.Any() == true)
                 {
-                    return await this.SetUserRoles(user, dto.RoleIds);
+                    return await this.SetUserRoles(user, dto.RoleIds,false);
                 }
                 else {
 
@@ -149,7 +155,7 @@ namespace Destiny.Core.Flow.Services
         /// <param name="userId"></param>
         /// <param name="roleIds"></param>
         /// <returns></returns>
-        private async Task<OperationResponse> SetUserRoles(User user, Guid[] roleIds)
+        private async Task<OperationResponse> SetUserRoles(User user, Guid[] roleIds,bool isAdd=true)
         {
 
             
@@ -163,7 +169,8 @@ namespace Destiny.Core.Flow.Services
                 {
                     return result.ToOperationResponse();
                 }
-                IList<string> roleNames = await _roleManager.Roles.Where(m => roleIds.Contains(m.Id)).Select(m => m.Name).ToListAsync();
+                var roles = await _roleManager.Roles.Where(m => roleIds.Contains(m.Id)).ToListAsync();
+                IList<string> roleNames = roles.Select(m => m.Name).ToList();
 
             
                 result = await _userManager.AddToRolesAsync(user, roleNames);
@@ -173,6 +180,7 @@ namespace Destiny.Core.Flow.Services
                     return result.ToOperationResponse();
                 }
                 await _userManager.UpdateSecurityStampAsync(user);
+                await _bus?.PublishAsync(new UserRoleCacheAddOrUpdateEvent() { User = user,IsAdd= isAdd,Roles= roles }); ;
             }
             catch (InvalidOperationException ex)
             {

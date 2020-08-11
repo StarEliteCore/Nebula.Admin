@@ -1,0 +1,82 @@
+﻿using Destiny.Core.Flow.Caching;
+using Destiny.Core.Flow.Events;
+using Destiny.Core.Flow.Model.Entities.Identity;
+using Destiny.Core.Flow.Services.Users.Events;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Dynamic.Core;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Destiny.Core.Flow.Services.Users.EventHandlers
+{
+    public class UserRoleCacheAddOrUpdateHandler : NotificationHandlerBase<UserRoleCacheAddOrUpdateEvent>
+    {
+        private readonly ICache _cache = null;
+
+
+        public UserRoleCacheAddOrUpdateHandler(ICache cache)
+        {
+            _cache = cache;
+
+        }
+
+        public override async Task Handle(UserRoleCacheAddOrUpdateEvent notification, CancellationToken cancellationToken)
+        {
+
+            if (notification.IsAdd)
+            {
+
+               await AddUserRoleCacheItem(notification.User, notification.Roles);
+            }
+            else {
+                await _cache.RemoveAsync(notification.GetCacheKey());
+
+                await AddUserRoleCacheItem(notification.User, notification.Roles);
+            }
+            async Task AddUserRoleCacheItem(User user,IEnumerable<Role> roles)
+            {
+
+
+                  var roleCaheItem=  roles.Select(o => new RoleCaheItem(o.Id, o.Name, o.IsAdmin));
+                  UserRoleCacheItem userRoleCacheItem = new UserRoleCacheItem(notification.User.Id, roleCaheItem);
+                await _cache.SetAsync(notification.GetCacheKey(), userRoleCacheItem);
+            }
+        }
+
+     
+
+        private class UserRoleCacheItem
+        {
+            public UserRoleCacheItem(Guid userId, IEnumerable<RoleCaheItem> roles)
+            {
+                UserId = userId;
+                Roles = roles;
+            }
+
+            public Guid UserId { get; private set; }
+
+            public IEnumerable<RoleCaheItem> Roles { get; private set; } = new List<RoleCaheItem>();
+        }
+
+        private class RoleCaheItem
+        {
+            public RoleCaheItem(Guid roleId, string roleName, bool isAdmin)
+            {
+                RoleId = roleId;
+                RoleName = roleName;
+                IsAdmin = isAdmin;
+            }
+
+            public Guid RoleId { get; private set; }
+
+            public string RoleName { get; private set; }
+
+            public bool IsAdmin { get; private set; }
+        }
+    }
+}
