@@ -32,45 +32,42 @@ namespace Destiny.Core.Flow.Audit
                 var properties = entityEntry.Metadata.GetProperties();
                 foreach (var propertie in properties)
                 {
+                    model.NewValues = new Dictionary<string, object>();
+                    model.OriginalValues = new Dictionary<string, object>();
                     var propertyEntry = entityEntry.Property(propertie.Name);//获取字段名
                     switch (entityEntry.State)
                     {
-                        #region MyRegion
+                        case EntityState.Detached:
+                            model.OperationType = DataOperationType.None;
 
-
-                        //case EntityState.Detached:
-                        //    model.OperationType = DataOperationType.Add;
-                        //    break;
-                        //case EntityState.Unchanged:
-                        //    model.OperationType = DataOperationType.None;
-                        //    model.NewValues = new Dictionary<string, object>();
-                        //    model.NewValues[propertie.Name] = propertyEntry.CurrentValue?.ToString();//当前值
-                        //    model.OriginalValues[propertie.Name] = propertyEntry.OriginalValue?.ToString();//原始值
-                        //    break;
-                        #endregion
+                            model.NewValues[propertie.Name] = propertyEntry.CurrentValue?.ToString();//当前值
+                            model.OriginalValues[propertie.Name] = propertyEntry.OriginalValue?.ToString();//原始值
+                            break;
+                        case EntityState.Unchanged:
+                            model.OperationType = DataOperationType.None;
+                            model.NewValues[propertie.Name] = propertyEntry.CurrentValue?.ToString();//当前值
+                            model.OriginalValues[propertie.Name] = propertyEntry.OriginalValue?.ToString();//原始值
+                            break;
                         case EntityState.Deleted:
                             model.OperationType = DataOperationType.Delete;
-                            model.NewValues = new Dictionary<string, object>();
                             model.NewValues[propertie.Name] = propertyEntry.CurrentValue?.ToString();//当前值
                             model.OriginalValues[propertie.Name] = propertyEntry.OriginalValue?.ToString();//原始值
                             break;
                         case EntityState.Modified:
                             model.OperationType = DataOperationType.Update;
-                            model.NewValues = new Dictionary<string, object>();
                             model.NewValues[propertie.Name] = propertyEntry.CurrentValue?.ToString();//当前值
                             model.OriginalValues[propertie.Name] = propertyEntry.OriginalValue?.ToString();//原始值
                             break;
                         case EntityState.Added:
                             model.OperationType = DataOperationType.Add;
-                            model.NewValues = new Dictionary<string, object>();
-                            model.NewValues[propertie.Name]= propertyEntry.CurrentValue?.ToString();//当前值
-                            model.OriginalValues[propertie.Name]= propertyEntry.OriginalValue?.ToString();//原始值
+                            model.NewValues[propertie.Name] = propertyEntry.CurrentValue?.ToString();//当前值
+                            model.OriginalValues[propertie.Name] = propertyEntry.OriginalValue?.ToString();//原始值
                             break;
                     }
                 }
             }
-           var scope=  _serviceProvider.CreateScope();
-          var dic=  scope.ServiceProvider.GetRequiredService<DictionaryAccessor>();
+            var scope = _serviceProvider.CreateScope();
+            var dic = scope.ServiceProvider.GetRequiredService<DictionaryAccessor>();
             dic.ddd = false;
             dic["audit"] = model;
 
