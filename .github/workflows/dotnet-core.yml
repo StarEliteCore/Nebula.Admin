@@ -51,5 +51,6 @@ jobs:
               volumes:
               - /home/wzw/DestinyCore/DestinyFlow/DestinyCoreDb.txt:/app/DestinyCoreDb.txt
               - /home/wzw/DestinyCore/DestinyFlow/DestinyCoreRedis.txt:/app/DestinyCoreRedis.txt
+              - /home/wzw/DestinyCore/DestinyFlow/DestinyCoreMongoDb.txt:/app/DestinyCoreMongoDb.txt
 #    - name: Test
 #      run: dotnet test --no-restore --verbosity normal
