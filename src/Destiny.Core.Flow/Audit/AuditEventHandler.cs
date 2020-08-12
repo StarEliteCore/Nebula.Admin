@@ -67,9 +67,10 @@ namespace Destiny.Core.Flow.Audit
                 }
             }
             var scope = _serviceProvider.CreateScope();
-            var dic = scope.ServiceProvider.GetRequiredService<DictionaryAccessor>();
-            dic.ddd = false;
-            dic["audit"] = model;
+            _dictionaryAccessor.GetOrAdd("audit", model);
+            //var dic = _dictionaryAccessor.GetRequiredService<DictionaryAccessor>();
+            //dic.ddd = false;
+            //dic["audit"] = model;
 
             return Task.CompletedTask;
         }

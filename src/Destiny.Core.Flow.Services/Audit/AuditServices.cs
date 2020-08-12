@@ -12,8 +12,6 @@ namespace Destiny.Core.Flow.Services.Audit
     
         public async Task<bool> Save(AuditEntry auditEntry )
         {
-
-
             await Task.CompletedTask;
             return true;
         }

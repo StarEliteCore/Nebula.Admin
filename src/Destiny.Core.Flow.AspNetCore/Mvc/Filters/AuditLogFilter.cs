@@ -23,8 +23,9 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
         public void OnResultExecuted(ResultExecutedContext context)
         {
             IServiceProvider provider = context.HttpContext.RequestServices;
-            var scope = provider.CreateScope();
-            var dic = scope.ServiceProvider.GetService<DictionaryAccessor>();
+            //var scope = provider.CreateScope();
+            //var dic = scope.ServiceProvider.GetService<DictionaryAccessor>();
+            var dic = provider.GetService<DictionaryAccessor>();
             dic.TryGetValue("audit", out object auditEntry);
             var ddd = provider.GetService<IAuditStore>()?.Save((auditEntry as AuditEntry)).GetAwaiter().GetResult(); //不用异步，或则用异步IResultFilterAsync
         }
