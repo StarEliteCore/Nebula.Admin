@@ -175,21 +175,22 @@ namespace Destiny.Core.Flow.Services.Menu
         public async Task<TreeResult<MenuTableOutDto>> GetMenuTableAsync()
         {
             return await _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuTableOutDto>(
-                (p, c) =>
-                {
-                    return c.ParentId == null || c.ParentId == Guid.Empty;
-                },
-                (p, c) =>
-                {
-                    return p.Id == c.ParentId;
-                },
-                (p, children) =>
-                {
-                    if (p.children == null)
-                        p.children = new List<MenuTableOutDto>();
-                    p.children.AddRange(children);
-                }
-                );
+             (p, c) =>
+             {
+                 return c.ParentId == null || c.ParentId == Guid.Empty;
+             },
+             (p, c) =>
+             {
+                 return p.Id == c.ParentId;
+             },
+             (p, children) =>
+             {
+                 if (p.children == null)
+                     p.children = new List<MenuTableOutDto>();
+                 p.children.AddRange(children);
+             }
+             );
+
         }
         /// <summary>
         /// 

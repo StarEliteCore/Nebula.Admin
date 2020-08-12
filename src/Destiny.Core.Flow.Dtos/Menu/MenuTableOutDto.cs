@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.Entity;
+using Destiny.Core.Flow.Mapping;
 using Destiny.Core.Flow.Model.Entities.Menu;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,8 @@ namespace Destiny.Core.Flow.Dtos.Menu
 {
     /// <summary>
     /// 菜单表格
-    /// </summary>
+    /// </summary
+    [AutoMapp(typeof(MenuEntity))]
     public class MenuTableOutDto : OutputDto<Guid>
     {
         /// <summary>

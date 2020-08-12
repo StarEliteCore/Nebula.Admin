@@ -142,4 +142,14 @@ namespace Destiny.Core.Flow.Enums
         [FilterCode("or")]
         Or
     }
+
+    [Description("Dto状态")]
+    public enum DtoState
+    {
+
+        [Description("新增")]
+        Add =0,
+        [Description("更新")]
+        Update =5
+    }
 }
