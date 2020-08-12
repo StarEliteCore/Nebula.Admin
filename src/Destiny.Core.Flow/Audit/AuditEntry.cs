@@ -1,107 +1,82 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Destiny.Core.Flow.Entity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace Destiny.Core.Flow.Audit
 {
-    public class AuditEntry
+    [DisplayName("审计日志")]
+    [MongoDBTable("SuktAuditLog")]
+    public class AuditEntry : EntityBase<Guid>, IFullAuditedEntity<Guid>
     {
+        /// <summary>
+        /// 执行方法名
+        /// </summary>
+        [DisplayName("执行方法名")]
+        public string Action { get; set; }
+        /// <summary>
+        /// 功能名称
+        /// </summary>
+        [DisplayName("功能名称")]
+        public string DescriptionName { get; set; }
+        /// <summary>
+        /// 表名称
+        /// </summary>
+        [DisplayName("表名称")]
         public string TableName { get; set; }
         /// <summary>
         /// 修改前数据
         /// </summary>
+        [DisplayName("修改前数据")]
         public Dictionary<string, object> OriginalValues { get; set; }
         /// <summary>
         /// 修改后数据
         /// </summary>
+        [DisplayName("修改后数据")]
         public Dictionary<string, object> NewValues { get; set; }
         /// <summary>
         /// 主键
         /// </summary>
+        [DisplayName("主键")]
         public Dictionary<string, object> KeyValues { get; set; }
         /// <summary>
         /// 类型
         /// </summary>
+        [DisplayName("类型")]
         public DataOperationType OperationType { get; set; }
-
+        /// <summary>
+        /// 属性名称
+        /// </summary>
+        [DisplayName("属性名称")]
         public Dictionary<string, object> Properties { get; set; }
+        /// <summary>
+        ///  获取或设置 最后修改用户
+        /// </summary>
+        [DisplayName("最后修改用户")]
+        public virtual Guid? LastModifierUserId { get; set; }
+        /// <summary>
+        /// 获取或设置 最后修改时间
+        /// </summary>
+        [DisplayName("最后修改时间")]
+        public virtual DateTime? LastModifierTime { get; set; }
+        /// <summary>
+        ///获取或设置 是否删除
+        /// </summary>
+        [DisplayName("是否删除")]
+        public virtual bool IsDeleted { get; set; }
+        /// <summary>
+        ///获取或设置 创建用户ID
+        /// </summary>
+        [DisplayName("创建用户ID")]
+        public virtual Guid? CreatorUserId { get; set; }
+        /// <summary>
+        ///获取或设置 创建时间
+        /// </summary>
+        [DisplayName("创建时间")]
+        public virtual DateTime CreatedTime { get; set; }
 
-        public DateTimeOffset UpdatedAt { get; set; }
-
-        public string UpdatedBy { get; set; }
-    }
-    public sealed class InternalAuditEntry : AuditEntry
-    {
-        private object _entityEntry;
-
-        public List<PropertyEntry> TemporaryProperties { get; set; } = new List<PropertyEntry>();
-
-        public InternalAuditEntry(EntityEntry entityEntry)
-        {
-            TableName = entityEntry.Metadata.GetTableName();
-            KeyValues = new Dictionary<string, object>(4);
-            Properties = new Dictionary<string, object>(16);
-
-            //if (entityEntry.Properties.Any(x => x.IsTemporary))
-            //{
-            //    TemporaryProperties = new List<PropertyEntry>(4);
-            //}
-
-            if (entityEntry.State == EntityState.Added)
-            {
-                OperationType = DataOperationType.Add;
-                NewValues = new Dictionary<string, object>();
-            }
-            else if (entityEntry.State == EntityState.Deleted)
-            {
-                OperationType = DataOperationType.Delete;
-                OriginalValues = new Dictionary<string, object>();
-            }
-            else if (entityEntry.State == EntityState.Modified)
-            {
-                OperationType = DataOperationType.Update;
-                OriginalValues = new Dictionary<string, object>();
-                NewValues = new Dictionary<string, object>();
-            }
-            foreach (var propertyEntry in entityEntry.Properties)
-            {
-                //if (AuditConfig.AuditConfigOptions.PropertyFilters.Any(f => f.Invoke(entityEntry, propertyEntry) == false))
-                //{
-                //    continue;
-                //}
-                //if (propertyEntry.IsTemporary)
-                //{
-                TemporaryProperties.Add(propertyEntry);
-                //continue;
-                //}
-
-                var columnName = propertyEntry.Metadata.GetColumnName();
-                if (propertyEntry.Metadata.IsPrimaryKey())
-                {
-                    KeyValues[columnName] = propertyEntry.CurrentValue;
-                }
-                switch (entityEntry.State)
-                {
-                    case EntityState.Added:
-                        NewValues[columnName] = propertyEntry.CurrentValue;
-                        break;
-
-                    case EntityState.Deleted:
-                        OriginalValues[columnName] = propertyEntry.OriginalValue;
-                        break;
-
-                    case EntityState.Modified:
-                        //if (propertyEntry.IsModified || AuditConfig.AuditConfigOptions.SaveUnModifiedProperties)
-                        //if (propertyEntry.IsModified)
-                        //{
-                        OriginalValues[columnName] = propertyEntry.OriginalValue;
-                        //NewValues[columnName] = propertyEntry.CurrentValue;//修改后数据
-                        //}
-                        break;
-                }
-            }
-        }
     }
 }

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Audit
 {
-  public interface IAuditStore: IScopedDependency
+    public interface IAuditStore : IScopedDependency
     {
 
-          Task<bool> Save(AuditEntry auditEntry);
-     
+        Task Save(AuditEntry auditEntry);
+
     }
 }

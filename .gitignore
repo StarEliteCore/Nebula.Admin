@@ -377,3 +377,4 @@ __pycache__/
 
 /IDN.Services.BasicsService/src/IDN.Services.BasicsService.API/logs
 
+src/Destiny.Core.Flow.API/DestinyCoreMongoDb.txt

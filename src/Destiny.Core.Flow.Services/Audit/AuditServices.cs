@@ -1,5 +1,6 @@
 ﻿using Destiny.Core.Flow.Audit;
 using Destiny.Core.Flow.Dependency;
+using Destiny.Core.Flow.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,11 +10,16 @@ namespace Destiny.Core.Flow.Services.Audit
 {
     public class AuditServices : IAuditStore
     {
-    
-        public async Task<bool> Save(AuditEntry auditEntry )
+        private readonly IMongoDBRepository<AuditEntry, Guid> _mongoDBRepository;
+
+        public AuditServices(IMongoDBRepository<AuditEntry, Guid> mongoDBRepository)
         {
-            await Task.CompletedTask;
-            return true;
+            _mongoDBRepository = mongoDBRepository;
+        }
+
+        public async Task Save(AuditEntry auditEntry )
+        {
+            await _mongoDBRepository.InsertAsync(auditEntry);
         }
     }
 }

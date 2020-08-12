@@ -26,8 +26,9 @@ namespace Destiny.Core.Flow.API.Startups
     {
         protected override IServiceCollection AddRepository(IServiceCollection services)
         {
-  
-            return services.AddScoped(typeof(IEFCoreRepository<,>),typeof(Repository<,>));
+            services.AddScoped(typeof(IEFCoreRepository<,>), typeof(Repository<,>));
+            services.AddScoped(typeof(IMongoDBRepository<,>), typeof(MongoDBRepository<,>));
+            return services;
         }
 
         protected override IServiceCollection AddUnitOfWork(IServiceCollection services)
@@ -44,7 +45,7 @@ namespace Destiny.Core.Flow.API.Startups
             {
                 throw new Exception("未找到存放数据库链接的文件");
             }
-            var mysqlconn = File.ReadAllText(dbcontext).Trim(); ;
+            var mysqlconn = File.ReadAllText(dbcontext).Trim();
             var Assembly = typeof(EntityFrameworkCoreMySqlModule).GetTypeInfo().Assembly.GetName().Name;//获取程序集
             
             services.AddDbContext<DefaultDbContext>(oprions => {
