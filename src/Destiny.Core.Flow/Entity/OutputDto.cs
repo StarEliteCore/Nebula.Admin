@@ -1,12 +1,11 @@
-﻿namespace Destiny.Core.Flow.Entity
+﻿using Destiny.Core.Flow.Enums;
+
+namespace Destiny.Core.Flow.Entity
 {
-    public class OutputDto<TKey> : IOutputDto<TKey>
-    {
-        public TKey Id { get; set; }
-    }
-
-    public class OutputDto : IOutputDto
+    public class OutputDto<TKey> : OutputDtoBase<TKey>
     {
 
     }
+
+
 }

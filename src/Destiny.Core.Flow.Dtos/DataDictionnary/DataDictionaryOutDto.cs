@@ -8,7 +8,7 @@ using System.ComponentModel;
 namespace Destiny.Core.Flow.Dtos.DataDictionnary
 {
     [AutoMapp(typeof(DataDictionaryEntity))]
-    public class DataDictionaryOutDto : IOutputDto<Guid>
+    public class DataDictionaryOutDto : OutputDto<Guid>
     {
         /// <summary>
         /// 数据字典标题
@@ -45,11 +45,7 @@ namespace Destiny.Core.Flow.Dtos.DataDictionnary
         /// </summary>
         [DisplayName("编码")]
         public string Code { get; set; }
-        /// <summary>
-        /// id
-        /// </summary>
-        [DisplayName("Id")]
-        public Guid Id { get; set; }
+
 
         /// <summary>
         /// 子集
