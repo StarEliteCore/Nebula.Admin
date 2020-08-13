@@ -5,14 +5,9 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Services.RoleServices.Events
 {
-    public class RoleMenuEventCacehDeleteEvent : Notification
+    [CacheKey(CacheKeys.roleMenuKeyPrefix)]
+    public class RoleMenuEventCacehDeleteEvent :  CacheEventDataBase
     {
-        public Guid RoleId { get; set; }
-
-        public override string GetCacheKey()
-        {
-
-            return $"{CacheKeys.roleMenuKeyPrefix}{RoleId}";
-        }
+        
     }
 }

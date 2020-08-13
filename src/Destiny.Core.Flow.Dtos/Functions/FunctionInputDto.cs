@@ -8,8 +8,8 @@ using System.Text;
 namespace Destiny.Core.Flow.Dtos.Functions
 {
     [AutoMapp(typeof(Function))]
-    public class FunctionInputDto : FunctionDtoBase, IInputDto<Guid>
+    public class FunctionInputDto : FunctionDtoBase<Guid>, IInputDto<Guid>
     {
-        public Guid Id { get; set; }
+
     }
 }

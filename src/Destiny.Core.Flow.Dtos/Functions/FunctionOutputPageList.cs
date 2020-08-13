@@ -8,10 +8,10 @@ using System.Text;
 namespace Destiny.Core.Flow.Dtos.Functions
 {
     [AutoMapp(typeof(Function))]
-    public   class FunctionOutputPageList : FunctionDtoBase, IOutputDto
+    public   class FunctionOutputPageList : FunctionDtoBase<Guid>, IOutputDto<Guid>
     {
 
-        public Guid Id { get; set; }
+
 
         /// 创建时间
         /// </summary>

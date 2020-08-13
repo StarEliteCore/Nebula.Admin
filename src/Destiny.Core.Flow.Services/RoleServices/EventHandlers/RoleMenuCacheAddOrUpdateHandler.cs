@@ -15,17 +15,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Destiny.Core.Flow.Services.RoleServices.EventHandlers
 {
-    public class RoleMenuCacheAddOrUpdateHandler : NotificationHandlerBase<RoleMenuCacheAddOrUpdateEvent>
+
+    public class RoleMenuCacheAddOrUpdateHandler : CacheHandlerBase<RoleMenuCacheAddOrUpdateEvent>
     {
 
-        private IServiceProvider _serviceProvider = null;
-        private ICache _cache = null;
-        //private readonly IEFCoreRepository<RoleMenuEntity, Guid> _roleMenuRepository;
-        public RoleMenuCacheAddOrUpdateHandler(IServiceProvider serviceProvider)
+
+        private readonly IServiceProvider _serviceProvider = null;
+
+        public RoleMenuCacheAddOrUpdateHandler(IServiceProvider serviceProvider, ICache cache) :base(cache)
         {
             _serviceProvider = serviceProvider;
-            _cache = serviceProvider.GetService<ICache>();
-            //_roleMenuRepository = serviceProvider.GetService<IEFCoreRepository<RoleMenuEntity, Guid>>();
+
+          
 
         }
         public override async Task Handle(RoleMenuCacheAddOrUpdateEvent notification, CancellationToken cancellationToken)
@@ -38,7 +39,7 @@ namespace Destiny.Core.Flow.Services.RoleServices.EventHandlers
             roleMenuItem.RoleId = notification.RoleId;
             roleMenuItem.MenuIds = notification.MenuIds;
 
-            if (notification.IsAdd)
+            if (notification.EventState==EventState.Add)
             {
                 await _cache.SetAsync(key, roleMenuItem);
             }

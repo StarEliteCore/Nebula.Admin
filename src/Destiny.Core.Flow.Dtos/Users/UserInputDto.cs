@@ -12,7 +12,7 @@ namespace Destiny.Core.Flow.Dtos
 {
 
     [AutoMapp(typeof(User))]
-    public class UserInputDto : InputDto<Guid>
+    public class UserInputDto : InputWaitStateDto<Guid>
     {
         public UserInputDto()
         {
@@ -45,7 +45,7 @@ namespace Destiny.Core.Flow.Dtos
 
     }
     [AutoMapp(typeof(User))]
-    public class UserUpdateInputDto : InputDto<Guid>
+    public class UserUpdateInputDto : InputWaitStateDto<Guid>
     {
         public UserUpdateInputDto()
         {

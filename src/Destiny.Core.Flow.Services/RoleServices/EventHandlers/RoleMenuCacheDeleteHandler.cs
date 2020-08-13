@@ -12,17 +12,15 @@ using Destiny.Core.Flow.Extensions;
 
 namespace Destiny.Core.Flow.Services.RoleServices.EventHandlers
 {
-    public class RoleMenuCacheDeleteHandler : NotificationHandlerBase<RoleMenuEventCacehDeleteEvent>
+    public class RoleMenuCacheDeleteHandler : CacheHandlerBase<RoleMenuEventCacehDeleteEvent>
     {
         private IServiceProvider _serviceProvider = null;
-        private ICache _cache = null;
-        private ILogger _logger = null;
 
-        public RoleMenuCacheDeleteHandler(IServiceProvider serviceProvider)
+
+        public RoleMenuCacheDeleteHandler(IServiceProvider serviceProvider, ICache cache):base(cache)
         {
             _serviceProvider = serviceProvider;
-            _cache = serviceProvider.GetService<ICache>();
-            _logger = serviceProvider.GetLogger<RoleMenuCacheDeleteHandler>();
+           
         }
 
         public override async Task Handle(RoleMenuEventCacehDeleteEvent notification, CancellationToken cancellationToken)

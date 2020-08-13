@@ -14,21 +14,20 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.Users.EventHandlers
 {
-    public class UserRoleCacheAddOrUpdateHandler : NotificationHandlerBase<UserRoleCacheAddOrUpdateEvent>
+    public class UserRoleCacheAddOrUpdateHandler : CacheHandlerBase<UserRoleCacheAddOrUpdateEvent>
     {
-        private readonly ICache _cache = null;
 
 
-        public UserRoleCacheAddOrUpdateHandler(ICache cache)
+        public UserRoleCacheAddOrUpdateHandler(ICache cache):base(cache)
         {
-            _cache = cache;
+           
 
         }
 
         public override async Task Handle(UserRoleCacheAddOrUpdateEvent notification, CancellationToken cancellationToken)
         {
 
-            if (notification.IsAdd)
+            if (notification.EventState==EventState.Add)
             {
 
                await AddUserRoleCacheItem(notification.User, notification.Roles);

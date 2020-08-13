@@ -5,7 +5,8 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Services.RoleServices.Events
 {
-    public   class RoleMenuCacheAddOrUpdateEvent : Notification
+    [CacheKey(CacheKeys.roleMenuKeyPrefix)]
+    public   class RoleMenuCacheAddOrUpdateEvent : CacheEventDataBase
     {
 
         public Guid RoleId { get; set; }
@@ -14,12 +15,6 @@ namespace Destiny.Core.Flow.Services.RoleServices.Events
         
         public IEnumerable<Guid> MenuIds { get; set; }
 
-        public bool IsAdd { get; set; } = true;
-
-
-        public override string GetCacheKey() {
-
-            return $"{CacheKeys.roleMenuKeyPrefix}{RoleId}";
-        }
+     
     }
 }

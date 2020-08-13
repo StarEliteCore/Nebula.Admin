@@ -8,7 +8,7 @@ namespace Destiny.Core.Flow.Events
    public abstract class Notification: EventBase
     {
 
-        public abstract string GetCacheKey();
+      
 
   
     }
