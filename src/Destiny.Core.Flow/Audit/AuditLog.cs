@@ -1,7 +1,4 @@
-﻿using Destiny.Core.Flow.Data;
-using Destiny.Core.Flow.Entity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Destiny.Core.Flow.Entity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,39 +6,34 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Audit
 {
-    [DisplayName("审计日志实体")]
-    [MongoDBTable("DestinyAuditEntityLog")]
-    public class AuditEntry : EntityBase<Guid>, IFullAuditedEntity<Guid>
+    [DisplayName("审计日志")]
+    public class AuditLog: EntityBase<Guid>, IFullAuditedEntity<Guid>
     {
-        public AuditEntry()
-        {
-            Id = ComnGuid.NewGuid();
-        }
         /// <summary>
-        /// 实体名称
+        /// 浏览器信息
         /// </summary>
-        [DisplayName("实体名称")]
-        public string EntityAllName { get; set; }
+        [DisplayName("浏览器信息")]
+        public string BrowserInformation { get; set; }
+        /// <summary>
+        /// IP地址
+        /// </summary>
+        [DisplayName("IP地址")]
+        public string Ip { get; set; }
         /// <summary>
         /// 功能名称
         /// </summary>
-        [DisplayName("实体显示名称")]
-        public string EntityDisplayName { get; set; }
+        [DisplayName("功能名称")]
+        public string FunctionName { get; set; }
         /// <summary>
-        /// 表名称
+        /// 操作Action
         /// </summary>
-        [DisplayName("表名称")]
-        public string TableName { get; set; }
+        [DisplayName("操作Action")]
+        public string Action { get; set; }
         /// <summary>
-        /// 主键
+        /// 执行时长
         /// </summary>
-        [DisplayName("主键")]
-        public Dictionary<string, object> KeyValues { get; set; } = new Dictionary<string, object>();
-        /// <summary>
-        /// 操作类型
-        /// </summary>
-        [DisplayName("操作类型")]
-        public DataOperationType OperationType { get; set; }
+        [DisplayName("执行时长")]
+        public double ExecutionDuration { get; set; }
         /// <summary>
         ///  获取或设置 最后修改用户
         /// </summary>
@@ -67,11 +59,5 @@ namespace Destiny.Core.Flow.Audit
         /// </summary>
         [DisplayName("创建时间")]
         public virtual DateTime CreatedTime { get; set; }
-        /// <summary>
-        /// 审计日志主表Id
-        /// </summary>
-        [DisplayName("审计日志主表Id")]
-        public Guid AuditLogId { get; set; }
-        public List<AuditPropertysEntry> auditPropertys { get; set; } = new List<AuditPropertysEntry>();
     }
 }

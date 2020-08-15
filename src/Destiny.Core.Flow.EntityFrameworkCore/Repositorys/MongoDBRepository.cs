@@ -31,6 +31,8 @@ namespace Destiny.Core.Flow
             var databasename = configuration["Destiny:DbContext:MongoDBDataBase"];
             var client = new MongoClient(connection);
             var database = client.GetDatabase(databasename);
+            var start = client.StartSession();
+
             Type t = typeof(TData);
             var table = t.GetAttribute<MongoDBTableAttribute>();
             if (table == null)
@@ -39,6 +41,8 @@ namespace Destiny.Core.Flow
         }
         public async Task InsertAsync(TData entity)
         {
+            
+
             await _collection.InsertOneAsync(entity);
         }
         public async Task InsertAsync(List<TData> entitys)

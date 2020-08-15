@@ -213,7 +213,6 @@ namespace Destiny.Core.Flow.Extensions
 
         }
 
-
         /// <summary>
         /// 得到特性下描述 
         /// </summary>
