@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
+using Destiny.Core.Flow.Audit;
 using Destiny.Core.Flow.Dtos.DataDictionnary;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices.IDataDictionnary;
@@ -51,6 +52,7 @@ namespace Destiny.Core.Flow.API.Controllers.DataDictionary
         /// <returns></returns>
         [HttpPost]
         [Description("异步创建数据字典")]
+        [AuditLog]
         public async Task<AjaxResult> CreateAsync([FromBody]DataDictionnaryInputDto dto)
         {
             return (await _dataDictionnaryServices.CreateAsync(dto)).ToAjaxResult();

@@ -37,9 +37,12 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
                 var actionname = action.MethodInfo.ToDescription();//获取控制器特性
                 var dic = provider.GetService<DictionaryAccessor>();
                 dic.TryGetValue("audit", out object auditEntry);
-                (auditEntry as AuditEntry).Action = context.HttpContext.Request.Path;
-                (auditEntry as AuditEntry).DescriptionName = actionname;
-                provider.GetService<IAuditStore>()?.Save((auditEntry as AuditEntry)).GetAwaiter().GetResult(); //不用异步，或则用异步IResultFilterAsync
+                if(auditEntry!=null)
+                {
+                    //(auditEntry as AuditEntry).Action = context.HttpContext.Request.Path;
+                    //(auditEntry as AuditEntry).DescriptionName = actionname;
+                    provider.GetService<IAuditStore>()?.Save((auditEntry as AuditEntry)).GetAwaiter().GetResult(); //不用异步，或则用异步IResultFilterAsync
+                }
             }
         }
 
