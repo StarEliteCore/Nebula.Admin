@@ -18,7 +18,7 @@ namespace Destiny.Core.Flow.Events
 
         public override string Description()
         {
-            Key.NotNullOrEmpty("cacheKey");
+            
             return Key??string.Empty;
         }
     }

@@ -10,8 +10,8 @@ namespace Destiny.Core.Flow.Events
    public abstract class CacheEventDataBase: Notification
     {
      
-
         public string CacheId { get; set; }
+
         //应该放在缓存低层下做。。
         public virtual string GetCacheKey()
         {
@@ -20,14 +20,11 @@ namespace Destiny.Core.Flow.Events
             var cacheKey= GetType().GetCustomAttribute<CacheKeyAttribute>();
             if (cacheKey is null)
             {
-                return CacheId;
+                return $"{GetType().FullName}_{CacheId}";
             }
             var key= cacheKey.Description().IsNullOrEmpty()? GetType().Name: cacheKey.Description();
-            key = $"{key}_{CacheId}";
-            if (key.IndexOf("_", 0, 0) == -1)
-            {
-                key = $"_{key}";
-            }
+
+            key = $"{key}{CacheId}";
             return key;
            
         }
