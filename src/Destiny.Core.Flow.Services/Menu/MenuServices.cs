@@ -168,7 +168,7 @@ namespace Destiny.Core.Flow.Services.Menu
             {
                 Name = a.Name,
                 Path = a.Path,
-                Icon=a.Icon
+                Icon = a.Icon
             }).ToListAsync();
             return new OperationResponse<List<MenuOutputLoadDto>>(MessageDefinitionType.LoadSucces, menu, OperationResponseType.Success);
         }
@@ -196,8 +196,9 @@ namespace Destiny.Core.Flow.Services.Menu
         /// 
         /// </summary>
         /// <returns></returns>
-        public async Task<IPagedResult<MenuPermissionsOutDto>> GetMenuAsync()
+        public async Task<OperationResponse<Dictionary<string, bool>>> GetMenuAsync()
         {
+            Dictionary<string, bool> dic = new Dictionary<string, bool>();
             var menulist = new List<MenuPermissionsOutDto>();
             var userId = _iIdentity.GetUesrId<Guid>();
             var usermodel = await _userManager.FindByIdAsync(userId.ToString());
@@ -219,11 +220,11 @@ namespace Destiny.Core.Flow.Services.Menu
                     Id = x.Id,
                     Sort = x.Sort,
                 }).ToListAsync());
-                return new PageResult<MenuPermissionsOutDto>()
+                foreach (var item in menulist)
                 {
-                    ItemList = menulist,
-                    Total = menulist.Count,
-                };
+                    dic.Add(item.RouterPath, true);
+                }
+                return new OperationResponse<Dictionary<string, bool>>(MessageDefinitionType.LoadSucces, dic, OperationResponseType.Success);
             }
             menulist.AddRange(await _menuRepository.Entities.Where(x => menuId.Contains(x.Id)).Select(x => new MenuPermissionsOutDto
             {
@@ -232,11 +233,11 @@ namespace Destiny.Core.Flow.Services.Menu
                 Id = x.Id,
                 Sort = x.Sort,
             }).ToListAsync());
-            return new PageResult<MenuPermissionsOutDto>()
+            foreach (var item in menulist)
             {
-                ItemList = menulist,
-                Total = menulist.Count,
-            };
+                dic.Add(item.RouterPath, true);
+            }
+            return new OperationResponse<Dictionary<string, bool>>(MessageDefinitionType.LoadSucces, dic, OperationResponseType.Success);
         }
         /// <summary>
         /// 获取菜单树形

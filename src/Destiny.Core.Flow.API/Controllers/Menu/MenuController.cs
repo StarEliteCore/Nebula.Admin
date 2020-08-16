@@ -68,7 +68,7 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         /// <returns></returns>
         [HttpPost]
         [Description("添加菜单")]
-        public async Task<AjaxResult> AddMenuAsync([FromBody]MenuInputDto dto)
+        public async Task<AjaxResult> AddMenuAsync([FromBody] MenuInputDto dto)
         {
             if (dto.Id == Guid.Empty)
             {
@@ -109,9 +109,9 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         [HttpGet]
         [Description("根据登录账号获取菜单")]
         [NoAuthorityVerification]
-        public async Task<PageList<MenuPermissionsOutDto>> GetMenuAsync()
+        public async Task<AjaxResult> GetMenuAsync()
         {
-            return (await _menuServices.GetMenuAsync()).ToPageList();
+            return (await _menuServices.GetMenuAsync()).ToAjaxResult();
         }
         /// <summary>
         /// 登录成功之后获取用户菜单树
