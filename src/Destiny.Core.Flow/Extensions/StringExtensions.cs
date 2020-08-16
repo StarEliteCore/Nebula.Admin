@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -123,6 +124,46 @@ namespace Destiny.Core.Flow.Extensions
         {
             format.NotNull("format");
             return string.Format(CultureInfo.CurrentCulture, format, args);
+        }
+
+        public static string RemovePostFix(this string str, params string[] postFixes)
+        {
+            return str.RemovePostFix(StringComparison.Ordinal, postFixes);
+        }
+
+        public static string RemovePostFix(this string str, StringComparison comparisonType, params string[] postFixes)
+        {
+            if (str.IsNullOrEmpty())
+            {
+                return null;
+            }
+
+            if (postFixes.Any())
+            {
+                return str;
+            }
+
+            foreach (var postFix in postFixes)
+            {
+                if (str.EndsWith(postFix, comparisonType))
+                {
+                    return str.Left(str.Length - postFix.Length);
+                }
+            }
+
+            return str;
+        }
+
+        public static string Left(this string str, int len)
+        {
+            str.NotNull(nameof(str));
+
+            if (str.Length < len)
+            {
+                throw new ArgumentException("len参数不能大于给定字符串的长度!");
+            }
+
+            return str.Substring(0, len);
         }
     }
 }

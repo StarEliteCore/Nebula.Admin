@@ -75,7 +75,7 @@ namespace Destiny.Core.Flow.Services.RoleServices
             });
         }
         public async Task<OperationResponse> DeleteAsync(Guid id)
-        {
+        { 
             id.NotNull(nameof(id));
             var role =await _roleManager.FindByIdAsync(id.ToString());
             var result = await _roleManager.DeleteAsync(role);
