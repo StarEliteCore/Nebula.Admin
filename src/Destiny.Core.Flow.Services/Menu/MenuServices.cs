@@ -204,16 +204,9 @@ namespace Destiny.Core.Flow.Services.Menu
             var usermodel = await _userManager.FindByIdAsync(userId.ToString());
             var roleids = (await _repositoryUserRole.Entities.Where(x => x.UserId == userId).ToListAsync()).Select(x => x.RoleId);
             var menuId = (await _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).ToListAsync()).Select(x => x.MenuId);
-            menulist.Add(new MenuPermissionsOutDto
-            {
-                Name = "首页",
-                RouterPath = "home",
-                Id = Guid.NewGuid(),
-                Sort = 0,
-            });
             if (usermodel.IsSystem && _roleManager.Roles.Where(x => x.IsAdmin == true && roleids.Contains(x.Id)).Any())
             {
-                menulist.AddRange(await _menuRepository.Entities.Select(x => new MenuPermissionsOutDto
+                menulist.AddRange(await _menuRepository.Entities.Where(x=>x.Type == MenuEnum.Menu).Select(x => new MenuPermissionsOutDto
                 {
                     Name = x.Name,
                     RouterPath = x.Path,
@@ -226,7 +219,7 @@ namespace Destiny.Core.Flow.Services.Menu
                 }
                 return new OperationResponse<Dictionary<string, bool>>(MessageDefinitionType.LoadSucces, dic, OperationResponseType.Success);
             }
-            menulist.AddRange(await _menuRepository.Entities.Where(x => menuId.Contains(x.Id)).Select(x => new MenuPermissionsOutDto
+            menulist.AddRange(await _menuRepository.Entities.Where(x => x.Type==MenuEnum.Menu).Select(x => new MenuPermissionsOutDto
             {
                 Name = x.Name,
                 RouterPath = x.Path,
@@ -235,7 +228,10 @@ namespace Destiny.Core.Flow.Services.Menu
             }).ToListAsync());
             foreach (var item in menulist)
             {
-                dic.Add(item.RouterPath, true);
+                if (menuId.Contains(item.Id))
+                    dic.Add(item.RouterPath, true);
+                else
+                    dic.Add(item.RouterPath, false);
             }
             return new OperationResponse<Dictionary<string, bool>>(MessageDefinitionType.LoadSucces, dic, OperationResponseType.Success);
         }
