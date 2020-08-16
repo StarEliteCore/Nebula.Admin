@@ -16,30 +16,13 @@ namespace Destiny.Core.Flow.Entity
     {
         protected StateDto()
         {
-            if (typeof(TKey) == typeof(Guid))
-            {
-                DtoState = GetState(key => key.AsTo<Guid>() == Guid.Empty);
-            }
-            else if (typeof(TKey) == typeof(int))
-            {
-                DtoState = GetState(key => key.AsTo<int>() == 0);
-            }
-            else if (typeof(TKey) == typeof(Int32))
-            {
-                DtoState = GetState(key => key.AsTo<Int32>() == 0);
-            }
-            else if (typeof(TKey) == typeof(Int64))
-            {
-                DtoState = GetState(key => key.AsTo<Int64>() == 0);
-            }
-        }
 
-        private DtoState GetState(Func<object, bool> func)
-        {
 
-            return func(Id) ? DtoState.Add : DtoState.Update;
-        }
+            DtoState = IsNew() == true ? DtoState.Add : DtoState.Update;
+        } 
 
-        public virtual DtoState DtoState { get; set; }
+        public bool IsNew() =>
+                      EqualityComparer<TKey>.Default.Equals(Id, default);
+        public virtual DtoState DtoState { get; set; } 
     }
 }

@@ -37,7 +37,7 @@ namespace Destiny.Core.Flow.API.Startups
 
         public override void ConfigureServices(ConfigureServicesContext context)
         {
-
+            context.Services.AddTransient(typeof(Lazy<>), typeof(LazyFactory<>));
             var configuration = context.GetConfiguration();
             context.Services.Configure<AppOptionSettings>(configuration.GetSection("Destiny"));
            
