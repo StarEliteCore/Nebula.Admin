@@ -25,5 +25,7 @@ namespace Destiny.Core.Flow.Ui
         public OperationResponse(string message, object data, OperationResponseType type) : base(message, data, type)
         {
         }
+
+
     }
 }

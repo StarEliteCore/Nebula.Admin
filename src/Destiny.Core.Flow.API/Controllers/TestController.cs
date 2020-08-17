@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Destiny.Core.Flow.Caching;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
+using Destiny.Core.Flow.Ui;
 
 namespace Destiny.Core.Flow.API.Controllers
 {
@@ -40,6 +41,8 @@ namespace Destiny.Core.Flow.API.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
+
+          
             Console.WriteLine($"client: {_configuration["MysqlConnectionString"]}");
             var item = _configuration.GetValue<string>("TEST1.Destiny_Apollo:MysqlConnectionString");
             Console.WriteLine(item);

@@ -2,6 +2,7 @@
 using Destiny.Core.Flow.Filter;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Destiny.Core.Flow.Ui
@@ -41,38 +42,60 @@ namespace Destiny.Core.Flow.Ui
    
         public override bool Success => Type == OperationResponseType.Success;
 
+        /// <summary>
+        /// 成功
+        /// </summary>
+        /// <param name="message">提示消息</param>
+        public static OperationResponse<TData> Ok(string message)
+        {
+          return  Ok(message,default(TData));
+        }
 
         /// <summary>
-        /// 是否成功
+        /// 成功
         /// </summary>
-        /// <param name="message"></param>
-        public void IsSuccess(string message)
+        /// <param name="data">返回成功数据</param>
+        /// <returns></returns>
+        public static OperationResponse<TData> Ok(TData data)
         {
-            this.IsSuccess(message,default(TData));
-        }
-        public void IsSuccess(TData data)
-        {
-            this.IsSuccess(string.Empty,data);
+           return  Ok(string.Empty,data);
         }
 
-        public void IsSuccess(string message,TData data)
+        /// <summary>
+        /// 成功
+        /// </summary>
+        /// <param name="message">提示消息</param>
+        /// <param name="data">返回成功数据</param>
+        /// <returns></returns>
+        public static OperationResponse<TData> Ok(string message,TData data)
         {
-            this.Type = OperationResponseType.Success;
-            this.Message = message;
-            this.Data = data;
+          
+            return new OperationResponse<TData>(message,data, OperationResponseType.Success);
         }
 
-   
 
 
-        public bool Error()
+        public static OperationResponse<TData> Error(string message)
         {
-            return Type != OperationResponseType.Success;
+            return Error(message, default(TData));
+        }
+        public static OperationResponse<TData> Error(TData data)
+        {
+            return Error(string.Empty, data);
+        }
+        public static OperationResponse<TData> Error(string message, TData data)
+        {
+
+            return new OperationResponse<TData>(message, data, OperationResponseType.Error);
         }
 
+
+     
+ 
         public bool Exp()
         {
             return Type == OperationResponseType.Exp;
         }
+
     }
 }
