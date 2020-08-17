@@ -33,7 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1249687C-582
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B74CBBDD-8574-4768-AA9D-2144A77D4875}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "web", "web", "{9A347066-1CEA-4FD6-BD7E-598A7FF21E6C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.web", "1.web", "{9A347066-1CEA-4FD6-BD7E-598A7FF21E6C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Dtos", "src\Destiny.Core.Flow.Dtos\Destiny.Core.Flow.Dtos.csproj", "{9DFDA589-61A2-46E6-ACB6-6C8D1B987F0D}"
 EndProject
@@ -64,7 +64,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Consul", "src\Destiny.Core.Flow.Consul\Destiny.Core.Flow.Consul.csproj", "{E6E94B5B-54C7-4AF7-AB12-6A7A8BF948D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.GateWay", "src\Destiny.Core.Flow.GateWay\Destiny.Core.Flow.GateWay.csproj", "{34AD3FF4-04B2-406D-9D99-6CACC21F9930}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.GateWay", "src\Destiny.Core.Flow.GateWay\Destiny.Core.Flow.GateWay.csproj", "{34AD3FF4-04B2-406D-9D99-6CACC21F9930}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
