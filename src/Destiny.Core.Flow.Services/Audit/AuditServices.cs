@@ -17,7 +17,7 @@ namespace Destiny.Core.Flow.Services.Audit
             _mongoDBRepository = mongoDBRepository;
         }
 
-        public async Task Save(AuditEntry auditEntry )
+        public async Task Save(List<AuditEntry> auditEntry )
         {
             await _mongoDBRepository.InsertAsync(auditEntry);
         }

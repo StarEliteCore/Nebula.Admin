@@ -9,7 +9,7 @@ namespace Destiny.Core.Flow.Audit
     public interface IAuditStore : IScopedDependency
     {
 
-        Task Save(AuditEntry auditEntry);
+        Task Save(List<AuditEntry> auditEntry);
 
     }
 }
