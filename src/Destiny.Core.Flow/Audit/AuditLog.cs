@@ -6,7 +6,11 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Audit
 {
-    [DisplayName("审计日志")]
+    /// <summary>
+    /// 日志主表
+    /// </summary>
+    [DisplayName("日志主表")]
+    [MongoDBTable("DestinyAuditLog")]//
     public class AuditLog: EntityBase<Guid>, IFullAuditedEntity<Guid>
     {
         /// <summary>
