@@ -151,6 +151,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetMenuListAsync">
+            <summary>
+            获取登录用户权限菜单
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetMenuFunctionListAsync(System.Guid)">
             <summary>
             异步到菜单功能集合
