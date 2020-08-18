@@ -12,12 +12,11 @@ namespace Destiny.Core.Flow.Application
            where TEntity : IEntity<TPrimaryKey>, IEquatable<TPrimaryKey>
     {
 
-        IQueryable<TEntity> Query();
 
 
 
 
-        IQueryable<TEntity> QueryNoTracking();
+
         /// <summary>
         /// 删除
         /// </summary>

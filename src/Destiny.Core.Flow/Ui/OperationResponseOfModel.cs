@@ -7,7 +7,10 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Ui
 {
-   public class OperationResponse<TData>: ResultBase<TData>, IHasResultType<OperationResponseType>
+    /// <summary>
+    /// 有重复代码想办法解决。。
+    /// </summary>
+    public class OperationResponse<TData>: ResultBase<TData>, IHasResultType<OperationResponseType>
     {
 
         public OperationResponse() : this(OperationResponseType.Success)
@@ -42,13 +45,22 @@ namespace Destiny.Core.Flow.Ui
    
         public override bool Success => Type == OperationResponseType.Success;
 
+
+
+        /// <summary>
+        /// 成功
+        /// </summary>
+        public static OperationResponse<TData> Ok()
+        {
+            return Ok(string.Empty, default(TData));
+        }
         /// <summary>
         /// 成功
         /// </summary>
         /// <param name="message">提示消息</param>
         public static OperationResponse<TData> Ok(string message)
         {
-          return  Ok(message,default(TData));
+            return Ok(message, default(TData));
         }
 
         /// <summary>
@@ -58,7 +70,7 @@ namespace Destiny.Core.Flow.Ui
         /// <returns></returns>
         public static OperationResponse<TData> Ok(TData data)
         {
-           return  Ok(string.Empty,data);
+            return Ok(string.Empty, data);
         }
 
         /// <summary>
@@ -67,10 +79,10 @@ namespace Destiny.Core.Flow.Ui
         /// <param name="message">提示消息</param>
         /// <param name="data">返回成功数据</param>
         /// <returns></returns>
-        public static OperationResponse<TData> Ok(string message,TData data)
+        public static OperationResponse<TData> Ok(string message, TData data)
         {
-          
-            return new OperationResponse<TData>(message,data, OperationResponseType.Success);
+
+            return new OperationResponse<TData>(message, data, OperationResponseType.Success);
         }
 
 
@@ -90,8 +102,8 @@ namespace Destiny.Core.Flow.Ui
         }
 
 
-     
- 
+
+
         public bool Exp()
         {
             return Type == OperationResponseType.Exp;
