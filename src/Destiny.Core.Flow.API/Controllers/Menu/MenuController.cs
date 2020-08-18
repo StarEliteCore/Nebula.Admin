@@ -113,6 +113,7 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         {
             return (await _menuServices.GetMenuAsync()).ToAjaxResult();
         }
+
         /// <summary>
         /// 登录成功之后获取用户菜单树
         /// </summary>
@@ -146,6 +147,18 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         public async Task<AjaxResult> GetMenuChildrenButtonAsync(Guid? menuId)
         {
             return (await _menuServices.GetMenuChildrenButton(menuId.Value)).ToAjaxResult();
+        }
+        /// <summary>
+        /// 获取登录用户权限菜单
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Description("获取登录用户权限菜单")]
+        [NoAuthorityVerification]
+
+        public async Task<AjaxResult> GetMenuListAsync()
+        {
+            return (await _menuServices.GetMenuListAsync()).ToAjaxResult();
         }
         /// <summary>
         /// 异步到菜单功能集合

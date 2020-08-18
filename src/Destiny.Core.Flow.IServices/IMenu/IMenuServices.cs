@@ -73,5 +73,10 @@ namespace Destiny.Core.Flow.IServices.IMenu
         /// </summary>
         /// <returns></returns>
         Task<OperationResponse> GetUserMenuTreeAsync();
+        /// <summary>
+        /// 获取有权限的菜单列表
+        /// </summary>
+        /// <returns></returns>
+        Task<OperationResponse> GetMenuListAsync();
     }
 }
