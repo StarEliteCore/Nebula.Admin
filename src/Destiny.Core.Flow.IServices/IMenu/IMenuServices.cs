@@ -61,7 +61,7 @@ namespace Destiny.Core.Flow.IServices.IMenu
         /// 根据登录的用户获取角色并获取菜单
         /// </summary>
         /// <returns></returns>
-        Task<IPagedResult<MenuPermissionsOutDto>> GetMenuAsync();
+        Task<OperationResponse<Dictionary<string, bool>>> GetMenuAsync();
         /// <summary>
         /// 异步得到菜单下的按钮
         /// </summary>
@@ -73,5 +73,10 @@ namespace Destiny.Core.Flow.IServices.IMenu
         /// </summary>
         /// <returns></returns>
         Task<OperationResponse> GetUserMenuTreeAsync();
+        /// <summary>
+        /// 获取有权限的菜单列表
+        /// </summary>
+        /// <returns></returns>
+        Task<OperationResponse> GetMenuListAsync();
     }
 }

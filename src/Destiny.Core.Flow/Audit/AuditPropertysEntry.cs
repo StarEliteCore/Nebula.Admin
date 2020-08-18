@@ -8,7 +8,7 @@ using System.Text;
 namespace Destiny.Core.Flow.Audit
 {
     [DisplayName("审计日志属性")]
-    [MongoDBTable("DestinyAttributeLog")]
+    [MongoDBTable("AuditPropertysEntry")]
     public class AuditPropertysEntry : EntityBase<Guid>, IFullAuditedEntity<Guid>
     {
         public AuditPropertysEntry()

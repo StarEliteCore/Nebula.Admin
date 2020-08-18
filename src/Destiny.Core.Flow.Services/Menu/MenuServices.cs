@@ -168,7 +168,7 @@ namespace Destiny.Core.Flow.Services.Menu
             {
                 Name = a.Name,
                 Path = a.Path,
-                Icon=a.Icon
+                Icon = a.Icon
             }).ToListAsync();
             return new OperationResponse<List<MenuOutputLoadDto>>(MessageDefinitionType.LoadSucces, menu, OperationResponseType.Success);
         }
@@ -196,47 +196,44 @@ namespace Destiny.Core.Flow.Services.Menu
         /// 
         /// </summary>
         /// <returns></returns>
-        public async Task<IPagedResult<MenuPermissionsOutDto>> GetMenuAsync()
+        public async Task<OperationResponse<Dictionary<string, bool>>> GetMenuAsync()
         {
+            Dictionary<string, bool> dic = new Dictionary<string, bool>();
             var menulist = new List<MenuPermissionsOutDto>();
             var userId = _iIdentity.GetUesrId<Guid>();
             var usermodel = await _userManager.FindByIdAsync(userId.ToString());
             var roleids = (await _repositoryUserRole.Entities.Where(x => x.UserId == userId).ToListAsync()).Select(x => x.RoleId);
             var menuId = (await _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).ToListAsync()).Select(x => x.MenuId);
-            menulist.Add(new MenuPermissionsOutDto
-            {
-                Name = "首页",
-                RouterPath = "home",
-                Id = Guid.NewGuid(),
-                Sort = 0,
-            });
             if (usermodel.IsSystem && _roleManager.Roles.Where(x => x.IsAdmin == true && roleids.Contains(x.Id)).Any())
             {
-                menulist.AddRange(await _menuRepository.Entities.Select(x => new MenuPermissionsOutDto
+                menulist.AddRange(await _menuRepository.Entities.Where(x=>x.Type == MenuEnum.Menu).Select(x => new MenuPermissionsOutDto
                 {
                     Name = x.Name,
                     RouterPath = x.Path,
                     Id = x.Id,
                     Sort = x.Sort,
                 }).ToListAsync());
-                return new PageResult<MenuPermissionsOutDto>()
+                foreach (var item in menulist)
                 {
-                    ItemList = menulist,
-                    Total = menulist.Count,
-                };
+                    dic.Add(item.RouterPath, true);
+                }
+                return new OperationResponse<Dictionary<string, bool>>(MessageDefinitionType.LoadSucces, dic, OperationResponseType.Success);
             }
-            menulist.AddRange(await _menuRepository.Entities.Where(x => menuId.Contains(x.Id)).Select(x => new MenuPermissionsOutDto
+            menulist.AddRange(await _menuRepository.Entities.Where(x => x.Type==MenuEnum.Menu).Select(x => new MenuPermissionsOutDto
             {
                 Name = x.Name,
                 RouterPath = x.Path,
                 Id = x.Id,
                 Sort = x.Sort,
             }).ToListAsync());
-            return new PageResult<MenuPermissionsOutDto>()
+            foreach (var item in menulist)
             {
-                ItemList = menulist,
-                Total = menulist.Count,
-            };
+                if (menuId.Contains(item.Id))
+                    dic.Add(item.RouterPath, true);
+                else
+                    dic.Add(item.RouterPath, false);
+            }
+            return new OperationResponse<Dictionary<string, bool>>(MessageDefinitionType.LoadSucces, dic, OperationResponseType.Success);
         }
         /// <summary>
         /// 获取菜单树形
@@ -288,6 +285,39 @@ namespace Destiny.Core.Flow.Services.Menu
                      p.routes.AddRange(children);
                  });
             menulist.AddRange(result.ItemList);
+            return new OperationResponse(MessageDefinitionType.LoadSucces, menulist, OperationResponseType.Success);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<OperationResponse> GetMenuListAsync()
+        {
+            var menulist = new List<MenuPermissionsOutDto>();
+            var userId = _iIdentity.GetUesrId<Guid>();
+            var usermodel = await _userManager.FindByIdAsync(userId.ToString());
+            var roleids = (await _repositoryUserRole.Entities.Where(x => x.UserId == userId).ToListAsync()).Select(x => x.RoleId);
+            var menuId = (await _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).ToListAsync()).Select(x => x.MenuId);
+            if (usermodel.IsSystem && _roleManager.Roles.Where(x => x.IsAdmin == true && roleids.Contains(x.Id)).Any())
+            {
+                menulist.AddRange(await _menuRepository.Entities.Select(x => new MenuPermissionsOutDto
+                {
+                    Name = x.Name,
+                    RouterPath = x.Path,
+                    Id = x.Id,
+                    Sort = x.Sort,
+                }).ToListAsync());
+                return new OperationResponse(MessageDefinitionType.LoadSucces, menulist, OperationResponseType.Success);
+
+            }
+            menulist.AddRange(await _menuRepository.Entities.Where(x => menuId.Contains(x.Id)).Select(x => new MenuPermissionsOutDto
+            {
+                Name = x.Name,
+                RouterPath = x.Path,
+                Id = x.Id,
+                Sort = x.Sort,
+            }).ToListAsync());
             return new OperationResponse(MessageDefinitionType.LoadSucces, menulist, OperationResponseType.Success);
         }
     }
