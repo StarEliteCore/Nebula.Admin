@@ -136,7 +136,7 @@ namespace Destiny.Core.Flow.Services
                 }
 
 
-                if (dto.RoleIds.Any() == true)
+                if (dto.RoleIds?.Any() == true)
                 {
                     return await this.SetUserRoles(user, dto.RoleIds,false);
                 }
@@ -155,7 +155,7 @@ namespace Destiny.Core.Flow.Services
         /// <param name="userId"></param>
         /// <param name="roleIds"></param>
         /// <returns></returns>
-        private async Task<OperationResponse> SetUserRoles(User user, Guid[] roleIds,bool isAdd=true)
+        private async Task<OperationResponse> SetUserRoles(User user, Guid?[] roleIds,bool isAdd=true)
         {
 
             

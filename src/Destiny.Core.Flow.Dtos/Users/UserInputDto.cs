@@ -41,7 +41,7 @@ namespace Destiny.Core.Flow.Dtos
         /// </summary>
         public Sex Sex { get; set; }
 
-        public Guid[] RoleIds { get; set; }
+        public Guid?[] RoleIds { get; set; }
 
     }
     [AutoMapp(typeof(User))]
@@ -70,7 +70,7 @@ namespace Destiny.Core.Flow.Dtos
         /// </summary>
         public Sex Sex { get; set; }
 
-        public Guid[] RoleIds { get; set; }
+        public Guid?[] RoleIds { get; set; }
 
     }
 }
