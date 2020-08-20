@@ -19,13 +19,13 @@ namespace Destiny.Core.Flow.Audit
             _principal = principal;
         }
 
-        public async Task<List<AuditEntry>> GetChangeTrackerList(IEnumerable<EntityEntry> Entries)
+        public async Task<List<AuditEntryInputDto>> GetChangeTrackerList(IEnumerable<EntityEntry> Entries)
         {
             await Task.CompletedTask;
-            var list = new List<AuditEntry>();
+            var list = new List<AuditEntryInputDto>();
             foreach (var entityEntry in Entries)
             {
-                var auditentry = new AuditEntry();
+                var auditentry = new AuditEntryInputDto();
                 auditentry.EntityAllName = entityEntry.Metadata.Name;
                 auditentry.EntityDisplayName = entityEntry.Entity.GetType().ToDescription();
                 //auditentry.TableName=
@@ -50,7 +50,7 @@ namespace Destiny.Core.Flow.Audit
                 var properties = entityEntry.Metadata.GetProperties();
                 foreach (var propertie in properties)
                 {
-                    var AuditPropertys = new AuditPropertysEntry();
+                    var AuditPropertys = new AuditPropertyEntryInputDto();
                     var propertyEntry = entityEntry.Property(propertie.Name);//获取字段名
                     if (propertyEntry.Metadata.IsPrimaryKey())
                     {
@@ -63,8 +63,7 @@ namespace Destiny.Core.Flow.Audit
                         AuditPropertys.OriginalValues = propertyEntry.OriginalValue?.ToString();
                         AuditPropertys.PropertiesType = propertie.ClrType.FullName ;
                         AuditPropertys.Properties = propertyEntry.Metadata.PropertyInfo.ToDescription();
-                        AuditPropertys.AuditEntryId = auditentry.Id;
-                        auditentry.auditPropertys.Add(AuditPropertys);
+                        auditentry.AuditPropertys.Add(AuditPropertys);
                     }
                     
                 }

@@ -9,7 +9,7 @@ namespace Destiny.Core.Flow.Audit
 {
     public interface IGetChangeTracker:IScopedDependency
     {
-        Task<List<AuditEntry>> GetChangeTrackerList(IEnumerable<EntityEntry> Entries);
+        Task<List<AuditEntryInputDto>> GetChangeTrackerList(IEnumerable<EntityEntry> Entries);
 
     }
 }

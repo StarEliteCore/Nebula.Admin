@@ -42,11 +42,12 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
                     AuditLog auditlog = new AuditLog();
                     auditlog.Ip =  "";
                     auditlog.Ip = context.HttpContext.GetClientIP();
+                    auditlog.BrowserInformation= context.HttpContext.Request.Headers["User-Agent"].ToString();
                     auditlog.FunctionName =$"{context.Controller.GetType().ToDescription()}-{action.MethodInfo.ToDescription()}";
                     auditlog.Action = context.HttpContext.Request.Path;
                     //(auditEntry as AuditEntry).Action = context.HttpContext.Request.Path;
                     //(auditEntry as AuditEntry).DescriptionName = actionname;
-                    provider.GetService<IAuditStore>()?.Save(auditlog, (auditEntry as List<AuditEntry>)).GetAwaiter().GetResult(); //不用异步，或则用异步IResultFilterAsync
+                    provider.GetService<IAuditStore>()?.Save(auditlog, (auditEntry as List<AuditEntryInputDto>)).GetAwaiter().GetResult(); //不用异步，或则用异步IResultFilterAsync
                 }
             }
         }

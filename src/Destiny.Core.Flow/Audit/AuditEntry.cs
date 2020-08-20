@@ -72,6 +72,5 @@ namespace Destiny.Core.Flow.Audit
         /// </summary>
         [DisplayName("审计日志主表Id")]
         public Guid AuditLogId { get; set; }
-        public List<AuditPropertysEntry> auditPropertys { get; set; } = new List<AuditPropertysEntry>();
     }
 }
