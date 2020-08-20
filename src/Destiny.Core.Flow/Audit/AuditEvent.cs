@@ -11,6 +11,6 @@ namespace Destiny.Core.Flow.Audit
     /// </summary>
     public class AuditEvent: EventBase
     {
-        public List<AuditEntry> AuditEntries { get; set; }
+        public List<AuditEntryInputDto> AuditEntries { get; set; }
     }
 }

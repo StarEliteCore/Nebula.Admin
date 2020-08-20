@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Entity
 {
-    public interface IMongoDBRepository<TData, Tkey>
+    public interface IMongoDBRepository<TEntity, Tkey>
     {
         //Find<T> – 返回集合中与提供的搜索条件匹配的所有文档。
         //InsertOne – 插入提供的对象作为集合中的新文档。
@@ -16,12 +16,12 @@ namespace Destiny.Core.Flow.Entity
         /// </summary>
         /// <param name="T"></param>
         /// <returns></returns>
-        Task InsertAsync(TData entity);
+        Task InsertAsync(TEntity entity);
         /// <summary>
         /// 数组创建
         /// </summary>
         /// <param name="entitys"></param>
         /// <returns></returns>
-        Task InsertAsync(List<TData> entitys);
+        Task InsertAsync(TEntity[] entitys);
     }
 }
