@@ -10,16 +10,26 @@ namespace Destiny.Core.Flow.Services.Audit
 {
     public class AuditServices : IAuditStore
     {
-        private readonly IMongoDBRepository<AuditEntry, Guid> _mongoDBRepository;
+        private readonly IMongoDBRepository<AuditLog, Guid> _auditLogRepository;
+        private readonly IMongoDBRepository<AuditEntry, Guid> _auditEntryRepository;
+        private readonly IMongoDBRepository<AuditPropertysEntry, Guid> _auditPropertysEntryRepository;
 
-        public AuditServices(IMongoDBRepository<AuditEntry, Guid> mongoDBRepository)
+        public AuditServices(IMongoDBRepository<AuditLog, Guid> auditLogRepository, IMongoDBRepository<AuditEntry, Guid> auditEntryRepository, IMongoDBRepository<AuditPropertysEntry, Guid> auditPropertysEntryRepository)
         {
-            _mongoDBRepository = mongoDBRepository;
+            _auditLogRepository = auditLogRepository;
+            _auditEntryRepository = auditEntryRepository;
+            _auditPropertysEntryRepository = auditPropertysEntryRepository;
         }
 
-        public async Task Save(List<AuditEntry> auditEntry )
+        public async Task Save(AuditLog auditLog,List<AuditEntry> auditEntry)
         {
-            await _mongoDBRepository.InsertAsync(auditEntry);
+            foreach (var item in auditEntry)
+            {
+                item.AuditLogId = auditLog.Id;
+            }
+            await _auditLogRepository.InsertAsync(auditLog);
+            await _auditEntryRepository.InsertAsync(auditEntry);
+            //await _auditEntryRepository.InsertAsync(auditEntry);
         }
     }
 }

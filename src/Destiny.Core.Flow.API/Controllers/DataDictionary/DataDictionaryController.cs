@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 namespace Destiny.Core.Flow.API.Controllers.DataDictionary
 {
-    [Description("角色管理")]
+    [Description("数据字典")]
     [Authorize]
     public class DataDictionaryController : ApiControllerBase
     {

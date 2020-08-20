@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using Destiny.Core.Flow.Extensions;
 
 namespace Destiny.Core.Flow.Audit
 {
@@ -13,6 +14,10 @@ namespace Destiny.Core.Flow.Audit
     [MongoDBTable("DestinyAuditLog")]//
     public class AuditLog: EntityBase<Guid>, IFullAuditedEntity<Guid>
     {
+        public AuditLog()
+        {
+            Id = Guid.NewGuid();
+        }
         /// <summary>
         /// 浏览器信息
         /// </summary>
