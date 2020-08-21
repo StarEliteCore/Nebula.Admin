@@ -24,6 +24,7 @@ namespace Destiny.Core.Flow.Services.Audit
 
         public async Task Save(AuditLog auditLog,List<AuditEntryInputDto> auditEntry)
         {
+            var ss=auditEntry.MapToList<AuditEntry>();
             List<AuditEntry> auditentrylist = new List<AuditEntry>();
             List<AuditPropertysEntry> auditpropertysentrylist = new List<AuditPropertysEntry>();
             foreach (var item in auditEntry)

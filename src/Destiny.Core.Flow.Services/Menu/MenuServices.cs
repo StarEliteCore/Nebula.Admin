@@ -164,7 +164,26 @@ namespace Destiny.Core.Flow.Services.Menu
         /// <returns></returns>
         public async Task<OperationResponse<List<MenuOutputLoadDto>>> GetMenuChildrenButton(Guid Id)
         {
-            var menu = await _menuRepository.Entities.Where(x => x.ParentId == Id && x.Type == MenuEnum.Button).Select(a => new MenuOutputLoadDto
+            var menulist = new List<MenuPermissionsOutDto>();
+            var userId = _iIdentity.GetUesrId<Guid>();
+            var usermodel = await _userManager.FindByIdAsync(userId.ToString());
+            var roleids = (await _repositoryUserRole.Entities.Where(x => x.UserId == userId).ToListAsync()).Select(x => x.RoleId);
+            var menuId = (await _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).ToListAsync()).Select(x => x.MenuId);
+            if (usermodel.IsSystem && _roleManager.Roles.Where(x => x.IsAdmin == true && roleids.Contains(x.Id)).Any())
+            {
+                var menus = await _menuRepository.Entities.Where(x => x.ParentId == Id && x.Type == MenuEnum.Button ).Select(a => new MenuOutputLoadDto
+                {
+                    Name = a.Name,
+                    Path = a.Path,
+                    Icon = a.Icon
+                }).ToListAsync();
+                return new OperationResponse<List<MenuOutputLoadDto>>(MessageDefinitionType.LoadSucces, menus, OperationResponseType.Success);
+            }
+            if (!menuId.Contains(Id))
+            {
+                return new OperationResponse<List<MenuOutputLoadDto>>(MessageDefinitionType.LoadSucces, new List<MenuOutputLoadDto>(), OperationResponseType.Success);
+            }
+            var menu = await _menuRepository.Entities.Where(x => x.ParentId == Id && x.Type == MenuEnum.Button && menuId.Contains(x.Id)).Select(a => new MenuOutputLoadDto
             {
                 Name = a.Name,
                 Path = a.Path,
