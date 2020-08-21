@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace Destiny.Core.Flow.Dtos.Menu
 {
-    [AutoMapp(typeof(MenuEntity))]
+    [AutoMapping(typeof(MenuEntity))]
     public class MenuInputDto : InputDto<Guid>
     {
         /// <summary>

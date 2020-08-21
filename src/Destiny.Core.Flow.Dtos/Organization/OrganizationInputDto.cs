@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Dtos.Organization
 {
-    [AutoMapp(typeof(OrganizatedEntity))]
+    [AutoMapping(typeof(OrganizatedEntity))]
     [DisplayName("组织架构传入Dto")]
     public class OrganizationInputDto : InputDto<Guid>
     {

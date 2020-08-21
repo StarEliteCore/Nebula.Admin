@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Dtos
 {
-    [AutoMapp(typeof(MenuEntity))]
+    [AutoMapping(typeof(MenuEntity))]
     public class MenuEntityItem : MenuEntity
     {
 

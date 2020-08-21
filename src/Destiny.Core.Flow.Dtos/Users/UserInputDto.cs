@@ -11,7 +11,7 @@ using System.Text;
 namespace Destiny.Core.Flow.Dtos
 {
 
-    [AutoMapp(typeof(User))]
+    [AutoMapping(typeof(User))]
     public class UserInputDto : InputWaitStateDto<Guid>
     {
         public UserInputDto()
@@ -44,7 +44,7 @@ namespace Destiny.Core.Flow.Dtos
         public Guid?[] RoleIds { get; set; }
 
     }
-    [AutoMapp(typeof(User))]
+    [AutoMapping(typeof(User))]
     public class UserUpdateInputDto : InputWaitStateDto<Guid>
     {
         public UserUpdateInputDto()

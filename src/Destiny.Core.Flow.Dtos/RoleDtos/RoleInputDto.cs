@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Dtos.RoleDtos
 {
-    [AutoMapp(typeof(Role))]
+    [AutoMapping(typeof(Role))]
     public class RoleInputDto : InputDto<Guid>
     {
         public RoleInputDto() {
