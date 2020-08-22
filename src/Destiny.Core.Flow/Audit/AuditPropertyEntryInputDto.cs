@@ -7,7 +7,7 @@ using System.Text;
 namespace Destiny.Core.Flow.Audit
 {
     [DisplayName("审计日志属性输入Dto")]
-    [AutoMapp(typeof(AuditPropertysEntry))]
+    [AutoMapping(typeof(AuditPropertysEntry))]
     public class AuditPropertyEntryInputDto
     {
         /// <summary>

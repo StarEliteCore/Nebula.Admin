@@ -10,7 +10,7 @@ namespace Destiny.Core.Flow.Dtos.Menu
     /// <summary>
     /// 菜单表格
     /// </summary
-    [AutoMapp(typeof(MenuEntity))]
+    [AutoMapping(typeof(MenuEntity))]
     public class MenuTableOutDto : OutputDto<Guid>
     {
         /// <summary>

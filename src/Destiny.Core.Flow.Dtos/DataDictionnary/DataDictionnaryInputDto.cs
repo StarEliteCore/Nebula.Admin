@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Dtos.DataDictionnary
 {
-    [AutoMapp(typeof(DataDictionaryEntity))]
+    [AutoMapping(typeof(DataDictionaryEntity))]
     public class DataDictionnaryInputDto: InputDto<Guid>
     {
         /// <summary>

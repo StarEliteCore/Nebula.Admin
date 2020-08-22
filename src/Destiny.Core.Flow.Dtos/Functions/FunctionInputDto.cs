@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Dtos.Functions
 {
-    [AutoMapp(typeof(Function))]
+    [AutoMapping(typeof(Function))]
     public class FunctionInputDto : FunctionDtoBase<Guid>, IInputDto<Guid>
     {
 

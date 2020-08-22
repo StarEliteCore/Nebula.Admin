@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Dtos.Functions
 {
-    [AutoMapp(typeof(Function))]
+    [AutoMapping(typeof(Function))]
     public   class FunctionOutputPageList : FunctionDtoBase<Guid>, IOutputDto<Guid>
     {
 
