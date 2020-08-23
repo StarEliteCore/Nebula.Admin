@@ -25,7 +25,8 @@ namespace Destiny.Core.Flow.Services.RoleServices.EventHandlers
 
         public override async Task Handle(RoleMenuEventCacehDeleteEvent notification, CancellationToken cancellationToken)
         {
-          await  _cache.RemoveAsync(notification.GetCacheKey());
+            var key = $"{CacheKeys.roleMenuKeyPrefix}{notification.RoleId}";
+          await  _cache.RemoveAsync(key);
         }
     }
 }

@@ -31,8 +31,8 @@ namespace Destiny.Core.Flow.Services.RoleServices.EventHandlers
         }
         public override async Task Handle(RoleMenuCacheAddOrUpdateEvent notification, CancellationToken cancellationToken)
         {
-   
-            var key = notification.GetCacheKey();
+
+            var key = $"{CacheKeys.roleMenuKeyPrefix}{notification.RoleId}";
             RoleMenuItem roleMenuItem = new RoleMenuItem();
 
             //var ss = _roleMenuRepository.Entities.Where(x => x.RoleId == notification.RoleId).ToListAsync();

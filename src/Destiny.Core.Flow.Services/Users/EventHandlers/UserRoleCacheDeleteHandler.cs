@@ -18,10 +18,10 @@ namespace Destiny.Core.Flow.Services.Users.EventHandlers
          
         }
 
-        public override async Task Handle(UserRoleCacheDeleteEvent notification, CancellationToken cancellationToken)
+        public override async Task Handle(UserRoleCacheDeleteEvent eventData, CancellationToken cancellationToken)
         {
-
-            await _cache.RemoveAsync(notification.GetCacheKey());
+            var key = $"{UserCacheKeys.userRoleKeyPrefix}{eventData.UserId}";
+            await _cache.RemoveAsync(key);
         }
     }
 }

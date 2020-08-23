@@ -26,24 +26,24 @@ namespace Destiny.Core.Flow.Services.Users.EventHandlers
 
         public override async Task Handle(UserRoleCacheAddOrUpdateEvent notification, CancellationToken cancellationToken)
         {
-
+            var key = $"{UserCacheKeys.userRoleKeyPrefix}{notification.User.Id}";
             if (notification.EventState==EventState.Add)
             {
 
-               await AddUserRoleCacheItem(notification.User, notification.Roles);
+               await AddUserRoleCacheItem(key, notification.User, notification.Roles);
             }
             else {
-                await _cache.RemoveAsync(notification.GetCacheKey());
+                await _cache.RemoveAsync(key);
 
-                await AddUserRoleCacheItem(notification.User, notification.Roles);
+                await AddUserRoleCacheItem(key, notification.User, notification.Roles);
             }
-            async Task AddUserRoleCacheItem(User user,IEnumerable<Role> roles)
+            async Task AddUserRoleCacheItem(string key,User user,IEnumerable<Role> roles)
             {
 
 
                   var roleCaheItem=  roles.Select(o => new RoleCaheItem(o.Id, o.Name, o.IsAdmin));
                   UserRoleCacheItem userRoleCacheItem = new UserRoleCacheItem(notification.User.Id, roleCaheItem);
-                await _cache.SetAsync(notification.GetCacheKey(), userRoleCacheItem);
+                await _cache.SetAsync(key, userRoleCacheItem);
             }
         }
 

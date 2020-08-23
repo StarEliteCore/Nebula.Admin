@@ -1,9 +1,11 @@
-﻿using Destiny.Core.Flow.Extensions;
+﻿using Destiny.Core.Flow.Events;
+using Destiny.Core.Flow.Extensions;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,6 +14,8 @@ namespace Destiny.Core.Flow.Caching
 {
     public class MemoryCache : ICache
     {
+
+
 
         private  IMemoryCache _cache=null;
 
@@ -22,6 +26,7 @@ namespace Destiny.Core.Flow.Caching
 
         public TCacheData Get<TCacheData>(string key)
         {
+            
             return (TCacheData)_cache.Get(key);
         }
 
@@ -91,12 +96,12 @@ namespace Destiny.Core.Flow.Caching
 
         public void Set<TCacheData>(string key, TCacheData value)
         {
-            _cache.Set(key,value);
+            _cache.Set(key, value);
         }
 
         public async Task SetAsync<TCacheData>(string key, TCacheData value, CancellationToken token = default)
         {
-            await Task.Run(()=>this.Set<TCacheData>(key,value),token);
+            await Task.Run(()=>this.Set<TCacheData>(key, value),token);
         }
     }
 }

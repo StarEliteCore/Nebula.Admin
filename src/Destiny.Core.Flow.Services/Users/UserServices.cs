@@ -78,7 +78,7 @@ namespace Destiny.Core.Flow.Services
             {
                 return result.ToOperationResponse();
             }
-            _bus?.PublishAsync(new UserRoleCacheDeleteEvent() {CacheId=user.Id.ToString() });
+            _bus?.PublishAsync(new UserRoleCacheDeleteEvent() {UserId= user.Id,EventState=Events.EventState.Remove });
             return result.ToOperationResponse();
         }
 
@@ -180,7 +180,7 @@ namespace Destiny.Core.Flow.Services
                     return result.ToOperationResponse();
                 }
                 await _userManager.UpdateSecurityStampAsync(user);
-                await _bus?.PublishAsync(new UserRoleCacheAddOrUpdateEvent() { User = user,Roles= roles,CacheId=user.Id.ToString(),EventState= isAdd?Events.EventState.Add:Events.EventState.Update }); ;
+                await _bus?.PublishAsync(new UserRoleCacheAddOrUpdateEvent() { User = user,Roles= roles,EventState= isAdd?Events.EventState.Add:Events.EventState.Update }); ;
             }
             catch (InvalidOperationException ex)
             {

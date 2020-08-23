@@ -34,12 +34,12 @@ namespace Destiny.Core.Flow.Dependency
         private  void AddAutoInjection(IServiceCollection services)
         {
      
-            var servicesTypes = AssemblyHelper.GetAssembliesByName("Destiny.Core.Flow.Services", "Destiny.Core.Flow.Repository").SelectMany(type=>type.DefinedTypes);
+            //var servicesTypes = AssemblyHelper.GetAssembliesByName("Destiny.Core.Flow.Services", "Destiny.Core.Flow.Repository").SelectMany(type=>type.DefinedTypes);
 
             var typeFinder = services.GetOrAddSingletonService<ITypeFinder, TypeFinder>();
             var baseTypes = new Type[] { typeof(IScopedDependency), typeof(ITransientDependency), typeof(ISingletonDependency) };
 
-            var types = typeFinder.FindAll()?.Concat(servicesTypes).Distinct();
+            var types = typeFinder.FindAll().Distinct();
         
             types = types.Where(type =>type.IsClass&& !type.IsAbstract && (baseTypes.Any(b => b.IsAssignableFrom(type))) || type.GetCustomAttribute<DependencyAttribute>() != null);
             foreach (var implementedInterType in types)
