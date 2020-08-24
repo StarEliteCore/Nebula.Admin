@@ -58,6 +58,7 @@ namespace Destiny.Core.Flow.Audit
                     }
                     else
                     {
+                        AuditPropertys.PropertieDisplayName = propertie.GetType().ToDescription();
                         AuditPropertys.Properties = propertie.Name;
                         AuditPropertys.NewValues = propertyEntry.CurrentValue?.ToString();
                         AuditPropertys.OriginalValues = propertyEntry.OriginalValue?.ToString();
