@@ -40,7 +40,8 @@ namespace Destiny.Core.Flow.Application
         }
         protected virtual Task<OperationResponse> BeforeDeleteAsync(TEntity entity)
         {
-
+         
+          
             return Task.FromResult(OperationResponse.Ok());
         }
 

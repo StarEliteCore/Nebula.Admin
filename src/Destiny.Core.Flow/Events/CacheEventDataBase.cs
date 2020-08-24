@@ -9,25 +9,6 @@ namespace Destiny.Core.Flow.Events
 {
    public abstract class CacheEventDataBase: Notification
     {
-     
-        public string CacheId { get; set; }
-
-        //应该放在缓存低层下做。。
-        public virtual string GetCacheKey()
-        {
-
-            CacheId.NotNullOrEmpty("CacheId");
-            var cacheKey= GetType().GetCustomAttribute<CacheKeyAttribute>();
-            if (cacheKey is null)
-            {
-                return $"{GetType().FullName}_{CacheId}";
-            }
-            var key= cacheKey.Description().IsNullOrEmpty()? GetType().Name: cacheKey.Description();
-
-            key = $"{key}{CacheId}";
-            return key;
-           
-        }
 
         public EventState EventState { get; set; } = EventState.Add;
     }
