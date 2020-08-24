@@ -5,7 +5,7 @@ using System.Text;
 namespace Destiny.Core.Flow.Mapping
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class AutoMapFromAttribute : AutoMappAttribute
+    public class AutoMapFromAttribute : AutoMappingAttribute
     {
         public override AutoMapDirection Direciton
         {

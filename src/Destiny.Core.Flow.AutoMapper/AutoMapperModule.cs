@@ -20,10 +20,10 @@ namespace Destiny.Core.Flow.AutoMapper
         {
             var assemblyFinder = context.Services.GetOrAddSingletonService<IAssemblyFinder, AssemblyFinder>();
             var assemblys = assemblyFinder.FindAll();
-            var myAutoMapTypes = assemblys.SelectMany(o => o.GetTypes()).Where(t => t.IsClass && !t.IsAbstract && t.HasAttribute<AutoMappAttribute>(true)).Distinct().ToArray();
+            var myAutoMapTypes = assemblys.SelectMany(o => o.GetTypes()).Where(t => t.IsClass && !t.IsAbstract && t.HasAttribute<AutoMappingAttribute>(true)).Distinct().ToArray();
             context.Services.AddAutoMapper(mapper => {
 
-                this.CreateMapping<AutoMappAttribute>(myAutoMapTypes, mapper);
+                this.CreateMapping<AutoMappingAttribute>(myAutoMapTypes, mapper);
 
             }, assemblys, ServiceLifetime.Singleton);
             var mapper = context.Services.GetService<IMapper>();
@@ -32,7 +32,7 @@ namespace Destiny.Core.Flow.AutoMapper
     
 
         private void CreateMapping<TAttribute>(Type[] sourceTypes, IMapperConfigurationExpression mapperConfigurationExpression)
-     where TAttribute : AutoMappAttribute
+     where TAttribute : AutoMappingAttribute
         {
             foreach (var sourceType in sourceTypes)
             {

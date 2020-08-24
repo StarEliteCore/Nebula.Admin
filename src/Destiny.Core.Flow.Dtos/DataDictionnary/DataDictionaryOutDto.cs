@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace Destiny.Core.Flow.Dtos.DataDictionnary
 {
-    [AutoMapp(typeof(DataDictionaryEntity))]
+    [AutoMapping(typeof(DataDictionaryEntity))]
     public class DataDictionaryOutDto : OutputDto<Guid>
     {
         /// <summary>
