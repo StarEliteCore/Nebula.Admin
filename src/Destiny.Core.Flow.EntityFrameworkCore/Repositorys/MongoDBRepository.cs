@@ -5,6 +5,7 @@ using Destiny.Core.Flow.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -117,6 +118,9 @@ namespace Destiny.Core.Flow
             entity1.CreatedTime = DateTime.Now;
             return (TEntity)entity1;
         }
+        public virtual IMongoQueryable<TEntity> Entities => _collection.AsQueryable();
+
+
 
     }
 }
