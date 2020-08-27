@@ -4,6 +4,30 @@
         <name>Destiny.Core.Flow.API</name>
     </assembly>
     <members>
+        <member name="T:Destiny.Core.Flow.API.Controllers.AuditLogController">
+            <summary>
+            审计日志
+            </summary>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.AuditLogController.GetAuditLogPageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+            <summary>
+            异步得到功能分页
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.AuditLogController.GetAuditEntryListByAuditLogIdAsync(System.Nullable{System.Guid})">
+            <summary>
+            获取操作实体列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.AuditLogController.GetAuditEntryListByAuditEntryIdAsync(System.Nullable{System.Guid})">
+            <summary>
+            获取实体属性列表
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.DataDictionary.DataDictionaryController.GetPageListAsync(Destiny.Core.Flow.Filter.PageRequest)">
             <summary>
             分页获取数据字典

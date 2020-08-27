@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Driver.Linq;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,5 +24,6 @@ namespace Destiny.Core.Flow.Entity
         /// <param name="entitys"></param>
         /// <returns></returns>
         Task InsertAsync(TEntity[] entitys);
+        IMongoQueryable<TEntity> Entities { get; }
     }
 }
