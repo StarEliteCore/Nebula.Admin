@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.Audit;
+using Destiny.Core.Flow.DbContexts;
 using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Exceptions;
 using Destiny.Core.Flow.Extensions;
@@ -19,29 +20,15 @@ namespace Destiny.Core.Flow
     {
         private readonly IMongoCollection<TEntity> _collection;
         private readonly IPrincipal _principal;
+        private readonly IMongoMongoDbContext _mongoMongoDbContext = null;
         //BsonDocument
         public MongoDBRepository(IServiceProvider serviceProvider)
         {
-          
-              var configuration =  serviceProvider.GetService<IConfiguration>();
-            var Dbpath = configuration["Destiny:DbContext:MongoDBConnectionString"];
-            var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath; //获取项目路径
-            var dbcontext = Path.Combine(basePath, Dbpath);
-            if (!File.Exists(dbcontext))
-            {
-                throw new Exception("未找到存放数据库链接的文件");
-            }
-            var connection = File.ReadAllText(dbcontext).Trim();
-            var databasename = configuration["Destiny:DbContext:MongoDBDataBase"];
-            var client = new MongoClient(connection);
-            var database = client.GetDatabase(databasename);
-            var start = client.StartSession();
-            _principal = serviceProvider.GetService<IPrincipal>();
-            Type t = typeof(TEntity);
-            var table = t.GetAttribute<MongoDBTableAttribute>();
-            if (table == null)
-                throw new AppException("Table name does not exist!");
-            _collection = database.GetCollection<TEntity>(table.TableName);
+
+            _mongoMongoDbContext = serviceProvider.GetService<IMongoMongoDbContext>();
+
+             _principal = serviceProvider.GetService<IPrincipal>();
+            _collection = _mongoMongoDbContext.Collection<TEntity>();
         }
         public async Task InsertAsync(TEntity entity)
         {

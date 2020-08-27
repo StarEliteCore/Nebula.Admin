@@ -18,6 +18,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.1.6" />
@@ -37,6 +49,7 @@
   <ItemGroup>
     <ProjectReference Include="..\src\Destiny.Core.Flow.AutoMapper\Destiny.Core.Flow.AutoMapper.csproj" />
     <ProjectReference Include="..\src\Destiny.Core.Flow.Caching\Destiny.Core.Flow.Caching.csproj" />
+    <ProjectReference Include="..\src\Destiny.Core.Flow.EntityFrameworkCore\Destiny.Core.Flow.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\src\Destiny.Core.Flow.TestBase\Destiny.Core.Flow.TestBase.csproj" />
     <ProjectReference Include="..\src\Destiny.Core.Flow\Destiny.Core.Flow.csproj" />
   </ItemGroup>
