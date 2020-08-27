@@ -21,7 +21,8 @@ namespace Destiny.Core.Flow
         //BsonDocument
         public MongoDBRepository(IServiceProvider serviceProvider)
         {
-            var configuration =  serviceProvider.GetService<IConfiguration>();
+          
+              var configuration =  serviceProvider.GetService<IConfiguration>();
             var Dbpath = configuration["Destiny:DbContext:MongoDBConnectionString"];
             var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath; //获取项目路径
             var dbcontext = Path.Combine(basePath, Dbpath);
