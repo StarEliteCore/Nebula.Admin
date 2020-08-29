@@ -8,7 +8,7 @@
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "SkyAPM.Agent.AspNetCore",
         "SKYWALKING__SERVICENAME": "Destiny"
       },
-      "applicationUrl": "http://localhost:50003"
+      "applicationUrl": "http://192.168.0.2:50003"
     },
     "Docker": {
       "commandName": "Docker",
