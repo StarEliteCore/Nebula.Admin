@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Destiny.Core.Flow.Audit
+namespace Destiny.Core.Flow
 {
     /// <summary>
     /// MongoDb表名称特性

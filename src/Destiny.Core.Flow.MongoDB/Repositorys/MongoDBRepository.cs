@@ -1,34 +1,29 @@
-﻿using Destiny.Core.Flow.Audit;
-using Destiny.Core.Flow.DbContexts;
-using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.Exceptions;
+﻿using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Extensions;
-using Microsoft.Extensions.Configuration;
+using Destiny.Core.Flow.MongoDB.DbContexts;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Destiny.Core.Flow
+namespace Destiny.Core.Flow.MongoDB.Repositorys
 {
     public class MongoDBRepository<TEntity, Tkey> : IMongoDBRepository<TEntity, Tkey>
     {
-        private readonly IMongoCollection<TEntity> _collection;
+        private readonly MongoDbContextBase _mongoDbContext = null;
+        private readonly IMongoCollection<TEntity> _collection = null;
         private readonly IPrincipal _principal;
-        private readonly IMongoMongoDbContext _mongoMongoDbContext = null;
         //BsonDocument
-        public MongoDBRepository(IServiceProvider serviceProvider)
+        public MongoDBRepository(IServiceProvider serviceProvider, MongoDbContextBase mongoDbContext)
         {
+            _mongoDbContext = mongoDbContext;
 
-            _mongoMongoDbContext = serviceProvider.GetService<IMongoMongoDbContext>();
-
-             _principal = serviceProvider.GetService<IPrincipal>();
-            _collection = _mongoMongoDbContext.Collection<TEntity>();
+            _collection = _mongoDbContext.Collection<TEntity>();
+            _principal = serviceProvider.GetService<IPrincipal>();
         }
         public async Task InsertAsync(TEntity entity)
         {
@@ -112,3 +107,4 @@ namespace Destiny.Core.Flow
 
     }
 }
+

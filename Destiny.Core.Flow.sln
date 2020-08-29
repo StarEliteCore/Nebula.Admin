@@ -66,6 +66,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Consul", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.GateWay", "src\Destiny.Core.Flow.GateWay\Destiny.Core.Flow.GateWay.csproj", "{34AD3FF4-04B2-406D-9D99-6CACC21F9930}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.MongoDB", "src\Destiny.Core.Flow.MongoDB\Destiny.Core.Flow.MongoDB.csproj", "{D8E15451-16A4-4769-9BFA-A38C6237715B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -164,6 +166,10 @@ Global
 		{34AD3FF4-04B2-406D-9D99-6CACC21F9930}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34AD3FF4-04B2-406D-9D99-6CACC21F9930}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34AD3FF4-04B2-406D-9D99-6CACC21F9930}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8E15451-16A4-4769-9BFA-A38C6237715B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8E15451-16A4-4769-9BFA-A38C6237715B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8E15451-16A4-4769-9BFA-A38C6237715B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8E15451-16A4-4769-9BFA-A38C6237715B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -196,6 +202,7 @@ Global
 		{FF2E379E-9F78-4DC7-A454-CFCF6200ABBE} = {D49782B1-99E0-442F-98DD-6D30CD09F6BA}
 		{E6E94B5B-54C7-4AF7-AB12-6A7A8BF948D0} = {D49782B1-99E0-442F-98DD-6D30CD09F6BA}
 		{34AD3FF4-04B2-406D-9D99-6CACC21F9930} = {9A347066-1CEA-4FD6-BD7E-598A7FF21E6C}
+		{D8E15451-16A4-4769-9BFA-A38C6237715B} = {D49782B1-99E0-442F-98DD-6D30CD09F6BA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {468F450C-837F-4FCD-8E06-3E12690DDED6}

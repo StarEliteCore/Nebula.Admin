@@ -15,7 +15,7 @@ using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Modules;
 using Destiny.Core.Flow.Events;
-using Destiny.Core.Flow.DbContexts;
+
 
 namespace Destiny.Core.Flow.API.Startups
 {
@@ -28,8 +28,6 @@ namespace Destiny.Core.Flow.API.Startups
         protected override IServiceCollection AddRepository(IServiceCollection services)
         {
             services.AddScoped(typeof(IEFCoreRepository<,>), typeof(Repository<,>));
-            services.AddScoped<IMongoMongoDbContext, MongoMongoDbContext>();
-            services.AddScoped(typeof(IMongoDBRepository<,>), typeof(MongoDBRepository<,>));
             return services;
         }
 
