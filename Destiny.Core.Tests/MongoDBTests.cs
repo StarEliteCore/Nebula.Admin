@@ -97,14 +97,7 @@ namespace Destiny.Core.Tests
     }
 
 
-    public class DefaultMongoDbContext: MongoDbContextBase
-    {
-        public DefaultMongoDbContext([NotNull] MongoDbContextOptions options):base(options)
-        {
-       
-        }
 
-    }
 
     [MongoDBTable("TestDB")]//
     public class TestDB : EntityBase<Guid>, IFullAuditedEntity<Guid>

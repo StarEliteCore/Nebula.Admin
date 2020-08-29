@@ -28,7 +28,8 @@ namespace Destiny.Core.Flow.API.Startups
                typeof(EventBusAppModule),
                typeof(EntityFrameworkCoreMySqlModule),
                typeof(AutoMapperModule),
-               typeof(CSRedisModule)
+               typeof(CSRedisModule),
+               typeof(MongoDBModelule)
         )]
     public class AppWebModule: AppModule
     {
