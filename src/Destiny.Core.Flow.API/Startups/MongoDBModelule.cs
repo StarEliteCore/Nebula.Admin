@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Extensions;
+﻿using Destiny.Core.Flow.Exceptions;
+using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.MongoDB.DbContexts;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -21,7 +22,7 @@ namespace Destiny.Core.Flow.API.Startups
             var dbcontext = Path.Combine(basePath, dbpath);
             if (!File.Exists(dbcontext))
             {
-                throw new Exception("未找到存放数据库链接的文件");
+                throw new AppException("未找到存放数据库链接的文件");
             }
             var connection = File.ReadAllText(dbcontext).Trim();
 
