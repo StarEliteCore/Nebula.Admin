@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Destiny.Core.Flow.Entity
+namespace Destiny.Core.Flow.MongoDB.Repositorys
 {
     public interface IMongoDBRepository<TEntity, Tkey>
     {
