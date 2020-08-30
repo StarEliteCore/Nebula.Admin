@@ -1,6 +1,6 @@
 ﻿
 using Destiny.Core.Flow.Dependency;
-
+using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Modules;
 using Destiny.Core.Flow.MongoDB.Repositorys;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +17,7 @@ namespace Destiny.Core.Flow
 
         public override void ConfigureServices(ConfigureServicesContext context)
         {
-
+         
               AddDbContext(context.Services);
              AddRepository(context.Services);
         }
