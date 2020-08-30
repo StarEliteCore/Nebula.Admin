@@ -7,6 +7,7 @@ using Destiny.Core.Flow.MongoDB.Repositorys;
 using Destiny.Core.Flow.TestBase;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System;
@@ -14,7 +15,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Text;
+using System.Text;           
 using System.Threading.Tasks;
 using Xunit;
 
@@ -95,6 +96,19 @@ namespace Destiny.Core.Tests
          
         }
     }
+
+
+    public class TestMongoDbContext : MongoDbContextBase
+    {
+
+        public TestMongoDbContext(MongoDbContextOptions options) : base(options)
+        { 
+        
+        }
+
+       
+    }
+
 
 
 

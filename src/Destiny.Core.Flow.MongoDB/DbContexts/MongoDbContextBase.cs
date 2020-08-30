@@ -12,7 +12,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow.MongoDB.DbContexts
 {
-    public abstract class MongoDbContextBase
+    public abstract class MongoDbContextBase : IDisposable
     {
         private readonly MongoDbContextOptions _options;
         public MongoDbContextBase([NotNull] MongoDbContextOptions options) {
@@ -32,9 +32,17 @@ namespace Destiny.Core.Flow.MongoDB.DbContexts
         {
             Type t = typeof(TEntity);
             var table = t.GetAttribute<MongoDBTableAttribute>();
+
             if (table == null)
+            {
+                return t.Name;
+            }
+            if (table.TableName.IsNullOrEmpty())
+            {
                 throw new AppException("Table name does not exist!");
+            }
             return table.TableName;
+             
         }
 
 
@@ -42,8 +50,17 @@ namespace Destiny.Core.Flow.MongoDB.DbContexts
         {
             var mongoUrl = new MongoUrl(ConnectionString);
             var databaseName = mongoUrl.DatabaseName;
+            if (databaseName.IsNullOrEmpty())
+            {
+                throw new AppException($"{mongoUrl}不存DatabaseName名!!!");
+            }
             var database = new MongoClient(mongoUrl).GetDatabase(databaseName);
             return database;
+        }
+
+        public void Dispose()
+        {
+          
         }
     }
 }
