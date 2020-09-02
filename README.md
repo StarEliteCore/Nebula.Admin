@@ -3,7 +3,13 @@
 
 **Destiny.Core.Flow是一个基于`.net core3.1`平台轻量级的模块化开发框架Admin管理应用框架，旨在提升团队的快速开发输出能力，由常用公共操作类（工具类、帮助类）、分层架构基类，第三方组件封装等组成。**
 
++ ## 采用技术栈
+
+  ![](https://wangzewei.oss-cn-beijing.aliyuncs.com/imges/20200902204528.png)
+
 + ## 1.框架功能
+
+  + ### 该项目是基础版不提供工作流版本
 
   + ### 系统设置
 
@@ -17,7 +23,9 @@
 
     + #### 组织架构
 
-    + to do
+    + #### 工作流（）
+
+    + To do
 
 + ## 2.框架分层
 
@@ -112,10 +120,6 @@
     + to do
 
   + 
-
-## 采用技术栈
-
-![](https://wangzewei.oss-cn-beijing.aliyuncs.com/imges/20200602155453.png)
 
 ## 部署环境
 
