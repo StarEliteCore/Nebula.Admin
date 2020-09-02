@@ -5,6 +5,8 @@
 
 + ## 1.框架功能
 
+  + [在线地址]: http://admin.destinycore.club
+
   + ### 系统设置
 
     + #### 用户管理
