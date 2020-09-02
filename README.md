@@ -11,9 +11,7 @@
 
   + ### 该项目是基础版不提供工作流版本     
 
-    [在线地址]: http://admin.destinycore.club
-
-    阿斯达是的
+  + ### [在线地址]( http://admin.destinycore.club )
 
   + ### 系统设置
 
