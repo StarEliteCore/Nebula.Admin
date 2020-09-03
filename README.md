@@ -11,9 +11,7 @@
 
   + ### 该项目是基础版不提供工作流版本     
 
-    [在线地址]: http://admin.destinycore.club
-
-    
+  + ### [在线地址]( http://admin.destinycore.club )
 
   + ### 系统设置
 
