@@ -8,6 +8,8 @@ namespace Destiny.Core.Flow.Modules
 {
     public class AppModule : IAppModule
     {
+        public bool Enable { get; set; } = true;
+
         public virtual void ApplicationInitialization(ApplicationContext context)
         {
           
@@ -48,6 +50,9 @@ namespace Destiny.Core.Flow.Modules
             }
             return dependList.Distinct().ToArray();
         }
+
+
+  
 
         public static bool IsAppModule(Type type)
         {
