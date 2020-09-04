@@ -97,7 +97,7 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
             return (await _menuServices.DeleteAsync(id.Value)).ToAjaxResult();
         }
         [HttpGet]
-        [Description("根据菜单获取功能")]
+        [Description("获取一个菜单")]
         public async Task<AjaxResult> LoadFormMenuAsync(Guid Id)
         {
             return (await _menuServices.LoadFormMenuAsync(Id)).ToAjaxResult();

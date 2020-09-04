@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Destiny.Core.Flow.API.Controllers.Organization
 {
-    [Description("角色管理")]
+    [Description("组织架构管理")]
     [Authorize]
     public class OrganizationController : ApiControllerBase
     {
