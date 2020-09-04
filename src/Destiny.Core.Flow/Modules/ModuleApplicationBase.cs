@@ -58,6 +58,8 @@ namespace Destiny.Core.Flow.Modules
             {
                 throw new Exception($"类型为“{StartupModuleType.FullName}”的模块实例无法找到");
             }
+
+        
             modules.Add(module);
 
             var dependeds = module.GetDependedTypes();
@@ -79,7 +81,7 @@ namespace Destiny.Core.Flow.Modules
         private IAppModule CreateModule(IServiceCollection services, Type moduleType)
         {
 
-           var module= /*(IAppModule)Activator.CreateInstance(moduleType)*/(IAppModule)Expression.Lambda(Expression.New(moduleType)).Compile().DynamicInvoke();
+           var module= (IAppModule)Expression.Lambda(Expression.New(moduleType)).Compile().DynamicInvoke();
            services.AddSingleton(moduleType, module);
             return module;
         }

@@ -31,6 +31,21 @@ namespace Destiny.Core.Tests
             Assert.NotNull(value);
             Assert.True(value.Name== "大黄瓜18CM");
         }
+
+
+        [Fact]
+        public void CachePrefixWith_Test()
+        {
+            //这种用法的好处？？？？
+            TestCachePrefixItem testCache = new TestCachePrefixItem();
+            testCache.TestId = Guid.NewGuid().ToString();
+            testCache.Name = "大黄瓜22CM";
+            _cache.Set(testCache);
+
+            var value = _cache.Get<TestCachePrefixItem>($"test_{testCache.TestId}");
+            Assert.NotNull(value);
+            Assert.True(value.Name == "大黄瓜22CM");
+        }
     }
 
 
@@ -39,6 +54,16 @@ namespace Destiny.Core.Tests
       public string TestId { get; set; }
 
       public string Name { get; set; }
+    }
+
+
+    [CachePrefix("test_")]
+    public class TestCachePrefixItem: CacheItemBase
+    {
+        [CacheAutoKey]
+        public string TestId { get; set; }
+
+        public string Name { get; set; }
     }
 
     public class MemoryTestModelule : AppModule

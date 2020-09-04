@@ -22,6 +22,9 @@ namespace Destiny.Core.Flow.Modules
         /// <returns></returns>
         Type[] GetDependedTypes(Type moduleType = null);
 
-    
+
+        bool Enable { get; set; }
+
+
     }
 }
