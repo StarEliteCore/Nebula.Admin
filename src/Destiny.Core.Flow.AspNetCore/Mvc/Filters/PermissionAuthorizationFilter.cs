@@ -53,7 +53,7 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
                     context.Result = new JsonResult(result);
                     return;
                 }
-                if (!await _authority.IsPermission(linkurl))
+                if (!await _authority.IsPermission(linkurl.ToLower()))
                 {
                     ////????不包含的时候怎么返回出去？这个请求终止掉
                     ///

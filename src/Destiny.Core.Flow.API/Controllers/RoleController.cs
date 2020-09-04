@@ -34,7 +34,7 @@ namespace Destiny.Core.Flow.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [Description("异步创建角色")]
+        [Description("异步得到角色分页")]
         public async Task<PageList<RoleOutputPageListDto>> GetRolePageAsync([FromBody]PageRequest request)
         {
 
