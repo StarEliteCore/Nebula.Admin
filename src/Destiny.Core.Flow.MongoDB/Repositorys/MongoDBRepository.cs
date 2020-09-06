@@ -50,18 +50,7 @@ namespace Destiny.Core.Flow.MongoDB.Repositorys
 
         public virtual IMongoQueryable<TEntity> Entities => Collection.AsQueryable();
 
-        public virtual async Task<PageResult<TEntity>> ToPageAsync(Expression<Func<TEntity, bool>> predicate, IPagedRequest request)
-        {
-            var count = !predicate.IsNotNull() ? await Collection.CountDocumentsAsync(predicate) : await Collection.CountDocumentsAsync(FilterDefinition<TEntity>.Empty);
-            var findFluent = Collection.Find(predicate).Skip(request.PageSize * (request.PageIndex - 1)).Limit(request.PageSize);
-
-            findFluent = findFluent.OrderBy(request.OrderConditions);
-            var lists = await findFluent.ToListAsync();
-            return new PageResult<TEntity>() { ItemList = lists, Message = "加载成功", Success = true, Total = count.AsTo<int>() };
-
-        }
-
-
+      
 
     }
 }

@@ -34,6 +34,39 @@ namespace Destiny.Core.Flow.Services.Identity
             _bus = bus;
         }
 
+        public async Task<(OperationResponse item, Claim[] cliams)> ChangePassword(ChangePassDto dto)
+        {
+            dto.NotNull(nameof(dto));
+            var user = await _userManager.FindByNameAsync(dto.UserName);
+
+            if (user == null)
+            {
+                return (new OperationResponse("此用户不存在!!", OperationResponseType.Error), new Claim[] { });
+            }
+            var signInResult = await _signInManager.CheckPasswordSignInAsync(user, dto.OldPassword, true);
+            if (!signInResult.Succeeded)
+            {
+                return (OperationResponse.Error("密码不正确!!"), new Claim[] { });
+            }
+
+           var result =   await _userManager.ChangePasswordAsync(user, dto.OldPassword,dto.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                return (result.ToOperationResponse(), new Claim[] { });
+            }
+
+            var jwtToken = _jwtBearerService.CreateToken(user.Id, user.UserName);
+         
+            return (new OperationResponse("修改密码成功!!", new
+            {
+                AccessToken = jwtToken.AccessToken,
+                NickName = user.NickName,
+                UserId = user.Id.ToString(),
+                AccessExpires = jwtToken.AccessExpires
+            }, OperationResponseType.Success), jwtToken.claims);
+        }
+
         public async Task<(OperationResponse item, Claim[] cliams)> Login(LoginDto loginDto)
         {
             loginDto.NotNull(nameof(loginDto));

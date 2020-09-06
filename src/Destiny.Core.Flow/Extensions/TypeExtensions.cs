@@ -1,5 +1,6 @@
 ﻿using Destiny.Core.Flow.Attributes.Base;
 using Destiny.Core.Flow.Entity;
+using Destiny.Core.Flow.Exceptions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Internal;
 using System;
@@ -233,15 +234,7 @@ namespace Destiny.Core.Flow.Extensions
         }
 
 
-        public static string GetKeySelector(this Type type, string keyName)
-        {
-
-
-            string[] propertyNames = keyName.Split(".");
-            return propertyNames.Select(o => type.GetProperty(o)).FirstOrDefault()?.Name;
-           
-
-        }
+  
 
 
         /// <summary>
@@ -665,6 +658,33 @@ namespace Destiny.Core.Flow.Extensions
                    type == typeof(DateTimeOffset) ||
                    type == typeof(TimeSpan) ||
                    type == typeof(Guid);
+        }
+
+
+        public static Expression GetKeySelector(this Type type,string keyName)
+        {
+         
+            string key = $"{type.FullName}.{keyName}";
+            //if (Cache.ContainsKey(key))
+            //{
+            //    return Cache[key];
+            //}
+            ParameterExpression param = Expression.Parameter(type);
+            string[] propertyNames = keyName.Split(".");
+            Expression propertyAccess = param;
+
+            foreach (var propertyName in propertyNames)
+            {
+                PropertyInfo property = type.GetProperty(propertyName);
+                if (property.IsNull())
+                {
+                    throw new AppException($"查找类似 指定对象中不存在名称为“{propertyName}”的属性");
+                }
+                type = property.PropertyType;
+                propertyAccess = Expression.Property(propertyAccess, propertyName);
+            }
+      
+            return propertyAccess;
         }
 
     }

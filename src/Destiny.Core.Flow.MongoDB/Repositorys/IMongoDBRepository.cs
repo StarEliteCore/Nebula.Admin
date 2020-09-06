@@ -34,13 +34,6 @@ namespace Destiny.Core.Flow.MongoDB.Repositorys
 
         IMongoCollection<TEntity> Collection { get; }
 
-        /// <summary>
-        /// 异步分页
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <param name="request"></param>
-        /// <param name="orderConditions"></param>
-        /// <returns></returns>
-        Task<PageResult<TEntity>> ToPageAsync(Expression<Func<TEntity, bool>> predicate, IPagedRequest request);
+      
     }
 }

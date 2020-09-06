@@ -20,7 +20,7 @@ namespace Destiny.Core.Flow.API.Controllers
     /// 身份管理
     /// </summary>
     [Description("身份管理")]
-    [AllowAnonymous]
+  
 
     public class IdentityController : ApiControllerBase
     {
@@ -39,7 +39,7 @@ namespace Destiny.Core.Flow.API.Controllers
 
         [HttpPost]
         [Description("登录")]
-
+        [AllowAnonymous]
         public async Task<AjaxResult> LoginAsync([FromBody]LoginDto loginDto)
         {
 
@@ -49,6 +49,15 @@ namespace Destiny.Core.Flow.API.Controllers
             return result.item.ToAjaxResult();
         }
 
-       
+        public async Task<AjaxResult> ChangePassword([FromBody] ChangePassDto dto)
+        {
+            var result = await _identityService.ChangePassword(dto);
+            var identity = new ClaimsIdentity(JwtBearerDefaults.AuthenticationScheme);//用户标识
+            identity.AddClaims(result.cliams);
+            return result.item.ToAjaxResult();
+        }
+
+
+
     }
 }

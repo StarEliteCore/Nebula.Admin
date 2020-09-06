@@ -37,6 +37,14 @@ namespace Destiny.Core.Tests
         public MongoDBTests()
         {
             _mongoDBRepository = ServiceProvider.GetService<IMongoDBRepository<TestDB, Guid>>();
+            //BsonClassMap.RegisterClassMap<Test001>(cm =>
+            //{
+            //    cm.MapIdProperty(o => o.Id);
+            //    cm.MapProperty(o => o.Name);
+            //    cm.ToCollection("Test001");
+            //});
+
+
         }
 
 
@@ -58,39 +66,36 @@ namespace Destiny.Core.Tests
         [Fact]
         public async Task GetPageAsync_Test()
         {
-            try
-            {
-                FilterCondition condition = new FilterCondition();
-                QueryFilter filter = new QueryFilter();
-                //condition.Field = "Name";
-                //condition.Value = "大黄瓜18CM";
-                //filter.Conditions.Add(condition);
-                var exp = FilterBuilder.GetExpression<TestDB>(filter);
-                OrderCondition[] orderConditions = new OrderCondition[] {
+            FilterCondition condition = new FilterCondition();
+            QueryFilter filter = new QueryFilter();
+            //condition.Field = "Name";
+            //condition.Value = "大黄瓜18CM";
+            //filter.Conditions.Add(condition);
+            var exp = FilterBuilder.GetExpression<TestDB>(filter);
+            OrderCondition[] orderConditions = new OrderCondition[] {
                 new OrderCondition("Name",Flow.Enums.SortDirection.Descending),
                 new OrderCondition("CreatedTime")
                };
-                PagedRequest pagedRequest = new PagedRequest();
-                pagedRequest.OrderConditions = orderConditions;
-                var page=  await _mongoDBRepository.ToPageAsync(exp, pagedRequest);
+            PagedRequest pagedRequest = new PagedRequest();
+            pagedRequest.OrderConditions = orderConditions;
+            var page = await _mongoDBRepository.Collection.ToPageAsync(exp, pagedRequest);
 
-            }
-            catch (Exception ex)
+            Assert.True(page.ItemList.Count == 10);
+
+
+            var page1 = await _mongoDBRepository.Collection.ToPageAsync(exp, pagedRequest, o => new TestDto
             {
-
-                throw;
-            }
+                Id = o.Id,
+                Name = o.Name
+            });
+   
+           
+            Assert.True(page1.ItemList.Count == 10);
 
         }
 
 
 
-        [Fact]
-
-        public async Task DeleteAsync_Test()
-        {
-            var re = await _mongoDBRepository.Collection.DeleteManyAsync(o => o.Name == "大黄瓜18CM");
-        }
 
 
     }
@@ -151,7 +156,7 @@ namespace Destiny.Core.Tests
 
 
 
-            services.AddMongoDbContext<DefaultMongoDbContext>(options =>
+            services.AddMongoDbContext<TestMongoDbContext>(options =>
             {
                 options.ConnectionString = connection;
             });
@@ -173,14 +178,16 @@ namespace Destiny.Core.Tests
 
 
 
-
+    
 
     [MongoDBTable("TestDB")]//
+    
     public class TestDB : EntityBase<Guid>, IFullAuditedEntity<Guid>
     {
         public TestDB()
         {
             Id = Guid.NewGuid();
+            
         }
 
 
@@ -211,5 +218,42 @@ namespace Destiny.Core.Tests
         /// </summary>
         [DisplayName("创建时间")]
         public virtual DateTime CreatedTime { get; set; }
+    }
+
+
+    public class TestDto
+    { 
+      public Guid Id { get; set; }
+
+      public string Name { get; set; }
+    }
+
+    public static partial class Extensions
+    {
+
+        private static ConcurrentDictionary<Type,string> Dic = new System.Collections.Concurrent.ConcurrentDictionary<Type, string>();
+
+        public static BsonClassMap<TEntity> ToCollection<TEntity>(this BsonClassMap<TEntity> bson, string collection)
+        {
+        
+            Dic.GetOrAdd(bson.ClassType, collection);
+            return bson;
+        }
+
+        public static string GetBsonClassCollection(Type type)
+        {
+            Dic.TryGetValue(type,out string value);
+            return value;
+        }
+
+    }
+
+    public class Test001 { 
+    
+       public Guid Id { get; set; }
+
+       public string Name { get; set; }
+
+       
     }
 }
