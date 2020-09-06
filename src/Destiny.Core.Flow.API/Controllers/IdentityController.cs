@@ -48,5 +48,7 @@ namespace Destiny.Core.Flow.API.Controllers
             identity.AddClaims(result.cliams);
             return result.item.ToAjaxResult();
         }
+
+       
     }
 }

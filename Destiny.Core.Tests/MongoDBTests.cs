@@ -1,5 +1,7 @@
 ﻿using Destiny.Core.Flow;
 using Destiny.Core.Flow.Entity;
+using Destiny.Core.Flow.ExpressionUtil;
+using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Modules;
 using Destiny.Core.Flow.MongoDB;
 using Destiny.Core.Flow.MongoDB.DbContexts;
@@ -11,42 +13,101 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Text;           
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.Filter.Abstract;
 
 namespace Destiny.Core.Tests
 {
+
+
     public class MongoDBTests : IntegratedTest<MongoDBModelule>
     {
 
         private readonly IMongoDBRepository<TestDB, Guid> _mongoDBRepository = null;
-       public  MongoDBTests()
+        public MongoDBTests()
         {
-            _mongoDBRepository = ServiceProvider.GetService<IMongoDBRepository<TestDB,Guid>>();
-         }
+            _mongoDBRepository = ServiceProvider.GetService<IMongoDBRepository<TestDB, Guid>>();
+        }
 
 
         [Fact]
 
-        public async Task InsertEntityAsync_Test() {
+        public async Task InsertEntityAsync_Test()
+        {
+
             TestDB test = new TestDB();
             test.IsDeleted = false;
             test.CreatedTime = DateTime.Now;
-            test.Name = "大黄瓜18CM";
-             await  _mongoDBRepository.InsertAsync(test);
+            test.Name = $"大黄瓜18CM";
+            await _mongoDBRepository.InsertAsync(test);
 
-            var entitie = await _mongoDBRepository.Entities.Where(o => o.Id== test.Id).FirstOrDefaultAsync();
+            var entitie = await _mongoDBRepository.Entities.Where(o => o.Id == test.Id).FirstOrDefaultAsync();
             Assert.True(entitie.Name == "大黄瓜18CM");
         }
 
-      
+        [Fact]
+        public async Task GetPageAsync_Test()
+        {
+            try
+            {
+                FilterCondition condition = new FilterCondition();
+                QueryFilter filter = new QueryFilter();
+                //condition.Field = "Name";
+                //condition.Value = "大黄瓜18CM";
+                //filter.Conditions.Add(condition);
+                var exp = FilterBuilder.GetExpression<TestDB>(filter);
+                OrderCondition[] orderConditions = new OrderCondition[] {
+                new OrderCondition("Name",Flow.Enums.SortDirection.Descending),
+                new OrderCondition("CreatedTime")
+               };
+                PagedRequest pagedRequest = new PagedRequest();
+                pagedRequest.OrderConditions = orderConditions;
+                var page=  await _mongoDBRepository.ToPageAsync(exp, pagedRequest);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
+
+
+        [Fact]
+
+        public async Task DeleteAsync_Test()
+        {
+            var re = await _mongoDBRepository.Collection.DeleteManyAsync(o => o.Name == "大黄瓜18CM");
+        }
+
+
     }
 
+    public class PagedRequest : IPagedRequest
+    {
+
+        public PagedRequest()
+        {
+            PageIndex = 1;
+            PageSize = 10;
+            OrderConditions = new OrderCondition[] { };
+        }
+        public int PageIndex { get; set; }
+        public int PageSize { get; set; }
+        public OrderCondition[] OrderConditions { get; set; }
+    }
 
     public class MongoDBModelule : MongoDBModuleBase
     {
@@ -89,11 +150,12 @@ namespace Destiny.Core.Tests
             var connection = File.ReadAllText(dbcontext).Trim();
 
 
-         
-            services.AddMongoDbContext<DefaultMongoDbContext>(options => {
+
+            services.AddMongoDbContext<DefaultMongoDbContext>(options =>
+            {
                 options.ConnectionString = connection;
             });
-         
+
         }
     }
 
@@ -102,11 +164,11 @@ namespace Destiny.Core.Tests
     {
 
         public TestMongoDbContext(MongoDbContextOptions options) : base(options)
-        { 
-        
+        {
+
         }
 
-       
+
     }
 
 

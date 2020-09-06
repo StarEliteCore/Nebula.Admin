@@ -54,6 +54,7 @@ namespace Destiny.Core.Flow.MongoDB.DbContexts
             {
                 throw new AppException($"{mongoUrl}不存DatabaseName名!!!");
             }
+ 
             var database = new MongoClient(mongoUrl).GetDatabase(databaseName);
             return database;
         }

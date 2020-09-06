@@ -1,7 +1,11 @@
 ﻿using Destiny.Core.Flow.Entity;
+using Destiny.Core.Flow.Filter;
+using Destiny.Core.Flow.Filter.Abstract;
+using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,5 +31,16 @@ namespace Destiny.Core.Flow.MongoDB.Repositorys
         /// <returns></returns>
         Task InsertAsync(TEntity[] entitys);
         IMongoQueryable<TEntity> Entities { get; }
+
+        IMongoCollection<TEntity> Collection { get; }
+
+        /// <summary>
+        /// 异步分页
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <param name="request"></param>
+        /// <param name="orderConditions"></param>
+        /// <returns></returns>
+        Task<PageResult<TEntity>> ToPageAsync(Expression<Func<TEntity, bool>> predicate, IPagedRequest request);
     }
 }
