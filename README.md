@@ -5,6 +5,7 @@
 + ## 在线地址
 
 ✔ [在线展示](http://admin.destinycore.club)
+✔ 后面支持VUE版本
 账号Test002    123456
 
 ✔ [在线展示后端API链接](http://api.destinycore.club)
