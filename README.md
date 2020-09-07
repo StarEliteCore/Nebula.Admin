@@ -125,7 +125,7 @@
 
       + 在仓储层实现了自动转实体层不需要手动注入实现转化
 
-    + #### SignalR即时通信
+    + #### SignalR即时通信(暂时不支持)
 
     + #### EntityFrameworkCore ORM框架
 
@@ -140,17 +140,10 @@
   + Docker
 + 容器管理
   + Portainer
-  + 
-+ 
 
 ### 框架博客
 
 + https://www.cnblogs.com/pual13/p/12587113.html 项目名字可能有些不同思路一样
-+ 
-
-
-
-
 
 
 
