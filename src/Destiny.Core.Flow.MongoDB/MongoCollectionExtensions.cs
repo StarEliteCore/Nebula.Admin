@@ -15,7 +15,7 @@ namespace Destiny.Core.Flow
    public static class MongoCollectionExtensions
     {
 
-        public static async Task<PageResult<TEntity>> ToPageAsync<TEntity>(this IMongoCollection<TEntity> collection, Expression<Func<TEntity, bool>> predicate, IPagedRequest request)
+        public static async Task<IPagedResult<TEntity>> ToPageAsync<TEntity>(this IMongoCollection<TEntity> collection, Expression<Func<TEntity, bool>> predicate, IPagedRequest request)
         {
             var count = !predicate.IsNotNull() ? await collection.CountDocumentsAsync(predicate) : await collection.CountDocumentsAsync(FilterDefinition<TEntity>.Empty);
             var findFluent = collection.Find(predicate).Skip(request.PageSize * (request.PageIndex - 1)).Limit(request.PageSize);
@@ -26,7 +26,7 @@ namespace Destiny.Core.Flow
 
         }
 
-        public static async Task<PageResult<TResult>> ToPageAsync<TEntity, TResult>(this IMongoCollection<TEntity> collection, Expression<Func<TEntity, bool>> predicate, IPagedRequest request, Expression<Func<TEntity, TResult>> selector)
+        public static async Task<IPagedResult<TResult>> ToPageAsync<TEntity, TResult>(this IMongoCollection<TEntity> collection, Expression<Func<TEntity, bool>> predicate, IPagedRequest request, Expression<Func<TEntity, TResult>> selector)
         {
             var count = !predicate.IsNotNull() ? await collection.CountDocumentsAsync(predicate) : await collection.CountDocumentsAsync(FilterDefinition<TEntity>.Empty);
             var findFluent = collection.Find(predicate).Skip(request.PageSize * (request.PageIndex - 1)).Limit(request.PageSize);

@@ -34,7 +34,7 @@ namespace Destiny.Core.Flow.Caching.CSRedis
         /// <returns></returns>
         public static TCacheData GetOrAdd<TKey, TCacheData>(
          TKey key,
-         Func<TCacheData> func)
+         Func<TCacheData> func, int expireSeconds = -1)
         {
             key.NotNull(nameof(key));
 
@@ -78,7 +78,7 @@ namespace Destiny.Core.Flow.Caching.CSRedis
         /// <returns>返回得到或添加后的缓存数据</returns>
         async public static Task<TCacheData> GetOrAddAsync<TKey, TCacheData>(
            [NotNull] TKey key,
-           Func<Task<TCacheData>> func,
+           Func<Task<TCacheData>> func, int expireSeconds = -1,
            CancellationToken token = default
        )
         {
@@ -111,10 +111,10 @@ namespace Destiny.Core.Flow.Caching.CSRedis
         /// </summary>
         /// <param name="key">键</param>
         /// <param name="value">值</param>
-        public static void Set<TKey, TCacheData>(TKey key, TCacheData value)
+        public static void Set<TKey, TCacheData>(TKey key, TCacheData value, int expireSeconds = -1)
         {
             value.NotNull(nameof(value));
-            RedisHelper.Set(GetKey(key), value);
+            RedisHelper.Set(GetKey(key), value, expireSeconds);
         }
 
         /// <summary>
@@ -124,10 +124,10 @@ namespace Destiny.Core.Flow.Caching.CSRedis
         /// <param name="value">值</param>
         /// <param name="token"></param>
         /// <returns></returns>
-        async public static Task SetAsync<TKey, TCacheData>(TKey key, TCacheData value, CancellationToken token = default)
+        async public static Task SetAsync<TKey, TCacheData>(TKey key, TCacheData value, int expireSeconds = -1, CancellationToken token = default)
         {
             value.NotNull(nameof(value));
-            await RedisHelper.SetAsync(GetKey(key), value);
+            await RedisHelper.SetAsync(GetKey(key), value, expireSeconds);
         }
         #endregion
 
