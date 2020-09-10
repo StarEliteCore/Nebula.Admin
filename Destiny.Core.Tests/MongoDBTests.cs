@@ -52,7 +52,7 @@ namespace Destiny.Core.Tests
 
         public async Task InsertEntityAsync_Test()
         {
-
+      
             TestDB test = new TestDB();
             test.IsDeleted = false;
             test.CreatedTime = DateTime.Now;

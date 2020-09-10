@@ -26,14 +26,14 @@ namespace Destiny.Core.Flow.Caching.CSRedis
             return await CacheHelper.GetAsync<string, TCacheData>(key);
         }
 
-        public TCacheData GetOrAdd<TCacheData>(string key, Func<TCacheData> func)
+        public TCacheData GetOrAdd<TCacheData>(string key, Func<TCacheData> func, int expireSeconds = -1)
         {
-            return CacheHelper.GetOrAdd<string, TCacheData>(key, func);
+            return CacheHelper.GetOrAdd<string, TCacheData>(key, func, expireSeconds);
         }
 
-        public async Task<TCacheData> GetOrAddAsync<TCacheData>([NotNull] string key, Func<Task<TCacheData>> func, CancellationToken token = default)
+        public async Task<TCacheData> GetOrAddAsync<TCacheData>([NotNull] string key, Func<Task<TCacheData>> func, int expireSeconds = -1, CancellationToken token = default)
         {
-            return await CacheHelper.GetOrAddAsync<string, TCacheData>(key, func);
+            return await CacheHelper.GetOrAddAsync<string, TCacheData>(key, func,expireSeconds);
         }
 
         public void Remove(string key)
@@ -47,16 +47,16 @@ namespace Destiny.Core.Flow.Caching.CSRedis
             await CacheHelper.RemoveAsync(key);
         }
 
-        public void Set<TCacheData>(string key, TCacheData value)
+        public void Set<TCacheData>(string key, TCacheData value, int expireSeconds = -1)
         {
 
-            CacheHelper.Set(key,value);
+            CacheHelper.Set(key,value, expireSeconds);
         }
 
-        public async Task SetAsync<TCacheData>(string key, TCacheData value, CancellationToken token = default)
+        public async Task SetAsync<TCacheData>(string key, TCacheData value, int expireSeconds = -1, CancellationToken token = default)
         {
          
-            await CacheHelper.SetAsync(key, value);
+            await CacheHelper.SetAsync(key, value, expireSeconds);
         }
     }
 }
