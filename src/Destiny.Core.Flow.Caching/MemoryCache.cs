@@ -36,7 +36,7 @@ namespace Destiny.Core.Flow.Caching
             return await Task.Run(()=> (TCacheData)_cache.Get(key));
         }
 
-        public TCacheData GetOrAdd<TCacheData>(string key, Func<TCacheData> func)
+        public TCacheData GetOrAdd<TCacheData>(string key, Func<TCacheData> func, int expireSeconds = -1)
         {
             key.NotNull(nameof(key));
 
@@ -56,11 +56,11 @@ namespace Destiny.Core.Flow.Caching
                 return default;
             }
 
-            Set(key, value);
+            Set(key, value,expireSeconds);
             return value;
         }
 
-        public async Task<TCacheData> GetOrAddAsync<TCacheData>([NotNull] string key, Func<Task<TCacheData>> func, CancellationToken token = default)
+        public async Task<TCacheData> GetOrAddAsync<TCacheData>([NotNull] string key, Func<Task<TCacheData>> func, int expireSeconds = -1, CancellationToken token = default)
         {
             key.NotNull(nameof(key));
 
@@ -94,14 +94,22 @@ namespace Destiny.Core.Flow.Caching
             await Task.Run(() => this.Remove(key),token);
         }
 
-        public void Set<TCacheData>(string key, TCacheData value)
+        public void Set<TCacheData>(string key, TCacheData value, int expireSeconds = -1)
         {
-            _cache.Set(key, value);
+            if (expireSeconds > 0)
+            {
+                _cache.Set(key, value, TimeSpan.FromSeconds(expireSeconds));
+            }
+            else
+            {
+                _cache.Set(key, value);
+            }
+    
         }
 
-        public async Task SetAsync<TCacheData>(string key, TCacheData value, CancellationToken token = default)
+        public async Task SetAsync<TCacheData>(string key, TCacheData value, int expireSeconds = -1, CancellationToken token = default)
         {
-            await Task.Run(()=>this.Set<TCacheData>(key, value),token);
+            await Task.Run(()=>this.Set<TCacheData>(key, value, expireSeconds),token);
         }
     }
 }

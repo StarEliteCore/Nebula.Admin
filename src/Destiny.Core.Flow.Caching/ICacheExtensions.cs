@@ -69,11 +69,11 @@ namespace Destiny.Core.Flow.Caching
         /// <param name="value">值</param>
         /// <param name="token"></param>
         /// <returns></returns>
-        public static async Task SetAsync<TCacheData>(this ICache cache, TCacheData value, CancellationToken token = default)
+        public static async Task SetAsync<TCacheData>(this ICache cache, TCacheData value,int expireSeconds=1, CancellationToken token = default)
           where TCacheData : class, ICacheItem
         {
             var key = GetKey<TCacheData>(value);
-            await cache.SetAsync<TCacheData>(key, value, token);
+            await cache.SetAsync<TCacheData>(key, value, expireSeconds, token);
         }
     }
 }

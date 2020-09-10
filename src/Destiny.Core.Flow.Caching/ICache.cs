@@ -22,10 +22,11 @@ namespace Destiny.Core.Flow.Caching
         /// 得到或添加
         /// </summary>
         /// <param name="func"></param>
+        /// <param name="expireSeconds">过期秒数-1,0不过期。</param>
         /// <returns></returns>
         TCacheData GetOrAdd<TCacheData>(
         string key,
-        Func<TCacheData> func);
+         Func<TCacheData> func, int expireSeconds = -1);
 
         /// <summary>
         /// 异步得到缓存
@@ -41,10 +42,12 @@ namespace Destiny.Core.Flow.Caching
         /// <param name="key"><键/param>
         /// <param name="func"></param>
         /// <param name="token"></param>
+        /// <param name="expireSeconds">过期秒数-1,0不过期。</param>
         /// <returns>返回得到或添加后的缓存数据</returns>
         Task<TCacheData> GetOrAddAsync<TCacheData>(
              [NotNull] string key,
              Func<Task<TCacheData>> func,
+             int expireSeconds = -1,
              CancellationToken token = default
          );
 
@@ -56,7 +59,8 @@ namespace Destiny.Core.Flow.Caching
         /// </summary>
         /// <param name="key">键</param>
         /// <param name="value">值</param>
-        void Set<TCacheData>(string key, TCacheData value);
+        /// <param name="expireSeconds">过期秒数-1,0不过期。</param>
+        void Set<TCacheData>(string key, TCacheData value, int expireSeconds =-1);
 
         /// <summary>
         /// 异步设置缓存
@@ -64,8 +68,8 @@ namespace Destiny.Core.Flow.Caching
         /// <param name="key">键</param>
         /// <param name="value">值</param>
         /// <param name="token"></param>
-        /// <returns></returns>
-        Task SetAsync<TCacheData>(string key, TCacheData value, CancellationToken token = default);
+        /// <param name="expireSeconds">过期秒数-1,0不过期。</param>
+        Task SetAsync<TCacheData>(string key, TCacheData value, int expireSeconds = -1, CancellationToken token = default);
         #endregion
 
 
