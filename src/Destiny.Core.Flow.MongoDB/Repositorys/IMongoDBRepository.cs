@@ -34,6 +34,14 @@ namespace Destiny.Core.Flow.MongoDB.Repositorys
 
         IMongoCollection<TEntity> Collection { get; }
 
-      
+        /// <summary>
+        /// 根据键查询
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        Task<TEntity> FindByIdAsync(Tkey key);
+
+
+
     }
 }
