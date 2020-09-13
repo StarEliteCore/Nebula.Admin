@@ -1,6 +1,8 @@
 ﻿using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Filter.Abstract;
+using Destiny.Core.Flow.Ui;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System;
@@ -41,7 +43,19 @@ namespace Destiny.Core.Flow.MongoDB.Repositorys
         /// <returns></returns>
         Task<TEntity> FindByIdAsync(Tkey key);
 
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <returns></returns>
 
+        Task<OperationResponse> UpdateAsync(Tkey key, UpdateDefinition<TEntity> update);
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        Task<OperationResponse> DeleteAsync(Tkey key);
 
     }
 }
