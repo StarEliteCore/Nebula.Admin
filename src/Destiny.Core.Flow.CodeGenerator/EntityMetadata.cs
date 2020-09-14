@@ -20,7 +20,14 @@ namespace Destiny.Core.Flow.CodeGenerator
         /// </summary>
         public string DisplayName { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string PrimaryKeyType { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
 
         public string PrimaryKeyColName { get; set; }
     }
