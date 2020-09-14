@@ -34,7 +34,7 @@ namespace Destiny.Core.Flow.Services.Identity
             _bus = bus;
         }
 
-        public async Task<(OperationResponse item, Claim[] cliams)> ChangePassword(ChangePassDto dto)
+        public async Task<(OperationResponse item, Claim[] cliams)> ChangePassword(ChangePassInputDto dto)
         {
             dto.NotNull(nameof(dto));
             var user = await _userManager.FindByNameAsync(dto.UserName);

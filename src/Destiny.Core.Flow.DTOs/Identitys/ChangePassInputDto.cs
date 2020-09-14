@@ -5,9 +5,9 @@ using System.Text;
 namespace Destiny.Core.Flow.Dtos.Identitys
 {
     /// <summary>
-    /// 更新密码
+    /// 修改密码
     /// </summary>
-  public  class ChangePassDto
+    public class ChangePassInputDto
     {
         /// <summary>
         /// 用户名
@@ -24,6 +24,5 @@ namespace Destiny.Core.Flow.Dtos.Identitys
         /// </summary>
 
         public string NewPassword { get; set; }
-
     }
 }

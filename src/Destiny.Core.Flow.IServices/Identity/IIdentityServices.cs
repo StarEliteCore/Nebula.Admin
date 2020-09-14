@@ -19,7 +19,7 @@ namespace Destiny.Core.Flow.IServices.Identity
         //[ServiceInterceptor(typeof(TransactionalAttribute))]
         Task<(OperationResponse item, Claim[] cliams)> Login(LoginDto loginDto);
 
-        Task<(OperationResponse item, Claim[] cliams)> ChangePassword(ChangePassDto dto);
+        Task<(OperationResponse item, Claim[] cliams)> ChangePassword(ChangePassInputDto dto);
 
 
     }
