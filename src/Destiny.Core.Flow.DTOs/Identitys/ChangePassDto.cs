@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Dtos.Identitys
 {
-  public  class ChangePassDto
+    public class ChangePassDto
     {
 
         public string UserName { get; set; }
