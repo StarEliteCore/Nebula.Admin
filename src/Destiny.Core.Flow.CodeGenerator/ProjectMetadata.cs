@@ -34,5 +34,7 @@ namespace Destiny.Core.Flow.CodeGenerator
         /// 命名空间
         /// </summary>
         public string Namespace { get; set; }
+
+        
     }
 }
