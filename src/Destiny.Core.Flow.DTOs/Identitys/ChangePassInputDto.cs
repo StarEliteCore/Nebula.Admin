@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Destiny.Core.Flow.Dtos.Identitys
+namespace Destiny.Core.Flow.Dtos
 {
     /// <summary>
     /// 修改密码

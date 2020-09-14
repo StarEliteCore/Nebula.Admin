@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
+using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Dtos.Identitys;
 using Destiny.Core.Flow.IServices.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
