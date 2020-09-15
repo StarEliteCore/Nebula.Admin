@@ -9,6 +9,7 @@ using Destiny.Core.Flow.Services.Identity.Events;
 using Destiny.Core.Flow.Ui;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.Identity
@@ -20,18 +21,21 @@ namespace Destiny.Core.Flow.Services.Identity
         private readonly UserManager<User> _userManager = null;
         private readonly IJwtBearerService _jwtBearerService = null;
         private readonly IEventBus _bus;
-        public IdentityServices(SignInManager<User> signInManager, UserManager<User> userManager, IJwtBearerService jwtBearerService, IEventBus bus)
+        private readonly IPrincipal _principal;
+        public IdentityServices(SignInManager<User> signInManager, UserManager<User> userManager, IJwtBearerService jwtBearerService, IEventBus bus,IPrincipal principal)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _jwtBearerService = jwtBearerService;
             _bus = bus;
+            _principal = principal;
         }
 
         public async Task<(OperationResponse item, Claim[] cliams)> ChangePassword(ChangePassInputDto dto)
         {
             dto.NotNull(nameof(dto));
-            var user = await _userManager.FindByNameAsync(dto.UserName);
+            var userId=  _principal.Identity?.GetUesrId<string>();
+            var user = await _userManager.FindByIdAsync(userId);
 
             if (user == null)
             {
