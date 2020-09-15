@@ -119,7 +119,7 @@
             身份管理
             </summary>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityController.LoginAsync(Destiny.Core.Flow.Dtos.Identitys.LoginDto)">
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityController.LoginAsync(Destiny.Core.Flow.Dtos.LoginDto)">
             <summary>
             登录
             </summary>
