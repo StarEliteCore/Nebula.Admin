@@ -1,6 +1,5 @@
 ﻿using AspectCore.DynamicProxy;
 using Destiny.Core.Flow.Dependency;
-using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Ui;
 using System;
 using System.Collections.Generic;
@@ -17,9 +16,9 @@ namespace Destiny.Core.Flow.IServices.Identity
     public interface IIdentityServices: IScopedDependency
     {
         //[ServiceInterceptor(typeof(TransactionalAttribute))]
-        Task<(OperationResponse item, Claim[] cliams)> Login(LoginDto loginDto);
+        Task<(OperationResponse item, Claim[] cliams)> Login(Dtos.LoginDto loginDto);
 
-        Task<(OperationResponse item, Claim[] cliams)> ChangePassword(ChangePassInputDto dto);
+        Task<(OperationResponse item, Claim[] cliams)> ChangePassword(Dtos.ChangePassInputDto dto);
 
 
     }
