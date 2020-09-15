@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Destiny.Core.Flow.Dtos
+﻿namespace Destiny.Core.Flow.Dtos
 {
     /// <summary>
     /// 修改密码
@@ -24,5 +20,6 @@ namespace Destiny.Core.Flow.Dtos
         /// </summary>
 
         public string NewPassword { get; set; }
+
     }
 }
