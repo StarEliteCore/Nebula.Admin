@@ -1,26 +1,19 @@
-﻿using Destiny.Core.Flow.Dependency;
-using Destiny.Core.Flow.Dtos;
-using Destiny.Core.Flow.Dtos.Identitys;
+﻿using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Events.EventBus;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.IServices.Identity;
-using Destiny.Core.Flow.IServices.UserRoles;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Security.Jwt;
 using Destiny.Core.Flow.Services.Identity.Events;
 using Destiny.Core.Flow.Ui;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.Identity
 {
- 
+
     public class IdentityServices : IIdentityServices
     {
         private readonly SignInManager<User> _signInManager = null;
