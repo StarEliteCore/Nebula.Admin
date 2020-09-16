@@ -5,10 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
+    <PackageReference Include="IdentityServer4.EntityFramework.Storage" Version="4.1.0" />
+    <PackageReference Include="IdentityServer4.Storage" Version="4.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.1.8" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Destiny.Core.Flow.IdentityServer4\Destiny.Core.Flow.IdentityServer4.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Identity\Destiny.Core.Flow.Identitys.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow\Destiny.Core.Flow.csproj" />
   </ItemGroup>

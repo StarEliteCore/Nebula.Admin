@@ -56,17 +56,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.MongoDB", "src\Destiny.Core.Flow.MongoDB\Destiny.Core.Flow.MongoDB.csproj", "{D8E15451-16A4-4769-9BFA-A38C6237715B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.MongoDB", "src\Destiny.Core.Flow.MongoDB\Destiny.Core.Flow.MongoDB.csproj", "{D8E15451-16A4-4769-9BFA-A38C6237715B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.GateWay", "src\Destiny.Core.Flow.GateWay\Destiny.Core.Flow.GateWay.csproj", "{3DD6B93E-872B-4F11-B968-DDC88C0E0C3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.GateWay", "src\Destiny.Core.Flow.GateWay\Destiny.Core.Flow.GateWay.csproj", "{3DD6B93E-872B-4F11-B968-DDC88C0E0C3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.Caching", "src\Destiny.Core.Flow.Caching\Destiny.Core.Flow.Caching.csproj", "{951EDF2A-119D-407B-A8FB-13D4F757D6F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Caching", "src\Destiny.Core.Flow.Caching\Destiny.Core.Flow.Caching.csproj", "{951EDF2A-119D-407B-A8FB-13D4F757D6F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.Caching.CSRedis", "src\Destiny.Core.Flow.Caching.CSRedis\Destiny.Core.Flow.Caching.CSRedis.csproj", "{1B1CE807-2090-40B0-A6C5-326A9F6543C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Caching.CSRedis", "src\Destiny.Core.Flow.Caching.CSRedis\Destiny.Core.Flow.Caching.CSRedis.csproj", "{1B1CE807-2090-40B0-A6C5-326A9F6543C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.TestBase", "src\Destiny.Core.Flow.TestBase\Destiny.Core.Flow.TestBase.csproj", "{7D118558-7701-4804-A42D-C0C81FC394D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.TestBase", "src\Destiny.Core.Flow.TestBase\Destiny.Core.Flow.TestBase.csproj", "{7D118558-7701-4804-A42D-C0C81FC394D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.Consul", "src\Destiny.Core.Flow.Consul\Destiny.Core.Flow.Consul.csproj", "{43BB4E0A-BAFF-41D1-85FC-AA894627A9DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Consul", "src\Destiny.Core.Flow.Consul\Destiny.Core.Flow.Consul.csproj", "{43BB4E0A-BAFF-41D1-85FC-AA894627A9DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.IdentityServer4", "src\Destiny.Core.Flow.IdentityServer4\Destiny.Core.Flow.IdentityServer4.csproj", "{501DC32B-2705-4713-A8C3-9C6842996707}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -170,6 +172,10 @@ Global
 		{43BB4E0A-BAFF-41D1-85FC-AA894627A9DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43BB4E0A-BAFF-41D1-85FC-AA894627A9DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43BB4E0A-BAFF-41D1-85FC-AA894627A9DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{501DC32B-2705-4713-A8C3-9C6842996707}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{501DC32B-2705-4713-A8C3-9C6842996707}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{501DC32B-2705-4713-A8C3-9C6842996707}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{501DC32B-2705-4713-A8C3-9C6842996707}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -203,6 +209,7 @@ Global
 		{1B1CE807-2090-40B0-A6C5-326A9F6543C1} = {D49782B1-99E0-442F-98DD-6D30CD09F6BA}
 		{7D118558-7701-4804-A42D-C0C81FC394D6} = {D49782B1-99E0-442F-98DD-6D30CD09F6BA}
 		{43BB4E0A-BAFF-41D1-85FC-AA894627A9DF} = {D49782B1-99E0-442F-98DD-6D30CD09F6BA}
+		{501DC32B-2705-4713-A8C3-9C6842996707} = {968F74F4-4D0A-4832-A7EA-5CB2BA08AF8A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {468F450C-837F-4FCD-8E06-3E12690DDED6}
