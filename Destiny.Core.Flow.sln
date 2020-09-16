@@ -68,7 +68,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.TestBase"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Consul", "src\Destiny.Core.Flow.Consul\Destiny.Core.Flow.Consul.csproj", "{43BB4E0A-BAFF-41D1-85FC-AA894627A9DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.IdentityServer4", "src\Destiny.Core.Flow.IdentityServer4\Destiny.Core.Flow.IdentityServer4.csproj", "{501DC32B-2705-4713-A8C3-9C6842996707}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.IdentityServer", "src\Destiny.Core.Flow.IdentityServer4\Destiny.Core.Flow.IdentityServer.csproj", "{501DC32B-2705-4713-A8C3-9C6842996707}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
