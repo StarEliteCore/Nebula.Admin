@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Dependency
 {
@@ -8,7 +6,7 @@ namespace Destiny.Core.Flow.Dependency
     /// 标注了此特性的类，将忽略依赖注入自动映射
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface)]
-    public class IgnoreDependencyAttribute: Attribute
+    public class IgnoreDependencyAttribute : Attribute
     {
     }
 }

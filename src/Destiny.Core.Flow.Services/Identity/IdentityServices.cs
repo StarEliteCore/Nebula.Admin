@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.Identity
 {
-
     public class IdentityServices : IIdentityServices
     {
         private readonly SignInManager<User> _signInManager = null;
@@ -22,7 +21,8 @@ namespace Destiny.Core.Flow.Services.Identity
         private readonly IJwtBearerService _jwtBearerService = null;
         private readonly IEventBus _bus;
         private readonly IPrincipal _principal;
-        public IdentityServices(SignInManager<User> signInManager, UserManager<User> userManager, IJwtBearerService jwtBearerService, IEventBus bus,IPrincipal principal)
+
+        public IdentityServices(SignInManager<User> signInManager, UserManager<User> userManager, IJwtBearerService jwtBearerService, IEventBus bus, IPrincipal principal)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -34,7 +34,7 @@ namespace Destiny.Core.Flow.Services.Identity
         public async Task<(OperationResponse item, Claim[] cliams)> ChangePassword(ChangePassInputDto dto)
         {
             dto.NotNull(nameof(dto));
-            var userId=  _principal.Identity?.GetUesrId<string>();
+            var userId = _principal.Identity?.GetUesrId<string>();
             var user = await _userManager.FindByIdAsync(userId);
 
             if (user == null)
@@ -47,7 +47,7 @@ namespace Destiny.Core.Flow.Services.Identity
                 return (OperationResponse.Error("密码不正确!!"), new Claim[] { });
             }
 
-           var result =   await _userManager.ChangePasswordAsync(user, dto.OldPassword,dto.NewPassword);
+            var result = await _userManager.ChangePasswordAsync(user, dto.OldPassword, dto.NewPassword);
 
             if (!result.Succeeded)
             {
@@ -55,7 +55,7 @@ namespace Destiny.Core.Flow.Services.Identity
             }
 
             var jwtToken = _jwtBearerService.CreateToken(user.Id, user.UserName);
-         
+
             return (new OperationResponse("修改密码成功!!", new
             {
                 AccessToken = jwtToken.AccessToken,
@@ -81,7 +81,7 @@ namespace Destiny.Core.Flow.Services.Identity
             }
 
             var jwtToken = _jwtBearerService.CreateToken(user.Id, user.UserName);
-            await  _bus.PublishAsync(new IdentityEvent() { UserName= loginDto.UserName});
+            await _bus.PublishAsync(new IdentityEvent() { UserName = loginDto.UserName });
             return (new OperationResponse("登录成功", new
             {
                 AccessToken = jwtToken.AccessToken,

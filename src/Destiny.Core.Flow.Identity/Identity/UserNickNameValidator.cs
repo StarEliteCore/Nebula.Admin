@@ -1,11 +1,8 @@
-﻿
-using Destiny.Core.Flow.Extensions;
+﻿using Destiny.Core.Flow.Extensions;
 using Microsoft.AspNetCore.Identity;
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Identity
@@ -19,7 +16,7 @@ namespace Destiny.Core.Flow.Identity
             IdentityResult result = IdentityResult.Success;
             TUser existUser = manager.Users.FirstOrDefault(m => m.NickName == user.NickName);
             if (existUser != null
-             && (Equals(user.Id, default(TUserKey)) 
+             && (Equals(user.Id, default(TUserKey))
              || !Equals(user.Id, existUser.Id)))
             {
                 result = new IdentityResult().Failed($"昵称为“{user.NickName}”的用户已存在，请更换昵称重试");

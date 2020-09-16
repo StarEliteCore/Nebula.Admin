@@ -1,21 +1,9 @@
-﻿
-using Destiny.Core.Flow.AspNetCore.Ui;
-using Destiny.Core.Flow.Enums;
-using Destiny.Core.Flow.Extensions;
-using Destiny.Core.Flow.Filter;
-using Destiny.Core.Flow.Filter.Abstract;
-using Destiny.Core.Flow.Ui;
-
-
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Destiny.Core.Flow.Filter.Abstract;
 
 namespace Destiny.Core.Flow.AspNetCore.Ui
 {
     /// <summary>
-    ///  分页集合Dto扩展
+    /// 分页集合Dto扩展
     /// </summary>
     public static class PageListExtensions
     {
@@ -28,8 +16,7 @@ namespace Destiny.Core.Flow.AspNetCore.Ui
         public static PageList<T> ToPageList<T>(this IPagedResult<T> pageResult)
         {
             var result = pageResult;
-            return new PageList<T>() { ItemList= result.ItemList,Message= result.Message,Total= result.Total,Success= result.Success};
+            return new PageList<T>() { ItemList = result.ItemList, Message = result.Message, Total = result.Total, Success = result.Success };
         }
- 
     }
 }

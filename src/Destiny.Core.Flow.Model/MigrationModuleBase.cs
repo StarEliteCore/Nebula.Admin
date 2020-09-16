@@ -1,22 +1,15 @@
 ﻿using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.EntityFrameworkCore;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Modules;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Destiny.Core.Flow.Model
 {
-    public   class MigrationModuleBase : AppModule
+    public class MigrationModuleBase : AppModule
     {
-
-
         public override void ApplicationInitialization(ApplicationContext context)
         {
             var app = context.GetApplicationBuilder();
@@ -24,18 +17,16 @@ namespace Destiny.Core.Flow.Model
             var isAutoMigration = configuration["Destiny:Migrations:IsAutoMigration"].AsTo<bool>();
             if (isAutoMigration)
             {
-                context.ServiceProvider.CreateScoped(provider => {
+                context.ServiceProvider.CreateScoped(provider =>
+                {
                     var unitOfWork = provider.GetService<IUnitOfWork>();
                     var dbContext = unitOfWork.GetDbContext();
                     string[] migrations = dbContext.Database.GetPendingMigrations().ToArray();
                     if (migrations.Length > 0)
                     {
                         dbContext.Database.Migrate();
-
                     }
-
                 });
-
             }
 
             var isAddSeedData = configuration["Destiny:Migrations:IsAddSeedData"].AsTo<bool>();
@@ -49,6 +40,5 @@ namespace Destiny.Core.Flow.Model
                 }
             }
         }
-    
     }
 }

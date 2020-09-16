@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace Destiny.Core.Flow.Model.Entities.Menu
 {
@@ -11,8 +8,9 @@ namespace Destiny.Core.Flow.Model.Entities.Menu
     public enum MenuEnum
     {
         [Description("菜单")]
-        Menu=0,
+        Menu = 0,
+
         [Description("按钮")]
-        Button=5,
+        Button = 5,
     }
 }

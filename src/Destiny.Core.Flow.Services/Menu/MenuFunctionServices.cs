@@ -1,7 +1,4 @@
-﻿using Destiny.Core.Flow.Dependency;
-using Destiny.Core.Flow.Dtos.MenuFunction;
-using Destiny.Core.Flow.ExpressionUtil;
-using Destiny.Core.Flow.Extensions;
+﻿using Destiny.Core.Flow.Dtos.MenuFunction;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.IServices.IMenu;
@@ -9,17 +6,14 @@ using Destiny.Core.Flow.Model.Entities.Function;
 using Destiny.Core.Flow.Model.Entities.Menu;
 using Destiny.Core.Flow.Repository.MenuRepository;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.Menu
 {
-
     public class MenuFunctionServices : IMenuFunctionServices
     {
         private readonly IMenuFunctionRepository _menuFunctionRepository = null;
@@ -35,7 +29,6 @@ namespace Destiny.Core.Flow.Services.Menu
 
         public async Task<IPagedResult<MenuFunctionOutPageListDto>> GetMenuFunctionListAsync(Guid menuId)
         {
-           
             Action<MenuEntity, ICollection<MenuEntity>> menuItem = null;
             List<Guid> menuIds = new List<Guid>();
             menuItem = (dto, suoure) =>
@@ -49,22 +42,21 @@ namespace Destiny.Core.Flow.Services.Menu
                 {
                     menuIds.Add(item.Id);
                     menuItem(item, suoure);
-
                 }
             };
             var roots = _menuRepository.Entities;
-            var menuList=await roots.Where(o => o.Id == menuId).ToListAsync();
-            var suoures = await roots.Where(o => o.ParentId==Guid.Empty).ToListAsync();
+            var menuList = await roots.Where(o => o.Id == menuId).ToListAsync();
+            var suoures = await roots.Where(o => o.ParentId == Guid.Empty).ToListAsync();
             foreach (var menu in menuList)
             {
                 menuItem(menu, suoures);
             }
-            var functionIds= _menuFunctionRepository.Entities.Where(mf => menuIds.Contains(mf.MenuId)).Select(o=>o.FunctionId);
-            var functionList =await _functionRepository.Entities.Where(f=> functionIds.Contains(f.Id)).Select(o=>new MenuFunctionOutPageListDto() { 
-            
-              Description=o.Description,
-              LinkUrl=o.LinkUrl,
-              Name=o.Name
+            var functionIds = _menuFunctionRepository.Entities.Where(mf => menuIds.Contains(mf.MenuId)).Select(o => o.FunctionId);
+            var functionList = await _functionRepository.Entities.Where(f => functionIds.Contains(f.Id)).Select(o => new MenuFunctionOutPageListDto()
+            {
+                Description = o.Description,
+                LinkUrl = o.LinkUrl,
+                Name = o.Name
             }).ToListAsync();
             return new PageResult<MenuFunctionOutPageListDto>()
             {

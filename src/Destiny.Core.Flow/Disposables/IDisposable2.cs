@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 
 namespace Destiny.Core.Flow
 {
-   
-   /// <summary>
-   /// 释放接口
-   /// </summary>
-   public interface IDisposable2 : IDisposable
+    /// <summary>
+    /// 释放接口
+    /// </summary>
+    public interface IDisposable2 : IDisposable
     {
         /// <summary>
         /// 已释放
@@ -24,11 +21,12 @@ namespace Destiny.Core.Flow
 
     public class DisposeBase : IDisposable2
     {
-        public bool Disposed => _disposed>0;
+        public bool Disposed => _disposed > 0;
 
         public event EventHandler OnDisposed;
 
         private Int32 _disposed = 0;
+
         public void Dispose()
         {
             Dispose(true);
@@ -51,6 +49,9 @@ namespace Destiny.Core.Flow
             OnDisposed?.Invoke(this, EventArgs.Empty);
         }
 
-        ~DisposeBase() { Dispose(false); }
+        ~DisposeBase()
+        {
+            Dispose(false);
+        }
     }
 }

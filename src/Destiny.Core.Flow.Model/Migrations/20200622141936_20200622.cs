@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Destiny.Core.Flow.Model.Migrations
 {
@@ -12,7 +11,6 @@ namespace Destiny.Core.Flow.Model.Migrations
                 table: "Function",
                 maxLength: 500,
                 nullable: true);
-
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -20,7 +18,6 @@ namespace Destiny.Core.Flow.Model.Migrations
             migrationBuilder.DropColumn(
                 name: "Url",
                 table: "Function");
-
         }
     }
 }

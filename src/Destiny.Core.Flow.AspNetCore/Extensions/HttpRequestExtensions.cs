@@ -1,14 +1,11 @@
 ﻿using Destiny.Core.Flow.Extensions;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.AspNetCore.Extensions
 {
-   public static class HttpRequestExtensions
+    public static class HttpRequestExtensions
     {
-
         /// <summary>
         /// 判断是否为json格式
         /// </summary>
@@ -16,10 +13,10 @@ namespace Destiny.Core.Flow.AspNetCore.Extensions
         /// <returns></returns>
         public static bool IsJsonContextType(this HttpRequest request)
         {
-
             request.NotNull(nameof(request));
             return request.Headers?["Content-Type"].ToString()?.IndexOf("application/json", StringComparison.OrdinalIgnoreCase) > -1;
         }
+
         /// <summary>
         /// 判断是否AJAX请求
         /// </summary>

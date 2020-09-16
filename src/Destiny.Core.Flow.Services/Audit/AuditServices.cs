@@ -1,7 +1,5 @@
 ﻿using Destiny.Core.Flow.Audit;
 using Destiny.Core.Flow.Audit.Dto;
-using Destiny.Core.Flow.Dependency;
-using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
@@ -12,7 +10,6 @@ using MongoDB.Driver.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.Audit
@@ -30,18 +27,18 @@ namespace Destiny.Core.Flow.Services.Audit
             _auditPropertysEntryRepository = auditPropertysEntryRepository;
         }
 
-        public async Task Save(AuditLog auditLog,List<AuditEntryInputDto> auditEntry)
+        public async Task Save(AuditLog auditLog, List<AuditEntryInputDto> auditEntry)
         {
-            var ss=auditEntry.MapToList<AuditEntry>();
+            var ss = auditEntry.MapToList<AuditEntry>();
             List<AuditEntry> auditentrylist = new List<AuditEntry>();
             List<AuditPropertysEntry> auditpropertysentrylist = new List<AuditPropertysEntry>();
             foreach (var item in auditEntry)
             {
-                var model =item.MapTo<AuditEntry>();
+                var model = item.MapTo<AuditEntry>();
                 model.AuditLogId = auditLog.Id;
                 foreach (var auditProperty in item.AuditPropertys)
                 {
-                    var auditPropertymodel= auditProperty.MapTo<AuditPropertysEntry>();
+                    var auditPropertymodel = auditProperty.MapTo<AuditPropertysEntry>();
                     auditPropertymodel.AuditEntryId = model.Id;
                     auditpropertysentrylist.Add(auditPropertymodel);
                 }
@@ -51,8 +48,8 @@ namespace Destiny.Core.Flow.Services.Audit
             await _auditEntryRepository.InsertAsync(auditentrylist.ToArray());
             await _auditPropertysEntryRepository.InsertAsync(auditpropertysentrylist.ToArray());
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <returns></returns>
         public async Task<PageResult<AuditLogOutputPageDto>> GetAuditLogPageAsync(PageRequest request)
@@ -70,12 +67,13 @@ namespace Destiny.Core.Flow.Services.Audit
             }).ToListAsync();
             return new PageResult<AuditLogOutputPageDto>(list, _auditLogRepository.Entities.Count());
         }
+
         public async Task<OperationResponse> GetAuditEntryListByAuditLogIdAsync(Guid id)
         {
-            var list= await _auditEntryRepository.Entities.Where(x => x.AuditLogId == id)
+            var list = await _auditEntryRepository.Entities.Where(x => x.AuditLogId == id)
                 .Select(x => new AuditEntryOutputDto
                 {
-                    EntityAllName=x.EntityAllName,
+                    EntityAllName = x.EntityAllName,
                     EntityDisplayName = x.EntityDisplayName,
                     TableName = x.TableName,
                     KeyValues = x.KeyValues,
@@ -86,7 +84,7 @@ namespace Destiny.Core.Flow.Services.Audit
 
         public async Task<OperationResponse> GetAuditEntryListByAuditEntryIdAsync(Guid id)
         {
-           var list= await  _auditPropertysEntryRepository.Entities.Where(x => x.AuditEntryId == id).Select(x => new AuditPropertyEntryOutputDto
+            var list = await _auditPropertysEntryRepository.Entities.Where(x => x.AuditEntryId == id).Select(x => new AuditPropertyEntryOutputDto
             {
                 Properties = x.Properties,
                 PropertieDisplayName = x.PropertieDisplayName,

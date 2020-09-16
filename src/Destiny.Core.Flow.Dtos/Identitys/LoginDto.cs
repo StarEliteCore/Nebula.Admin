@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Destiny.Core.Flow.Dtos
 {
@@ -21,6 +18,5 @@ namespace Destiny.Core.Flow.Dtos
         /// </summary>
         [DataType(DataType.Password)]
         public string Password { get; set; }
-
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Destiny.Core.Flow.Model.Migrations
 {
@@ -28,8 +27,6 @@ namespace Destiny.Core.Flow.Model.Migrations
                 table: "Function",
                 maxLength: 500,
                 nullable: true);
-
-       
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -38,18 +35,12 @@ namespace Destiny.Core.Flow.Model.Migrations
                 name: "LinkUrl",
                 table: "Function");
 
-       
-
-         
-
-      
             migrationBuilder.AddColumn<string>(
                 name: "Url",
                 table: "Function",
                 type: "varchar(500) CHARACTER SET utf8mb4",
                 maxLength: 500,
                 nullable: true);
-
         }
     }
 }

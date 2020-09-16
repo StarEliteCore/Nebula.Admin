@@ -1,11 +1,10 @@
 ﻿using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Ui;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Destiny.Core.Flow.Application
 {
@@ -38,20 +37,19 @@ namespace Destiny.Core.Flow.Application
 
             return result;
         }
+
         protected virtual Task<OperationResponse> BeforeDeleteAsync(TEntity entity)
         {
-         
-          
             return Task.FromResult(OperationResponse.Ok());
         }
 
         protected virtual Task<OperationResponse> AfterDeleteAsync(TEntity entity)
         {
-
             return Task.FromResult(OperationResponse.Ok());
         }
 
         protected virtual IQueryable<TEntity> FindEntityQueryable => _efCoreRepository.Entities;
+
         protected abstract Task<OperationResponse> RemoveEntityAsync(IReadOnlyList<TEntity> entityList);
     }
 }

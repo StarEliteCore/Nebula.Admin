@@ -7,10 +7,8 @@ using Destiny.Core.Flow.Permission;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.Permission
@@ -18,7 +16,7 @@ namespace Destiny.Core.Flow.Services.Permission
     /// <summary>
     /// 登录账号访问接口权限验证
     /// </summary>
-    public class AuthorityVerificationServices: IAuthorityVerification
+    public class AuthorityVerificationServices : IAuthorityVerification
     {
         private readonly IPrincipal _principal;
         private readonly IEFCoreRepository<UserRole, Guid> _repositoryUserRole = null;
@@ -38,6 +36,7 @@ namespace Destiny.Core.Flow.Services.Permission
             _userManager = userManager;
             _roleManager = roleManager;
         }
+
         /// <summary>
         /// 判断用户是否有访问接口的权限
         /// </summary>
@@ -45,14 +44,14 @@ namespace Destiny.Core.Flow.Services.Permission
         /// <returns></returns>
         public async Task<bool> IsPermission(string url)
         {
-            var Id = _principal?.Identity.GetUesrId<Guid>();//获取登录用户Id 
+            var Id = _principal?.Identity.GetUesrId<Guid>();//获取登录用户Id
             var role = await _repositoryUserRole.Entities.Where(x => x.UserId == Id.Value).Select(x => x.RoleId).ToListAsync();//获取用户角色
             var menu = await _roleMenuRepository.Entities.Where(x => role.Contains(x.RoleId)).Select(x => x.MenuId).ToListAsync();//获取MenuId
             var funcId = await _menuFuncRepository.Entities.Where(x => menu.Contains(x.MenuId)).Select(x => x.FunctionId).ToListAsync();//获取functionId
             var funclist = await _funcRepository.Entities.Where(x => funcId.Contains(x.Id)).Select(x => x.LinkUrl).ToListAsync();//获取Function列表
             var user = await _userManager.FindByIdAsync(Id.ToString());//获取用户
-            var IsadminRole = await _roleManager.Roles.Where(x => x.IsAdmin == true && role.Contains(x.Id)).ToListAsync();//获取带有管理员权限的角色 
-            if(!user.IsSystem && !IsadminRole.Any())
+            var IsadminRole = await _roleManager.Roles.Where(x => x.IsAdmin == true && role.Contains(x.Id)).ToListAsync();//获取带有管理员权限的角色
+            if (!user.IsSystem && !IsadminRole.Any())
             {
                 if (!funclist.Contains(url))
                 {

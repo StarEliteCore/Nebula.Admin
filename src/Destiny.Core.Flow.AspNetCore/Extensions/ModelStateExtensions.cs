@@ -1,10 +1,7 @@
-﻿
-using Destiny.Core.Flow.AspNetCore.Mvc.Filters;
-using Destiny.Core.Flow.AspNetCore.Ui;
+﻿using Destiny.Core.Flow.AspNetCore.Mvc.Filters;
 using Destiny.Core.Flow.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +16,9 @@ namespace Destiny.Core.Flow.AspNetCore.Extensions
             return options;
         }
     }
+
     public static class ModelStateExtensions
     {
-    
         public static IDictionary<string, string[]> ToSerializableDictionary(this ModelStateDictionary modelState)
         {
             return modelState.Where(x => x.Value.Errors.Any()).ToDictionary(
@@ -29,11 +26,6 @@ namespace Destiny.Core.Flow.AspNetCore.Extensions
                 kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
             );
         }
-
-    
-
-      
-  
 
         public static string ExportErrors(this ModelStateDictionary modelState, bool useHtmlNewLine = false)
         {
@@ -52,7 +44,6 @@ namespace Destiny.Core.Flow.AspNetCore.Extensions
 
             return builder.ToString();
         }
-
 
         public static void ExportModelStateToTempData(this ModelStateDictionary modelState, Controller controller,
             string key)
