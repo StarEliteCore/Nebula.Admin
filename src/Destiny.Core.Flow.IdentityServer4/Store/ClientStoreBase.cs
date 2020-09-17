@@ -17,7 +17,6 @@ namespace Destiny.Core.Flow.IdentityServer.Store
         public async Task<IdentityServer4.Models.Client> FindClientByIdAsync(string clientId)
         {
             await Task.CompletedTask;
-            //IdentityServer4.EntityFramework.Entities.Client
             return new IdentityServer4.Models.Client();
         }
     }

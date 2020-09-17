@@ -560,7 +560,7 @@ namespace Destiny.Core.Flow
 
             IModificationAudited<TUserKey> entity1 = (IModificationAudited<TUserKey>)entity;
             entity1.LastModifierUserId = _principal?.Identity?.GetUesrId<TUserKey>();
-            entity1.LastModifierTime = DateTime.Now;
+            entity1.LastModifionTime = DateTime.Now;
             return (TEntity)entity1;
         }
 
@@ -618,7 +618,7 @@ namespace Destiny.Core.Flow
             {
                 var propertyName = propertyInfo.Name;
                 ConstantExpression constant = Expression.Constant(DateTime.Now);
-                if (propertyName == nameof(IModificationAudited<TUserKey>.LastModifierTime))
+                if (propertyName == nameof(IModificationAudited<TUserKey>.LastModifionTime))
                 {
                     var memberAssignment = Expression.Bind(propertyInfo, constant); //绑定属性
                     newMemberBindings.Add(memberAssignment);

@@ -9,7 +9,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// 客户端实体
     /// </summary>
     [DisplayName("客户端")]
-    public class Client : IEntity<Guid>
+    public class Client : IEntity<Guid>, ICreatedTime, IModificationTime
     {
         /// <summary>
         /// 主键
@@ -200,21 +200,21 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
         /// 创建时间
         /// </summary>
         [DisplayName("创建时间")]
-        public DateTime Created { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedTime { get; set; }
         /// <summary>
         /// 修改时间
         /// </summary>
-        [DisplayName("创建时间")]
-        public DateTime? Updated { get; set; }
+        [DisplayName("修改时间")]
+        public DateTime? LastModifionTime { get; set; }
         /// <summary>
-        /// 上次访问
+        /// 上次访问时间
         /// </summary>
-        [DisplayName("上次访问")]
+        [DisplayName("上次访问时间")]
         public DateTime? LastAccessed { get; set; }
         /// <summary>
-        /// 用户Sso生存期
+        /// 用户SSO期限
         /// </summary>
-        [DisplayName("用户Sso生存期")]
+        [DisplayName("用户SSO期限")]
         public int? UserSsoLifetime { get; set; }
         /// <summary>
         /// 用户代码类型
@@ -222,9 +222,9 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
         [DisplayName("用户代码类型")]
         public string UserCodeType { get; set; }
         /// <summary>
-        /// 设备代码寿命
+        /// 设备代码期限
         /// </summary>
-        [DisplayName("设备代码寿命")]
+        [DisplayName("设备代码期限")]
         public int DeviceCodeLifetime { get; set; } = 300;
         /// <summary>
         /// 不可编辑

@@ -96,7 +96,7 @@ namespace Destiny.Core.Flow.Entity
 
             IModificationAudited<TUserKey> entity1 = (IModificationAudited<TUserKey>)entity;
             entity1.LastModifierUserId = principal?.Identity?.GetUesrId<TUserKey>();
-            entity1.LastModifierTime = DateTime.Now;
+            entity1.LastModifionTime = DateTime.Now;
             return (TEntity)entity1;
         }
     }

@@ -18,7 +18,7 @@ namespace Destiny.Core.Flow.Model.Entities.Identity
         /// 获取或设置 最后修改时间
         /// </summary>
         [DisplayName("最后修改时间")]
-        public virtual DateTime? LastModifierTime { get; set; }
+        public virtual DateTime? LastModifionTime { get; set; }
 
         /// <summary>
         ///获取或设置 是否删除
