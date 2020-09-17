@@ -1,10 +1,6 @@
 ﻿using Destiny.Core.Flow.Extensions;
 using Microsoft.AspNetCore.Identity;
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace Destiny.Core.Flow
 {
     ///具体请查看Microsoft.AspNetCore.Identity源码
@@ -14,7 +10,7 @@ namespace Destiny.Core.Flow
     /// <remarks>
     /// These errors are returned to controllers and are generally used as display messages to end users.
     /// </remarks>
-    public class IdentityErrorDescriberZhHans: IdentityErrorDescriber
+    public class IdentityErrorDescriberZhHans : IdentityErrorDescriber
     {
         /// <summary>
         /// Returns the default <see cref="IdentityError"/>.
@@ -72,9 +68,13 @@ namespace Destiny.Core.Flow
         }
 
         /// <summary>
-        /// Returns an <see cref="IdentityError"/> indicating an external login is already associated with an account.
+        /// Returns an <see cref="IdentityError"/> indicating an external login is already
+        /// associated with an account.
         /// </summary>
-        /// <returns>An <see cref="IdentityError"/> indicating an external login is already associated with an account.</returns>
+        /// <returns>
+        /// An <see cref="IdentityError"/> indicating an external login is already associated with
+        /// an account.
+        /// </returns>
         public override IdentityError LoginAlreadyAssociated()
         {
             IdentityError error = base.LoginAlreadyAssociated();
@@ -83,10 +83,14 @@ namespace Destiny.Core.Flow
         }
 
         /// <summary>
-        /// Returns an <see cref="IdentityError"/> indicating the specified user <paramref name="userName"/> is invalid.
+        /// Returns an <see cref="IdentityError"/> indicating the specified user <paramref
+        /// name="userName"/> is invalid.
         /// </summary>
         /// <param name="userName">The user name that is invalid.</param>
-        /// <returns>An <see cref="IdentityError"/> indicating the specified user <paramref name="userName"/> is invalid.</returns>
+        /// <returns>
+        /// An <see cref="IdentityError"/> indicating the specified user <paramref name="userName"/>
+        /// is invalid.
+        /// </returns>
         public override IdentityError InvalidUserName(string userName)
         {
             IdentityError error = base.InvalidUserName(userName);
@@ -95,10 +99,13 @@ namespace Destiny.Core.Flow
         }
 
         /// <summary>
-        /// Returns an <see cref="IdentityError"/> indicating the specified <paramref name="email"/> is invalid.
+        /// Returns an <see cref="IdentityError"/> indicating the specified <paramref name="email"/>
+        /// is invalid.
         /// </summary>
         /// <param name="email">The email that is invalid.</param>
-        /// <returns>An <see cref="IdentityError"/> indicating the specified <paramref name="email"/> is invalid.</returns>
+        /// <returns>
+        /// An <see cref="IdentityError"/> indicating the specified <paramref name="email"/> is invalid.
+        /// </returns>
         public override IdentityError InvalidEmail(string email)
         {
             IdentityError error = base.InvalidEmail(email);
@@ -107,10 +114,14 @@ namespace Destiny.Core.Flow
         }
 
         /// <summary>
-        /// Returns an <see cref="IdentityError"/> indicating the specified <paramref name="userName"/> already exists.
+        /// Returns an <see cref="IdentityError"/> indicating the specified <paramref
+        /// name="userName"/> already exists.
         /// </summary>
         /// <param name="userName">The user name that already exists.</param>
-        /// <returns>An <see cref="IdentityError"/> indicating the specified <paramref name="userName"/> already exists.</returns>
+        /// <returns>
+        /// An <see cref="IdentityError"/> indicating the specified <paramref name="userName"/>
+        /// already exists.
+        /// </returns>
         public override IdentityError DuplicateUserName(string userName)
         {
             IdentityError error = base.DuplicateUserName(userName);
@@ -119,10 +130,14 @@ namespace Destiny.Core.Flow
         }
 
         /// <summary>
-        /// Returns an <see cref="IdentityError"/> indicating the specified <paramref name="email"/> is already associated with an account.
+        /// Returns an <see cref="IdentityError"/> indicating the specified <paramref name="email"/>
+        /// is already associated with an account.
         /// </summary>
         /// <param name="email">The email that is already associated with an account.</param>
-        /// <returns>An <see cref="IdentityError"/> indicating the specified <paramref name="email"/> is already associated with an account.</returns>
+        /// <returns>
+        /// An <see cref="IdentityError"/> indicating the specified <paramref name="email"/> is
+        /// already associated with an account.
+        /// </returns>
         public override IdentityError DuplicateEmail(string email)
         {
             IdentityError error = base.DuplicateEmail(email);
@@ -131,10 +146,14 @@ namespace Destiny.Core.Flow
         }
 
         /// <summary>
-        /// Returns an <see cref="IdentityError"/> indicating the specified <paramref name="role"/> name is invalid.
+        /// Returns an <see cref="IdentityError"/> indicating the specified <paramref name="role"/>
+        /// name is invalid.
         /// </summary>
         /// <param name="role">The invalid role.</param>
-        /// <returns>An <see cref="IdentityError"/> indicating the specific role <paramref name="role"/> name is invalid.</returns>
+        /// <returns>
+        /// An <see cref="IdentityError"/> indicating the specific role <paramref name="role"/> name
+        /// is invalid.
+        /// </returns>
         public override IdentityError InvalidRoleName(string role)
         {
             IdentityError error = base.InvalidRoleName(role);
@@ -143,10 +162,14 @@ namespace Destiny.Core.Flow
         }
 
         /// <summary>
-        /// Returns an <see cref="IdentityError"/> indicating the specified <paramref name="role"/> name already exists.
+        /// Returns an <see cref="IdentityError"/> indicating the specified <paramref name="role"/>
+        /// name already exists.
         /// </summary>
         /// <param name="role">The duplicate role.</param>
-        /// <returns>An <see cref="IdentityError"/> indicating the specific role <paramref name="role"/> name already exists.</returns>
+        /// <returns>
+        /// An <see cref="IdentityError"/> indicating the specific role <paramref name="role"/> name
+        /// already exists.
+        /// </returns>
         public override IdentityError DuplicateRoleName(string role)
         {
             IdentityError error = base.DuplicateRoleName(role);
@@ -177,10 +200,13 @@ namespace Destiny.Core.Flow
         }
 
         /// <summary>
-        /// Returns an <see cref="IdentityError"/> indicating a user is already in the specified <paramref name="role"/>.
+        /// Returns an <see cref="IdentityError"/> indicating a user is already in the specified
+        /// <paramref name="role"/>.
         /// </summary>
         /// <param name="role">The duplicate role.</param>
-        /// <returns>An <see cref="IdentityError"/> indicating a user is already in the specified <paramref name="role"/>.</returns>
+        /// <returns>
+        /// An <see cref="IdentityError"/> indicating a user is already in the specified <paramref name="role"/>.
+        /// </returns>
         public override IdentityError UserAlreadyInRole(string role)
         {
             IdentityError error = base.UserAlreadyInRole(role);
@@ -189,10 +215,13 @@ namespace Destiny.Core.Flow
         }
 
         /// <summary>
-        /// Returns an <see cref="IdentityError"/> indicating a user is not in the specified <paramref name="role"/>.
+        /// Returns an <see cref="IdentityError"/> indicating a user is not in the specified
+        /// <paramref name="role"/>.
         /// </summary>
         /// <param name="role">The duplicate role.</param>
-        /// <returns>An <see cref="IdentityError"/> indicating a user is not in the specified <paramref name="role"/>.</returns>
+        /// <returns>
+        /// An <see cref="IdentityError"/> indicating a user is not in the specified <paramref name="role"/>.
+        /// </returns>
         public override IdentityError UserNotInRole(string role)
         {
             IdentityError error = base.UserNotInRole(role);
@@ -201,10 +230,14 @@ namespace Destiny.Core.Flow
         }
 
         /// <summary>
-        /// Returns an <see cref="IdentityError"/> indicating a password of the specified <paramref name="length"/> does not meet the minimum length requirements.
+        /// Returns an <see cref="IdentityError"/> indicating a password of the specified <paramref
+        /// name="length"/> does not meet the minimum length requirements.
         /// </summary>
         /// <param name="length">The length that is not long enough.</param>
-        /// <returns>An <see cref="IdentityError"/> indicating a password of the specified <paramref name="length"/> does not meet the minimum length requirements.</returns>
+        /// <returns>
+        /// An <see cref="IdentityError"/> indicating a password of the specified <paramref
+        /// name="length"/> does not meet the minimum length requirements.
+        /// </returns>
         public override IdentityError PasswordTooShort(int length)
         {
             IdentityError error = base.PasswordTooShort(length);
@@ -213,10 +246,14 @@ namespace Destiny.Core.Flow
         }
 
         /// <summary>
-        /// Returns an <see cref="IdentityError"/> indicating a password does not meet the minimum number <paramref name="uniqueChars"/> of unique chars.
+        /// Returns an <see cref="IdentityError"/> indicating a password does not meet the minimum
+        /// number <paramref name="uniqueChars"/> of unique chars.
         /// </summary>
         /// <param name="uniqueChars">The number of different chars that must be used.</param>
-        /// <returns>An <see cref="IdentityError"/> indicating a password does not meet the minimum number <paramref name="uniqueChars"/> of unique chars.</returns>
+        /// <returns>
+        /// An <see cref="IdentityError"/> indicating a password does not meet the minimum number
+        /// <paramref name="uniqueChars"/> of unique chars.
+        /// </returns>
         public override IdentityError PasswordRequiresUniqueChars(int uniqueChars)
         {
             IdentityError error = base.PasswordRequiresUniqueChars(uniqueChars);
@@ -225,9 +262,13 @@ namespace Destiny.Core.Flow
         }
 
         /// <summary>
-        /// Returns an <see cref="IdentityError"/> indicating a password entered does not contain a non-alphanumeric character, which is required by the password policy.
+        /// Returns an <see cref="IdentityError"/> indicating a password entered does not contain a
+        /// non-alphanumeric character, which is required by the password policy.
         /// </summary>
-        /// <returns>An <see cref="IdentityError"/> indicating a password entered does not contain a non-alphanumeric character.</returns>
+        /// <returns>
+        /// An <see cref="IdentityError"/> indicating a password entered does not contain a
+        /// non-alphanumeric character.
+        /// </returns>
         public override IdentityError PasswordRequiresNonAlphanumeric()
         {
             IdentityError error = base.PasswordRequiresNonAlphanumeric();
@@ -236,9 +277,12 @@ namespace Destiny.Core.Flow
         }
 
         /// <summary>
-        /// Returns an <see cref="IdentityError"/> indicating a password entered does not contain a numeric character, which is required by the password policy.
+        /// Returns an <see cref="IdentityError"/> indicating a password entered does not contain a
+        /// numeric character, which is required by the password policy.
         /// </summary>
-        /// <returns>An <see cref="IdentityError"/> indicating a password entered does not contain a numeric character.</returns>
+        /// <returns>
+        /// An <see cref="IdentityError"/> indicating a password entered does not contain a numeric character.
+        /// </returns>
         public override IdentityError PasswordRequiresDigit()
         {
             IdentityError error = base.PasswordRequiresDigit();
@@ -247,9 +291,13 @@ namespace Destiny.Core.Flow
         }
 
         /// <summary>
-        /// Returns an <see cref="IdentityError"/> indicating a password entered does not contain a lower case letter, which is required by the password policy.
+        /// Returns an <see cref="IdentityError"/> indicating a password entered does not contain a
+        /// lower case letter, which is required by the password policy.
         /// </summary>
-        /// <returns>An <see cref="IdentityError"/> indicating a password entered does not contain a lower case letter.</returns>
+        /// <returns>
+        /// An <see cref="IdentityError"/> indicating a password entered does not contain a lower
+        /// case letter.
+        /// </returns>
         public override IdentityError PasswordRequiresLower()
         {
             IdentityError error = base.PasswordRequiresLower();
@@ -258,9 +306,13 @@ namespace Destiny.Core.Flow
         }
 
         /// <summary>
-        /// Returns an <see cref="IdentityError"/> indicating a password entered does not contain an upper case letter, which is required by the password policy.
+        /// Returns an <see cref="IdentityError"/> indicating a password entered does not contain an
+        /// upper case letter, which is required by the password policy.
         /// </summary>
-        /// <returns>An <see cref="IdentityError"/> indicating a password entered does not contain an upper case letter.</returns>
+        /// <returns>
+        /// An <see cref="IdentityError"/> indicating a password entered does not contain an upper
+        /// case letter.
+        /// </returns>
         public override IdentityError PasswordRequiresUpper()
         {
             IdentityError error = base.PasswordRequiresUpper();

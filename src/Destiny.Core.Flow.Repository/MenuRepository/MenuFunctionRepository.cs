@@ -2,8 +2,6 @@
 using Destiny.Core.Flow.Model.Entities.Menu;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Repository.MenuRepository
 {
@@ -17,8 +15,8 @@ namespace Destiny.Core.Flow.Repository.MenuRepository
         {
         }
     }
-    public interface IMenuFunctionRepository: IEFCoreRepository<MenuFunction, Guid>
-    {
 
+    public interface IMenuFunctionRepository : IEFCoreRepository<MenuFunction, Guid>
+    {
     }
 }

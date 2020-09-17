@@ -2,8 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Model.EntityConfigurations
 {
@@ -20,8 +18,6 @@ namespace Destiny.Core.Flow.Model.EntityConfigurations
             b.Property(o => o.IsDeleted).HasDefaultValue(false);
             b.Property(o => o.Code).HasMaxLength(20);
             b.ToTable("Role");
-
-
 
             //b.HasData(new Role()
             //{

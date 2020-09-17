@@ -1,16 +1,14 @@
 ﻿using Destiny.Core.Flow.Entity;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 
 namespace Destiny.Core.Flow.Model.Entities.Identity
 {
     [DisplayName("用户角色")]
-    public class UserRole:UserRoleBase<Guid,Guid>, IFullAuditedEntity<Guid>
+    public class UserRole : UserRoleBase<Guid, Guid>, IFullAuditedEntity<Guid>
     {
         /// <summary>
-        ///  获取或设置 最后修改用户
+        /// 获取或设置 最后修改用户
         /// </summary>
 
         [DisplayName("最后修改用户")]

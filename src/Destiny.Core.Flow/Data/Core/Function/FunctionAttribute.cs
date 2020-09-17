@@ -1,13 +1,9 @@
-﻿using Destiny.Core.Flow.Attributes.Base;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace Destiny.Core.Flow.Data.Core
 {
-    [AttributeUsage(AttributeTargets.Class|AttributeTargets.Method)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class FunctionAttribute : Attribute
     {
-      
     }
 }

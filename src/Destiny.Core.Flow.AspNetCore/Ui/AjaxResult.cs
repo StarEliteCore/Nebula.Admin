@@ -1,33 +1,26 @@
-﻿
-
-using Destiny.Core.Flow.Enums;
+﻿using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Helpers;
-
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.AspNetCore.Ui
 {
     /// <summary>
     /// Ajax操作结果
     /// </summary>
-   public class AjaxResult
+    public class AjaxResult
     {
-
         public AjaxResult() : this(null)
         {
-
         }
+
         public AjaxResult(AjaxResultType type = AjaxResultType.Success) : this("", null, type)
         {
-           
         }
-        public AjaxResult(string message, AjaxResultType type= AjaxResultType.Success, object data=null):this(message,data, type)
+
+        public AjaxResult(string message, AjaxResultType type = AjaxResultType.Success, object data = null) : this(message, data, type)
         {
-  
         }
-        public AjaxResult(string message,object data, AjaxResultType type)
+
+        public AjaxResult(string message, object data, AjaxResultType type)
         {
             this.Message = message;
             this.Data = data;
@@ -45,16 +38,14 @@ namespace Destiny.Core.Flow.AspNetCore.Ui
         /// <summary>
         /// 消息
         /// </summary>
- 
+
         public string Message { get; set; }
 
-       /// <summary>
-       /// 数据
-       /// </summary>
+        /// <summary>
+        /// 数据
+        /// </summary>
 
-        public  object Data { get; set; }
-
-
+        public object Data { get; set; }
 
         /// <summary>
         /// 是否成功
@@ -67,8 +58,6 @@ namespace Destiny.Core.Flow.AspNetCore.Ui
         /// </summary>
 
         public AjaxResultType Type { get; set; }
-
-
 
         /// <summary>
         /// 是否成功
@@ -92,7 +81,7 @@ namespace Destiny.Core.Flow.AspNetCore.Ui
         /// <returns></returns>
         public object ToObject()
         {
-            return new { Data,Message, Success,Type};
+            return new { Data, Message, Success, Type };
         }
 
         /// <summary>
@@ -101,10 +90,7 @@ namespace Destiny.Core.Flow.AspNetCore.Ui
         /// <returns></returns>
         public string ToJson()
         {
-
-          return  this.ToObject().ToJson();
+            return this.ToObject().ToJson();
         }
-   
     }
-
 }

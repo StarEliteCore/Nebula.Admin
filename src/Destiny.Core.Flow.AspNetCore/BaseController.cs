@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Destiny.Core.Flow.AspNetCore.Api;
-using Microsoft.AspNetCore.Http;
+﻿using Destiny.Core.Flow.AspNetCore.Api;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -16,6 +11,7 @@ namespace Destiny.Core.Flow.AspNetCore
         /// 公共日志记录
         /// </summary>
         public ILogger<T> _logger;
+
         /// <summary>
         /// 构造注入
         /// </summary>

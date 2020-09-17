@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Destiny.Core.Flow.Model.Security
+﻿namespace Destiny.Core.Flow.Model.Security
 {
-   public interface IFunctionHandler
+    public interface IFunctionHandler
     {
         void Initialize<BaseType>();
     }

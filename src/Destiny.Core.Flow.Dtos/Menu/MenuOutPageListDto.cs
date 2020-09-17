@@ -2,11 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 
 namespace Destiny.Core.Flow.Dtos.Menu
 {
-   public  class MenuOutPageListDto : OutputDto<Guid>
+    public class MenuOutPageListDto : OutputDto<Guid>
     {
         /// <summary>
         /// 菜单名称
@@ -43,6 +42,7 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// </summary>
         [DisplayName("深度")]
         public int Depth { get; set; }
+
         /// <summary>
         /// 菜单
         /// </summary>

@@ -6,16 +6,14 @@ using System;
 namespace Destiny.Core.Flow.Repository.DictionaryRepository
 {
     [Dependency(ServiceLifetime.Scoped)]
-    public class DataDictionnaryRepository : Repository<DataDictionaryEntity, Guid>,IDataDictionnaryRepository
+    public class DataDictionnaryRepository : Repository<DataDictionaryEntity, Guid>, IDataDictionnaryRepository
     {
-        public DataDictionnaryRepository(IServiceProvider serviceProvider):base(serviceProvider)
+        public DataDictionnaryRepository(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-
         }
     }
+
     public interface IDataDictionnaryRepository : IEFCoreRepository<DataDictionaryEntity, Guid>
-    { 
-    
-    
+    {
     }
 }

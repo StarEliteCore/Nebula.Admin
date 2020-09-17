@@ -1,27 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
-using System;
-using System.Collections.Generic;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.AspNetCore.Authorization;
-using System.Reflection;
-using System.Linq;
-using Destiny.Core.Flow.Extensions;
-using Microsoft.AspNetCore.Identity;
-using Destiny.Core.Flow.Model.Entities.Identity;
-using Microsoft.EntityFrameworkCore;
-using Destiny.Core.Flow.Model.Entities.Rolemenu;
-using Destiny.Core.Flow.Model.Entities.Menu;
-using Destiny.Core.Flow.Model.Entities.Function;
-using Destiny.Core.Flow.AspNetCore.Ui;
-using Destiny.Core.Flow.Ui;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
+﻿using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Permission;
+using Destiny.Core.Flow.Ui;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.Filters;
+using System.Linq;
+using System.Reflection;
+using System.Security.Principal;
+using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
 {
@@ -32,11 +20,11 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
     {
         private readonly IAuthorityVerification _authority;
         private readonly IPrincipal _principal;
+
         public PermissionAuthorizationFilter(IAuthorityVerification authority, IPrincipal principal)
         {
             _authority = authority;
             _principal = principal;
-            
         }
 
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)

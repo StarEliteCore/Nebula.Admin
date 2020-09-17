@@ -1,40 +1,26 @@
-﻿using Destiny.Core.Flow.Entity;
+﻿using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Model.Entities.Identity;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using Destiny.Core.Flow.EntityFrameworkCore;
-using Destiny.Core.Flow.Extensions;
+using System;
 using System.Linq.Expressions;
-using System.Linq;
-using Microsoft.Extensions.Logging;
-using Destiny.Core.Flow.Dependency;
 
 namespace Destiny.Core.Flow.Model.SeedDatas
 {
     [Dependency(ServiceLifetime.Singleton)]
     public class UserSeedData : SeedDataDefaults<User, Guid>
     {
-     
         public UserSeedData(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-           
         }
 
-        
-        
         public override bool Disable => false;
 
         protected override Expression<Func<User, bool>> Expression(User entity)
         {
-
             return o => o.UserName == entity.UserName && o.NickName == entity.NickName;
         }
 
-   
         protected override User[] SetSeedData()
         {
             return new User[] {
@@ -57,7 +43,6 @@ namespace Destiny.Core.Flow.Model.SeedDatas
                 IsDeleted = false,
                 Description = "系统管理员拥有所有权限",
                 Sex = Sex.Man
-
                }
             };
         }

@@ -2,13 +2,10 @@
 using Destiny.Core.Flow.Events;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Services.Users.Events;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,38 +13,30 @@ namespace Destiny.Core.Flow.Services.Users.EventHandlers
 {
     public class UserRoleCacheAddOrUpdateHandler : CacheHandlerBase<UserRoleCacheAddOrUpdateEvent>
     {
-
-
-        public UserRoleCacheAddOrUpdateHandler(ICache cache):base(cache)
+        public UserRoleCacheAddOrUpdateHandler(ICache cache) : base(cache)
         {
-           
-
         }
 
         public override async Task Handle(UserRoleCacheAddOrUpdateEvent notification, CancellationToken cancellationToken)
         {
             var key = $"{UserCacheKeys.userRoleKeyPrefix}{notification.User.Id}";
-            if (notification.EventState==EventState.Add)
+            if (notification.EventState == EventState.Add)
             {
-
-               await AddUserRoleCacheItem(key, notification.User, notification.Roles);
+                await AddUserRoleCacheItem(key, notification.User, notification.Roles);
             }
-            else {
+            else
+            {
                 await _cache.RemoveAsync(key);
 
                 await AddUserRoleCacheItem(key, notification.User, notification.Roles);
             }
-            async Task AddUserRoleCacheItem(string key,User user,IEnumerable<Role> roles)
+            async Task AddUserRoleCacheItem(string key, User user, IEnumerable<Role> roles)
             {
-
-
-                  var roleCaheItem=  roles.Select(o => new RoleCaheItem(o.Id, o.Name, o.IsAdmin));
-                  UserRoleCacheItem userRoleCacheItem = new UserRoleCacheItem(notification.User.Id, roleCaheItem);
+                var roleCaheItem = roles.Select(o => new RoleCaheItem(o.Id, o.Name, o.IsAdmin));
+                UserRoleCacheItem userRoleCacheItem = new UserRoleCacheItem(notification.User.Id, roleCaheItem);
                 await _cache.SetAsync(key, userRoleCacheItem);
             }
         }
-
-     
 
         private class UserRoleCacheItem
         {

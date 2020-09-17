@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.EntityFrameworkCore.Repositorys
 {
-    public class DapperRepository:IDapperRepository
+    public class DapperRepository : IDapperRepository
     {
-
         private readonly IUnitOfWork _unitOfWork = null;
-   
 
         public DapperRepository(IUnitOfWork unitOfWork)
         {
@@ -25,7 +23,5 @@ namespace Destiny.Core.Flow.EntityFrameworkCore.Repositorys
         {
             return DbConnection.QueryAsync<T>(sql, param);
         }
-
-
     }
 }

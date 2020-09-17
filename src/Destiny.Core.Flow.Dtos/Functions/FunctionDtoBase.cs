@@ -1,18 +1,11 @@
 ﻿using Destiny.Core.Flow.Entity;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Dtos.Functions
 {
-
-   public  abstract class FunctionDtoBase<TKey>:DtoBase<TKey>
+    public abstract class FunctionDtoBase<TKey> : DtoBase<TKey>
     {  /// <summary>
-       /// 功能名字
-       /// </summary>
+       /// 功能名字 </summary>
         public string Name { get; set; }
-
-    
 
         /// <summary>
         /// 是否可用

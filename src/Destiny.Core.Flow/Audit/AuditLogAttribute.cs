@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Audit
 {
@@ -10,6 +8,5 @@ namespace Destiny.Core.Flow.Audit
     [AttributeUsage(AttributeTargets.All)]
     public class AuditLogAttribute : Attribute
     {
-
     }
 }

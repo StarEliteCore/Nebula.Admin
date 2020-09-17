@@ -7,9 +7,7 @@ using System.ComponentModel;
 
 namespace Destiny.Core.Flow.Dtos.Menu
 {
-    /// <summary>
-    /// 菜单表格
-    /// </summary
+    /// <summary> 菜单表格 </summary
     [AutoMapping(typeof(MenuEntity))]
     public class MenuTableOutDto : OutputDto<Guid>
     {
@@ -48,21 +46,24 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// </summary>
         [DisplayName("深度")]
         public int Depth { get; set; }
+
         /// <summary>
-        /// 
         /// </summary>
         [DisplayName("当前菜单以上所有的父级")]
         public string ParentNumber { get; set; }
+
         /// <summary>
         /// 组件地址
         /// </summary>
         [DisplayName("组件地址")]
         public string Component { get; set; }
+
         /// <summary>
         /// 类型
         /// </summary>
         [DisplayName("类型")]
         public MenuEnum Type { get; set; }
+
         /// <summary>
         /// 子级
         /// </summary>

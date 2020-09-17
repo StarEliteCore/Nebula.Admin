@@ -5,8 +5,6 @@ using Destiny.Core.Flow.Helpers;
 using Destiny.Core.Flow.Services.Identity.Events;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,6 +15,7 @@ namespace Destiny.Core.Flow.Services.Identity.EventHandlers
         private IServiceProvider _serviceProvider = null;
         private readonly ILogger _logger = null;
         private readonly ICache _cache = null;
+
         public IdentityEventHandler(IServiceProvider serviceProvider, ICache cache)
         {
             _serviceProvider = serviceProvider;
@@ -24,10 +23,10 @@ namespace Destiny.Core.Flow.Services.Identity.EventHandlers
             _cache = cache;
         }
 
-        public override  Task Handle(IdentityEvent @event, CancellationToken cancellationToken)
+        public override Task Handle(IdentityEvent @event, CancellationToken cancellationToken)
         {
             _logger.LogInformation($"事件信息:{@event.ToJson()}");
-         
+
             return Task.CompletedTask;
         }
     }

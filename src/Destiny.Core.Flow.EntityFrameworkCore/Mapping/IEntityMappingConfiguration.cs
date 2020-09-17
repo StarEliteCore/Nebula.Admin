@@ -1,11 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow
 {
-   public interface IEntityMappingConfiguration
+    public interface IEntityMappingConfiguration
     {
         void Map(ModelBuilder b);
 

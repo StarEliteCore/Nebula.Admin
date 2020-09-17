@@ -46,7 +46,6 @@ namespace Destiny.Core.Flow.Dtos.DataDictionnary
         [DisplayName("编码")]
         public string Code { get; set; }
 
-
         /// <summary>
         /// 子集
         /// </summary>

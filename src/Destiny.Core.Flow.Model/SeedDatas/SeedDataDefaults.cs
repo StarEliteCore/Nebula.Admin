@@ -1,12 +1,8 @@
-﻿using Destiny.Core.Flow.Dependency;
-using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.EntityFrameworkCore;
+﻿using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Destiny.Core.Flow.Model.SeedDatas
 {
@@ -16,22 +12,19 @@ namespace Destiny.Core.Flow.Model.SeedDatas
     /// <typeparam name="TEntity"></typeparam>
     /// <typeparam name="TKey"></typeparam>
 
-   public abstract class SeedDataDefaults<TEntity, TKey> : SeedDataBase<TEntity, TKey>
-            where TEntity : IEntity<TKey>
-          where TKey : IEquatable<TKey>
+    public abstract class SeedDataDefaults<TEntity, TKey> : SeedDataBase<TEntity, TKey>
+             where TEntity : IEntity<TKey>
+           where TKey : IEquatable<TKey>
 
     {
-
-        protected SeedDataDefaults(IServiceProvider serviceProvider):base(serviceProvider)
+        protected SeedDataDefaults(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-       
         }
 
-        protected override void SaveDatabase(TEntity[] entities) {
-
+        protected override void SaveDatabase(TEntity[] entities)
+        {
             if (entities == null || entities.Length == 0)
             {
-
                 return;
             }
             _serviceProvider.CreateScoped(provider =>
@@ -46,12 +39,9 @@ namespace Destiny.Core.Flow.Model.SeedDatas
                         continue;
                     }
                     repository.Insert(entities);
-
-
                 }
                 unitOfWork.Commit();
             });
-
         }
     }
 }
