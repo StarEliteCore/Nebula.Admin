@@ -34,7 +34,11 @@ namespace Destiny.Core.Flow.Modules
            
             Modules = LoadModules();
         }
-
+        /// <summary>
+        /// 获取所有模块
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
         private List<IAppModule> GetAllModule(IServiceCollection services)
         {
           var typeFinder=   services.GetOrAddSingletonService<ITypeFinder, TypeFinder>();
@@ -49,6 +53,10 @@ namespace Destiny.Core.Flow.Modules
             ServiceProvider = serviceProvider;
             ServiceProvider.GetRequiredService<ObjectAccessor<IServiceProvider>>().Value = ServiceProvider;
         }
+        /// <summary>
+        /// 获取需要加载的模块
+        /// </summary>
+        /// <returns></returns>
         private IReadOnlyList<IAppModule> LoadModules()
         {
             List<IAppModule> modules = new List<IAppModule>();
@@ -77,7 +85,12 @@ namespace Destiny.Core.Flow.Modules
             return modules;
 
         }
-
+        /// <summary>
+        /// 注册模块
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="moduleType"></param>
+        /// <returns></returns>
         private IAppModule CreateModule(IServiceCollection services, Type moduleType)
         {
 

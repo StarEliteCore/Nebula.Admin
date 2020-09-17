@@ -6,15 +6,19 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Modules
 {
-  public  class StartupModuleRunner: ModuleApplicationBase, IStartupModuleRunner
+    public class StartupModuleRunner : ModuleApplicationBase, IStartupModuleRunner
     {
         public StartupModuleRunner(Type startupModuleType, IServiceCollection services)
-            : base(startupModuleType,services)
+            : base(startupModuleType, services)
         {
 
             services.AddSingleton<IStartupModuleRunner>(this);
 
         }
+        /// <summary>
+        /// 程序启动时加载模块中的配置
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             IocManage.Instance.SetServiceCollection(services);
@@ -26,7 +30,10 @@ namespace Destiny.Core.Flow.Modules
                 cfg.ConfigureServices(ctx);
             }
         }
-
+        /// <summary>
+        /// 加载应用程序
+        /// </summary>
+        /// <param name="service"></param>
         public void Initialize(IServiceProvider service)
         {
             IocManage.Instance.SetApplicationServiceProvider(service);
