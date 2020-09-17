@@ -5,7 +5,7 @@ using System.ComponentModel;
 namespace Destiny.Core.Flow.IdentityServer.Entities
 {
     /// <summary>
-    /// 
+    /// 客户端实体
     /// </summary>
     [DisplayName()]
     public class ClientBase : IEntity<Guid>
