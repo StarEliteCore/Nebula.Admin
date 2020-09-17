@@ -31,10 +31,16 @@ namespace Destiny.Core.Flow.CodeGenerator
 
 
         /// <summary>
-        /// 命名空间
+        /// 命名空间d
         /// </summary>
         public string Namespace { get; set; }
 
-        
+        /// <summary>
+        /// 实体元数据
+        /// </summary>
+
+        public EntityMetadata EntityMetadata { get; set; }
+
+
     }
 }

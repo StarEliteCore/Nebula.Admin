@@ -126,6 +126,13 @@
             <param name="loginDto"></param>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityController.ChangePassword(Destiny.Core.Flow.Dtos.ChangePassInputDto)">
+            <summary>
+            更新密码
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetTableAsync">
             <summary>
             获取表格菜单信息
