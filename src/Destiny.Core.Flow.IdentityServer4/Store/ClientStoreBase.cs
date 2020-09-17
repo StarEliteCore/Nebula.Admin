@@ -1,17 +1,9 @@
-﻿using Destiny.Core.Flow.Entity;
-using IdentityServer4.EntityFramework.Stores;
-using IdentityServer4.Stores;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using IdentityServer4.Stores;
 using System.Threading.Tasks;
-using IdentityServer4.EntityFramework.Mappers;
 
 namespace Destiny.Core.Flow.IdentityServer.Store
 {
-    public abstract class ClientStoreBase:IClientStore
+    public abstract class ClientStoreBase : IClientStore
     {
 
         //private readonly IEFCoreRepository<IdentityServer4.EntityFramework.Entities.Client, int> _clientRepository;
@@ -25,6 +17,7 @@ namespace Destiny.Core.Flow.IdentityServer.Store
         public async Task<IdentityServer4.Models.Client> FindClientByIdAsync(string clientId)
         {
             await Task.CompletedTask;
+            //IdentityServer4.EntityFramework.Entities.Client
             return new IdentityServer4.Models.Client();
         }
     }

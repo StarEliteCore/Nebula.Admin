@@ -1,5 +1,6 @@
 ﻿using Destiny.Core.Flow.Entity;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Destiny.Core.Flow.IdentityServer.Entities
@@ -8,7 +9,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// 客户端实体
     /// </summary>
     [DisplayName("客户端")]
-    public class ClientBase : IEntity<Guid>
+    public class Client : IEntity<Guid>
     {
         /// <summary>
         /// 主键
@@ -36,9 +37,9 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
         [DisplayName("需要客户端密码")]
         public bool RequireClientSecret { get; set; } = true;
         /// <summary>
-        /// 客户名称
+        /// 客户端名称
         /// </summary>
-        [DisplayName("客户名称")]
+        [DisplayName("客户端名称")]
         public string ClientName { get; set; }
         /// <summary>
         /// 说明
@@ -181,14 +182,14 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
         [DisplayName("包括JwtId")]
         public bool IncludeJwtId { get; set; }
         /// <summary>
-        /// 始终发送客户声明
+        /// 始终发送客户端声明
         /// </summary>
-        [DisplayName("始终发送客户声明")]
+        [DisplayName("始终发送客户端声明")]
         public bool AlwaysSendClientClaims { get; set; }
         /// <summary>
-        /// 客户声明前缀
+        /// 客户端声明前缀
         /// </summary>
-        [DisplayName("客户声明前缀")]
+        [DisplayName("客户端声明前缀")]
         public string ClientClaimsPrefix { get; set; } = "client_";
         /// <summary>
         /// 成对主题盐
@@ -233,23 +234,23 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
 
         #region IdentityServer4原始导航属性
 
-        //public List<ClientClaim> Claims{get;set;}
+        public List<ClientClaim> Claims { get; set; }
 
-        //public List<ClientCorsOrigin> AllowedCorsOrigins { get; set; }
+        public List<ClientCorsOrigin> AllowedCorsOrigins { get; set; }
 
-        //public List<ClientProperty> Properties { get; set; }
+        public List<ClientProperty> Properties { get; set; }
 
-        //public List<ClientIdPRestriction> IdentityProviderRestrictions{get;set;}
+        public List<ClientIdPRestriction> IdentityProviderRestrictions { get; set; }
 
-        //public List<ClientRedirectUri> RedirectUris { get; set; }
+        public List<ClientRedirectUri> RedirectUris { get; set; }
 
-        //public List<ClientPostLogoutRedirectUri> PostLogoutRedirectUris { get; set; }
+        public List<ClientPostLogoutRedirectUri> PostLogoutRedirectUris { get; set; }
 
-        //public List<ClientSecret> ClientSecrets{get;set;}
+        public List<ClientSecret> ClientSecrets { get; set; }
 
-        //public List<ClientScope> AllowedScopes{get;set;}
+        public List<ClientScope> AllowedScopes { get; set; }
 
-        //public List<ClientGrantType> AllowedGrantTypes { get; set; }
+        public List<ClientGrantType> AllowedGrantTypes { get; set; }
 
         #endregion
     }
