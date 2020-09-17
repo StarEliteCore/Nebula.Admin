@@ -1,194 +1,91 @@
 ﻿using Destiny.Core.Flow.Entity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace Destiny.Core.Flow.IdentityServer.Entities
 {
     public class ClientBase : IEntity<int>
     {
-
-        public int Id
-        {
-            get;
-            set;
-        }
-
-        public bool Enabled
-        {
-            get;
-            set;
-        } = true;
+        /// <summary>
+        /// 主键
+        /// </summary>
+        [DisplayName("主键")]
+        public int Id { get; set; }
+        /// <summary>
+        /// 是否启用
+        /// </summary>
+        [DisplayName("是否启用")]
+        public bool Enabled { get; set; } = true;
 
 
-        public string ClientId
-        {
-            get;
-            set;
-        }
+        public string ClientId { get; set; }
 
-        public string ProtocolType
-        {
-            get;
-            set;
-        } = "oidc";
+        public string ProtocolType { get; set; } = "oidc";
 
 
-        public List<ClientSecret> ClientSecrets
-        {
-            get;
-            set;
-        }
+        //public List<ClientSecret> ClientSecrets
+        //{
+        //    get;
+        //    set;
+        //}
 
-        public bool RequireClientSecret
-        {
-            get;
-            set;
-        } = true;
+        public bool RequireClientSecret { get; set; } = true;
 
 
-        public string ClientName
-        {
-            get;
-            set;
-        }
+        public string ClientName { get; set; }
 
-        public string Description
-        {
-            get;
-            set;
-        }
+        public string Description { get; set; }
 
-        public string ClientUri
-        {
-            get;
-            set;
-        }
+        public string ClientUri { get; set; }
 
-        public string LogoUri
-        {
-            get;
-            set;
-        }
+        public string LogoUri { get; set; }
 
-        public bool RequireConsent
-        {
-            get;
-            set;
-        }
+        public bool RequireConsent { get; set; }
 
-        public bool AllowRememberConsent
-        {
-            get;
-            set;
-        } = true;
+        public bool AllowRememberConsent { get; set; } = true;
 
 
-        public bool AlwaysIncludeUserClaimsInIdToken
-        {
-            get;
-            set;
-        }
+        public bool AlwaysIncludeUserClaimsInIdToken { get; set; }
 
-        public List<ClientGrantType> AllowedGrantTypes
-        {
-            get;
-            set;
-        }
+        //public List<ClientGrantType> AllowedGrantTypes { get; set; }
 
-        public bool RequirePkce
-        {
-            get;
-            set;
-        } = true;
+        public bool RequirePkce { get; set; } = true;
 
 
-        public bool AllowPlainTextPkce
-        {
-            get;
-            set;
-        }
+        public bool AllowPlainTextPkce { get; set; }
 
-        public bool RequireRequestObject
-        {
-            get;
-            set;
-        }
+        public bool RequireRequestObject { get; set; }
 
-        public bool AllowAccessTokensViaBrowser
-        {
-            get;
-            set;
-        }
+        public bool AllowAccessTokensViaBrowser { get; set; }
 
-        public List<ClientRedirectUri> RedirectUris
-        {
-            get;
-            set;
-        }
+        //public List<ClientRedirectUri> RedirectUris { get; set; }
 
-        public List<ClientPostLogoutRedirectUri> PostLogoutRedirectUris
-        {
-            get;
-            set;
-        }
+        //public List<ClientPostLogoutRedirectUri> PostLogoutRedirectUris { get; set; }
 
-        public string FrontChannelLogoutUri
-        {
-            get;
-            set;
-        }
+        public string FrontChannelLogoutUri { get; set; }
 
-        public bool FrontChannelLogoutSessionRequired
-        {
-            get;
-            set;
-        } = true;
+        public bool FrontChannelLogoutSessionRequired { get; set; } = true;
 
+        public string BackChannelLogoutUri { get; set; }
 
-        public string BackChannelLogoutUri
-        {
-            get;
-            set;
-        }
-
-        public bool BackChannelLogoutSessionRequired
-        {
-            get;
-            set;
-        } = true;
+        public bool BackChannelLogoutSessionRequired { get; set; } = true;
 
 
         public bool AllowOfflineAccess
         {
-            get;
-            set;
+            get; set;
         }
 
-        public List<ClientScope> AllowedScopes
-        {
-            get;
-            set;
-        }
+        //public List<ClientScope> AllowedScopes{get;set;}
 
-        public int IdentityTokenLifetime
-        {
-            get;
-            set;
-        } = 300;
+        public int IdentityTokenLifetime { get; set; } = 300;
 
 
-        public string AllowedIdentityTokenSigningAlgorithms
-        {
-            get;
-            set;
-        }
+        public string AllowedIdentityTokenSigningAlgorithms { get; set; }
 
-        public int AccessTokenLifetime
-        {
-            get;
-            set;
-        } = 3600;
+        public int AccessTokenLifetime { get; set; } = 3600;
 
 
         public int AuthorizationCodeLifetime
@@ -251,11 +148,11 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
         } = true;
 
 
-        public List<ClientIdPRestriction> IdentityProviderRestrictions
-        {
-            get;
-            set;
-        }
+        //public List<ClientIdPRestriction> IdentityProviderRestrictions
+        //{
+        //    get;
+        //    set;
+        //}
 
         public bool IncludeJwtId
         {
@@ -263,11 +160,11 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
             set;
         }
 
-        public List<ClientClaim> Claims
-        {
-            get;
-            set;
-        }
+        //public List<ClientClaim> Claims
+        //{
+        //    get;
+        //    set;
+        //}
 
         public bool AlwaysSendClientClaims
         {
@@ -288,60 +185,24 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
             set;
         }
 
-        public List<ClientCorsOrigin> AllowedCorsOrigins
-        {
-            get;
-            set;
-        }
+        //public List<ClientCorsOrigin> AllowedCorsOrigins { get; set; }
 
-        public List<ClientProperty> Properties
-        {
-            get;
-            set;
-        }
+        //public List<ClientProperty> Properties { get; set; }
 
-        public DateTime Created
-        {
-            get;
-            set;
-        } = DateTime.UtcNow;
+        public DateTime Created { get; set; } = DateTime.UtcNow;
 
 
-        public DateTime? Updated
-        {
-            get;
-            set;
-        }
+        public DateTime? Updated { get; set; }
 
-        public DateTime? LastAccessed
-        {
-            get;
-            set;
-        }
+        public DateTime? LastAccessed { get; set; }
 
-        public int? UserSsoLifetime
-        {
-            get;
-            set;
-        }
+        public int? UserSsoLifetime { get; set; }
 
-        public string UserCodeType
-        {
-            get;
-            set;
-        }
+        public string UserCodeType { get; set; }
 
-        public int DeviceCodeLifetime
-        {
-            get;
-            set;
-        } = 300;
+        public int DeviceCodeLifetime { get; set; } = 300;
 
 
-        public bool NonEditable
-        {
-            get;
-            set;
-        }
+        public bool NonEditable { get; set; }
     }
 }
