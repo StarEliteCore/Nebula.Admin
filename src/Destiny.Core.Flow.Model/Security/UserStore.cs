@@ -1,15 +1,11 @@
-﻿
-using Destiny.Core.Flow.Identity;
+﻿using Destiny.Core.Flow.Identity;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Model.Security
 {
     public class UserStore : UserStoreBase<User, Guid, UserClaim, UserLogin, UserToken, Role, Guid, UserRole>
     {
-
         public UserStore(
 
             IEFCoreRepository<User, Guid> userRepository,
@@ -20,8 +16,6 @@ namespace Destiny.Core.Flow.Model.Security
             IEFCoreRepository<UserRole, Guid> userRoleRepository)
             : base(userRepository, userLoginRepository, userClaimRepository, userTokenRepository, roleRepository, userRoleRepository)
         {
-        
-        
         }
     }
 }

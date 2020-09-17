@@ -1,15 +1,11 @@
-﻿using Destiny.Core.Flow.Dependency;
-using Destiny.Core.Flow.Extensions;
+﻿using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.IServices.UserRoles;
 using Destiny.Core.Flow.Model.Entities.Identity;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.UserRoles
@@ -17,7 +13,7 @@ namespace Destiny.Core.Flow.Services.UserRoles
     /// <summary>
     /// 用户角色
     /// </summary>
-    public class UserRoleService: IUserRoleService
+    public class UserRoleService : IUserRoleService
     {
         private readonly IEFCoreRepository<UserRole, Guid> _repositoryUserRole = null;
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Data.Core.Collections
 {
@@ -11,13 +10,10 @@ namespace Destiny.Core.Flow.Data.Core.Collections
 
     public class TypeList<TBaseType> : ITypeList<TBaseType>
     {
-
         public int Count => _typeList.Count;
 
-       
         public bool IsReadOnly => false;
 
-   
         public Type this[int index]
         {
             get => _typeList[index];
@@ -35,12 +31,10 @@ namespace Destiny.Core.Flow.Data.Core.Collections
             _typeList = new List<Type>();
         }
 
- 
         public void Add<T>() where T : TBaseType
         {
             _typeList.Add(typeof(T));
         }
-
 
         public void Add(Type item)
         {
@@ -53,7 +47,6 @@ namespace Destiny.Core.Flow.Data.Core.Collections
             _typeList.Insert(index, item);
         }
 
-
         public int IndexOf(Type item)
         {
             return _typeList.IndexOf(item);
@@ -63,7 +56,6 @@ namespace Destiny.Core.Flow.Data.Core.Collections
         {
             return Contains(typeof(T));
         }
-
 
         public bool Contains(Type item)
         {
@@ -75,7 +67,6 @@ namespace Destiny.Core.Flow.Data.Core.Collections
         {
             _typeList.Remove(typeof(T));
         }
-
 
         public bool Remove(Type item)
         {

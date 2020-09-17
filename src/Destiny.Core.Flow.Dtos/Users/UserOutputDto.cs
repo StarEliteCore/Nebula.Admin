@@ -4,13 +4,11 @@ using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Model.Entities.Identity;
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Dtos
 {
     [AutoMap(typeof(User))]
-    public  class UserOutputDto: OutputDto<Guid>
+    public class UserOutputDto : OutputDto<Guid>
     {
         public UserOutputDto()
         {
@@ -21,15 +19,11 @@ namespace Destiny.Core.Flow.Dtos
 
         public string NickName { get; set; }
 
-
-
         public string PasswordHash { get; set; }
-
 
         public DateTime CreatedTime { get; set; }
 
         public bool IsSystem { get; set; }
-
 
         /// <summary>
         /// 描述

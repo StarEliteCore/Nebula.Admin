@@ -1,17 +1,13 @@
 ﻿using Destiny.Core.Flow.Data;
 using Destiny.Core.Flow.Entity;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 
 namespace Destiny.Core.Flow.Model.Entities.Function
 {
     [DisplayName("功能")]
     public class Function : EntityBase<Guid>, IFullAuditedEntity<Guid>
     {
-
         public Function()
         {
             Id = ComnGuid.NewGuid();
@@ -23,14 +19,11 @@ namespace Destiny.Core.Flow.Model.Entities.Function
         /// </summary>
         public string Name { get; set; }
 
-
-      
         /// <summary>
         /// 创建者
         /// </summary>
         [DisplayName("创建者")]
         public Guid? CreatorUserId { get; set; }
-
 
         /// <summary>
         /// 创建时间
@@ -43,7 +36,6 @@ namespace Destiny.Core.Flow.Model.Entities.Function
         /// </summary>
         [DisplayName("最后修改者")]
         public Guid? LastModifierUserId { get; set; }
-
 
         /// <summary>
         /// 最后修改时间
@@ -74,7 +66,5 @@ namespace Destiny.Core.Flow.Model.Entities.Function
         /// </summary>
         [DisplayName("链接Url")]
         public string LinkUrl { get; set; }
-
-
     }
 }

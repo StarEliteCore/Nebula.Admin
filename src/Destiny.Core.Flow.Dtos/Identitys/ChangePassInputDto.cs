@@ -5,8 +5,6 @@
     /// </summary>
     public class ChangePassInputDto
     {
-    
-
         /// <summary>
         /// 旧密码
         /// </summary>
@@ -17,6 +15,5 @@
         /// </summary>
 
         public string NewPassword { get; set; }
-
     }
 }

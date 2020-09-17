@@ -1,36 +1,26 @@
 ﻿using Destiny.Core.Flow.Data.Core;
-using Destiny.Core.Flow.Dependency;
+using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.Model.Entities.Function;
 using Destiny.Core.Flow.Reflection;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Destiny.Core.Flow.Extensions;
-using Microsoft.Extensions.Logging;
-using Destiny.Core.Flow.Exceptions;
 using System.Reflection;
-using System.Security.Cryptography;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Destiny.Core.Flow.Model.Entities.Function;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.AspNetCore.Mvc.Abstractions;
-using System.ComponentModel;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Destiny.Core.Flow.Model.Security
 {
     //[Dependency(ServiceLifetime.Scoped)]
     public class FunctionHandler : IFunctionHandler
     {
-
         private readonly IAssemblyFinder _assemblyFinder = null;
         private readonly ILogger _logger = null;
 
         private readonly IActionDescriptorCollectionProvider _actionProvider = null;
         private readonly IServiceProvider _serviceProvider = null;
-
 
         public FunctionHandler(IAssemblyFinder assemblyFinder, ILoggerFactory loggerFactory, IActionDescriptorCollectionProvider actionProvider, IServiceProvider serviceProvider)
         {
@@ -46,9 +36,9 @@ namespace Destiny.Core.Flow.Model.Security
         /// <typeparam name="BaseType"></typeparam>
         public void Initialize<BaseType>()
         {
-            var controllerActionDescriptorList = _actionProvider.ActionDescriptors.Items.Cast<ControllerActionDescriptor>().Where(o => o.ControllerTypeInfo.IsBaseOn<BaseType>()&&!o.ControllerTypeInfo.HasAttribute<AllowAnonymousAttribute>());
+            var controllerActionDescriptorList = _actionProvider.ActionDescriptors.Items.Cast<ControllerActionDescriptor>().Where(o => o.ControllerTypeInfo.IsBaseOn<BaseType>() && !o.ControllerTypeInfo.HasAttribute<AllowAnonymousAttribute>());
 
-            var functionInfos= GetFunctions(controllerActionDescriptorList.ToArray());
+            var functionInfos = GetFunctions(controllerActionDescriptorList.ToArray());
             this.SavaData(functionInfos);
         }
 
@@ -67,24 +57,21 @@ namespace Destiny.Core.Flow.Model.Security
                 repository.UnitOfWork.BeginTransaction();
                 if (deleteDbFcutions.Any())
                 {
-
                     repository.Delete(deleteDbFcutions);
                     _logger.LogInformation($"已删除【{deleteDbFcutions.Select(o => o.Name).ToJoin("、")}】功能,删除成功{deleteDbFcutions.Length}条");
                 }
 
                 if (addDbActions.Any())
                 {
-                   repository.Insert(this.AddFunctions(addDbActions));
+                    repository.Insert(this.AddFunctions(addDbActions));
                     _logger.LogInformation($"添加【{addDbActions.Select(o => o.Name).ToJoin("、")}】功能,添加成功{addDbActions.Length}条");
                 }
 
                 var updateDbFcutions = dbFcutions.Except(deleteDbFcutions);
 
-
                 if (updateDbFcutions.Any())
                 {
-
-                    this.UpdateFunctions(updateDbFcutions,functionInfos,repository);
+                    this.UpdateFunctions(updateDbFcutions, functionInfos, repository);
                 }
                 repository.UnitOfWork.Commit();
             });
@@ -92,14 +79,11 @@ namespace Destiny.Core.Flow.Model.Security
 
         private void UpdateFunctions(IEnumerable<Function> updatFunction, IEnumerable<FunctionInfo> functionInfos, IEFCoreRepository<Function, Guid> repository)
         {
-
             foreach (var function in updatFunction)
             {
-
-
                 FunctionInfo functionInfo = functionInfos.FirstOrDefault(o =>
                     string.Equals(o.LinkUrl, function.LinkUrl, StringComparison.OrdinalIgnoreCase)
-                  
+
                      );
                 if (functionInfo == null)
                 {
@@ -108,7 +92,6 @@ namespace Destiny.Core.Flow.Model.Security
 
                 bool isUpdate = false;
 
-             
                 if (function.Name != functionInfo.Name)
                 {
                     isUpdate = true;
@@ -124,7 +107,6 @@ namespace Destiny.Core.Flow.Model.Security
                     repository.Update(function);
                     _logger.LogInformation($"更新【{function.Name}】名字，链接Url：【{function.LinkUrl}】");
                 }
-                
             }
         }
 
@@ -140,22 +122,20 @@ namespace Destiny.Core.Flow.Model.Security
 
         private Function MapToEntity(FunctionInfo model)
         {
-
             return new Function
             {
                 Name = model.Name,
-               
+
                 Description = model.Description,
                 IsEnabled = true,
                 LinkUrl = model.LinkUrl.ToLower()
             };
         }
 
-
         private FunctionInfo[] GetFunctions(ControllerActionDescriptor[] controllers)
         {
             List<FunctionInfo> functions = new List<FunctionInfo>();
-            foreach (var controllerDescriptor in controllers.OrderBy(o=>o.ControllerName))
+            foreach (var controllerDescriptor in controllers.OrderBy(o => o.ControllerName))
             {
                 var controller = GetController(controllerDescriptor);
                 if (controller is null)
@@ -184,35 +164,26 @@ namespace Destiny.Core.Flow.Model.Security
                 //    functions.Add(controller);
                 //}
             }
-             return functions.ToArray();
+            return functions.ToArray();
         }
 
-
-   
-
-        private FunctionInfo GetController(ControllerActionDescriptor  controller)
+        private FunctionInfo GetController(ControllerActionDescriptor controller)
         {
-
-        
             return new FunctionInfo()
             {
                 Name = controller.ControllerTypeInfo.ToDescription(),
 
                 LinkUrl = controller.ControllerName
-
             };
         }
-     
 
         private FunctionInfo GetAction(FunctionInfo function, MethodInfo method, ControllerActionDescriptor controller)
         {
             return new FunctionInfo
             {
                 Name = $"{function.Name}-{method.ToDescription()}",
-               LinkUrl= $"{controller.ControllerName}/{controller.ActionName}".ToLower()
+                LinkUrl = $"{controller.ControllerName}/{controller.ActionName}".ToLower()
             };
         }
-
-
     }
 }

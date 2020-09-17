@@ -2,8 +2,6 @@
 using Destiny.Core.Flow.Model.Entities.Organizational;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Repository.OrganizationRepository
 {
@@ -14,8 +12,8 @@ namespace Destiny.Core.Flow.Repository.OrganizationRepository
         {
         }
     }
-    public interface IOrganizatedRepository:IEFCoreRepository<OrganizatedEntity,Guid>
-    {
 
+    public interface IOrganizatedRepository : IEFCoreRepository<OrganizatedEntity, Guid>
+    {
     }
 }

@@ -6,23 +6,24 @@ using Destiny.Core.Flow.Ui;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IServices.IRoleServices
 {
-    public interface IRoleManagerServices: IScopedDependency
+    public interface IRoleManagerServices : IScopedDependency
     {
         /// <summary>
         /// 添加角色
         /// </summary>
         /// <returns></returns>
         Task<OperationResponse> AddRoleAsync(RoleInputDto dto);
+
         /// <summary>
         /// 修改角色
         /// </summary>
         /// <returns></returns>
         Task<OperationResponse> UpdateRoleAsync(RoleInputDto dto);
+
         /// <summary>
         /// 删除角色
         /// </summary>
@@ -30,8 +31,8 @@ namespace Destiny.Core.Flow.IServices.IRoleServices
         /// <returns></returns>
         Task<OperationResponse> DeleteAsync(Guid id);
 
-
         Task<OperationResponse<IEnumerable<SelectListItem>>> GetRolesToSelectListItemAsync();
+
         /// <summary>
         /// 分页查询角色
         /// </summary>

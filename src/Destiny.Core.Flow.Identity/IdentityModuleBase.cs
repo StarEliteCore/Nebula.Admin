@@ -1,11 +1,8 @@
 ﻿using Destiny.Core.Flow.Identity;
 using Destiny.Core.Flow.Modules;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow
 {
@@ -18,8 +15,6 @@ namespace Destiny.Core.Flow
           where TUserKey : IEquatable<TUserKey>
           where TRoleKey : IEquatable<TRoleKey>
     {
-
-
         public override void ConfigureServices(ConfigureServicesContext context)
         {
             context.Services.AddScoped<IUserStore<TUser>, TUserStore>();
@@ -32,19 +27,11 @@ namespace Destiny.Core.Flow
             UseIdentityBuilder(identityBuilder);
             AddAuthentication(context.Services);
         }
-    
-
 
         protected abstract Action<IdentityOptions> IdentityOption();
-
 
         protected abstract void AddAuthentication(IServiceCollection services);
 
         protected abstract IdentityBuilder UseIdentityBuilder(IdentityBuilder identityBuilder);
-
-    
-
-
-
     }
 }

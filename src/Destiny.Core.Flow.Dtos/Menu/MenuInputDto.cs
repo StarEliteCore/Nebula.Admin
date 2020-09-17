@@ -33,23 +33,26 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// </summary>
         [DisplayName("父级菜单ID")]
         public Guid ParentId { get; set; }
+
         /// <summary>
         /// 组件地址
         /// </summary>
         [DisplayName("组件地址")]
         public string Component { get; set; }
+
         /// <summary>
         /// 菜单图标
         /// </summary>
         [DisplayName("菜单图标")]
         public string Icon { get; set; }
+
         /// <summary>
         ///获取或设置 描述
         /// </summary>
         [DisplayName("描述")]
         public virtual string Description { get; set; }
+
         /// <summary>
-        /// 
         /// </summary>
         [DisplayName("当前菜单以上所有的父级")]
         public string ParentNumber { get; set; }
@@ -61,6 +64,7 @@ namespace Destiny.Core.Flow.Dtos.Menu
         public int Depth { get; set; }
 
         public List<Guid> FunctionId { get; set; }
+
         /// <summary>
         /// 类型
         /// </summary>

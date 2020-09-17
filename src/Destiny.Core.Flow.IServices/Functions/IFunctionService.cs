@@ -6,7 +6,6 @@ using Destiny.Core.Flow.Ui;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IServices.Functions
@@ -14,7 +13,7 @@ namespace Destiny.Core.Flow.IServices.Functions
     /// <summary>
     /// 功能
     /// </summary>
-   public interface IFunctionService: IScopedDependency
+    public interface IFunctionService : IScopedDependency
     {
         /// <summary>
         /// 异步创建功能
@@ -22,9 +21,6 @@ namespace Destiny.Core.Flow.IServices.Functions
         /// <param name="dto"></param>
         /// <returns></returns>
         Task<OperationResponse> CreateAsync(FunctionInputDto dto);
-
-
-
 
         /// <summary>
         /// 删除功能
@@ -40,7 +36,6 @@ namespace Destiny.Core.Flow.IServices.Functions
         /// <returns></returns>
         Task<OperationResponse> UpdateAsync(FunctionInputDto dto);
 
-
         /// <summary>
         /// 异步加载表单功能
         /// </summary>
@@ -54,6 +49,7 @@ namespace Destiny.Core.Flow.IServices.Functions
         /// <param name="request"></param>
         /// <returns></returns>
         Task<IPagedResult<FunctionOutputPageList>> GetFunctionPageAsync(PageRequest request);
+
         /// <summary>
         /// 获取功能下拉框列表
         /// </summary>

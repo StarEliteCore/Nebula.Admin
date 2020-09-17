@@ -1,16 +1,13 @@
 ﻿using Destiny.Core.Flow.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Security.Principal;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Audit
 {
-    public class GetChangeTracker: IGetChangeTracker
+    public class GetChangeTracker : IGetChangeTracker
     {
         private readonly IPrincipal _principal;
 
@@ -34,15 +31,19 @@ namespace Destiny.Core.Flow.Audit
                     case EntityState.Detached:
                         auditentry.OperationType = DataOperationType.None;
                         break;
+
                     case EntityState.Unchanged:
                         auditentry.OperationType = DataOperationType.None;
                         break;
+
                     case EntityState.Deleted:
                         auditentry.OperationType = DataOperationType.Delete;
                         break;
+
                     case EntityState.Modified:
                         auditentry.OperationType = DataOperationType.Update;
                         break;
+
                     case EntityState.Added:
                         auditentry.OperationType = DataOperationType.Add;
                         break;
@@ -61,11 +62,10 @@ namespace Destiny.Core.Flow.Audit
                         AuditPropertys.Properties = propertie.Name;
                         AuditPropertys.NewValues = propertyEntry.CurrentValue?.ToString();
                         AuditPropertys.OriginalValues = propertyEntry.OriginalValue?.ToString();
-                        AuditPropertys.PropertiesType = propertie.ClrType.FullName ;
+                        AuditPropertys.PropertiesType = propertie.ClrType.FullName;
                         AuditPropertys.PropertieDisplayName = propertyEntry.Metadata.PropertyInfo.ToDescription();
                         auditentry.AuditPropertys.Add(AuditPropertys);
                     }
-                    
                 }
                 list.Add(auditentry);
             }

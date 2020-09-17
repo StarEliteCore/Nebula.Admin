@@ -1,17 +1,15 @@
 ﻿using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Identity;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 
 namespace Destiny.Core.Flow.Model.Entities.Identity
 {
     [DisplayName("用户声明")]
-    public class UserClaim: UserClaimBase<Guid>, IFullAuditedEntity<Guid>
+    public class UserClaim : UserClaimBase<Guid>, IFullAuditedEntity<Guid>
     {
         /// <summary>
-        ///  获取或设置 最后修改用户
+        /// 获取或设置 最后修改用户
         /// </summary>
 
         [DisplayName("最后修改用户")]

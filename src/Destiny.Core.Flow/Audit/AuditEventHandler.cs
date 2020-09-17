@@ -1,13 +1,10 @@
 ﻿using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Events;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
+
 namespace Destiny.Core.Flow.Audit
 {
     public class AuditEventHandler : NotificationHandlerBase<AuditEvent>

@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
 namespace Destiny.Core.Flow.Model.Migrations
 {
-
     public partial class wzw20200616_v2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -80,7 +79,6 @@ namespace Destiny.Core.Flow.Model.Migrations
                     CreatorUserId = table.Column<Guid>(nullable: true),
 
                     CreatedTime = table.Column<DateTime>(nullable: false)
-
                 },
                 constraints: table =>
                 {
@@ -266,8 +264,8 @@ namespace Destiny.Core.Flow.Model.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedTime", "CreatorUserId", "Description", "Email", "EmailConfirmed", "HeadImg", "IsSystem", "LastModifierTime", "LastModifierUserId", "LockoutEnabled", "LockoutEnd", "NickName", "NormalizeEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Sex", "TwoFactorEnabled", "UserName" },
 
                 values: new object[] { new Guid("a1e89f45-4fa8-4751-9df9-dec86f7e6c14"), "0286cab6-8a4a-44ed-9a97-86b0506c65c3", new DateTime(2020, 6, 16, 22, 18, 17, 579, DateTimeKind.Local).AddTicks(3868), null, "系统管理员拥有所有权限", null, false, null, true, null, null, true, null, "管理员", null, "ADMIN", "AQAAAAEAACcQAAAAEEPWhHPCHU1i6Z0ayoApKGbPlZUb38RUdJg4QjUcccVhUSto0sRZtLOXfwWUJ+P2Xw==", null, false, "3OWMGQAK5ZTXMSV6OFSGIWWWNIWJ2SX6", 0, false, "Admin" });
-
         }
+
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

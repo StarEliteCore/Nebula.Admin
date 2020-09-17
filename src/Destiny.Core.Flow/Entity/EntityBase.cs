@@ -1,24 +1,17 @@
 ﻿using Destiny.Core.Flow.Extensions;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
-
 
 namespace Destiny.Core.Flow.Entity
 {
     public abstract class EntityBase<TKey> : IEntity<TKey> where TKey : IEquatable<TKey>
     {
-
         public EntityBase()
         {
-
-      
         }
 
         [Description("主键")]
         public TKey Id { get; set; }
-
 
         /// <summary>
         /// 判断两个实体是否是同一数据记录的实体
@@ -64,9 +57,8 @@ namespace Destiny.Core.Flow.Entity
         /// 用作特定类型的哈希函数。
         /// </summary>
         /// <returns>
-        /// 当前 <see cref="T:System.Object"/> 的哈希代码。<br/>
-        /// 如果<c>Id</c>为<c>null</c>则返回0，
-        /// 如果不为<c>null</c>则返回<c>Id</c>对应的哈希值
+        /// 当前 <see cref="T:System.Object"/> 的哈希代码。 <br/> 如果 <c>Id</c> 为 <c>null</c> 则返回0， 如果不为
+        /// <c>null</c> 则返回 <c>Id</c> 对应的哈希值
         /// </returns>
         public override int GetHashCode()
         {

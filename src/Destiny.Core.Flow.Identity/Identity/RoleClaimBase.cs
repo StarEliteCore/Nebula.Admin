@@ -1,30 +1,21 @@
-﻿
-
-using Destiny.Core.Flow.Entity;
+﻿using Destiny.Core.Flow.Entity;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Security.Claims;
-using System.Text;
 
 namespace Destiny.Core.Flow.Identity
 {
     public abstract class RoleClaimBase<TRoleKey> : EntityBase<Guid>
             where TRoleKey : IEquatable<TRoleKey>
     {
-
-
-
-   
         [DisplayName("角色编号")]
-        public  TRoleKey RoleId { get; set; }
-   
-        [DisplayName("声明类型")]
-        public  string ClaimType { get; set; }
+        public TRoleKey RoleId { get; set; }
 
-      
+        [DisplayName("声明类型")]
+        public string ClaimType { get; set; }
+
         [DisplayName("声明值")]
-        public  string ClaimValue { get; set; }
+        public string ClaimValue { get; set; }
 
         public virtual Claim ToClaim()
         {

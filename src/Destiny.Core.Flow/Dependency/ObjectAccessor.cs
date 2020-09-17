@@ -1,7 +1,4 @@
 ﻿using JetBrains.Annotations;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Dependency
 {
@@ -16,10 +13,11 @@ namespace Destiny.Core.Flow.Dependency
         {
             Value = obj;
         }
+
         public ObjectAccessor()
         {
-
         }
+
         public TType Value { get; set; }
     }
 }

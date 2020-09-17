@@ -1,11 +1,7 @@
-﻿using AutoMapper;
-using Destiny.Core.Flow.Dependency;
-using Destiny.Core.Flow.Dtos;
+﻿using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.EntityFrameworkCore;
 using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Events.EventBus;
-using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Filter.Abstract;
@@ -14,20 +10,15 @@ using Destiny.Core.Flow.IServices.UserRoles;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Services.Users.Events;
 using Destiny.Core.Flow.Ui;
-using Destiny.Core.Flow.Validation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
 
 namespace Destiny.Core.Flow.Services
 {
-
     public class UserServices : IUserServices
     {
         private readonly UserManager<User> _userManager = null;
@@ -44,6 +35,7 @@ namespace Destiny.Core.Flow.Services
             _userRoleService = userRoleService;
             _bus = bus;
         }
+
         //[NonGlobalAopTran]
         //[ValidationInterceptor]
         public async Task<OperationResponse> CreateAsync(UserInputDto dto)
@@ -58,15 +50,13 @@ namespace Destiny.Core.Flow.Services
                 {
                     return result.ToOperationResponse();
                 }
-                  
+
                 if (dto.RoleIds.Any() == true)
                 {
                     return await this.SetUserRoles(user, dto.RoleIds);
                 }
-                return new OperationResponse("添加用户成功", OperationResponseType.Success); 
-
+                return new OperationResponse("添加用户成功", OperationResponseType.Success);
             });
-
         }
 
         private async Task<OperationResponse> DeleteUserRoleAsync(User user)
@@ -78,7 +68,7 @@ namespace Destiny.Core.Flow.Services
             {
                 return result.ToOperationResponse();
             }
-            _bus?.PublishAsync(new UserRoleCacheDeleteEvent() {UserId= user.Id,EventState=Events.EventState.Remove });
+            _bus?.PublishAsync(new UserRoleCacheDeleteEvent() { UserId = user.Id, EventState = Events.EventState.Remove });
             return result.ToOperationResponse();
         }
 
@@ -91,7 +81,7 @@ namespace Destiny.Core.Flow.Services
         {
             id.NotNull(nameof(id));
             var user = await _userManager.FindByIdAsync(id.ToString());
-           // IList<string> existRoleNames = await _userManager.GetRolesAsync(user);
+            // IList<string> existRoleNames = await _userManager.GetRolesAsync(user);
             return await _unitOfWork.UseTranAsync(async () =>
             {
                 var result = await _userManager.DeleteAsync(user);
@@ -100,25 +90,21 @@ namespace Destiny.Core.Flow.Services
                     return result.ToOperationResponse();
                 }
 
-                var  result1 = await this.DeleteUserRoleAsync(user);
+                var result1 = await this.DeleteUserRoleAsync(user);
                 if (!result1.Success)
                 {
                     return result1;
                 }
                 return new OperationResponse("删除用户成功", OperationResponseType.Success);
             });
-
         }
-
-
 
         public async Task<OperationResponse<UserOutputDto>> LoadFormUserAsync(Guid id)
         {
-
             var user = await _userManager.FindByIdAsync(id.ToString());
 
             var userDto = user.MapTo<UserOutputDto>();
-            userDto.RoleIds =await _userRoleService.GetRoleIdsByUserIdAsync(user.Id);
+            userDto.RoleIds = await _userRoleService.GetRoleIdsByUserIdAsync(user.Id);
             return new OperationResponse<UserOutputDto>("加载成功", userDto, OperationResponseType.Success);
         }
 
@@ -135,19 +121,16 @@ namespace Destiny.Core.Flow.Services
                     return result.ToOperationResponse();
                 }
 
-
                 if (dto.RoleIds?.Any() == true)
                 {
-                    return await this.SetUserRoles(user, dto.RoleIds,false);
+                    return await this.SetUserRoles(user, dto.RoleIds, false);
                 }
-                else {
-
+                else
+                {
                     return await this.DeleteUserRoleAsync(user);
                 }
             });
-
         }
-
 
         /// <summary>
         /// 设置用户权限
@@ -155,14 +138,11 @@ namespace Destiny.Core.Flow.Services
         /// <param name="userId"></param>
         /// <param name="roleIds"></param>
         /// <returns></returns>
-        private async Task<OperationResponse> SetUserRoles(User user, Guid?[] roleIds,bool isAdd=true)
+        private async Task<OperationResponse> SetUserRoles(User user, Guid?[] roleIds, bool isAdd = true)
         {
-
-            
             IList<string> existRoleNames = await _userManager.GetRolesAsync(user);
             try
             {
-
                 IdentityResult result = await _userManager.RemoveFromRolesAsync(user, existRoleNames);
 
                 if (!result.Succeeded)
@@ -172,7 +152,6 @@ namespace Destiny.Core.Flow.Services
                 var roles = await _roleManager.Roles.Where(m => roleIds.Contains(m.Id)).ToListAsync();
                 IList<string> roleNames = roles.Select(m => m.Name).ToList();
 
-            
                 result = await _userManager.AddToRolesAsync(user, roleNames);
 
                 if (!result.Succeeded)
@@ -180,29 +159,26 @@ namespace Destiny.Core.Flow.Services
                     return result.ToOperationResponse();
                 }
                 await _userManager.UpdateSecurityStampAsync(user);
-                await _bus?.PublishAsync(new UserRoleCacheAddOrUpdateEvent() { User = user,Roles= roles,EventState= isAdd?Events.EventState.Add:Events.EventState.Update }); ;
+                await _bus?.PublishAsync(new UserRoleCacheAddOrUpdateEvent() { User = user, Roles = roles, EventState = isAdd ? Events.EventState.Add : Events.EventState.Update }); ;
             }
             catch (InvalidOperationException ex)
             {
-
                 return new OperationResponse(ex.Message, OperationResponseType.Error);
             }
             return new OperationResponse("添加用户角色成功", OperationResponseType.Success);
-
         }
+
         /// <summary>
         /// 异步得到用户分页
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public  Task<IPagedResult<UserOutputPageListDto>> GetUserPageAsync(PageRequest request)
+        public Task<IPagedResult<UserOutputPageListDto>> GetUserPageAsync(PageRequest request)
         {
-
             request.NotNull(nameof(request));
-            OrderCondition<User>[] orderConditions = new OrderCondition<User>[] { new OrderCondition<User>(o=>o.CreatedTime,SortDirection.Descending)};
+            OrderCondition<User>[] orderConditions = new OrderCondition<User>[] { new OrderCondition<User>(o => o.CreatedTime, SortDirection.Descending) };
             request.OrderConditions = orderConditions;
-            return  _userManager.Users.AsNoTracking().ToPageAsync<User, UserOutputPageListDto>(request);
-
+            return _userManager.Users.AsNoTracking().ToPageAsync<User, UserOutputPageListDto>(request);
         }
     }
 }
