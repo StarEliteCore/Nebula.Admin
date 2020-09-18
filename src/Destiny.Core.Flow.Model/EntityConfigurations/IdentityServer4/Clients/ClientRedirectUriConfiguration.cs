@@ -7,12 +7,12 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Model.EntityConfigurations.IdentityServer4.Clients
 {
-    public class ClientPostLogoutRedirectUriConfiguration : EntityMappingConfiguration<ClientPostLogoutRedirectUri, Guid>
+    public class ClientRedirectUriConfiguration : EntityMappingConfiguration<ClientRedirectUri, Guid>
     {
-        public override void Map(EntityTypeBuilder<ClientPostLogoutRedirectUri> b)
+        public override void Map(EntityTypeBuilder<ClientRedirectUri> b)
         {
             b.HasKey(o => o.Id);
-            b.ToTable("ClientPostLogoutRedirectUri");
+            b.ToTable("ClientRedirectUri");
         }
     }
 }
