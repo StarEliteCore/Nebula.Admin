@@ -25,13 +25,13 @@ namespace Destiny.Core.Flow.CodeGenerator
 
 
         /// <summary>
-        /// 获取或设置 Copyright
+        /// 获取或设置 版权
         /// </summary>
         public string Copyright { get; set; }
 
 
         /// <summary>
-        /// 命名空间d
+        /// 命名空间
         /// </summary>
         public string Namespace { get; set; }
 

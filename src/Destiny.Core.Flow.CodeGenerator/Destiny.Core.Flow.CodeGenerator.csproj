@@ -16,4 +16,8 @@
     <EmbeddedResource Include="Templates\Entity.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Destiny.Core.Flow\Destiny.Core.Flow.csproj" />
+  </ItemGroup>
+
 </Project>
