@@ -45,6 +45,11 @@ namespace Destiny.Core.Flow.API.Controllers
             return result.item.ToAjaxResult();
         }
 
+        /// <summary>
+        /// 更新密码
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
         [Description("更改密码")]
         public async Task<AjaxResult> ChangePassword([FromBody] ChangePassInputDto dto)

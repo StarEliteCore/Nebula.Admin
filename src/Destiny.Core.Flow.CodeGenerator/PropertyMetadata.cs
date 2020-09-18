@@ -9,7 +9,11 @@ namespace Destiny.Core.Flow.CodeGenerator
     /// </summary>
    public class PropertyMetadata
     {
+        /// <summary>
+        /// 是否主键
+        /// </summary>
 
+        public bool IsPrimaryKey { get; set; }
         /// <summary>
         /// 属性名
         /// </summary>
