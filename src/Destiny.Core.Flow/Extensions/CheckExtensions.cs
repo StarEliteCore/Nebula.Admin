@@ -9,7 +9,7 @@ namespace Destiny.Core.Flow.Extensions
     /// <summary>
     /// 检查扩展
     /// </summary>
-    public  static partial class Extensions
+    public static partial class Extensions
     {
         /// <summary>
         /// 验证指定值的断言<paramref name="assertion"/>是否为真，如果不为真，抛出指定消息<paramref name="message"/>的指定类型<typeparamref name="TException"/>异常

@@ -1,23 +1,18 @@
-﻿
-using Destiny.Core.Flow.Exceptions;
-using Destiny.Core.Flow.Helpers;
-using Destiny.Core.Flow.Options;
+﻿using Destiny.Core.Flow.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Destiny.Core.Flow.Extensions
 {
 
     public static partial class Extensions
     {
-  
+
         /// <summary>
         /// 得到注入服务
         /// </summary>
@@ -37,7 +32,7 @@ namespace Destiny.Core.Flow.Extensions
         /// <typeparam name="TImplementation"></typeparam>
         /// <param name="services"></param>
         /// <returns></returns>
-    
+
 
         public static TServiceType GetOrAddSingletonService<TServiceType, TImplementation>(this IServiceCollection services)
     where TServiceType : class
@@ -49,8 +44,8 @@ where TImplementation : class, TServiceType
             var type = services.GetSingletonInstanceOrNull<TServiceType>();
             if (type is null)
             {
-                var  provider = services.BuildServiceProvider();
-                var serviceType=(TServiceType)provider.GetInstance(new ServiceDescriptor(typeof(TServiceType), typeof(TImplementation), ServiceLifetime.Singleton));
+                var provider = services.BuildServiceProvider();
+                var serviceType = (TServiceType)provider.GetInstance(new ServiceDescriptor(typeof(TServiceType), typeof(TImplementation), ServiceLifetime.Singleton));
                 return serviceType;
             }
 
@@ -66,7 +61,7 @@ where TImplementation : class, TServiceType
         {
 
 
-            var servciceType= services.GetSingletonInstanceOrNull<TServiceType>();
+            var servciceType = services.GetSingletonInstanceOrNull<TServiceType>();
             if (servciceType is null)
             {
                 servciceType = factory();
@@ -99,8 +94,8 @@ where TImplementation : class, TServiceType
 
         public static T GetSingletonInstanceOrNull<T>(this IServiceCollection services)
         {
-            var servictType= services
-                .FirstOrDefault(d => d.ServiceType == typeof(T)&&d.Lifetime== ServiceLifetime.Singleton);
+            var servictType = services
+                .FirstOrDefault(d => d.ServiceType == typeof(T) && d.Lifetime == ServiceLifetime.Singleton);
             if (servictType?.ImplementationInstance != null)
             {
                 return (T)servictType.ImplementationInstance;
@@ -154,7 +149,7 @@ where TImplementation : class, TServiceType
             return services.BuildServiceProvider();
         }
 
-     
+
         public static IServiceProvider ConfigureProvider(this IServiceCollection services, Action<IServiceCollection> configure)
         {
             configure(services);

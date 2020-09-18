@@ -1,29 +1,23 @@
 ﻿using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Model.Security;
+using Destiny.Core.Flow.Modules;
 using Destiny.Core.Flow.Options;
-
 using Destiny.Core.Flow.Security.Jwt;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Destiny.Core.Flow.Modules;
 
 namespace Destiny.Core.Flow.API.Startups
 {
     public class IdentityModule : IdentityModuleBase<UserStore, RoleStore, User, UserRole, Role, Guid, Guid>
     {
 
-  
+
         protected override Action<IdentityOptions> IdentityOption()
         {
             return options =>
@@ -52,7 +46,7 @@ namespace Destiny.Core.Flow.API.Startups
 
         protected override void AddAuthentication(IServiceCollection services)
         {
-          
+
             AppOptionSettings settings = services.GetAppSettings();
             var jwt = settings.Jwt;
 
@@ -69,7 +63,7 @@ namespace Destiny.Core.Flow.API.Startups
                 ClockSkew = TimeSpan.Zero, ////允许的服务器时间偏移量
                 LifetimeValidator = (nbf, exp, token, param) => exp > DateTime.UtcNow
             };
-           
+
             services.AddAuthorization();
             services.AddAuthentication(x =>
             {
@@ -105,5 +99,5 @@ namespace Destiny.Core.Flow.API.Startups
             return identityBuilder.AddDefaultTokenProviders();
         }
     }
-    
+
 }

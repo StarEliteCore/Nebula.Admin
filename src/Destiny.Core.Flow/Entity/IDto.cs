@@ -1,12 +1,6 @@
-﻿using Destiny.Core.Flow.Enums;
-using Destiny.Core.Flow.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Destiny.Core.Flow.Entity
+﻿namespace Destiny.Core.Flow.Entity
 {
-   public  interface IDto<TKey>
+    public interface IDto<TKey>
     {
         TKey Id { get; set; }
     }
@@ -16,6 +10,6 @@ namespace Destiny.Core.Flow.Entity
     {
         public virtual TKey Id { get; set; }
 
-       
+
     }
 }

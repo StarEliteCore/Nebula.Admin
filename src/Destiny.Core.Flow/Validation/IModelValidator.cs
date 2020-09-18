@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Validation
 {
 
     public interface IModelValidator<in TModel> : IModelValidator
     {
-    
+
         IEnumerable<ValidationFailure> Validate(TModel model);
     }
     /// <summary>
     /// 模型验证器
     /// </summary>
-    public  interface IModelValidator
+    public interface IModelValidator
     {
         /// <summary>
         /// 同步验证指定的实例
@@ -21,7 +20,7 @@ namespace Destiny.Core.Flow.Validation
         /// </summary>
         /// <param name="model">要验证的模型</param>
         /// <returns>
-    
+
         /// </returns>
         IEnumerable<ValidationFailure> Validate(object model);
 

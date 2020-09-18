@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 using System.Security.Claims;
 using System.Security.Principal;
-using System.Text;
 
 namespace Destiny.Core.Flow.Extensions
 {
@@ -110,7 +107,7 @@ namespace Destiny.Core.Flow.Extensions
                 return new string[0];
             }
             string value = claimsIdentity.FindFirst(type)?.Value;
-            return value != null? value.Split():new string [0];
+            return value != null ? value.Split() : new string[0];
         }
     }
 }

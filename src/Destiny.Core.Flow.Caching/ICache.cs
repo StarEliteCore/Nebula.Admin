@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,7 +7,8 @@ namespace Destiny.Core.Flow.Caching
 {
 
 
-    public interface ICache {
+    public interface ICache
+    {
 
         /// <summary>
         /// 得到
@@ -60,7 +59,7 @@ namespace Destiny.Core.Flow.Caching
         /// <param name="key">键</param>
         /// <param name="value">值</param>
         /// <param name="expireSeconds">过期秒数-1,0不过期。</param>
-        void Set<TCacheData>(string key, TCacheData value, int expireSeconds =-1);
+        void Set<TCacheData>(string key, TCacheData value, int expireSeconds = -1);
 
         /// <summary>
         /// 异步设置缓存

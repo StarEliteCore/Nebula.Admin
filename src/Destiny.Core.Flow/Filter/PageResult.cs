@@ -1,8 +1,6 @@
 ﻿using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.Ui;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Filter
 {
@@ -10,7 +8,7 @@ namespace Destiny.Core.Flow.Filter
     /// 分页数据
     /// </summary>
     /// <typeparam name="T">动态类型</typeparam>
-    public class PageResult<T>: ResultBase, IPagedResult<T>
+    public class PageResult<T> : ResultBase, IPagedResult<T>
     {
 
         public PageResult() : this(new T[0], 0, "查询成功", true)

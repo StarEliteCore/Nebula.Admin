@@ -1,12 +1,8 @@
-﻿using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.Extensions;
+﻿using Destiny.Core.Flow.Extensions;
 using Microsoft.EntityFrameworkCore.Internal;
-using MongoDB.Libmongocrypt;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,17 +18,18 @@ namespace Destiny.Core.Flow.Caching
               where TCacheData : ICacheItem
         {
             var parameter = Expression.Parameter(typeof(TCacheData), "o");
-  
+
             //var value = Expression.Lambda<Func<TCacheData, string>>(parameter, new ParameterExpression[] { parameter }).Compile().Invoke(test);
             var preFix = CachePrefixAttribute.GetCachePrefix(typeof(TCacheData));
             var values = data.GetType().GetProperties().Where(o => o.HasAttribute<CacheAutoKeyAttribute>())
-                .Select(pi => {
+                .Select(pi =>
+                {
 
-                   var pr=  Expression.Property(parameter,pi);
-                   return  Expression.Lambda<Func<TCacheData, string>>(pr,new ParameterExpression[] {
+                    var pr = Expression.Property(parameter, pi);
+                    return Expression.Lambda<Func<TCacheData, string>>(pr, new ParameterExpression[] {
                     parameter
                     }).Compile().Invoke(data);
-                  }
+                }
                 );
 
             var key = values.Join("-");
@@ -41,13 +38,13 @@ namespace Destiny.Core.Flow.Caching
         }
 
 
-      
 
-    
 
-     
 
-       
+
+
+
+
 
 
         /// <summary>
@@ -69,7 +66,7 @@ namespace Destiny.Core.Flow.Caching
         /// <param name="value">值</param>
         /// <param name="token"></param>
         /// <returns></returns>
-        public static async Task SetAsync<TCacheData>(this ICache cache, TCacheData value,int expireSeconds=1, CancellationToken token = default)
+        public static async Task SetAsync<TCacheData>(this ICache cache, TCacheData value, int expireSeconds = 1, CancellationToken token = default)
           where TCacheData : class, ICacheItem
         {
             var key = GetKey<TCacheData>(value);

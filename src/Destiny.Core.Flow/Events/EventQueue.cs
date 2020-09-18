@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Concurrent;
 
 namespace Destiny.Core.Flow.Events
 {
-  public  class EventQueue
+    public class EventQueue
     {
         private readonly ConcurrentDictionary<string, ConcurrentQueue<EventBase>> _eventQueues =
         new ConcurrentDictionary<string, ConcurrentQueue<EventBase>>();

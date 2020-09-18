@@ -1,13 +1,9 @@
 ﻿
 using Destiny.Core.Flow.Exceptions;
 using Destiny.Core.Flow.Extensions;
-using Destiny.Core.Flow.MongoDB;
 using MongoDB.Driver;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Text;
 
 
 namespace Destiny.Core.Flow.MongoDB.DbContexts
@@ -15,7 +11,8 @@ namespace Destiny.Core.Flow.MongoDB.DbContexts
     public abstract class MongoDbContextBase : IDisposable
     {
         private readonly MongoDbContextOptions _options;
-        public MongoDbContextBase([NotNull] MongoDbContextOptions options) {
+        public MongoDbContextBase([NotNull] MongoDbContextOptions options)
+        {
             _options = options;
         }
 
@@ -42,7 +39,7 @@ namespace Destiny.Core.Flow.MongoDB.DbContexts
                 throw new AppException("Table name does not exist!");
             }
             return table.TableName;
-             
+
         }
 
 
@@ -54,14 +51,14 @@ namespace Destiny.Core.Flow.MongoDB.DbContexts
             {
                 throw new AppException($"{mongoUrl}不存DatabaseName名!!!");
             }
- 
+
             var database = new MongoClient(mongoUrl).GetDatabase(databaseName);
             return database;
         }
 
         public void Dispose()
         {
-          
+
         }
     }
 }

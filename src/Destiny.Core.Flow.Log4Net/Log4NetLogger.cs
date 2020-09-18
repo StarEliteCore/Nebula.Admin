@@ -11,7 +11,7 @@ namespace Destiny.Core.Flow.Log4Net
     /// 日志记录
     /// https://dotnetthoughts.net/how-to-use-log4net-with-aspnetcore-for-logging/
     /// </summary>
-    
+
     public class Log4NetLogger : ILogger
     {
 

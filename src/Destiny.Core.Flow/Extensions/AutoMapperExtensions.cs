@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Destiny.Core.Flow.Extensions
 {
@@ -25,7 +22,7 @@ namespace Destiny.Core.Flow.Extensions
             mapper.NotNull(nameof(mapper));
             _mapper = mapper;
         }
-       
+
         private static void CheckMapper()
         {
 
@@ -41,7 +38,7 @@ namespace Destiny.Core.Flow.Extensions
         {
             CheckMapper();
             source.NotNull(nameof(source));
-            
+
             return _mapper.Map<TTarget>(source);
         }
 

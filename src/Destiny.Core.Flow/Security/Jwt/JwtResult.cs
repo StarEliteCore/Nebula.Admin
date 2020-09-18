@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Text;
+﻿using System.Security.Claims;
 
 namespace Destiny.Core.Flow.Security.Jwt
 {
@@ -16,7 +13,7 @@ namespace Destiny.Core.Flow.Security.Jwt
 
         public long AccessExpires { get; set; }
 
-        public Claim[] claims { get; set; } = new Claim[]{ };
+        public Claim[] claims { get; set; } = new Claim[] { };
 
     }
 }

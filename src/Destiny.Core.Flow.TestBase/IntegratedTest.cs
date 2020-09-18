@@ -2,12 +2,10 @@
 using Destiny.Core.Flow.Modules;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.TestBase
 {
-   public abstract class IntegratedTest<TStartupModule>: TestBaseWithServiceProvider where TStartupModule : IAppModule
+    public abstract class IntegratedTest<TStartupModule> : TestBaseWithServiceProvider where TStartupModule : IAppModule
     {
 
         protected IModuleApplication Application { get; }
@@ -31,7 +29,7 @@ namespace Destiny.Core.Flow.TestBase
 
             RootServiceProvider = CreateServiceProvider(services);
             TestServiceScope = RootServiceProvider.CreateScope();
-            ((StartupModuleRunner)Application).Initialize(TestServiceScope.ServiceProvider) ;
+            ((StartupModuleRunner)Application).Initialize(TestServiceScope.ServiceProvider);
         }
 
         protected virtual IServiceCollection CreateServiceCollection()

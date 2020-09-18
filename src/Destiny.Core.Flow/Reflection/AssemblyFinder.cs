@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
+﻿using System.Reflection;
 
 namespace Destiny.Core.Flow.Reflection
 {
@@ -10,7 +6,7 @@ namespace Destiny.Core.Flow.Reflection
     {
         protected override Assembly[] FindAllItems()
         {
-          return  AssemblyHelper.FindAllItems();
+            return AssemblyHelper.FindAllItems();
         }
     }
 }

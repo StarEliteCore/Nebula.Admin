@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Destiny.Core.Flow;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Mapping;
 using Destiny.Core.Flow.Modules;
@@ -11,7 +10,7 @@ using System.Reflection;
 
 namespace Destiny.Core.Flow.AutoMapper
 {
-  public   class AutoMapperModule: AppModule
+    public class AutoMapperModule : AppModule
     {
 
 
@@ -21,7 +20,8 @@ namespace Destiny.Core.Flow.AutoMapper
             var assemblyFinder = context.Services.GetOrAddSingletonService<IAssemblyFinder, AssemblyFinder>();
             var assemblys = assemblyFinder.FindAll();
             var myAutoMapTypes = assemblys.SelectMany(o => o.GetTypes()).Where(t => t.IsClass && !t.IsAbstract && t.HasAttribute<AutoMappingAttribute>(true)).Distinct().ToArray();
-            context.Services.AddAutoMapper(mapper => {
+            context.Services.AddAutoMapper(mapper =>
+            {
 
                 this.CreateMapping<AutoMappingAttribute>(myAutoMapTypes, mapper);
 
@@ -29,7 +29,7 @@ namespace Destiny.Core.Flow.AutoMapper
             var mapper = context.Services.GetService<IMapper>();
             Destiny.Core.Flow.Extensions.Extensions.SetMapper(mapper);
         }
-    
+
 
         private void CreateMapping<TAttribute>(Type[] sourceTypes, IMapperConfigurationExpression mapperConfigurationExpression)
      where TAttribute : AutoMappingAttribute

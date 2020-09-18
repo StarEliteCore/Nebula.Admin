@@ -1,18 +1,14 @@
-﻿using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.ExpressionUtil;
-using Destiny.Core.Flow.Extensions;
+﻿using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Filter.Abstract;
 using MongoDB.Driver;
 using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow
 {
-   public static class MongoCollectionExtensions
+    public static class MongoCollectionExtensions
     {
 
         public static async Task<IPagedResult<TEntity>> ToPageAsync<TEntity>(this IMongoCollection<TEntity> collection, Expression<Func<TEntity, bool>> predicate, IPagedRequest request)
@@ -38,7 +34,7 @@ namespace Destiny.Core.Flow
         }
 
 
-      
+
 
     }
 }

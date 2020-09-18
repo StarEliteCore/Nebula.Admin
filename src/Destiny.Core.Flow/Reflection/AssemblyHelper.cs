@@ -5,11 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
-using System.Text;
 
 namespace Destiny.Core.Flow.Reflection
 {
-  public static  class AssemblyHelper
+    public static class AssemblyHelper
     {
 
         /// <summary>
@@ -52,7 +51,7 @@ namespace Destiny.Core.Flow.Reflection
             return list;
         }
 
-        public static  Assembly[] FindAllItems()
+        public static Assembly[] FindAllItems()
         {
             return GetAllAssemblies().ToArray();
         }
@@ -65,7 +64,7 @@ namespace Destiny.Core.Flow.Reflection
         public static IEnumerable<Assembly> GetAssembliesByName(params string[] assemblyNames)
         {
             var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath; //获取项目路径
-            return assemblyNames.Select(o=>AssemblyLoadContext.Default.LoadFromAssemblyPath(Path.Combine(basePath,$"{o}.dll")));
+            return assemblyNames.Select(o => AssemblyLoadContext.Default.LoadFromAssemblyPath(Path.Combine(basePath, $"{o}.dll")));
         }
 
         //public static List<Assembly> LoadAssemblies(string folderPath, SearchOption searchOption)

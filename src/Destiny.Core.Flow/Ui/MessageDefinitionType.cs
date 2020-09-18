@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Destiny.Core.Flow.Ui
+﻿namespace Destiny.Core.Flow.Ui
 {
     /// <summary>
     /// 返回消息定义

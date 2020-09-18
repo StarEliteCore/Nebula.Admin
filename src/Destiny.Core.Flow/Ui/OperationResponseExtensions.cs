@@ -1,11 +1,8 @@
 ﻿using Destiny.Core.Flow.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Ui
 {
-   public static class OperationResponseExtensions
+    public static class OperationResponseExtensions
     {
 
         /// <summary>
@@ -19,7 +16,7 @@ namespace Destiny.Core.Flow.Ui
         /// 成功
         /// </summary>
         /// <param name="message">提示消息</param>
-        public static OperationResponse<TData> Ok<TData> (this OperationResponse<TData> operation, string message)
+        public static OperationResponse<TData> Ok<TData>(this OperationResponse<TData> operation, string message)
         {
             return operation.Ok<TData>(message, default(TData));
         }
@@ -29,7 +26,7 @@ namespace Destiny.Core.Flow.Ui
         /// </summary>
         /// <param name="data">返回成功数据</param>
         /// <returns></returns>
-        public static OperationResponse<TData> Ok<TData> (this OperationResponse<TData> operation, TData data)
+        public static OperationResponse<TData> Ok<TData>(this OperationResponse<TData> operation, TData data)
         {
             return operation.Ok<TData>(string.Empty, data);
         }
@@ -84,7 +81,7 @@ namespace Destiny.Core.Flow.Ui
         /// </summary>
         /// <param name="data">返回成功数据</param>
         /// <returns></returns>
-        public static OperationResponse Ok(this OperationResponse response,object data)
+        public static OperationResponse Ok(this OperationResponse response, object data)
         {
             return response.Ok(string.Empty, data);
         }

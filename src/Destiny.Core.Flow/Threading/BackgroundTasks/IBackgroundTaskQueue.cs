@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Threading.BackgroundTasks
 {
-    public interface  IBackgroundTaskQueue
+    public interface IBackgroundTaskQueue
     {
         void QueueBackgroundWorkItem(Func<CancellationToken, IServiceProvider, Task> workItem);
 

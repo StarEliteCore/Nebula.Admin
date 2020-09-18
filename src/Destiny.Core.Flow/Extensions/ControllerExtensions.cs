@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Bson;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 
 namespace Destiny.Core.Flow.Extensions
 {
@@ -22,7 +19,7 @@ namespace Destiny.Core.Flow.Extensions
         public static bool IsController(this TypeInfo typeInfo)
         {
 
-            return typeInfo.IsClass && !typeInfo.IsAbstract && typeInfo.IsPublic && (typeInfo.IsDefined(typeof(ControllerAttribute))&& typeInfo.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase));
+            return typeInfo.IsClass && !typeInfo.IsAbstract && typeInfo.IsPublic && (typeInfo.IsDefined(typeof(ControllerAttribute)) && typeInfo.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase));
         }
     }
 }

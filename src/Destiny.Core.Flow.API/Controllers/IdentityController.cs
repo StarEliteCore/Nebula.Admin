@@ -1,13 +1,13 @@
-﻿using System.ComponentModel;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Destiny.Core.Flow.AspNetCore.Api;
+﻿using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.IServices.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.API.Controllers
 {
@@ -16,7 +16,7 @@ namespace Destiny.Core.Flow.API.Controllers
     /// 身份管理
     /// </summary>
     [Description("身份管理")]
-  
+
 
     public class IdentityController : ApiControllerBase
     {
@@ -36,7 +36,7 @@ namespace Destiny.Core.Flow.API.Controllers
         [HttpPost]
         [Description("登录")]
         [AllowAnonymous]
-        public async Task<AjaxResult> LoginAsync([FromBody]LoginDto loginDto)
+        public async Task<AjaxResult> LoginAsync([FromBody] LoginDto loginDto)
         {
 
             var result = await _identityService.Login(loginDto);

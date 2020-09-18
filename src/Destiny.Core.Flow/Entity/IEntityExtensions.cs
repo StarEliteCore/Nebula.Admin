@@ -1,13 +1,6 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Destiny.Core.Flow.Extensions;
+﻿using Destiny.Core.Flow.Extensions;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Security.Principal;
-using System.Text;
 
 namespace Destiny.Core.Flow.Entity
 {

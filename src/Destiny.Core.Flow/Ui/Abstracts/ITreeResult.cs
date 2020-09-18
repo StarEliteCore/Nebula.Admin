@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Destiny.Core.Flow.Ui.Abstracts
 {
@@ -8,11 +6,11 @@ namespace Destiny.Core.Flow.Ui.Abstracts
     /// 接口树型结果
     /// </summary>
     /// <typeparam name="TData"></typeparam>
-    public interface ITreeResult<TData>:IResultBase,IListResult<TData>
+    public interface ITreeResult<TData> : IResultBase, IListResult<TData>
     {
 
 
-       
+
     }
 
 

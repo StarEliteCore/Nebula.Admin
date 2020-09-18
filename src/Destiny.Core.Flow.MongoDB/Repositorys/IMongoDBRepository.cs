@@ -1,19 +1,12 @@
 ﻿using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.Filter;
-using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.Ui;
-using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.MongoDB.Repositorys
 {
-    public interface IMongoDBRepository<TEntity, Tkey> 
+    public interface IMongoDBRepository<TEntity, Tkey>
         where TEntity : IEntity<Tkey>
     {
         //Find<T> – 返回集合中与提供的搜索条件匹配的所有文档。

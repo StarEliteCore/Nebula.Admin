@@ -5,11 +5,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Destiny.Core.Flow.Validation.Interceptor
 {
-   public class MethodInvocationValidator
+    public class MethodInvocationValidator
     {
         private const int MaxRecursiveParameterValidationDepth = 8;
 
@@ -77,7 +76,7 @@ namespace Destiny.Core.Flow.Validation.Interceptor
                 return;
             }
 
-        
+
 
             if (validatingObject.GetType().IsPrimitiveExtendedIncludingNullable())
             {
@@ -100,7 +99,7 @@ namespace Destiny.Core.Flow.Validation.Interceptor
             var properties = TypeDescriptor.GetProperties(validatingObject).Cast<PropertyDescriptor>();
             foreach (var property in properties)
             {
-       
+
 
                 ValidateObjectRecursively(property.GetValue(validatingObject), depth + 1);
             }

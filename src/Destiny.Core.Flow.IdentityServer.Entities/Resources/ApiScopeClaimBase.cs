@@ -14,7 +14,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
         /// </summary>
         [DisplayName("范围id")]
         public Guid ScopeId { get; set; }
-        
+
         ///// <summary>
         ///// 范围
         ///// </summary>

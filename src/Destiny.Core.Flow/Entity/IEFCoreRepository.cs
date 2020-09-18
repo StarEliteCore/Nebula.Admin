@@ -1,16 +1,14 @@
 ﻿using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Ui;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow
 {
-    public interface  IEFCoreRepository<TEntity, TPrimaryKey>
+    public interface IEFCoreRepository<TEntity, TPrimaryKey>
            where TEntity : IEntity<TPrimaryKey>
     {
 

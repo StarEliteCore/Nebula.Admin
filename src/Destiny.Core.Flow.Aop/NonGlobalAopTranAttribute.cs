@@ -1,12 +1,11 @@
 ﻿using AspectCore.DynamicProxy;
 using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Aop
 {
-    public class NonGlobalAopTranAttribute: AbstractInterceptorAttribute
+    public class NonGlobalAopTranAttribute : AbstractInterceptorAttribute
     {
         //[FromServiceContext]
         //private IUnitOfWork _unitOfWork { get; set; }

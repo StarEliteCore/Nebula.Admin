@@ -1,13 +1,11 @@
 ﻿using AspectCore.DynamicProxy;
-using Destiny.Core.Flow.Validation.Interceptor;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Linq;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Ui;
+using Destiny.Core.Flow.Validation.Interceptor;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Validation
 {
@@ -52,7 +50,7 @@ namespace Destiny.Core.Flow.Validation
                         {
 
                             Message = result.Message.IsNullOrEmpty() ? result.Data.Select(o => o.Message).ToJoin() : result.Message,
-                            Type=Enums.OperationResponseType.Error
+                            Type = Enums.OperationResponseType.Error
                         });
 
                     }

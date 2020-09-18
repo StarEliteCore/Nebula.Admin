@@ -2,9 +2,7 @@
 using Serilog.Events;
 using Serilog.Sinks.Elasticsearch;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace Destiny.Core.Flow.SeriLog
 {
@@ -15,19 +13,20 @@ namespace Destiny.Core.Flow.SeriLog
         /// SeriLog记录日志到文件
         /// </summary>
         /// <param name="fileName"></param>
-        public static void SetSeriLoggerToFile(string fileName,string eshost)
+        public static void SetSeriLoggerToFile(string fileName, string eshost)
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
-                .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(eshost)) { 
-                    AutoRegisterTemplate=true,
+                .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(eshost))
+                {
+                    AutoRegisterTemplate = true,
                 })
-                .WriteTo.Map(le=>MapData(le),
-                (key,log)=>
-                 log.Async(o=>o.File(Path.Combine(fileName, @$"{key.time:yyyy-MM-dd}\{key.level.ToString().ToLower()}.txt"))))
+                .WriteTo.Map(le => MapData(le),
+                (key, log) =>
+                 log.Async(o => o.File(Path.Combine(fileName, @$"{key.time:yyyy-MM-dd}\{key.level.ToString().ToLower()}.txt"))))
                 .CreateLogger();
 
             (DateTime time, LogEventLevel level) MapData(LogEvent logEvent)
@@ -37,8 +36,8 @@ namespace Destiny.Core.Flow.SeriLog
             }
         }
 
-    
-      
+
+
 
     }
 }

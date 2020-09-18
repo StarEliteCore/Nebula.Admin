@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Destiny.Core.Flow.Filter.Abstract
+﻿namespace Destiny.Core.Flow.Filter.Abstract
 {
     /// <summary>
     /// 分页请求口

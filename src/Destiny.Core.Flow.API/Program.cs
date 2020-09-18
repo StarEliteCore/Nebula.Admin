@@ -1,17 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using AspectCore.Extensions.Hosting;
-using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.SeriLog;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
-using Serilog.Events;
 
 namespace Destiny.Core.Flow.API
 {
@@ -19,7 +12,7 @@ namespace Destiny.Core.Flow.API
     {
         public static void Main(string[] args)
         {
-          
+
             SeriLogLogger.SetSeriLoggerToFile("Logs", "http://1065.cloud:9600/");
             CreateHostBuilder(args).Build().Run();
         }

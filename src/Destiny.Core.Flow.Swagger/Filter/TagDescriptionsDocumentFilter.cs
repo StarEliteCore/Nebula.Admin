@@ -1,8 +1,5 @@
 ﻿using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Swagger.Filter
 {
@@ -10,7 +7,7 @@ namespace Destiny.Core.Flow.Swagger.Filter
     {
         public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
         {
-         
+
         }
     }
 }

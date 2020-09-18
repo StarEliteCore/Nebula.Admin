@@ -1,23 +1,19 @@
-﻿using Destiny.Core.Flow.Modules;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Destiny.Core.Flow.Exceptions;
 using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.Modules;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
-using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.SwaggerUI;
 using System.IO;
 using System.Reflection;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using Microsoft.AspNetCore.Builder;
-using Destiny.Core.Flow.Exceptions;
-using Destiny.Core.Flow.Swagger.Filter;
-using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Destiny.Core.Flow.Swagger
 {
-    public  class SwaggerModule : AppModule
+    public class SwaggerModule : AppModule
     {
 
 
@@ -109,7 +105,7 @@ namespace Destiny.Core.Flow.Swagger
         public override void ApplicationInitialization(ApplicationContext context)
         {
 
-           var app=  context.GetApplicationBuilder();
+            var app = context.GetApplicationBuilder();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -130,6 +126,6 @@ namespace Destiny.Core.Flow.Swagger
             });
         }
 
-      
+
     }
 }

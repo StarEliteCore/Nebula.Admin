@@ -2,18 +2,14 @@
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.MongoDB.DbContexts;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.API.Startups
 {
     public class MongoDBModelule : MongoDBModuleBase
     {
 
-       
+
         protected override void AddDbContext(IServiceCollection services)
         {
             var dbpath = services.GetConfiguration()["Destiny:DbContext:MongoDBConnectionString"];
@@ -28,7 +24,8 @@ namespace Destiny.Core.Flow.API.Startups
 
 
 
-            services.AddMongoDbContext<DefaultMongoDbContext>(options => {
+            services.AddMongoDbContext<DefaultMongoDbContext>(options =>
+            {
                 options.ConnectionString = connection;
             });
 

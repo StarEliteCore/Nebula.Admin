@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
-
-using Destiny.Core.Flow.AspNetCore.Api;
+﻿using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Dtos.Organization;
 using Destiny.Core.Flow.IServices.Organization;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.API.Controllers.Organization
 {
@@ -34,7 +30,7 @@ namespace Destiny.Core.Flow.API.Controllers.Organization
         public async Task<TreeModel<OrganizationOutDto>> GetAsync()
         {
 
-            var result= await _organization.GetOrganization();
+            var result = await _organization.GetOrganization();
             return new TreeModel<OrganizationOutDto>()
             {
                 ItemList = result.ItemList,
@@ -50,7 +46,7 @@ namespace Destiny.Core.Flow.API.Controllers.Organization
         /// <returns></returns>
         [HttpPost]
         [Description("异步创建组织架构")]
-        public async Task<AjaxResult> CreateAsync([FromBody]OrganizationInputDto dto)
+        public async Task<AjaxResult> CreateAsync([FromBody] OrganizationInputDto dto)
         {
 
             return (await _organization.CreateAsync(dto)).ToAjaxResult();
@@ -62,7 +58,7 @@ namespace Destiny.Core.Flow.API.Controllers.Organization
         /// <returns></returns>
         [HttpPut]
         [Description("异步修改组织架构")]
-        public async Task<AjaxResult> UpdateAsync([FromBody]OrganizationInputDto dto)
+        public async Task<AjaxResult> UpdateAsync([FromBody] OrganizationInputDto dto)
         {
 
             return (await _organization.UpdateAsync(dto)).ToAjaxResult();

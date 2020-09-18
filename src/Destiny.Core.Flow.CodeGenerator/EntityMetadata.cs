@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Destiny.Core.Flow.CodeGenerator
 {
     /// <summary>
     /// 实体元数据
     /// </summary>
-   public class EntityMetadata
+    public class EntityMetadata
     {
 
         /// <summary>

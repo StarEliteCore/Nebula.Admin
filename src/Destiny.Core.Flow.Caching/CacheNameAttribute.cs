@@ -1,10 +1,7 @@
 ﻿using Destiny.Core.Flow.Attributes.Base;
 using Destiny.Core.Flow.Extensions;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace Destiny.Core.Flow.Caching
 {
@@ -25,9 +22,10 @@ namespace Destiny.Core.Flow.Caching
         }
 
 
-        public static string GetCacheName(Type cacheType) {
-            
-            
+        public static string GetCacheName(Type cacheType)
+        {
+
+
             var cacheNameAttribute = cacheType.GetCustomAttribute<CacheNameAttribute>();
             if (cacheNameAttribute != null)
             {

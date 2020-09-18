@@ -1,15 +1,12 @@
 ﻿using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Filter;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Ui
 {
     /// <summary>
     /// 有重复代码想办法解决。。
     /// </summary>
-  public  class OperationResponse : ResultBase<object>,IHasResultType<OperationResponseType>
+    public class OperationResponse : ResultBase<object>, IHasResultType<OperationResponseType>
     {
 
         public OperationResponse() : this(OperationResponseType.Success)

@@ -1,16 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Destiny.Core.Flow.Extensions;
-using Microsoft.Extensions.DependencyInjection;
-using Destiny.Core.Flow.Dependency;
 
 namespace Destiny.Core.Flow.Entity
 {
-  
+
     public abstract class SeedDataBase<TEntity, TKey> : ISeedData
             where TEntity : IEntity<TKey>
           where TKey : IEquatable<TKey>
@@ -33,8 +26,8 @@ namespace Destiny.Core.Flow.Entity
 
         public virtual void Initialize()
         {
-            var entities= SetSeedData();
-             SaveDatabase(entities);
+            var entities = SetSeedData();
+            SaveDatabase(entities);
         }
 
         protected abstract TEntity[] SetSeedData();
@@ -44,11 +37,11 @@ namespace Destiny.Core.Flow.Entity
         /// </summary>
         /// <returns></returns>
         protected abstract void SaveDatabase(TEntity[] entities);
-          
+
 
 
         protected abstract Expression<Func<TEntity, bool>> Expression(TEntity entity);
 
-    
+
     }
 }

@@ -1,11 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Modules
 {
-   public interface IModuleApplication: IDisposable
+    public interface IModuleApplication : IDisposable
     {
 
         Type StartupModuleType { get; }

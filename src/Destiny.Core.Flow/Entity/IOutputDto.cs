@@ -1,27 +1,20 @@
-﻿using Destiny.Core.Flow.Enums;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
-using Destiny.Core.Flow.Extensions;
-
-namespace Destiny.Core.Flow.Entity
+﻿namespace Destiny.Core.Flow.Entity
 {
     /// <summary>
     /// 定义输出DTO
     /// </summary>
-   public interface IOutputDto
+    public interface IOutputDto
     {
-     
+
     }
 
     /// <summary>
     /// 继承第一层DTO接口
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
-    public interface IOutputDto<TKey>: IOutputDto
+    public interface IOutputDto<TKey> : IOutputDto
     {
-   
+
         TKey Id { get; set; }
 
     }
@@ -31,7 +24,7 @@ namespace Destiny.Core.Flow.Entity
     /// <typeparam name="TKey"></typeparam>
     public class OutputDtoBase<TKey> : IOutputDto<TKey>
     {
-      
+
         public TKey Id { get; set; }
 
     }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Destiny.Core.Flow.Entity
+﻿namespace Destiny.Core.Flow.Entity
 {
-   public  class InputWaitStateDto<TKey>: StateDto<TKey>, IInputDto<TKey>
+    public class InputWaitStateDto<TKey> : StateDto<TKey>, IInputDto<TKey>
     {
     }
 }

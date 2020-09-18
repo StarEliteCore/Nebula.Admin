@@ -3,14 +3,10 @@ using Destiny.Core.Flow.Modules;
 using Destiny.Core.Flow.Reflection;
 using Destiny.Core.Flow.Validation;
 using FluentValidation;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.FluentValidation
 {
-  public   class FluentValidationModuleBase : AppModule
+    public class FluentValidationModuleBase : AppModule
     {
 
         public override void ConfigureServices(ConfigureServicesContext context)
@@ -21,8 +17,8 @@ namespace Destiny.Core.Flow.FluentValidation
             context.Services.WithFluentValidation();
             context.Services.WithModelValidation();
         }
-    
 
-  
+
+
     }
 }

@@ -3,7 +3,6 @@ using Destiny.Core.Flow.ConsulEntity;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Modules;
 using Destiny.Core.Flow.Network;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -14,7 +13,7 @@ namespace Destiny.Core.Flow.Consul
     /// <summary>
     /// Consul服务发现模块
     /// </summary>
-    public abstract  class DestinyConsulModule : AppModule
+    public abstract class DestinyConsulModule : AppModule
     {
         /// <summary>
         /// 服务地址
@@ -23,7 +22,7 @@ namespace Destiny.Core.Flow.Consul
         /// <summary>
         /// Consul服务地址
         /// </summary>
-        private string _consulIp= string.Empty;
+        private string _consulIp = string.Empty;
         /// <summary>
         /// Consul服务端口
         /// </summary>
@@ -83,13 +82,13 @@ namespace Destiny.Core.Flow.Consul
                 Tags = new[] { $"urlprefix-/{serviceEntity.ServiceName}" }//添加 urlprefix-/servicename 格式的 tag 标签，以便 Fabio 识别
             };
             consulClient.Agent.ServiceRegister(registration).Wait();//服务启动时注册，内部实现其实就是使用 Consul API 进行注册（HttpClient发起）
-            var lifetime =context.ServiceProvider.GetRequiredService<IHostApplicationLifetime>();
+            var lifetime = context.ServiceProvider.GetRequiredService<IHostApplicationLifetime>();
             lifetime.ApplicationStopping.Register(() =>
             {
                 consulClient.Agent.ServiceDeregister(registration.ID).Wait();//服务停止时取消注册
             });
         }
 
-      
+
     }
 }

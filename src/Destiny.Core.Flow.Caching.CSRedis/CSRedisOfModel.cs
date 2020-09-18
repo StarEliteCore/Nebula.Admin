@@ -1,10 +1,5 @@
-﻿using Destiny.Core.Flow.Caching;
-using Destiny.Core.Flow.Extensions;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,11 +15,11 @@ namespace Destiny.Core.Flow.Caching.CSRedis
          where TCacheData : class
     {
 
-  
+
         public TCacheData Get(TKey key)
         {
 
-            return CacheHelper.Get<TKey,TCacheData>(key);
+            return CacheHelper.Get<TKey, TCacheData>(key);
         }
 
         public async Task<TCacheData> GetAsync(TKey key, CancellationToken token = default)
@@ -36,7 +31,7 @@ namespace Destiny.Core.Flow.Caching.CSRedis
         public TCacheData GetOrAdd(TKey key, Func<TCacheData> func)
         {
 
-            return CacheHelper.GetOrAdd(key,func);
+            return CacheHelper.GetOrAdd(key, func);
         }
 
         public async Task<TCacheData> GetOrAddAsync([NotNull] TKey key, Func<Task<TCacheData>> func, CancellationToken token = default)
@@ -55,12 +50,12 @@ namespace Destiny.Core.Flow.Caching.CSRedis
         public async Task RemoveAsync(TKey key, CancellationToken token = default)
         {
 
-             await CacheHelper.RemoveAsync(key);
+            await CacheHelper.RemoveAsync(key);
         }
 
         public void Set(TKey key, TCacheData value)
         {
-            CacheHelper.Set(key,value);
+            CacheHelper.Set(key, value);
         }
 
         public async Task SetAsync(TKey key, TCacheData value, CancellationToken token = default)

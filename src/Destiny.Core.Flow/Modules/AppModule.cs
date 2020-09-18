@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Destiny.Core.Flow.Modules
 {
@@ -12,12 +11,12 @@ namespace Destiny.Core.Flow.Modules
 
         public virtual void ApplicationInitialization(ApplicationContext context)
         {
-          
+
         }
 
         public virtual void ConfigureServices(ConfigureServicesContext context)
         {
-           
+
         }
 
         public Type[] GetDependedTypes(Type moduleType = null)
@@ -52,11 +51,11 @@ namespace Destiny.Core.Flow.Modules
         }
 
 
-  
+
 
         public static bool IsAppModule(Type type)
         {
-           var typeInfo=  type.GetTypeInfo();
+            var typeInfo = type.GetTypeInfo();
             return typeInfo.IsClass &&
                  !typeInfo.IsAbstract &&
                  !typeInfo.IsGenericType &&

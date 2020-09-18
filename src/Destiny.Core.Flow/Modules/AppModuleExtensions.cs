@@ -3,15 +3,13 @@ using Destiny.Core.Flow.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Modules
 {
     public static class AppModuleExtensions
     {
 
-        public static IServiceCollection AddApplication<T>(this IServiceCollection services) where T : IAppModule 
+        public static IServiceCollection AddApplication<T>(this IServiceCollection services) where T : IAppModule
         {
 
 
@@ -20,7 +18,7 @@ namespace Destiny.Core.Flow.Modules
 
         }
 
-        private static IServiceCollection AddApplication(this IServiceCollection services,Type type)
+        private static IServiceCollection AddApplication(this IServiceCollection services, Type type)
         {
             if (services == null)
             {
@@ -31,7 +29,7 @@ namespace Destiny.Core.Flow.Modules
             services.AddObjectAccessor(obj);
 
 
-                     IStartupModuleRunner runner = new StartupModuleRunner(type,services);
+            IStartupModuleRunner runner = new StartupModuleRunner(type, services);
             runner.ConfigureServices(services);
 
             return services;

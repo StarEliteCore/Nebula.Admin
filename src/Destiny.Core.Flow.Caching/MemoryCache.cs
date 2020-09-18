@@ -1,12 +1,8 @@
-﻿using Destiny.Core.Flow.Events;
-using Destiny.Core.Flow.Extensions;
+﻿using Destiny.Core.Flow.Extensions;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,7 +13,7 @@ namespace Destiny.Core.Flow.Caching
 
 
 
-        private  IMemoryCache _cache=null;
+        private IMemoryCache _cache = null;
 
         public MemoryCache(IMemoryCache cache)
         {
@@ -26,14 +22,14 @@ namespace Destiny.Core.Flow.Caching
 
         public TCacheData Get<TCacheData>(string key)
         {
-            
+
             return (TCacheData)_cache.Get(key);
         }
 
         public async Task<TCacheData> GetAsync<TCacheData>(string key, CancellationToken token = default)
         {
 
-            return await Task.Run(()=> (TCacheData)_cache.Get(key));
+            return await Task.Run(() => (TCacheData)_cache.Get(key));
         }
 
         public TCacheData GetOrAdd<TCacheData>(string key, Func<TCacheData> func, int expireSeconds = -1)
@@ -56,7 +52,7 @@ namespace Destiny.Core.Flow.Caching
                 return default;
             }
 
-            Set(key, value,expireSeconds);
+            Set(key, value, expireSeconds);
             return value;
         }
 
@@ -65,7 +61,7 @@ namespace Destiny.Core.Flow.Caching
             key.NotNull(nameof(key));
 
             func.NotNull(nameof(func));
-            var value =await this.GetAsync<TCacheData>(key);
+            var value = await this.GetAsync<TCacheData>(key);
 
 
             if (!Equals(value, default(TCacheData)))
@@ -80,7 +76,7 @@ namespace Destiny.Core.Flow.Caching
                 return default;
             }
 
-             await SetAsync(key, value);
+            await SetAsync(key, value);
             return value;
         }
 
@@ -91,7 +87,7 @@ namespace Destiny.Core.Flow.Caching
 
         public async Task RemoveAsync(string key, CancellationToken token = default)
         {
-            await Task.Run(() => this.Remove(key),token);
+            await Task.Run(() => this.Remove(key), token);
         }
 
         public void Set<TCacheData>(string key, TCacheData value, int expireSeconds = -1)
@@ -104,12 +100,12 @@ namespace Destiny.Core.Flow.Caching
             {
                 _cache.Set(key, value);
             }
-    
+
         }
 
         public async Task SetAsync<TCacheData>(string key, TCacheData value, int expireSeconds = -1, CancellationToken token = default)
         {
-            await Task.Run(()=>this.Set<TCacheData>(key, value, expireSeconds),token);
+            await Task.Run(() => this.Set<TCacheData>(key, value, expireSeconds), token);
         }
     }
 }

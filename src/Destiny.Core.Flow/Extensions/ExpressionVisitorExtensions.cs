@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Destiny.Core.Flow.Extensions
 {
     public static partial class Extensions
     {
-        public static Expression Visit<TExpression>(this Expression expression, Func<TExpression, Expression> visitor)where TExpression : Expression
+        public static Expression Visit<TExpression>(this Expression expression, Func<TExpression, Expression> visitor) where TExpression : Expression
         {
             return ExpressionVisitor<TExpression>.Visit(expression, visitor);
         }

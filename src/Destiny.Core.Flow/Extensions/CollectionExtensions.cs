@@ -72,7 +72,7 @@ namespace Destiny.Core.Flow.Extensions
         /// <param name="keySelector">键条件</param>
         /// <returns>返回去重后集合数据</returns>
         public static IList<TSource> ToDistinctBy<TSource, TKey>(this IEnumerable<TSource> source,
-             Func<TSource, TKey> keySelector) 
+             Func<TSource, TKey> keySelector)
         {
 
             return source.DistinctBy(keySelector).ToList();
@@ -86,7 +86,7 @@ namespace Destiny.Core.Flow.Extensions
         /// <param name="left">左边符</param>
         /// <param name="right">右边符</param>
         /// <returns>返回组装好的值，例如"'a','b'"</returns>
-        public static string ToSqlIn<TSource>(this IEnumerable<TSource> values, string separator = ",", string left = "'", string right = "'") 
+        public static string ToSqlIn<TSource>(this IEnumerable<TSource> values, string separator = ",", string left = "'", string right = "'")
         {
             StringBuilder sb = new StringBuilder();
             var enumerable = values as TSource[] ?? values.ToArray();
@@ -94,7 +94,7 @@ namespace Destiny.Core.Flow.Extensions
             {
                 return string.Empty;
             }
-           
+
             enumerable.ToList().ForEach(o =>
             {
 
@@ -149,7 +149,7 @@ namespace Destiny.Core.Flow.Extensions
         /// <param name="func">方法</param>
         public static void ForEach<T>(this IEnumerable<T> iEnumberable, Action<T, int> func)
         {
-           
+
             var array = iEnumberable.ToArray();
             for (int i = 0; i < array.Count(); i++)
             {

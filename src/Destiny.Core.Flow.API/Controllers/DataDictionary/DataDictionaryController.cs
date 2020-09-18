@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
-
-using Destiny.Core.Flow.AspNetCore.Api;
+﻿using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Audit;
 using Destiny.Core.Flow.Dtos.DataDictionnary;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices.IDataDictionnary;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.ComponentModel;
+using System.Threading.Tasks;
 namespace Destiny.Core.Flow.API.Controllers.DataDictionary
 {
     [Description("数据字典")]
     [Authorize]
     public class DataDictionaryController : ApiControllerBase
     {
-        private readonly IDataDictionnaryServices _dataDictionnaryServices  = null;
+        private readonly IDataDictionnaryServices _dataDictionnaryServices = null;
         public DataDictionaryController(IDataDictionnaryServices dataDictionnaryServices)
         {
             _dataDictionnaryServices = dataDictionnaryServices;
@@ -31,7 +27,7 @@ namespace Destiny.Core.Flow.API.Controllers.DataDictionary
         /// <returns></returns>
         [HttpPost]
         [Description("分页获取数据字典")]
-        public async Task<PageList<DataDictionaryOutPageListDto>> GetPageListAsync([FromBody]PageRequest request)
+        public async Task<PageList<DataDictionaryOutPageListDto>> GetPageListAsync([FromBody] PageRequest request)
         {
             return (await _dataDictionnaryServices.GetDictionnnaryPageAsync(request)).ToPageList();
         }
@@ -53,7 +49,7 @@ namespace Destiny.Core.Flow.API.Controllers.DataDictionary
         [HttpPost]
         [Description("异步创建数据字典")]
         [AuditLog]
-        public async Task<AjaxResult> CreateAsync([FromBody]DataDictionnaryInputDto dto)
+        public async Task<AjaxResult> CreateAsync([FromBody] DataDictionnaryInputDto dto)
         {
             return (await _dataDictionnaryServices.CreateAsync(dto)).ToAjaxResult();
         }
@@ -95,7 +91,7 @@ namespace Destiny.Core.Flow.API.Controllers.DataDictionary
         [Description("根据id获取数据字典详情")]
         [HttpGet]
         public async Task<AjaxResult> GetDataDictionnnaryListAsync(Guid Id)
-        {    
+        {
             return (await _dataDictionnaryServices.GetLoadDictionnnary(Id)).ToAjaxResult();
         }
     }

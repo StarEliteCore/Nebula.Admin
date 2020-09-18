@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Destiny.Core.Flow.Options
+﻿namespace Destiny.Core.Flow.Options
 {
     /// <summary>
     /// Cors操作

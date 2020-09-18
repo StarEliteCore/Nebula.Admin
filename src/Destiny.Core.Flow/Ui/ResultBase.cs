@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Destiny.Core.Flow.Ui
+﻿namespace Destiny.Core.Flow.Ui
 {
-  public abstract  class ResultBase: IResultBase
+    public abstract class ResultBase : IResultBase
     {
 
 
-      
+
         public virtual bool Success { get; set; }
 
 
@@ -20,9 +16,9 @@ namespace Destiny.Core.Flow.Ui
 
     public interface IResultBase
     {
-          bool Success { get; set; }
+        bool Success { get; set; }
 
 
-          string Message { get; set; }
+        string Message { get; set; }
     }
 }

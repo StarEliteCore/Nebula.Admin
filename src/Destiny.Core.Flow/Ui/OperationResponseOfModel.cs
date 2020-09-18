@@ -1,16 +1,12 @@
 ﻿using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Filter;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 
 namespace Destiny.Core.Flow.Ui
 {
     /// <summary>
     /// 有重复代码想办法解决。。
     /// </summary>
-    public class OperationResponse<TData>: ResultBase<TData>, IHasResultType<OperationResponseType>
+    public class OperationResponse<TData> : ResultBase<TData>, IHasResultType<OperationResponseType>
     {
 
         public OperationResponse() : this(OperationResponseType.Success)
@@ -38,11 +34,11 @@ namespace Destiny.Core.Flow.Ui
 
 
 
-   
+
 
         public virtual OperationResponseType Type { get; set; }
 
-   
+
         public override bool Success => Type == OperationResponseType.Success;
 
 

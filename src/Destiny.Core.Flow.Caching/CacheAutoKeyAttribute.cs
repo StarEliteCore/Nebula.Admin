@@ -1,12 +1,7 @@
-﻿using Destiny.Core.Flow.Attributes.Base;
-using Destiny.Core.Flow.Extensions;
+﻿using Destiny.Core.Flow.Extensions;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
 
 namespace Destiny.Core.Flow.Caching
 {
@@ -19,7 +14,7 @@ namespace Destiny.Core.Flow.Caching
 
         public static string GetCacheKey(Type cacheType)
         {
-           
+
             var values = cacheType.GetProperties().Where(o => o.HasAttribute<CacheAutoKeyAttribute>()).Select(pi => pi.GetValue(cacheType));
 
             var key = values.Join("-");

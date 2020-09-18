@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Destiny.Core.Flow.TestBase
 {
-   public abstract class TestBaseWithServiceProvider
+    public abstract class TestBaseWithServiceProvider
     {
 
         protected abstract IServiceProvider ServiceProvider { get; }

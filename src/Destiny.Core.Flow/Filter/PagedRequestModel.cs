@@ -1,14 +1,12 @@
 ﻿using Destiny.Core.Flow.Filter.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Filter
 {
     public class PagedRequestModel : IFilteredPagedRequest
     {
 
-        public PagedRequestModel() {
+        public PagedRequestModel()
+        {
 
             OrderConditions = new OrderCondition[] { };
             Filter = new QueryFilter();

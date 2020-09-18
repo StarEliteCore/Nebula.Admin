@@ -5,7 +5,6 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 
 namespace Destiny.Core.Flow.Helpers
@@ -319,7 +318,7 @@ namespace Destiny.Core.Flow.Helpers
 
             return enumerable.Any() ? func(enumerable) : EmptyJson;
         }
-     
+
         #endregion
     }
 }

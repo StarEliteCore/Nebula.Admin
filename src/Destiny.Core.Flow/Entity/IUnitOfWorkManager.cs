@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Destiny.Core.Flow.Entity
+﻿namespace Destiny.Core.Flow.Entity
 {
-   public interface IUnitOfWorkManager
+    public interface IUnitOfWorkManager
     {
 
         IUnitOfWork Current { get; }

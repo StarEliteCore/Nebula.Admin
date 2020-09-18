@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Destiny.Core.Flow.CodeGenerator
+﻿namespace Destiny.Core.Flow.CodeGenerator
 {
     /// <summary>
     /// 属性元数据
     /// </summary>
-   public class PropertyMetadata
+    public class PropertyMetadata
     {
         /// <summary>
         /// 是否主键

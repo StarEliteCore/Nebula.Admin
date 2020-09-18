@@ -1,9 +1,7 @@
 ﻿using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Extensions;
 using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Destiny.Core.Flow.Filter
 {
@@ -66,7 +64,7 @@ namespace Destiny.Core.Flow.Filter
         /// </summary>
         private static string GetPropertyName(Expression<Func<T, object>> keySelector)
         {
-        
+
             return keySelector.GetPropertyName();
         }
     }

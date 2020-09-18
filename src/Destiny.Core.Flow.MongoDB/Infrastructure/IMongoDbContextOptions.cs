@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Destiny.Core.Flow.MongoDB.Infrastructure
+﻿namespace Destiny.Core.Flow.MongoDB.Infrastructure
 {
     public interface IMongoDbContextOptions
     {

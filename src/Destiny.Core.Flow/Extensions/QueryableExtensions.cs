@@ -1,18 +1,16 @@
-﻿using Destiny.Core.Flow.Filter;
+﻿using Destiny.Core.Flow.Entity;
+using Destiny.Core.Flow.Enums;
+using Destiny.Core.Flow.ExpressionUtil;
+using Destiny.Core.Flow.Filter;
+using Destiny.Core.Flow.Filter.Abstract;
+using Destiny.Core.Flow.Ui;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Linq.Dynamic.Core;
-using Destiny.Core.Flow.Enums;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.Filter.Abstract;
-using Destiny.Core.Flow.ExpressionUtil;
-using JetBrains.Annotations;
-using Destiny.Core.Flow.Ui;
 
 namespace Destiny.Core.Flow.Extensions
 {
@@ -138,7 +136,7 @@ namespace Destiny.Core.Flow.Extensions
 
 
 
-  
+
 
         ///// <summary>
         ///// 从集合中查询指定输出DTO的分页信息
@@ -157,7 +155,7 @@ namespace Destiny.Core.Flow.Extensions
             if (isFiltered)
             {
                 var filter = (request as IFilteredPagedRequest).Filter;
-                expression = filter==null?null: FilterBuilder.GetExpression<TEntity>(filter);
+                expression = filter == null ? null : FilterBuilder.GetExpression<TEntity>(filter);
             }
             var result = await source.WhereAsync(request.PageIndex, request.PageSize, expression, request.OrderConditions);
             var list = await result.data.ToOutput<TOutputDto>().ToArrayAsync();
@@ -195,8 +193,8 @@ namespace Destiny.Core.Flow.Extensions
 
             source.NotNull(nameof(source));
             queryFilter.NotNull(nameof(queryFilter));
-            var expression= FilterBuilder.GetExpression<TEntity>(queryFilter);
-             return source.Where(expression);
+            var expression = FilterBuilder.GetExpression<TEntity>(queryFilter);
+            return source.Where(expression);
         }
 
 
@@ -224,7 +222,7 @@ namespace Destiny.Core.Flow.Extensions
             var treeData = list.ToTree(rootwhere, childswhere, addchilds, entity);
             return new TreeResult<TResult>
             {
-                
+
                 ItemList = treeData,
             };
         }

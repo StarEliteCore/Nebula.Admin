@@ -1,5 +1,4 @@
-﻿using AutoMapper.QueryableExtensions;
-using Destiny.Core.Flow.Enums;
+﻿using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Exceptions;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
@@ -34,10 +33,10 @@ namespace Destiny.Core.Flow.ExpressionUtil
 
         private static Expression GetExpressionBody(ParameterExpression param, QueryFilter queryFilter)
         {
-    
+
             List<Expression> expressions = new List<Expression>();
             Expression expression = Expression.Constant(true);
-            if (queryFilter is null || (queryFilter?.Conditions.Count() == 0&&queryFilter?.Filters.Count() == 0)) //为空
+            if (queryFilter is null || (queryFilter?.Conditions.Count() == 0 && queryFilter?.Filters.Count() == 0)) //为空
             {
                 return expression;
             }
@@ -83,7 +82,7 @@ namespace Destiny.Core.Flow.ExpressionUtil
             var constant = Expression.Constant(true);
 
             var value = filter.Value.AsTo(conversionType);
-            if (value==null)
+            if (value == null)
             {
                 return constant;
             }
@@ -92,7 +91,7 @@ namespace Destiny.Core.Flow.ExpressionUtil
         }
         private static Expression GetOperateExpression(FilterOperator operate, Expression member, Expression expression)
         {
-            switch (operate) 
+            switch (operate)
             {
                 case FilterOperator.Equal:
                     return Expression.Equal(member, expression);

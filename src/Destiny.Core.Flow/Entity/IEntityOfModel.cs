@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace Destiny.Core.Flow.Entity
 {
@@ -9,10 +6,10 @@ namespace Destiny.Core.Flow.Entity
     /// 实体接口
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
-    public interface IEntity<out TKey>: IEntity
+    public interface IEntity<out TKey> : IEntity
     {
         [Description("主键")]
-        TKey Id { get;}
+        TKey Id { get; }
     }
 
 

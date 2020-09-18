@@ -7,12 +7,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 
 namespace Destiny.Core.Flow.Extensions
@@ -140,7 +138,7 @@ namespace Destiny.Core.Flow.Extensions
         }
 
 
-    
+
 
         /// <summary>
         /// 判断是否IEnumerable、ICollection类型
@@ -194,7 +192,7 @@ namespace Destiny.Core.Flow.Extensions
         }
 
 
-    
+
         public static string ToDescription(this MemberInfo member)
         {
 
@@ -221,20 +219,20 @@ namespace Destiny.Core.Flow.Extensions
         /// <param name="member"></param>
         /// <returns></returns>
         public static string ToDescription<TAttribute>(this MemberInfo member)
-            where TAttribute: AttributeBase
+            where TAttribute : AttributeBase
         {
 
             var attributeBase = (AttributeBase)member.GetCustomAttribute<TAttribute>();
             if (!attributeBase.IsNull())
             {
-               return attributeBase.Description();
+                return attributeBase.Description();
             }
             return member.Name;
 
         }
 
 
-  
+
 
 
         /// <summary>
@@ -280,7 +278,7 @@ namespace Destiny.Core.Flow.Extensions
         /// </summary>
         /// <param name="type">type</param>
         /// <returns></returns>
-        public static bool IsValueTuple([NotNull]this Type type)
+        public static bool IsValueTuple([NotNull] this Type type)
                 => type.IsValueType && type.FullName?.StartsWith("System.ValueTuple`", StringComparison.Ordinal) == true;
 
         /// <summary>
@@ -288,7 +286,7 @@ namespace Destiny.Core.Flow.Extensions
         /// </summary>
         /// <param name="type">type</param>
         /// <returns></returns>
-        public static string GetDescription([NotNull]this Type type) =>
+        public static string GetDescription([NotNull] this Type type) =>
             type.GetCustomAttribute<DescriptionAttribute>()?.Description ?? string.Empty;
 
         /// <summary>
@@ -297,12 +295,12 @@ namespace Destiny.Core.Flow.Extensions
         /// </summary>
         /// <param name="type">type</param>
         /// <returns></returns>
-        public static bool IsPrimitiveType([NotNull]this Type type)
+        public static bool IsPrimitiveType([NotNull] this Type type)
             => (Nullable.GetUnderlyingType(type) ?? type).IsPrimitive;
 
         public static bool IsPrimitiveType<T>() => typeof(T).IsPrimitiveType();
 
-        public static bool IsBasicType([NotNull]this Type type) => _basicTypes.Contains(type) || type.IsEnum;
+        public static bool IsBasicType([NotNull] this Type type) => _basicTypes.Contains(type) || type.IsEnum;
 
         public static bool IsBasicType<T>() => typeof(T).IsBasicType();
 
@@ -387,7 +385,7 @@ namespace Destiny.Core.Flow.Extensions
         /// </summary>
         /// <param name="type">type</param>
         /// <returns>当前类型实现的接口的集合。</returns>
-        public static IEnumerable<Type> GetImplementedInterfaces([NotNull]this Type type)
+        public static IEnumerable<Type> GetImplementedInterfaces([NotNull] this Type type)
         {
             return type.GetTypeInfo().ImplementedInterfaces;
         }
@@ -661,9 +659,9 @@ namespace Destiny.Core.Flow.Extensions
         }
 
 
-        public static Expression GetKeySelector(this Type type,string keyName)
+        public static Expression GetKeySelector(this Type type, string keyName)
         {
-         
+
             string key = $"{type.FullName}.{keyName}";
             //if (Cache.ContainsKey(key))
             //{
@@ -683,7 +681,7 @@ namespace Destiny.Core.Flow.Extensions
                 type = property.PropertyType;
                 propertyAccess = Expression.Property(propertyAccess, propertyName);
             }
-      
+
             return propertyAccess;
         }
 

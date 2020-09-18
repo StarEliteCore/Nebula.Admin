@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Destiny.Core.Flow.Entity
+﻿namespace Destiny.Core.Flow.Entity
 {
     /// <summary>
     /// 定义输入DTO底层接口

@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using AspectCore.DynamicProxy;
-using Destiny.Core.Flow.Events;
-using Destiny.Core.Flow.Events.EventBus;
-using Destiny.Core.Flow.Model.Entities.Identity;
-
+﻿using Destiny.Core.Flow.Caching;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Destiny.Core.Flow.Caching;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.FileProviders;
-using Destiny.Core.Flow.Ui;
+using System;
+using System.Collections.Generic;
 
 namespace Destiny.Core.Flow.API.Controllers
 {
@@ -42,7 +31,7 @@ namespace Destiny.Core.Flow.API.Controllers
         public IEnumerable<string> Get()
         {
 
-          
+
             Console.WriteLine($"client: {_configuration["MysqlConnectionString"]}");
             var item = _configuration.GetValue<string>("TEST1.Destiny_Apollo:MysqlConnectionString");
             Console.WriteLine(item);
@@ -50,12 +39,12 @@ namespace Destiny.Core.Flow.API.Controllers
 
             for (int i = 0; i < 10; i++)
             {
-                test.Add(new Test{Name=i.ToString() });
+                test.Add(new Test { Name = i.ToString() });
             }
             _cache.Set("_test", new Test { Name = "大黄瓜" });
             var value = _cache.Get("_test");
-            _cache1.Set("aa",test);
-            var values= _cache1.Get<List<Test>>("aa");
+            _cache1.Set("aa", test);
+            var values = _cache1.Get<List<Test>>("aa");
             return new string[] { "🐕威威还是没用给我链接字符串", "🐕威威也没有给我远程仓库的权限,无法上传代码." };
         }
 
@@ -87,8 +76,8 @@ namespace Destiny.Core.Flow.API.Controllers
 
 
     public class Test
-    { 
-      public string Name { get; set; }
+    {
+        public string Name { get; set; }
     }
 }
 

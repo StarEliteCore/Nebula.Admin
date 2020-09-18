@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Xml;
 
 namespace Destiny.Core.Flow.Log4Net
@@ -23,8 +21,8 @@ namespace Destiny.Core.Flow.Log4Net
         /// 
         /// </summary>
         public Log4NetProvider() : this(_defaultLog4NetFileName)
-        { 
-        
+        {
+
         }
         public Log4NetProvider(string log4NetConfigFile)
         {
@@ -45,7 +43,7 @@ namespace Destiny.Core.Flow.Log4Net
             _loggers.Clear();
         }
 
-   
+
         public void Dispose()
         {
             Dispose(true);

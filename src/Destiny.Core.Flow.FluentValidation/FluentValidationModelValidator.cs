@@ -3,7 +3,6 @@ using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Destiny.Core.Flow.FluentValidation
 {

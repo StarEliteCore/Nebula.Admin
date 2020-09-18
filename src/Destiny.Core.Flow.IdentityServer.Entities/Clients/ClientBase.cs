@@ -1,6 +1,5 @@
 ﻿using Destiny.Core.Flow.Entity;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Destiny.Core.Flow.IdentityServer.Entities

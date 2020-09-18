@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Destiny.Core.Flow.Entity;
+using Destiny.Core.Flow.IdentityServer.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.IdentityServer.Entities;
 
 namespace Destiny.Core.Flow.Model.IdentityServer4
 {

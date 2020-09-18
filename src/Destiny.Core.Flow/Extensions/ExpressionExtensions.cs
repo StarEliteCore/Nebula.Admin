@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
 
 namespace Destiny.Core.Flow.Extensions
 {
@@ -283,7 +281,7 @@ namespace Destiny.Core.Flow.Extensions
             }
             var entityType = typeof(T);
 
-         
+
             var memberInitExpression = expressionBody as MemberInitExpression;
             if (memberInitExpression == null)
             {

@@ -1,8 +1,5 @@
-﻿using Destiny.Core.Flow.Ui;
-using Destiny.Core.Flow.Ui.Abstracts;
-using System;
+﻿using Destiny.Core.Flow.Ui.Abstracts;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Ui
 {
@@ -29,7 +26,7 @@ namespace Destiny.Core.Flow.Ui
 
     public class TreeResult<TData, TSelectedType> : TreeResult<TData>, ITreeResult<TData, TSelectedType>
     {
-       
+
 
         public TreeResult() : this(new TData[0], "成功返回数据", true)
         {

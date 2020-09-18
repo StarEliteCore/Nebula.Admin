@@ -1,11 +1,9 @@
 ﻿using Destiny.Core.Flow.Validation;
-using Destiny.Core.Flow.Validation.Interceptor;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 
 namespace Destiny.Core.Flow.FluentValidation
 {
@@ -19,7 +17,7 @@ namespace Destiny.Core.Flow.FluentValidation
             return services;
         }
 
-   
+
 
 
 
@@ -91,7 +89,7 @@ namespace Destiny.Core.Flow.FluentValidation
         private static IServiceCollection AddScanResult(this IServiceCollection services,
             AssemblyScanner.AssemblyScanResult scanResult, ServiceLifetime lifetime)
         {
-       
+
             services.Add(
                 new ServiceDescriptor(
                     scanResult.InterfaceType,

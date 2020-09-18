@@ -1,36 +1,31 @@
-﻿using Destiny.Core.Flow.Dependency;
-using Destiny.Core.Flow.Modules;
+﻿using Destiny.Core.Flow.Modules;
 using Destiny.Core.Flow.TestBase;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Destiny.Core.Tests
 {
-   public class StartupModulesTest: IntegratedTest<TestModules>
+    public class StartupModulesTest : IntegratedTest<TestModules>
     {
         TestModules test = null;
         public StartupModulesTest()
         {
-             test = ServiceProvider.GetService<TestModules>();
+            test = ServiceProvider.GetService<TestModules>();
         }
 
-       
+
 
         [Fact]
         public void Test_TestModules()
         {
 
-         
+
             Assert.True(test.ApplicationInitializationIsCalled);
             Assert.True(test.ConfigureServicesIsCalled);
         }
     }
 
-    [DependsOn(typeof(TestModules1),typeof(TestModules3))]
+    [DependsOn(typeof(TestModules1), typeof(TestModules3))]
     public class TestModules : AppModule
     {
         public bool ConfigureServicesIsCalled { get; set; }

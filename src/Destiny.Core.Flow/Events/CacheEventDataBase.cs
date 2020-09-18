@@ -1,13 +1,8 @@
-﻿using Destiny.Core.Flow.Extensions;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Reflection;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace Destiny.Core.Flow.Events
 {
-   public abstract class CacheEventDataBase: Notification
+    public abstract class CacheEventDataBase : Notification
     {
 
         public EventState EventState { get; set; } = EventState.Add;
@@ -17,7 +12,7 @@ namespace Destiny.Core.Flow.Events
     public enum EventState
     {
         [Description("添加")]
-        Add =5,
+        Add = 5,
         [Description("更新")]
         Update = 10,
         [Description("移除")]

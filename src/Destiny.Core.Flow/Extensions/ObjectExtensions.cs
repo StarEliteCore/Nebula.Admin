@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 
 namespace Destiny.Core.Flow.Extensions
 {
@@ -102,7 +100,7 @@ namespace Destiny.Core.Flow.Extensions
             return !value.IsNull();
         }
 
-  
+
 
         /// <summary>
         /// 判断特性相应是否存在
@@ -129,6 +127,6 @@ namespace Destiny.Core.Flow.Extensions
         }
 
 
-      
+
     }
 }

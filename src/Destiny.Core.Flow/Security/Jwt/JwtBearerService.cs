@@ -3,23 +3,21 @@ using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Security.Jwt
 {
     public class JwtBearerService : IJwtBearerService
     {
-        private readonly IServiceProvider _provider=null;
+        private readonly IServiceProvider _provider = null;
         private readonly JwtOptions _jwtOptions = null;
         private readonly JwtSecurityTokenHandler _tokenHandler = new JwtSecurityTokenHandler();
         public JwtBearerService(IServiceProvider provider)
         {
             _provider = provider;
-            _jwtOptions= provider.GetAppSettings()?.Jwt;
+            _jwtOptions = provider.GetAppSettings()?.Jwt;
         }
 
         /// <summary>
@@ -30,19 +28,19 @@ namespace Destiny.Core.Flow.Security.Jwt
         /// <returns></returns>
         public JwtResult CreateToken(Guid userId, string userName)
         {
-         
+
             Claim[] claims =
             {
                 new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
                 new Claim(ClaimTypes.Name, userName),
             };
-            var(token, accessExpires) =this.BuildJwtToken(claims, _jwtOptions);
-            
+            var (token, accessExpires) = this.BuildJwtToken(claims, _jwtOptions);
+
             return new JwtResult()
             {
                 AccessToken = token,
                 AccessExpires = accessExpires.UnixTicks().AsTo<long>(),
-                claims=claims,
+                claims = claims,
             };
         }
 
@@ -59,9 +57,9 @@ namespace Destiny.Core.Flow.Security.Jwt
             SecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(options.SecretKey));
             SigningCredentials credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
             double minutes = options.ExpireMins <= 0 ? 5 : options.ExpireMins;
-              
+
             DateTime expires = now.AddMinutes(minutes);
-           
+
 
             SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
             {

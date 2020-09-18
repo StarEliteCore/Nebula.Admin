@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
+﻿using System.Reflection;
 
 namespace Destiny.Core.Flow.Reflection
 {
-    public interface IAssemblyFinder:IFinder<Assembly>
+    public interface IAssemblyFinder : IFinder<Assembly>
     {
 
     }

@@ -3,10 +3,8 @@ using Destiny.Core.Flow.Extensions;
 using MongoDB.Driver;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 
 namespace Destiny.Core.Flow
 {
@@ -54,9 +52,9 @@ namespace Destiny.Core.Flow
                 propertyAccess = Expression.Property(propertyAccess, propertyName);
             }
             var convertExpression = Expression.Convert(propertyAccess, typeof(object));
-            Expression<Func<TEntity, object>> keySelector = 
+            Expression<Func<TEntity, object>> keySelector =
             Expression.Lambda<Func<TEntity, object>>(
-                convertExpression, 
+                convertExpression,
                 new ParameterExpression[] {
               param
             });

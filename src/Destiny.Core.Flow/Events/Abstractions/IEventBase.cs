@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Events.Abstractions
 {
     /// <summary>
     /// 事件基类
     /// </summary>
-   public interface IEventBase
+    public interface IEventBase
     {   /// <summary>
         /// 事件发布时间
         /// </summary>

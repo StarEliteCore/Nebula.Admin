@@ -1,19 +1,13 @@
 ﻿using CSRedis;
-using Destiny.Core.Flow.Caching;
 using Destiny.Core.Flow.Exceptions;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Modules;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace Destiny.Core.Flow.Caching.CSRedis
 {
-  public   class CSRedisModule : AppModule
+    public class CSRedisModule : AppModule
     {
 
         public override void ConfigureServices(ConfigureServicesContext context)
@@ -32,7 +26,7 @@ namespace Destiny.Core.Flow.Caching.CSRedis
             context.Services.TryAddSingleton(typeof(ICache<,>), typeof(CSRedisCache<,>));
             context.Services.TryAddSingleton<ICache, CSRedisCache>();
         }
-      
-       
+
+
     }
 }

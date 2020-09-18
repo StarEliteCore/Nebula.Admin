@@ -1,32 +1,25 @@
 ﻿using Destiny.Core.Flow;
 using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.ExpressionUtil;
+using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
-using Destiny.Core.Flow.Modules;
+using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.MongoDB;
 using Destiny.Core.Flow.MongoDB.DbContexts;
 using Destiny.Core.Flow.MongoDB.Repositorys;
 using Destiny.Core.Flow.TestBase;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using Destiny.Core.Flow.Extensions;
-using Destiny.Core.Flow.Filter.Abstract;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
 
 namespace Destiny.Core.Tests
 {
@@ -107,20 +100,20 @@ namespace Destiny.Core.Tests
 
 
         [Fact]
-        public async Task  UpdateAsync_Test()
+        public async Task UpdateAsync_Test()
         {
-        
+
 
             try
             {
-            
-          //var entity =await  _mongoDBRepository.FindAsync(new ObjectId("5f5b695806303c854f0ba8be"));
+
+                //var entity =await  _mongoDBRepository.FindAsync(new ObjectId("5f5b695806303c854f0ba8be"));
 
                 var update = Builders<TestDB>.Update
             .Set(t => t.IsDeleted, true);
                 var filter = Builders<TestDB>.Filter.Eq(e => e.Id, new ObjectId("5f5b695906303c854f0ba8bf"));
-                var re =await _mongoDBRepository.Collection.UpdateOneAsync(filter, update);
-                Assert.True(re.ModifiedCount>0);
+                var re = await _mongoDBRepository.Collection.UpdateOneAsync(filter, update);
+                Assert.True(re.ModifiedCount > 0);
             }
             catch (Exception ex)
             {
@@ -208,16 +201,16 @@ namespace Destiny.Core.Tests
 
 
 
-    
+
 
     [MongoDBTable("TestDB")]//
-    
+
     public class TestDB : MongoEntity, IFullAuditedEntity<ObjectId>
     {
 
 
- 
-      
+
+
 
 
         public string Name { get; set; }
@@ -248,43 +241,44 @@ namespace Destiny.Core.Tests
         [DisplayName("创建时间")]
         public virtual DateTime CreatedTime { get; set; }
 
-       
+
     }
 
 
     public class TestDto
-    { 
-      public ObjectId Id { get; set; }
+    {
+        public ObjectId Id { get; set; }
 
-      public string Name { get; set; }
+        public string Name { get; set; }
     }
 
     public static partial class Extensions
     {
 
-        private static ConcurrentDictionary<Type,string> Dic = new System.Collections.Concurrent.ConcurrentDictionary<Type, string>();
+        private static ConcurrentDictionary<Type, string> Dic = new System.Collections.Concurrent.ConcurrentDictionary<Type, string>();
 
         public static BsonClassMap<TEntity> ToCollection<TEntity>(this BsonClassMap<TEntity> bson, string collection)
         {
-        
+
             Dic.GetOrAdd(bson.ClassType, collection);
             return bson;
         }
 
         public static string GetBsonClassCollection(Type type)
         {
-            Dic.TryGetValue(type,out string value);
+            Dic.TryGetValue(type, out string value);
             return value;
         }
 
     }
 
-    public class Test001 { 
-    
-       public ObjectId Id { get; set; }
+    public class Test001
+    {
 
-       public string Name { get; set; }
+        public ObjectId Id { get; set; }
 
-       
+        public string Name { get; set; }
+
+
     }
 }

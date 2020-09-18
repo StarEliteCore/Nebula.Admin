@@ -1,8 +1,4 @@
-﻿using Destiny.Core.Flow.Events.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Events.EventBus
@@ -10,7 +6,7 @@ namespace Destiny.Core.Flow.Events.EventBus
     /// <summary>
     /// 中介者处理器
     /// </summary>
-   public interface IMediatorHandler
+    public interface IMediatorHandler
     {
         /// <summary>
         ///  发布事件

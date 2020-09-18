@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Destiny.Core.Flow.Entity
+﻿namespace Destiny.Core.Flow.Entity
 {
     /// <summary>
     /// 设置种子数据
@@ -16,7 +11,7 @@ namespace Destiny.Core.Flow.Entity
         /// </summary>
         void Initialize();
 
-        int Order { get;  }
+        int Order { get; }
 
         bool Disable { get; }
     }

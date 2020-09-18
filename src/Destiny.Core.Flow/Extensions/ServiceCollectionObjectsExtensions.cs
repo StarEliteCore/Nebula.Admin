@@ -1,13 +1,11 @@
 ﻿using Destiny.Core.Flow.Dependency;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Destiny.Core.Flow.Extensions
 {
-  public   static partial class Extensions
+    public static partial class Extensions
     {
         public static ObjectAccessor<T> TryAddObjectAccessor<T>(this IServiceCollection services)
         {

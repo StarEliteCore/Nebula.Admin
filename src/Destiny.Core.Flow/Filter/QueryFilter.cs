@@ -1,7 +1,5 @@
 ﻿using Destiny.Core.Flow.Enums;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Filter
 {

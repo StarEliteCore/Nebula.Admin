@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Destiny.Core.Flow.Entity;
+using System;
 using System.ComponentModel;
-using Destiny.Core.Flow.Entity;
 
 namespace Destiny.Core.Flow.IdentityServer.Entities
 {
@@ -28,7 +28,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
         /// 客户端id
         /// </summary>
         [DisplayName("客户端id")]
-        public int ClientId { get; set; }
+        public Guid ClientId { get; set; }
 
         ///// <summary>
         ///// 所属客户端

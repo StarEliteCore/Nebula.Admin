@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Destiny.Core.Flow.Validation
+﻿namespace Destiny.Core.Flow.Validation
 {
     public class ValidationFailure
     {

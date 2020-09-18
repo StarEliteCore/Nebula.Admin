@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using Destiny.Core.Flow.Dependency;
 
 namespace Destiny.Core.Flow.Reflection
 {
@@ -19,7 +16,7 @@ namespace Destiny.Core.Flow.Reflection
 
         protected override Type[] FindAllItems()
         {
-          return  _assemblyFinder.FindAll().SelectMany(o=>o.GetTypes()).ToArray();
+            return _assemblyFinder.FindAll().SelectMany(o => o.GetTypes()).ToArray();
         }
     }
 }

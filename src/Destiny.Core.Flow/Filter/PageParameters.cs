@@ -1,14 +1,11 @@
 ﻿using Destiny.Core.Flow.Filter.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Filter
 {
     /// <summary>
     /// 分页所需的参数
     /// </summary>
-    public class PageParameters: IPagedRequest, IFilteredPagedRequest
+    public class PageParameters : IPagedRequest, IFilteredPagedRequest
     {
 
 
@@ -23,7 +20,7 @@ namespace Destiny.Core.Flow.Filter
         /// <summary>
         /// 分页大小
         /// </summary>
-        public virtual int PageSize { get; set; } 
+        public virtual int PageSize { get; set; }
 
         /// <summary>
         /// 排序条件集合

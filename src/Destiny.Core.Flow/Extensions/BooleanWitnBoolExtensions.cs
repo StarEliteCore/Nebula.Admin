@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Destiny.Core.Flow.Extensions
+﻿namespace Destiny.Core.Flow.Extensions
 {
     public static partial class Extensions
     {
@@ -14,7 +10,7 @@ namespace Destiny.Core.Flow.Extensions
         /// <returns></returns>
         public static bool NullableBoolToBool(bool? @bool)
         {
-          return  @bool == null || @bool == false ? false : true;
+            return @bool == null || @bool == false ? false : true;
         }
     }
 }

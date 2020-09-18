@@ -1,13 +1,9 @@
 ﻿using Destiny.Core.Flow.Options;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Extensions
@@ -32,7 +28,7 @@ namespace Destiny.Core.Flow.Extensions
         /// <param name="provider"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static ILogger GetLogger(this IServiceProvider provider,Type type)
+        public static ILogger GetLogger(this IServiceProvider provider, Type type)
         {
             ILoggerFactory factory = provider.GetService<ILoggerFactory>();
             return factory.CreateLogger(type);
@@ -69,10 +65,10 @@ namespace Destiny.Core.Flow.Extensions
             return ActivatorUtilities.CreateInstance(provider, type, arguments);
         }
 
-        public static void GetService<T>(this IServiceProvider provider,Action<T> action)
+        public static void GetService<T>(this IServiceProvider provider, Action<T> action)
         {
             action.NotNull(nameof(action));
-            var t= provider.GetService<T>();
+            var t = provider.GetService<T>();
             action(t);
         }
 
@@ -173,6 +169,6 @@ namespace Destiny.Core.Flow.Extensions
             await callback(scope.ServiceProvider);
         }
 
-       
+
     }
 }

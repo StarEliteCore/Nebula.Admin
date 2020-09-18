@@ -1,12 +1,9 @@
-﻿using Destiny.Core.Flow.Dependency;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace Destiny.Core.Flow.Reflection
 {
 
-    public interface ITypeFinder 
+    public interface ITypeFinder
     {
         Type[] Find(Func<Type, bool> predicate);
 

@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
-using Destiny.Core.Flow.IServices.IRoleServices;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Dtos.RoleDtos;
-using Destiny.Core.Flow.AspNetCore.Api;
-using Microsoft.AspNetCore.Authorization;
 using Destiny.Core.Flow.Filter;
+using Destiny.Core.Flow.IServices.IRoleServices;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.ComponentModel;
+using System.Threading.Tasks;
 
 
 namespace Destiny.Core.Flow.API.Controllers
@@ -35,7 +32,7 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Description("异步得到角色分页")]
-        public async Task<PageList<RoleOutputPageListDto>> GetRolePageAsync([FromBody]PageRequest request)
+        public async Task<PageList<RoleOutputPageListDto>> GetRolePageAsync([FromBody] PageRequest request)
         {
 
             return (await _roleManagerServices.GetRolePageAsync(request)).ToPageList();
@@ -79,7 +76,7 @@ namespace Destiny.Core.Flow.API.Controllers
         [HttpPost]
         public async Task<AjaxResult> AddOrUpdateAsync([FromBody] RoleInputDto dto)
         {
-            if(dto.Id==Guid.Empty)
+            if (dto.Id == Guid.Empty)
             {
                 return (await _roleManagerServices.AddRoleAsync(dto)).ToAjaxResult();
             }

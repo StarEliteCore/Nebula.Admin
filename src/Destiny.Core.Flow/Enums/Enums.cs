@@ -1,8 +1,5 @@
 ﻿using Destiny.Core.Flow.Filter;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 
 namespace Destiny.Core.Flow.Enums
 {
@@ -120,10 +117,10 @@ namespace Destiny.Core.Flow.Enums
         [Description("小于或等于")]
         LessThanOrEqual,
 
- 
+
         [Description("不等于")]
         NotEqual,
-        
+
 
         [Description("包含")]
         In,
@@ -148,8 +145,8 @@ namespace Destiny.Core.Flow.Enums
     {
 
         [Description("新增")]
-        Add =0,
+        Add = 0,
         [Description("更新")]
-        Update =5
+        Update = 5
     }
 }
