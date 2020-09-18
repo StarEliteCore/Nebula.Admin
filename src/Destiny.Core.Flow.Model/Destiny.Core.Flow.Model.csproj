@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Entities\IdentityServer4\Resources\UserClaim.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="IdentityServer4.EntityFramework.Storage" Version="4.1.0" />
     <PackageReference Include="IdentityServer4.Storage" Version="4.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
@@ -12,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Destiny.Core.Flow.IdentityServer.Entities\Destiny.Core.Flow.IdentityServer.Entities.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.IdentityServer4\Destiny.Core.Flow.IdentityServer.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Identity\Destiny.Core.Flow.Identitys.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow\Destiny.Core.Flow.csproj" />
