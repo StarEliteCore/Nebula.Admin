@@ -21,14 +21,19 @@ namespace Destiny.Core.Flow.CodeGenerator
         public string DisplayName { get; set; }
 
         /// <summary>
-        /// 
+        /// 主键类型
         /// </summary>
         public string PrimaryKeyType { get; set; }
 
         /// <summary>
-        /// 
+        /// 主键名
         /// </summary>
 
-        public string PrimaryKeyColName { get; set; }
+        public string PrimaryKeyName { get; set; }
+
+        /// <summary>
+        /// 属性集合
+        /// </summary>
+        public List<PropertyMetadata> Properties = new List<PropertyMetadata>();
     }
 }

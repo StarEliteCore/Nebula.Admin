@@ -5,7 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Templates\Entity.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="RazorEngine.NetCore" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Templates\Entity.cshtml" />
   </ItemGroup>
 
 </Project>
