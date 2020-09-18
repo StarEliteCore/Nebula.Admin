@@ -8,6 +8,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// <summary>
     /// 身份资源
     /// </summary>
+    [DisplayName("身份资源")]
     public class IdentityResource : IEntity<Guid>, ICreatedTime, IModificationTime
     {
         public Guid Id { get; set; }

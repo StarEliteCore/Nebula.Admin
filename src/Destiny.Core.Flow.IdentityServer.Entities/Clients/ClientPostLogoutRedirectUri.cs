@@ -7,6 +7,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// <summary>
     /// 客户端退出重定向uri
     /// </summary>
+    [DisplayName("客户端退出重定向uri")]
     public class ClientPostLogoutRedirectUri : IEntity<Guid>
     {
         public Guid Id { get; set; }

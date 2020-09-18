@@ -7,6 +7,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// <summary>
     /// 客户端允许的重定向uri
     /// </summary>
+    [DisplayName("客户端允许的重定向uri")]
     public class ClientRedirectUri : IEntity<Guid>
     {
         public Guid Id { get; set; }

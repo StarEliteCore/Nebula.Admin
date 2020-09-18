@@ -6,6 +6,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// <summary>
     /// api授权范围属性
     /// </summary>
+    [DisplayName("api授权范围属性")]
     public class ApiScopeProperty : Property
     {
         /// <summary>

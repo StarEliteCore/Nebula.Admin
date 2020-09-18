@@ -7,6 +7,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// <summary>
     /// 持久化授权
     /// </summary>
+    [DisplayName("持久化授权")]
     public class PersistedGrant : IEntity<Guid>, ICreatedTime
     {
         public Guid Id { get; set; }

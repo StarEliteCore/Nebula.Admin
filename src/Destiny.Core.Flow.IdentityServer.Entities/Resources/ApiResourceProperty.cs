@@ -6,6 +6,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// <summary>
     /// api资源属性
     /// </summary>
+    [DisplayName("api资源属性")]
     public class ApiResourceProperty : Property
     {
         /// <summary>

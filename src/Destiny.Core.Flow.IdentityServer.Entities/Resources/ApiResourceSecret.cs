@@ -6,6 +6,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// <summary>
     /// api资源
     /// </summary>
+    [DisplayName("api资源")]
     public class ApiResourceSecret : Secret
     {
         /// <summary>

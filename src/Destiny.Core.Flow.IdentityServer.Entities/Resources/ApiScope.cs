@@ -8,6 +8,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// <summary>
     /// api授权范围
     /// </summary>
+    [DisplayName("api授权范围")]
     public class ApiScope : IEntity<Guid>
     {
         public Guid Id { get; set; }

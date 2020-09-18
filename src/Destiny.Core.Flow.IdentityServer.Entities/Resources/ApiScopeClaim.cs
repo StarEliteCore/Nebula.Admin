@@ -6,6 +6,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// <summary>
     /// api授权范围声明
     /// </summary>
+    [DisplayName("api授权范围声明")]
     public class ApiScopeClaim : UserClaim
     {
         /// <summary>

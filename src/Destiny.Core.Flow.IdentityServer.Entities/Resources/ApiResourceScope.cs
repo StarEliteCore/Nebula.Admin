@@ -4,6 +4,10 @@ using Destiny.Core.Flow.Entity;
 
 namespace Destiny.Core.Flow.IdentityServer.Entities
 {
+    /// <summary>
+    /// Api资源范围
+    /// </summary>
+    [DisplayName("Api资源范围")]
     public class ApiResourceScope : IEntity<Guid>
     {
         public Guid Id { get; set; }

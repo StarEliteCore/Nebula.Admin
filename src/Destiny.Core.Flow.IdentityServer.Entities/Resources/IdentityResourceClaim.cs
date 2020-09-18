@@ -6,6 +6,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// <summary>
     /// 身份资源声明
     /// </summary>
+    [DisplayName("身份资源声明")]
     public class IdentityResourceClaim : UserClaim
     {
         /// <summary>

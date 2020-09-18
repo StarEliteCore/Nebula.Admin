@@ -7,6 +7,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// <summary>
     /// 客户端声明
     /// </summary>
+    [DisplayName("客户端声明")]
     public class ClientClaim : IEntity<Guid>
     {
         public Guid Id { get; set; }

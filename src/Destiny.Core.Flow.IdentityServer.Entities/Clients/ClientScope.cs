@@ -7,6 +7,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// <summary>
     /// 客户端授权范围
     /// </summary>
+    [DisplayName("客户端授权范围")]
     public class ClientScope : IEntity<Guid>
     {
         public Guid Id { get; set; }

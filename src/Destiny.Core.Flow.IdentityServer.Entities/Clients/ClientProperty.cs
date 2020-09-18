@@ -28,6 +28,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// <summary>
     /// 客户端属性
     /// </summary>
+    [DisplayName("客户端属性")]
     public class ClientProperty : Property
     {
         /// <summary>

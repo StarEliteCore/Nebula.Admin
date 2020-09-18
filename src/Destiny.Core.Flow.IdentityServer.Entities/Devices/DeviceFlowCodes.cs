@@ -9,6 +9,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// <summary>
     /// 设备代码
     /// </summary>
+    [DisplayName("设备代码")]
     public class DeviceFlowCodes : IEntity<Guid>, ICreatedTime
     {
         public Guid Id { get; set; }

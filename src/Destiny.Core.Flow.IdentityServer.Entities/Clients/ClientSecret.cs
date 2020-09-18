@@ -45,6 +45,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// <summary>
     /// 客户端密钥
     /// </summary>
+    [DisplayName("客户端密钥")]
     public class ClientSecret : Secret
     {
         /// <summary>

@@ -9,6 +9,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// <summary>
     /// 客户端限制提供器
     /// </summary>
+    [DisplayName("客户端限制提供器")]
     public class ClientIdPRestriction : IEntity<Guid>
     {
         public Guid Id { get; set; }

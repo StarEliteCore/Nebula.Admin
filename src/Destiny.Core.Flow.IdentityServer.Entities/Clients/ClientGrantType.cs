@@ -7,6 +7,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// <summary>
     /// 客户端授权类型
     /// </summary>
+    [DisplayName("客户端授权类型")]
     public class ClientGrantType : IEntity<Guid>
     {
         public Guid Id { get; set; }

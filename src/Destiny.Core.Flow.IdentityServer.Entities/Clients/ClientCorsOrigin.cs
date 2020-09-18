@@ -7,6 +7,7 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// <summary>
     /// 客户端跨域配置
     /// </summary>
+    [DisplayName("客户端跨域配置")]
     public class ClientCorsOrigin : IEntity<Guid>
     {
         public Guid Id { get; set; }
