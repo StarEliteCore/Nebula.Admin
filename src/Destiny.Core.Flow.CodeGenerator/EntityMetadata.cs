@@ -31,6 +31,8 @@ namespace Destiny.Core.Flow.CodeGenerator
 
         public string PrimaryKeyName { get; set; }
 
+
+
         /// <summary>
         /// 属性集合
         /// </summary>

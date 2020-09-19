@@ -13,7 +13,7 @@ namespace Destiny.Core.Flow.CodeGenerator
         /// 是否主键
         /// </summary>
 
-        public bool IsPrimaryKey { get; set; }
+        public bool IsPrimaryKey { get; set; } = false;
         /// <summary>
         /// 属性名
         /// </summary>
@@ -27,7 +27,7 @@ namespace Destiny.Core.Flow.CodeGenerator
         /// <summary>
         /// 是否允许为空
         /// </summary>
-        public bool IsNullable { get; set; }
+        public bool IsNullable { get; set; } = false;
 
         /// <summary>
         /// 默认值

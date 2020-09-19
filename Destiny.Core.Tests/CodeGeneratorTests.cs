@@ -33,6 +33,15 @@ namespace Destiny.Core.Tests
                 PropertyName = "Name"
 
             });
+            propertyMetadatas.Add(new PropertyMetadata()
+            {
+                IsNullable = false,
+                IsPrimaryKey = false,
+                CSharpType = "string",
+                DisplayName = "名字1",
+                PropertyName = "Name1"
+
+            });
             projectMetadata.EntityMetadata = new EntityMetadata()
             {
                 EntityName = "TestCode",

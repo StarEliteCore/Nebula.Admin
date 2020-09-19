@@ -23,5 +23,12 @@ namespace Destiny.Core.Flow.CodeGenerator
         /// <param name="metadata"></param>
         /// <returns></returns>
         CodeData GenerateEntityCode(ProjectMetadata metadata);
+
+        /// <summary>
+        /// 生成实体配置代码
+        /// </summary>
+        /// <param name="metadata">元数据</param>
+        /// <returns></returns>
+         CodeData GenerateEntityConfigurationCode(ProjectMetadata metadata);
     }
 }

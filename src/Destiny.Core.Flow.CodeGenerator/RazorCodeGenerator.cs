@@ -29,7 +29,7 @@ namespace Destiny.Core.Flow.CodeGenerator
             List<CodeData> codes = new List<CodeData>();
 
             codes.Add(GenerateEntityCode(projectMetadata));
-
+            codes.Add(GenerateEntityConfigurationCode(projectMetadata));
             codes = codes.OrderBy(o => o.FileName).ToList();
             foreach (var code in codes)
             {
@@ -68,6 +68,8 @@ namespace Destiny.Core.Flow.CodeGenerator
             return code;
         }
 
+
+         
         /// <summary>
         /// 创建键
         /// </summary>
@@ -82,6 +84,11 @@ namespace Destiny.Core.Flow.CodeGenerator
             return Engine.Razor.GetKey(name);
         }
 
+        /// <summary>
+        /// 生成实体代码
+        /// </summary>
+        /// <param name="metadata">元数据</param>
+        /// <returns></returns>
 
         public CodeData GenerateEntityCode(ProjectMetadata metadata)
         {
@@ -90,6 +97,22 @@ namespace Destiny.Core.Flow.CodeGenerator
             {
                 SourceCode = template,
                 FileName = $"Entity/{metadata.EntityMetadata.EntityName}.cs"
+            };
+            return code;
+        }
+
+        /// <summary>
+        /// 生成实体配置代码
+        /// </summary>
+        /// <param name="metadata">元数据</param>
+        /// <returns></returns>
+        public CodeData GenerateEntityConfigurationCode(ProjectMetadata metadata)
+        {
+            var template = GetTemplateCode(metadata, CodeType.EntityConfiguration);
+            var code = new CodeData()
+            {
+                SourceCode = template,
+                FileName = $"EntityConfigurations/{metadata.EntityMetadata.EntityName}Configuration.cs"
             };
             return code;
         }
