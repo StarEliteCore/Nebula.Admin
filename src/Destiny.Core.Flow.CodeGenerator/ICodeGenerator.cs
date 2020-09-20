@@ -30,5 +30,28 @@ namespace Destiny.Core.Flow.CodeGenerator
         /// <param name="metadata">元数据</param>
         /// <returns></returns>
          CodeData GenerateEntityConfigurationCode(ProjectMetadata metadata);
+
+
+        /// <summary>
+        /// 创建输入Dto码
+        /// </summary>
+        /// <param name="metadata">元数据</param>
+        /// <returns></returns>
+        CodeData GenerateInputDtoCode(ProjectMetadata metadata);
+
+        /// <summary>
+        /// 创建输出代码
+        /// </summary>
+        /// <param name="metadata"></param>
+        /// <returns></returns>
+        CodeData GenerateOutputDtoCode(ProjectMetadata metadata);
+
+
+        /// <summary>
+        /// 创建分页Dto代码
+        /// </summary>
+        /// <param name="metadata"></param>
+        /// <returns></returns>
+        CodeData GeneratePageDtoCode(ProjectMetadata metadata);
     }
 }

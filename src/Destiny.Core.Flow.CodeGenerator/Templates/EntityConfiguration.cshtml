@@ -11,11 +11,10 @@
     //     此代码由代码生成器生成。
     //     手动更改此文件可能导致应用程序出现意外的行为。
     //     如果重新生成代码，将覆盖对此文件的手动更改。
-    //
-</auto-generated>
-//<copyright file="@(metadata.EntityMetadata.EntityName).cs" company="@metadata.Company">
+//</auto-generated>
+//<copyright file="@(metadata.EntityMetadata.EntityName)EntityConfiguration.cs" company="@metadata.Company">
     //     @metadata.Copyright
-</copyright>
+//</copyright>
 //<site>@metadata.SiteUrl</site>
 //<last-editor>@metadata.Creator</last-editor>
 //<last-date>@DateTime.Now.ToString("yyyy/MM/dd HH:mm")</last-date>
@@ -43,15 +42,15 @@ namespace @(metadata.Namespace).EntityConfigurations
            @foreach (var property in metadata.EntityMetadata.Properties)
            {
                @if (property.IsPrimaryKey)
-               {
-                   <text>builder.HasKey(x => x.Id);</text>}
+               {<text>builder.HasKey(x => x.Id);</text>}
                else
                {<text>
-                   builder.Property(x =>x.@(property.PropertyName)).IsRequired(@(property.IsNullable));
-                </text>
+                     builder.Property(x =>x.@(property.PropertyName)).IsRequired(@(property.IsNullable.ToString().ToLower()));</text>
                }
            
            }
-           builder.ToTable("@metadata.EntityMetadata.EntityName");
+             
+                     builder.ToTable("@metadata.EntityMetadata.EntityName");
         }
+    }
 }

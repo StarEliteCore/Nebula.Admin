@@ -40,5 +40,21 @@ namespace Destiny.Core.Flow.CodeGenerator
         /// </summary>
         public string CSharpType { get; set; }
 
+
+        /// <summary>
+        /// 该字段是否生成输入DTO
+        /// </summary>
+        public bool IsInputDto { get; set; } = true;
+
+        /// <summary>
+        /// 该字段是否生成输出DTO
+        /// </summary>
+        public bool IsOutputDto { get; set; } = true;
+
+        /// <summary>
+        /// 该字段是否生成分页DTO
+        /// </summary>
+        public bool IsPageDto { get; set; } = true;
+
     }
 }

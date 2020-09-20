@@ -30,8 +30,10 @@ namespace Destiny.Core.Flow.CodeGenerator
 
             codes.Add(GenerateEntityCode(projectMetadata));
             codes.Add(GenerateEntityConfigurationCode(projectMetadata));
-            codes = codes.OrderBy(o => o.FileName).ToList();
-            foreach (var code in codes)
+            codes.Add(GenerateInputDtoCode(projectMetadata));
+            codes.Add(GenerateOutputDtoCode(projectMetadata));
+            codes.Add(GeneratePageDtoCode(projectMetadata));
+            foreach (var code in codes.OrderBy(o => o.FileName))
             {
                 var saveFilePath = $"{Path.Combine(@"{0}\{1}", filePath, code.FileName)}";
                 var  path = Path.GetDirectoryName(saveFilePath);
@@ -42,14 +44,12 @@ namespace Destiny.Core.Flow.CodeGenerator
 
                 using (var fs = new FileStream(saveFilePath, FileMode.Create, FileAccess.Write))
                 {
-                    //实例化一个StreamWriter-->与fs相关联
+      
                     using (var sw = new StreamWriter(fs))
                     {
-                        //开始写入
+
                         sw.Write(code.SourceCode);
-                        //清空缓冲区
                         sw.Flush();
-                        //关闭流
                         sw.Close();
                         fs.Close();
                     }
@@ -57,15 +57,17 @@ namespace Destiny.Core.Flow.CodeGenerator
             }
         }
 
+        /// <summary>
+        /// 得到模版
+        /// </summary>
+        /// <param name="metadata"></param>
+        /// <param name="codeType"></param>
+        /// <returns></returns>
         private string GetTemplateCode(ProjectMetadata metadata, CodeType codeType)
         {
-         
-
             string template = GetInternalTemplate(codeType);
             var key = GetKey(codeType, template);
-            string code;
-            code = Engine.Razor.RunCompile(template, key, metadata.GetType(), metadata);
-            return code;
+            return Engine.Razor.RunCompile(template, key, metadata.GetType(), metadata);
         }
 
 
@@ -79,7 +81,6 @@ namespace Destiny.Core.Flow.CodeGenerator
 
         private ITemplateKey GetKey(CodeType codeType, string template)
         {
-
             string name = $"{codeType.ToString()}-{Guid.NewGuid()}";
             return Engine.Razor.GetKey(name);
         }
@@ -116,6 +117,57 @@ namespace Destiny.Core.Flow.CodeGenerator
             };
             return code;
         }
+
+        /// <summary>
+        /// 创建输入代码
+        /// </summary>
+        /// <param name="metadata"></param>
+        /// <returns></returns>
+        public CodeData GenerateInputDtoCode(ProjectMetadata metadata)
+        {
+            var template = GetTemplateCode(metadata, CodeType.InputDto);
+            var code = new CodeData()
+            {
+                SourceCode = template,
+                FileName = $"Dtos/{metadata.EntityMetadata.EntityName}InputDto.cs"
+            };
+            return code;
+        }
+
+
+        /// <summary>
+        /// 创建输出代码
+        /// </summary>
+        /// <param name="metadata"></param>
+        /// <returns></returns>
+        public CodeData GenerateOutputDtoCode(ProjectMetadata metadata)
+        {
+            var template = GetTemplateCode(metadata, CodeType.OutputDto);
+            var code = new CodeData()
+            {
+                SourceCode = template,
+                FileName = $"Dtos/{metadata.EntityMetadata.EntityName}OutputDto.cs"
+            };
+            return code;
+        }
+
+
+        /// <summary>
+        /// 创建分页Dto代码
+        /// </summary>
+        /// <param name="metadata"></param>
+        /// <returns></returns>
+        public CodeData GeneratePageDtoCode(ProjectMetadata metadata)
+        {
+            var template = GetTemplateCode(metadata, CodeType.PageListDto);
+            var code = new CodeData()
+            {
+                SourceCode = template,
+                FileName = $"Dtos/{metadata.EntityMetadata.EntityName}PageListDto.cs"
+            };
+            return code;
+        }
+
         /// <summary>
         /// 读取指定代码类型的内置代码模板
         /// </summary>
@@ -123,7 +175,7 @@ namespace Destiny.Core.Flow.CodeGenerator
         /// <returns></returns>
         private string GetInternalTemplate(CodeType type)
         {
-            String projectName = Assembly.GetExecutingAssembly().GetName().Name.ToString();
+            string projectName = Assembly.GetExecutingAssembly().GetName().Name.ToString();
             string resName = $"{projectName}.Templates.{type.ToString()}.cshtml";
             Stream stream = GetType().Assembly.GetManifestResourceStream(resName);
             if (stream == null)
@@ -150,6 +202,23 @@ namespace Destiny.Core.Flow.CodeGenerator
         /// 实体配置
         /// </summary>
         EntityConfiguration,
+
+        /// <summary>
+        /// 输出Dto
+        /// </summary>
+        OutputDto,
+
+
+        /// <summary>
+        /// 输入Dto
+        /// </summary>
+        InputDto,
+
+        /// <summary>
+        /// 分页Dto
+        /// </summary>
+        PageListDto,
+
 
     }
 }
