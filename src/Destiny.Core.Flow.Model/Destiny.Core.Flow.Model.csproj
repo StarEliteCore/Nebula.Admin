@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="EntityConfigurations\IdentityServer4\**" />
+    <EmbeddedResource Remove="EntityConfigurations\IdentityServer4\**" />
+    <None Remove="EntityConfigurations\IdentityServer4\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Entities\IdentityServer4\Resources\UserClaim.cs" />
   </ItemGroup>
 
