@@ -33,6 +33,8 @@ namespace Destiny.Core.Flow.CodeGenerator
             codes.Add(GenerateInputDtoCode(projectMetadata));
             codes.Add(GenerateOutputDtoCode(projectMetadata));
             codes.Add(GeneratePageDtoCode(projectMetadata));
+            codes.Add(GenerateIService(projectMetadata));
+            codes.Add(GenerateServiceImpl(projectMetadata));
             foreach (var code in codes.OrderBy(o => o.FileName))
             {
                 var saveFilePath = $"{Path.Combine(@"{0}\{1}", filePath, code.FileName)}";
@@ -169,6 +171,36 @@ namespace Destiny.Core.Flow.CodeGenerator
         }
 
         /// <summary>
+        /// 创建服务接口
+        /// </summary>
+        /// <param name="metadata">元数据</param>
+        /// <returns></returns>
+
+        public CodeData GenerateIService(ProjectMetadata metadata)
+        {
+
+            var template = GetTemplateCode(metadata, CodeType.IService);
+            var code = new CodeData()
+            {
+                SourceCode = template,
+                FileName = $"Services/I{metadata.EntityMetadata.EntityName}Service.cs"
+            };
+            return code;
+        }
+
+        public CodeData GenerateServiceImpl(ProjectMetadata metadata)
+        {
+
+            var template = GetTemplateCode(metadata, CodeType.ServiceImpl);
+            var code = new CodeData()
+            {
+                SourceCode = template,
+                FileName = $"Services/{metadata.EntityMetadata.EntityName}Service.cs"
+            };
+            return code;
+        }
+
+        /// <summary>
         /// 读取指定代码类型的内置代码模板
         /// </summary>
         /// <param name="type">代码类型</param>
@@ -220,5 +252,15 @@ namespace Destiny.Core.Flow.CodeGenerator
         PageListDto,
 
 
+        /// <summary>
+        /// 服务接口
+        /// </summary>
+        IService,
+
+
+        /// <summary>
+        /// 服务接口实现
+        /// </summary>
+        ServiceImpl,
     }
 }

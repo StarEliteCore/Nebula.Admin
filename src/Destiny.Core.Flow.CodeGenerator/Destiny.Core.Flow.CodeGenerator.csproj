@@ -8,8 +8,10 @@
     <None Remove="Templates\Entity.cshtml" />
     <None Remove="Templates\EntityConfiguration.cshtml" />
     <None Remove="Templates\InputDto.cshtml" />
+    <None Remove="Templates\IService.cshtml" />
     <None Remove="Templates\OutputDto.cshtml" />
     <None Remove="Templates\PageListDto.cshtml" />
+    <None Remove="Templates\ServiceImpl.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,11 +19,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Templates\IService.cshtml" />
     <EmbeddedResource Include="Templates\PageListDto.cshtml" />
     <EmbeddedResource Include="Templates\OutputDto.cshtml" />
     <EmbeddedResource Include="Templates\InputDto.cshtml" />
     <EmbeddedResource Include="Templates\Entity.cshtml" />
     <EmbeddedResource Include="Templates\EntityConfiguration.cshtml" />
+    <EmbeddedResource Include="Templates\ServiceImpl.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
