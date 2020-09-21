@@ -8,46 +8,14 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
     /// api资源
     /// </summary>
     [DisplayName("api资源")]
-    public abstract class ApiResourceBase : IEntity<Guid>
+    public abstract class ApiResourceBase : Resource
     {
-        public Guid Id { get; set; }
-
-        /// <summary>
-        /// 是否启用
-        /// </summary>
-        [DisplayName("是否启用")]
-        public bool Enabled { get; set; }
-
-        /// <summary>
-        /// 名称
-        /// </summary>
-        [DisplayName("名称")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// 显示名称
-        /// </summary>
-        [DisplayName("显示名称")]
-        public string DisplayName { get; set; }
-
-        /// <summary>
-        /// 描述
-        /// </summary>
-        [DisplayName("描述")]
-        public string Description { get; set; }
 
         /// <summary>
         /// 允许的访问令牌登录算法
         /// </summary>
         [DisplayName("允许的访问令牌登录算法")]
         public string AllowedAccessTokenSigningAlgorithms { get; set; }
-
-        /// <summary>
-        /// 是否显示在发现文档中
-        /// </summary>
-        [DisplayName("是否显示在发现文档中")]
-        public bool ShowInDiscoveryDocument { get; set; }
-
         ///// <summary>
         ///// 密钥
         ///// </summary>

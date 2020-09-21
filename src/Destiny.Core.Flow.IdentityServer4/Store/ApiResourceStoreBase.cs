@@ -29,34 +29,35 @@ namespace Destiny.Core.Flow.IdentityServer.Store
 
         public async Task<IEnumerable<IdentityServer4.Models.ApiResource>> FindApiResourcesByNameAsync(IEnumerable<string> apiResourceNames)
         {
-            var model= await _apiResourceRepository.Entities.Where(x => apiResourceNames.Contains(x.Name)).ToListAsync();
-            var dto=model.Select(x => x.MapTo<IdentityServer4.Models.ApiResource>()).ToList();
-            return dto;
+            return await _apiResourceRepository.Entities.Where(x => apiResourceNames.Contains(x.Name))
+                .Select(x => x.MapTo<IdentityServer4.Models.ApiResource>()).ToArrayAsync();
         }
 
         public async Task<IEnumerable<IdentityServer4.Models.ApiResource>> FindApiResourcesByScopeNameAsync(IEnumerable<string> scopeNames)
         {
-
-            throw new NotImplementedException();
+            return await _apiResourceRepository.Entities.Include(x => x.Scopes).Where(x => x.Scopes.Any(s => scopeNames.Contains(s.Scope)))
+                .Select(x => x.MapTo<IdentityServer4.Models.ApiResource>()).ToArrayAsync();
 
         }
 
         public async Task<IEnumerable<IdentityServer4.Models.ApiScope>> FindApiScopesByNameAsync(IEnumerable<string> scopeNames)
         {
-            throw new NotImplementedException();
+            return await _apiScopeRepository.Entities.Where(x => scopeNames.Contains(x.Name))
+                .Select(x => x.MapTo<IdentityServer4.Models.ApiScope>()).ToArrayAsync();
         }
 
         public async Task<IEnumerable<IdentityServer4.Models.IdentityResource>> FindIdentityResourcesByScopeNameAsync(IEnumerable<string> scopeNames)
         {
-            throw new NotImplementedException();
+            return await _identityResourceRepository.Entities.Where(x => scopeNames.Contains(x.Name))
+                .Select(x => x.MapTo<IdentityServer4.Models.IdentityResource>()).ToArrayAsync();
         }
 
         public async Task<IdentityServer4.Models.Resources> GetAllResourcesAsync()
         {
-            var identities= await _identityResourceRepository.TrackEntities.ToListAsync();
-            var scopes = await _apiScopeRepository.TrackEntities.ToListAsync();
-            var apis = await _apiResourceRepository.TrackEntities.ToListAsync();
-            return new IdentityServer4.Models.Resources(identities.Select(x=>x.MapTo<IdentityServer4.Models.IdentityResource>()),apis.Select(x=>x.MapTo<IdentityServer4.Models.ApiResource>()),scopes.Select(x=>x.MapTo<IdentityServer4.Models.ApiScope>()));
+            var identityResources = await _identityResourceRepository.Entities.Select(x => x.MapTo<IdentityServer4.Models.IdentityResource>()).ToListAsync();
+            var apiScopes = await _apiScopeRepository.Entities.Select(x => x.MapTo<IdentityServer4.Models.ApiScope>()).ToListAsync();
+            var apiResources = await _apiResourceRepository.Entities.Select(x => x.MapTo<IdentityServer4.Models.ApiResource>()).ToListAsync();
+            return new IdentityServer4.Models.Resources(identityResources, apiResources, apiScopes);
         }
     }
 }

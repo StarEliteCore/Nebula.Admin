@@ -23,12 +23,10 @@ namespace Destiny.Core.Flow.IdentityServer.Store
 
         public async Task<IdentityServer4.Models.Client> FindClientByIdAsync(string clientId)
         {
-             await Task.CompletedTask;
-            var client=await _clientRepository
+            var client = await _clientRepository
                 .Entities.Where(x => x.ClientId == clientId)
                 .FirstOrDefaultAsync();
-            var dto= client?.MapTo<IdentityServer4.Models.Client>();
-            return dto;
+            return client?.MapTo<IdentityServer4.Models.Client>();
         }
     }
 }
