@@ -15,10 +15,15 @@ namespace Destiny.Core.Flow.IdentityServer.Store
     public class ApiResourceStoreBase : IResourceStore
     {
         private readonly IEFCoreRepository<ApiResource, Guid> _apiResourceRepository;
+        private readonly IEFCoreRepository<IdentityResource, Guid> _identityResourceRepository;
+        private readonly IEFCoreRepository<ApiScope, Guid> _apiScopeRepository;
         private readonly ILogger<ApiResourceStoreBase> _logger;
-        public ApiResourceStoreBase(IEFCoreRepository<ApiResource, Guid> apiResourceRepository, ILogger<ApiResourceStoreBase> logger)
+
+        public ApiResourceStoreBase(IEFCoreRepository<ApiResource, Guid> apiResourceRepository, IEFCoreRepository<IdentityResource, Guid> identityResourceRepository, IEFCoreRepository<ApiScope, Guid> apiScopeRepository, ILogger<ApiResourceStoreBase> logger)
         {
             _apiResourceRepository = apiResourceRepository;
+            _identityResourceRepository = identityResourceRepository;
+            _apiScopeRepository = apiScopeRepository;
             _logger = logger;
         }
 
@@ -31,7 +36,9 @@ namespace Destiny.Core.Flow.IdentityServer.Store
 
         public async Task<IEnumerable<IdentityServer4.Models.ApiResource>> FindApiResourcesByScopeNameAsync(IEnumerable<string> scopeNames)
         {
+
             throw new NotImplementedException();
+
         }
 
         public async Task<IEnumerable<IdentityServer4.Models.ApiScope>> FindApiScopesByNameAsync(IEnumerable<string> scopeNames)
@@ -46,7 +53,10 @@ namespace Destiny.Core.Flow.IdentityServer.Store
 
         public async Task<IdentityServer4.Models.Resources> GetAllResourcesAsync()
         {
-            throw new NotImplementedException();
+            var identities= await _identityResourceRepository.TrackEntities.ToListAsync();
+            var scopes = await _apiScopeRepository.TrackEntities.ToListAsync();
+            var apis = await _apiResourceRepository.TrackEntities.ToListAsync();
+            return new IdentityServer4.Models.Resources(identities.Select(x=>x.MapTo<IdentityServer4.Models.IdentityResource>()),apis.Select(x=>x.MapTo<IdentityServer4.Models.ApiResource>()),scopes.Select(x=>x.MapTo<IdentityServer4.Models.ApiScope>()));
         }
     }
 }
