@@ -10,6 +10,7 @@ namespace Destiny.Core.Flow.Model.DestinyIdentityServer4.EntityConfigurations.De
         public override void Map(EntityTypeBuilder<ClientClaim> b)
         {
             b.HasKey(o => o.Id);
+            b.Ignore(x => x.Client);
             b.ToTable("ClientClaim");
         }
     }
