@@ -8,16 +8,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Destiny.Core.Flow.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Destiny.Core.Flow.IdentityServer.Store
 {
-    public class ResourceStoreBase : IResourceStore
+    public class ApiResourceStoreBase : IResourceStore
     {
         private readonly IEFCoreRepository<ApiResource, Guid> _apiResourceRepository;
-
-        public ResourceStoreBase(IEFCoreRepository<ApiResource, Guid> apiResourceRepository)
+        private readonly ILogger<ApiResourceStoreBase> _logger;
+        public ApiResourceStoreBase(IEFCoreRepository<ApiResource, Guid> apiResourceRepository, ILogger<ApiResourceStoreBase> logger)
         {
             _apiResourceRepository = apiResourceRepository;
+            _logger = logger;
         }
 
         public async Task<IEnumerable<IdentityServer4.Models.ApiResource>> FindApiResourcesByNameAsync(IEnumerable<string> apiResourceNames)
