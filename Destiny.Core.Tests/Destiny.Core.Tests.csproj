@@ -49,6 +49,7 @@
   <ItemGroup>
     <ProjectReference Include="..\src\Destiny.Core.Flow.AutoMapper\Destiny.Core.Flow.AutoMapper.csproj" />
     <ProjectReference Include="..\src\Destiny.Core.Flow.Caching\Destiny.Core.Flow.Caching.csproj" />
+    <ProjectReference Include="..\src\Destiny.Core.Flow.CodeGenerator\Destiny.Core.Flow.CodeGenerator.csproj" />
     <ProjectReference Include="..\src\Destiny.Core.Flow.EntityFrameworkCore\Destiny.Core.Flow.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\src\Destiny.Core.Flow.MongoDB\Destiny.Core.Flow.MongoDB.csproj" />
     <ProjectReference Include="..\src\Destiny.Core.Flow.TestBase\Destiny.Core.Flow.TestBase.csproj" />
