@@ -1,4 +1,9 @@
-﻿using IdentityServer4.Stores;
+﻿using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.Model.DestinyIdentityServer4;
+using IdentityServer4.Stores;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IdentityServer.Store
@@ -6,18 +11,22 @@ namespace Destiny.Core.Flow.IdentityServer.Store
     public abstract class ClientStoreBase : IClientStore
     {
 
-        //private readonly IEFCoreRepository<IdentityServer4.EntityFramework.Entities.Client, int> _clientRepository;
+        private readonly IEFCoreRepository<Client, Guid> _clientRepository;
 
-        //public ClientStoreBase(IEFCoreRepository<IdentityServer4.EntityFramework.Entities.Client, int> clientRepository)
-        //{
-        //    _clientRepository = clientRepository;
+        public ClientStoreBase(IEFCoreRepository<Client, Guid> clientRepository)
+        {
+            _clientRepository = clientRepository;
 
-        //}
+        }
 
         public async Task<IdentityServer4.Models.Client> FindClientByIdAsync(string clientId)
         {
-            await Task.CompletedTask;
-            return new IdentityServer4.Models.Client();
+             await Task.CompletedTask;
+            var client=await _clientRepository
+                .Entities.Where(x => x.ClientId == clientId)
+                .FirstOrDefaultAsync();
+            var dto= client?.MapTo<IdentityServer4.Models.Client>();
+            return dto;
         }
     }
 }
