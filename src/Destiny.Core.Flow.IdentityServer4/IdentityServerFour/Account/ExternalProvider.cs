@@ -2,10 +2,11 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-namespace Destiny.Core.Flow.Dtos.IdentityServerFour.Account
+namespace Destiny.Core.Flow.IdentityServer
 {
-    public class LogoutViewModel : LogoutInputModel
+    public class ExternalProvider
     {
-        public bool ShowLogoutPrompt { get; set; }
+        public string DisplayName { get; set; }
+        public string AuthenticationScheme { get; set; }
     }
 }

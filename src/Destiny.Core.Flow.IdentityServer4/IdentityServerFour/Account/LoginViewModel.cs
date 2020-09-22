@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Destiny.Core.Flow.Dtos.IdentityServerFour.Account
+namespace Destiny.Core.Flow.IdentityServer
 {
     public class LoginViewModel : LoginInputModel
     {

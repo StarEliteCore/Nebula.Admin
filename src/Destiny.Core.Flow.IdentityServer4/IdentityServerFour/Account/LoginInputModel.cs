@@ -4,7 +4,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace Destiny.Core.Flow.Dtos.IdentityServerFour.Account
+namespace Destiny.Core.Flow.IdentityServer
 {
     public class LoginInputModel
     {
