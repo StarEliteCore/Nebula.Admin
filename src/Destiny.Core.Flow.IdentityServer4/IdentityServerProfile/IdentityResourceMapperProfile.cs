@@ -5,7 +5,7 @@ using AutoMapper;
 using Destiny.Core.Flow.Model.DestinyIdentityServer4;
 using System.Linq;
 
-namespace IdentityServer4.MongoDB.Mappers
+namespace Destiny.Core.Flow.IdentityServer.IdentityServerProfile
 {
     /// <summary>
     /// AutoMapper configuration for identity resource

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IdentityServer.Store
 {
-    public abstract class ClientStoreBase : IClientStore
+    public class ClientStoreBase : IClientStore
     {
         private readonly ILogger<ClientStoreBase> _logger;
 
