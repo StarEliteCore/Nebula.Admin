@@ -49,5 +49,12 @@
         /// <param name="metadata"></param>
         /// <returns></returns>
         CodeData GeneratePageDtoCode(ProjectMetadata metadata);
+
+        /// <summary>
+        /// 生成控制器
+        /// </summary>
+        /// <param name="metadata"></param>
+        /// <returns></returns>
+        CodeData GenerateController(ProjectMetadata metadata);
     }
 }

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Templates\Controller.cshtml" />
     <None Remove="Templates\Entity.cshtml" />
     <None Remove="Templates\EntityConfiguration.cshtml" />
     <None Remove="Templates\InputDto.cshtml" />
@@ -25,6 +26,7 @@
     <EmbeddedResource Include="Templates\InputDto.cshtml" />
     <EmbeddedResource Include="Templates\Entity.cshtml" />
     <EmbeddedResource Include="Templates\EntityConfiguration.cshtml" />
+    <EmbeddedResource Include="Templates\Controller.cshtml" />
     <EmbeddedResource Include="Templates\ServiceImpl.cshtml" />
   </ItemGroup>
 

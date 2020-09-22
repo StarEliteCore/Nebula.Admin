@@ -34,6 +34,7 @@ namespace Destiny.Core.Flow.CodeGenerator
             codes.Add(GeneratePageDtoCode(projectMetadata));
             codes.Add(GenerateIService(projectMetadata));
             codes.Add(GenerateServiceImpl(projectMetadata));
+            codes.Add(GenerateController(projectMetadata));
             foreach (var code in codes.OrderBy(o => o.FileName))
             {
                 var saveFilePath = $"{Path.Combine(@"{0}\{1}", filePath, code.FileName)}";
@@ -200,6 +201,23 @@ namespace Destiny.Core.Flow.CodeGenerator
         }
 
         /// <summary>
+        /// 生成控制器
+        /// </summary>
+        /// <param name="metadata"></param>
+        /// <returns></returns>
+        public CodeData GenerateController(ProjectMetadata metadata)
+        {
+
+            var template = GetTemplateCode(metadata, CodeType.Controller);
+            var code = new CodeData()
+            {
+                SourceCode = template,
+                FileName = $"{metadata.EntityMetadata.EntityName}Controller.cs"
+            };
+            return code;
+        }
+
+        /// <summary>
         /// 读取指定代码类型的内置代码模板
         /// </summary>
         /// <param name="type">代码类型</param>
@@ -261,5 +279,12 @@ namespace Destiny.Core.Flow.CodeGenerator
         /// 服务接口实现
         /// </summary>
         ServiceImpl,
+
+        /// <summary>
+        /// 控制器
+        /// 控制器
+        /// 控制器
+        /// </summary>
+        Controller,
     }
 }
