@@ -73,11 +73,18 @@ namespace Destiny.Core.Flow.Services.Identity
             {
                 return (new OperationResponse("此用户不存在!!", OperationResponseType.Error), new Claim[] { });
             }
-            var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
-
-            if (!result)
+            var signInResult = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, true);
+            if (!signInResult.Succeeded)
             {
-                return (new OperationResponse("密码不正确!!", OperationResponseType.Error), new Claim[] { });
+                if (signInResult.IsLockedOut)
+                {
+                    return (new OperationResponse($"用户因密码错误次数过多而被锁定 {_userManager.Options.Lockout.DefaultLockoutTimeSpan.TotalMinutes} 分钟，请稍后重试", OperationResponseType.Error), new Claim[] { });
+                }
+                if (signInResult.IsNotAllowed)
+                {
+                    return (new OperationResponse("不允许登录。", OperationResponseType.Error), new Claim[] { });
+                }
+                return (new OperationResponse("登录失败，用户名或账号无效。", OperationResponseType.Error), new Claim[] { });
             }
 
             var jwtToken = _jwtBearerService.CreateToken(user.Id, user.UserName);

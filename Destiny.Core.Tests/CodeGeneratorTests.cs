@@ -23,7 +23,7 @@ namespace Destiny.Core.Tests
             projectMetadata.SiteUrl = "http://admin.destinycore.club";
             projectMetadata.Creator = "大黄瓜18cm";
             projectMetadata.Copyright = "大黄瓜18cm";
-            projectMetadata.Namespace = "Destiny.Core.Flow.Model.DestinyIdentityServer4";
+            projectMetadata.Namespace = "Destiny.Core.Flow";
             List<PropertyMetadata> propertyMetadatas = new List<PropertyMetadata>();
             propertyMetadatas.Add(new PropertyMetadata()
             {
