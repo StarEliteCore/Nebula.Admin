@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Validation\TokenRequestBaseValidator.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
 	<PackageReference Include="IdentityServer4" Version="4.1.0"></PackageReference>
     <PackageReference Include="IdentityServer4.EntityFramework.Storage" Version="4.1.0" />
   </ItemGroup>
