@@ -10,4 +10,10 @@
     <PackageReference Include="Ocelot.Provider.Polly" Version="16.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Destiny.Core.Flow.IdentityServer4\Destiny.Core.Flow.IdentityServer.csproj" />
+    <ProjectReference Include="..\Destiny.Core.Flow.Model\Destiny.Core.Flow.Model.csproj" />
+    <ProjectReference Include="..\Destiny.Core.Flow\Destiny.Core.Flow.csproj" />
+  </ItemGroup>
+
 </Project>

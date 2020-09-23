@@ -1,4 +1,6 @@
-﻿using Destiny.Core.Flow.IdentityServer.Store;
+﻿using Destiny.Core.Flow.IdentityServer.Service.Account;
+using Destiny.Core.Flow.IdentityServer.Service.Consent;
+using Destiny.Core.Flow.IdentityServer.Store;
 using Destiny.Core.Flow.Modules;
 using IdentityServer4.Stores;
 using Microsoft.AspNetCore.Builder;
@@ -24,11 +26,15 @@ namespace Destiny.Core.Flow.IdentityServer
             service.AddTransient<IClientStore, ClientStoreBase>();
             service.AddTransient<IResourceStore, ApiResourceStoreBase>();
             service.AddTransient<IPersistedGrantStore, PersistedGrantStoreBase>();
+
+            service.AddTransient<IAccountService, AccountService>();
+            service.AddTransient<IConsentService, ConsentService>();
+
         }
         public override void ApplicationInitialization(ApplicationContext context)
         {
             var app = context.GetApplicationBuilder();
-            app.UseIdentityServer();
+            app.UseStaticFiles();
         }
 
         

@@ -15,7 +15,7 @@ namespace Destiny.Core.Flow.IdentityServer.Store
 
         private readonly IEFCoreRepository<Client, Guid> _clientRepository;
 
-        protected ClientStoreBase(ILogger<ClientStoreBase> logger, IEFCoreRepository<Client, Guid> clientRepository)
+        public ClientStoreBase(ILogger<ClientStoreBase> logger, IEFCoreRepository<Client, Guid> clientRepository)
         {
             _logger = logger;
             _clientRepository = clientRepository;

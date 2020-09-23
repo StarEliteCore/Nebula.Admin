@@ -1,5 +1,4 @@
-﻿using Destiny.Core.Flow.Dtos.IdentityServerFour.Consent;
-using IdentityServer4.Models;
+﻿using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
 using Microsoft.Extensions.Logging;
@@ -16,18 +15,18 @@ namespace Destiny.Core.Flow.IdentityServer.Service.Consent
         private readonly IClientStore _clientStore;
         private readonly IResourceStore _resourceStore;
         private readonly IIdentityServerInteractionService _interaction;
-        private readonly ILogger _logger;
+        //private readonly ILogger _logger;
 
         public ConsentService(
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
-            IResourceStore resourceStore,
-            ILogger logger)
+            IResourceStore resourceStore
+            /*ILogger logger*/)
         {
             _interaction = interaction;
             _clientStore = clientStore;
             _resourceStore = resourceStore;
-            _logger = logger;
+            //_logger = logger;
         }
 
         public async Task<ProcessConsentResult> ProcessConsent(ConsentInputModel model)
@@ -105,17 +104,17 @@ namespace Destiny.Core.Flow.IdentityServer.Service.Consent
                     }
                     else
                     {
-                        _logger.LogError("No scopes matching: {0}", request.ValidatedResources.Resources.ToScopeNames().Aggregate((x, y) => x + ", " + y));
+                        //_logger.LogError("No scopes matching: {0}", request.ValidatedResources.Resources.ToScopeNames().Aggregate((x, y) => x + ", " + y));
                     }
                 }
                 else
                 {
-                    _logger.LogError("Invalid client id: {0}", request.Client.ClientId);
+                    //_logger.LogError("Invalid client id: {0}", request.Client.ClientId);
                 }
             }
             else
             {
-                _logger.LogError("No consent request matching request: {0}", returnUrl);
+                //_logger.LogError("No consent request matching request: {0}", returnUrl);
             }
 
             return null;
