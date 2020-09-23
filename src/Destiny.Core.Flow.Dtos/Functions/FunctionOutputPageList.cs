@@ -14,6 +14,6 @@ namespace Destiny.Core.Flow.Dtos.Functions
         /// <summary>
         /// 最后修改时间
         /// </summary>
-        public DateTime? LastModifierTime { get; set; }
+        public DateTime? LastModifionTime { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace Destiny.Core.Flow.Dtos
         public bool IsSystem { get; set; }
 
         [DisplayName("最后修改时间")]
-        public DateTime? LastModifierTime { get; set; }
+        public DateTime? LastModifionTime { get; set; }
 
         [DisplayName("是否删除")]
         public bool IsDeleted { get; set; }

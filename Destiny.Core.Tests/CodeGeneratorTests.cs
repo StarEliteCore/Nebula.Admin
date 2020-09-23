@@ -65,6 +65,8 @@ namespace Destiny.Core.Tests
                 IsModification = true,
                 IsSoftDelete = false,
                 AuditedUserKeyType = "Guid",
+                IsAutoMap=true,
+               
 
             };
             var savePath = @"C:\Users\Admin\Desktop\Code";

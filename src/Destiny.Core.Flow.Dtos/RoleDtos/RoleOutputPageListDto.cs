@@ -39,7 +39,7 @@ namespace Destiny.Core.Flow.Dtos.RoleDtos
         /// 获取或设置 最后修改时间
         /// </summary>
         [DisplayName("最后修改时间")]
-        public DateTime? LastModifierTime { get; set; }
+        public DateTime? LastModifionTime { get; set; }
 
         /// <summary>
         ///获取或设置 创建时间
