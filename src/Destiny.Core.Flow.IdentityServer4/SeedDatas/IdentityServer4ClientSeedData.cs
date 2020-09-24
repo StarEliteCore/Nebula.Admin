@@ -26,7 +26,11 @@ namespace Destiny.Core.Flow.IdentityServer
             List<Client> clients = new List<Client>();
             foreach (var item in Config.GetClients())
             {
-                clients.Add(item.MapTo<Client>());
+                var model = item.MapTo<Client>();
+                model.CreatedTime = DateTime.Now;
+                model.CreatorUserId = Guid.Parse("a1e89f45-4fa8-4751-9df9-dec86f7e6c14");
+                model.IsDeleted = false;
+                clients.Add(model);
             }
             return clients.ToArray();
         }

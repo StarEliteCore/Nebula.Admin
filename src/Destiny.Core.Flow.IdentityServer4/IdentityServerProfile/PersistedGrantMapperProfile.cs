@@ -10,11 +10,8 @@ namespace Destiny.Core.Flow.IdentityServer.IdentityServerProfile
     {
         public PersistedGrantMapperProfile()
         {
-            // entity to model
-            CreateMap<PersistedGrant, IdentityServer4.Models.PersistedGrant>(MemberList.Destination);
-
-            // model to entity
-            CreateMap<IdentityServer4.Models.PersistedGrant, PersistedGrant>(MemberList.Source);
+            CreateMap<PersistedGrant, IdentityServer4.Models.PersistedGrant>(MemberList.Destination)
+                .ReverseMap();
         }
     }
 }

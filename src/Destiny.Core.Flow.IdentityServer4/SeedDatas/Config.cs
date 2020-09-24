@@ -31,13 +31,13 @@ namespace Destiny.Core.Flow.IdentityServer
         public static IEnumerable<ApiResource> GetApiResources()
         {
             return new List<ApiResource> {
-                new ApiResource("Destiny.Core.Flow.API", "Mosi.OA.API") {
+                new ApiResource("Destiny.Core.Flow.API", "Destiny.Core.Flow.API") {
                     // include the following using claims in access token (in addition to subject id)
                     //requires using using IdentityModel;
                     UserClaims = { JwtClaimTypes.Name, JwtClaimTypes.Role },
                     ApiSecrets = new List<Secret>()
                     {
-                        new Secret("api_secret".Sha256())
+                        new Secret("Destiny.Core.Flow.API_secret".Sha256())
                     },
                 }
             };
@@ -51,6 +51,26 @@ namespace Destiny.Core.Flow.IdentityServer
                     ClientId = "DestinyCoreFlowReactClient",
                     ClientName = "Destiny.Core.Flow.ReactClient",
                     AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+
+                    RedirectUris =           { "http://localhost:8080/LoginedCallbackView" },
+                    PostLogoutRedirectUris = { "http://localhost:8080" },
+                    AllowedCorsOrigins =     { "http://localhost:8080" },
+                    AllowedScopes = {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "roles",
+                        "Destiny.Core.Flow.API"
+                    },
+                },
+                new Client {
+                    ClientId = "DestinyCoreFlowReactClientpwd",
+                    ClientName = "Destiny.Core.Flow.ReactClientpwd",
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     AllowAccessTokensViaBrowser = true,
                     ClientSecrets =
                     {

@@ -3,6 +3,7 @@
 
 using AutoMapper;
 using Destiny.Core.Flow.Model.DestinyIdentityServer4;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Destiny.Core.Flow.IdentityServer.IdentityServerProfile
@@ -18,17 +19,17 @@ namespace Destiny.Core.Flow.IdentityServer.IdentityServerProfile
         /// </summary>
         public IdentityResourceMapperProfile()
         {
-            // entity to model
-            CreateMap<IdentityResource, IdentityServer4.Models.IdentityResource>(MemberList.Destination)
-                .ForMember(x => x.Properties,
-                    opt => opt.MapFrom(src => src.Properties.ToDictionary(item => item.Key, item => item.Value)))
-                .ForMember(x => x.UserClaims, opt => opt.MapFrom(src => src.UserClaims.Select(x => x.Type)));
+            CreateMap<IdentityResourceProperty, KeyValuePair<string, string>>()
+               .ReverseMap();
 
-            // model to entity
-            CreateMap<IdentityServer4.Models.IdentityResource, IdentityResource>(MemberList.Source)
-                .ForMember(x => x.Properties,
-                    opt => opt.MapFrom(src => src.Properties.ToDictionary(item => item.Key, item => item.Value)))
-                .ForMember(x => x.UserClaims, opts => opts.MapFrom(src => src.UserClaims.Select(x => new IdentityResourceClaim { Type = x })));
+            CreateMap<IdentityResource, IdentityServer4.Models.IdentityResource>(MemberList.Destination)
+                .ConstructUsing(src => new IdentityServer4.Models.IdentityResource())
+                .ReverseMap();
+
+            CreateMap<IdentityResourceClaim, string>()
+               .ConstructUsing(x => x.Type)
+               .ReverseMap()
+               .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src));
         }
     }
 }

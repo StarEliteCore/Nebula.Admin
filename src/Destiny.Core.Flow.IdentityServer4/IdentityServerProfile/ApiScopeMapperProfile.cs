@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Destiny.Core.Flow.Model.DestinyIdentityServer4;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Destiny.Core.Flow.IdentityServer.IdentityServerProfile
@@ -11,13 +12,19 @@ namespace Destiny.Core.Flow.IdentityServer.IdentityServerProfile
         /// </summary>
         public ApiScopeMapperProfile()
         {
-            // entity to model
-            CreateMap<ApiScope, IdentityServer4.Models.ApiScope>(MemberList.Destination)
-                .ForMember(x => x.UserClaims, opt => opt.MapFrom(src => src.UserClaims.Select(x => x.Type)));
+            CreateMap<ApiScopeProperty, KeyValuePair<string, string>>()
+                .ReverseMap();
 
-            // model to entity
-            CreateMap<IdentityServer4.Models.ApiScope, ApiScope>(MemberList.Source)
-                .ForMember(x => x.UserClaims, opts => opts.MapFrom(src => src.UserClaims.Select(x => new ApiScopeClaim { Type = x })));
+            CreateMap<ApiScopeClaim, string>()
+               .ConstructUsing(x => x.Type)
+               .ReverseMap()
+               .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src));
+
+            CreateMap<ApiScope,IdentityServer4. Models.ApiScope>(MemberList.Destination)
+                .ConstructUsing(src => new IdentityServer4.Models.ApiScope())
+                .ForMember(x => x.Properties, opts => opts.MapFrom(x => x.Properties))
+                .ForMember(x => x.UserClaims, opts => opts.MapFrom(x => x.UserClaims))
+                .ReverseMap();
         }
     }
 }

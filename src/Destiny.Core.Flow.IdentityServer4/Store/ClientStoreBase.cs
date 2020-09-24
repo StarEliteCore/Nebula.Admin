@@ -26,12 +26,14 @@ namespace Destiny.Core.Flow.IdentityServer.Store
         public async Task<IdentityServer4.Models.Client> FindClientByIdAsync(string clientId)
         {
             var client = await _clientRepository
-                .Entities.Where(x => x.ClientId == clientId).FirstOrDefaultAsync();
-            if(client==null)
-                return client?.MapTo<IdentityServer4.Models.Client>();
+                .Entities.Where(x => x.ClientId == clientId)
+                .Include(x => x.AllowedGrantTypes)
+                .Include(x => x.RedirectUris)
+                .Include(x => x.AllowedScopes)
+                .Include(x => x.ClientSecrets).SingleOrDefaultAsync();
+            if (client == null)
+                return null;
             var dto= client?.MapTo<IdentityServer4.Models.Client>();
-            var grantyypes= await _clientGrantTypeRepository.Entities.Where(x => x.ClientId == client.Id).Select(x => x.GrantType).ToListAsync();
-            dto.AllowedGrantTypes = grantyypes;
             return dto;
         }
     }
