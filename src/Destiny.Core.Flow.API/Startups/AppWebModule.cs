@@ -4,6 +4,7 @@ using Destiny.Core.Flow.Caching.CSRedis;
 using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Events;
 using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.Model;
 using Destiny.Core.Flow.Modules;
 using Destiny.Core.Flow.Options;
 using Destiny.Core.Flow.Swagger;
@@ -24,7 +25,8 @@ namespace Destiny.Core.Flow.API.Startups
                typeof(EntityFrameworkCoreMySqlModule),
                typeof(AutoMapperModule),
                typeof(CSRedisModule),
-               typeof(MongoDBModelule)
+               typeof(MongoDBModelule),
+        typeof(MigrationModuleBase)
         )]
     public class AppWebModule : AppModule
     {

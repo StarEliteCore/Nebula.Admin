@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Dependency;
+﻿using Destiny.Core.Flow.AutoMapper;
+using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Events;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.IdentityServer;
@@ -20,6 +21,7 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
     typeof(DependencyAppModule),
     typeof(EventBusAppModule),
     typeof(EntityFrameworkCoreMySqlModule),
+        typeof(AutoMapperModule),
         typeof(IdentityServer4Module)
     )]
     public class AppWebModule : AppModule
