@@ -20,12 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Templates\EntityConfiguration.cshtml" />
     <EmbeddedResource Include="Templates\IService.cshtml" />
     <EmbeddedResource Include="Templates\PageListDto.cshtml" />
     <EmbeddedResource Include="Templates\OutputDto.cshtml" />
     <EmbeddedResource Include="Templates\InputDto.cshtml" />
     <EmbeddedResource Include="Templates\Entity.cshtml" />
-    <EmbeddedResource Include="Templates\EntityConfiguration.cshtml" />
     <EmbeddedResource Include="Templates\Controller.cshtml" />
     <EmbeddedResource Include="Templates\ServiceImpl.cshtml" />
   </ItemGroup>
