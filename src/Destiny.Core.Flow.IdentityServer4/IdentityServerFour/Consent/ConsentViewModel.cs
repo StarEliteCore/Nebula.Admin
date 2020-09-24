@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 
-namespace Destiny.Core.Flow.Dtos.IdentityServerFour.Consent
+namespace Destiny.Core.Flow.IdentityServer
 {
     public class ConsentViewModel : ConsentInputModel
     {

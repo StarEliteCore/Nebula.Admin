@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Destiny.Core.Flow.Dtos.IdentityServerFour.Grants
+namespace Destiny.Core.Flow.IdentityServer
 {
     public class GrantsViewModel
     {
