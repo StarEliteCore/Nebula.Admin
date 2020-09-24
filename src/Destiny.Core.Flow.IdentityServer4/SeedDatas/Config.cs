@@ -31,7 +31,8 @@ namespace Destiny.Core.Flow.IdentityServer
         public static IEnumerable<ApiResource> GetApiResources()
         {
             return new List<ApiResource> {
-                new ApiResource("Destiny.Core.Flow.API", "Destiny.Core.Flow.API") {
+                new ApiResource() {
+                    Name="Destiny.Core.Flow.API",
                     // include the following using claims in access token (in addition to subject id)
                     //requires using using IdentityModel;
                     UserClaims = { JwtClaimTypes.Name, JwtClaimTypes.Role },
@@ -39,6 +40,10 @@ namespace Destiny.Core.Flow.IdentityServer
                     {
                         new Secret("Destiny.Core.Flow.API_secret".Sha256())
                     },
+                    Scopes =
+                    {
+                        "Destiny.Core.Flow.API"
+                    }
                 }
             };
         }
@@ -86,6 +91,17 @@ namespace Destiny.Core.Flow.IdentityServer
                         "roles",
                         "Destiny.Core.Flow.API"
                     },
+                },
+            };
+        }
+        public static IEnumerable<ApiScope> GetApiScopes()
+        {
+            return new[]
+            {
+                new ApiScope()
+                {
+                    Name = "Destiny.Core.Flow.API",
+                    DisplayName = "Destiny.Core.Flow.API",
                 }
             };
         }

@@ -28,7 +28,7 @@ namespace Destiny.Core.Flow.IdentityServer
             service.AddTransient<IClientStore, ClientStoreBase>();
             service.AddTransient<IResourceStore, ApiResourceStoreBase>();
             service.AddTransient<IPersistedGrantStore, PersistedGrantStoreBase>();
-            //service.AddTransient<IClientSecretValidator, ClientSecretBaseValidator>();
+            service.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordBaseValidator>();
             service.AddTransient<IAccountService, AccountService>();
             service.AddTransient<IConsentService, ConsentService>();
 
