@@ -15,16 +15,16 @@ namespace @(metadata.Namespace).Dtos
     /// &lt;summary&gt;
     /// @(string.IsNullOrEmpty(metadata.EntityMetadata.DisplayName) ? metadata.EntityMetadata.EntityName : metadata.EntityMetadata.DisplayName)
     /// &lt;/summary&gt;
-@if (metadata.EntityMetadata.IsAutoMap)
-{
+    @if (metadata.EntityMetadata.IsAutoMap)
+    {
     <text>
         [AutoMapping(typeof(@metadata.EntityMetadata.EntityName))]
     </text>
-}
+    }
     public partial class @(metadata.EntityMetadata.EntityName)OutputDto  : OutputDto&lt;@(metadata.EntityMetadata.PrimaryKeyType)&gt;
     {
-@foreach (var property in metadata.EntityMetadata.Properties.Where(o => o.IsOutputDto))
-{
+    @foreach (var property in metadata.EntityMetadata.Properties.Where(o => o.IsOutputDto))
+    {
         <text>
         /// &lt;summary&gt;
         /// 获取或设置 @property.DisplayName
@@ -32,7 +32,7 @@ namespace @(metadata.Namespace).Dtos
         public @property.CSharpType @property.PropertyName { get; set; }
         </text>
 
-}
+     }
 
     }
 
