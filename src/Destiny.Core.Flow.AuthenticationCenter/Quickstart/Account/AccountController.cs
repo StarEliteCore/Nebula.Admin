@@ -111,7 +111,7 @@ namespace IdentityServer4.Quickstart.UI
                 if(usermodel!=null)
                 {
                     //var user = _users.FindByUsername(model.Username);
-                    var result = await _signInManager.CheckPasswordSignInAsync(usermodel, model.Password ,true);
+                    var result = await _signInManager.CheckPasswordSignInAsync(usermodel, model.Password,true);
                     if (result.Succeeded)
                     {
                         await _events.RaiseAsync(new UserLoginSuccessEvent(usermodel.UserName, usermodel.Id.ToString(), usermodel.UserName));
