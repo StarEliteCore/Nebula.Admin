@@ -72,10 +72,12 @@ namespace Destiny.Core.Flow.API.Startups
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(jwt =>
             {
-
+                jwt.Authority = "http://localhost:5000";
+                jwt.Audience = "Destiny.Core.Flow.API";
+                jwt.RequireHttpsMetadata = false;
                 //jwt.SecurityTokenValidators.Clear();
                 //jwt.SecurityTokenValidators.Add(new CmsJwtSecurityTokenHandler());
-                jwt.TokenValidationParameters = tokenValidationParameters;
+                //jwt.TokenValidationParameters = tokenValidationParameters;
                 jwt.Events = new JwtBearerEvents /*jwt自带事件*/
                 {
                     OnAuthenticationFailed = context =>
@@ -92,7 +94,7 @@ namespace Destiny.Core.Flow.API.Startups
                 };
 
             });
-            services.AddScoped<IJwtBearerService, JwtBearerService>();
+            //services.AddScoped<IJwtBearerService, JwtBearerService>();
         }
         protected override IdentityBuilder UseIdentityBuilder(IdentityBuilder identityBuilder)
         {
