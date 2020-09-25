@@ -26,9 +26,14 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
     )]
     public class AppWebModule : AppModule
     {
+        private string _corePolicyName = string.Empty;
         public override void ApplicationInitialization(ApplicationContext context)
         {
             var app = context.GetApplicationBuilder();
+            if (!_corePolicyName.IsNullOrEmpty())
+            {
+                app.UseCors(_corePolicyName); //添加跨域中间件
+            }
             app.UseStaticFiles();
         }
 
@@ -36,15 +41,30 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
         {
             var service = context.Services;
             service.AddMvc();
-            context.Services.AddTransient<IPrincipal>(provider =>
-            {
-                IHttpContextAccessor accessor = provider.GetService<IHttpContextAccessor>();
-                return accessor?.HttpContext?.User;
-            });
 
-            var configuration = service.GetConfiguration();
-            service.Configure<AppOptionSettings>(configuration.GetSection("Destiny"));
-            var settings = service.GetAppSettings();
+            var configuration = context.GetConfiguration();
+            context.Services.Configure<AppOptionSettings>(configuration.GetSection("Destiny"));
+
+            var settings = context.GetConfiguration<AppOptionSettings>("Destiny");
+            context.Services.AddObjectAccessor<AppOptionSettings>(settings);
+            if (!settings.Cors.PolicyName.IsNullOrEmpty() && !settings.Cors.Url.IsNullOrEmpty()) //添加跨域
+            {
+                _corePolicyName = settings.Cors.PolicyName;
+                context.Services.AddCors(c =>
+                {
+                    c.AddPolicy(settings.Cors.PolicyName, policy =>
+                    {
+                        policy.WithOrigins(settings.Cors.Url
+                          .Split(",", StringSplitOptions.RemoveEmptyEntries).ToArray())
+                        //policy.WithOrigins("http://localhost:5001")//支持多个域名端口，注意端口号后不要带/斜杆：比如localhost:8000/，是错的
+                        .AllowAnyHeader().AllowAnyMethod().AllowCredentials();//允许cookie;
+                    });
+                });
+            }
+
+            //context.Services.AddTransient<IPrincipal>();
+
+
         }
     }
 }

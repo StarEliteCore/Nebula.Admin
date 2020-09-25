@@ -22,6 +22,6 @@ namespace Destiny.Core.Flow.IdentityServer
         // specify the Windows authentication scheme and display name
         public static readonly string WindowsAuthenticationSchemeName = "Windows";
 
-        public static string InvalidCredentialsErrorMessage = "Invalid username or password";
+        public static string InvalidCredentialsErrorMessage = "账户名或密码错误！";
     }
 }

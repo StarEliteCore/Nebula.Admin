@@ -9,13 +9,6 @@ namespace Destiny.Core.Flow.Audit
 {
     public class GetChangeTracker : IGetChangeTracker
     {
-        private readonly IPrincipal _principal;
-
-        public GetChangeTracker(IPrincipal principal)
-        {
-            _principal = principal;
-        }
-
         public async Task<List<AuditEntryInputDto>> GetChangeTrackerList(IEnumerable<EntityEntry> Entries)
         {
             await Task.CompletedTask;
