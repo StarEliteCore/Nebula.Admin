@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.IdentityServer.Service.Account;
+﻿using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.IdentityServer.Service.Account;
 using Destiny.Core.Flow.IdentityServer.Service.Consent;
 using Destiny.Core.Flow.IdentityServer.Store;
 using Destiny.Core.Flow.IdentityServer.Validation;
@@ -24,6 +25,7 @@ namespace Destiny.Core.Flow.IdentityServer
                  opt.Events.RaiseInformationEvents = true;
                  opt.Events.RaiseFailureEvents = true;
                  opt.Events.RaiseSuccessEvents = true;
+                 opt.IssuerUri = service.GetConfiguration()["AuthServer:Authority"];
              }).AddDeveloperSigningCredential();
             service.AddTransient<IClientStore, ClientStoreBase>();
             service.AddTransient<IResourceStore, ApiResourceStoreBase>();
