@@ -12,14 +12,7 @@ namespace Destiny.Core.Flow
             AddRepository(context.Services);
         }
 
-        //public override IServiceCollection ConfigureServices(IServiceCollection services)
-        //{
-        //    services = UseSql(services);
-        //    services= AddUnitOfWork(services);
-        //    services = AddRepository(services);
-        //    return services;
-        //}
-
+  
         protected abstract IServiceCollection AddUnitOfWork(IServiceCollection services);
 
         protected abstract IServiceCollection AddRepository(IServiceCollection services);

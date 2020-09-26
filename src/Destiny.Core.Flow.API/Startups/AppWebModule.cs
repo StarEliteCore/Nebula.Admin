@@ -11,6 +11,7 @@ using Destiny.Core.Flow.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using System;
 using System.Linq;
 using System.Security.Principal;
@@ -37,6 +38,8 @@ namespace Destiny.Core.Flow.API.Startups
         {
             context.Services.AddTransient(typeof(Lazy<>), typeof(LazyFactory<>));
             var configuration = context.GetConfiguration();
+            var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath; //获取项目路径
+            context.Services.AddSingleton<IFileProvider>(new PhysicalFileProvider(basePath));
             context.Services.Configure<AppOptionSettings>(configuration.GetSection("Destiny"));
 
             var settings = context.GetConfiguration<AppOptionSettings>("Destiny");
