@@ -26,9 +26,9 @@ namespace IdentityServer4.Quickstart.UI
     {
         private readonly IEventService _events;
         private readonly ILogger<ConsentController> _logger;
-        private readonly Destiny.Core.Flow.IdentityServer.Service.Consent.IConsentService _consentService;
+        private readonly Destiny.Core.Flow.IdentityServer.Service.Consent.IDestinyConsentService _consentService;
         public ConsentController(
-            Destiny.Core.Flow.IdentityServer.Service.Consent.IConsentService consentService,
+            Destiny.Core.Flow.IdentityServer.Service.Consent.IDestinyConsentService consentService,
             IEventService events,
             ILogger<ConsentController> logger)
         {

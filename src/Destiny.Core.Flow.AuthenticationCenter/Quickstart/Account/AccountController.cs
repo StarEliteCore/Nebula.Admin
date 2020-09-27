@@ -81,11 +81,14 @@ namespace IdentityServer4.Quickstart.UI
         {
             // check if we are in the context of an authorization request
             // the user clicked the "cancel" button
+            var context = await _interaction.GetAuthorizationContextAsync(model.ReturnUrl);
             if (button != "login")
             {
-                var context = await _interaction.GetAuthorizationContextAsync(model.ReturnUrl);
+                
                 if (context != null)
                 {
+
+                    await _interaction.DenyAuthorizationAsync(context, AuthorizationError.AccessDenied);
                     // if the user cancels, send a result back into IdentityServer as if they 
                     // denied the consent (even if this client does not require consent).
                     // this will send back an access denied OIDC error response to the client.
@@ -114,9 +117,26 @@ namespace IdentityServer4.Quickstart.UI
                     var result = await _signInManager.CheckPasswordSignInAsync(usermodel, model.Password,true);
                     if (result.Succeeded)
                     {
-                        await _events.RaiseAsync(new UserLoginSuccessEvent(usermodel.UserName, usermodel.Id.ToString(), usermodel.UserName));
-                        if (_interaction.IsValidReturnUrl(model.ReturnUrl) || Url.IsLocalUrl(model.ReturnUrl))
+                        await _events.RaiseAsync(new UserLoginSuccessEvent(usermodel.UserName, usermodel.Id.ToString(), usermodel.UserName, context?.Client.ClientId));
+
+
+                        AuthenticationProperties props = null;
+                        if (AccountOptions.AllowRememberLogin && model.RememberLogin)
                         {
+                            props = new AuthenticationProperties
+                            {
+                                IsPersistent = true,
+                                ExpiresUtc = DateTimeOffset.UtcNow.Add(AccountOptions.RememberMeLoginDuration)
+                            };
+                        };
+                        var isuser = new IdentityServerUser(usermodel.Id.ToString())
+                        {
+                            DisplayName = usermodel.UserName
+                        };
+                        await HttpContext.SignInAsync(isuser, props);
+                        if (context != null)
+                        {
+                            // we can trust model.ReturnUrl since GetAuthorizationContextAsync returned non-null
                             return Redirect(model.ReturnUrl);
                         }
                         return Redirect("~/");

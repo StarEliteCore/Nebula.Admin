@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IdentityServer.Service.Consent
 {
-    public class ConsentService: IConsentService
+    public class DestinyConsentService: IDestinyConsentService
     {
         private readonly IClientStore _clientStore;
         private readonly IResourceStore _resourceStore;
         private readonly IIdentityServerInteractionService _interaction;
         //private readonly ILogger _logger;
 
-        public ConsentService(
+        public DestinyConsentService(
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IResourceStore resourceStore

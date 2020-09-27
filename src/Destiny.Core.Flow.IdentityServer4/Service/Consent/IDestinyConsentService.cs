@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IdentityServer.Service.Consent
 {
-    public interface IConsentService:IScopedDependency
+    public interface IDestinyConsentService:IScopedDependency
     {
         Task<ConsentViewModel> BuildViewModelAsync(string returnUrl, ConsentInputModel model = null);
         Task<ProcessConsentResult> ProcessConsent(ConsentInputModel model);
