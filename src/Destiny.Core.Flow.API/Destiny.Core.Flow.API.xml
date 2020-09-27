@@ -314,5 +314,12 @@
             <param name="request"></param>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Startups.EntityFrameworkCoreMySqlModule.ReadAllText(Microsoft.Extensions.FileProviders.IFileInfo)">
+            <summary>
+            读取全部文本
+            </summary>
+            <param name="fileInfo"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

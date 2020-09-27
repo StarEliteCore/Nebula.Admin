@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using Microsoft.Extensions.DependencyInjection;
+using Destiny.Core.Flow.Exceptions;
+using System.IO;
+
 namespace Destiny.Core.Tests
 {
   public  class CodeGeneratorTests : IntegratedTest<CodeGeneratorModeule>
@@ -71,7 +74,9 @@ namespace Destiny.Core.Tests
             };
             var savePath = @"C:\Users\Admin\Desktop\Code";
             ICodeGenerator codeGenerator = ServiceProvider.GetService<ICodeGenerator>();
+
             codeGenerator.GenerateCode(projectMetadata, savePath);
+            Assert.True(Directory.Exists(savePath));
         }
     }
 }

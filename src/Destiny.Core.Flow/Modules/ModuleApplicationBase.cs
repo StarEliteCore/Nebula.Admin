@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.Dependency;
+using Destiny.Core.Flow.Exceptions;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Reflection;
 using Microsoft.Extensions.DependencyInjection;
@@ -62,7 +63,7 @@ namespace Destiny.Core.Flow.Modules
             var module = _source.FirstOrDefault(o => o.GetType() == StartupModuleType);
             if (module == null)
             {
-                throw new Exception($"类型为“{StartupModuleType.FullName}”的模块实例无法找到");
+                throw new AppException($"类型为“{StartupModuleType.FullName}”的模块实例无法找到");
             }
 
 
@@ -74,7 +75,7 @@ namespace Destiny.Core.Flow.Modules
                 var dependModule = _source.ToList().Find(m => m.GetType() == dependType);
                 if (dependModule == null)
                 {
-                    throw new Exception($"加载模块{module.GetType().FullName}时无法找到依赖模块{dependType.FullName}");
+                    throw new AppException($"加载模块{module.GetType().FullName}时无法找到依赖模块{dependType.FullName}");
                 }
 
                 modules.AddIfNotContains(dependModule);
