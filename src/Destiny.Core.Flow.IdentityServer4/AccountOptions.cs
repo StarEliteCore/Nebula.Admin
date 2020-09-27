@@ -15,13 +15,6 @@ namespace Destiny.Core.Flow.IdentityServer
         public static bool ShowLogoutPrompt = true;
         public static bool AutomaticRedirectAfterSignOut = false;
 
-        // to enable windows authentication, the host (IIS or IIS Express) also must have 
-        // windows auth enabled.
-        public static bool WindowsAuthenticationEnabled = true;
-        public static bool IncludeWindowsGroups = false;
-        // specify the Windows authentication scheme and display name
-        public static readonly string WindowsAuthenticationSchemeName = "Windows";
-
-        public static string InvalidCredentialsErrorMessage = "账户名或密码错误！";
+        public static string InvalidCredentialsErrorMessage = "账户名或密码错误!";
     }
 }

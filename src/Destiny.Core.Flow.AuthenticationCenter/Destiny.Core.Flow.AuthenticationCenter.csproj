@@ -7,17 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Quickstart\Device\**" />
-    <Compile Remove="Quickstart\Diagnostics\**" />
-    <Content Remove="Quickstart\Device\**" />
-    <Content Remove="Quickstart\Diagnostics\**" />
-    <EmbeddedResource Remove="Quickstart\Device\**" />
-    <EmbeddedResource Remove="Quickstart\Diagnostics\**" />
-    <None Remove="Quickstart\Device\**" />
-    <None Remove="Quickstart\Diagnostics\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.1" />
   </ItemGroup>
 

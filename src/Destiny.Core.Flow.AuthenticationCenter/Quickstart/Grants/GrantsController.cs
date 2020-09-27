@@ -1,5 +1,7 @@
 // Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
+
+
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
 using Microsoft.AspNetCore.Mvc;
@@ -9,14 +11,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
-using Destiny.Core.Flow.IdentityServer;
+using Destiny.Core.Flow.IdentityServer.IdentityServerFour;
 
-namespace IdentityServer4.Quickstart.UI
+namespace IdentityServerHost.Quickstart.UI
 {
     /// <summary>
     /// This sample controller allows a user to revoke grants given to clients
     /// </summary>
-    
+    [SecurityHeaders]
     [Authorize]
     public class GrantsController : Controller
     {
@@ -60,8 +62,8 @@ namespace IdentityServer4.Quickstart.UI
 
         private async Task<GrantsViewModel> BuildViewModelAsync()
         {
-            //var grants = await _interaction.GetAllUserConsentsAsync();
             var grants = await _interaction.GetAllUserGrantsAsync();
+
             var list = new List<GrantViewModel>();
             foreach(var grant in grants)
             {
@@ -76,10 +78,11 @@ namespace IdentityServer4.Quickstart.UI
                         ClientName = client.ClientName ?? client.ClientId,
                         ClientLogoUrl = client.LogoUri,
                         ClientUrl = client.ClientUri,
+                        Description = grant.Description,
                         Created = grant.CreationTime,
                         Expires = grant.Expiration,
                         IdentityGrantNames = resources.IdentityResources.Select(x => x.DisplayName ?? x.Name).ToArray(),
-                        ApiGrantNames = resources.ApiResources.Select(x => x.DisplayName ?? x.Name).ToArray()
+                        ApiGrantNames = resources.ApiScopes.Select(x => x.DisplayName ?? x.Name).ToArray()
                     };
 
                     list.Add(item);

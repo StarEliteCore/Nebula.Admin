@@ -10,9 +10,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
-namespace IdentityServer4.Quickstart.UI
+namespace IdentityServerHost.Quickstart.UI
 {
-    
+    [SecurityHeaders]
     [AllowAnonymous]
     public class HomeController : Controller
     {

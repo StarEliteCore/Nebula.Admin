@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Destiny.Core.Flow.IdentityServer
+namespace Destiny.Core.Flow.IdentityServer.IdentityServerFour
 {
     public class GrantsViewModel
     {
@@ -15,6 +15,7 @@ namespace Destiny.Core.Flow.IdentityServer
         public string ClientName { get; set; }
         public string ClientUrl { get; set; }
         public string ClientLogoUrl { get; set; }
+        public string Description { get; set; }
         public DateTime Created { get; set; }
         public DateTime? Expires { get; set; }
         public IEnumerable<string> IdentityGrantNames { get; set; }

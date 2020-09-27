@@ -4,11 +4,12 @@
 
 using System.Linq;
 using System.Threading.Tasks;
+using Destiny.Core.Flow.IdentityServer.IdentityServerFour;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace IdentityServer4.Quickstart.UI
+namespace IdentityServerHost.Quickstart.UI
 {
     [SecurityHeaders]
     [Authorize]
