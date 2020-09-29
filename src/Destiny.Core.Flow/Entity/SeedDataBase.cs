@@ -33,7 +33,7 @@ namespace Destiny.Core.Flow.Entity
         protected abstract TEntity[] SetSeedData();
 
         /// <summary>
-        /// 异步保存到数据库中
+        /// 同步保存到数据库中
         /// </summary>
         /// <returns></returns>
         protected abstract void SaveDatabase(TEntity[] entities);
