@@ -21,17 +21,17 @@ namespace @(metadata.Namespace).Dtos
     /// @(string.IsNullOrEmpty(metadata.EntityMetadata.DisplayName) ? metadata.EntityMetadata.EntityName : metadata.EntityMetadata.DisplayName)
     /// &lt;/summary&gt;
     [AutoMapping(typeof(@metadata.EntityMetadata.EntityName))]
-    public partial class @(metadata.EntityMetadata.EntityName)InputDto  : InputDto&lt;@(metadata.EntityMetadata.PrimaryKeyType)&gt;
+    public partial class @(metadata.EntityMetadata.EntityName)InputDto : InputDto&lt;@(metadata.EntityMetadata.PrimaryKeyType)&gt;
     {
     @foreach (var property in metadata.EntityMetadata.Properties.Where(o => o.IsInputDto))
     {
 
-        <text>
-        /// &lt;summary&gt;
-        /// 获取或设置 @property.DisplayName
-        /// &lt;/summary&gt;
-        public @property.CSharpType @property.PropertyName { get; set; }
-        </text>
+
+        @:/// &lt;summary&gt;
+        @:/// 获取或设置 @property.DisplayName
+        @:/// &lt;/summary&gt;
+        @:public @property.CSharpType @property.PropertyName { get; set; }
+
 
     }
 

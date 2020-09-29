@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using RazorEngine.Configuration;
+using RazorEngine.Text;
+using System.CodeDom.Compiler;
 
 namespace Destiny.Core.Flow.CodeGenerator
 {
@@ -69,7 +72,15 @@ namespace Destiny.Core.Flow.CodeGenerator
         {
             string template = GetInternalTemplate(codeType);
             var key = GetKey(codeType, template);
-            return Engine.Razor.RunCompile(template, key, metadata.GetType(), metadata);
+            ITemplateServiceConfiguration configuration = new TemplateServiceConfiguration()
+            {
+                Language = Language.CSharp,
+                //EncodedStringFactory = new RawStringFactory(),
+                Debug = true
+            };
+            IRazorEngineService service = RazorEngineService.Create(configuration);
+          
+            return service.RunCompile(template, key, metadata.GetType(), metadata);
         }
 
 
@@ -96,11 +107,13 @@ namespace Destiny.Core.Flow.CodeGenerator
         public CodeData GenerateEntityCode(ProjectMetadata metadata)
         {
             var template = GetTemplateCode(metadata, CodeType.Entity);
+ 
             var code = new CodeData()
             {
                 SourceCode = template,
                 FileName = $"Entity/{metadata.EntityMetadata.EntityName}.cs"
             };
+          
             return code;
         }
 

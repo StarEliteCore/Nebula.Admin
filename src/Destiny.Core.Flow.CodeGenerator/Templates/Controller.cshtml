@@ -29,69 +29,69 @@ namespace @(metadata.Namespace).API.Controllers
     public class @(metadata.EntityMetadata.EntityName)Controller : AuthorizeControllerBase
     {
 
-    private readonly I@(metadata.EntityMetadata.EntityName)Service @_serive;
+        private readonly I@(metadata.EntityMetadata.EntityName)Service @_serive;
+        
+        public @(metadata.EntityMetadata.EntityName)Controller(I@(metadata.EntityMetadata.EntityName)Service @serive)
+        {
+            @_serive=@serive;
+        }
 
-    public @(metadata.EntityMetadata.EntityName)Controller(I@(metadata.EntityMetadata.EntityName)Service @serive)
-    {
-          @_serive=@serive;
+
+        /// &lt;summary&gt;
+        /// 异步创建@(metadata.EntityMetadata.DisplayName)
+        /// &lt;/summary&gt;
+        /// &lt;param name="dto"&gt;添加的@(metadata.EntityMetadata.DisplayName)DTO&lt;/param&gt;
+        [HttpPost]
+        [Description("异步创建@(metadata.EntityMetadata.DisplayName)")]
+        public async Task&lt;AjaxResult&gt; CreateAsync([FromBody] @(metadata.EntityMetadata.EntityName)InputDto dto)
+        {
+            return (await @(_serive).CreateAsync(dto)).ToAjaxResult();
+        }
+
+        /// &lt;summary&gt;
+        /// 异步更新@(metadata.EntityMetadata.DisplayName)
+        /// &lt;/summary&gt;
+        /// &lt;param name="dto"&gt;更新的@(metadata.EntityMetadata.DisplayName)DTO&lt;/param&gt;
+        [HttpPost]
+        [Description("异步更新@(metadata.EntityMetadata.DisplayName)")]
+        public async Task&lt;AjaxResult&gt; UpdateAsync([FromBody] @(metadata.EntityMetadata.EntityName)InputDto dto)
+        {
+            return (await @(_serive).UpdateAsync(dto)).ToAjaxResult();
+        }
+        
+        /// &lt;summary&gt;
+        /// 异步加载表单@(metadata.EntityMetadata.DisplayName)
+        /// &lt;/summary&gt;
+        /// &lt;param name="id"&gt;要加载的@(metadata.EntityMetadata.DisplayName)主键&lt;/param&gt;
+        [HttpGet]
+        [Description("异步加载表单@(metadata.EntityMetadata.DisplayName)")]
+        public async Task&lt;AjaxResult&gt;  LoadFormAsync(@metadata.EntityMetadata.PrimaryKeyType id)
+        {
+            return (await @(_serive).LoadFormAsync(id)).ToAjaxResult();
+        }
+        
+        
+        /// &lt;summary&gt;
+        /// 异步删除@(metadata.EntityMetadata.DisplayName)
+        /// &lt;/summary&gt;
+        /// &lt;param name="id"&gt;要删除的@(metadata.EntityMetadata.DisplayName)主键&lt;/param&gt;
+        [HttpDelete]
+        [Description("异步删除@(metadata.EntityMetadata.DisplayName)")]
+        public async Task&lt;AjaxResult&gt; DeleteAsync(@metadata.EntityMetadata.PrimaryKeyType id)
+        {
+            return (await @(_serive).DeleteAsync(id)).ToAjaxResult();
+        }
+        
+        /// &lt;summary&gt;
+        /// 异步得到@(metadata.EntityMetadata.DisplayName)分页数据
+        /// &lt;/summary&gt;
+        /// &lt;param name="request"&gt;分页请求数据&lt;/param&gt;
+        [HttpPost]
+        [Description("异步得到@(metadata.EntityMetadata.DisplayName)分页数据")]
+        public async Task&lt;PageList&lt;@(metadata.EntityMetadata.EntityName)PageListDto&gt;&gt; GetPageAsync(PageRequest request)
+        {
+            return (await @(_serive).GetPageAsync(request)).ToPageList();
+        }
+
     }
-
-
-    /// &lt;summary&gt;
-    /// 异步创建@(metadata.EntityMetadata.DisplayName)
-    /// &lt;/summary&gt;
-    /// &lt;param name="dto"&gt;添加的@(metadata.EntityMetadata.DisplayName)DTO&lt;/param&gt;
-    [HttpPost]
-    [Description("异步创建@(metadata.EntityMetadata.DisplayName)")]
-    public async Task&lt;AjaxResult&gt; CreateAsync([FromBody] @(metadata.EntityMetadata.EntityName)InputDto dto)
-    {
-    return (await @(_serive).CreateAsync(dto)).ToAjaxResult();
-    }
-
-    /// &lt;summary&gt;
-    /// 异步更新@(metadata.EntityMetadata.DisplayName)
-    /// &lt;/summary&gt;
-    /// &lt;param name="dto"&gt;更新的@(metadata.EntityMetadata.DisplayName)DTO&lt;/param&gt;
-    [HttpPost]
-    [Description("异步更新@(metadata.EntityMetadata.DisplayName)")]
-    public async Task&lt;AjaxResult&gt; UpdateAsync([FromBody] @(metadata.EntityMetadata.EntityName)InputDto dto)
-    {
-    return (await @(_serive).UpdateAsync(dto)).ToAjaxResult();
-    }
-
-    /// &lt;summary&gt;
-    /// 异步加载表单@(metadata.EntityMetadata.DisplayName)
-    /// &lt;/summary&gt;
-    /// &lt;param name="id"&gt;要加载的@(metadata.EntityMetadata.DisplayName)主键&lt;/param&gt;
-    [HttpGet]
-    [Description("异步加载表单@(metadata.EntityMetadata.DisplayName)")]
-    public async Task&lt;AjaxResult&gt;  LoadFormAsync(@metadata.EntityMetadata.PrimaryKeyType id)
-    {
-    return (await @(_serive).LoadFormAsync(id)).ToAjaxResult();
-    }
-
-
-    /// &lt;summary&gt;
-    /// 异步删除@(metadata.EntityMetadata.DisplayName)
-    /// &lt;/summary&gt;
-    /// &lt;param name="id"&gt;要删除的@(metadata.EntityMetadata.DisplayName)主键&lt;/param&gt;
-    [HttpDelete]
-    [Description("异步删除@(metadata.EntityMetadata.DisplayName)")]
-    public async  Task&lt;AjaxResult&gt; DeleteAsync(@metadata.EntityMetadata.PrimaryKeyType id)
-    {
-    return (await @(_serive).DeleteAsync(id)).ToAjaxResult();
-    }
-
-    /// &lt;summary&gt;
-    /// 异步得到@(metadata.EntityMetadata.DisplayName)分页数据
-    /// &lt;/summary&gt;
-    /// &lt;param name="request"&gt;分页请求数据&lt;/param&gt;
-    [HttpPost]
-    [Description("异步得到@(metadata.EntityMetadata.DisplayName)分页数据")]
-    public async  Task&lt;PageList&lt;@(metadata.EntityMetadata.EntityName)PageListDto&gt;&gt; GetPageAsync(PageRequest request)
-    {
-    return (await @(_serive).GetPageAsync(request)).ToPageList();
-    }
-
-    }
-    }
+}

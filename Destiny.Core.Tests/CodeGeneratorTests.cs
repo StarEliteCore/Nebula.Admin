@@ -36,6 +36,7 @@ namespace Destiny.Core.Tests
                 DisplayName = "名字",
                 PropertyName = "Name",
                 IsPageDto=true,
+                
 
             });
             propertyMetadatas.Add(new PropertyMetadata()
@@ -66,9 +67,10 @@ namespace Destiny.Core.Tests
                 Properties = propertyMetadatas,
                 IsCreation = true,
                 IsModification = true,
-                IsSoftDelete = false,
+                IsSoftDelete = true,
                 AuditedUserKeyType = "Guid",
                 IsAutoMap=true,
+                
                
 
             };

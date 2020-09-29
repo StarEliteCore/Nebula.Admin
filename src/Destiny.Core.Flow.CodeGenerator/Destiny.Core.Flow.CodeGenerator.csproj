@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="RazorEngine.NetCore" Version="3.1.0" />
+    <PackageReference Include="System.CodeDom" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,13 +26,16 @@
     <EmbeddedResource Include="Templates\PageListDto.cshtml" />
     <EmbeddedResource Include="Templates\OutputDto.cshtml" />
     <EmbeddedResource Include="Templates\InputDto.cshtml" />
-    <EmbeddedResource Include="Templates\Entity.cshtml" />
     <EmbeddedResource Include="Templates\Controller.cshtml" />
     <EmbeddedResource Include="Templates\ServiceImpl.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Destiny.Core.Flow\Destiny.Core.Flow.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Templates\Entity.cshtml" />
   </ItemGroup>
 
 </Project>
