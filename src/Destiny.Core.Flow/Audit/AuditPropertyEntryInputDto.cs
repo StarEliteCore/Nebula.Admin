@@ -37,11 +37,5 @@ namespace Destiny.Core.Flow.Audit
         /// </summary>
         [DisplayName("属性类型")]
         public string PropertiesType { get; set; }
-
-        /// <summary>
-        /// 审计日志实体Id
-        /// </summary>
-        [DisplayName("审计日志实体Id")]
-        public Guid AuditEntryId { get; set; }
     }
 }

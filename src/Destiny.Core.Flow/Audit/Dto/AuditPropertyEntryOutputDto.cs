@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Destiny.Core.Flow.Entity;
+using MongoDB.Bson;
+using System;
 using System.ComponentModel;
 
 namespace Destiny.Core.Flow.Audit.Dto
@@ -7,7 +9,7 @@ namespace Destiny.Core.Flow.Audit.Dto
     /// 日志属性输出Dto
     /// </summary>
     [DisplayName("日志属性输出Dto")]
-    public class AuditPropertyEntryOutputDto
+    public class AuditPropertyEntryOutputDto:OutputDtoBase<ObjectId>
     {
         /// <summary>
         /// 属性名称
@@ -38,11 +40,5 @@ namespace Destiny.Core.Flow.Audit.Dto
         /// </summary>
         [DisplayName("属性类型")]
         public string PropertiesType { get; set; }
-
-        /// <summary>
-        /// 审计日志实体Id
-        /// </summary>
-        [DisplayName("审计日志实体Id")]
-        public Guid AuditEntryId { get; set; }
     }
 }

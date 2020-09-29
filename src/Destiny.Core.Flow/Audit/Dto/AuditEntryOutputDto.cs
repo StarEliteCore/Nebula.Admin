@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.Entity;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ namespace Destiny.Core.Flow.Audit.Dto
     /// 实体输出Dto
     /// </summary>
     [DisplayName("日志实体输出")]
-    public class AuditEntryOutputDto : OutputDto<Guid>
+    public class AuditEntryOutputDto : OutputDto<ObjectId>
     {
         /// <summary>
         /// 实体名称

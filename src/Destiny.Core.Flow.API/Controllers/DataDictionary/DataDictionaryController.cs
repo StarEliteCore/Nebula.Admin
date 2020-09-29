@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Destiny.Core.Flow.API.Controllers.DataDictionary
 {
     [Description("数据字典")]
-    [Authorize]
+    [AllowAnonymous]
     public class DataDictionaryController : ApiControllerBase
     {
         private readonly IDataDictionnaryServices _dataDictionnaryServices = null;

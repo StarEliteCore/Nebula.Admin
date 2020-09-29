@@ -11,18 +11,18 @@
         </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.AuditLogController.GetAuditLogPageAsync(Destiny.Core.Flow.Filter.PageRequest)">
             <summary>
-            异步得到功能分页
+            分页获取审计日志
             </summary>
             <param name="request"></param>
             <returns></returns>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.AuditLogController.GetAuditEntryListByAuditLogIdAsync(System.Nullable{MongoDB.Bson.ObjectId})">
+        <member name="M:Destiny.Core.Flow.API.Controllers.AuditLogController.GetAuditEntryListByAuditLogIdAsync(System.String)">
             <summary>
             获取操作实体列表
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.AuditLogController.GetAuditEntryListByAuditEntryIdAsync(System.Nullable{MongoDB.Bson.ObjectId})">
+        <member name="M:Destiny.Core.Flow.API.Controllers.AuditLogController.GetAuditEntryListByAuditEntryIdAsync(System.String)">
             <summary>
             获取实体属性列表
             </summary>

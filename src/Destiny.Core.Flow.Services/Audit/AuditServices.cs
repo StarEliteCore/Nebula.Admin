@@ -1,8 +1,10 @@
 ﻿using Destiny.Core.Flow.Audit;
 using Destiny.Core.Flow.Audit.Dto;
 using Destiny.Core.Flow.Enums;
+using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
+using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.MongoDB.Repositorys;
 using Destiny.Core.Flow.Ui;
 using MongoDB.Bson;
@@ -53,9 +55,10 @@ namespace Destiny.Core.Flow.Services.Audit
         /// <summary>
         /// </summary>
         /// <returns></returns>
-        public async Task<PageResult<AuditLogOutputPageDto>> GetAuditLogPageAsync(PageRequest request)
+        public async Task<IPagedResult<AuditLogOutputPageDto>> GetAuditLogPageAsync(PageRequest request)
         {
-            var list = await _auditLogRepository.Entities.Skip(request.PageSize * (request.PageIndex - 1)).Take(request.PageSize).Select(x => new AuditLogOutputPageDto
+            var exp = FilterBuilder.GetExpression<AuditLog>(request.Filter);
+            return await _auditLogRepository.Collection.ToPageAsync(exp, request, x => new AuditLogOutputPageDto
             {
                 BrowserInformation = x.BrowserInformation,
                 Ip = x.Ip,
@@ -65,8 +68,7 @@ namespace Destiny.Core.Flow.Services.Audit
                 CreatorUserId = x.CreatorUserId,
                 CreatedTime = x.CreatedTime,
                 Id = x.Id
-            }).ToListAsync();
-            return new PageResult<AuditLogOutputPageDto>(list, _auditLogRepository.Entities.Count());
+            });
         }
 
         public async Task<OperationResponse> GetAuditEntryListByAuditLogIdAsync(ObjectId id)
@@ -79,6 +81,7 @@ namespace Destiny.Core.Flow.Services.Audit
                     TableName = x.TableName,
                     KeyValues = x.KeyValues,
                     OperationType = x.OperationType,
+                    Id=x.Id
                 }).ToListAsync();
             return new OperationResponse(MessageDefinitionType.LoadSucces, list, OperationResponseType.Success);
         }
@@ -92,6 +95,7 @@ namespace Destiny.Core.Flow.Services.Audit
                 OriginalValues = x.OriginalValues,
                 NewValues = x.NewValues,
                 PropertiesType = x.PropertiesType,
+                Id=x.Id
             }).ToListAsync();
             return new OperationResponse(MessageDefinitionType.LoadSucces, list, OperationResponseType.Success);
         }

@@ -1,6 +1,7 @@
 ﻿using Destiny.Core.Flow.Audit.Dto;
 using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Filter;
+using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.Ui;
 using MongoDB.Bson;
 using System;
@@ -18,7 +19,7 @@ namespace Destiny.Core.Flow.Audit
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        Task<PageResult<AuditLogOutputPageDto>> GetAuditLogPageAsync(PageRequest request);
+        Task<IPagedResult<AuditLogOutputPageDto>> GetAuditLogPageAsync(PageRequest request);
 
         /// <summary>
         /// 获取操作明细
