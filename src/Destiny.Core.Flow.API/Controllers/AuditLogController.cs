@@ -4,6 +4,7 @@ using Destiny.Core.Flow.Audit.Dto;
 using Destiny.Core.Flow.Filter;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -40,7 +41,7 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Description("获取操作实体列表")]
-        public async Task<AjaxResult> GetAuditEntryListByAuditLogIdAsync(Guid? id)
+        public async Task<AjaxResult> GetAuditEntryListByAuditLogIdAsync(ObjectId? id)
         {
             return (await _auditStore.GetAuditEntryListByAuditLogIdAsync(id.Value)).ToAjaxResult();
         }
@@ -50,7 +51,7 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Description("获取实体属性列表")]
-        public async Task<AjaxResult> GetAuditEntryListByAuditEntryIdAsync(Guid? id)
+        public async Task<AjaxResult> GetAuditEntryListByAuditEntryIdAsync(ObjectId? id)
         {
             return (await _auditStore.GetAuditEntryListByAuditEntryIdAsync(id.Value)).ToAjaxResult();
         }

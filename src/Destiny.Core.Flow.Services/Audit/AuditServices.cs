@@ -5,6 +5,7 @@ using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.MongoDB.Repositorys;
 using Destiny.Core.Flow.Ui;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System;
@@ -16,11 +17,11 @@ namespace Destiny.Core.Flow.Services.Audit
 {
     public class AuditServices : IAuditStore
     {
-        private readonly IMongoDBRepository<AuditLog, Guid> _auditLogRepository;
-        private readonly IMongoDBRepository<AuditEntry, Guid> _auditEntryRepository;
-        private readonly IMongoDBRepository<AuditPropertysEntry, Guid> _auditPropertysEntryRepository;
+        private readonly IMongoDBRepository<AuditLog, ObjectId> _auditLogRepository;
+        private readonly IMongoDBRepository<AuditEntry, ObjectId> _auditEntryRepository;
+        private readonly IMongoDBRepository<AuditPropertysEntry, ObjectId> _auditPropertysEntryRepository;
 
-        public AuditServices(IMongoDBRepository<AuditLog, Guid> auditLogRepository, IMongoDBRepository<AuditEntry, Guid> auditEntryRepository, IMongoDBRepository<AuditPropertysEntry, Guid> auditPropertysEntryRepository)
+        public AuditServices(IMongoDBRepository<AuditLog, ObjectId> auditLogRepository, IMongoDBRepository<AuditEntry, ObjectId> auditEntryRepository, IMongoDBRepository<AuditPropertysEntry, ObjectId> auditPropertysEntryRepository)
         {
             _auditLogRepository = auditLogRepository;
             _auditEntryRepository = auditEntryRepository;
@@ -68,7 +69,7 @@ namespace Destiny.Core.Flow.Services.Audit
             return new PageResult<AuditLogOutputPageDto>(list, _auditLogRepository.Entities.Count());
         }
 
-        public async Task<OperationResponse> GetAuditEntryListByAuditLogIdAsync(Guid id)
+        public async Task<OperationResponse> GetAuditEntryListByAuditLogIdAsync(ObjectId id)
         {
             var list = await _auditEntryRepository.Entities.Where(x => x.AuditLogId == id)
                 .Select(x => new AuditEntryOutputDto
@@ -82,7 +83,7 @@ namespace Destiny.Core.Flow.Services.Audit
             return new OperationResponse(MessageDefinitionType.LoadSucces, list, OperationResponseType.Success);
         }
 
-        public async Task<OperationResponse> GetAuditEntryListByAuditEntryIdAsync(Guid id)
+        public async Task<OperationResponse> GetAuditEntryListByAuditEntryIdAsync(ObjectId id)
         {
             var list = await _auditPropertysEntryRepository.Entities.Where(x => x.AuditEntryId == id).Select(x => new AuditPropertyEntryOutputDto
             {

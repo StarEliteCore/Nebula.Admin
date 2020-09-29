@@ -2,6 +2,7 @@
 using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Ui;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -24,13 +25,13 @@ namespace Destiny.Core.Flow.Audit
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<OperationResponse> GetAuditEntryListByAuditLogIdAsync(Guid id);
+        Task<OperationResponse> GetAuditEntryListByAuditLogIdAsync(ObjectId id);
 
         /// <summary>
         /// 获取实体明细
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<OperationResponse> GetAuditEntryListByAuditEntryIdAsync(Guid id);
+        Task<OperationResponse> GetAuditEntryListByAuditEntryIdAsync(ObjectId id);
     }
 }

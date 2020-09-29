@@ -1,5 +1,6 @@
 ﻿using Destiny.Core.Flow.Data;
 using Destiny.Core.Flow.Entity;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,11 +9,11 @@ namespace Destiny.Core.Flow.Audit
 {
     [DisplayName("审计日志实体")]
     [MongoDBTable("DestinyAuditEntityLog")]
-    public class AuditEntry : EntityBase<Guid>, IFullAuditedEntity<Guid>
+    public class AuditEntry : EntityBase<ObjectId>, IFullAuditedEntity<Guid>
     {
         public AuditEntry()
         {
-            Id = ComnGuid.NewGuid();
+            Id = ObjectId.GenerateNewId();
         }
 
         /// <summary>
@@ -79,6 +80,6 @@ namespace Destiny.Core.Flow.Audit
         /// 审计日志主表Id
         /// </summary>
         [DisplayName("审计日志主表Id")]
-        public Guid AuditLogId { get; set; }
+        public ObjectId AuditLogId { get; set; }
     }
 }

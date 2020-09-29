@@ -16,13 +16,13 @@
             <param name="request"></param>
             <returns></returns>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.AuditLogController.GetAuditEntryListByAuditLogIdAsync(System.Nullable{System.Guid})">
+        <member name="M:Destiny.Core.Flow.API.Controllers.AuditLogController.GetAuditEntryListByAuditLogIdAsync(System.Nullable{MongoDB.Bson.ObjectId})">
             <summary>
             获取操作实体列表
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.AuditLogController.GetAuditEntryListByAuditEntryIdAsync(System.Nullable{System.Guid})">
+        <member name="M:Destiny.Core.Flow.API.Controllers.AuditLogController.GetAuditEntryListByAuditEntryIdAsync(System.Nullable{MongoDB.Bson.ObjectId})">
             <summary>
             获取实体属性列表
             </summary>
@@ -231,48 +231,6 @@
             <summary>
             异步得到权限集合
             </summary>
-        </member>
-        <member name="T:Destiny.Core.Flow.API.Controllers.RoleController">
-            <summary>
-            角色管理
-            </summary>
-        </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.RoleController.GetRolePageAsync(Destiny.Core.Flow.Filter.PageRequest)">
-            <summary>
-            异步得到分页
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.RoleController.CreateAsync(Destiny.Core.Flow.Dtos.RoleDtos.RoleInputDto)">
-            <summary>
-            
-            </summary>
-            <param name="dto"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.RoleController.UpdateAsync(Destiny.Core.Flow.Dtos.RoleDtos.RoleInputDto)">
-            <summary>
-            
-            </summary>
-            <param name="dto"></param>
-        </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.RoleController.DeleteAsync(System.Guid)">
-            <summary>
-            删除角色
-            </summary>
-            <param name="id"></param>
-        </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.RoleController.AddOrUpdateAsync(Destiny.Core.Flow.Dtos.RoleDtos.RoleInputDto)">
-            <summary>
-            删除角色
-            </summary>
-            <param name="dto"></param>
-        </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.RoleController.GetRoleSelectListAsync">
-            <summary>
-            异步得到角色下拉数据
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.UserController">
             <summary>

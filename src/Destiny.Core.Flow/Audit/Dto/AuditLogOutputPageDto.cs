@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.Entity;
+using MongoDB.Bson;
 using System;
 using System.ComponentModel;
 
@@ -8,7 +9,7 @@ namespace Destiny.Core.Flow.Audit.Dto
     /// 审计日志分页输出Dto
     /// </summary>
     [DisplayName("审计日志分页列表")]
-    public class AuditLogOutputPageDto : OutputDto<Guid>
+    public class AuditLogOutputPageDto : OutputDto<ObjectId>
     {
         /// <summary>
         /// 浏览器信息
