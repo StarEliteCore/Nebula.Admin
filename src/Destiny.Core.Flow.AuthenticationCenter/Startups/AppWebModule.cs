@@ -30,10 +30,21 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
         public override void ApplicationInitialization(ApplicationContext context)
         {
             var app = context.GetApplicationBuilder();
+            app.UseRouting();
             if (!_corePolicyName.IsNullOrEmpty())
             {
                 app.UseCors(_corePolicyName); //添加跨域中间件
             }
+            app.UseStaticFiles();
+            app.UseIdentityServer();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
             app.UseStaticFiles();
         }
 
@@ -44,7 +55,6 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
 
             var configuration = context.GetConfiguration();
             context.Services.Configure<AppOptionSettings>(configuration.GetSection("Destiny"));
-
             var settings = context.GetConfiguration<AppOptionSettings>("Destiny");
             context.Services.AddObjectAccessor<AppOptionSettings>(settings);
             if (!settings.Cors.PolicyName.IsNullOrEmpty() && !settings.Cors.Url.IsNullOrEmpty()) //添加跨域

@@ -28,18 +28,7 @@ namespace Destiny.Core.Flow.AuthenticationCenter
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors("Destiny.Core.Flow.API"); //添加跨域中间件
-            app.UseStaticFiles();
-            app.UseRouting();
-            app.UseIdentityServer();
-            app.UseAuthentication();
-            app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.InitializeApplication();
         }
     }
 }
