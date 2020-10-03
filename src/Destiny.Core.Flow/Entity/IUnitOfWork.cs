@@ -1,6 +1,7 @@
 ﻿using Destiny.Core.Flow.Ui;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,6 +12,11 @@ namespace Destiny.Core.Flow.Entity
     /// </summary>
     public interface IUnitOfWork : IDisposable
     {
+        /// <summary>
+        /// 释放时触发
+        /// </summary>
+        Action OnDispose { get;set; }
+
         /// <summary>
         /// 得到上下文
         /// </summary>
@@ -78,6 +84,8 @@ namespace Destiny.Core.Flow.Entity
         /// </summary>
         /// <returns></returns>
         Task RollbackAsync();
+
+  
 
     }
 }

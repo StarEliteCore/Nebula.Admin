@@ -18,6 +18,12 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
     /// </summary>
     public class UnitOfWork<TDbContext> : IUnitOfWork where TDbContext : DbContextBase
     {
+        /// <summary>
+        /// 释放时触发
+        /// </summary>
+        public Action OnDispose { get; set; }
+
+
         private readonly DbContextBase _dbContext = null;
 
         /// <summary>
@@ -59,6 +65,7 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
 
             HasCommitted = false;
         }
+
 
         /// <summary>
         /// 开启事务 如果成功提交事务，失败回滚事务
@@ -243,7 +250,9 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
             }
             _transaction?.Dispose();
             _dbContext.Dispose();
+            OnDispose?.Invoke();
             _disposed = true;
+  
         }
 
         /// <summary>

@@ -18,7 +18,10 @@ namespace Destiny.Core.Flow.Entity
         public virtual bool Disable { get; protected set; } = false;
 
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="serviceProvider"></param>
         protected SeedDataBase(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
@@ -39,7 +42,11 @@ namespace Destiny.Core.Flow.Entity
         protected abstract void SaveDatabase(TEntity[] entities);
 
 
-
+        /// <summary>
+        /// 条件表达树
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         protected abstract Expression<Func<TEntity, bool>> Expression(TEntity entity);
 
 
