@@ -27,7 +27,7 @@ namespace Destiny.Core.Flow.API.Startups
                typeof(AutoMapperModule),
                typeof(CSRedisModule),
                typeof(MongoDBModelule),
-        typeof(MigrationModuleBase)
+        typeof(MigrationModule)
         )]
     public class AppWebModule : AppModule
     {

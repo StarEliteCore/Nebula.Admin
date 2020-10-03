@@ -1,5 +1,6 @@
 ﻿using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.IdentityServer;
 using Destiny.Core.Flow.Model.DestinyIdentityServer4;
 using Destiny.Core.Flow.Model.SeedDatas;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,13 +9,18 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Destiny.Core.Flow.IdentityServer
+namespace Destiny.Core.Flow.AuthenticationCenter.SeedDatas
 {
     [Dependency(ServiceLifetime.Singleton)]
     public class IdentityServer4IdentityResourceSeedData : SeedDataDefaults<IdentityResource, Guid>
     {
+ 
+
+
+
         public IdentityServer4IdentityResourceSeedData(IServiceProvider serviceProvider) : base(serviceProvider)
         {
+        
         }
 
         protected override Expression<Func<IdentityResource, bool>> Expression(IdentityResource entity)
@@ -23,7 +29,9 @@ namespace Destiny.Core.Flow.IdentityServer
         }
         protected override IdentityResource[] SetSeedData()
         {
-            List<IdentityResource> identityResources =  new List<IdentityResource>();
+
+
+            List<IdentityResource> identityResources = new List<IdentityResource>();
             foreach (var item in Config.GetIdentityResources())
             {
                 var model = item.MapTo<IdentityResource>();
@@ -35,4 +43,9 @@ namespace Destiny.Core.Flow.IdentityServer
             return identityResources.ToArray();
         }
     }
+
+
+
+ 
+
 }

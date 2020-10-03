@@ -1,6 +1,8 @@
 ﻿using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.EntityFrameworkCore;
 using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.Model;
+using Destiny.Core.Flow.Modules;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -12,6 +14,9 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.AuthenticationCenter.Startups
 {
+    [DependsOn(
+     typeof(Destiny.Core.Flow.AuthenticationCenter.Startups.MigrationModule)
+     )]
     public class EntityFrameworkCoreMySqlModule: EntityFrameworkCoreModuleBase
     {
         protected override IServiceCollection AddRepository(IServiceCollection services)

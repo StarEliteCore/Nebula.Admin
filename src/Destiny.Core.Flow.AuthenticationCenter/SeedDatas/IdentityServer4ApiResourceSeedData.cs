@@ -1,5 +1,6 @@
 ﻿using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.IdentityServer;
 using Destiny.Core.Flow.Model.DestinyIdentityServer4;
 using Destiny.Core.Flow.Model.SeedDatas;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,13 +9,15 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Destiny.Core.Flow.IdentityServer
+namespace Destiny.Core.Flow.AuthenticationCenter.SeedDatas
 {
     [Dependency(ServiceLifetime.Singleton)]
     public class IdentityServer4ApiResourceSeedData : SeedDataDefaults<ApiResource, Guid>
     {
+    
         public IdentityServer4ApiResourceSeedData(IServiceProvider serviceProvider) : base(serviceProvider)
         {
+        
         }
 
         protected override Expression<Func<ApiResource, bool>> Expression(ApiResource entity)

@@ -21,8 +21,8 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
     typeof(DependencyAppModule),
     typeof(EventBusAppModule),
     typeof(EntityFrameworkCoreMySqlModule),
-        typeof(AutoMapperModule),
-        typeof(IdentityServer4Module)
+    typeof(AutoMapperModule),
+    typeof(IdentityServer4Module)
     )]
     public class AppWebModule : AppModule
     {

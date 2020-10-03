@@ -1,22 +1,37 @@
-﻿using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.Extensions;
+﻿using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Modules;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
-namespace Destiny.Core.Flow.Model
+namespace Destiny.Core.Flow.Entity.Modules
 {
-    public class MigrationModuleBase : AppModule
+   public abstract class MigrationModuleBase : AppModule
     {
+
+
+        /// <summary>
+        /// 是否自动迁移
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        protected abstract bool IsAutoMigration(ApplicationContext context);
+
+        /// <summary>
+        /// 是否添加种子数据
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        protected abstract bool IsAddSeedData(ApplicationContext context);
+
         public override void ApplicationInitialization(ApplicationContext context)
         {
             var app = context.GetApplicationBuilder();
-            var configuration = context.ServiceProvider.GetService<IConfiguration>();
-            var isAutoMigration = configuration["Destiny:Migrations:IsAutoMigration"].AsTo<bool>();
-            if (isAutoMigration)
-            {
+
+            if (IsAutoMigration(context)) {
                 context.ServiceProvider.CreateScoped(provider =>
                 {
                     var unitOfWork = provider.GetService<IUnitOfWork>();
@@ -29,8 +44,8 @@ namespace Destiny.Core.Flow.Model
                 });
             }
 
-            var isAddSeedData = configuration["Destiny:Migrations:IsAddSeedData"].AsTo<bool>();
-            if (isAddSeedData)
+
+            if (IsAddSeedData(context))
             {
                 var seedDatas = context.ServiceProvider.GetServices<ISeedData>();
 
@@ -39,6 +54,7 @@ namespace Destiny.Core.Flow.Model
                     seed.Initialize();
                 }
             }
+           
         }
     }
 }

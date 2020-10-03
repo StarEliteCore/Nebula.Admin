@@ -13,7 +13,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow.IdentityServer
 {
-    public class IdentityServer4Module : AppModule
+    public  class IdentityServer4Module : AppModule
     {
         public override void ConfigureServices(ConfigureServicesContext context)
         {
@@ -30,11 +30,10 @@ namespace Destiny.Core.Flow.IdentityServer
             service.AddTransient<IResourceStore, ApiResourceStoreBase>();
             service.AddTransient<IPersistedGrantStore, PersistedGrantStoreBase>();
             service.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordBaseValidator>();
-            //service.AddTransient<IAuthorizeInteractionResponseGenerator, AuthorizeInteractionResponseBaseGenerator>();
-            //service.AddTransient<IAccountService, AccountService>();
-            //service.AddTransient<IDestinyConsentService, DestinyConsentService>();
+         
 
         }
+     
         public override void ApplicationInitialization(ApplicationContext context)
         {
             var app = context.GetApplicationBuilder();
