@@ -51,9 +51,9 @@ namespace Destiny.Core.Flow.Extensions
         /// 异步循环
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="source"></param>
-        /// <param name="maxDegreeOfParallelism"></param>
-        /// <param name="body"></param>
+        /// <param name="source">源</param>
+        /// <param name="maxDegreeOfParallelism">最大并行度值</param>
+        /// <param name="body">主体</param>
         /// <returns></returns>
         public static Task ForEachAsync<T>(this IEnumerable<T> source, int maxDegreeOfParallelism, Func<T, Task> body)
         {
