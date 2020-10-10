@@ -120,7 +120,9 @@ namespace Destiny.Core.Flow.Extensions
                     try
                     {
                         var t = next(first.Result);
-                        if (t == null) tcs.TrySetCanceled();
+                        if (t == null) {
+                            tcs.TrySetCanceled();
+                        }
                         else
                             t.ContinueWith(delegate
                             {
