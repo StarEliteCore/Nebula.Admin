@@ -61,7 +61,7 @@
 
     + #### Destiny.Core.Flow.CodeGenerator 代码生成器
 
-      暂时为实现代码生成器
+      已实现，可以生成实体、DTO、接口、控制器。
 
     + to do...
 
