@@ -27,6 +27,7 @@ namespace Destiny.Core.Tests
             projectMetadata.Creator = "大黄瓜18cm";
             projectMetadata.Copyright = "大黄瓜18cm";
             projectMetadata.Namespace = "Destiny.Core.Flow";
+            projectMetadata.SaveFilePath = @"C:\Users\Admin\Desktop\Code";
             List<PropertyMetadata> propertyMetadatas = new List<PropertyMetadata>();
             propertyMetadatas.Add(new PropertyMetadata()
             {
@@ -74,11 +75,11 @@ namespace Destiny.Core.Tests
                
 
             };
-            var savePath = @"C:\Users\Admin\Desktop\Code";
+     
             ICodeGenerator codeGenerator = ServiceProvider.GetService<ICodeGenerator>();
 
-            codeGenerator.GenerateCode(projectMetadata, savePath);
-            Assert.True(Directory.Exists(savePath));
+            codeGenerator.GenerateCode(projectMetadata);
+       
         }
     }
 }

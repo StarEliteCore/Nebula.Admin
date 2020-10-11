@@ -11,7 +11,7 @@
         /// <param name="projectMetadata"></param>
         /// <param name="filePath"></param>
 
-        void GenerateCode(ProjectMetadata projectMetadata, string filePath);
+        void GenerateCode(ProjectMetadata projectMetadata);
 
         /// <summary>
         /// 创建实体代码

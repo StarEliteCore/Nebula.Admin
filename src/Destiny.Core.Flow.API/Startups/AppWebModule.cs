@@ -1,6 +1,7 @@
 ﻿using Destiny.Core.Flow.AspNetCore.Mvc.Filters;
 using Destiny.Core.Flow.AutoMapper;
 using Destiny.Core.Flow.Caching.CSRedis;
+using Destiny.Core.Flow.CodeGenerator;
 using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Events;
 using Destiny.Core.Flow.Extensions;
@@ -27,7 +28,8 @@ namespace Destiny.Core.Flow.API.Startups
                typeof(AutoMapperModule),
                typeof(CSRedisModule),
                typeof(MongoDBModelule),
-        typeof(MigrationModule)
+               typeof(MigrationModule),
+               typeof(CodeGeneratorModeule)
         )]
     public class AppWebModule : AppModule
     {
