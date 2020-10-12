@@ -104,7 +104,8 @@
     + #### Destiny.Core.Flow.Consul 服务发现模块
 
     + #### Destiny.Core.Flow.SwaggerUI 模块
-
+    + #### Destiny.Core.Flow.MongoDB 模块
+     集成MongoDB分页查询，添加，更新，删除。实现MongoDB单独仓储
 + ## 3.框架技术
 
   + ### 数据库
@@ -129,7 +130,8 @@
 
     + #### EntityFrameworkCore ORM框架
 
-    + to do
+    + ### MongoDB 
+    + ### Redis 
 
   + 
 
