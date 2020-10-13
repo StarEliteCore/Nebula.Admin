@@ -61,7 +61,7 @@
 
     + #### Destiny.Core.Flow.CodeGenerator 代码生成器
 
-      暂时为实现代码生成器
+      已实现，可以生成实体、DTO、接口、控制器。
 
     + to do...
 
@@ -104,7 +104,8 @@
     + #### Destiny.Core.Flow.Consul 服务发现模块
 
     + #### Destiny.Core.Flow.SwaggerUI 模块
-
+    + #### Destiny.Core.Flow.MongoDB 模块
+      集成MongoDB分页查询，添加，更新，删除。实现MongoDB单独仓储
 + ## 3.框架技术
 
   + ### 数据库
@@ -129,7 +130,8 @@
 
     + #### EntityFrameworkCore ORM框架
 
-    + to do
+    + ### MongoDB 
+    + ### Redis 
 
   + 
 
