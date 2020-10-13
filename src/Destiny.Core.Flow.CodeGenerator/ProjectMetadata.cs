@@ -37,6 +37,11 @@
 
         public EntityMetadata EntityMetadata { get; set; }
 
+        /// <summary>
+        /// 保存文件路径
+        /// </summary>
+        public string SaveFilePath { get; set; }
+
 
     }
 }

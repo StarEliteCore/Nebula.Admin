@@ -24,8 +24,7 @@ namespace Destiny.Core.Flow.CodeGenerator
         /// 生成代码
         /// </summary>
         /// <param name="projectMetadata"></param>
-        /// <param name="filePath"></param>
-        public void GenerateCode(ProjectMetadata projectMetadata, string filePath)
+        public void GenerateCode(ProjectMetadata projectMetadata)
         {
 
             List<CodeData> codes = new List<CodeData>();
@@ -40,7 +39,7 @@ namespace Destiny.Core.Flow.CodeGenerator
             codes.Add(GenerateController(projectMetadata));
             foreach (var code in codes.OrderBy(o => o.FileName))
             {
-                var saveFilePath = $"{Path.Combine(@"{0}\{1}", filePath, code.FileName)}";
+                var saveFilePath = $"{Path.Combine(@"{0}\{1}", projectMetadata.SaveFilePath, code.FileName)}";
                 var  path = Path.GetDirectoryName(saveFilePath);
                 if (!Directory.Exists(path))
                 {

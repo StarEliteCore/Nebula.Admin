@@ -8,6 +8,8 @@ namespace Destiny.Core.Flow.CodeGenerator
     public class EntityMetadata
     {
 
+    
+
         /// <summary>
         /// 实体名
         /// </summary>
@@ -27,7 +29,7 @@ namespace Destiny.Core.Flow.CodeGenerator
         /// 主键名
         /// </summary>
 
-        public string PrimaryKeyName { get; set; }
+        public string PrimaryKeyName { get; set; } 
 
 
         /// <summary>
@@ -38,7 +40,8 @@ namespace Destiny.Core.Flow.CodeGenerator
         /// <summary>
         /// 属性集合
         /// </summary>
-        public List<PropertyMetadata> Properties = new List<PropertyMetadata>();
+        public List<PropertyMetadata> Properties { get; set; } = new List<PropertyMetadata>();
+
 
         /// <summary>
         /// 就否自动映射（AutoMappper）
