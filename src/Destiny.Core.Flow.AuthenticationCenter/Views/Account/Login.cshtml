@@ -1,33 +1,24 @@
-@model Destiny.Core.Flow.IdentityServer.IdentityServerFour.LoginViewModel
-
+﻿@model Destiny.Core.Flow.IdentityServer.IdentityServerFour.LoginViewModel
 <div class="login-page">
-    <div class="lead">
-        <h1>Login</h1>
-        <p>Choose how to login</p>
-    </div>
-
     <partial name="_ValidationSummary" />
-
     <div class="row">
 
         @if (Model.EnableLocalLogin)
         {
-            <div class="col-sm-6">
+            <div class="col-sm-5">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Local Account</h2>
+                        <h4 style="text-align:center;">DestinyFlowCore登录认证中心</h4>
                     </div>
-
                     <div class="card-body">
                         <form asp-route="Login">
                             <input type="hidden" asp-for="ReturnUrl" />
-
                             <div class="form-group">
-                                <label asp-for="Username"></label>
+                                <label>用户名</label>
                                 <input class="form-control" placeholder="Username" asp-for="Username" autofocus>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Password"></label>
+                                <label>密码</label>
                                 <input type="password" class="form-control" placeholder="Password" asp-for="Password" autocomplete="off">
                             </div>
                             @if (Model.AllowRememberLogin)
@@ -41,8 +32,11 @@
                                     </div>
                                 </div>
                             }
-                            <button class="btn btn-primary" name="button" value="login">Login</button>
-                            <button class="btn btn-secondary" name="button" value="cancel">Cancel</button>
+                            <div class="form-group">
+                                <button class="btn btn-primary form-control" name="button" value="login">登录</button>
+                            </div>
+
+                            @*<button class="btn btn-secondary" name="button" value="cancel">Cancel</button>*@
                         </form>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
@@ -12,7 +12,6 @@ using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
-using IdentityServer4.Test;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -120,11 +119,11 @@ namespace IdentityServerHost.Quickstart.UI
             {
                 // validate username/password against in-memory store
 
-                var usermodel = await  _userManager.FindByNameAsync(model.Username);
-                if (usermodel!=null)
+                var usermodel = await _userManager.FindByNameAsync(model.Username);
+                if (usermodel != null)
                 {
-                     var result= await _signInManager.CheckPasswordSignInAsync(usermodel, model.Password, true);
-                    if(!result.Succeeded)
+                    var result = await _signInManager.CheckPasswordSignInAsync(usermodel, model.Password, true);
+                    if (!result.Succeeded)
                     {
                         await _events.RaiseAsync(new UserLoginFailureEvent(model.Username, "invalid credentials", clientId: context?.Client.ClientId));
                         ModelState.AddModelError(string.Empty, AccountOptions.InvalidCredentialsErrorMessage);
@@ -181,7 +180,7 @@ namespace IdentityServerHost.Quickstart.UI
                         throw new Exception("invalid return URL");
                     }
                 }
-                await _events.RaiseAsync(new UserLoginFailureEvent(model.Username, "invalid credentials", clientId:context?.Client.ClientId));
+                await _events.RaiseAsync(new UserLoginFailureEvent(model.Username, "invalid credentials", clientId: context?.Client.ClientId));
                 ModelState.AddModelError(string.Empty, AccountOptions.InvalidCredentialsErrorMessage);
             }
             // something went wrong, show form with error
@@ -189,7 +188,7 @@ namespace IdentityServerHost.Quickstart.UI
             return View(vm);
         }
 
-        
+
         /// <summary>
         /// Show logout page
         /// </summary>
@@ -218,12 +217,10 @@ namespace IdentityServerHost.Quickstart.UI
         {
             // build a model so the logged out page knows what to display
             var vm = await BuildLoggedOutViewModelAsync(model.LogoutId);
-
             if (User?.Identity.IsAuthenticated == true)
             {
                 // delete local authentication cookie
                 await HttpContext.SignOutAsync();
-
                 // raise the logout event
                 await _events.RaiseAsync(new UserLogoutSuccessEvent(User.GetSubjectId(), User.GetDisplayName()));
             }
@@ -235,11 +232,9 @@ namespace IdentityServerHost.Quickstart.UI
                 // to us after the user has logged out. this allows us to then
                 // complete our single sign-out processing.
                 string url = Url.Action("Logout", new { logoutId = vm.LogoutId });
-
                 // this triggers a redirect to the external provider for sign-out
                 return SignOut(new AuthenticationProperties { RedirectUri = url }, vm.ExternalAuthenticationScheme);
             }
-
             return View("LoggedOut", vm);
         }
 
@@ -248,8 +243,6 @@ namespace IdentityServerHost.Quickstart.UI
         {
             return View();
         }
-
-
         /*****************************************/
         /* helper APIs for the AccountController */
         /*****************************************/

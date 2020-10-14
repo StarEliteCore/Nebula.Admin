@@ -1,19 +1,14 @@
-﻿using Destiny.Core.Flow.IdentityServer.ResponseHandling;
-using Destiny.Core.Flow.IdentityServer.Store;
+﻿using Destiny.Core.Flow.IdentityServer.Store;
 using Destiny.Core.Flow.IdentityServer.Validation;
 using Destiny.Core.Flow.Modules;
-using IdentityServer4.ResponseHandling;
 using IdentityServer4.Stores;
 using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.IdentityServer
 {
-    public  class IdentityServer4Module : AppModule
+    public class IdentityServer4Module : AppModule
     {
         public override void ConfigureServices(ConfigureServicesContext context)
         {
@@ -30,16 +25,14 @@ namespace Destiny.Core.Flow.IdentityServer
             service.AddTransient<IResourceStore, ApiResourceStoreBase>();
             service.AddTransient<IPersistedGrantStore, PersistedGrantStoreBase>();
             service.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordBaseValidator>();
-         
-
         }
-     
+
         public override void ApplicationInitialization(ApplicationContext context)
         {
             var app = context.GetApplicationBuilder();
             app.UseStaticFiles();
         }
 
-        
+
     }
 }
