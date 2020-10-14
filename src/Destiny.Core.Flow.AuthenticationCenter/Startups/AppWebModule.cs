@@ -52,7 +52,6 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
         {
             var service = context.Services;
             service.AddMvc();
-
             var configuration = context.GetConfiguration();
             context.Services.Configure<AppOptionSettings>(configuration.GetSection("Destiny"));
             var settings = context.GetConfiguration<AppOptionSettings>("Destiny");

@@ -1,48 +1,42 @@
 ﻿@model Destiny.Core.Flow.IdentityServer.IdentityServerFour.LoginViewModel
 <div class="login-page">
     <partial name="_ValidationSummary" />
-    <div class="row">
-
+    <div class="row main">
         @if (Model.EnableLocalLogin)
         {
-            <div class="col-sm-5">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 style="text-align:center;">DestinyFlowCore登录认证中心</h4>
-                    </div>
-                    <div class="card-body">
-                        <form asp-route="Login">
-                            <input type="hidden" asp-for="ReturnUrl" />
+            <div class="col-sm-5 login">
+                <div class="log-con">
+                    <span>登录</span>
+                    <form asp-route="Login">
+                        <input type="hidden" asp-for="ReturnUrl" />
+                        <div class="form-group">
+                            @*<label>用户名</label>*@
+                            <input class="form-control name" placeholder="Username" asp-for="Username" autofocus>
+                        </div>
+                        <div class="form-group">
+                            @*<label>密码</label>*@
+                            <input type="password" class="form-control password" placeholder="Password" asp-for="Password" autocomplete="off">
+                        </div>
+                        @if (Model.AllowRememberLogin)
+                        {
                             <div class="form-group">
-                                <label>用户名</label>
-                                <input class="form-control" placeholder="Username" asp-for="Username" autofocus>
-                            </div>
-                            <div class="form-group">
-                                <label>密码</label>
-                                <input type="password" class="form-control" placeholder="Password" asp-for="Password" autocomplete="off">
-                            </div>
-                            @if (Model.AllowRememberLogin)
-                            {
-                                <div class="form-group">
-                                    <div class="form-check">
-                                        <input class="form-check-input" asp-for="RememberLogin">
-                                        <label class="form-check-label" asp-for="RememberLogin">
-                                            Remember My Login
-                                        </label>
-                                    </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="RememberLogin">
+                                    <label class="form-check-label" asp-for="RememberLogin">
+                                        Remember My Login
+                                    </label>
                                 </div>
-                            }
-                            <div class="form-group">
-                                <button class="btn btn-primary form-control" name="button" value="login">登录</button>
                             </div>
+                        }
+                        <div class="form-group">
+                            <button class="btn btn-primary form-control" name="button" value="login">登录</button>
+                        </div>
 
-                            @*<button class="btn btn-secondary" name="button" value="cancel">Cancel</button>*@
-                        </form>
-                    </div>
+                        @*<button class="btn btn-secondary" name="button" value="cancel">Cancel</button>*@
+                    </form>
                 </div>
             </div>
         }
-
         @if (Model.VisibleExternalProviders.Any())
         {
             <div class="col-sm-6">
