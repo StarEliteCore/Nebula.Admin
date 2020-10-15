@@ -18,6 +18,8 @@
 
         public CorsOptions Cors { get; set; }
 
+        public AuthOptions Auth { get; set; }
+
         /// <summary>
         /// 是否自动添加功能
         /// </summary>
