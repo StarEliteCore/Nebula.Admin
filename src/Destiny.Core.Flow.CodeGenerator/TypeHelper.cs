@@ -54,5 +54,32 @@ namespace Destiny.Core.Flow.CodeGenerator
         {
            return _cSharpType.Where(o => o.Key.FullName == typeFullName)?.FirstOrDefault().Value;
         }
+
+        /// <summary>
+        /// 得到想要的集合
+        /// </summary>
+        /// <param name="aggregateName">集合名</param>
+        /// <param name="cSharpType">类型</param>
+        /// <param name="isNullable">是否可空</param>
+        /// <returns>返回转后集合</returns>
+        public static string GetAggregate(string aggregateName, string cSharpType, bool isNullable)
+        {
+            //Guid? []
+            //List<string>//
+            //IEnumerable<string>//
+            //ICollection
+            //[]
+            if (aggregateName == "[]")  //数组
+            {
+               return  $"{cSharpType}{(isNullable ? "?" : "")}{aggregateName}";
+            }
+            else {
+
+                return $"{aggregateName}<{(isNullable ? cSharpType + "?" : cSharpType)}>";
+            }
+        
+
+        }
+
     }
 }

@@ -20,6 +20,11 @@ namespace Destiny.Core.Flow.AspNetCore.Ui
         {
         }
 
+        public AjaxResult(AjaxResultType type = AjaxResultType.Success, object data = null) : this("", data, type)
+        {
+        }
+
+
         public AjaxResult(string message, object data, AjaxResultType type)
         {
             this.Message = message;

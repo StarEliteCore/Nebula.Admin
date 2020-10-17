@@ -81,5 +81,22 @@ namespace Destiny.Core.Tests
             codeGenerator.GenerateCode(projectMetadata);
        
         }
+
+        [Fact]
+        public void GetAggregate_Test()
+        {
+
+            
+            var nullableArr = TypeHelper.GetAggregate("[]", "Guid", true); //空数组
+            var notNullableArr = TypeHelper.GetAggregate("[]", "Guid", false); //非空数组
+            Assert.True(nullableArr == "Guid?[]");
+            Assert.True(notNullableArr == $"{typeof(Guid[]).Name}");
+            
+
+            var nullableIEnumerable = TypeHelper.GetAggregate("IEnumerable", "Guid", true); //空数组
+            var notNullableIEnumerable = TypeHelper.GetAggregate("IEnumerable", "Guid", false); //非空数组
+            Assert.True(nullableIEnumerable == "IEnumerable<Guid?>");
+            Assert.True(notNullableIEnumerable == "IEnumerable<Guid?>");
+        }
     }
 }

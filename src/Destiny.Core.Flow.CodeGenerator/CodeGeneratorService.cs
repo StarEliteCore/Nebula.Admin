@@ -20,7 +20,7 @@ namespace Destiny.Core.Flow.CodeGenerator
         {
           var item=  TypeHelper.GetCSharpType().Select(o =>new 
             {
-                Title=o.Key.FullName,
+                Label = o.Key.FullName,
                 Value=o.Value,
             });
             return OperationResponse.Ok(data:item);

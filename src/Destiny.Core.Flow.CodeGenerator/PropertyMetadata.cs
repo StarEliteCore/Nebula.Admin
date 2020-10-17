@@ -52,5 +52,15 @@
         /// </summary>
         public bool IsPageDto { get; set; } = true;
 
+
+        /// <summary>
+        /// 集合类型
+        /// </summary>
+        public string AggregateType { get; set; }
+
+
+
     }
+
+   
 }

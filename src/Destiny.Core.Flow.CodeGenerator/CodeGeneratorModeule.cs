@@ -16,6 +16,7 @@ namespace Destiny.Core.Flow.CodeGenerator
         {
 
             context.Services.AddSingleton<ICodeGenerator, RazorCodeGenerator>();
+            context.Services.AddSingleton<ICodeGeneratorService, CodeGeneratorService>();
         }
     }
 }
