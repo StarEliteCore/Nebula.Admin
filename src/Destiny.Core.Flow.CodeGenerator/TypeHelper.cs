@@ -55,6 +55,18 @@ namespace Destiny.Core.Flow.CodeGenerator
            return _cSharpType.Where(o => o.Key.FullName == typeFullName)?.FirstOrDefault().Value;
         }
 
+
+        public static string ToSingleTypeName(string cSharpType, bool isNullable)
+        {
+
+            if (cSharpType == typeof(string).Name.ToLower())
+            {
+                return cSharpType;
+            }
+
+            return $"{cSharpType}{(isNullable ? "?" : "")}";
+        }
+
         /// <summary>
         /// 得到想要的集合
         /// </summary>
@@ -71,11 +83,11 @@ namespace Destiny.Core.Flow.CodeGenerator
             //[]
             if (aggregateName == "[]")  //数组
             {
-               return  $"{cSharpType}{(isNullable ? "?" : "")}{aggregateName}";
+               return  $"{TypeHelper.ToSingleTypeName(cSharpType,isNullable)}{aggregateName}";
             }
             else {
 
-                return $"{aggregateName}<{(isNullable ? cSharpType + "?" : cSharpType)}>";
+                return $"{aggregateName}<{TypeHelper.ToSingleTypeName(cSharpType,isNullable)}>";
             }
         
 

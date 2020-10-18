@@ -48,7 +48,7 @@ namespace @(metadata.Namespace).Entities
         @:/// 获取或设置 @property.DisplayName
         @:/// &lt;/summary&gt;
         @:[DisplayName("@property.DisplayName")]
-        @:public @property.CSharpType @property.PropertyName { get; set; }
+        @:public @(string.IsNullOrEmpty(property.AggregateType)?TypeHelper.ToSingleTypeName(property.CSharpType,property.IsNullable):TypeHelper.GetAggregate(property.AggregateType,property.CSharpType,property.IsNullable)) @property.PropertyName { get; set; }
     }
     @{
         if (metadata.EntityMetadata.IsFullAudited())

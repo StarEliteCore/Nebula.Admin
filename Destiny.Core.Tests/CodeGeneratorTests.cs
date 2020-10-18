@@ -93,10 +93,22 @@ namespace Destiny.Core.Tests
             Assert.True(notNullableArr == $"{typeof(Guid[]).Name}");
             
 
-            var nullableIEnumerable = TypeHelper.GetAggregate("IEnumerable", "Guid", true); //空数组
-            var notNullableIEnumerable = TypeHelper.GetAggregate("IEnumerable", "Guid", false); //非空数组
+            var nullableIEnumerable = TypeHelper.GetAggregate("IEnumerable", "Guid", true); //空IEnumerable
+            var notNullableIEnumerable = TypeHelper.GetAggregate("IEnumerable", "Guid", false); //非空IEnumerable
             Assert.True(nullableIEnumerable == "IEnumerable<Guid?>");
-            Assert.True(notNullableIEnumerable == "IEnumerable<Guid?>");
+            Assert.True(notNullableIEnumerable == "IEnumerable<Guid>");
+
+            
+            var nullableList = TypeHelper.GetAggregate("List", "Guid", true); //空List
+            var notNullableList = TypeHelper.GetAggregate("List", "Guid", false); //非空List
+            Assert.True(nullableList == "List<Guid?>");
+            Assert.True(notNullableList == "List<Guid>");
+
+
+            var nullableCollection = TypeHelper.GetAggregate("ICollection", "Guid", true); //空List
+            var notNullableCollection = TypeHelper.GetAggregate("ICollection", "Guid", false); //非空List
+            Assert.True(nullableCollection == "ICollection<Guid?>");
+            Assert.True(notNullableCollection == "ICollection<Guid>");
         }
     }
 }

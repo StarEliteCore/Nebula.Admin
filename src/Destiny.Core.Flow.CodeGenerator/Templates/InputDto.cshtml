@@ -30,7 +30,7 @@ namespace @(metadata.Namespace).Dtos
         @:/// &lt;summary&gt;
         @:/// 获取或设置 @property.DisplayName
         @:/// &lt;/summary&gt;
-        @:public @property.CSharpType @property.PropertyName { get; set; }
+        @:public @(string.IsNullOrEmpty(property.AggregateType)?TypeHelper.ToSingleTypeName(property.CSharpType,property.IsNullable):TypeHelper.GetAggregate(property.AggregateType,property.CSharpType,property.IsNullable)) @property.PropertyName { get; set; }
 
 
     }

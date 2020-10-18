@@ -30,6 +30,7 @@ namespace Destiny.Core.Flow.AspNetCore.Ui
             this.Message = message;
             this.Data = data;
             this.Type = type;
+            this.Success = Succeeded();
         }
 
         public AjaxResult(string message, bool success, object data, AjaxResultType type)
@@ -38,6 +39,7 @@ namespace Destiny.Core.Flow.AspNetCore.Ui
             this.Data = data;
             this.Type = type;
             this.Success = success;
+           
         }
 
         /// <summary>
