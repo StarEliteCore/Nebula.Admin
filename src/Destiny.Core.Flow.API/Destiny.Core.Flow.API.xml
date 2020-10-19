@@ -35,7 +35,7 @@
         </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.CodeGeneratorController.GenerateCode(Destiny.Core.Flow.CodeGenerator.ProjectMetadata)">
             <summary>
-            代码生成(目前这样，等页面弄好，再修改)
+            代码生成
             </summary>
         </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.DataDictionary.DataDictionaryController.GetPageListAsync(Destiny.Core.Flow.Filter.PageRequest)">

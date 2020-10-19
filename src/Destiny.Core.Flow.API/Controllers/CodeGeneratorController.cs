@@ -32,7 +32,7 @@ namespace Destiny.Core.Flow.API.Controllers
 
 
         /// <summary>
-        /// 代码生成(目前这样，等页面弄好，再修改)
+        /// 代码生成
         /// </summary>
         [Description("代码生成")]
         [HttpPost]
