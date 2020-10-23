@@ -16,8 +16,8 @@ namespace Destiny.Core.Flow.API.Controllers
     /// 角色管理
     /// </summary>
     [Description("角色管理")]
-    [Authorize]
-    public class RoleController : ApiControllerBase
+
+    public class RoleController : AuthorizeControllerBase
     {
         private readonly IRoleManagerServices _roleManagerServices = null;
 
@@ -37,8 +37,9 @@ namespace Destiny.Core.Flow.API.Controllers
 
             return (await _roleManagerServices.GetRolePageAsync(request)).ToPageList();
         }
+
         /// <summary>
-        /// 
+        /// 异步创建角色
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
@@ -48,8 +49,9 @@ namespace Destiny.Core.Flow.API.Controllers
         {
             return (await _roleManagerServices.AddRoleAsync(dto)).ToAjaxResult();
         }
+
         /// <summary>
-        /// 
+        /// 异步更新角色
         /// </summary>
         /// <param name="dto"></param>
         [Description("异步更新角色")]
@@ -58,6 +60,7 @@ namespace Destiny.Core.Flow.API.Controllers
         {
             return (await _roleManagerServices.UpdateRoleAsync(dto)).ToAjaxResult();
         }
+
         /// <summary>
         /// 删除角色
         /// </summary>
@@ -68,8 +71,9 @@ namespace Destiny.Core.Flow.API.Controllers
         {
             return (await _roleManagerServices.DeleteAsync(id)).ToAjaxResult();
         }
+
         /// <summary>
-        /// 删除角色
+        /// 异步创建或添加角色
         /// </summary>
         /// <param name="dto"></param>
         [Description("异步创建或添加角色")]
