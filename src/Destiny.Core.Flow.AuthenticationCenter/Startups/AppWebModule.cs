@@ -72,7 +72,10 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
             }
 
             //context.Services.AddTransient<IPrincipal>();
-
+            //context.Services.AddAuthentication().AddOpenIdConnect(Options =>
+            //{
+            //    Options.Authority = configuration["AuthServer:Authority"];
+            //});
 
         }
     }
