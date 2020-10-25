@@ -10,9 +10,11 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.API.Controllers.Organization
 {
+    /// <summary>
+    /// 组织架构管理
+    /// </summary>
     [Description("组织架构管理")]
-    [Authorize]
-    public class OrganizationController : ApiControllerBase
+    public class OrganizationController : AuthorizeControllerBase
     {
         private readonly IOrganizationService _organization;
 

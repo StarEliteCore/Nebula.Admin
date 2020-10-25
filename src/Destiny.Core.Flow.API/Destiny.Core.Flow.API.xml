@@ -38,6 +38,11 @@
             代码生成
             </summary>
         </member>
+        <member name="T:Destiny.Core.Flow.API.Controllers.DataDictionary.DataDictionaryController">
+            <summary>
+            数据字典
+            </summary>
+        </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.DataDictionary.DataDictionaryController.GetPageListAsync(Destiny.Core.Flow.Filter.PageRequest)">
             <summary>
             分页获取数据字典
@@ -143,6 +148,11 @@
             <param name="dto"></param>
             <returns></returns>
         </member>
+        <member name="T:Destiny.Core.Flow.API.Controllers.Menu.MenuController">
+            <summary>
+            菜单管理
+            </summary>
+        </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetTableAsync">
             <summary>
             获取表格菜单信息
@@ -166,6 +176,13 @@
             <summary>
             删除
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.LoadFormMenuAsync(System.Guid)">
+            <summary>
+            异步加载表单菜单
+            </summary>
+            <param name="Id"></param>
             <returns></returns>
         </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetMenuAsync">
@@ -203,6 +220,11 @@
             异步到菜单功能集合
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:Destiny.Core.Flow.API.Controllers.Organization.OrganizationController">
+            <summary>
+            组织架构管理
+            </summary>
         </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.Organization.OrganizationController.GetAsync">
             <summary>
