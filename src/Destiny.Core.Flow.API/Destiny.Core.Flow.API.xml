@@ -255,14 +255,14 @@
         </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.RoleController.CreateAsync(Destiny.Core.Flow.Dtos.RoleDtos.RoleInputDto)">
             <summary>
-            
+            异步创建角色
             </summary>
             <param name="dto"></param>
             <returns></returns>
         </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.RoleController.UpdateAsync(Destiny.Core.Flow.Dtos.RoleDtos.RoleInputDto)">
             <summary>
-            
+            异步更新角色
             </summary>
             <param name="dto"></param>
         </member>
@@ -274,7 +274,7 @@
         </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.RoleController.AddOrUpdateAsync(Destiny.Core.Flow.Dtos.RoleDtos.RoleInputDto)">
             <summary>
-            删除角色
+            异步创建或添加角色
             </summary>
             <param name="dto"></param>
         </member>
