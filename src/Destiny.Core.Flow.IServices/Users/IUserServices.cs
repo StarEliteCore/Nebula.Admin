@@ -44,6 +44,7 @@ namespace Destiny.Core.Flow.IServices
         /// <param name="request"></param>
         /// <returns></returns>
         Task<IPagedResult<UserOutputPageListDto>> GetUserPageAsync(PageRequest request);
+
         /// <summary>
         /// 用户分配角色
         /// </summary>

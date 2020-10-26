@@ -12,7 +12,7 @@ namespace Destiny.Core.Flow.Dtos.RoleDtos
     {
         public RoleInputDto()
         {
-            //MenuIds = new List<Guid>();
+           MenuIds = new List<Guid>();
         }
 
         /// <summary>
