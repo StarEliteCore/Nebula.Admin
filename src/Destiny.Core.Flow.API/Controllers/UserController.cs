@@ -4,7 +4,6 @@ using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices;
 using Destiny.Core.Flow.Permission;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -17,7 +16,7 @@ namespace Destiny.Core.Flow.API.Controllers
     /// 用户管理
     /// </summary>
     [Description("用户管理")]
- 
+
     public class UserController : AuthorizeControllerBase
     {
 
@@ -98,6 +97,16 @@ namespace Destiny.Core.Flow.API.Controllers
 
             return (await _userService.LoadFormUserAsync(id)).ToAjaxResult();
 
+        }
+        /// <summary>
+        /// 用户分配角色
+        /// </summary>
+        /// <returns></returns>
+        [Description("用户分配角色")]
+        [HttpPost]
+        public async Task<AjaxResult> AllocationRoleAsync([FromBody] UserAllocationRoleInputDto dto)
+        {
+            return (await _userService.AllocationRoleAsync(dto)).ToAjaxResult();
         }
 
         ///// <summary>

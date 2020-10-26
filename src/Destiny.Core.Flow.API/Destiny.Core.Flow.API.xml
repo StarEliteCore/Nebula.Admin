@@ -339,6 +339,12 @@
             <param name="id">主键</param>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.UserController.AllocationRoleAsync(Destiny.Core.Flow.Dtos.UserAllocationRoleInputDto)">
+            <summary>
+            用户分配角色
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.UserController.GetUserPageAsync(Destiny.Core.Flow.Filter.PageRequest)">
             <summary>
             异步得到分页

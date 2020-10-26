@@ -59,6 +59,23 @@ namespace Destiny.Core.Flow.Services
             });
         }
 
+        public async Task<OperationResponse> AllocationRoleAsync(UserAllocationRoleInputDto dto)
+        {
+            dto.NotNull(nameof(dto));
+            var user = await _userManager.FindByIdAsync(dto.Id.ToString());
+            return await _unitOfWork.UseTranAsync(async () =>
+            {
+                if (dto.RoleIds?.Any() == true)
+                {
+                    return await this.SetUserRoles(user, dto.RoleIds, false);
+                }
+                else
+                {
+                    return await this.DeleteUserRoleAsync(user);
+                }
+            });
+        }
+
         private async Task<OperationResponse> DeleteUserRoleAsync(User user)
         {
             IList<string> existRoleNames = await _userManager.GetRolesAsync(user);

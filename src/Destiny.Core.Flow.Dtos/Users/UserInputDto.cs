@@ -74,4 +74,11 @@ namespace Destiny.Core.Flow.Dtos
 
         public Guid?[] RoleIds { get; set; }
     }
+    /// <summary>
+    /// 分配角色Dto
+    /// </summary>
+    public class UserAllocationRoleInputDto : InputWaitStateDto<Guid>
+    {
+        public Guid?[] RoleIds { get; set; }
+    }
 }
