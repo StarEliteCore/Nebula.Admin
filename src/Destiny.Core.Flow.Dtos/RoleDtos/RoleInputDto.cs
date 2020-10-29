@@ -10,11 +10,7 @@ namespace Destiny.Core.Flow.Dtos.RoleDtos
     [AutoMapping(typeof(Role))]
     public class RoleInputDto : InputDto<Guid>
     {
-        public RoleInputDto()
-        {
-           MenuIds = new List<Guid>();
-        }
-
+    
         /// <summary>
         ///获取或设置 描述
         /// </summary>
@@ -42,6 +38,6 @@ namespace Destiny.Core.Flow.Dtos.RoleDtos
         /// <summary>
         /// 选中的所有菜单Id
         /// </summary>
-        public List<Guid> MenuIds { get; set; }
+        public List<Guid?> MenuIds { get; set; }
     }
 }

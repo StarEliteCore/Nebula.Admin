@@ -56,11 +56,11 @@ namespace Destiny.Core.Flow.Services.RoleServices
                 {
                     var list = dto.MenuIds.Select(x => new RoleMenuEntity
                     {
-                        MenuId = x,
+                        MenuId = x.Value,
                         RoleId = role.Id,
                     }).ToArray();
                     int count = await _roleMenuRepository.InsertAsync(list);
-                    await _eventBus?.PublishAsync(new RoleMenuCacheAddOrUpdateEvent() { RoleId = role.Id, MenuIds = dto.MenuIds, EventState = Flow.Events.EventState.Add });
+                    await _eventBus?.PublishAsync(new RoleMenuCacheAddOrUpdateEvent() { RoleId = role.Id, MenuIds = dto.MenuIds.Select(o=>o.Value), EventState = Flow.Events.EventState.Add });
                     if (count <= 0)
                     {
                         return new OperationResponse("保存失败", OperationResponseType.Error);
@@ -97,14 +97,14 @@ namespace Destiny.Core.Flow.Services.RoleServices
                 {
                     var list = dto.MenuIds.Select(x => new RoleMenuEntity
                     {
-                        MenuId = x,
+                        MenuId = x.Value,
                         RoleId = role.Id,
                     }).ToArray();
                     int count = await _roleMenuRepository.DeleteBatchAsync(x => x.RoleId == role.Id);
                     int insertcount = await _roleMenuRepository.InsertAsync(list);
                     if (count <= 0 && insertcount <= 0)
                         return new OperationResponse("保存失败", OperationResponseType.Error);
-                    await _eventBus?.PublishAsync(new RoleMenuCacheAddOrUpdateEvent() { RoleId = role.Id, MenuIds = dto.MenuIds, EventState = Flow.Events.EventState.Add });
+                    await _eventBus?.PublishAsync(new RoleMenuCacheAddOrUpdateEvent() { RoleId = role.Id, MenuIds = dto.MenuIds.Select(o=>o.Value), EventState = Flow.Events.EventState.Add });
                 }
                 return new OperationResponse("保存成功", OperationResponseType.Success);
             });
