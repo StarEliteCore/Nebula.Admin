@@ -104,7 +104,7 @@ namespace Destiny.Core.Flow.Services.RoleServices
                     int insertcount = await _roleMenuRepository.InsertAsync(list);
                     if (count <= 0 && insertcount <= 0)
                         return new OperationResponse("保存失败", OperationResponseType.Error);
-                    await _eventBus?.PublishAsync(new RoleMenuCacheAddOrUpdateEvent() { RoleId = role.Id, MenuIds = dto.MenuIds.Select(o=>o.Value), EventState = Flow.Events.EventState.Add });
+                    await _eventBus?.PublishAsync(new RoleMenuCacheAddOrUpdateEvent() { RoleId = role.Id, MenuIds = dto.MenuIds.Select(o=>o.Value), EventState = Flow.Events.EventState.Update });
                 }
                 return new OperationResponse("保存成功", OperationResponseType.Success);
             });
@@ -136,6 +136,50 @@ namespace Destiny.Core.Flow.Services.RoleServices
                 Selected = false,
             }).ToListAsync();
             return new OperationResponse<IEnumerable<SelectListItem>>("得到数据成功", roles, OperationResponseType.Success);
+        }
+
+
+        /// <summary>
+        /// 设置角色菜单
+        /// </summary>
+        /// <param name="roleId">角色ID</param>
+        /// <param name="menuIds">菜单ID集合</param>
+        /// <returns></returns>
+
+        public async Task<OperationResponse> SetRoleMenu(Guid roleId, Guid[] menuIds)
+        {
+            return await _roleMenuRepository.UnitOfWork.UseTranAsync(async () =>
+            {
+                roleId.NotEmpty(nameof(roleId));
+                if (menuIds?.Length <= 0)
+                {
+                    return new OperationResponse("没有选择菜单!!!", OperationResponseType.Error);
+
+                }
+
+              
+                 await _roleMenuRepository.DeleteBatchAsync(o => o.RoleId == roleId);
+                
+                var roleMenuList = menuIds.Select(x => new RoleMenuEntity
+                {
+                    MenuId = x,
+                    RoleId = roleId,
+                }).ToArray();
+
+                int count = await _roleMenuRepository.InsertAsync(roleMenuList);
+                if (count >= 0)
+                {
+                    await _eventBus?.PublishAsync(new RoleMenuCacheAddOrUpdateEvent() { RoleId = roleId, MenuIds = menuIds, EventState = Flow.Events.EventState.Update });
+                }
+
+                if (count <= 0)
+                {
+                    return new OperationResponse("设置角色菜单失败!!!", OperationResponseType.Error);
+                }
+                return new OperationResponse("设置角色菜单成功!!!", OperationResponseType.Success);
+
+            });
+          
         }
     }
 }

@@ -306,6 +306,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.RoleController.SetRoleMenuAsync(System.Guid,System.Guid[])">
+            <summary>
+            异步设置角色菜单
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.UserController">
             <summary>
             用户管理

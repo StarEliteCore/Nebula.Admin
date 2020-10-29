@@ -39,5 +39,13 @@ namespace Destiny.Core.Flow.IServices.IRoleServices
         /// <param name="request"></param>
         /// <returns></returns>
         Task<IPagedResult<RoleOutputPageListDto>> GetRolePageAsync(PageRequest request);
+
+        /// <summary>
+        /// 设置角色菜单
+        /// </summary>
+        /// <param name="roleId">角色ID</param>
+        /// <param name="menuIds">菜单ID集合</param>
+        /// <returns></returns>
+        Task<OperationResponse> SetRoleMenu(Guid roleId, Guid[] menuIds);
     }
 }

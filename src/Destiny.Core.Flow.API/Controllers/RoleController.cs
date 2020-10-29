@@ -99,5 +99,18 @@ namespace Destiny.Core.Flow.API.Controllers
 
             return (await _roleManagerServices.GetRolesToSelectListItemAsync()).ToAjaxResult();
         }
+
+        /// <summary>
+        /// 异步设置角色菜单
+        /// </summary>
+        /// <returns></returns>
+        [Description("异步设置角色菜单")]
+        [HttpPost]
+        public async Task<AjaxResult> SetRoleMenuAsync([FromQuery]Guid roleId, [FromBody]Guid[] menuIds)
+        {
+
+
+            return (await _roleManagerServices.SetRoleMenu(roleId,menuIds)).ToAjaxResult();
+        }
     }
 }
