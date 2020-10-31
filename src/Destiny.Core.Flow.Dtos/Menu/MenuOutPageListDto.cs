@@ -38,13 +38,36 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// 菜单图标
         /// </summary>
         [DisplayName("菜单图标")]
-        public Guid Iocn { get; set; }
+        public string Iocn { get; set; }
 
         /// <summary>
         /// 深度
         /// </summary>
         [DisplayName("深度")]
         public int Depth { get; set; }
+
+        [DisplayName("类型")]
+        public MenuEnum Type { get; set; }
+
+
+        /// <summary>
+        ///获取或设置 创建时间
+        /// </summary>
+        [DisplayName("创建时间")]
+        public  DateTime CreatedTime { get; set; }
+
+        /// <summary>
+        /// 获取或设置 最后修改时间
+        /// </summary>
+        [DisplayName("最后修改时间")]
+        public DateTime? LastModifionTime { get; set; }
+
+
+        /// <summary>
+        ///获取或设置 描述
+        /// </summary>
+        [DisplayName("描述")]
+        public  string Description { get; set; }
 
         /// <summary>
         /// 菜单 
