@@ -44,8 +44,9 @@ namespace Destiny.Core.Flow.Dtos.Menu
         public int Depth { get; set; }
 
         /// <summary>
-        /// 菜单
+        /// 菜单 
         /// </summary>
-        public List<MenuOutPageListDto> Children { get; set; } = new List<MenuOutPageListDto>();
+        ///可以单独出来，有没有办法做法公用的？？？？
+        public List<MenuOutPageListDto> Children { get; set; } = new List<MenuOutPageListDto>(); 
     }
 }

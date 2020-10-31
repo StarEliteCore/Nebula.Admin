@@ -2,6 +2,8 @@
 using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.Filter;
+using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.IServices.IMenu;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Model.Entities.Menu;
@@ -121,19 +123,7 @@ namespace Destiny.Core.Flow.Services.Menu
             return operationResponse;
         }
 
-        //public async Task<OperationResponse> GetTreeSelectTreeDataAsync()
-        //{
-        //    OperationResponse response = new OperationResponse();
-        //    var list=  await _menuRepository.Entities.ToListAsync();
-        //    var permissionTreeItems = await GetMenuTreeAsync();
-
-        //    response.IsSuccess("查询成功", new
-        //    {
-        //        TreeItemData = list,
-        //        SelectTreeItems = permissionTreeItems
-        //    });
-        //    return response;
-        //}
+    
         /// <summary>
         /// 根据ID获取一个菜单
         /// </summary>
@@ -327,6 +317,43 @@ namespace Destiny.Core.Flow.Services.Menu
                 Sort = x.Sort,
             }).ToListAsync());
             return new OperationResponse(MessageDefinitionType.LoadSucces, menulist, OperationResponseType.Success);
+        }
+
+        /// <summary>
+        /// 异步得到所有菜单
+        /// </summary>
+        /// <returns></returns>
+        public async Task<TreeResult<MenuTreeOutDto>> GetAllMenuTreeAsync(MenuEnum menu= MenuEnum.Menu)
+        {
+            return await _menuRepository.Entities.Where(o=>o.Type== menu).ToTreeResultAsync<MenuEntity, MenuTreeOutDto>(
+              (p, c) =>
+              {
+                  return c.ParentId == null || c.ParentId == Guid.Empty;
+              },
+              (p, c) =>
+              {
+                  return p.Id == c.ParentId;
+              },
+              (p, children) =>
+              {
+                  if (p.children == null)
+                      p.children = new List<MenuTreeOutDto>();
+                  p.children.AddRange(children);
+              }
+              );
+        }
+
+        /// <summary>
+        /// 得到菜单分页数据（不是树，只是普通表格）
+        /// </summary>
+        /// <param name="request">请求参数</param>
+        /// <returns></returns>
+        public async Task<IPagedResult<MenuOutPageListDto>> GetMenuPageAsync(PageRequest request)
+        {
+            request.NotNull(nameof(request));
+            OrderCondition<MenuEntity>[] orderConditions = new OrderCondition<MenuEntity>[] { new OrderCondition<MenuEntity>(o => o.CreatedTime, SortDirection.Descending) };
+            request.OrderConditions = orderConditions;
+            return await _menuRepository.Entities.ToPageAsync<MenuEntity, MenuOutPageListDto>(request);
         }
     }
 }

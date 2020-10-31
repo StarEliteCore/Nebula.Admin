@@ -1,5 +1,8 @@
 ﻿using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Dtos.Menu;
+using Destiny.Core.Flow.Filter;
+using Destiny.Core.Flow.Filter.Abstract;
+using Destiny.Core.Flow.Model.Entities.Menu;
 using Destiny.Core.Flow.Ui;
 using System;
 using System.Collections.Generic;
@@ -80,5 +83,19 @@ namespace Destiny.Core.Flow.IServices.IMenu
         /// </summary>
         /// <returns></returns>
         Task<OperationResponse> GetMenuListAsync();
+
+        /// <summary>
+        /// 异步得到所有菜单
+        /// </summary>
+        /// <returns></returns>
+        Task<TreeResult<MenuTreeOutDto>> GetAllMenuTreeAsync(MenuEnum menu = MenuEnum.Menu);
+
+
+        /// <summary>
+        /// 得到菜单分页数据（不是树，只是普通表格）
+        /// </summary>
+        /// <param name="request">请求参数</param>
+        /// <returns></returns>
+        Task<IPagedResult<MenuOutPageListDto>> GetMenuPageAsync(PageRequest request);
     }
 }

@@ -2,6 +2,7 @@
 using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Dtos.Menu;
 using Destiny.Core.Flow.Dtos.MenuFunction;
+using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices.IMenu;
 using Destiny.Core.Flow.Permission;
 using Microsoft.AspNetCore.Authorization;
@@ -180,6 +181,35 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         public async Task<PageList<MenuFunctionOutPageListDto>> GetMenuFunctionListAsync(Guid id)
         {
             return (await _menuFunctionServices.GetMenuFunctionListAsync(id)).ToPageList();
+        }
+
+        /// <summary>
+        /// 异步得到菜单分页数据（不是树，只是普通表格）
+        /// </summary>
+        /// <param name="request">请求参数</param>
+        /// <returns></returns>
+
+        [HttpPost]
+        [Description("异步得到菜单分页数据")]
+       
+        public async Task<PageList<MenuOutPageListDto>> GetMenuPageAsync([FromBody] PageRequest request)
+        {
+
+            return (await _menuServices.GetMenuPageAsync(request)).ToPageList();
+        
+        }
+
+        /// <summary>
+        /// 异步得到所有菜单
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Description("异步得到菜单分页数据")]
+       
+        public async Task<TreeModel<MenuTreeOutDto>> GetAllMenuTreeAsync()
+        {
+
+            return (await _menuServices.GetAllMenuTreeAsync()).ToTreeModel();
         }
     }
 }
