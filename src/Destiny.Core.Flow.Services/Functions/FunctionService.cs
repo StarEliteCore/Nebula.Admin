@@ -49,6 +49,7 @@ namespace Destiny.Core.Flow.Services.Functions
 
         public Task<IPagedResult<FunctionOutputPageList>> GetFunctionPageAsync(PageRequest request)
         {
+
             OrderCondition<Function>[] orderConditions = new OrderCondition<Function>[] { new OrderCondition<Function>(o => o.CreatedTime, SortDirection.Descending) };
             request.OrderConditions = orderConditions;
             return _functionRepository.Entities.ToPageAsync<Function, FunctionOutputPageList>(request);

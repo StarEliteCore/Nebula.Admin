@@ -5,8 +5,10 @@ using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Filter.Abstract;
+using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.MongoDB.Repositorys;
 using Destiny.Core.Flow.Ui;
+using Microsoft.AspNetCore.Identity;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
@@ -22,6 +24,7 @@ namespace Destiny.Core.Flow.Services.Audit
         private readonly IMongoDBRepository<AuditLog, ObjectId> _auditLogRepository;
         private readonly IMongoDBRepository<AuditEntry, ObjectId> _auditEntryRepository;
         private readonly IMongoDBRepository<AuditPropertysEntry, ObjectId> _auditPropertysEntryRepository;
+        private readonly UserManager<User> _userManager = null;
 
         public AuditServices(IMongoDBRepository<AuditLog, ObjectId> auditLogRepository, IMongoDBRepository<AuditEntry, ObjectId> auditEntryRepository, IMongoDBRepository<AuditPropertysEntry, ObjectId> auditPropertysEntryRepository)
         {

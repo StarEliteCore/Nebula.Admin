@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.Dtos.RoleDtos;
+using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Events.EventBus;
 using Destiny.Core.Flow.Extensions;
@@ -24,16 +25,18 @@ namespace Destiny.Core.Flow.Services.RoleServices
         private readonly RoleManager<Role> _roleManager = null;
         private readonly IEFCoreRepository<RoleMenuEntity, Guid> _roleMenuRepository;
         private readonly IEventBus _eventBus = null;
+        private readonly IUnitOfWork _unitOfWork = null;
 
         /// <summary>
         /// 构造函数注入
         /// </summary>
         /// <param name="roleManager"></param>
-        public RoleManagerServices(RoleManager<Role> roleManager, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository, IEventBus eventBus)
+        public RoleManagerServices(RoleManager<Role> roleManager, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository, IEventBus eventBus, IUnitOfWork unitOfWork)
         {
             _roleManager = roleManager;
             _roleMenuRepository = roleMenuRepository;
             _eventBus = eventBus;
+            _unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -72,15 +75,28 @@ namespace Destiny.Core.Flow.Services.RoleServices
 
         public async Task<OperationResponse> DeleteAsync(Guid id)
         {
-            id.NotNull(nameof(id));
-            var role = await _roleManager.FindByIdAsync(id.ToString());
-            var result = await _roleManager.DeleteAsync(role);
-            if (!result.Succeeded)
+            
+            
+            return await _unitOfWork.UseTranAsync(async () =>
             {
-                return result.ToOperationResponse();
-            }
-            _eventBus?.PublishAsync(new RoleMenuEventCacehDeleteEvent() { RoleId = id });
-            return new OperationResponse("删除成功!!", OperationResponseType.Success);
+                id.NotNull(nameof(id));
+                var role = await _roleManager.FindByIdAsync(id.ToString());
+                var result = await _roleManager.DeleteAsync(role);
+                if (!result.Succeeded)
+                {
+                    return result.ToOperationResponse();
+                }
+
+                var count= await _roleMenuRepository.DeleteBatchAsync(o => o.RoleId == id);
+
+                if (count > 0)
+                {
+                    _eventBus?.PublishAsync(new RoleMenuEventCacehDeleteEvent() { RoleId = id });
+                }
+              
+                return new OperationResponse("删除成功!!", OperationResponseType.Success);
+            });
+           
         }
 
         public async Task<OperationResponse> UpdateRoleAsync(RoleInputDto dto)

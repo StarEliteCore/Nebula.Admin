@@ -204,7 +204,7 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Description("异步得到菜单分页数据")]
+        [Description("异步得到所有菜单")]
        
         public async Task<TreeModel<MenuTreeOutDto>> GetAllMenuTreeAsync()
         {

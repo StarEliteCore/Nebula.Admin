@@ -94,5 +94,37 @@ namespace Destiny.Core.Flow.API.Controllers
             return (await _functionService.GetFunctionSelectListItemAsync()).ToAjaxResult();
         }
 
+        /// <summary>
+        /// 异步加载功能
+        /// </summary>
+        /// <returns></returns>
+        [Description("异步加载功能")]
+        [HttpGet]
+        public async Task<AjaxResult> LoadAsync(Guid id)
+        {
+
+            return (await _functionService.LoadFormFunctionAsync(id)).ToAjaxResult();
+        }
+
+        /// <summary>
+        /// 异步创建或更新功能
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Description("异步创建或更新功能")]
+        public async Task<AjaxResult> AddOrUpdateAsync([FromBody] FunctionInputDto dto)
+        {
+
+
+            if (dto.Id == Guid.Empty)
+            {
+                return (await _functionService.CreateAsync(dto)).ToAjaxResult();
+            }
+            return (await _functionService.UpdateAsync(dto)).ToAjaxResult();
+        }
+
+
+
     }
 }

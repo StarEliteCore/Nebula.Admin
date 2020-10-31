@@ -123,6 +123,19 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.FunctionController.LoadAsync(System.Guid)">
+            <summary>
+            异步加载功能
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.FunctionController.AddOrUpdateAsync(Destiny.Core.Flow.Dtos.Functions.FunctionInputDto)">
+            <summary>
+            异步创建或更新功能
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.HealthController.Get">
             <summary>
             健康监测
@@ -218,6 +231,19 @@
         <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetMenuFunctionListAsync(System.Guid)">
             <summary>
             异步到菜单功能集合
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetMenuPageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+            <summary>
+            异步得到菜单分页数据（不是树，只是普通表格）
+            </summary>
+            <param name="request">请求参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetAllMenuTreeAsync">
+            <summary>
+            异步得到所有菜单
             </summary>
             <returns></returns>
         </member>
