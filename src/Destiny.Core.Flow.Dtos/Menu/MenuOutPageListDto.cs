@@ -1,10 +1,13 @@
 ﻿using Destiny.Core.Flow.Entity;
+using Destiny.Core.Flow.Mapping;
+using Destiny.Core.Flow.Model.Entities.Menu;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Destiny.Core.Flow.Dtos.Menu
 {
+    [AutoMapping(typeof(MenuEntity))]
     public class MenuOutPageListDto : OutputDto<Guid>
     {
         /// <summary>
