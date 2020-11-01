@@ -9,6 +9,7 @@ using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.MongoDB.Repositorys;
 using Destiny.Core.Flow.Ui;
 using Microsoft.AspNetCore.Identity;
+
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
@@ -26,11 +27,12 @@ namespace Destiny.Core.Flow.Services.Audit
         private readonly IMongoDBRepository<AuditPropertysEntry, ObjectId> _auditPropertysEntryRepository;
         private readonly UserManager<User> _userManager = null;
 
-        public AuditServices(IMongoDBRepository<AuditLog, ObjectId> auditLogRepository, IMongoDBRepository<AuditEntry, ObjectId> auditEntryRepository, IMongoDBRepository<AuditPropertysEntry, ObjectId> auditPropertysEntryRepository)
+        public AuditServices(IMongoDBRepository<AuditLog, ObjectId> auditLogRepository, IMongoDBRepository<AuditEntry, ObjectId> auditEntryRepository, IMongoDBRepository<AuditPropertysEntry, ObjectId> auditPropertysEntryRepository, UserManager<User> userManager)
         {
             _auditLogRepository = auditLogRepository;
             _auditEntryRepository = auditEntryRepository;
             _auditPropertysEntryRepository = auditPropertysEntryRepository;
+            _userManager = userManager;
         }
 
         public async Task Save(AuditLog auditLog, List<AuditEntryInputDto> auditEntry)
@@ -61,7 +63,10 @@ namespace Destiny.Core.Flow.Services.Audit
         public async Task<IPagedResult<AuditLogOutputPageDto>> GetAuditLogPageAsync(PageRequest request)
         {
             var exp = FilterBuilder.GetExpression<AuditLog>(request.Filter);
-            return await _auditLogRepository.Collection.ToPageAsync(exp, request, x => new AuditLogOutputPageDto
+            OrderCondition<AuditLog>[] orderConditions = new OrderCondition<AuditLog>[] { new OrderCondition<AuditLog>(o => o.CreatedTime, Enums.SortDirection.Descending) };
+            request.OrderConditions = orderConditions;
+            var users = _userManager.Users.ToList();
+            var page= await _auditLogRepository.Collection.ToPageAsync(exp, request, x => new AuditLogOutputPageDto
             {
                 BrowserInformation = x.BrowserInformation,
                 Ip = x.Ip,
@@ -70,8 +75,16 @@ namespace Destiny.Core.Flow.Services.Audit
                 ExecutionDuration = x.ExecutionDuration,
                 CreatorUserId = x.CreatorUserId,
                 CreatedTime = x.CreatedTime,
-                Id = x.Id
+                Id = x.Id,
+                //NickName=x.CreatorUserId == Guid.Empty || x.CreatorUserId == null ? string.Empty : users.FirstOrDefault(o => o.Id == x.CreatorUserId.Value).NickName
             });
+
+            page.ItemList.ForEach(x =>
+            {
+
+                x.NickName = x.CreatorUserId == Guid.Empty || x.CreatorUserId == null ? string.Empty : users.FirstOrDefault(o => o.Id == x.CreatorUserId.Value).NickName;
+            });
+            return page;
         }
 
         public async Task<OperationResponse> GetAuditEntryListByAuditLogIdAsync(ObjectId id)
@@ -101,6 +114,65 @@ namespace Destiny.Core.Flow.Services.Audit
                 Id=x.Id
             }).ToListAsync();
             return new OperationResponse(MessageDefinitionType.LoadSucces, list, OperationResponseType.Success);
+        }
+
+
+        /// <summary>
+        /// 分页获取数据实体审计 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+
+        public async Task<IPagedResult<AuditEntryOutputDto>> GetAuditEntryPageAsync(PageRequest request)
+        {
+            var exp = FilterBuilder.GetExpression<AuditEntry>(request.Filter);
+            OrderCondition<AuditEntry>[] orderConditions = new OrderCondition<AuditEntry>[] { new OrderCondition<AuditEntry>(o => o.CreatedTime, Enums.SortDirection.Descending) };
+            request.OrderConditions = orderConditions;
+            var users = _userManager.Users.ToList();
+            var page= await _auditEntryRepository.Collection.ToPageAsync(exp, request, x => new AuditEntryOutputDto
+            {
+               Id=x.Id,
+               EntityAllName=x.EntityAllName,
+               EntityDisplayName=x.EntityDisplayName,
+               KeyValues=x.KeyValues,
+               OperationType=x.OperationType,
+               CreatedTime=x.CreatedTime,
+               CreatorUserId=x.CreatorUserId
+           
+            });
+            page.ItemList.ForEach(x =>
+            {
+
+                x.NickName = x.CreatorUserId == Guid.Empty || x.CreatorUserId == null ? string.Empty : users.FirstOrDefault(o => o.Id == x.CreatorUserId.Value).NickName;
+            });
+       
+
+            return page;
+        }
+
+        /// <summary>
+        /// 分页获取数据实体属性审计 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public async Task<IPagedResult<AuditPropertyEntryOutputDto>> GetAuditEntryPropertyPageAsync(PageRequest request)
+        {
+            var exp = FilterBuilder.GetExpression<AuditPropertysEntry>(request.Filter);
+            OrderCondition<AuditPropertysEntry>[] orderConditions = new OrderCondition<AuditPropertysEntry>[] { new OrderCondition<AuditPropertysEntry>(o => o.CreatedTime, Enums.SortDirection.Descending) };
+            request.OrderConditions = orderConditions;
+            var users = _userManager.Users.ToList();
+            var page = await _auditPropertysEntryRepository.Collection.ToPageAsync(exp, request, x => new AuditPropertyEntryOutputDto
+            {
+                Id = x.Id,
+                PropertieDisplayName=x.PropertieDisplayName,
+                NewValues=x.NewValues,
+                OriginalValues=x.OriginalValues,
+                Properties=x.Properties,
+                PropertiesType=x.PropertiesType,
+
+            });
+            return page;
+       
         }
     }
 }

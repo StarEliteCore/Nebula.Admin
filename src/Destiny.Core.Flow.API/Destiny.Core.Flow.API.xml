@@ -4,6 +4,25 @@
         <name>Destiny.Core.Flow.API</name>
     </assembly>
     <members>
+        <member name="T:Destiny.Core.Flow.API.Controllers.AuditEntryController">
+            <summary>
+            数据审计
+            </summary>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.AuditEntryController.GetAuditEntryPageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+            <summary>
+            异步得到数据审计分页
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.AuditEntryController.GetAuditEntryPropertyPageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+            <summary>
+            异步得到实体属性分页
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.AuditLogController">
             <summary>
             审计日志

@@ -41,5 +41,22 @@ namespace Destiny.Core.Flow.Audit.Dto
         /// </summary>
         [DisplayName("操作类型")]
         public DataOperationType OperationType { get; set; }
+
+        [DisplayName("用户名")]
+        /// <summary>
+        /// 获取或设置 操作用户名
+        /// </summary>
+        public string UserName { get; set; }
+
+        [DisplayName("昵称")]
+        /// <summary>
+        /// 获取或设置 操作昵称
+        /// </summary>
+        public string NickName { get; set; }
+
+
+        public DateTime? CreatedTime { get; set; }
+
+        public Guid? CreatorUserId { get; set; }
     }
 }

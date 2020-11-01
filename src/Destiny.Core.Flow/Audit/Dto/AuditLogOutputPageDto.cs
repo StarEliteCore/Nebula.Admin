@@ -52,5 +52,17 @@ namespace Destiny.Core.Flow.Audit.Dto
         /// </summary>
         [DisplayName("创建时间")]
         public DateTime CreatedTime { get; set; }
+
+        [DisplayName("用户名")]
+        /// <summary>
+        /// 获取或设置 操作用户名
+        /// </summary>
+        public string UserName { get; set; }
+
+        [DisplayName("昵称")]
+        /// <summary>
+        /// 获取或设置 操作昵称
+        /// </summary>
+        public string NickName { get; set; }
     }
 }

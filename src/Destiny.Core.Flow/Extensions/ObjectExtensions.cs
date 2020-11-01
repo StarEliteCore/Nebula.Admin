@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Reflection;
 
 namespace Destiny.Core.Flow.Extensions
@@ -53,6 +54,13 @@ namespace Destiny.Core.Flow.Extensions
             {
 
                 return value.ToString();
+            }
+
+            if (type == typeof(ObjectId))
+            {
+
+                ObjectId.TryParse(value.ToString(),out var newValue);
+                return newValue;
             }
 
             return Convert.ChangeType(value, type);

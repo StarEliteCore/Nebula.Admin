@@ -21,6 +21,22 @@ namespace Destiny.Core.Flow.Audit
         /// <returns></returns>
         Task<IPagedResult<AuditLogOutputPageDto>> GetAuditLogPageAsync(PageRequest request);
 
+
+        /// <summary>
+        /// 分页获取数据实体审计 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<IPagedResult<AuditEntryOutputDto>> GetAuditEntryPageAsync(PageRequest request);
+
+
+        /// <summary>
+        /// 分页获取数据实体属性审计 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<IPagedResult<AuditPropertyEntryOutputDto>> GetAuditEntryPropertyPageAsync(PageRequest request);
+
         /// <summary>
         /// 获取操作明细
         /// </summary>

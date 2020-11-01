@@ -12,7 +12,7 @@ namespace Destiny.Core.Flow
             IOrderedFindFluent<TEntity, TEntity> orderFindFluent = null;
             if (orderConditions == null || orderConditions.Length == 0)
             {
-                findFluent = FindFluentSortBy<TEntity, TEntity>.OrderBy(findFluent, "Id", Destiny.Core.Flow.Enums.SortDirection.Ascending);
+                orderFindFluent = FindFluentSortBy<TEntity, TEntity>.OrderBy(findFluent, "Id", Destiny.Core.Flow.Enums.SortDirection.Ascending);
             }
             orderConditions.ForEach((e, i) =>
             {
