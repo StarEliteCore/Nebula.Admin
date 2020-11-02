@@ -83,6 +83,7 @@ namespace Destiny.Core.Flow.Services.Audit
             {
 
                 x.NickName = x.CreatorUserId == Guid.Empty || x.CreatorUserId == null ? string.Empty : users.FirstOrDefault(o => o.Id == x.CreatorUserId.Value).NickName;
+                x.UserName = x.CreatorUserId == Guid.Empty || x.CreatorUserId == null ? string.Empty : users.FirstOrDefault(o => o.Id == x.CreatorUserId.Value).UserName;
             });
             return page;
         }
@@ -160,7 +161,6 @@ namespace Destiny.Core.Flow.Services.Audit
             var exp = FilterBuilder.GetExpression<AuditPropertysEntry>(request.Filter);
             OrderCondition<AuditPropertysEntry>[] orderConditions = new OrderCondition<AuditPropertysEntry>[] { new OrderCondition<AuditPropertysEntry>(o => o.CreatedTime, Enums.SortDirection.Descending) };
             request.OrderConditions = orderConditions;
-            var users = _userManager.Users.ToList();
             var page = await _auditPropertysEntryRepository.Collection.ToPageAsync(exp, request, x => new AuditPropertyEntryOutputDto
             {
                 Id = x.Id,

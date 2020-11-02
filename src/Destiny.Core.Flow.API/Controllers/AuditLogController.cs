@@ -9,6 +9,7 @@ using MongoDB.Bson;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using Destiny.Core.Flow.Extensions;
 
 namespace Destiny.Core.Flow.API.Controllers
 {
@@ -44,7 +45,8 @@ namespace Destiny.Core.Flow.API.Controllers
         [Description("获取操作实体列表")]
         public async Task<AjaxResult> GetAuditEntryListByAuditLogIdAsync(string id)
         {
-            ObjectId.TryParse(id, out ObjectId objectId);
+            var objectId = id.AsTo<ObjectId>();
+            //ObjectId.TryParse(id, out ObjectId objectId);
             return (await _auditStore.GetAuditEntryListByAuditLogIdAsync(objectId)).ToAjaxResult();
         }
         /// <summary>
@@ -55,7 +57,7 @@ namespace Destiny.Core.Flow.API.Controllers
         [Description("获取实体属性列表")]
         public async Task<AjaxResult> GetAuditEntryListByAuditEntryIdAsync(string id)
         {
-            ObjectId.TryParse(id, out ObjectId objectId);
+            var objectId = id.AsTo<ObjectId>();
             return (await _auditStore.GetAuditEntryListByAuditEntryIdAsync(objectId)).ToAjaxResult();
         }
     }

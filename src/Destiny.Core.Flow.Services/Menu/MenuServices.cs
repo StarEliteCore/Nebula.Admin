@@ -47,20 +47,23 @@ namespace Destiny.Core.Flow.Services.Menu
         public async Task<OperationResponse> CreateAsync(MenuInputDto input)
         {
             input.NotNull(nameof(input));
-            return await _unitOfWork.UseTranAsync(async () =>
-            {
-                var result = await _menuRepository.InsertAsync(input);
-                if (input.FunctionId?.Any() == true)
-                {
-                    int count = await _menuFunction.InsertAsync(input.FunctionId.Select(x => new MenuFunction
-                    {
-                        MenuId = input.Id,
-                        FunctionId = x
-                    }).ToArray());
-                }
-                return new OperationResponse("保存成功", OperationResponseType.Success);
-            });
+            return  await _menuRepository.InsertAsync(input); 
+            //return await _unitOfWork.UseTranAsync(async () =>
+            //{
+            //    var result = await _menuRepository.InsertAsync(input);
+            //    if (input.FunctionId?.Any() == true)
+            //    {
+            //        int count = await _menuFunction.InsertAsync(input.FunctionId.Select(x => new MenuFunction
+            //        {
+            //            MenuId = input.Id,
+            //            FunctionId = x
+            //        }).ToArray());
+            //    }
+            //    return new OperationResponse("保存成功", OperationResponseType.Success);
+            //});
         }
+
+
 
         public async Task<OperationResponse> DeleteAsync(Guid id)
         {
@@ -70,20 +73,21 @@ namespace Destiny.Core.Flow.Services.Menu
         public async Task<OperationResponse> UpdateAsync(MenuInputDto input)
         {
             input.NotNull(nameof(input));
-            return await _unitOfWork.UseTranAsync(async () =>
-            {
-                var result = await _menuRepository.UpdateAsync(input);
-                await _menuFunction.DeleteBatchAsync(x => x.MenuId == input.Id);
-                if (input.FunctionId?.Any() == true)
-                {
-                    int count = await _menuFunction.InsertAsync(input.FunctionId.Select(x => new MenuFunction
-                    {
-                        MenuId = input.Id,
-                        FunctionId = x
-                    }).ToArray());
-                }
-                return new OperationResponse("保存成功", OperationResponseType.Success);
-            });
+            return await _menuRepository.UpdateAsync(input);
+            //return await _unitOfWork.UseTranAsync(async () =>
+            //{
+            //    var result = await _menuRepository.UpdateAsync(input);
+            //    await _menuFunction.DeleteBatchAsync(x => x.MenuId == input.Id);
+            //    if (input.FunctionId?.Any() == true)
+            //    {
+            //        int count = await _menuFunction.InsertAsync(input.FunctionId.Select(x => new MenuFunction
+            //        {
+            //            MenuId = input.Id,
+            //            FunctionId = x
+            //        }).ToArray());
+            //    }
+            //    return new OperationResponse("保存成功", OperationResponseType.Success);
+            //});
         }
 
         /// <summary>
