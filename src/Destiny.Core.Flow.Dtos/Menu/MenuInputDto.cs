@@ -32,7 +32,7 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// 父级菜单ID
         /// </summary>
         [DisplayName("父级菜单ID")]
-        public Guid ParentId { get; set; }
+        public Guid? ParentId { get; set; }
 
         /// <summary>
         /// 组件地址
