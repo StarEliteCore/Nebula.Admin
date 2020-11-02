@@ -63,7 +63,8 @@ namespace Destiny.Core.Flow.Dtos.Menu
         [DisplayName("深度")]
         public int Depth { get; set; }
 
-        public List<Guid> FunctionId { get; set; }
+        
+
 
         /// <summary>
         /// 类型

@@ -14,7 +14,7 @@ namespace Destiny.Core.Flow.Dtos.Menu
     {
         public MenuOutputLoadDto()
         {
-            FunctionIds = new Guid[] { };
+         
         }
 
         /// <summary>
@@ -59,10 +59,10 @@ namespace Destiny.Core.Flow.Dtos.Menu
         [DisplayName("菜单图标")]
         public string Icon { get; set; }
 
-        /// <summary>
-        /// 功能Id
-        /// </summary>
-        public Guid[] FunctionIds { get; set; }
+        ///// <summary>
+        ///// 功能Id
+        ///// </summary>
+        //public Guid[] FunctionIds { get; set; }
 
         /// <summary>
         /// 当前菜单以上所有的父级

@@ -137,7 +137,7 @@ namespace Destiny.Core.Flow.Services.Menu
         {
             var menu = await _menuRepository.GetByIdAsync(Id);
             var menudto = menu.MapTo<MenuOutputLoadDto>();
-            menudto.FunctionIds = (await _menuFunction.Entities.Where(x => x.MenuId == Id && x.IsDeleted == false).ToListAsync()).Select(x => x.FunctionId).ToArray();
+            
             return new OperationResponse<MenuOutputLoadDto>(MessageDefinitionType.LoadSucces, menudto, OperationResponseType.Success);
         }
 
