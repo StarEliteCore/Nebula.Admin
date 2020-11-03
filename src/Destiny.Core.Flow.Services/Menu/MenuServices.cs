@@ -329,7 +329,7 @@ namespace Destiny.Core.Flow.Services.Menu
         /// <returns></returns>
         public async Task<TreeResult<MenuTreeOutDto>> GetAllMenuTreeAsync(MenuEnum menu= MenuEnum.Menu)
         {
-            return await _menuRepository.Entities.Where(o=>o.Type== menu).ToTreeResultAsync<MenuEntity, MenuTreeOutDto>(
+            return await _menuRepository.Entities.OrderBy(o=>o.Sort).Where(o=>o.Type== menu).ToTreeResultAsync<MenuEntity, MenuTreeOutDto>(
               (p, c) =>
               {
                   return c.ParentId == null || c.ParentId == Guid.Empty;

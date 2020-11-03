@@ -1,15 +1,21 @@
-﻿using Destiny.Core.Flow.Dtos.MenuFunction;
+﻿using Destiny.Core.Flow.Dtos.Menu;
+using Destiny.Core.Flow.Dtos.MenuFunction;
+using Destiny.Core.Flow.Entity;
+using Destiny.Core.Flow.ExpressionUtil;
+using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.IServices.IMenu;
 using Destiny.Core.Flow.Model.Entities.Function;
 using Destiny.Core.Flow.Model.Entities.Menu;
 using Destiny.Core.Flow.Repository.MenuRepository;
+using Destiny.Core.Flow.Ui;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.Menu
@@ -19,50 +25,107 @@ namespace Destiny.Core.Flow.Services.Menu
         private readonly IMenuFunctionRepository _menuFunctionRepository = null;
         private readonly IEFCoreRepository<Function, Guid> _functionRepository;
         private readonly IMenuRepository _menuRepository = null;
+        private readonly IUnitOfWork _unitOfWork = null;
 
-        public MenuFunctionServices(IMenuFunctionRepository menuFunctionRepository, IEFCoreRepository<Function, Guid> functionRepository, IMenuRepository menuRepository)
+
+        public MenuFunctionServices(IMenuFunctionRepository menuFunctionRepository, IEFCoreRepository<Function, Guid> functionRepository, IMenuRepository menuRepository, IUnitOfWork unitOfWork)
         {
             _menuFunctionRepository = menuFunctionRepository;
             _functionRepository = functionRepository;
             _menuRepository = menuRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<IPagedResult<MenuFunctionOutPageListDto>> GetMenuFunctionListAsync(Guid menuId)
+        /// <summary>
+        /// 根据菜单ID得到菜单功能分页
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+
+        public async Task<IPagedResult<MenuFunctionOutPageListDto>> GetMenuFunctionByMenuIdPageAsync(MenuFunctionPageRequestDto request)
         {
-            Action<MenuEntity, ICollection<MenuEntity>> menuItem = null;
-            List<Guid> menuIds = new List<Guid>();
-            menuItem = (dto, suoure) =>
+            request.NotNull(nameof(request));
+
+
+            var functionIds = _menuFunctionRepository.Entities.Where(o => o.MenuId == request.MenuId).Select(o => o.FunctionId);
+            var exprrssion = FilterBuilder.GetExpression<Function>(request.Filter);
+    
+      
+            return await _functionRepository.Entities.Where(o=>functionIds.Contains(o.Id)).ToPageAsync(exprrssion, request, f => new MenuFunctionOutPageListDto()
             {
-                var childs = suoure.Where(o => o.ParentId == dto.Id).ToList();
-                if (!childs.Any())
+
+                FunctionId = f.Id,
+                Name = f.Name,
+                Description = f.Description,
+                LinkUrl = f.LinkUrl,
+                IsEnabled = f.IsEnabled,
+
+            });
+        }
+
+
+
+        /// <summary>
+        /// 批量添加功能菜单
+        /// </summary>
+        /// <param name="menuFunctionInputDto">输入DTO</param>
+        /// <returns></returns>
+
+        public async Task<OperationResponse> BatchAddMenuFunctionAsync(MenuFunctionInputDto menuFunctionInputDto)
+        {
+
+
+           var menuFunctions = ToMenuFunctions(menuFunctionInputDto);
+          return await _unitOfWork.UseTranAsync(async () =>
+            {
+                var count = await _menuFunctionRepository.InsertAsync(menuFunctions);
+                if (count <= 0)
                 {
-                    menuIds.Add(dto.Id);
+
+                    return new OperationResponse("没有发生任何操作!!!!", Enums.OperationResponseType.NoChanged);
                 }
-                foreach (var item in childs)
+                return OperationResponse.Ok($"{count}个菜单功能添加成功");
+                
+            });
+         
+
+        }
+
+        private MenuFunction[] ToMenuFunctions(MenuFunctionInputDto menuFunctionInputDto)
+        {
+            menuFunctionInputDto.NotNull(nameof(menuFunctionInputDto));
+            menuFunctionInputDto.FunctionIds.NotNull("FunctionIds");
+            return menuFunctionInputDto.FunctionIds.Select(f => new MenuFunction
+            {
+
+                FunctionId = f,
+                MenuId = menuFunctionInputDto.MenuId
+            }).ToArray();
+        }
+
+        /// <summary>
+        /// 批量删除功能菜单
+        /// </summary>
+        /// <param name="menuFunctionInputDto">输入DTO</param>
+        /// <returns></returns>
+        public async Task<OperationResponse> BatchDeleteMenuFunctionAsync(MenuFunctionInputDto menuFunctionInputDto) {
+
+            menuFunctionInputDto.NotNull(nameof(menuFunctionInputDto));
+
+            menuFunctionInputDto.FunctionIds.NotNull("FunctionIds");
+            var functionIds = menuFunctionInputDto.FunctionIds;
+            var menuId= menuFunctionInputDto.MenuId;
+            return await _unitOfWork.UseTranAsync(async () =>
+            {
+                var count = await _menuFunctionRepository.DeleteBatchAsync(o=>o.MenuId==menuId&& functionIds.Contains(o.FunctionId));
+                if (count <= 0)
                 {
-                    menuIds.Add(item.Id);
-                    menuItem(item, suoure);
+
+                    return new OperationResponse("没有发生任何操作!!!!", Enums.OperationResponseType.NoChanged);
                 }
-            };
-            var roots = _menuRepository.Entities;
-            var menuList = await roots.Where(o => o.Id == menuId).ToListAsync();
-            var suoures = await roots.Where(o => o.ParentId == Guid.Empty).ToListAsync();
-            foreach (var menu in menuList)
-            {
-                menuItem(menu, suoures);
-            }
-            var functionIds = _menuFunctionRepository.Entities.Where(mf => menuIds.Contains(mf.MenuId)).Select(o => o.FunctionId);
-            var functionList = await _functionRepository.Entities.Where(f => functionIds.Contains(f.Id)).Select(o => new MenuFunctionOutPageListDto()
-            {
-                Description = o.Description,
-                LinkUrl = o.LinkUrl,
-                Name = o.Name
-            }).ToListAsync();
-            return new PageResult<MenuFunctionOutPageListDto>()
-            {
-                ItemList = functionList,
-                Total = functionList.Count()
-            };
+                return OperationResponse.Ok($"{count}个菜单功能删除成功!!!!");
+
+            });
         }
     }
 }
