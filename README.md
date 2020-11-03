@@ -58,7 +58,15 @@
     + #### Destiny.Core.Flow.Identitys
 
       重写微软Identity自带用户角色的代码。
-
+      
+    + #### Destiny.Core.Flow.IdentityServer
+ 
+      重写IdentityServer相关接口，及相关映射，实现通过仓储操作相关数据
+      
+     + #### Destiny.Core.Flow.IdentityServer.Entities
+ 
+       IdentityServer相关实体
+      
     + #### Destiny.Core.Flow.AspNetCore
 
       NetCoreAPI通用层，权限过滤器，日志过滤器、异常中间件、控制器返回同意格式模型。
@@ -90,7 +98,9 @@
     + #### Destiny.Core.Flow.API
 
       API接口定义。
-
+   
+    + #### Destiny.Core.Flow.AuthenticationCenter
+      IdentityServer授权中心
     + to do...
 
   + ## Moduls 模块层
@@ -108,6 +118,7 @@
     + #### Destiny.Core.Flow.Consul 服务发现模块
 
     + #### Destiny.Core.Flow.SwaggerUI 模块
+    
     + #### Destiny.Core.Flow.MongoDB 模块
       集成MongoDB分页查询，添加，更新，删除。实现MongoDB单独仓储
 + ## 3.框架技术
@@ -117,6 +128,8 @@
     + #### MySql
 
     + #### Redis
+    
+    + #### MongoDB
 
   + ### .Net Core技术
 
