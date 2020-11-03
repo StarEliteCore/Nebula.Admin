@@ -122,6 +122,7 @@
     + #### Destiny.Core.Flow.SwaggerUI 模块
     
     + #### Destiny.Core.Flow.MongoDB 模块
+      注意MongoDB链接 mongodb://127.0.0.2/Test
       集成MongoDB分页查询，添加，更新，删除。实现MongoDB单独仓储
 + ## 3.框架技术
 
