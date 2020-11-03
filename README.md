@@ -150,7 +150,7 @@
 
     + #### EntityFrameworkCore ORM框架
 
-    + ### MongoDB 
+    + ### MongoDB 切记MongoDB链接 mongodb://127.0.0.2/Test
     + ### Redis 
 
   + 
