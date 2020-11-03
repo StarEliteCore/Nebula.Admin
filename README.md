@@ -10,7 +10,7 @@
  
 ✔ 后面支持VUE版本
 
-✔ [在线展示后端API链接](http://api.destinycore.club)
+✔ [在线展示后端API链接](http://api.destinycore.club) 目前不维护
 
 + ## 关联前端
 
