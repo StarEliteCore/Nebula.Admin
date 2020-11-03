@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.Dtos;
+using Destiny.Core.Flow.Dtos.Users;
 using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Events.EventBus;
@@ -196,6 +197,17 @@ namespace Destiny.Core.Flow.Services
             OrderCondition<User>[] orderConditions = new OrderCondition<User>[] { new OrderCondition<User>(o => o.CreatedTime, SortDirection.Descending) };
             request.OrderConditions = orderConditions;
             return _userManager.Users.AsNoTracking().ToPageAsync<User, UserOutputPageListDto>(request);
+        }
+
+        /// <summary>
+        /// 异步得到所有用户
+        /// </summary>
+        /// <returns></returns>
+        public async Task<OperationResponse<List<UserOutputListDto>>> GetUsersAsync()
+        {
+            var users =await _userManager.Users.AsNoTracking().ToOutput<UserOutputListDto>().ToListAsync();
+
+            return OperationResponse<List<UserOutputListDto>>.Ok("得到用户成功", users);
         }
     }
 }
