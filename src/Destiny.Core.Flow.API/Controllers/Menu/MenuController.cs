@@ -168,17 +168,7 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
             return (await _menuServices.GetMenuListAsync()).ToAjaxResult();
         }
 
-        /// <summary>
-        /// 异步到菜单功能集合
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [Description("异步到菜单功能集合")]
-
-        public async Task<PageList<MenuFunctionOutPageListDto>> GetMenuFunctionListAsync(Guid id)
-        {
-            return (await _menuFunctionServices.GetMenuFunctionListAsync(id)).ToPageList();
-        }
+      
 
         /// <summary>
         /// 异步得到菜单分页数据（不是树，只是普通表格）

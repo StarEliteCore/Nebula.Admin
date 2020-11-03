@@ -1,28 +1,23 @@
-﻿using AutoMapper;
-using Destiny.Core.Flow.Entity;
+﻿using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Mapping;
 using Destiny.Core.Flow.Model.Entities.Identity;
-
 using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Destiny.Core.Flow.Dtos
+namespace Destiny.Core.Flow.Dtos.Users
 {
+    /// <summary>
+    /// 用户输出集合DTO
+    /// </summary>
     [AutoMapping(typeof(User))]
-    public class UserOutputDto : OutputDto<Guid>
+    public   class UserOutputListDto : OutputDto<Guid>
     {
-        public UserOutputDto()
-        {
-            RoleIds = new Guid[] { };
-        }
-
         public string UserName { get; set; }
 
         public string NickName { get; set; }
 
-        public DateTime CreatedTime { get; set; }
-
-        public bool IsSystem { get; set; }
 
         /// <summary>
         /// 描述
@@ -33,7 +28,5 @@ namespace Destiny.Core.Flow.Dtos
         /// 姓别
         /// </summary>
         public Sex Sex { get; set; }
-
-        public Guid[] RoleIds { get; set; }
     }
 }

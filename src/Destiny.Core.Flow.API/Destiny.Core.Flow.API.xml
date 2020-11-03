@@ -180,6 +180,32 @@
             <param name="dto"></param>
             <returns></returns>
         </member>
+        <member name="T:Destiny.Core.Flow.API.Controllers.MenuFunctionController">
+            <summary>
+            菜单功能
+            </summary>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.MenuFunctionController.BatchAddMenuFunctionAsync(Destiny.Core.Flow.Dtos.Menu.MenuFunctionInputDto)">
+            <summary>
+            批量添加功能菜单
+            </summary>
+            <param name="menuFunctionInputDto">输入DTO</param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.MenuFunctionController.BatchDeleteMenuFunctionAsync(Destiny.Core.Flow.Dtos.Menu.MenuFunctionInputDto)">
+            <summary>
+            批量删除功能菜单
+            </summary>
+            <param name="menuFunctionInputDto">输入DTO</param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.MenuFunctionController.GetMenuFunctionByMenuIdPageAsync(Destiny.Core.Flow.Dtos.MenuFunction.MenuFunctionPageRequestDto)">
+            <summary>
+            根据菜单ID得到菜单功能分页
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.Menu.MenuController">
             <summary>
             菜单管理
@@ -244,12 +270,6 @@
         <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetMenuListAsync">
             <summary>
             获取登录用户权限菜单
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetMenuFunctionListAsync(System.Guid)">
-            <summary>
-            异步到菜单功能集合
             </summary>
             <returns></returns>
         </member>
@@ -401,6 +421,12 @@
             异步得到分页
             </summary>
             <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.UserController.GetUsersAsync">
+            <summary>
+            异步得到所有用户
+            </summary>
             <returns></returns>
         </member>
         <member name="M:Destiny.Core.Flow.API.Startups.EntityFrameworkCoreMySqlModule.ReadAllText(Microsoft.Extensions.FileProviders.IFileInfo)">

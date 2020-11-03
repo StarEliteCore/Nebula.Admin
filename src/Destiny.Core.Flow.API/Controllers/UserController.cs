@@ -1,12 +1,14 @@
 ﻿using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Dtos;
+using Destiny.Core.Flow.Dtos.Users;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices;
 using Destiny.Core.Flow.Permission;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 namespace Destiny.Core.Flow.API.Controllers
@@ -138,6 +140,19 @@ namespace Destiny.Core.Flow.API.Controllers
         public async Task<PageList<UserOutputPageListDto>> GetUserPageAsync([FromBody] PageRequest request)
         {
             return (await _userService.GetUserPageAsync(request)).ToPageList();
+        }
+
+        /// <summary>
+        /// 异步得到所有用户
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Description("异步得到所有用户")]
+        [NoAuthorityVerification]
+        public async Task<AjaxResult> GetUsersAsync()
+        {
+
+            return (await _userService.GetUsersAsync()).ToAjaxResult();
         }
     }
 }
