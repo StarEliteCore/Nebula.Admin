@@ -262,9 +262,9 @@ namespace Destiny.Core.Flow.Services.Menu
                  },
                  (p, children) =>
                  {
-                     if (p.routes == null)
-                         p.routes = new List<MenuPermissionsTreeOutDto>();
-                     p.routes.AddRange(children);
+                     if (p.Routes == null)
+                         p.Routes = new List<MenuPermissionsTreeOutDto>();
+                     p.Routes.AddRange(children);
                  });
                 menulist.AddRange(list.ItemList);
                 return new OperationResponse(MessageDefinitionType.LoadSucces, menulist, OperationResponseType.Success);
@@ -284,9 +284,9 @@ namespace Destiny.Core.Flow.Services.Menu
                  },
                  (p, children) =>
                  {
-                     if (p.routes == null)
-                         p.routes = new List<MenuPermissionsTreeOutDto>();
-                     p.routes.AddRange(children);
+                     if (p.Routes == null)
+                         p.Routes = new List<MenuPermissionsTreeOutDto>();
+                     p.Routes.AddRange(children);
                  });
             menulist.AddRange(result.ItemList);
             return new OperationResponse(MessageDefinitionType.LoadSucces, menulist, OperationResponseType.Success);

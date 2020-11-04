@@ -15,37 +15,37 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// 菜单名称
         /// </summary>
         [DisplayName("路由名称")]
-        public string path { get; set; }
+        public string Path { get; set; }
 
         /// <summary>
         /// 重定向
         /// </summary>
         [DisplayName("重定向")]
-        public string redirect { get; set; }
+        public string Redirect { get; set; }
 
         /// <summary>
         /// 名称
         /// </summary>
         [DisplayName("名称")]
-        public string access { get; set; }
+        public string Access { get; set; }
 
         /// <summary>
         /// 路由名称(前端)
         /// </summary>
         [DisplayName("路由名称")]
-        public string name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// 组件地址(前端)
         /// </summary>
         [DisplayName("组件名称")]
-        public string component { get; set; }
+        public string Component { get; set; }
 
         /// <summary>
         /// 菜单图标
         /// </summary>
         [DisplayName("菜单图标")]
-        public string icon { get; set; }
+        public string Icon { get; set; }
 
         /// <summary>
         /// 父级菜单ID
@@ -57,6 +57,6 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// 父级菜单ID
         /// </summary>
         [DisplayName("子级")]
-        public List<MenuPermissionsTreeOutDto> routes { get; set; } = new List<MenuPermissionsTreeOutDto>();
+        public List<MenuPermissionsTreeOutDto> Routes { get; set; } = new List<MenuPermissionsTreeOutDto>();
     }
 }
