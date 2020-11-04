@@ -39,8 +39,6 @@ namespace Destiny.Core.Flow.Dtos
         /// 姓别
         /// </summary>
         public Sex Sex { get; set; }
-
-        public Guid?[] RoleIds { get; set; }
     }
 
     [AutoMapping(typeof(User))]
