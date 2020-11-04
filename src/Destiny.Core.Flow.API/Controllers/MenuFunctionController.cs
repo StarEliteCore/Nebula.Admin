@@ -18,7 +18,7 @@ namespace Destiny.Core.Flow.API.Controllers
     /// </summary>
     [Description("菜单功能")]
     
-    public class MenuFunctionController : ApiControllerBase
+    public class MenuFunctionController : AuthorizeControllerBase
     {
         private readonly IMenuFunctionServices _menuFunctionServices;
 
