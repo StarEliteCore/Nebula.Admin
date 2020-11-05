@@ -11,7 +11,7 @@ namespace Destiny.Core.Flow.Audit
     {
         public async Task<List<AuditEntryInputDto>> GetChangeTrackerList(IEnumerable<EntityEntry> Entries)
         {
-            await Task.CompletedTask;
+            await Task.CompletedTask; //?????为什么这样。。。。。
             var list = new List<AuditEntryInputDto>();
             foreach (var entityEntry in Entries)
             {
@@ -55,7 +55,7 @@ namespace Destiny.Core.Flow.Audit
                         AuditPropertys.Properties = propertie.Name;
                         AuditPropertys.NewValues = propertyEntry.CurrentValue?.ToString();
                         AuditPropertys.OriginalValues = propertyEntry.OriginalValue?.ToString();
-                        AuditPropertys.PropertiesType = propertie.ClrType.FullName;
+                        AuditPropertys.PropertiesType = propertie.ClrType.Name;
                         AuditPropertys.PropertieDisplayName = propertyEntry.Metadata.PropertyInfo.ToDescription();
                         auditentry.AuditPropertys.Add(AuditPropertys);
                     }

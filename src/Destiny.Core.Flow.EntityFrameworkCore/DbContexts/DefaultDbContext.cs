@@ -22,17 +22,39 @@ namespace Destiny.Core.Flow
             _changeTracker = _serviceProvider.GetService<IGetChangeTracker>();
         }
 
+        /// <summary>
+        ///保存更改操作 
+        /// </summary>
+        /// <returns></returns>
+
         public override int SaveChanges()
         {
-            return base.SaveChanges();
+            var auditlist =  _changeTracker.GetChangeTrackerList(this.ChangeTracker.Entries()).GetAwaiter().GetResult();
+            var result = base.SaveChanges();
+            if (auditlist.Count > 0)
+            {
+                _bus.PublishAsync(new AuditEvent() { AuditEntries = auditlist }).GetAwaiter();
+            }
+    
+            return result;
         }
 
+        /// <summary>
+        ///保存更改操作 
+        /// </summary>
+        /// <returns></returns>
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var auditlist = await _changeTracker.GetChangeTrackerList(this.ChangeTracker.Entries());
             var result = await base.SaveChangesAsync(cancellationToken);
-            await _bus.PublishAsync(new AuditEvent() { AuditEntries = auditlist });
+            if (auditlist.Count > 0)
+            {
+                await _bus.PublishAsync(new AuditEvent() { AuditEntries = auditlist });
+            }
+ 
             return result;
         }
+
+        
     }
 }
