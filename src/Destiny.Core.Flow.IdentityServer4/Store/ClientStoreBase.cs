@@ -29,11 +29,12 @@ namespace Destiny.Core.Flow.IdentityServer.Store
                 .Entities.Where(x => x.ClientId == clientId)
                 .Include(x => x.AllowedGrantTypes)
                 .Include(x => x.RedirectUris)
+                .Include(x => x.PostLogoutRedirectUris)//退出登录回调的url
                 .Include(x => x.AllowedScopes)
                 .Include(x => x.ClientSecrets).SingleOrDefaultAsync();
             if (client == null)
                 return null;
-            var dto= client?.MapTo<IdentityServer4.Models.Client>();
+            var dto = client?.MapTo<IdentityServer4.Models.Client>();
             return dto;
         }
     }

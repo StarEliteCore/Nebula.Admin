@@ -33,7 +33,7 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
             var isAllowAnonymous = action.ControllerTypeInfo.GetCustomAttribute<AllowAnonymousAttribute>();//获取Action中的特性
             var linkurl = context.HttpContext.Request.Path.Value.Replace("/api/", "");
             var result = new AjaxResult(MessageDefinitionType.Unauthorized, Enums.AjaxResultType.Unauthorized);
-            if (!action.EndpointMetadata.Any(x => x is AllowAnonymousAttribute || x is NoAuthorityVerificationAttribute))
+            if (!action.EndpointMetadata.Any(x => x is AllowAnonymousAttribute))
             {
                 if (!_principal.Identity.IsAuthenticated)
                 {
@@ -41,14 +41,20 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
                     context.Result = new JsonResult(result);
                     return;
                 }
-                if (!await _authority.IsPermission(linkurl.ToLower()))
+                else
                 {
-                    ////????不包含的时候怎么返回出去？这个请求终止掉
-                    ///
-                    result.Message = MessageDefinitionType.Uncertified;
-                    context.HttpContext.Response.StatusCode = StatusCodes.Status403Forbidden;
-                    context.Result = new JsonResult(result);
-                    return;
+                    if (!action.EndpointMetadata.Any(x => x is NoAuthorityVerificationAttribute))
+                    {
+                        if (!await _authority.IsPermission(linkurl.ToLower()))
+                        {
+                            ////????不包含的时候怎么返回出去？这个请求终止掉
+                            ///
+                            result.Message = MessageDefinitionType.Uncertified;
+                            context.HttpContext.Response.StatusCode = StatusCodes.Status403Forbidden;
+                            context.Result = new JsonResult(result);
+                            return;
+                        }
+                    }
                 }
             }
         }
