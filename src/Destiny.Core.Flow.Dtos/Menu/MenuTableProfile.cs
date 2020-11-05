@@ -9,12 +9,12 @@ namespace Destiny.Core.Flow.Dtos.Menu
         {
             //CreateMap<MenuEntity, MenuTableOutDto>();
             CreateMap<MenuEntity, MenuPermissionsTreeOutDto>()
-                .ForMember(x => x.access, opt => opt.MapFrom(s => s.Name))
-                .ForMember(x => x.name, opt => opt.MapFrom(s => s.Name))
-                .ForMember(x => x.icon, opt => opt.MapFrom(s => s.Icon))
-                .ForMember(x => x.path, opt => opt.MapFrom(s => s.Path))
-                .ForMember(x => x.component, opt => opt.MapFrom(s => s.Component))
-                .ForMember(x => x.redirect, opt => opt.MapFrom(s => s.Redirect))
+                .ForMember(x => x.Access, opt => opt.MapFrom(s => s.Name))
+                .ForMember(x => x.Name, opt => opt.MapFrom(s => s.Name))
+                .ForMember(x => x.Icon, opt => opt.MapFrom(s => s.Icon))
+                .ForMember(x => x.Path, opt => opt.MapFrom(s => s.Path))
+                .ForMember(x => x.Component, opt => opt.MapFrom(s => s.Component))
+                .ForMember(x => x.Redirect, opt => opt.MapFrom(s => s.Redirect))
                 ;
         }
     }
