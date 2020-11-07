@@ -60,9 +60,9 @@ namespace Destiny.Core.Flow.API.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         [Description("根据菜单ID得到菜单功能分页")]
-        public async Task<PageList<MenuFunctionOutPageListDto>> GetMenuFunctionByMenuIdPageAsync(MenuFunctionPageRequestDto request)
+        public async Task<PageList<MenuFunctionOutPageListDto>> GetMenuFunctionByMenuIdPageAsync([FromBody] MenuFunctionPageRequestDto request)
         {
             return (await _menuFunctionServices.GetMenuFunctionByMenuIdPageAsync(request)).ToPageList();
         }
