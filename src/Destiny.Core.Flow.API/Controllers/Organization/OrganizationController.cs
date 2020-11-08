@@ -1,6 +1,7 @@
 ﻿using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Dtos.Organization;
+using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices.Organization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +30,7 @@ namespace Destiny.Core.Flow.API.Controllers.Organization
         /// <returns></returns>
         [HttpGet]
         [Description("获取组织架构")]
-        public async Task<TreeModel<OrganizationOutDto>> GetAsync()
+        public async Task<TreeModel<OrganizationOutDto>> GetOrganizationTreeAsync()
         {
 
             var result = await _organization.GetOrganization();
@@ -76,6 +77,17 @@ namespace Destiny.Core.Flow.API.Controllers.Organization
         {
 
             return (await _organization.DeleteAsync(id)).ToAjaxResult();
+        }
+        /// <summary>
+        /// 异步得到组织架构分页数据
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Description("异步得到组织架构分页数据")]
+        public async Task<PageList<OrganizationOutPageListDto>> GetPageOrganizationAsync([FromBody] PageRequest request)
+        {
+            return (await _organization.GetPageOrganizationAsync(request)).ToPageList();
         }
     }
 }

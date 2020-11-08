@@ -13,27 +13,31 @@ namespace Destiny.Core.Flow.Dtos.Organization
         /// <summary>
         /// 组织架构标题
         /// </summary>
-        public string title { get; set; }
+        public string Title { get; set; }
+        /// <summary>
+        /// 是否展开直子节点
+        /// </summary>
+        public Guid Key { get; set; }
 
         /// <summary>
         /// 是否展开直子节点
         /// </summary>
-        public bool expand { get; set; }
+        public bool Expand { get; set; }
 
         /// <summary>
         /// 禁掉响应
         /// </summary>
-        public string disabled { get; set; }
+        public bool Disabled { get; set; }
 
         /// <summary>
         /// 组织架构深度
         /// </summary>
-        public string Depth { get; set; }
+        public int Depth { get; set; }
 
         /// <summary>
         /// 父级ID
         /// </summary>
-        public Guid ParentId { get; set; }
+        public Guid? ParentId { get; set; }
 
         /// <summary>
         /// 当前节点以上所有组织架构
