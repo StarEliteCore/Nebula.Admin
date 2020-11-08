@@ -20,7 +20,7 @@ using System.Security.Principal;
 namespace Destiny.Core.Flow.API.Startups
 {
     [DependsOn(typeof(DependencyAppModule),
-               typeof(SwaggerModule),
+               typeof(AspNetCoreSwaggerModule),
                typeof(IdentityModule),
                typeof(FunctionModule),
                typeof(EventBusAppModule),
@@ -80,12 +80,16 @@ namespace Destiny.Core.Flow.API.Startups
                 return accessor?.HttpContext?.User;
             });
 
+            context.Services.AddMiniProfiler().AddEntityFramework();
+
+
         }
 
         public override void ApplicationInitialization(ApplicationContext context)
         {
             var app = context.GetApplicationBuilder();
             app.UseRouting();
+            app.UseMiniProfiler();
             if (!_corePolicyName.IsNullOrEmpty())
             {
                 app.UseCors(_corePolicyName); //添加跨域中间件
