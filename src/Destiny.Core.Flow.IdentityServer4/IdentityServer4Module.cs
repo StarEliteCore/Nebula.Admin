@@ -2,10 +2,8 @@
 using Destiny.Core.Flow.IdentityServer.Store;
 using Destiny.Core.Flow.IdentityServer.Validation;
 using Destiny.Core.Flow.Modules;
-using IdentityServer4.Extensions;
 using IdentityServer4.Stores;
 using IdentityServer4.Validation;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Destiny.Core.Flow.IdentityServer
@@ -23,9 +21,9 @@ namespace Destiny.Core.Flow.IdentityServer
                  opt.Events.RaiseFailureEvents = true;
                  opt.Events.RaiseSuccessEvents = true;
                  //opt.IssuerUri = issuerUri;
-             })               
-                .AddDeveloperSigningCredential()
-             .AddProfileService<DestinyProfileService>();
+             })
+                .AddDeveloperSigningCredential();
+            //.AddProfileService<DestinyProfileService>();
             service.AddTransient<IClientStore, ClientStoreBase>();
             service.AddTransient<IResourceStore, ApiResourceStoreBase>();
             service.AddTransient<IPersistedGrantStore, PersistedGrantStoreBase>();
@@ -34,9 +32,9 @@ namespace Destiny.Core.Flow.IdentityServer
 
         public override void ApplicationInitialization(ApplicationContext context)
         {
-            var app = context.GetApplicationBuilder();
-            app.UseStaticFiles();
-            
+            //var app = context.GetApplicationBuilder();
+            //app.UseStaticFiles();
+
         }
 
 
