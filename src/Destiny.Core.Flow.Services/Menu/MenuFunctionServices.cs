@@ -46,12 +46,10 @@ namespace Destiny.Core.Flow.Services.Menu
         {
             request.NotNull(nameof(request));
 
-
             var functionIds = _menuFunctionRepository.Entities.Where(o => o.MenuId == request.MenuId).Select(o => o.FunctionId);
             var exprrssion = FilterBuilder.GetExpression<Function>(request.Filter);
-    
-      
-            return await _functionRepository.Entities.Where(o=>functionIds.Contains(o.Id)).ToPageAsync(exprrssion, request, f => new MenuFunctionOutPageListDto()
+            exprrssion = exprrssion.And(o => functionIds.Contains(o.Id));
+            return await _functionRepository.Entities.ToPageAsync(exprrssion, request, f => new MenuFunctionOutPageListDto()
             {
 
                 FunctionId = f.Id,

@@ -7,6 +7,7 @@ using Destiny.Core.Flow.IServices;
 using Destiny.Core.Flow.Permission;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using StackExchange.Profiling;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -140,6 +141,7 @@ namespace Destiny.Core.Flow.API.Controllers
         public async Task<PageList<UserOutputPageListDto>> GetUserPageAsync([FromBody] PageRequest request)
         {
             return (await _userService.GetUserPageAsync(request)).ToPageList();
+
         }
 
         /// <summary>
