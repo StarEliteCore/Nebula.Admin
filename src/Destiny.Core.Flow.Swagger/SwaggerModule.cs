@@ -8,6 +8,7 @@ using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using System;
 using System.IO;
 using System.Reflection;
 
@@ -102,6 +103,13 @@ namespace Destiny.Core.Flow.Swagger
         }
 
 
+
+        public virtual Stream GetIndexStream()
+        {
+
+            return null;
+        }
+
         public override void ApplicationInitialization(ApplicationContext context)
         {
 
@@ -109,6 +117,10 @@ namespace Destiny.Core.Flow.Swagger
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
+
+                if (this.GetIndexStream() != null) {
+                    c.IndexStream = ()=>this.GetIndexStream();
+                }
                 c.DefaultModelExpandDepth(2);
                 c.DefaultModelRendering(ModelRendering.Example);
                 c.DefaultModelsExpandDepth(-1);

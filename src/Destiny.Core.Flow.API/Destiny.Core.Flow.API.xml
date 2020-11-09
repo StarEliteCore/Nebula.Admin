@@ -291,7 +291,7 @@
             组织架构管理
             </summary>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.Organization.OrganizationController.GetAsync">
+        <member name="M:Destiny.Core.Flow.API.Controllers.Organization.OrganizationController.GetOrganizationTreeAsync">
             <summary>
             获取组织架构
             </summary>
@@ -317,6 +317,13 @@
             异步删除组织架构
             </summary>
             <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Organization.OrganizationController.GetPageOrganizationAsync(Destiny.Core.Flow.Filter.PageRequest)">
+            <summary>
+            异步得到组织架构分页数据
+            </summary>
+            <param name="request"></param>
             <returns></returns>
         </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.PermissionController">

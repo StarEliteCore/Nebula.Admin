@@ -7,7 +7,7 @@ namespace Destiny.Core.Flow.Dtos.Organization
     {
         public OrganizationProfile()
         {
-            CreateMap<OrganizatedEntity, OrganizationOutDto>().ForMember(x => x.title, opt => opt.MapFrom(x => x.Name));
+            CreateMap<OrganizatedEntity, OrganizationOutDto>().ForMember(x => x.Title, opt => opt.MapFrom(x => x.Name)).ForMember(x=>x.Key,opt=>opt.MapFrom(x=>x.Id));
         }
     }
 }

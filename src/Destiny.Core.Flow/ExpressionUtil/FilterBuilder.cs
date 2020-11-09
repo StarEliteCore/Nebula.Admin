@@ -4,6 +4,7 @@ using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -81,6 +82,12 @@ namespace Destiny.Core.Flow.ExpressionUtil
         {
             var constant = Expression.Constant(true);
 
+            if (filter.Operator == FilterOperator.In)
+            {
+
+               return  Expression.Constant(filter.Value);
+            }
+
             var value = filter.Value.AsTo(conversionType);
             if (value == null)
             {
@@ -112,15 +119,16 @@ namespace Destiny.Core.Flow.ExpressionUtil
                     return Expression.LessThanOrEqual(member, expression);
 
                 case FilterOperator.Like:
-
                     return Like(member, expression);
+                case FilterOperator.In:
+                    return (member as MemberExpression).In(expression);
                 default:
                     throw new AppException($"此{operate}过滤条件不存在！！！");
 
             }
         }
 
-
+       
         private static Expression Like(Expression member, Expression expression)
         {
             if (expression.Type != typeof(string))

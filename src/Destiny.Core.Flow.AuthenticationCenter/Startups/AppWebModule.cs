@@ -9,10 +9,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
-using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.AuthenticationCenter.Startups
 {
@@ -45,17 +43,21 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-            app.UseStaticFiles();
         }
 
         public override void ConfigureServices(ConfigureServicesContext context)
         {
             var service = context.Services;
             service.AddMvc();
+            context.Services.AddTransient<IPrincipal>(provider =>
+            {
+                IHttpContextAccessor accessor = provider.GetService<IHttpContextAccessor>();
+                return accessor?.HttpContext?.User;
+            });
             var configuration = context.GetConfiguration();
             context.Services.Configure<AppOptionSettings>(configuration.GetSection("Destiny"));
             var settings = context.GetConfiguration<AppOptionSettings>("Destiny");
-            context.Services.AddObjectAccessor<AppOptionSettings>(settings);
+            //context.Services.AddObjectAccessor<AppOptionSettings>(settings);
             if (!settings.Cors.PolicyName.IsNullOrEmpty() && !settings.Cors.Url.IsNullOrEmpty()) //添加跨域
             {
                 _corePolicyName = settings.Cors.PolicyName;
