@@ -17,16 +17,22 @@ namespace Destiny.Core.Flow.Dtos.DataDictionnary
         public string Title { get; set; }
 
         /// <summary>
-        /// 数据字典值
+        /// ID
         /// </summary>
-        [DisplayName("数据字典值")]
-        public string Value { get; set; }
+        [DisplayName("ID")]
+        public Guid Key { get; set; }
 
-        /// <summary>
-        /// 数据字典备注
-        /// </summary>
-        [DisplayName("数据字典备注")]
-        public string Remark { get; set; }
+        ///// <summary>
+        ///// 数据字典值
+        ///// </summary>
+        //[DisplayName("数据字典值")]
+        //public string Value { get; set; }
+
+        ///// <summary>
+        ///// 数据字典备注
+        ///// </summary>
+        //[DisplayName("数据字典备注")]
+        //public string Remark { get; set; }
 
         /// <summary>
         /// 数据字典父级
@@ -34,17 +40,17 @@ namespace Destiny.Core.Flow.Dtos.DataDictionnary
         [DisplayName("数据字典父级")]
         public Guid ParentId { get; set; } = Guid.Empty;
 
-        /// <summary>
-        /// 排序
-        /// </summary>
-        [DisplayName("排序")]
-        public int Sort { get; set; }
+        ///// <summary>
+        ///// 排序
+        ///// </summary>
+        //[DisplayName("排序")]
+        //public int Sort { get; set; }
 
-        /// <summary>
-        ///获取或设置 编码
-        /// </summary>
-        [DisplayName("编码")]
-        public string Code { get; set; }
+        ///// <summary>
+        /////获取或设置 编码
+        ///// </summary>
+        //[DisplayName("编码")]
+        //public string Code { get; set; }
 
         /// <summary>
         /// 子集
