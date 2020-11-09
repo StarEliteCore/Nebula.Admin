@@ -8,7 +8,7 @@
 
 账号Test002    123456
  
-✔ 后面支持React版本
+✔ 后面支持Vue版本
 
 ✔ [在线展示后端API链接](http://api.destinycore.club) 
 
