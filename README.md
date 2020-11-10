@@ -8,17 +8,17 @@
 
 账号Test002    123456
  
-✔ 后面支持VUE版本
+✔ 后面支持Vue版本
 
-✔ [在线展示后端API链接](http://api.destinycore.club) 目前不维护
+✔ [在线展示后端API链接](http://api.destinycore.club) 
 
 + ## 关联前端
 
-✔ [关联前端项目链接](https://github.com/DestinyCore/destiny-admin-flow-umi)
+✔ [关联前端项目链接](https://github.com/DestinyCore/Destiny.Core.Flow.WebUI)
 
 + ## 采用技术栈
 
-  ![](https://wangzewei.oss-cn-beijing.aliyuncs.com/imges/20200902204528.png)
+  ![](https://wangzewei.oss-cn-beijing.aliyuncs.com/imges/20201109171810.png)
 
 + ## 1.框架功能
 
