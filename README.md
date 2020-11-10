@@ -1,7 +1,10 @@
 # Destiny.Core.Flow模块化快速开发框架
 ![.NET Core](https://github.com/DestinyCore/Destiny.Core.Flow/workflows/.NET%20Core/badge.svg)  [![Front](https://img.shields.io/badge/Front-React-d.svg)](#) [![sdk](https://img.shields.io/badge/sdk-3.1-d.svg)](#)  [![License MIT](https://img.shields.io/badge/license-Apache-blue.svg?style=flat-square)](https://github.com/anjoy8/Blog.Core/blob/master/LICENSE) [![Language](https://img.shields.io/badge/language-csharp-d.svg)](#) [![博客园](https://img.shields.io/badge/博客园-微微Kawhi-brightgreen.svg)](https://www.cnblogs.com/pual13/)
 
-**Destiny.Core.Flow是一个基于`.net core3.1`平台轻量级的模块化开发框架Admin管理应用框架，旨在提升团队的快速开发输出能力，由常用公共操作类（工具类、帮助类）、分层架构基类，第三方组件封装等组成。**
+**Destiny.Core.Flow是一个基于`.net core3.1`平台轻量级的模块化开发框架Admin管理应用框架，旨在提升团队的快速开发输出能力，由常用公共操作类（工具类、帮助类）、分层架构基类，第三方组件封装等组成。
+Destiny.Core.Flow重写微软的identity用户角色和重写IDS4的实体，以及IDS4的查询仓库实现，将IDS4和Identity以及其他模块合并成为一个上下文，在使用IDS4时不需要在维护几个上下文，统一了上下文管理。
+框架lambda查询不需要在后台写各种判断，所有的查询条件通过前端传入，从而减少后台的一些字符段判断等，使用动态拼接lambda。
+**
 + ## 在线地址
 
 ✔ [在线展示](http://admin.destinycore.club)（这版本目前没法使用（后面再维护），VUE版本正在开发。。。）
