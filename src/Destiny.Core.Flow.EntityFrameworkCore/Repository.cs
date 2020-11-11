@@ -489,7 +489,7 @@ namespace Destiny.Core.Flow
             }
 
             ICreationAudited<TUserKey> entity1 = (ICreationAudited<TUserKey>)entity;
-            entity1.CreatorUserId = _principal?.Identity.GetUesrId<TUserKey>();
+            entity1.CreatorUserId = _principal?.Identity.GetIdentityServer4SubjectId<TUserKey>();
             entity1.CreatedTime = DateTime.Now;
             return (TEntity)entity1;
         }
@@ -559,7 +559,7 @@ namespace Destiny.Core.Flow
             }
 
             IModificationAudited<TUserKey> entity1 = (IModificationAudited<TUserKey>)entity;
-            entity1.LastModifierUserId = _principal?.Identity?.GetUesrId<TUserKey>();
+            entity1.LastModifierUserId = _principal?.Identity?.GetIdentityServer4SubjectId<TUserKey>();
             entity1.LastModifionTime = DateTime.Now;
             return (TEntity)entity1;
         }
@@ -625,7 +625,7 @@ namespace Destiny.Core.Flow
                 }
                 else if (propertyName == nameof(IModificationAudited<TUserKey>.LastModifierUserId))
                 {
-                    constant = Expression.Constant(_principal?.Identity?.GetUesrId<TUserKey>(), typeof(TUserKey));
+                    constant = Expression.Constant(_principal?.Identity?.GetIdentityServer4SubjectId<TUserKey>(), typeof(TUserKey));
                     var memberAssignment = Expression.Bind(propertyInfo, constant); //绑定属性
                     newMemberBindings.Add(memberAssignment);
                 }

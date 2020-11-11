@@ -47,7 +47,7 @@ namespace Destiny.Core.Flow.Services.Menu
         public async Task<OperationResponse> CreateAsync(MenuInputDto input)
         {
             input.NotNull(nameof(input));
-            return  await _menuRepository.InsertAsync(input); 
+            return await _menuRepository.InsertAsync(input);
             //return await _unitOfWork.UseTranAsync(async () =>
             //{
             //    var result = await _menuRepository.InsertAsync(input);
@@ -127,7 +127,7 @@ namespace Destiny.Core.Flow.Services.Menu
             return operationResponse;
         }
 
-    
+
         /// <summary>
         /// 根据ID获取一个菜单
         /// </summary>
@@ -137,7 +137,7 @@ namespace Destiny.Core.Flow.Services.Menu
         {
             var menu = await _menuRepository.GetByIdAsync(Id);
             var menudto = menu.MapTo<MenuOutputLoadDto>();
-            
+
             return new OperationResponse<MenuOutputLoadDto>(MessageDefinitionType.LoadSucces, menudto, OperationResponseType.Success);
         }
 
@@ -149,7 +149,7 @@ namespace Destiny.Core.Flow.Services.Menu
         public async Task<OperationResponse<List<MenuOutputLoadDto>>> GetMenuChildrenButton(Guid Id)
         {
             var menulist = new List<MenuPermissionsOutDto>();
-            var userId = _iIdentity.GetUesrId<Guid>();
+            var userId = _iIdentity.GetIdentityServer4SubjectId<Guid>();
             var usermodel = await _userManager.FindByIdAsync(userId.ToString());
             var roleids = (await _repositoryUserRole.Entities.Where(x => x.UserId == userId).ToListAsync()).Select(x => x.RoleId);
             var menuId = (await _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).ToListAsync()).Select(x => x.MenuId);
@@ -203,7 +203,7 @@ namespace Destiny.Core.Flow.Services.Menu
         {
             Dictionary<string, bool> dic = new Dictionary<string, bool>();
             var menulist = new List<MenuPermissionsOutDto>();
-            var userId = _iIdentity.GetUesrId<Guid>();
+            var userId = _iIdentity.GetIdentityServer4SubjectId<Guid>();
             var usermodel = await _userManager.FindByIdAsync(userId.ToString());
             var roleids = (await _repositoryUserRole.Entities.Where(x => x.UserId == userId).ToListAsync()).Select(x => x.RoleId);
             var menuId = (await _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).ToListAsync()).Select(x => x.MenuId);
@@ -246,7 +246,7 @@ namespace Destiny.Core.Flow.Services.Menu
         public async Task<OperationResponse> GetUserMenuTreeAsync()
         {
             var menulist = new List<MenuPermissionsTreeOutDto>();
-            var userId = _iIdentity.GetUesrId<Guid>();
+            var userId = _iIdentity.GetIdentityServer4SubjectId<Guid>();
             var usermodel = await _userManager.FindByIdAsync(userId.ToString());
             var roleids = (await _repositoryUserRole.Entities.Where(x => x.UserId == userId).ToListAsync()).Select(x => x.RoleId);
             var menuId = (await _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).ToListAsync()).Select(x => x.MenuId);
@@ -298,7 +298,7 @@ namespace Destiny.Core.Flow.Services.Menu
         public async Task<OperationResponse> GetMenuListAsync()
         {
             var menulist = new List<MenuPermissionsOutDto>();
-            var userId = _iIdentity.GetUesrId<Guid>();
+            var userId = _iIdentity.GetIdentityServer4SubjectId<Guid>();
             var usermodel = await _userManager.FindByIdAsync(userId.ToString());
             var roleids = (await _repositoryUserRole.Entities.Where(x => x.UserId == userId).ToListAsync()).Select(x => x.RoleId);
             var menuId = (await _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).ToListAsync()).Select(x => x.MenuId);
@@ -327,9 +327,9 @@ namespace Destiny.Core.Flow.Services.Menu
         /// 异步得到所有菜单
         /// </summary>
         /// <returns></returns>
-        public async Task<TreeResult<MenuTreeOutDto>> GetAllMenuTreeAsync(MenuEnum menu= MenuEnum.Menu)
+        public async Task<TreeResult<MenuTreeOutDto>> GetAllMenuTreeAsync(MenuEnum menu = MenuEnum.Menu)
         {
-            return await _menuRepository.Entities.OrderBy(o=>o.Sort).Where(o=>o.Type== menu).ToTreeResultAsync<MenuEntity, MenuTreeOutDto>(
+            return await _menuRepository.Entities.OrderBy(o => o.Sort).Where(o => o.Type == menu).ToTreeResultAsync<MenuEntity, MenuTreeOutDto>(
               (p, c) =>
               {
                   return c.ParentId == null || c.ParentId == Guid.Empty;

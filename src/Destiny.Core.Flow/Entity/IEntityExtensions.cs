@@ -73,7 +73,7 @@ namespace Destiny.Core.Flow.Entity
             }
 
             ICreationAudited<TUserKey> entity1 = (ICreationAudited<TUserKey>)entity;
-            entity1.CreatorUserId = principal?.Identity.GetUesrId<TUserKey>();
+            entity1.CreatorUserId = principal?.Identity.GetIdentityServer4SubjectId<TUserKey>();
             entity1.CreatedTime = DateTime.Now;
             return (TEntity)entity1;
         }
@@ -88,7 +88,7 @@ namespace Destiny.Core.Flow.Entity
             }
 
             IModificationAudited<TUserKey> entity1 = (IModificationAudited<TUserKey>)entity;
-            entity1.LastModifierUserId = principal?.Identity?.GetUesrId<TUserKey>();
+            entity1.LastModifierUserId = principal?.Identity?.GetIdentityServer4SubjectId<TUserKey>();
             entity1.LastModifionTime = DateTime.Now;
             return (TEntity)entity1;
         }
