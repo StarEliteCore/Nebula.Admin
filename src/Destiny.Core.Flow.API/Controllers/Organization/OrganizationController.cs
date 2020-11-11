@@ -3,7 +3,6 @@ using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Dtos.Organization;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices.Organization;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel;
@@ -65,6 +64,18 @@ namespace Destiny.Core.Flow.API.Controllers.Organization
         {
 
             return (await _organization.UpdateAsync(dto)).ToAjaxResult();
+        }
+        /// <summary>
+        /// 根据Id获取一个组织架构
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Description("表单加载组织架构")]
+        public async Task<AjaxResult> LoadFormOrganizationAsync([FromQuery] Guid? id)
+        {
+
+            return (await _organization.LoadFormOrganizationAsync(id.Value)).ToAjaxResult();
         }
         /// <summary>
         /// 异步删除组织架构

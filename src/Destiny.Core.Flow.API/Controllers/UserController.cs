@@ -1,15 +1,12 @@
 ﻿using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Dtos;
-using Destiny.Core.Flow.Dtos.Users;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices;
 using Destiny.Core.Flow.Permission;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using StackExchange.Profiling;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 namespace Destiny.Core.Flow.API.Controllers
@@ -112,24 +109,18 @@ namespace Destiny.Core.Flow.API.Controllers
         {
             return (await _userService.AllocationRoleAsync(dto)).ToAjaxResult();
         }
+        /// <summary>
+        ///获取所有用户列表
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Description("获取所有用户列表")]
 
-        ///// <summary>
-        /////异步添加或更新
-        ///// </summary>
-        ///// <param name="dto"></param>
-        ///// <returns></returns>
-        //[HttpPost]
-        //[Description("异步添加或更新")]
-
-        //public async Task<AjaxResult> AddOrUpdateAsync([FromBody]UserInputDto dto)
-        //{
-
-        //    //if (dto.Id == Guid.Empty)
-        //    //{
-        //    //    return (await _userService.CreateAsync(dto)).ToAjaxResult();
-        //    //}
-        //    //return (await _userService.UpdateAsync(dto)).ToAjaxResult();
-        //}
+        public async Task<AjaxResult> GetUsersToSelectListItemAsync()
+        {
+            return (await _userService.GetUsersToSelectListItemAsync()).ToAjaxResult();
+        }
 
         /// <summary>
         /// 异步得到分页
@@ -143,7 +134,6 @@ namespace Destiny.Core.Flow.API.Controllers
             return (await _userService.GetUserPageAsync(request)).ToPageList();
 
         }
-
         /// <summary>
         /// 异步得到所有用户
         /// </summary>

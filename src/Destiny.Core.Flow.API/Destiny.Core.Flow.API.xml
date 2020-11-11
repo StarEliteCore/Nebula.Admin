@@ -312,6 +312,13 @@
             <param name="dto"></param>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Organization.OrganizationController.LoadFormOrganizationAsync(System.Nullable{System.Guid})">
+            <summary>
+            根据Id获取一个组织架构
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.Organization.OrganizationController.DeleteAsync(System.Guid)">
             <summary>
             异步删除组织架构
@@ -422,6 +429,13 @@
             用户分配角色
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.UserController.GetUsersToSelectListItemAsync">
+             <summary>
+            获取所有用户列表
+             </summary>
+             <param name="dto"></param>
+             <returns></returns>
         </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.UserController.GetUserPageAsync(Destiny.Core.Flow.Filter.PageRequest)">
             <summary>

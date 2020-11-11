@@ -75,5 +75,10 @@ namespace Destiny.Core.Flow.Services.Organization
             request.OrderConditions = orderConditions;
             return await _organizated.Entities.ToPageAsync<OrganizatedEntity, OrganizationOutPageListDto>(request);
         }
+        public async Task<OperationResponse<OrganizationOutputLoadDto>> LoadFormOrganizationAsync(Guid id)
+        {
+            var dto = (await _organizated.GetByIdAsync(id))?.MapTo<OrganizationOutputLoadDto>();
+            return new OperationResponse<OrganizationOutputLoadDto>(MessageDefinitionType.LoadSucces, dto, OperationResponseType.Success);
+        }
     }
 }
