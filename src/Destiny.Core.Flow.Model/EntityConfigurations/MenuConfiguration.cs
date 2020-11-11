@@ -17,6 +17,9 @@ namespace Destiny.Core.Flow.Model.EntityConfigurations
             b.Property(x => x.Sort).HasDefaultValue(0);
             b.Property(x => x.Icon).HasMaxLength(50);
             b.Property(x => x.IsDeleted).HasDefaultValue(0);
+            b.Property(x => x.Layout).HasMaxLength(500).IsRequired(false);
+            b.Property(x => x.IsHide).HasDefaultValue(false);
+            b.Property(x => x.EventName).HasMaxLength(100).IsRequired(false);
             b.ToTable("Menu");
         }
     }
