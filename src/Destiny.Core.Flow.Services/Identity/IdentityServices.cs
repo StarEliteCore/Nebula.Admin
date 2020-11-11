@@ -34,7 +34,7 @@ namespace Destiny.Core.Flow.Services.Identity
         public async Task<(OperationResponse item, Claim[] cliams)> ChangePassword(ChangePassInputDto dto)
         {
             dto.NotNull(nameof(dto));
-            var userId = _principal.Identity?.GetIdentityServer4SubjectId<string>();
+            var userId = _principal.Identity?.GetUesrId<string>();
             var user = await _userManager.FindByIdAsync(userId);
 
             if (user == null)

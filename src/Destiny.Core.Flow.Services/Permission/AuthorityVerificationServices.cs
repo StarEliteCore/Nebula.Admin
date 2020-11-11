@@ -44,7 +44,7 @@ namespace Destiny.Core.Flow.Services.Permission
         /// <returns></returns>
         public async Task<bool> IsPermission(string url)
         {
-            var Id = _principal?.Identity.GetIdentityServer4SubjectId<Guid>();//获取登录用户Id
+            var Id = _principal?.Identity.GetUesrId<Guid>();//获取登录用户Id
             var role = await _repositoryUserRole.Entities.Where(x => x.UserId == Id.Value).Select(x => x.RoleId).ToListAsync();//获取用户角色
             var menu = await _roleMenuRepository.Entities.Where(x => role.Contains(x.RoleId)).Select(x => x.MenuId).ToListAsync();//获取MenuId
             var funcId = await _menuFuncRepository.Entities.Where(x => menu.Contains(x.MenuId)).Select(x => x.FunctionId).ToListAsync();//获取functionId

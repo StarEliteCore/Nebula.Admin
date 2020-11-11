@@ -149,7 +149,7 @@ namespace Destiny.Core.Flow.Services.Menu
         public async Task<OperationResponse<List<MenuOutputLoadDto>>> GetMenuChildrenButton(Guid Id)
         {
             var menulist = new List<MenuPermissionsOutDto>();
-            var userId = _iIdentity.GetIdentityServer4SubjectId<Guid>();
+            var userId = _iIdentity.GetUesrId<Guid>();
             var usermodel = await _userManager.FindByIdAsync(userId.ToString());
             var roleids = (await _repositoryUserRole.Entities.Where(x => x.UserId == userId).ToListAsync()).Select(x => x.RoleId);
             var menuId = (await _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).ToListAsync()).Select(x => x.MenuId);
@@ -203,7 +203,7 @@ namespace Destiny.Core.Flow.Services.Menu
         {
             Dictionary<string, bool> dic = new Dictionary<string, bool>();
             var menulist = new List<MenuPermissionsOutDto>();
-            var userId = _iIdentity.GetIdentityServer4SubjectId<Guid>();
+            var userId = _iIdentity.GetUesrId<Guid>();
             var usermodel = await _userManager.FindByIdAsync(userId.ToString());
             var roleids = (await _repositoryUserRole.Entities.Where(x => x.UserId == userId).ToListAsync()).Select(x => x.RoleId);
             var menuId = (await _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).ToListAsync()).Select(x => x.MenuId);
@@ -246,7 +246,7 @@ namespace Destiny.Core.Flow.Services.Menu
         public async Task<OperationResponse> GetUserMenuTreeAsync()
         {
             var menulist = new List<MenuPermissionsTreeOutDto>();
-            var userId = _iIdentity.GetIdentityServer4SubjectId<Guid>();
+            var userId = _iIdentity.GetUesrId<Guid>();
             var usermodel = await _userManager.FindByIdAsync(userId.ToString());
             var roleids = (await _repositoryUserRole.Entities.Where(x => x.UserId == userId).ToListAsync()).Select(x => x.RoleId);
             var menuId = (await _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).ToListAsync()).Select(x => x.MenuId);
@@ -298,7 +298,7 @@ namespace Destiny.Core.Flow.Services.Menu
         public async Task<OperationResponse> GetMenuListAsync()
         {
             var menulist = new List<MenuPermissionsOutDto>();
-            var userId = _iIdentity.GetIdentityServer4SubjectId<Guid>();
+            var userId = _iIdentity.GetUesrId<Guid>();
             var usermodel = await _userManager.FindByIdAsync(userId.ToString());
             var roleids = (await _repositoryUserRole.Entities.Where(x => x.UserId == userId).ToListAsync()).Select(x => x.RoleId);
             var menuId = (await _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).ToListAsync()).Select(x => x.MenuId);
