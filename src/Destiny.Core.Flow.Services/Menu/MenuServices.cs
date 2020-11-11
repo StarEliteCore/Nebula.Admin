@@ -240,19 +240,18 @@ namespace Destiny.Core.Flow.Services.Menu
         }
 
         /// <summary>
-        /// 获取菜单树形
+        /// 获取Vue动态路由菜单
         /// </summary>
         /// <returns></returns>
-        public async Task<OperationResponse> GetUserMenuTreeAsync()
+        public async Task<OperationResponse> GetVueDynamicRouterTreeAsync()
         {
-            var menulist = new List<MenuPermissionsTreeOutDto>();
             var userId = _iIdentity.GetUesrId<Guid>();
             var usermodel = await _userManager.FindByIdAsync(userId.ToString());
             var roleids = (await _repositoryUserRole.Entities.Where(x => x.UserId == userId).ToListAsync()).Select(x => x.RoleId);
             var menuId = (await _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).ToListAsync()).Select(x => x.MenuId);
             if (usermodel.IsSystem && _roleManager.Roles.Where(x => x.IsAdmin == true && roleids.Contains(x.Id)).Any())
             {
-                var list = await _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuPermissionsTreeOutDto>((p, c) =>
+                var list = await _menuRepository.Entities.ToTreeResultAsync<MenuEntity, VueDynamicRouterTreeOutDto>((p, c) =>
                 {
                     return c.ParentId == null || c.ParentId == Guid.Empty;
                 },
@@ -262,34 +261,33 @@ namespace Destiny.Core.Flow.Services.Menu
                  },
                  (p, children) =>
                  {
-                     if (p.Routes == null)
-                         p.Routes = new List<MenuPermissionsTreeOutDto>();
-                     p.Routes.AddRange(children);
+                     if (p.Children == null)
+                         p.Children = new List<VueDynamicRouterTreeOutDto>();
+                     p.Children.AddRange(children.Where(x => x.Type == MenuEnum.Menu));
+                     if (p.ButtonChildren == null)
+                         p.ButtonChildren = new List<VueDynamicRouterTreeOutDto>();
+                     p.ButtonChildren.AddRange(children.Where(x => x.Type == MenuEnum.Button));
                  });
-                menulist.AddRange(list.ItemList);
-                return new OperationResponse(MessageDefinitionType.LoadSucces, menulist, OperationResponseType.Success);
-                //return new PageResult<MenuPermissionsOutDto>()
-                //{
-                //    ItemList = menulist,
-                //    Total = menulist.Count,
-                //};
+                return new OperationResponse(MessageDefinitionType.LoadSucces, list, OperationResponseType.Success);
             }
-            var result = await _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuPermissionsTreeOutDto>((p, c) =>
-            {
-                return c.ParentId == null || c.ParentId == Guid.Empty;
-            },
+                var result = await _menuRepository.Entities.ToTreeResultAsync<MenuEntity, VueDynamicRouterTreeOutDto>((p, c) =>
+                {
+                    return c.ParentId == null || c.ParentId == Guid.Empty;
+                },
                  (p, c) =>
                  {
                      return p.Id == c.ParentId;
                  },
                  (p, children) =>
                  {
-                     if (p.Routes == null)
-                         p.Routes = new List<MenuPermissionsTreeOutDto>();
-                     p.Routes.AddRange(children);
+                     if (p.Children == null)
+                         p.Children = new List<VueDynamicRouterTreeOutDto>();
+                     p.Children.AddRange(children.Where(x => x.Type == MenuEnum.Menu));
+                     if (p.ButtonChildren == null)
+                         p.ButtonChildren = new List<VueDynamicRouterTreeOutDto>();
+                     p.ButtonChildren.AddRange(children.Where(x => x.Type == MenuEnum.Button));
                  });
-            menulist.AddRange(result.ItemList);
-            return new OperationResponse(MessageDefinitionType.LoadSucces, menulist, OperationResponseType.Success);
+            return new OperationResponse(MessageDefinitionType.LoadSucces, result, OperationResponseType.Success);
         }
 
         /// <summary>

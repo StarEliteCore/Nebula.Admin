@@ -249,9 +249,9 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetUserMenuTreeAsync">
+        <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetVueDynamicRouterTreeAsync">
             <summary>
-            登录成功之后获取用户菜单树
+            登录成功之后获取Vue动态路由菜单
             </summary>
             <returns></returns>
         </member>
