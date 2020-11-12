@@ -119,15 +119,15 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         }
 
         /// <summary>
-        /// 登录成功之后获取用户菜单树
+        /// 登录成功之后获取Vue动态路由菜单
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Description("登录成功之后获取用户菜单树")]
+        [Description("获取Vue动态路由菜单")]
         [NoAuthorityVerification]
-        public async Task<AjaxResult> GetUserMenuTreeAsync()
+        public async Task<AjaxResult> GetVueDynamicRouterTreeAsync()
         {
-            return (await _menuServices.GetUserMenuTreeAsync()).ToAjaxResult();
+            return (await _menuServices.GetVueDynamicRouterTreeAsync()).ToAjaxResult();
         }
 
         /// <summary>

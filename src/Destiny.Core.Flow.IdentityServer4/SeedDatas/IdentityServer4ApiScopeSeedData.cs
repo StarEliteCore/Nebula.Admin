@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Destiny.Core.Flow.AuthenticationCenter.SeedDatas
+namespace Destiny.Core.Flow.IdentityServer
 {
     [Dependency(ServiceLifetime.Singleton)]
     public class IdentityServer4ApiScopeSeedData : SeedDataDefaults<ApiScope, Guid>

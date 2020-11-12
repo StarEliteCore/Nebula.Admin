@@ -7,7 +7,7 @@ using IdentityServer4.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
-namespace Destiny.Core.Flow.AuthenticationCenter
+namespace Destiny.Core.Flow.IdentityServer
 {
     public sealed class Config 
     {
@@ -62,9 +62,9 @@ namespace Destiny.Core.Flow.AuthenticationCenter
                         new Secret("secret".Sha256())
                     },
 
-                    RedirectUris =           { "http://localhost:8080/LoginedCallbackView" },
-                    PostLogoutRedirectUris = { "http://localhost:8080" },
-                    AllowedCorsOrigins =     { "http://localhost:8080" },
+                    RedirectUris =           { "http://localhost:8848/callback","https://admin.destinycore.club/callback" },
+                    PostLogoutRedirectUris = { "http://localhost:8848","https://admin.destinycore.club" },
+                    AllowedCorsOrigins =     { "http://localhost:8848","https://admin.destinycore.club" },
                     AllowedScopes = {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,

@@ -76,7 +76,7 @@ namespace Destiny.Core.Flow.IServices.IMenu
         /// 获取菜单树形
         /// </summary>
         /// <returns></returns>
-        Task<OperationResponse> GetUserMenuTreeAsync();
+        Task<OperationResponse> GetVueDynamicRouterTreeAsync();
 
         /// <summary>
         /// 获取有权限的菜单列表
