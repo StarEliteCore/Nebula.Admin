@@ -36,7 +36,8 @@ namespace Destiny.Core.Flow.API.Controllers
         /// </summary>
         [Description("代码生成")]
         [HttpPost]
-        public AjaxResult GenerateCode([FromBody] ProjectMetadata projectMetadata) {
+        public AjaxResult GenerateCode([FromBody] ProjectMetadata projectMetadata)
+        {
 
             _codeGenerator.GenerateCode(projectMetadata);
             return new AjaxResult("生成成功");
@@ -46,7 +47,7 @@ namespace Destiny.Core.Flow.API.Controllers
         [HttpGet]
         public AjaxResult GetCSharpTypeToSelectItem()
         {
-            var result =   _codeGeneratorService.GetCSharpTypeToSelectItem();
+            var result = _codeGeneratorService.GetCSharpTypeToSelectItem();
             return result.ToAjaxResult();
         }
 
