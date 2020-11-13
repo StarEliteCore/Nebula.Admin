@@ -60,6 +60,25 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// </summary>
         [DisplayName("子级")]
         public List<MenuPermissionsTreeOutDto> Routes { get; set; } = new List<MenuPermissionsTreeOutDto>();
+
+        /// <summary>
+        /// 模板页
+        /// </summary>
+        [DisplayName("模板页")]
+        public string Layout { get; set; }
+
+
+        /// <summary>
+        /// 是否隐藏
+        /// </summary>
+        [DisplayName("是否隐藏")]
+        public bool IsHide { get; set; }
+
+        /// <summary>
+        /// 事件名
+        /// </summary>
+        [DisplayName("事件名")]
+        public string EventName { get; set; }
     }
     /// <summary>
     /// Vue动态路由树形
@@ -128,6 +147,7 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// </summary>
         [DisplayName("按钮集合")]
         public List<VueDynamicRouterTreeOutDto> ButtonChildren { get; set; }
+
 
     }
 }

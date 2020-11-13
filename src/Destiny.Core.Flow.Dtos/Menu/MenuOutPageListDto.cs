@@ -73,6 +73,26 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// 菜单 
         /// </summary>
         ///可以单独出来，有没有办法做法公用的？？？？
-        public List<MenuOutPageListDto> Children { get; set; } = new List<MenuOutPageListDto>(); 
+        public List<MenuOutPageListDto> Children { get; set; } = new List<MenuOutPageListDto>();
+
+
+        /// <summary>
+        /// 模板页
+        /// </summary>
+        [DisplayName("模板页")]
+        public string Layout { get; set; }
+
+
+        /// <summary>
+        /// 是否隐藏
+        /// </summary>
+        [DisplayName("是否隐藏")]
+        public bool IsHide { get; set; }
+
+        /// <summary>
+        /// 事件名
+        /// </summary>
+        [DisplayName("事件名")]
+        public string EventName { get; set; }
     }
 }

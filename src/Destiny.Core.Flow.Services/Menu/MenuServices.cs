@@ -251,7 +251,7 @@ namespace Destiny.Core.Flow.Services.Menu
             var menuId = (await _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).ToListAsync()).Select(x => x.MenuId);
             if (usermodel.IsSystem && _roleManager.Roles.Where(x => x.IsAdmin == true && roleids.Contains(x.Id)).Any())
             {
-                var list = await _menuRepository.Entities.ToTreeResultAsync<MenuEntity, VueDynamicRouterTreeOutDto>((p, c) =>
+                var list = await _menuRepository.Entities.OrderBy(o=>o.Sort).ToTreeResultAsync<MenuEntity, VueDynamicRouterTreeOutDto>((p, c) =>
                 {
                     return c.ParentId == null || c.ParentId == Guid.Empty;
                 },
@@ -266,11 +266,11 @@ namespace Destiny.Core.Flow.Services.Menu
                      p.Children.AddRange(children.Where(x => x.Type == MenuEnum.Menu));
                      if (p.ButtonChildren == null)
                          p.ButtonChildren = new List<VueDynamicRouterTreeOutDto>();
-                     p.ButtonChildren.AddRange(children.Where(x => x.Type == MenuEnum.Button));
+                     p.ButtonChildren.AddRange(children.Where(x => x.Type == MenuEnum.Function));
                  });
-                return new OperationResponse(MessageDefinitionType.LoadSucces, list, OperationResponseType.Success);
+                return new OperationResponse(MessageDefinitionType.LoadSucces, list.ItemList, OperationResponseType.Success);
             }
-                var result = await _menuRepository.Entities.ToTreeResultAsync<MenuEntity, VueDynamicRouterTreeOutDto>((p, c) =>
+                var result = await _menuRepository.Entities.OrderBy(o => o.Sort).ToTreeResultAsync<MenuEntity, VueDynamicRouterTreeOutDto>((p, c) =>
                 {
                     return c.ParentId == null || c.ParentId == Guid.Empty;
                 },
@@ -285,9 +285,9 @@ namespace Destiny.Core.Flow.Services.Menu
                      p.Children.AddRange(children.Where(x => x.Type == MenuEnum.Menu));
                      if (p.ButtonChildren == null)
                          p.ButtonChildren = new List<VueDynamicRouterTreeOutDto>();
-                     p.ButtonChildren.AddRange(children.Where(x => x.Type == MenuEnum.Button));
+                     p.ButtonChildren.AddRange(children.Where(x => x.Type == MenuEnum.Function));
                  });
-            return new OperationResponse(MessageDefinitionType.LoadSucces, result, OperationResponseType.Success);
+            return new OperationResponse(MessageDefinitionType.LoadSucces, result.ItemList, OperationResponseType.Success);
         }
 
         /// <summary>
