@@ -246,14 +246,12 @@ namespace Destiny.Core.Flow.Extensions
             var queryContext = enumerator.Private<RelationalQueryContext>(relationalQueryContextText) ?? throw new InvalidOperationException($"{cannotGetText} {relationalQueryContextText}");
             var parameterValues = queryContext.ParameterValues;
 
- 
+
             if (relationalCommandCache != null)
             {
-#pragma warning disable EF1001 // Internal EF Core API usage.
                 var command = relationalCommandCache.GetRelationalCommand(parameterValues);
-#pragma warning restore EF1001 // Internal EF Core API usage.
                 var parameterNames = new HashSet<string>(command.Parameters.Select(p => p.InvariantName));
-              
+
                 return $"{command.CommandText};{Environment.NewLine}";
             }
             else
@@ -273,7 +271,4 @@ namespace Destiny.Core.Flow.Extensions
         private static object Private(this object obj, string privateField) => obj?.GetType().GetField(privateField, bindingFlags)?.GetValue(obj);
         private static T Private<T>(this object obj, string privateField) => (T)obj?.GetType().GetField(privateField, bindingFlags)?.GetValue(obj);
     }
-
-
-}
 }
