@@ -14,7 +14,7 @@ namespace Destiny.Core.Flow.API.Controllers.Organization
     /// 组织架构管理
     /// </summary>
     [Description("组织架构管理")]
-    public class OrganizationController : AuthorizeControllerBase
+    public class OrganizationController : AdminControllerBase
     {
         private readonly IOrganizationService _organization;
 

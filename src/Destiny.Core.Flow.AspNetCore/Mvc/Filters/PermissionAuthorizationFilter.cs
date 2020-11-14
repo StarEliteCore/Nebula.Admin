@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
 {
     /// <summary>
-    /// 好像3.1不能这样用了，是用策略
+    ///
     /// </summary>
     public class PermissionAuthorizationFilter : IAsyncAuthorizationFilter
     {

@@ -24,22 +24,17 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
         public void OnResultExecuted(ResultExecutedContext context)
         {
  
-            //var scope = provider.CreateScope();
-            //var dic = scope.ServiceProvider.GetService<DictionaryAccessor>();
+  
             var action = context.ActionDescriptor as ControllerActionDescriptor;
-
-        
-
             if (action.EndpointMetadata.Any(x => x is AuditLogAttribute))
             {
                 IServiceProvider provider = context.HttpContext.RequestServices;
                 var actionname = action.MethodInfo.ToDescription();//获取控制器特性
-                var dic = provider.GetService<DictionaryAccessor>();
+                var dic = provider.GetService<DictionaryScoped>();
                 dic.TryGetValue("audit", out object auditEntry);
                 if (auditEntry != null)
                 {
                     AuditLog auditlog = new AuditLog();
-                    auditlog.Ip = "";
                     auditlog.Ip = context.HttpContext.GetClientIP();
                     auditlog.BrowserInformation = context.HttpContext.Request.Headers["User-Agent"].ToString();
                     auditlog.FunctionName = $"{context.Controller.GetType().ToDescription()}-{action.MethodInfo.ToDescription()}";
