@@ -14,6 +14,9 @@ Destiny.Core.Flow重写微软的identity用户角色和重写IDS4的实体，以
 
 ✔ [在线展示后端API链接](http://api.destinycore.club) 
 
+✔ [VUE版本]
+https://github.com/DestinyCore/Destiny.Core.Flow.WebUI
+
 + ## 关联前端
 
 ✔ [关联前端项目链接](https://github.com/DestinyCore/Destiny.Core.Flow.WebUI)
