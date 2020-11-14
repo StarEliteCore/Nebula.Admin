@@ -14,7 +14,7 @@ namespace Destiny.Core.Flow.API.Controllers
     /// </summary>
     [Description("权限管理")]
 
-    public class PermissionController : AuthorizeControllerBase
+    public class PermissionController : AdminControllerBase
     {
 
         private IPermissionService _permissionService = null;

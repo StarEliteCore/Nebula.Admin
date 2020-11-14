@@ -15,7 +15,7 @@ namespace Destiny.Core.Flow.API.Controllers.DataDictionary
     /// 数据字典
     /// </summary>
     [Description("数据字典")]
-    public class DataDictionaryController : AuthorizeControllerBase
+    public class DataDictionaryController : AdminControllerBase
     {
         private readonly IDataDictionnaryServices _dataDictionnaryServices = null;
         public DataDictionaryController(IDataDictionnaryServices dataDictionnaryServices)

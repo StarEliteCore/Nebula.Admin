@@ -16,7 +16,7 @@ namespace Destiny.Core.Flow.API.Controllers
     /// </summary>
     [Description("功能管理")]
 
-    public class FunctionController : AuthorizeControllerBase
+    public class FunctionController : AdminControllerBase
     {
 
         private readonly IFunctionService _functionService;

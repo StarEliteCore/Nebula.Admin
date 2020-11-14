@@ -9,7 +9,7 @@ namespace Destiny.Core.Flow.AspNetCore.Api
     /// 要授权的控制器
     /// </summary>
     [Authorize]
-    public abstract class AuthorizeControllerBase : ApiControllerBase
+    public abstract class AdminControllerBase : ApiControllerBase
     {
     }
 }

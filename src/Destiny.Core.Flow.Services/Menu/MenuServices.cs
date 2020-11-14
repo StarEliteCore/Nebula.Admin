@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Linq.Expressions;
 using System.Security.Principal;
 using System.Threading.Tasks;
 
@@ -240,37 +241,43 @@ namespace Destiny.Core.Flow.Services.Menu
         }
 
         /// <summary>
-        /// 获取Vue动态路由菜单
+        /// 获取Vue动态路由菜单(应该返回Tree)
         /// </summary>
         /// <returns></returns>
         public async Task<OperationResponse> GetVueDynamicRouterTreeAsync()
         {
             var userId = _iIdentity.GetUesrId<Guid>();
             var usermodel = await _userManager.FindByIdAsync(userId.ToString());
-            var roleids = (await _repositoryUserRole.Entities.Where(x => x.UserId == userId).ToListAsync()).Select(x => x.RoleId);
-            var menuId = (await _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).ToListAsync()).Select(x => x.MenuId);
-            if (usermodel.IsSystem && _roleManager.Roles.Where(x => x.IsAdmin == true && roleids.Contains(x.Id)).Any())
+            var roleids = _repositoryUserRole.Entities.Where(x => x.UserId == userId).Select(x => x.RoleId);
+            var menuIds = _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).Select(o => o.MenuId);
+            var isAdmin = await _roleManager.Roles.Where(x => x.IsAdmin == true && roleids.Contains(x.Id)).AnyAsync();
+            Expression<Func<MenuEntity, bool>> expression = o => true;
+            if (!usermodel.IsSystem && !isAdmin) //不是系统，不是管理员
             {
-                var list = await _menuRepository.Entities.OrderBy(o=>o.Sort).ToTreeResultAsync<MenuEntity, VueDynamicRouterTreeOutDto>((p, c) =>
-                {
-                    return c.ParentId == null || c.ParentId == Guid.Empty;
-                },
-                 (p, c) =>
-                 {
-                     return p.Id == c.ParentId;
-                 },
-                 (p, children) =>
-                 {
-                     if (p.Children == null)
-                         p.Children = new List<VueDynamicRouterTreeOutDto>();
-                     p.Children.AddRange(children.Where(x => x.Type == MenuEnum.Menu));
-                     if (p.ButtonChildren == null)
-                         p.ButtonChildren = new List<VueDynamicRouterTreeOutDto>();
-                     p.ButtonChildren.AddRange(children.Where(x => x.Type == MenuEnum.Function));
-                 });
-                return new OperationResponse(MessageDefinitionType.LoadSucces, list.ItemList, OperationResponseType.Success);
+                expression = o => menuIds.Contains(o.Id);
             }
-                var result = await _menuRepository.Entities.OrderBy(o => o.Sort).ToTreeResultAsync<MenuEntity, VueDynamicRouterTreeOutDto>((p, c) =>
+            //if (usermodel.IsSystem && isAdmin)
+            //{
+            //    var list = await _menuRepository.Entities.OrderBy(o=>o.Sort).ToTreeResultAsync<MenuEntity, VueDynamicRouterTreeOutDto>((p, c) =>
+            //    {
+            //        return c.ParentId == null || c.ParentId == Guid.Empty;
+            //    },
+            //     (p, c) =>
+            //     {
+            //         return p.Id == c.ParentId;
+            //     },
+            //     (p, children) =>
+            //     {
+            //         if (p.Children == null)
+            //             p.Children = new List<VueDynamicRouterTreeOutDto>();
+            //         p.Children.AddRange(children.Where(x => x.Type == MenuEnum.Menu));
+            //         if (p.ButtonChildren == null)
+            //             p.ButtonChildren = new List<VueDynamicRouterTreeOutDto>();
+            //         p.ButtonChildren.AddRange(children.Where(x => x.Type == MenuEnum.Function));
+            //     });
+            //    return new OperationResponse(MessageDefinitionType.LoadSucces, list.ItemList, OperationResponseType.Success);
+            //}
+                var result = await _menuRepository.Entities.Where(expression).OrderBy(o => o.Sort).ToTreeResultAsync<MenuEntity, VueDynamicRouterTreeOutDto>((p, c) =>
                 {
                     return c.ParentId == null || c.ParentId == Guid.Empty;
                 },
@@ -280,12 +287,13 @@ namespace Destiny.Core.Flow.Services.Menu
                  },
                  (p, children) =>
                  {
+
                      if (p.Children == null)
                          p.Children = new List<VueDynamicRouterTreeOutDto>();
                      p.Children.AddRange(children.Where(x => x.Type == MenuEnum.Menu));
-                     if (p.ButtonChildren == null)
-                         p.ButtonChildren = new List<VueDynamicRouterTreeOutDto>();
-                     p.ButtonChildren.AddRange(children.Where(x => x.Type == MenuEnum.Function));
+                     if (p.FunctionChildren == null)
+                         p.FunctionChildren = new List<VueDynamicRouterTreeOutDto>();
+                     p.FunctionChildren.AddRange(children.Where(x => x.Type != MenuEnum.Menu));
                  });
             return new OperationResponse(MessageDefinitionType.LoadSucces, result.ItemList, OperationResponseType.Success);
         }
