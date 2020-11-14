@@ -15,6 +15,12 @@ namespace Destiny.Core.Flow.Audit
         Task Save(AuditLog auditLog, List<AuditEntryInputDto> auditEntry);
 
         /// <summary>
+        /// 异步保存
+        /// </summary>
+        /// <param name="auditChange"></param>
+        /// <returns></returns>
+        Task SaveAsync(AuditChange auditChange);
+        /// <summary>
         /// 分页获取审计日志
         /// </summary>
         /// <param name="request"></param>

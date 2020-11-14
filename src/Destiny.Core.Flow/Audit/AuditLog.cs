@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.Entity;
+using Destiny.Core.Flow.Enums;
 using MongoDB.Bson;
 using System;
 using System.ComponentModel;
@@ -76,5 +77,11 @@ namespace Destiny.Core.Flow.Audit
         /// </summary>
         [DisplayName("创建时间")]
         public virtual DateTime CreatedTime { get; set; }
+
+        public AjaxResultType? OperationType { get; set; }
+
+        public string UserId { get; set; }
+
+        public  string Message { get; set; }
     }
 }
