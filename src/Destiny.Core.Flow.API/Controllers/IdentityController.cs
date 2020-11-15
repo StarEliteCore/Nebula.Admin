@@ -29,7 +29,7 @@ namespace Destiny.Core.Flow.API.Controllers
         }
 
         /// <summary>
-        /// 登录
+        /// 现在用不上。。
         /// </summary>
         /// <param name="loginDto"></param>
         /// <returns></returns>
