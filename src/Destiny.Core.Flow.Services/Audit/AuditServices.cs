@@ -16,6 +16,7 @@ using MongoDB.Driver.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.Audit
@@ -27,17 +28,21 @@ namespace Destiny.Core.Flow.Services.Audit
         private readonly IMongoDBRepository<AuditPropertysEntry, ObjectId> _auditPropertysEntryRepository;
         private readonly UserManager<User> _userManager = null;
 
-        public AuditServices(IMongoDBRepository<AuditLog, ObjectId> auditLogRepository, IMongoDBRepository<AuditEntry, ObjectId> auditEntryRepository, IMongoDBRepository<AuditPropertysEntry, ObjectId> auditPropertysEntryRepository, UserManager<User> userManager)
+        private readonly IPrincipal _principal;
+
+        public AuditServices(IMongoDBRepository<AuditLog, ObjectId> auditLogRepository, IMongoDBRepository<AuditEntry, ObjectId> auditEntryRepository, IMongoDBRepository<AuditPropertysEntry, ObjectId> auditPropertysEntryRepository, UserManager<User> userManager,IPrincipal principal)
         {
             _auditLogRepository = auditLogRepository;
             _auditEntryRepository = auditEntryRepository;
             _auditPropertysEntryRepository = auditPropertysEntryRepository;
             _userManager = userManager;
+            _principal = principal;
+
+
         }
 
         public async Task Save(AuditLog auditLog, List<AuditEntryInputDto> auditEntry)
         {
-            var ss = auditEntry.MapToList<AuditEntry>();
             List<AuditEntry> auditentrylist = new List<AuditEntry>();
             List<AuditPropertysEntry> auditpropertysentrylist = new List<AuditPropertysEntry>();
             foreach (var item in auditEntry)
@@ -78,7 +83,6 @@ namespace Destiny.Core.Flow.Services.Audit
                 Id = x.Id,
                 //NickName=x.CreatorUserId == Guid.Empty || x.CreatorUserId == null ? string.Empty : users.FirstOrDefault(o => o.Id == x.CreatorUserId.Value).NickName
             });
-
             page.ItemList.ForEach(x =>
             {
 
@@ -173,6 +177,58 @@ namespace Destiny.Core.Flow.Services.Audit
             });
             return page;
        
+        }
+
+        public async Task SaveAsync(AuditChange auditChange)
+        {
+            if (auditChange !=null)
+            {
+                AuditLog auditLog = new AuditLog();
+                auditLog.Action = auditChange.Action;
+                auditLog.BrowserInformation = auditChange.BrowserInformation;
+                auditLog.FunctionName = auditChange.FunctionName;
+                auditLog.Ip = auditChange.Ip;
+                auditLog.OperationType = auditChange.ResultType;
+                auditLog.ExecutionDuration = auditChange.ExecutionDuration;
+                auditLog.UserId = _principal?.Identity?.GetUesrId();
+                auditLog.Message = auditChange.Message;
+                List<AuditEntry> auditEntryList = new List<AuditEntry>();
+                List<AuditPropertysEntry> auditPropertyList = new List<AuditPropertysEntry>();
+                foreach (var item in auditChange.AuditEntitys)
+                {
+                    AuditEntry auditEntry = new AuditEntry();
+                    auditEntry.AuditLogId = auditLog.Id;
+                    auditEntry.EntityAllName = item.EntityName;
+                    auditEntry.EntityDisplayName = item.DisplayName;
+                    auditEntry.OperationType = item.OperationType;
+                    auditEntry.KeyValues = item.KeyValues;
+                    auditEntry.EntityDisplayName = item.DisplayName;
+                    foreach (var auditProperty in item.AuditPropertys)
+                    {
+                        AuditPropertysEntry auditPropertyModel = new AuditPropertysEntry();
+                        auditPropertyModel.AuditEntryId = auditEntry.Id;
+                        auditPropertyModel.NewValues = auditProperty.NewValues;
+                        auditPropertyModel.OriginalValues = auditProperty.OriginalValues;
+                        auditPropertyModel.Properties = auditProperty.PropertyName;
+                        auditPropertyModel.PropertieDisplayName = auditProperty.PropertyDisplayName;
+                        auditPropertyModel.PropertiesType = auditProperty.PropertyType;
+                        auditPropertyList.Add(auditPropertyModel);
+                    }
+                    auditEntryList.Add(auditEntry);
+                }
+                await _auditLogRepository.InsertAsync(auditLog);
+                if (auditEntryList.Any())
+                {
+                    await _auditEntryRepository.InsertAsync(auditEntryList.ToArray());
+                }
+
+                if (auditPropertyList.Any())
+                {
+                    await _auditPropertysEntryRepository.InsertAsync(auditPropertyList.ToArray());
+                }
+            }
+            
+         
         }
     }
 }

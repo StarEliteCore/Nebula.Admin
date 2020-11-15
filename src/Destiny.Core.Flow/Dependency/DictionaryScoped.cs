@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Destiny.Core.Flow.Audit;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -31,14 +32,17 @@ namespace Destiny.Core.Flow.Dependency
         public List<string> RoleIds { get; set; }
 
 
-
+        /// <summary>
+        /// 审计
+        /// </summary>
+        public AuditChange AuditChange { get; set; }
         public virtual void Dispose()
         {
             this.Clear();
             this.IsAdmin = false;
             this.IsSystem = false;
-            this.RoleNames.Clear();
-            this.RoleIds.Clear();
+            this.RoleNames?.Clear();
+            this.RoleIds?.Clear();
         }
     }
 }
