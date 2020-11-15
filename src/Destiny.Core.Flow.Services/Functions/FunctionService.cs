@@ -6,12 +6,14 @@ using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.IServices.Functions;
 using Destiny.Core.Flow.Model.Entities.Function;
+using Destiny.Core.Flow.Repository.MenuRepository;
 using Destiny.Core.Flow.Ui;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.Functions
@@ -19,10 +21,12 @@ namespace Destiny.Core.Flow.Services.Functions
     public class FunctionService : IFunctionService
     {
         private readonly IEFCoreRepository<Function, Guid> _functionRepository;
+        private readonly IMenuFunctionRepository _menuFunctionRepository = null;
 
-        public FunctionService(IEFCoreRepository<Function, Guid> functionRepository)
+        public FunctionService(IEFCoreRepository<Function, Guid> functionRepository, IMenuFunctionRepository menuFunctionRepository)
         {
             _functionRepository = functionRepository ?? throw new ArgumentNullException(nameof(functionRepository));
+            _menuFunctionRepository = menuFunctionRepository;
         }
 
         public async Task<OperationResponse> CreateAsync(FunctionInputDto dto)
@@ -47,12 +51,22 @@ namespace Destiny.Core.Flow.Services.Functions
             return _functionRepository.DeleteAsync(id);
         }
 
-        public Task<IPagedResult<FunctionOutputPageList>> GetFunctionPageAsync(PageRequest request)
+        public async Task<IPagedResult<FunctionOutputPageList>> GetFunctionPageAsync(FunctionPageRequestDto request)
         {
 
             OrderCondition<Function>[] orderConditions = new OrderCondition<Function>[] { new OrderCondition<Function>(o => o.CreatedTime, SortDirection.Descending) };
             request.OrderConditions = orderConditions;
-            return _functionRepository.Entities.ToPageAsync<Function, FunctionOutputPageList>(request);
+            Expression<Func<Function, bool>> expression = o => true;
+            if (request.MenuIds?.Any()==true)
+            {
+                var functionIds=  _menuFunctionRepository.Entities.Where(o => request.MenuIds.Contains(o.MenuId)).Select(o => o.FunctionId);
+                expression = o => !functionIds.Contains(o.Id);
+                //if (functionIds.Any())
+                //{
+                //    request.Filter.Conditions.Add(new FilterCondition() { Field = "Id", Value = functionIds, Operator = FilterOperator.In });
+                //}
+            }
+            return await _functionRepository.Entities.Where(expression).ToPageAsync<Function, FunctionOutputPageList>(request);
         }
 
         public async Task<OperationResponse<FunctionOutputDto>> LoadFormFunctionAsync(Guid id)
