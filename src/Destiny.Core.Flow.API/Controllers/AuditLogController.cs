@@ -18,6 +18,7 @@ namespace Destiny.Core.Flow.API.Controllers
     /// </summary>
     [Description("审计日志")]
     [AllowAnonymous]
+    [DisableAuditing]
     public class AuditLogController : ApiControllerBase
     {
         private readonly IAuditStore _auditStore = null;

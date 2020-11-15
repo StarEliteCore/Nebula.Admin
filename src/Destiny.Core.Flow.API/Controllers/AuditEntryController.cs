@@ -19,6 +19,7 @@ namespace Destiny.Core.Flow.API.Controllers
     /// </summary>
     [Description("数据审计")]
     [AllowAnonymous]
+    [DisableAuditing]
     public class AuditEntryController : ApiControllerBase
     {
 
