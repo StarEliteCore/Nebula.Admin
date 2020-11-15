@@ -79,7 +79,7 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <returns></returns>
         [Description("异步得到功能分页")]
         [HttpPost]
-        public async Task<PageList<FunctionOutputPageList>> GetFunctionPageAsync([FromBody] PageRequest request)
+        public async Task<PageList<FunctionOutputPageList>> GetFunctionPageAsync([FromBody] FunctionPageRequestDto request)
         {
             return (await _functionService.GetFunctionPageAsync(request)).ToPageList();
         }

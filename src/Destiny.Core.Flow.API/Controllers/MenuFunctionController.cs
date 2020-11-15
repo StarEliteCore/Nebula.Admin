@@ -35,7 +35,7 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Description("批量添加功能菜单")]
-        public async Task<AjaxResult> BatchAddMenuFunctionAsync([FromBody] MenuFunctionInputDto menuFunctionInputDto)
+        public async Task<AjaxResult> BatchAddMenuFunctionAsync([FromBody] BatchAddMenuFunctionInputDto menuFunctionInputDto)
         {
             return (await _menuFunctionServices.BatchAddMenuFunctionAsync(menuFunctionInputDto)).ToAjaxResult();
         }
