@@ -1,5 +1,6 @@
 ﻿using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
+using Destiny.Core.Flow.Audit;
 using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.IServices.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -16,7 +17,7 @@ namespace Destiny.Core.Flow.API.Controllers
     /// 身份管理
     /// </summary>
     [Description("身份管理")]
-
+    [DisableAuditing]
 
     public class IdentityController : ApiControllerBase
     {
@@ -28,7 +29,7 @@ namespace Destiny.Core.Flow.API.Controllers
         }
 
         /// <summary>
-        /// 登录
+        /// 现在用不上。。
         /// </summary>
         /// <param name="loginDto"></param>
         /// <returns></returns>

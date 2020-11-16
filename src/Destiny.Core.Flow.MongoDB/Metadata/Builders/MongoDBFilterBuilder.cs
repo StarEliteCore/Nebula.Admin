@@ -1,24 +1,23 @@
 ﻿using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Exceptions;
+using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
 
-namespace Destiny.Core.Flow.ExpressionUtil
+namespace Destiny.Core.Flow.Metadata.Builders
 {
-    /// <summary>
-    /// 过滤器构建器
-    /// </summary>
-    public class FilterBuilder
+    
+    public   class MongoDBFilterBuilder
     {
 
-        public static Func<FilterOperator, Expression, Expression, Expression> GetOperateExpression=(operate,member,expression)=>{
+
+        public static Func<FilterOperator, Expression, Expression, Expression> GetOperateExpression = (operate, member, expression) => {
 
             switch (operate)
             {
@@ -41,17 +40,15 @@ namespace Destiny.Core.Flow.ExpressionUtil
                     return Expression.LessThanOrEqual(member, expression);
 
                 case FilterOperator.Like:
-                    return Like(member, expression);
-                case FilterOperator.In:
-                    return (member as MemberExpression).In(expression);
+                    return Contains((member as MemberExpression), expression as ConstantExpression);
                 default:
-                    throw new AppException($"此{operate}过滤条件不存在！！！");
+                    throw new AppException($"此{operate}过滤条件不支持！！");
 
             }
 
 
         };
-            
+
         /// <summary>
         /// 得到表达式目录树
         /// </summary>
@@ -100,7 +97,7 @@ namespace Destiny.Core.Flow.ExpressionUtil
 
             var lambda = GetPropertyLambdaExpression(param, filter);
             var constant = ChangeTypeToExpression(filter, lambda.Body.Type);
-          
+
             return GetOperateExpression(filter.Operator, lambda.Body, constant);
 
         }
@@ -117,10 +114,10 @@ namespace Destiny.Core.Flow.ExpressionUtil
         {
             var constant = Expression.Constant(true);
 
-            if (filter.Operator == FilterOperator.In)
+            if (conversionType.Name != typeof(string).Name&&filter.Operator==FilterOperator.Like)
             {
 
-                return Expression.Constant(filter.Value);
+                throw new AppException("此{conversionType.Name}类型不支持Like,只有{typeof(string).Name}才支持Like！！！");
             }
 
             var value = filter.Value.AsTo(conversionType);
@@ -134,22 +131,7 @@ namespace Destiny.Core.Flow.ExpressionUtil
 
 
 
-        private static Expression Like(Expression member, Expression expression)
-        {
-            if (expression.Type != typeof(string))
-            {
-                throw new NotSupportedException("“Like”比较方式只支持字符串类型的数据");
-            }
-            var functions = Expression.Property(null, typeof(EF).GetProperty(nameof(EF.Functions)));
-            var like = typeof(DbFunctionsExtensions).GetMethod(nameof(DbFunctionsExtensions.Like), new Type[] { functions.Type, typeof(string), typeof(string) });
-            var methodCallExpression = Expression.Call(
-             null,
-             like,
-             functions,
-             member,
-             expression);
-            return methodCallExpression;
-        }
+
 
         private static LambdaExpression GetPropertyLambdaExpression(ParameterExpression parameter, FilterCondition filter)
         {
@@ -162,7 +144,20 @@ namespace Destiny.Core.Flow.ExpressionUtil
             MemberExpression propertyAccess = Expression.MakeMemberAccess(parameter, property);
             return Expression.Lambda(propertyAccess, parameter);
         }
+
+
+
+        private static readonly MethodInfo stringContainsMethod = typeof(string).GetMethod("Contains", new[] { typeof(string) });
+
+
+        public static Expression Contains(MemberExpression member, ConstantExpression constant1)
+        {
+            Expression constant = constant1.TrimToLower();
+
+            return Expression.Call(member.TrimToLower(), stringContainsMethod, constant);
+                 
+        }
+
+
     }
-
-
 }

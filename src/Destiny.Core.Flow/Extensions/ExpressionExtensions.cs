@@ -407,6 +407,13 @@ namespace Destiny.Core.Flow.Extensions
 
             return dictValues;
         }
+
+
+        public static Expression AddNullCheck(this Expression expression, MemberExpression member)
+        {
+            Expression memberIsNotNull = Expression.NotEqual(member, Expression.Constant(null));
+            return Expression.AndAlso(memberIsNotNull, expression);
+        }
     }
     public class NewExpressionVisitor : ExpressionVisitor
     {

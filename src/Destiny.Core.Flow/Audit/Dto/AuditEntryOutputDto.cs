@@ -1,5 +1,6 @@
 ﻿using Destiny.Core.Flow.Entity;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -54,9 +55,9 @@ namespace Destiny.Core.Flow.Audit.Dto
         /// </summary>
         public string NickName { get; set; }
 
-
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime? CreatedTime { get; set; }
 
-        public Guid? CreatorUserId { get; set; }
+        public string UserId { get; set; }
     }
 }

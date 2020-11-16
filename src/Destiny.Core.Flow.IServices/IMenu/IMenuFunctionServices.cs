@@ -29,7 +29,7 @@ namespace Destiny.Core.Flow.IServices.IMenu
         /// <param name="menuFunctionInputDto">输入DTO</param>
         /// <returns></returns>
 
-        Task<OperationResponse> BatchAddMenuFunctionAsync(MenuFunctionInputDto menuFunctionInputDto);
+        Task<OperationResponse> BatchAddMenuFunctionAsync(BatchAddMenuFunctionInputDto menuFunctionInputDto);
 
 
         /// <summary>
