@@ -22,7 +22,7 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
     {
         public void OnActionExecuted(ActionExecutedContext context)
         {
-           
+
             if (context.Result is ObjectResult result)
             {
                 if (result.Value is AjaxResult ajax)
@@ -35,10 +35,10 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
                     {
                         dict.AuditChange.Message = ajax.Message;
                     }
-                  
+
                     dict.AuditChange.ResultType = type;
                 }
-        
+
 
             }
 

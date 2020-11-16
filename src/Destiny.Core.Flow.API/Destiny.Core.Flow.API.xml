@@ -168,7 +168,7 @@
         </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.IdentityController.LoginAsync(Destiny.Core.Flow.Dtos.LoginDto)">
             <summary>
-            现在用不上。。
+            现在用不上。。现在用IDS4登录
             </summary>
             <param name="loginDto"></param>
             <returns></returns>

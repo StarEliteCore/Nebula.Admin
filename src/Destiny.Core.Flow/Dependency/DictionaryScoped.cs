@@ -35,7 +35,7 @@ namespace Destiny.Core.Flow.Dependency
         /// <summary>
         /// 审计
         /// </summary>
-        public AuditChange AuditChange { get; set; }
+        public AuditChange AuditChange { get; set; } = new AuditChange();
         public virtual void Dispose()
         {
             this.Clear();
@@ -43,6 +43,7 @@ namespace Destiny.Core.Flow.Dependency
             this.IsSystem = false;
             this.RoleNames?.Clear();
             this.RoleIds?.Clear();
+            this.AuditChange = null;
         }
     }
 }

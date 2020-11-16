@@ -48,11 +48,12 @@ namespace Destiny.Core.Flow.Services.Permission
             var roleIds = _repositoryUserRole.Entities.Where(x => x.UserId == userId.Value).Select(x => x.RoleId); //得到用户角色
             var menuIds = _roleMenuRepository.Entities.Where(rm => roleIds.Contains(rm.RoleId)).Select(o => o.MenuId); //获取MenuId集合;
             var funcIds = _menuFuncRepository.Entities.Where(mf => menuIds.Contains(mf.MenuId)).Select(o => o.FunctionId); //得到功能Id集合
-            var isExistUrl = _funcRepository.Entities.Where(f => funcIds.Contains(f.Id) && f.LinkUrl == url).Any();
+       
             var user = await _userManager.FindByIdAsync(userId.ToString());//获取用户
             var isAdminRole = await _roleManager.Roles.Where(x => x.IsAdmin == true && roleIds.Contains(x.Id)).ToListAsync();//获取带有管理员权限的角色
-            if (!user.IsSystem && !isAdminRole.Any())
+            if (!user.IsSystem || !isAdminRole.Any())
             {
+                var isExistUrl =await _funcRepository.Entities.Where(f => funcIds.Contains(f.Id) && f.LinkUrl == url).AnyAsync();
                 if (!isExistUrl)
                 {
                     return false;

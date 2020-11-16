@@ -3,6 +3,7 @@ using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Audit;
 using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.IServices.Identity;
+using Destiny.Core.Flow.Permission;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +30,7 @@ namespace Destiny.Core.Flow.API.Controllers
         }
 
         /// <summary>
-        /// 现在用不上。。
+        /// 现在用不上。。现在用IDS4登录
         /// </summary>
         /// <param name="loginDto"></param>
         /// <returns></returns>
@@ -53,12 +54,12 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Description("更改密码")]
+        [NoAuthorityVerification]
         public async Task<AjaxResult> ChangePassword([FromBody] ChangePassInputDto dto)
         {
             var result = await _identityService.ChangePassword(dto);
-            var identity = new ClaimsIdentity(JwtBearerDefaults.AuthenticationScheme);//用户标识
-            identity.AddClaims(result.cliams);
-            return result.item.ToAjaxResult();
+        
+            return result.ToAjaxResult();
         }
 
 

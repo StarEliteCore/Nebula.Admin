@@ -252,7 +252,7 @@ namespace Destiny.Core.Flow.Services.Menu
             var menuIds = _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).Select(o => o.MenuId);
             var isAdmin = await _roleManager.Roles.Where(x => x.IsAdmin == true && roleids.Contains(x.Id)).AnyAsync();
             Expression<Func<MenuEntity, bool>> expression = o => true;
-            if (!usermodel.IsSystem && !isAdmin) //不是系统，不是管理员
+            if (!usermodel.IsSystem || !isAdmin) //不是系统，不是管理员
             {
                 expression = o => menuIds.Contains(o.Id);
             }

@@ -31,7 +31,7 @@ namespace Destiny.Core.Flow.Services.Identity
             _principal = principal;
         }
 
-        public async Task<(OperationResponse item, Claim[] cliams)> ChangePassword(ChangePassInputDto dto)
+        public async Task<OperationResponse> ChangePassword(ChangePassInputDto dto)
         {
             dto.NotNull(nameof(dto));
             var userId = _principal.Identity?.GetUesrId<string>();
@@ -39,30 +39,17 @@ namespace Destiny.Core.Flow.Services.Identity
 
             if (user == null)
             {
-                return (new OperationResponse("此用户不存在!!", OperationResponseType.Error), new Claim[] { });
+                return new OperationResponse("此用户不存在!!", OperationResponseType.Error);
             }
             var signInResult = await _signInManager.CheckPasswordSignInAsync(user, dto.OldPassword, true);
             if (!signInResult.Succeeded)
             {
-                return (OperationResponse.Error("密码不正确!!"), new Claim[] { });
+                return OperationResponse.Error("密码不正确!!");
             }
 
             var result = await _userManager.ChangePasswordAsync(user, dto.OldPassword, dto.NewPassword);
 
-            if (!result.Succeeded)
-            {
-                return (result.ToOperationResponse(), new Claim[] { });
-            }
-
-            var jwtToken = _jwtBearerService.CreateToken(user.Id, user.UserName);
-
-            return (new OperationResponse("修改密码成功!!", new
-            {
-                AccessToken = jwtToken.AccessToken,
-                NickName = user.NickName,
-                UserId = user.Id.ToString(),
-                AccessExpires = jwtToken.AccessExpires
-            }, OperationResponseType.Success), jwtToken.claims);
+            return result.ToOperationResponse();
         }
 
         public async Task<(OperationResponse item, Claim[] cliams)> Login(LoginDto loginDto)
