@@ -137,6 +137,13 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// </summary>
         [DisplayName("菜单名称")]
         public string Name { get; set; }
+
+
+        /// <summary>
+        /// 事件名
+        /// </summary>
+        [DisplayName("事件名")]
+        public string EventName { get; set; }
         /// <summary>
         /// 子级
         /// </summary>
