@@ -48,7 +48,7 @@ namespace Destiny.Core.Flow.IServices.Functions
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        Task<IPagedResult<FunctionOutputPageList>> GetFunctionPageAsync(PageRequest request);
+        Task<IPagedResult<FunctionOutputPageList>> GetFunctionPageAsync(FunctionPageRequestDto request);
 
         /// <summary>
         /// 获取功能下拉框列表

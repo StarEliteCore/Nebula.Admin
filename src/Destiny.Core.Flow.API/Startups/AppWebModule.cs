@@ -5,6 +5,7 @@ using Destiny.Core.Flow.CodeGenerator;
 using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Events;
 using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.MiniProfiler;
 using Destiny.Core.Flow.Model;
 using Destiny.Core.Flow.Modules;
 using Destiny.Core.Flow.Options;
@@ -29,7 +30,8 @@ namespace Destiny.Core.Flow.API.Startups
                typeof(CSRedisModule),
                typeof(MongoDBModelule),
                typeof(MigrationModule),
-               typeof(CodeGeneratorModeule)
+               typeof(CodeGeneratorModeule),
+               typeof(MiniProfilerModule)
         )]
     public class AppWebModule : AppModule
     {
@@ -67,8 +69,7 @@ namespace Destiny.Core.Flow.API.Startups
                 o.SuppressAsyncSuffixInActionNames = false;
                 o.Filters.Add<PermissionAuthorizationFilter>();
                 o.Filters.Add<AuditLogFilter>();
-            })
-                .AddNewtonsoftJson(options =>
+            }).AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
 
@@ -79,17 +80,13 @@ namespace Destiny.Core.Flow.API.Startups
                 IHttpContextAccessor accessor = provider.GetService<IHttpContextAccessor>();
                 return accessor?.HttpContext?.User;
             });
-
-            context.Services.AddMiniProfiler().AddEntityFramework();
-
-
         }
 
         public override void ApplicationInitialization(ApplicationContext context)
         {
             var app = context.GetApplicationBuilder();
             app.UseRouting();
-            app.UseMiniProfiler();
+ 
             if (!_corePolicyName.IsNullOrEmpty())
             {
                 app.UseCors(_corePolicyName); //添加跨域中间件

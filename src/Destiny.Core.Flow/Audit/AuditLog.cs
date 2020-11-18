@@ -1,5 +1,7 @@
 ﻿using Destiny.Core.Flow.Entity;
+using Destiny.Core.Flow.Enums;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.ComponentModel;
 
@@ -10,7 +12,7 @@ namespace Destiny.Core.Flow.Audit
     /// </summary>
     [DisplayName("日志主表")]
     [MongoDBTable("DestinyAuditLog")]//
-    public class AuditLog : EntityBase<ObjectId>, IFullAuditedEntity<Guid>
+    public class AuditLog : EntityBase<ObjectId>
     {
         public AuditLog()
         {
@@ -47,34 +49,26 @@ namespace Destiny.Core.Flow.Audit
         [DisplayName("执行时长")]
         public double ExecutionDuration { get; set; }
 
-        /// <summary>
-        /// 获取或设置 最后修改用户
-        /// </summary>
-        [DisplayName("最后修改用户")]
-        public virtual Guid? LastModifierUserId { get; set; }
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
 
-        /// <summary>
-        /// 获取或设置 最后修改时间
-        /// </summary>
-        [DisplayName("最后修改时间")]
-        public virtual DateTime? LastModifionTime { get; set; }
 
-        /// <summary>
-        ///获取或设置 是否删除
-        /// </summary>
-        [DisplayName("是否删除")]
-        public virtual bool IsDeleted { get; set; }
-
-        /// <summary>
-        ///获取或设置 创建用户ID
-        /// </summary>
-        [DisplayName("创建用户ID")]
-        public virtual Guid? CreatorUserId { get; set; }
-
-        /// <summary>
-        ///获取或设置 创建时间
-        /// </summary>
-        [DisplayName("创建时间")]
+        [DisplayName("审计时间")]
         public virtual DateTime CreatedTime { get; set; }
+
+        public AjaxResultType? OperationType { get; set; }
+
+        public string UserId { get; set; }
+
+        public  string Message { get; set; }
+
+        [DisplayName("用户名")]
+        /// <summary>
+        /// 获取或设置 操作用户名
+        /// </summary>
+        public string UserName { get; set; }
+
+
+        /// </summary>
+        public string NickName { get; set; }
     }
 }

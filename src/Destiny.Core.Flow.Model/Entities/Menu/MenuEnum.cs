@@ -10,7 +10,10 @@ namespace Destiny.Core.Flow.Model.Entities.Menu
         [Description("菜单")]
         Menu = 0,
 
+        [Description("功能")]
+        Function = 5,
+
         [Description("按钮")]
-        Button = 5,
+        Button = 10,
     }
 }

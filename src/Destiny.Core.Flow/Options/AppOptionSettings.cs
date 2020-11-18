@@ -24,5 +24,11 @@
         /// 是否自动添加功能
         /// </summary>
         public bool IsAutoAddFunction { get; set; }
+
+        /// <summary>
+        /// 是否启用审计 
+        /// </summary>
+        public bool AuditEnabled { get; set; }
+
     }
 }

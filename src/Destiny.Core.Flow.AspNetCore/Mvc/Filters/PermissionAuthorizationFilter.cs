@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Reflection;
 using System.Security.Principal;
@@ -14,17 +15,19 @@ using System.Threading.Tasks;
 namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
 {
     /// <summary>
-    /// 好像3.1不能这样用了，是用策略
+    ///
     /// </summary>
     public class PermissionAuthorizationFilter : IAsyncAuthorizationFilter
     {
         private readonly IAuthorityVerification _authority;
         private readonly IPrincipal _principal;
+        private readonly ILogger<PermissionAuthorizationFilter> _logger = null;
 
-        public PermissionAuthorizationFilter(IAuthorityVerification authority, IPrincipal principal)
+        public PermissionAuthorizationFilter(IAuthorityVerification authority, IPrincipal principal, ILogger<PermissionAuthorizationFilter> logger)
         {
             _authority = authority;
             _principal = principal;
+            _logger = logger;
         }
 
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
@@ -49,7 +52,9 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
                         {
                             ////????不包含的时候怎么返回出去？这个请求终止掉
                             ///
+                            _logger.LogError($"此{linkurl}地址没有权限");
                             result.Message = MessageDefinitionType.Uncertified;
+                            result.Type = Enums.AjaxResultType.Uncertified;
                             context.HttpContext.Response.StatusCode = StatusCodes.Status403Forbidden;
                             context.Result = new JsonResult(result);
                             return;

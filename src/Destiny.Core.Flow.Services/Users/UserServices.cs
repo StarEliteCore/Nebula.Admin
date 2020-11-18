@@ -12,6 +12,7 @@ using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Services.Users.Events;
 using Destiny.Core.Flow.Ui;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -212,6 +213,20 @@ namespace Destiny.Core.Flow.Services
             var users = await _userManager.Users.AsNoTracking().ToOutput<UserOutputListDto>().ToListAsync();
 
             return OperationResponse<List<UserOutputListDto>>.Ok("得到用户成功", users);
+        }
+        /// <summary>
+        /// 得到所有用户并转成下拉
+        /// </summary>
+        /// <returns></returns>
+        public async Task<OperationResponse<IEnumerable<SelectListItem>>> GetUsersToSelectListItemAsync()
+        {
+            var users = await _userManager.Users.AsNoTracking().Select(r => new SelectListItem
+            {
+                Value = r.Id.ToString().ToLower(),
+                Text = r.UserName,
+                Selected = false,
+            }).ToListAsync();
+            return new OperationResponse<IEnumerable<SelectListItem>>("得到数据成功", users, OperationResponseType.Success);
         }
     }
 }

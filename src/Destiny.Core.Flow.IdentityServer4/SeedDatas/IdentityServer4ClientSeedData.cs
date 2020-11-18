@@ -10,7 +10,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Destiny.Core.Flow.AuthenticationCenter.SeedDatas
+namespace Destiny.Core.Flow.IdentityServer
 {
     [Dependency(ServiceLifetime.Singleton)]
     public class IdentityServer4ClientSeedData : SeedDataDefaults<Client, Guid>

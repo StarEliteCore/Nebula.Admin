@@ -1,5 +1,6 @@
 ﻿using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
+using Destiny.Core.Flow.Audit;
 using Destiny.Core.Flow.Dtos.Menu;
 using Destiny.Core.Flow.Dtos.MenuFunction;
 using Destiny.Core.Flow.Filter;
@@ -18,7 +19,7 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
     /// </summary>
     [Description("菜单管理")]
     
-    public class MenuController : AuthorizeControllerBase
+    public class MenuController : AdminControllerBase
     {
         private readonly IMenuServices _menuServices;
         private readonly IMenuFunctionServices _menuFunctionServices;
@@ -119,15 +120,16 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         }
 
         /// <summary>
-        /// 登录成功之后获取用户菜单树
+        /// 登录成功之后获取Vue动态路由菜单
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Description("登录成功之后获取用户菜单树")]
+        [Description("获取Vue动态路由菜单")]
         [NoAuthorityVerification]
-        public async Task<AjaxResult> GetUserMenuTreeAsync()
+        [DisableAuditing]
+        public async Task<AjaxResult> GetVueDynamicRouterTreeAsync()
         {
-            return (await _menuServices.GetUserMenuTreeAsync()).ToAjaxResult();
+            return (await _menuServices.GetVueDynamicRouterTreeAsync()).ToAjaxResult();
         }
 
         /// <summary>

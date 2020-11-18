@@ -10,9 +10,9 @@ namespace Destiny.Core.Flow.Audit
     public class AuditEventHandler : NotificationHandlerBase<AuditEvent>
     {
         private IServiceProvider _serviceProvider = null;
-        private readonly DictionaryAccessor _dictionaryAccessor = null;
+        private readonly DictionaryScoped _dictionaryAccessor = null;
 
-        public AuditEventHandler(IServiceProvider serviceProvider, DictionaryAccessor dictionaryAccessor)
+        public AuditEventHandler(IServiceProvider serviceProvider, DictionaryScoped dictionaryAccessor)
         {
             _serviceProvider = serviceProvider;
             _dictionaryAccessor = dictionaryAccessor;

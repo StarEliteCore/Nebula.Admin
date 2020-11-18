@@ -14,6 +14,6 @@ namespace Destiny.Core.Flow.IServices.Identity
         //[ServiceInterceptor(typeof(TransactionalAttribute))]
         Task<(OperationResponse item, Claim[] cliams)> Login(Dtos.LoginDto loginDto);
 
-        Task<(OperationResponse item, Claim[] cliams)> ChangePassword(Dtos.ChangePassInputDto dto);
+        Task<OperationResponse> ChangePassword(Dtos.ChangePassInputDto dto);
     }
 }

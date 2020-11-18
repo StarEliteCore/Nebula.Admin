@@ -41,5 +41,11 @@ namespace Destiny.Core.Flow.IServices.Organization
         /// <param name="request"></param>
         /// <returns></returns>
         Task<IPagedResult<OrganizationOutPageListDto>> GetPageOrganizationAsync(PageRequest request);
+        /// <summary>
+        /// 根据Id 获取一个组织架构
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<OperationResponse<OrganizationOutputLoadDto>> LoadFormOrganizationAsync(Guid id);
     }
 }

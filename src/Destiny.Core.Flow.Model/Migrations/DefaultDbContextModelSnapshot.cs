@@ -1495,6 +1495,10 @@ namespace Destiny.Core.Flow.Model.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("EventName")
+                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
+                        .HasMaxLength(100);
+
                     b.Property<string>("Icon")
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
                         .HasMaxLength(50);
@@ -1504,11 +1508,20 @@ namespace Destiny.Core.Flow.Model.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasDefaultValue(false);
 
+                    b.Property<bool>("IsHide")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
+
                     b.Property<Guid?>("LastModifierUserId")
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("LastModifionTime")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Layout")
+                        .HasColumnType("varchar(500) CHARACTER SET utf8mb4")
+                        .HasMaxLength(500);
 
                     b.Property<string>("Name")
                         .IsRequired()

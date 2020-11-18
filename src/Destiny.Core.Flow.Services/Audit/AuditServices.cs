@@ -5,6 +5,7 @@ using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Filter.Abstract;
+using Destiny.Core.Flow.Metadata.Builders;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.MongoDB.Repositorys;
 using Destiny.Core.Flow.Ui;
@@ -16,6 +17,7 @@ using MongoDB.Driver.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.Audit
@@ -27,17 +29,21 @@ namespace Destiny.Core.Flow.Services.Audit
         private readonly IMongoDBRepository<AuditPropertysEntry, ObjectId> _auditPropertysEntryRepository;
         private readonly UserManager<User> _userManager = null;
 
-        public AuditServices(IMongoDBRepository<AuditLog, ObjectId> auditLogRepository, IMongoDBRepository<AuditEntry, ObjectId> auditEntryRepository, IMongoDBRepository<AuditPropertysEntry, ObjectId> auditPropertysEntryRepository, UserManager<User> userManager)
+        private readonly IPrincipal _principal;
+
+        public AuditServices(IMongoDBRepository<AuditLog, ObjectId> auditLogRepository, IMongoDBRepository<AuditEntry, ObjectId> auditEntryRepository, IMongoDBRepository<AuditPropertysEntry, ObjectId> auditPropertysEntryRepository, UserManager<User> userManager,IPrincipal principal)
         {
             _auditLogRepository = auditLogRepository;
             _auditEntryRepository = auditEntryRepository;
             _auditPropertysEntryRepository = auditPropertysEntryRepository;
             _userManager = userManager;
+            _principal = principal;
+
+
         }
 
         public async Task Save(AuditLog auditLog, List<AuditEntryInputDto> auditEntry)
         {
-            var ss = auditEntry.MapToList<AuditEntry>();
             List<AuditEntry> auditentrylist = new List<AuditEntry>();
             List<AuditPropertysEntry> auditpropertysentrylist = new List<AuditPropertysEntry>();
             foreach (var item in auditEntry)
@@ -62,10 +68,11 @@ namespace Destiny.Core.Flow.Services.Audit
         /// <returns></returns>
         public async Task<IPagedResult<AuditLogOutputPageDto>> GetAuditLogPageAsync(PageRequest request)
         {
-            var exp = FilterBuilder.GetExpression<AuditLog>(request.Filter);
+
+            var exp = MongoDBFilterBuilder.GetExpression<AuditLog>(request.Filter);
             OrderCondition<AuditLog>[] orderConditions = new OrderCondition<AuditLog>[] { new OrderCondition<AuditLog>(o => o.CreatedTime, Enums.SortDirection.Descending) };
             request.OrderConditions = orderConditions;
-            var users = _userManager.Users.ToList();
+            //_auditLogRepository.Collection.Find(o=>o.FunctionName.Contains("dd"))
             var page= await _auditLogRepository.Collection.ToPageAsync(exp, request, x => new AuditLogOutputPageDto
             {
                 BrowserInformation = x.BrowserInformation,
@@ -73,19 +80,16 @@ namespace Destiny.Core.Flow.Services.Audit
                 FunctionName = x.FunctionName,
                 Action = x.Action,
                 ExecutionDuration = x.ExecutionDuration,
-                CreatorUserId = x.CreatorUserId,
                 CreatedTime = x.CreatedTime,
                 Id = x.Id,
-                //NickName=x.CreatorUserId == Guid.Empty || x.CreatorUserId == null ? string.Empty : users.FirstOrDefault(o => o.Id == x.CreatorUserId.Value).NickName
-            });
-
-            page.ItemList.ForEach(x =>
-            {
-
-                x.NickName = x.CreatorUserId == Guid.Empty || x.CreatorUserId == null ? string.Empty : users.FirstOrDefault(o => o.Id == x.CreatorUserId.Value).NickName;
-                x.UserName = x.CreatorUserId == Guid.Empty || x.CreatorUserId == null ? string.Empty : users.FirstOrDefault(o => o.Id == x.CreatorUserId.Value).UserName;
+                OperationType=x.OperationType,
+                Message=x.Message,
+                UserId=x.UserId,
+                NickName=x.NickName,
+                UserName=x.UserName
             });
             return page;
+
         }
 
         public async Task<OperationResponse> GetAuditEntryListByAuditLogIdAsync(ObjectId id)
@@ -126,10 +130,9 @@ namespace Destiny.Core.Flow.Services.Audit
 
         public async Task<IPagedResult<AuditEntryOutputDto>> GetAuditEntryPageAsync(PageRequest request)
         {
-            var exp = FilterBuilder.GetExpression<AuditEntry>(request.Filter);
+            var exp = MongoDBFilterBuilder.GetExpression<AuditEntry>(request.Filter);
             OrderCondition<AuditEntry>[] orderConditions = new OrderCondition<AuditEntry>[] { new OrderCondition<AuditEntry>(o => o.CreatedTime, Enums.SortDirection.Descending) };
             request.OrderConditions = orderConditions;
-            var users = _userManager.Users.ToList();
             var page= await _auditEntryRepository.Collection.ToPageAsync(exp, request, x => new AuditEntryOutputDto
             {
                Id=x.Id,
@@ -138,16 +141,13 @@ namespace Destiny.Core.Flow.Services.Audit
                KeyValues=x.KeyValues,
                OperationType=x.OperationType,
                CreatedTime=x.CreatedTime,
-               CreatorUserId=x.CreatorUserId
+               NickName=x.NickName,
+               UserName=x.UserName,
+
+               
            
             });
-            page.ItemList.ForEach(x =>
-            {
-
-                x.NickName = x.CreatorUserId == Guid.Empty || x.CreatorUserId == null ? string.Empty : users.FirstOrDefault(o => o.Id == x.CreatorUserId.Value).NickName;
-            });
-       
-
+ 
             return page;
         }
 
@@ -158,9 +158,8 @@ namespace Destiny.Core.Flow.Services.Audit
         /// <returns></returns>
         public async Task<IPagedResult<AuditPropertyEntryOutputDto>> GetAuditEntryPropertyPageAsync(PageRequest request)
         {
-            var exp = FilterBuilder.GetExpression<AuditPropertysEntry>(request.Filter);
-            OrderCondition<AuditPropertysEntry>[] orderConditions = new OrderCondition<AuditPropertysEntry>[] { new OrderCondition<AuditPropertysEntry>(o => o.CreatedTime, Enums.SortDirection.Descending) };
-            request.OrderConditions = orderConditions;
+            var exp = MongoDBFilterBuilder.GetExpression<AuditPropertysEntry>(request.Filter);
+
             var page = await _auditPropertysEntryRepository.Collection.ToPageAsync(exp, request, x => new AuditPropertyEntryOutputDto
             {
                 Id = x.Id,
@@ -173,6 +172,73 @@ namespace Destiny.Core.Flow.Services.Audit
             });
             return page;
        
+        }
+
+       
+
+        public async Task SaveAsync(AuditChange auditChange)
+        {
+            if (auditChange !=null)
+            {
+
+                var time = DateTime.Now;
+                AuditLog auditLog = new AuditLog();
+                auditLog.Action = auditChange.Action;
+                auditLog.BrowserInformation = auditChange.BrowserInformation;
+                auditLog.FunctionName = auditChange.FunctionName;
+                auditLog.Ip = auditChange.Ip;
+                auditLog.OperationType = auditChange.ResultType;
+                auditLog.ExecutionDuration = auditChange.ExecutionDuration;
+                auditLog.UserId = _principal?.Identity?.GetUesrId();
+                auditLog.Message = auditChange.Message;
+                auditLog.CreatedTime = time;
+
+                var userId = auditLog.UserId.AsTo<Guid>();
+                var user = _userManager.Users.Where(o => o.Id == userId).FirstOrDefault();
+                auditLog.NickName = user?.NickName;
+                auditLog.UserName = user?.UserName;
+
+                List<AuditEntry> auditEntryList = new List<AuditEntry>();
+                List<AuditPropertysEntry> auditPropertyList = new List<AuditPropertysEntry>();
+                
+                foreach (var item in auditChange.AuditEntitys)
+                {
+                    AuditEntry auditEntry = new AuditEntry();
+                    auditEntry.AuditLogId = auditLog.Id;
+                    auditEntry.EntityAllName = item.EntityName;
+                    auditEntry.EntityDisplayName = item.DisplayName;
+                    auditEntry.OperationType = item.OperationType;
+                    auditEntry.KeyValues = item.KeyValues;
+                    auditEntry.EntityDisplayName = item.DisplayName;
+                    auditEntry.NickName = auditLog.NickName;
+                    auditEntry.UserName = auditLog.UserName;
+                    auditEntry.CreatedTime = time;
+                    foreach (var auditProperty in item.AuditPropertys)
+                    {
+                        AuditPropertysEntry auditPropertyModel = new AuditPropertysEntry();
+                        auditPropertyModel.AuditEntryId = auditEntry.Id;
+                        auditPropertyModel.NewValues = auditProperty.NewValues;
+                        auditPropertyModel.OriginalValues = auditProperty.OriginalValues;
+                        auditPropertyModel.Properties = auditProperty.PropertyName;
+                        auditPropertyModel.PropertieDisplayName = auditProperty.PropertyDisplayName;
+                        auditPropertyModel.PropertiesType = auditProperty.PropertyType;
+                        auditPropertyList.Add(auditPropertyModel);
+                    }
+                    auditEntryList.Add(auditEntry);
+                }
+                await _auditLogRepository.InsertAsync(auditLog);
+                if (auditEntryList.Any())
+                {
+                    await _auditEntryRepository.InsertAsync(auditEntryList.ToArray());
+                }
+
+                if (auditPropertyList.Any())
+                {
+                    await _auditPropertysEntryRepository.InsertAsync(auditPropertyList.ToArray());
+                }
+            }
+            
+         
         }
     }
 }

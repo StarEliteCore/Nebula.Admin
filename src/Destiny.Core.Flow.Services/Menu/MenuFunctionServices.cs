@@ -69,14 +69,24 @@ namespace Destiny.Core.Flow.Services.Menu
         /// <param name="menuFunctionInputDto">输入DTO</param>
         /// <returns></returns>
 
-        public async Task<OperationResponse> BatchAddMenuFunctionAsync(MenuFunctionInputDto menuFunctionInputDto)
+        public async Task<OperationResponse> BatchAddMenuFunctionAsync(BatchAddMenuFunctionInputDto menuFunctionInputDto)
         {
 
 
-           var menuFunctions = ToMenuFunctions(menuFunctionInputDto);
-          return await _unitOfWork.UseTranAsync(async () =>
+       
+
+           return await _unitOfWork.UseTranAsync(async () =>
             {
-                var count = await _menuFunctionRepository.InsertAsync(menuFunctions);
+                List<MenuFunction> menuFunctions = new List<MenuFunction>();
+                foreach (var menuId in menuFunctionInputDto.MenuIds)
+                {
+                    foreach (var functionId in menuFunctionInputDto.FunctionIds)
+                    {
+                        menuFunctions.Add(new MenuFunction() { MenuId = menuId, FunctionId = functionId });
+                    }
+                }
+
+                var count = await _menuFunctionRepository.InsertAsync(menuFunctions.ToArray());
                 if (count <= 0)
                 {
 
@@ -89,17 +99,17 @@ namespace Destiny.Core.Flow.Services.Menu
 
         }
 
-        private MenuFunction[] ToMenuFunctions(MenuFunctionInputDto menuFunctionInputDto)
-        {
-            menuFunctionInputDto.NotNull(nameof(menuFunctionInputDto));
-            menuFunctionInputDto.FunctionIds.NotNull("FunctionIds");
-            return menuFunctionInputDto.FunctionIds.Select(f => new MenuFunction
-            {
+        //private MenuFunction[] ToMenuFunctions(MenuFunctionInputDto menuFunctionInputDto)
+        //{
+        //    menuFunctionInputDto.NotNull(nameof(menuFunctionInputDto));
+        //    menuFunctionInputDto.FunctionIds.NotNull("FunctionIds");
+        //    return menuFunctionInputDto.FunctionIds.Select(f => new MenuFunction
+        //    {
 
-                FunctionId = f,
-                MenuId = menuFunctionInputDto.MenuId
-            }).ToArray();
-        }
+        //        FunctionId = f,
+        //        MenuId = menuFunctionInputDto.MenuId
+        //    }).ToArray();
+        //}
 
         /// <summary>
         /// 批量删除功能菜单
