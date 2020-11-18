@@ -89,7 +89,7 @@ namespace Destiny.Core.Flow.Dtos.Menu
         public VueDynamicRouterTreeOutDto()
         {
             Children = new List<VueDynamicRouterTreeOutDto>();
-            FunctionChildren = new List<VueDynamicRouterTreeOutDto>();
+            ButtonChildren = new List<VueDynamicRouterTreeOutDto>();
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// 按钮集合
         /// </summary>
         [DisplayName("按钮集合")]
-        public List<VueDynamicRouterTreeOutDto> FunctionChildren { get; set; }
+        public List<VueDynamicRouterTreeOutDto> ButtonChildren { get; set; }
 
 
     }

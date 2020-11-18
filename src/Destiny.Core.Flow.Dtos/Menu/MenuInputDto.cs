@@ -20,7 +20,7 @@ namespace Destiny.Core.Flow.Dtos.Menu
         /// 排序
         /// </summary>
         [DisplayName("排序")]
-        public int Sort { get; set; }
+        public int? Sort { get; set; }
 
         /// <summary>
         /// 组件地址(前端)
