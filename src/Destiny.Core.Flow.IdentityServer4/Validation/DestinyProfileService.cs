@@ -37,7 +37,7 @@ namespace Destiny.Core.Flow.IdentityServer.Validation
                 Claim[] claims =
                 {
                 new Claim(DestinyCoreFlowClaimTypes.UserName, user.UserName),
-                new Claim(ClaimTypes.GivenName, user.NickName),
+                new Claim(DestinyCoreFlowClaimTypes.NickName, user.NickName),
                 new Claim(DestinyCoreFlowClaimTypes.IsAdmin,(user.IsSystem&&isAdmin?"1":"0")),
                 new Claim(DestinyCoreFlowClaimTypes.RoleId,string.Join(",", (await _userRoleRepository.Entities.Where(x => x.UserId == user.Id).Select(x => x.RoleId).ToListAsync())))
                 };
