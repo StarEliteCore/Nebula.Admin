@@ -22,8 +22,8 @@ namespace Destiny.Core.Flow.IdentityServer
                  opt.Events.RaiseSuccessEvents = true;
                  //opt.IssuerUri = issuerUri;
              })
-                .AddDeveloperSigningCredential();
-            //.AddProfileService<DestinyProfileService>();
+                .AddDeveloperSigningCredential()
+            .AddProfileService<DestinyProfileService>();
             service.AddTransient<IClientStore, ClientStoreBase>();
             service.AddTransient<IResourceStore, ApiResourceStoreBase>();
             service.AddTransient<IPersistedGrantStore, PersistedGrantStoreBase>();
