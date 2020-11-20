@@ -7,5 +7,6 @@
         public const string UserName = "name";
         public const string RoleName = "rolename";
         public const string RoleId = "roleid";
+        public const string NickName = "nikename";
     }
 }
