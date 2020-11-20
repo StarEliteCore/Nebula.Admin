@@ -1,16 +1,15 @@
-﻿using Destiny.Core.Flow.Model.Entities.Identity;
+﻿using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.Model.Entities.Identity;
+using Destiny.Core.Flow.Security.Identity;
+using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using Destiny.Core.Flow.Extensions;
-using Destiny.Core.Flow.Security.Identity;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IdentityServer.Validation
 {
@@ -18,18 +17,18 @@ namespace Destiny.Core.Flow.IdentityServer.Validation
     {
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
- 
+        private readonly IEFCoreRepository<UserRole, Guid> _userRoleRepository;
 
-        public DestinyProfileService(UserManager<User> userManager, RoleManager<Role> roleManager)
+        public DestinyProfileService(UserManager<User> userManager, RoleManager<Role> roleManager, IEFCoreRepository<UserRole, Guid> userRoleRepository)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _userRoleRepository = userRoleRepository;
         }
 
         public async Task GetProfileDataAsync(ProfileDataRequestContext context)
         {
-            
-            var userId = context.Subject.Identity.GetIdentityServer4SubjectId();  //为什么请求第二次为空？
+            var userId = context.Subject.Identity.GetSubjectId();  //为什么请求第二次为空？
             if (!userId.IsNullOrEmpty())
             {
                 var user = await _userManager.FindByIdAsync(userId);
@@ -37,19 +36,17 @@ namespace Destiny.Core.Flow.IdentityServer.Validation
                 var isAdmin = await _roleManager.Roles.Where(o => roles.Contains(o.Name) && o.IsAdmin == true).AnyAsync();
                 Claim[] claims =
                 {
-                new Claim("name", user.UserName),
+                new Claim(DestinyCoreFlowClaimTypes.UserName, user.UserName),
                 new Claim(ClaimTypes.GivenName, user.NickName),
                 new Claim(DestinyCoreFlowClaimTypes.IsAdmin,(user.IsSystem&&isAdmin?"1":"0")),
-            };
-
+                new Claim(DestinyCoreFlowClaimTypes.RoleId,string.Join(",", (await _userRoleRepository.Entities.Where(x => x.UserId == user.Id).Select(x => x.RoleId).ToListAsync())))
+                };
                 context.IssuedClaims.AddRange(claims);
             }
-  
         }
 
         public async Task IsActiveAsync(IsActiveContext context)
         {
-     
             context.IsActive = true;
             await Task.CompletedTask;
         }
