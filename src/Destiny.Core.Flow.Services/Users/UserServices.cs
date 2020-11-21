@@ -47,7 +47,7 @@ namespace Destiny.Core.Flow.Services
             var user = dto.MapTo<User>();
             var result = passwordHash.IsNullOrEmpty() ? await _userManager.CreateAsync(user) : await _userManager.CreateAsync(user, passwordHash);
 
-            return result.ToOperationResponse();
+            return result.ToOperationResponse("保存用户成功");
             //return await _unitOfWork.UseTranAsync(async () =>
             //{
             //    var result = passwordHash.IsNullOrEmpty() ? await _userManager.CreateAsync(user) : await _userManager.CreateAsync(user, passwordHash);
@@ -135,24 +135,9 @@ namespace Destiny.Core.Flow.Services
             dto.NotNull(nameof(dto));
             var user = await _userManager.FindByIdAsync(dto.Id.ToString());
             user = dto.MapTo(user);
-            return (await _userManager.UpdateAsync(user)).ToOperationResponse();
-            //return await _unitOfWork.UseTranAsync(async () =>
-            //{
-            //    var result = await _userManager.UpdateAsync(user);
-            //    if (!result.Succeeded)
-            //    {
-            //        return result.ToOperationResponse();
-            //    }
-
-            //    if (dto.RoleIds?.Any() == true)
-            //    {
-            //        return await this.SetUserRoles(user, dto.RoleIds, false);
-            //    }
-            //    else
-            //    {
-            //        return await this.DeleteUserRoleAsync(user);
-            //    }
-            //});
+            var result = await _userManager.UpdateAsync(user);
+            return result.ToOperationResponse("保存用户成功");
+           
         }
 
         /// <summary>
