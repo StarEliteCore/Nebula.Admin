@@ -6,11 +6,10 @@ Destiny.Core.Flow重写微软的identity用户角色和重写IDS4的实体，以
 框架lambda查询不需要在后台写各种判断，所有的查询条件通过前端传入，从而减少后台的一些字符段判断等，使用动态拼接lambda。**
 + ## 在线地址
 
-✔ [在线展示](http://admin.destinycore.club)（这版本目前没法使用（后面再维护），VUE版本正在开发。。。）
+✔ [在线展示](http://admin.destinycore.club)
 
 账号Test002    123456
  
-✔ 后面支持Vue版本
 
 ✔ [在线展示后端API链接](http://api.destinycore.club) 
 

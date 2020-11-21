@@ -67,7 +67,7 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         /// <returns></returns>
         [HttpPost]
         [Description("添加菜单")]
-        [NoAuthorityVerification]
+
         public async Task<AjaxResult> AddMenuAsync([FromBody] MenuInputDto dto)
         {
             return (await _menuServices.CreateAsync(dto)).ToAjaxResult();
