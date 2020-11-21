@@ -10,6 +10,11 @@ namespace Destiny.Core.Flow.Dtos.DataDictionnary
     public class DataDictionaryOutPageListDto : IOutputDto
     {
         /// <summary>
+        /// id
+        /// </summary>
+        [DisplayName("Id")]
+        public string Id { get; set; }
+        /// <summary>
         /// 数据字典标题
         /// </summary>
         [DisplayName("数据字典标题")]
@@ -38,5 +43,6 @@ namespace Destiny.Core.Flow.Dtos.DataDictionnary
         /// </summary>
         [DisplayName("排序")]
         public int Sort { get; set; }
+
     }
 }
