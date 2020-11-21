@@ -1,5 +1,6 @@
 ﻿using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
+using Destiny.Core.Flow.Audit;
 using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices;
@@ -141,6 +142,7 @@ namespace Destiny.Core.Flow.API.Controllers
         [HttpGet]
         [Description("异步得到所有用户")]
         [NoAuthorityVerification]
+        [DisableAuditing]
         public async Task<AjaxResult> GetUsersAsync()
         {
 

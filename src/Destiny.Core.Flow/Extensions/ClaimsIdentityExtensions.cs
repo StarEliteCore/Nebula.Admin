@@ -181,5 +181,50 @@ namespace Destiny.Core.Flow.Extensions
             var value = ((identity as ClaimsIdentity).FindFirst("TenantId") ?? throw new InvalidOperationException("TenantId claim is missing")).Value;
             return value;
         }
+
+        /// <summary>
+        /// 查找对应类型
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="identity"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static T FindFirst<T>(this IIdentity identity,string type)
+        {
+
+            identity.NotNull(nameof(identity));
+            if (!(identity is ClaimsIdentity claimsIdentity))
+            {
+                return default(T);
+            }
+            string value = claimsIdentity.FindFirst(type)?.Value;
+            if (value == null)
+            {
+                return default(T);
+            }
+            return value.AsTo<T>();
+        }
+
+
+
+
+        /// <summary>
+        /// 查找对应类型
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="identity"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static string  FindFirst(this IIdentity identity, string type)
+        {
+
+            identity.NotNull(nameof(identity));
+            if (!(identity is ClaimsIdentity claimsIdentity))
+            {
+                return null;
+            }
+            string value = claimsIdentity.FindFirst(type)?.Value;
+            return value;
+        }
     }
 }
