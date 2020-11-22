@@ -46,11 +46,12 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
-
+            IServiceProvider provider = context.HttpContext.RequestServices;
             var controllerAction = context.ActionDescriptor as ControllerActionDescriptor;
-            if (controllerAction.ControllerTypeInfo.HasAttribute<DisableAuditingAttribute>() == false || !controllerAction.MethodInfo.HasAttribute<DisableAuditingAttribute>() == false)
+            var isAuditEnabled=  provider.GetAppSettings().AuditEnabled;
+            if (isAuditEnabled&&controllerAction.ControllerTypeInfo.HasAttribute<DisableAuditingAttribute>() == false || !controllerAction.MethodInfo.HasAttribute<DisableAuditingAttribute>() == false)
             {
-                IServiceProvider provider = context.HttpContext.RequestServices;
+            
    
                 DictionaryScoped dict = provider.GetService<DictionaryScoped>();
                 AuditChange auditChange = new AuditChange();
@@ -66,12 +67,13 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
 
         public void OnResultExecuted(ResultExecutedContext context)
         {
- 
-  
+
+            IServiceProvider provider = context.HttpContext.RequestServices;
             var action = context.ActionDescriptor as ControllerActionDescriptor;
-            if (!action.EndpointMetadata.Any(x => x is DisableAuditingAttribute))
+            var isAuditEnabled = provider.GetAppSettings().AuditEnabled;
+            if (isAuditEnabled&&!action.EndpointMetadata.Any(x => x is DisableAuditingAttribute))
             {
-                IServiceProvider provider = context.HttpContext.RequestServices;
+   
                 var dic=  provider.GetService<DictionaryScoped>();
                 
                 dic.AuditChange.ExecutionDuration= DateTime.Now.Subtract(dic.AuditChange.StartTime).TotalMilliseconds;

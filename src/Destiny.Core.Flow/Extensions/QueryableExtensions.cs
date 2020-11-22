@@ -63,7 +63,7 @@ namespace Destiny.Core.Flow.Extensions
         /// <param name="predicate">查询条件表达式</param>
         /// <param name="pageParameters">分页参数</param>
         /// <returns></returns>
-        public static async Task<PageResult<TEntity>> ToPageAsync<TEntity>(this IQueryable<TEntity> source, Expression<Func<TEntity, bool>> predicate, IPagedRequest request)
+        public static async Task<IPagedResult<TEntity>> ToPageAsync<TEntity>(this IQueryable<TEntity> source, Expression<Func<TEntity, bool>> predicate, IPagedRequest request)
 
         {
             request.NotNull(nameof(request));
@@ -85,7 +85,7 @@ namespace Destiny.Core.Flow.Extensions
         /// <param name="pageParameters">分页参数</param>
         /// <param name="selector">数据筛选表达式</param>
         /// <returns></returns>
-        public static async Task<PageResult<TResult>> ToPageAsync<TEntity, TResult>(this IQueryable<TEntity> source, Expression<Func<TEntity, bool>> predicate, IPagedRequest request, Expression<Func<TEntity, TResult>> selector)
+        public static async Task<IPagedResult<TResult>> ToPageAsync<TEntity, TResult>(this IQueryable<TEntity> source, Expression<Func<TEntity, bool>> predicate, IPagedRequest request, Expression<Func<TEntity, TResult>> selector)
         {
             request.NotNull(nameof(request));
             selector.NotNull(nameof(selector));
@@ -110,7 +110,7 @@ namespace Destiny.Core.Flow.Extensions
         /// <param name="pageParameters">分页参数</param>
         /// <param name="selector">数据筛选表达式</param>
         /// <returns></returns>
-        public static async Task<PageResult<TEntity>> ToPageAsync<TEntity>(this IQueryable<TEntity> source, IPagedRequest request)
+        public static async Task<IPagedResult<TEntity>> ToPageAsync<TEntity>(this IQueryable<TEntity> source, IPagedRequest request)
         {
             request.NotNull(nameof(request));
 
@@ -129,7 +129,7 @@ namespace Destiny.Core.Flow.Extensions
         /// <param name="predicate">查询条件表达式</param>
         /// <param name="pageParameters">分页参数</param>
         /// <returns></returns>
-        public static async Task<PageResult<TOutputDto>> ToPageAsync<TEntity, TOutputDto>(this IQueryable<TEntity> source, Expression<Func<TEntity, bool>> predicate, PageParameters pageParameters)
+        public static async Task<IPagedResult<TOutputDto>> ToPageAsync<TEntity, TOutputDto>(this IQueryable<TEntity> source, Expression<Func<TEntity, bool>> predicate, PageParameters pageParameters)
           where TOutputDto : IOutputDto
         {
             pageParameters.NotNull(nameof(pageParameters));

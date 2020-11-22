@@ -13,7 +13,7 @@ namespace Destiny.Core.Flow.API
         public static void Main(string[] args)
         {
 
-            SeriLogLogger.SetSeriLoggerToFile("Logs", "http://1065.cloud:9600/");
+            SeriLogLogger.SetSeriLoggerToFile("Logs",string.Empty);
             CreateHostBuilder(args).Build().Run();
         }
         public static IHostBuilder CreateHostBuilder(string[] args) =>

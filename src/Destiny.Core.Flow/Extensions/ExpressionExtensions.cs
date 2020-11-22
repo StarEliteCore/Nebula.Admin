@@ -194,7 +194,7 @@ namespace Destiny.Core.Flow.Extensions
                 return expr2;
                 
             }
-            var body = Expression.And(exp.left, exp.right);
+            var body = Expression.AndAlso(exp.left, exp.right);
             return Expression.Lambda<Func<T, bool>>(body, newParameter);
 
         }

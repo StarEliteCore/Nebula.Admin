@@ -88,7 +88,24 @@ namespace Destiny.Core.Flow
         /// <returns></returns>
         public override int SaveChanges()
         {
-            return base.SaveChanges();
+            IEnumerable<AuditEntryDto> auditEntitys = new List<AuditEntryDto>();
+            IEnumerable<EntityEntry> entityEntry = this.ChangeTracker.Entries();
+            if (_option.AuditEnabled)
+            {
+
+                auditEntitys = _serviceProvider.GetRequiredService<IAuditHelper>()?.GetAuditEntity(entityEntry);
+            }
+            int count= base.SaveChanges();
+            _logger.LogInformation($"成功保存多少条{count}数据");
+            if (count > 0 && auditEntitys.Count() > 0)
+            {
+                var _bus = _serviceProvider.GetService<IEventBus>();
+                _bus.PublishAsync(new AuditEntityEventData() { AuditEntitys = auditEntitys.ToList() }).GetAwaiter();
+            }
+            return count;
         }
+
+  
+
     }
 }
