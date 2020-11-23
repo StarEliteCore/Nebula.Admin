@@ -20,10 +20,10 @@ namespace Destiny.Core.Flow.SeriLog
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
-                .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(eshost))
-                {
-                    AutoRegisterTemplate = true,
-                })
+                //.WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(eshost))
+                //{
+                //    AutoRegisterTemplate = true,
+                //})
                 .WriteTo.Map(le => MapData(le),
                 (key, log) =>
                  log.Async(o => o.File(Path.Combine(fileName, @$"{key.time:yyyy-MM-dd}\{key.level.ToString().ToLower()}.txt"))))

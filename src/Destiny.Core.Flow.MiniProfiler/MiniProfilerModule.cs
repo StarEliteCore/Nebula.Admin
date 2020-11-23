@@ -29,7 +29,7 @@ namespace Destiny.Core.Flow.MiniProfiler
             var isOpen=  context.GetConfiguration()[_name].AsTo<bool>();
             if (isOpen.IsTrue())
             {
-                object p = context.Services.AddMiniProfiler().AddEntityFramework();
+               context.Services.AddMiniProfiler().AddEntityFramework();
             }
             base.ConfigureServices(context);
         }
