@@ -52,5 +52,6 @@ jobs:
               - /home/wzw/DestinyCore/DestinyFlow/DestinyCoreDb.txt:/app/DestinyCoreDb.txt
               - /home/wzw/DestinyCore/DestinyFlow/DestinyCoreRedis.txt:/app/DestinyCoreRedis.txt
               - /home/wzw/DestinyCore/DestinyFlow/DestinyCoreMongoDb.txt:/app/DestinyCoreMongoDb.txt
+              - /home/wzw/DestinyCore/DestinyFlow/appsettings.json:/app/appsettings.json
 #    - name: Test
 #      run: dotnet test --no-restore --verbosity normal
