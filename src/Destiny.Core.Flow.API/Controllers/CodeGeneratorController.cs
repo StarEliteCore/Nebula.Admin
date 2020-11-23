@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
+using Destiny.Core.Flow.Audit;
 using Destiny.Core.Flow.CodeGenerator;
 using Destiny.Core.Flow.Enums;
 using Microsoft.AspNetCore.Http;
@@ -17,6 +18,7 @@ namespace Destiny.Core.Flow.API.Controllers
     /// 代码生成器
     /// </summary>
     [Description("代码生成器")]
+    [DisableAuditing]
     public class CodeGeneratorController : ApiControllerBase
     {
 

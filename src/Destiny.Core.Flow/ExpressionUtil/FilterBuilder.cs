@@ -18,7 +18,8 @@ namespace Destiny.Core.Flow.ExpressionUtil
     public class FilterBuilder
     {
 
-        public static Func<FilterOperator, Expression, Expression, Expression> GetOperateExpression=(operate,member,expression)=>{
+        public static Func<FilterOperator, Expression, Expression, Expression> GetOperateExpression = (operate, member, expression) =>
+        {
 
             switch (operate)
             {
@@ -44,6 +45,9 @@ namespace Destiny.Core.Flow.ExpressionUtil
                     return Like(member, expression);
                 case FilterOperator.In:
                     return (member as MemberExpression).In(expression);
+
+                case FilterOperator.NotIn:
+                    return Expression.Not((member as MemberExpression).In(expression));
                 default:
                     throw new AppException($"此{operate}过滤条件不存在！！！");
 
@@ -51,7 +55,7 @@ namespace Destiny.Core.Flow.ExpressionUtil
 
 
         };
-            
+
         /// <summary>
         /// 得到表达式目录树
         /// </summary>
@@ -100,7 +104,7 @@ namespace Destiny.Core.Flow.ExpressionUtil
 
             var lambda = GetPropertyLambdaExpression(param, filter);
             var constant = ChangeTypeToExpression(filter, lambda.Body.Type);
-          
+
             return GetOperateExpression(filter.Operator, lambda.Body, constant);
 
         }

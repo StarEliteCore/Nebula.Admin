@@ -1,6 +1,7 @@
 ﻿using Destiny.Core.Flow.Dtos.Menu;
 using Destiny.Core.Flow.Dtos.MenuFunction;
 using Destiny.Core.Flow.Entity;
+using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
@@ -42,14 +43,15 @@ namespace Destiny.Core.Flow.Services.Menu
         /// <param name="request"></param>
         /// <returns></returns>
 
-        public async Task<IPagedResult<MenuFunctionOutPageListDto>> GetMenuFunctionByMenuIdPageAsync(MenuFunctionPageRequestDto request)
+        public  Task<IPagedResult<MenuFunctionOutPageListDto>> GetMenuFunctionByMenuIdPageAsync(MenuFunctionPageRequestDto request)
         {
             request.NotNull(nameof(request));
 
             var functionIds = _menuFunctionRepository.Entities.Where(o => o.MenuId == request.MenuId).Select(o => o.FunctionId);
+      
             var exprrssion = FilterBuilder.GetExpression<Function>(request.Filter);
             exprrssion = exprrssion.And(o => functionIds.Contains(o.Id));
-            return await _functionRepository.Entities.ToPageAsync(exprrssion, request, f => new MenuFunctionOutPageListDto()
+            return  _functionRepository.Entities.ToPageAsync(exprrssion, request, f => new MenuFunctionOutPageListDto()
             {
 
                 FunctionId = f.Id,
@@ -90,7 +92,7 @@ namespace Destiny.Core.Flow.Services.Menu
                 if (count <= 0)
                 {
 
-                    return new OperationResponse("没有发生任何操作!!!!", Enums.OperationResponseType.NoChanged);
+                    return new OperationResponse(OperationResponseType.NoChanged.ToDescription(), OperationResponseType.NoChanged);
                 }
                 return OperationResponse.Ok($"{count}个菜单功能添加成功");
                 
@@ -129,7 +131,7 @@ namespace Destiny.Core.Flow.Services.Menu
                 if (count <= 0)
                 {
 
-                    return new OperationResponse("没有发生任何操作!!!!", Enums.OperationResponseType.NoChanged);
+                    return new OperationResponse(OperationResponseType.NoChanged.ToDescription(), OperationResponseType.NoChanged);
                 }
                 return OperationResponse.Ok($"{count}个菜单功能删除成功!!!!");
 

@@ -128,6 +128,9 @@ namespace Destiny.Core.Flow.Enums
 
         [Description("模糊查询")]
         Like,
+
+        [Description("不包含")]
+        NotIn
     }
 
     [Description("过滤连接器")]

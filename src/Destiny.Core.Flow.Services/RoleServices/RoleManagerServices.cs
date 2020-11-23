@@ -131,12 +131,12 @@ namespace Destiny.Core.Flow.Services.RoleServices
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<IPagedResult<RoleOutputPageListDto>> GetRolePageAsync(PageRequest request)
+        public  Task<IPagedResult<RoleOutputPageListDto>> GetRolePageAsync(PageRequest request)
         {
             request.NotNull(nameof(request));
 
             request.OrderConditions = new OrderCondition<Role>[] { new OrderCondition<Role>(o => o.CreatedTime, SortDirection.Descending) };
-            return await _roleManager.Roles.AsNoTracking().ToPageAsync<Role, RoleOutputPageListDto>(request);
+            return  _roleManager.Roles.AsNoTracking().ToPageAsync<Role, RoleOutputPageListDto>(request);
         }
 
         /// <summary>

@@ -28,6 +28,7 @@ namespace Destiny.Core.Flow.Swagger
             var title = configuration["Destiny:Swagger:Title"];
             var version = configuration["Destiny:Swagger:Version"];
             var url = configuration["Destiny:Swagger:Url"];
+            var html= configuration["Destiny:Swagger:Html"]; ;
 
             if (url.IsNullOrEmpty())
             {

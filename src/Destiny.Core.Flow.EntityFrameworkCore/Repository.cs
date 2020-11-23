@@ -13,6 +13,7 @@ using System.Linq.Expressions;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
+using Z.EntityFramework.Extensions;
 using Z.EntityFramework.Plus;
 
 namespace Destiny.Core.Flow
@@ -358,6 +359,7 @@ namespace Destiny.Core.Flow
         /// <returns>操作影响的行数</returns>
         public virtual async Task<int> DeleteBatchAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
         {
+
             predicate.NotNull(nameof(predicate));
             if (typeof(ISoftDelete).IsAssignableFrom(typeof(TEntity)))
             {
