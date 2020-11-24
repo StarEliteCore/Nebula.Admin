@@ -65,20 +65,20 @@ namespace Destiny.Core.Flow
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            IEnumerable<AuditEntryDto> auditEntitys = new List<AuditEntryDto>();
-            IEnumerable<EntityEntry> entityEntry = this.ChangeTracker.Entries();
-            if (_option.AuditEnabled)
-            {
+            //IEnumerable<AuditEntryDto> auditEntitys = new List<AuditEntryDto>();
+            //IEnumerable<EntityEntry> entityEntry = this.ChangeTracker.Entries();
+            //if (_option?.AuditEnabled)
+            //{
 
-                auditEntitys = _serviceProvider.GetRequiredService<IAuditHelper>()?.GetAuditEntity(entityEntry);
-            }
+            //    auditEntitys = _serviceProvider.GetRequiredService<IAuditHelper>()?.GetAuditEntity(entityEntry);
+            //}
             int count = await base.SaveChangesAsync(cancellationToken);
-            _logger.LogInformation($"成功保存多少条{count}数据");
-            if (count > 0 && auditEntitys.Count() > 0)
-            {
-                var _bus= _serviceProvider.GetService<IEventBus>();
-                await _bus.PublishAsync(new AuditEntityEventData() { AuditEntitys= auditEntitys.ToList() });
-            }
+            //_logger.LogInformation($"成功保存多少条{count}数据");
+            //if (count > 0 && auditEntitys.Count() > 0)
+            //{
+            //    var _bus= _serviceProvider.GetService<IEventBus>();
+            //    await _bus.PublishAsync(new AuditEntityEventData() { AuditEntitys= auditEntitys.ToList() });
+            //}
             return count;
         }
 
@@ -88,20 +88,20 @@ namespace Destiny.Core.Flow
         /// <returns></returns>
         public override int SaveChanges()
         {
-            IEnumerable<AuditEntryDto> auditEntitys = new List<AuditEntryDto>();
-            IEnumerable<EntityEntry> entityEntry = this.ChangeTracker.Entries();
-            if (_option.AuditEnabled)
-            {
+            //IEnumerable<AuditEntryDto> auditEntitys = new List<AuditEntryDto>();
+            //IEnumerable<EntityEntry> entityEntry = this.ChangeTracker.Entries();
+            //if (_option.AuditEnabled)
+            //{
 
-                auditEntitys = _serviceProvider.GetRequiredService<IAuditHelper>()?.GetAuditEntity(entityEntry);
-            }
+            //    auditEntitys = _serviceProvider.GetRequiredService<IAuditHelper>()?.GetAuditEntity(entityEntry);
+            //}
             int count= base.SaveChanges();
-            _logger.LogInformation($"成功保存多少条{count}数据");
-            if (count > 0 && auditEntitys.Count() > 0)
-            {
-                var _bus = _serviceProvider.GetService<IEventBus>();
-                _bus.PublishAsync(new AuditEntityEventData() { AuditEntitys = auditEntitys.ToList() }).GetAwaiter();
-            }
+            ////_logger.LogInformation($"成功保存多少条{count}数据");
+            //if (count > 0 && auditEntitys.Count() > 0)
+            //{
+            //    var _bus = _serviceProvider.GetService<IEventBus>();
+            //    _bus.PublishAsync(new AuditEntityEventData() { AuditEntitys = auditEntitys.ToList() }).GetAwaiter();
+            //}
             return count;
         }
 
