@@ -25,9 +25,9 @@ namespace Destiny.Core.Flow
     /// </summary>
     public abstract class DbContextBase : DbContext
     {
-        private readonly IServiceProvider _serviceProvider = null;
-        private readonly AppOptionSettings _option = null;
-        private readonly Microsoft.Extensions.Logging.ILogger _logger = null;
+        protected readonly IServiceProvider _serviceProvider = null;
+        protected readonly AppOptionSettings _option = null;
+        protected readonly Microsoft.Extensions.Logging.ILogger _logger = null;
 
         protected DbContextBase(DbContextOptions options, IServiceProvider serviceProvider)
              : base(options)
@@ -63,23 +63,10 @@ namespace Destiny.Core.Flow
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
 
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public override  Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            IEnumerable<AuditEntryDto> auditEntitys = new List<AuditEntryDto>();
-            IEnumerable<EntityEntry> entityEntry = this.ChangeTracker.Entries();
-            if (_option.AuditEnabled)
-            {
 
-                auditEntitys = _serviceProvider.GetRequiredService<IAuditHelper>()?.GetAuditEntity(entityEntry);
-            }
-            int count = await base.SaveChangesAsync(cancellationToken);
-            _logger.LogInformation($"成功保存多少条{count}数据");
-            if (count > 0 && auditEntitys.Count() > 0)
-            {
-                var _bus= _serviceProvider.GetService<IEventBus>();
-                await _bus.PublishAsync(new AuditEntityEventData() { AuditEntitys= auditEntitys.ToList() });
-            }
-            return count;
+            return base.SaveChangesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -88,21 +75,8 @@ namespace Destiny.Core.Flow
         /// <returns></returns>
         public override int SaveChanges()
         {
-            IEnumerable<AuditEntryDto> auditEntitys = new List<AuditEntryDto>();
-            IEnumerable<EntityEntry> entityEntry = this.ChangeTracker.Entries();
-            if (_option.AuditEnabled)
-            {
 
-                auditEntitys = _serviceProvider.GetRequiredService<IAuditHelper>()?.GetAuditEntity(entityEntry);
-            }
-            int count= base.SaveChanges();
-            _logger.LogInformation($"成功保存多少条{count}数据");
-            if (count > 0 && auditEntitys.Count() > 0)
-            {
-                var _bus = _serviceProvider.GetService<IEventBus>();
-                _bus.PublishAsync(new AuditEntityEventData() { AuditEntitys = auditEntitys.ToList() }).GetAwaiter();
-            }
-            return count;
+            return base.SaveChanges();
         }
 
   

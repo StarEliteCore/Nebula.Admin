@@ -57,7 +57,7 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
             var configuration = context.GetConfiguration();
             context.Services.Configure<AppOptionSettings>(configuration.GetSection("Destiny"));
             var settings = context.GetConfiguration<AppOptionSettings>("Destiny");
-            //context.Services.AddObjectAccessor<AppOptionSettings>(settings);
+            context.Services.AddObjectAccessor<AppOptionSettings>(settings);
             if (!settings.Cors.PolicyName.IsNullOrEmpty() && !settings.Cors.Url.IsNullOrEmpty()) //添加跨域
             {
                 _corePolicyName = settings.Cors.PolicyName;
