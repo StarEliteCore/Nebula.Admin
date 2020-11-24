@@ -11,6 +11,7 @@ using Destiny.Core.Flow.Model.Entities.Rolemenu;
 using Destiny.Core.Flow.Repository.MenuRepository;
 using Destiny.Core.Flow.Security.Identity;
 using Destiny.Core.Flow.Ui;
+using DnsClient.Internal;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,6 +21,7 @@ using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Destiny.Core.Flow.Services.Menu
 {
@@ -33,8 +35,9 @@ namespace Destiny.Core.Flow.Services.Menu
         private readonly IEFCoreRepository<UserRole, Guid> _repositoryUserRole = null;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
+        private readonly Microsoft.Extensions.Logging.ILogger _logger = null;
 
-        public MenuServices(IMenuRepository menuRepository, IUnitOfWork unitOfWork, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository, IMenuFunctionRepository menuFunction, IPrincipal principal, UserManager<User> userManager, RoleManager<Role> roleManager, IEFCoreRepository<UserRole, Guid> repositoryUserRole)
+        public MenuServices(IMenuRepository menuRepository, IUnitOfWork unitOfWork, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository, IMenuFunctionRepository menuFunction, IPrincipal principal, UserManager<User> userManager, RoleManager<Role> roleManager, IEFCoreRepository<UserRole, Guid> repositoryUserRole, Microsoft.Extensions.Logging.ILoggerFactory loggerFactory)
         {
             _menuRepository = menuRepository;
             _roleMenuRepository = roleMenuRepository;
@@ -44,6 +47,7 @@ namespace Destiny.Core.Flow.Services.Menu
             _userManager = userManager;
             _roleManager = roleManager;
             _repositoryUserRole = repositoryUserRole;
+            _logger = loggerFactory.CreateLogger<MenuServices>();
         }
 
         public async Task<OperationResponse> CreateAsync(MenuInputDto input)
@@ -269,7 +273,8 @@ namespace Destiny.Core.Flow.Services.Menu
             {
                 expression = o => menuIds.Contains(o.Id);
             }
-        
+            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
             var result = await _menuRepository.Entities.Where(expression).OrderBy(o => o.Sort).ToTreeResultAsync<MenuEntity, VueDynamicRouterTreeOutDto>((p, c) =>
             {
                 return c.ParentId == null || c.ParentId == Guid.Empty;
@@ -288,6 +293,10 @@ namespace Destiny.Core.Flow.Services.Menu
                      p.ButtonChildren = new List<VueDynamicRouterTreeOutDto>();
                  p.ButtonChildren.AddRange(children.Where(x => x.Type != MenuEnum.Menu));
              });
+            sw.Stop();
+
+            TimeSpan ts2 = sw.Elapsed;
+            _logger.LogInformation($"得到动态路由所有多少{ts2.TotalMilliseconds}毫秒");
             return new OperationResponse(MessageDefinitionType.LoadSucces, result.ItemList, OperationResponseType.Success);
         }
 

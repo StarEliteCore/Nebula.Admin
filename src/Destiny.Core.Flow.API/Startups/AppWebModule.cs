@@ -21,6 +21,7 @@ using System.Security.Principal;
 namespace Destiny.Core.Flow.API.Startups
 {
     [DependsOn(typeof(DependencyAppModule),
+              typeof(MiniProfilerModule),
                typeof(AspNetCoreSwaggerModule),
                typeof(IdentityModule),
                typeof(FunctionModule),
@@ -30,8 +31,8 @@ namespace Destiny.Core.Flow.API.Startups
                typeof(CSRedisModule),
                typeof(MongoDBModelule),
                typeof(MigrationModule),
-               typeof(CodeGeneratorModeule),
-               typeof(MiniProfilerModule)
+               typeof(CodeGeneratorModeule)
+         
         )]
     public class AppWebModule : AppModule
     {
@@ -80,6 +81,7 @@ namespace Destiny.Core.Flow.API.Startups
                 IHttpContextAccessor accessor = provider.GetService<IHttpContextAccessor>();
                 return accessor?.HttpContext?.User;
             });
+ 
         }
 
         public override void ApplicationInitialization(ApplicationContext context)
