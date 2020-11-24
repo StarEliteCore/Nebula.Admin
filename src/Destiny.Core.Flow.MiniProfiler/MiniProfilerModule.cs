@@ -21,7 +21,6 @@ namespace Destiny.Core.Flow.MiniProfiler
                 app.UseMiniProfiler();
             }
           
-            base.ApplicationInitialization(context);
         }
 
         public override void ConfigureServices(ConfigureServicesContext context)
@@ -31,7 +30,7 @@ namespace Destiny.Core.Flow.MiniProfiler
             {
                context.Services.AddMiniProfiler().AddEntityFramework();
             }
-            base.ConfigureServices(context);
+
         }
     }
 }

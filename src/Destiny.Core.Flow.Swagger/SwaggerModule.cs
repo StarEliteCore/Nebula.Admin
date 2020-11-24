@@ -52,7 +52,7 @@ namespace Destiny.Core.Flow.Swagger
             {
 
 
-                s.SwaggerDoc(version, new OpenApiInfo { Title = title, Version = version });
+                s.SwaggerDoc(version, new OpenApiInfo { Title = title, Version = version, Contact = new OpenApiContact {  Name= "Destiny出品",Url = new Uri("https://github.com/DestinyCore/Destiny.Core.Flow") } });
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
 
                 var files = Directory.GetFiles(basePath, "*.xml");
