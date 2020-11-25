@@ -381,3 +381,4 @@ src/Destiny.Core.Flow.API/DestinyCoreMongoDb.txt
 /src/Destiny.Core.Flow.AuthenticationCenter/DestinyCoreDb.txt
 /src/Destiny.Core.Flow.AuthenticationCenter/DestinyCoreMongoDb.txt
 /src/Destiny.Core.Flow.AuthenticationCenter/DestinyCoreRedis.txt
+/src/Destiny.Core.Flow.AuthenticationCenter/Logs
