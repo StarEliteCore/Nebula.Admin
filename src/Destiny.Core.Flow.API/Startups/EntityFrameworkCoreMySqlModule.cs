@@ -21,16 +21,12 @@ namespace Destiny.Core.Flow.API.Startups
        )]
     public class EntityFrameworkCoreMySqlModule : EntityFrameworkCoreModuleBase
     {
-        protected override IServiceCollection AddRepository(IServiceCollection services)
-        {
-            services.AddScoped(typeof(IEFCoreRepository<,>), typeof(Repository<,>));
-            return services;
-        }
 
-        protected override IServiceCollection AddUnitOfWork(IServiceCollection services)
-        {
-            return services.AddScoped<IUnitOfWork, UnitOfWork<DefaultDbContext>>();
-        }
+
+        //protected override IServiceCollection AddUnitOfWork(IServiceCollection services)
+        //{
+        //    return services.AddScoped<IUnitOfWork, UnitOfWork<DefaultDbContext>>();
+        //}
 
         protected override IServiceCollection UseSql(IServiceCollection services)
         {
