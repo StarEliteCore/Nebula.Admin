@@ -12,14 +12,9 @@ namespace Destiny.Core.Flow.Caching.CSRedis
 
         public override void ConfigureServices(ConfigureServicesContext context)
         {
-            var redisPath = context.Services.GetConfiguration()["Destiny:Redis:ConnectionString"];
-            var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath; //获取项目路径
-            var redisConn = Path.Combine(basePath, redisPath);
-            if (!File.Exists(redisConn))
-            {
-                throw new AppException("未找到存放Rdis链接的文件");
-            }
-            var connStr = File.ReadAllText(redisConn).Trim();
+
+
+            var connStr = context.Services.GetFileByConfiguration("Destiny:Redis:ConnectionString", "未找到存放Rdis链接的文件");
             var csredis = new CSRedisClient(connStr);
             RedisHelper.Initialization(csredis);
             context.Services.TryAddSingleton(typeof(ICache<>), typeof(CSRedisCache<>));

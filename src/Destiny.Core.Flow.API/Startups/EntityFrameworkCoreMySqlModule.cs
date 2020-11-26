@@ -23,24 +23,12 @@ namespace Destiny.Core.Flow.API.Startups
     {
 
 
-        //protected override IServiceCollection AddUnitOfWork(IServiceCollection services)
-        //{
-        //    return services.AddScoped<IUnitOfWork, UnitOfWork<DefaultDbContext>>();
-        //}
 
         protected override IServiceCollection UseSql(IServiceCollection services)
         {
-            var fileProvider = services.GetSingletonInstanceOrNull<IFileProvider>();
+       
 
-            var dbpath = services.GetConfiguration()["Destiny:DbContext:MysqlConnectionString"];
-            var fileInfo = fileProvider.GetFileInfo(dbpath);
-            if (!fileInfo.Exists)
-            {
-                throw new AppException("未找到存放数据库链接的文件");
-            }
-
-
-            var mySqlConn = ReadAllText(fileInfo);
+            var mySqlConn = services.GetFileByConfiguration("Destiny:DbContext:MysqlConnectionString", "未找到存放MySql数据库链接的文件");
 
             services.AddDbContext<DefaultDbContext>(oprions =>
             {
@@ -55,20 +43,6 @@ namespace Destiny.Core.Flow.API.Startups
         }
 
 
-        /// <summary>
-        /// 读取全部文本
-        /// </summary>
-        /// <param name="fileInfo"></param>
-        /// <returns></returns>
-        private string ReadAllText(IFileInfo fileInfo)
-        {
-            byte[] buffer;
-            using var stream = fileInfo.CreateReadStream();
-
-            buffer = new byte[stream.Length];
-            stream.Read(buffer, 0, buffer.Length);
-
-            return Encoding.Default.GetString(buffer).Trim();
-        }
+     
     }
 }

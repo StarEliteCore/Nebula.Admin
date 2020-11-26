@@ -34,19 +34,12 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
 
         protected override IServiceCollection UseSql(IServiceCollection services)
         {
-            var dbPath = services.GetConfiguration()["Destiny:DbContext:MysqlConnectionString"];
-            var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath; //获取项目路径
-            var dbcontext = Path.Combine(basePath, dbPath);
-            if (!File.Exists(dbcontext))
-            {
-                throw new AppException("未找到存放数据库链接的文件");
-            }
-            var mysqlconn = File.ReadAllText(dbcontext).Trim();
-          
+            var mySqlConn = services.GetFileByConfiguration("Destiny:DbContext:MysqlConnectionString", "未找到存放Ids4数据库链接的文件");
+
 
             services.AddDbContext<IdentityServer4DefaultDbContext>(oprions =>
             {
-                oprions.UseMySql(mysqlconn, assembly =>
+                oprions.UseMySql(mySqlConn, assembly =>
                 {
                     assembly.MigrationsAssembly("Destiny.Core.Flow.Model");
 

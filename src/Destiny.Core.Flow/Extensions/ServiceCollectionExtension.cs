@@ -1,11 +1,14 @@
-﻿using Destiny.Core.Flow.Options;
+﻿using Destiny.Core.Flow.Exceptions;
+using Destiny.Core.Flow.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace Destiny.Core.Flow.Extensions
 {
@@ -155,6 +158,79 @@ where TImplementation : class, TServiceType
             configure(services);
 
             return services.BuildServiceProviderFromFactory();
+        }
+
+
+
+
+
+        /// <summary>
+        /// 得到文件容器
+        /// </summary>
+        /// <param name="services">服务接口</param>
+        /// <param name="fileName">文件名+后缀名</param>
+        /// <param name="fileNotExistsMsg">文件不存提示信息</param>
+        /// <returns>返回文件中的文件</returns>
+        public static string GetFileText(this IServiceCollection services, string fileName, string fileNotExistsMsg)
+        {
+            fileName.NotNullOrEmpty(nameof(fileName));
+            var fileProvider = services.GetSingletonInstanceOrNull<IFileProvider>();
+
+            if (fileProvider == null)
+            {
+
+                throw new AppException("IFileProvider接口不存在");
+            }
+
+
+            var fileInfo = fileProvider.GetFileInfo(fileName);
+            if (!fileInfo.Exists)
+            {
+                if (!fileNotExistsMsg.IsNullOrEmpty())
+                {
+                    throw new AppException(fileNotExistsMsg);
+                }
+
+            }
+            var text = ReadAllText(fileInfo);
+            if (text.IsNullOrEmpty())
+            {
+                throw new AppException("文件内容不存在");
+            }
+            return text;
+        }
+
+        /// <summary>
+        /// 根据配置得到文件内容
+        /// </summary>
+        /// <param name="services">服务接口</param>
+        /// <param name=""></param>
+        /// <param name="sectionKey">分区键</param>
+        /// <param name="fileNotExistsMsg">文件不存提示信息</param>
+        /// <returns>返回文件中的文件</returns>
+        public static string GetFileByConfiguration(this IServiceCollection services, string sectionKey, string fileNotExistsMsg)
+        {
+
+
+            sectionKey.NotNullOrEmpty(nameof(sectionKey));
+            var configuration = services.GetService<IConfiguration>();
+            var value = configuration?.GetSection(sectionKey)?.Value;
+            return services.GetFileText(value, fileNotExistsMsg);
+
+        }
+
+        /// <summary>
+        /// 读取全部文本
+        /// </summary>
+        /// <param name="fileInfo">文件信息接口</param>
+        /// <returns></returns>
+        private static string ReadAllText(IFileInfo fileInfo)
+        {
+            byte[] buffer;
+            using var stream = fileInfo.CreateReadStream();
+            buffer = new byte[stream.Length];
+            stream.Read(buffer, 0, buffer.Length);
+            return Encoding.Default.GetString(buffer).Trim();
         }
 
     }
