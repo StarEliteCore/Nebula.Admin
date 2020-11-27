@@ -8,6 +8,7 @@ using Destiny.Core.Flow.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using System;
 using System.Linq;
 using System.Security.Principal;
@@ -54,6 +55,8 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
                 IHttpContextAccessor accessor = provider.GetService<IHttpContextAccessor>();
                 return accessor?.HttpContext?.User;
             });
+            var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath; //获取项目路径
+            context.Services.AddSingleton<IFileProvider>(new PhysicalFileProvider(basePath));
             var configuration = context.GetConfiguration();
             context.Services.Configure<AppOptionSettings>(configuration.GetSection("Destiny"));
             var settings = context.GetConfiguration<AppOptionSettings>("Destiny");
@@ -73,11 +76,6 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
                 });
             }
 
-            //context.Services.AddTransient<IPrincipal>();
-            //context.Services.AddAuthentication().AddOpenIdConnect(Options =>
-            //{
-            //    Options.Authority = configuration["AuthServer:Authority"];
-            //});
 
         }
     }

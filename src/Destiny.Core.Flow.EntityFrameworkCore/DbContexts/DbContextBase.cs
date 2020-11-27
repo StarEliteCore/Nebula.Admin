@@ -29,6 +29,10 @@ namespace Destiny.Core.Flow
         protected readonly AppOptionSettings _option = null;
         protected readonly Microsoft.Extensions.Logging.ILogger _logger = null;
 
+        /// <summary>
+        /// 保存更改前
+        /// </summary>
+        protected event EventHandler SaveChangesPreEvent;
         protected DbContextBase(DbContextOptions options, IServiceProvider serviceProvider)
              : base(options)
         {
@@ -41,9 +45,7 @@ namespace Destiny.Core.Flow
 
         public IUnitOfWork UnitOfWork { get; set; }
 
-        protected virtual Task BeforeSaveChanges() => Task.CompletedTask;
 
-        protected virtual Task AfterSaveChanges() => Task.CompletedTask;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -63,12 +65,13 @@ namespace Destiny.Core.Flow
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
 
-        public override  Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             return base.SaveChangesAsync(cancellationToken);
 
         }
 
+      
         /// <summary>
         /// 保存更改
         /// </summary>
@@ -76,10 +79,9 @@ namespace Destiny.Core.Flow
         public override int SaveChanges()
         {
             return base.SaveChanges();
-       
+
         }
 
-  
 
     }
 }

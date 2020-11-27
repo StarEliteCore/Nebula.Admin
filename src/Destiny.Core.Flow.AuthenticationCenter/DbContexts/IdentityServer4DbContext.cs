@@ -29,6 +29,7 @@ namespace Destiny.Core.Flow.AuthenticationCenter.DbContexts
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
+
             return base.SaveChangesAsync(cancellationToken);
         }
 
