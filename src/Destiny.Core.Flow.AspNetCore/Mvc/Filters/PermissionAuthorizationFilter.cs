@@ -32,6 +32,7 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
 
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
+            _logger.LogInformation($"进入权限判断");
             var action = context.ActionDescriptor as ControllerActionDescriptor;
             var isAllowAnonymous = action.ControllerTypeInfo.GetCustomAttribute<AllowAnonymousAttribute>();//获取Action中的特性
             var linkurl = context.HttpContext.Request.Path.Value.Replace("/api/", "");
@@ -62,6 +63,7 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
                     }
                 }
             }
+            _logger.LogInformation($"权限判断结束");
         }
     }
 }

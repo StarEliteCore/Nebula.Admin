@@ -264,6 +264,7 @@ namespace Destiny.Core.Flow.Services.Menu
         /// <returns></returns>
         public async Task<OperationResponse> GetVueDynamicRouterTreeAsync()
         {
+            _logger.LogInformation("进入动态路由方法");
             var userId = _iIdentity.GetUesrId<Guid>();
             int isAdmin=  _iIdentity.FindFirst<int>(DestinyCoreFlowClaimTypes.IsAdmin);
             var roleids = _repositoryUserRole.Entities.Where(x => x.UserId == userId).Select(x => x.RoleId);

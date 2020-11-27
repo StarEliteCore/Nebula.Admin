@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Destiny.Core.Flow.API.Controllers.Menu
 {
@@ -23,11 +24,12 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
     {
         private readonly IMenuServices _menuServices;
         private readonly IMenuFunctionServices _menuFunctionServices;
-
-        public MenuController(IMenuServices menuServices, IMenuFunctionServices menuFunctionServices)
+        private readonly Microsoft.Extensions.Logging.ILogger _logger = null;
+        public MenuController(IMenuServices menuServices, IMenuFunctionServices menuFunctionServices, Microsoft.Extensions.Logging.ILoggerFactory loggerFactory)
         {
             _menuServices = menuServices;
             _menuFunctionServices = menuFunctionServices;
+            _logger = loggerFactory.CreateLogger<MenuController>();
         }
 
 
@@ -129,6 +131,7 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         [DisableAuditing]
         public async Task<AjaxResult> GetVueDynamicRouterTreeAsync()
         {
+            _logger.LogInformation("进入动态路由控制器");
             return (await _menuServices.GetVueDynamicRouterTreeAsync()).ToAjaxResult();
         }
 
