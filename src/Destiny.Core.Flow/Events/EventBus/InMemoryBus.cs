@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Events.EventBus
 {
-    public sealed class InMemoryDefaultBus : IEventBus
+    public sealed class InMemoryDefaultBus : IMediatorHandler
     {
         private readonly IMediator _mediator;
 

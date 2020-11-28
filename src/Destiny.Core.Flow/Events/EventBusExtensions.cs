@@ -9,7 +9,7 @@ namespace Destiny.Core.Flow.Events
 
         public static IServiceCollection AddEvents(this IServiceCollection services)
         {
-            services.TryAddTransient<IEventBus, InMemoryDefaultBus>();
+          
             return services;
         }
 

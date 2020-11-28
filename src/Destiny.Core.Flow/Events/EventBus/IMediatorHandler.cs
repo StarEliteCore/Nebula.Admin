@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using Destiny.Core.Flow.Events.Abstractions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Events.EventBus
@@ -15,6 +16,6 @@ namespace Destiny.Core.Flow.Events.EventBus
         /// <param name="event"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task PublishAsync<T>(T @event, CancellationToken cancellationToken = default) where T : EventBase;
+        Task PublishAsync<T>(T @event, CancellationToken cancellationToken = default) where T : class, IEventBase;
     }
 }
