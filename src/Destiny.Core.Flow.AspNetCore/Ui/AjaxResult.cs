@@ -1,12 +1,14 @@
 ﻿using Destiny.Core.Flow.Enums;
+using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Helpers;
+using Destiny.Core.Flow.Ui;
 
 namespace Destiny.Core.Flow.AspNetCore.Ui
 {
     /// <summary>
     /// Ajax操作结果
     /// </summary>
-    public class AjaxResult
+    public class AjaxResult: ResultBase<object>, IHasResultType<AjaxResultType>
     {
         public AjaxResult() : this(null)
         {
@@ -42,23 +44,7 @@ namespace Destiny.Core.Flow.AspNetCore.Ui
            
         }
 
-        /// <summary>
-        /// 消息
-        /// </summary>
-
-        public string Message { get; set; }
-
-        /// <summary>
-        /// 数据
-        /// </summary>
-
-        public object Data { get; set; }
-
-        /// <summary>
-        /// 是否成功
-        /// </summary>
-
-        public bool Success { get; set; }
+     
 
         /// <summary>
         /// 返回类型

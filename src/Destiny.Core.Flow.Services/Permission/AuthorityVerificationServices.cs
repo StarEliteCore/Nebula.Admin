@@ -47,6 +47,11 @@ namespace Destiny.Core.Flow.Services.Permission
         {
             var userId = _principal?.Identity.GetUesrId<Guid>();//获取登录用户Id
             var isAdmin = _principal?.Identity.FindFirst<int>(DestinyCoreFlowClaimTypes.IsAdmin);
+
+            if (isAdmin == 1)
+            {
+                return true;
+            }
             var roleIds = _repositoryUserRole.Entities.Where(x => x.UserId == userId.Value).Select(x => x.RoleId); //得到用户角色
             var menuIds = _roleMenuRepository.Entities.Where(rm => roleIds.Contains(rm.RoleId)).Select(o => o.MenuId); //获取MenuId集合;
             var funcIds = _menuFuncRepository.Entities.Where(mf => menuIds.Contains(mf.MenuId)).Select(o => o.FunctionId); //得到功能Id集合
