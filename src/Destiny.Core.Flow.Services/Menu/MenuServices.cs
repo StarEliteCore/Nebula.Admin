@@ -22,6 +22,8 @@ using System.Linq.Expressions;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore.Internal;
+using Destiny.Core.Flow.Caching;
 
 namespace Destiny.Core.Flow.Services.Menu
 {
@@ -36,8 +38,9 @@ namespace Destiny.Core.Flow.Services.Menu
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
         private readonly Microsoft.Extensions.Logging.ILogger _logger = null;
-
-        public MenuServices(IMenuRepository menuRepository, IUnitOfWork unitOfWork, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository, IMenuFunctionRepository menuFunction, IPrincipal principal, UserManager<User> userManager, RoleManager<Role> roleManager, IEFCoreRepository<UserRole, Guid> repositoryUserRole, Microsoft.Extensions.Logging.ILoggerFactory loggerFactory)
+        private readonly ICache _cache = null;
+        private readonly AsyncLock _mutex = new AsyncLock();
+        public MenuServices(IMenuRepository menuRepository, IUnitOfWork unitOfWork, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository, IMenuFunctionRepository menuFunction, IPrincipal principal, UserManager<User> userManager, RoleManager<Role> roleManager, IEFCoreRepository<UserRole, Guid> repositoryUserRole, Microsoft.Extensions.Logging.ILoggerFactory loggerFactory, ICache cache)
         {
             _menuRepository = menuRepository;
             _roleMenuRepository = roleMenuRepository;
@@ -48,6 +51,7 @@ namespace Destiny.Core.Flow.Services.Menu
             _roleManager = roleManager;
             _repositoryUserRole = repositoryUserRole;
             _logger = loggerFactory.CreateLogger<MenuServices>();
+            _cache = cache;
         }
 
         public async Task<OperationResponse> CreateAsync(MenuInputDto input)
@@ -258,46 +262,72 @@ namespace Destiny.Core.Flow.Services.Menu
             return new OperationResponse<Dictionary<string, bool>>(MessageDefinitionType.LoadSucces, dic, OperationResponseType.Success);
         }
 
+        private string vueRouterTreeKey = "vueDynamicRouter";
         /// <summary>
         /// 获取Vue动态路由菜单(应该返回Tree)
         /// </summary>
         /// <returns></returns>
         public async Task<OperationResponse> GetVueDynamicRouterTreeAsync()
         {
-            var userId = _iIdentity.GetUesrId<Guid>();
-            int isAdmin=  _iIdentity.FindFirst<int>(DestinyCoreFlowClaimTypes.IsAdmin);
-            var roleids = _repositoryUserRole.Entities.Where(x => x.UserId == userId).Select(x => x.RoleId);
-            var menuIds = _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).Select(o => o.MenuId);
-            Expression<Func<MenuEntity, bool>> expression = o => true;
-            if (isAdmin!=1) //不是系统，不是管理员
+
+            using (await _mutex.LockAsync())
             {
-                expression = o => menuIds.Contains(o.Id);
+                _logger.LogInformation("进入动态路由方法");
+                var userId = _iIdentity.GetUesrId<Guid>();
+                if (userId == Guid.Empty)
+                {
+                    return OperationResponse.Error("userId不存在");
+                }
+
+                var key = $"{vueRouterTreeKey}_{userId}";
+                var treeList =  await _cache.GetAsync<IReadOnlyList<VueDynamicRouterTreeOutDto>>(key); //得到缓存
+
+                if (treeList == null) //不在缓存
+                {
+                    int isAdmin = _iIdentity.FindFirst<int>(DestinyCoreFlowClaimTypes.IsAdmin);
+                    var roleids = _repositoryUserRole.Entities.Where(x => x.UserId == userId).Select(x => x.RoleId);
+                    var menuIds = _roleMenuRepository.Entities.Where(x => roleids.Contains(x.RoleId)).Select(o => o.MenuId);
+                    Expression<Func<MenuEntity, bool>> expression = o => true;
+                    if (isAdmin != 1) //不是系统，不是管理员
+                    {
+                        expression = o => menuIds.Contains(o.Id);
+                    }
+                    System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+                    sw.Start();
+                    var result = await _menuRepository.Entities.Where(expression).OrderBy(o => o.Sort).ToTreeResultAsync<MenuEntity, VueDynamicRouterTreeOutDto>((p, c) =>
+                    {
+                        return c.ParentId == null || c.ParentId == Guid.Empty;
+                    },
+                     (p, c) =>
+                     {
+                         return p.Id == c.ParentId;
+                     },
+                     (p, children) =>
+                     {
+
+                         if (p.Children == null)
+                             p.Children = new List<VueDynamicRouterTreeOutDto>();
+                         p.Children.AddRange(children.Where(x => x.Type == MenuEnum.Menu));
+                         if (p.ButtonChildren == null)
+                             p.ButtonChildren = new List<VueDynamicRouterTreeOutDto>();
+                         p.ButtonChildren.AddRange(children.Where(x => x.Type != MenuEnum.Menu));
+                     });
+                    sw.Stop();
+
+                    TimeSpan ts2 = sw.Elapsed;
+                    _logger.LogInformation($"得到动态路由所有多少{ts2.TotalMilliseconds}毫秒");
+                     await _cache.SetAsync<IReadOnlyList<VueDynamicRouterTreeOutDto>>(key, result.ItemList);
+                    return OperationResponse.Ok(MessageDefinitionType.LoadSucces, result.ItemList);
+
+                }
+                else
+                {
+                    return OperationResponse.Ok(MessageDefinitionType.LoadSucces, treeList);
+                
+                }
+           
             }
-            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-            sw.Start();
-            var result = await _menuRepository.Entities.Where(expression).OrderBy(o => o.Sort).ToTreeResultAsync<MenuEntity, VueDynamicRouterTreeOutDto>((p, c) =>
-            {
-                return c.ParentId == null || c.ParentId == Guid.Empty;
-            },
-             (p, c) =>
-             {
-                 return p.Id == c.ParentId;
-             },
-             (p, children) =>
-             {
-
-                 if (p.Children == null)
-                     p.Children = new List<VueDynamicRouterTreeOutDto>();
-                 p.Children.AddRange(children.Where(x => x.Type == MenuEnum.Menu));
-                 if (p.ButtonChildren == null)
-                     p.ButtonChildren = new List<VueDynamicRouterTreeOutDto>();
-                 p.ButtonChildren.AddRange(children.Where(x => x.Type != MenuEnum.Menu));
-             });
-            sw.Stop();
-
-            TimeSpan ts2 = sw.Elapsed;
-            _logger.LogInformation($"得到动态路由所有多少{ts2.TotalMilliseconds}毫秒");
-            return new OperationResponse(MessageDefinitionType.LoadSucces, result.ItemList, OperationResponseType.Success);
+         
         }
 
         /// <summary>

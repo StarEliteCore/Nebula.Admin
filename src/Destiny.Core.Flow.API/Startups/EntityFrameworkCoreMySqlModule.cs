@@ -16,7 +16,7 @@ using System.Text;
 namespace Destiny.Core.Flow.API.Startups
 {
     [DependsOn(
-              typeof(EventBusAppModule)
+              typeof(MediatorAppModule)
 
        )]
     public class EntityFrameworkCoreMySqlModule : EntityFrameworkCoreModuleBase

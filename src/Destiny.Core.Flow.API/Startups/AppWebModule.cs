@@ -24,7 +24,7 @@ namespace Destiny.Core.Flow.API.Startups
                typeof(AspNetCoreSwaggerModule),
                typeof(IdentityModule),
                typeof(FunctionModule),
-               typeof(EventBusAppModule),
+               typeof(MediatorAppModule),
                typeof(EntityFrameworkCoreMySqlModule),
                typeof(AutoMapperModule),
                typeof(CSRedisModule),

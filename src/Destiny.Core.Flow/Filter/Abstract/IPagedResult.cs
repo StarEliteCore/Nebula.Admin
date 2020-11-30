@@ -1,8 +1,9 @@
-﻿using Destiny.Core.Flow.Ui;
+﻿using Destiny.Core.Flow.Enums;
+using Destiny.Core.Flow.Ui;
 
 namespace Destiny.Core.Flow.Filter.Abstract
 {
-    public interface IPagedResult<TModel> : IResultBase, IListResult<TModel>
+    public interface IPagedResult<TModel> : IResultBase, IListResult<TModel>, IHasResultType<AjaxResultType>
     {
 
 

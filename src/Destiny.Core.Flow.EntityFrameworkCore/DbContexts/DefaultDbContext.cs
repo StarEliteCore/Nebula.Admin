@@ -48,7 +48,7 @@ namespace Destiny.Core.Flow
             _logger.LogInformation($"成功保存多少条{count}数据");
             if (count > 0 && auditEntitys.Count() > 0)
             {
-                var _bus = _serviceProvider.GetService<IEventBus>();
+                var _bus = _serviceProvider.GetService<IMediatorHandler>();
                 await _bus.PublishAsync(new AuditEntityEventData() { AuditEntitys = auditEntitys.ToList() });
             }
             return count;
@@ -71,7 +71,7 @@ namespace Destiny.Core.Flow
             _logger.LogInformation($"成功保存多少条{count}数据");
             if (count > 0 && auditEntitys.Count() > 0)
             {
-                var _bus = _serviceProvider.GetService<IEventBus>();
+                var _bus = _serviceProvider.GetService<IMediatorHandler>();
                 _bus.PublishAsync(new AuditEntityEventData() { AuditEntitys = auditEntitys.ToList() }).GetAwaiter();
             }
             return count;

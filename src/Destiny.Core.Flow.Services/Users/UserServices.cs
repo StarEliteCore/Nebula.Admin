@@ -27,9 +27,9 @@ namespace Destiny.Core.Flow.Services
         private readonly RoleManager<Role> _roleManager = null;
         private readonly IUnitOfWork _unitOfWork = null;
         private readonly IUserRoleService _userRoleService = null;
-        private readonly IEventBus _bus = null;
+        private readonly IMediatorHandler _bus = null;
 
-        public UserServices(UserManager<User> userManager, RoleManager<Role> roleManager, IUnitOfWork unitOfWork, IUserRoleService userRoleService, IEventBus bus)
+        public UserServices(UserManager<User> userManager, RoleManager<Role> roleManager, IUnitOfWork unitOfWork, IUserRoleService userRoleService, IMediatorHandler bus)
         {
             _userManager = userManager;
             _roleManager = roleManager;

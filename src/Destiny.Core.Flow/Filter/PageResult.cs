@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Filter.Abstract;
+﻿using Destiny.Core.Flow.Enums;
+using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.Ui;
 using System.Collections.Generic;
 
@@ -8,7 +9,7 @@ namespace Destiny.Core.Flow.Filter
     /// 分页数据
     /// </summary>
     /// <typeparam name="T">动态类型</typeparam>
-    public class PageResult<T> : ResultBase, IPagedResult<T>
+    public class PageResult<T> : ResultBase, IPagedResult<T>, IHasResultType<AjaxResultType>
     {
 
         public PageResult() : this(new T[0], 0, "查询成功", true)
@@ -21,6 +22,7 @@ namespace Destiny.Core.Flow.Filter
             Total = total;
             Success = success;
             this.Message = message;
+            Type = success ? AjaxResultType.Success : AjaxResultType.Error;
         }
 
 
@@ -31,5 +33,6 @@ namespace Destiny.Core.Flow.Filter
         public int Total { get; set; }
 
         public IReadOnlyList<T> ItemList { get; set; }
+        public AjaxResultType Type { get; set; }
     }
 }

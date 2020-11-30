@@ -16,7 +16,7 @@ namespace Destiny.Core.Flow.AspNetCore.Ui
         public static PageList<T> ToPageList<T>(this IPagedResult<T> pageResult)
         {
             var result = pageResult;
-            return new PageList<T>() { ItemList = result.ItemList, Message = result.Message, Total = result.Total, Success = result.Success };
+            return new PageList<T>() { ItemList = result.ItemList, Message = result.Message, Total = result.Total, Success = result.Success,Type= result.Type };
         }
     }
 }

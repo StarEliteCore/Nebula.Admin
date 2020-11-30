@@ -19,10 +19,10 @@ namespace Destiny.Core.Flow.Services.Identity
         private readonly SignInManager<User> _signInManager = null;
         private readonly UserManager<User> _userManager = null;
         private readonly IJwtBearerService _jwtBearerService = null;
-        private readonly IEventBus _bus;
+        private readonly IMediatorHandler _bus;
         private readonly IPrincipal _principal;
 
-        public IdentityServices(SignInManager<User> signInManager, UserManager<User> userManager, IJwtBearerService jwtBearerService, IEventBus bus, IPrincipal principal)
+        public IdentityServices(SignInManager<User> signInManager, UserManager<User> userManager, IJwtBearerService jwtBearerService, IMediatorHandler bus, IPrincipal principal)
         {
             _signInManager = signInManager;
             _userManager = userManager;
