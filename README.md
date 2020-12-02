@@ -9,17 +9,26 @@ Destiny.Core.Flow重写微软的identity用户角色和重写IDS4的实体，以
 ✔ [在线展示](http://admin.destinycore.club)
 
 账号Test002    123456
- 
+
 
 ✔ [在线展示后端API链接](http://api.destinycore.club) 
 
 ✔ [VUE版本]
- 
+
  https://github.com/DestinyCore/Destiny.Core.Flow.WebUI
 
 + ## 关联前端
 
 ✔ [关联前端项目链接](https://github.com/DestinyCore/Destiny.Core.Flow.WebUI)
+
++ ## nuget 模板包
+
+  + [admin框架模板]([NuGet Gallery | SuktCoreWebApi.Templates 1.4.3](https://www.nuget.org/packages/SuktCoreWebApi.Templates/))
+  + [非admin框架模板]([NuGet Gallery | SuktCoreBusinessWebApi.Templates 1.0.3](https://www.nuget.org/packages/SuktCoreBusinessWebApi.Templates/))
+  + 先执行安装命令
+    + 创建模板项目命令 
+    + admin 模板创建命令    dotnet new suktcorebusinesswebapitpl -n your name  
+    + 非 admin 模板命令       dotnet new suktcorewebapitpl -n your name
 
 + ## 采用技术栈
 
@@ -41,7 +50,7 @@ Destiny.Core.Flow重写微软的identity用户角色和重写IDS4的实体，以
     + #### 数据字典
 
     + #### 组织架构
-   
+  
     + #### 操作审计
     
     + #### 数据审计
@@ -67,11 +76,11 @@ Destiny.Core.Flow重写微软的identity用户角色和重写IDS4的实体，以
       重写微软Identity自带用户角色的代码。
       
     + #### Destiny.Core.Flow.IdentityServer
- 
+
       重写IdentityServer相关接口，及相关映射，实现通过仓储操作相关数据
       
      + #### Destiny.Core.Flow.IdentityServer.Entities
- 
+
        IdentityServer相关实体
       
     + #### Destiny.Core.Flow.AspNetCore
@@ -105,7 +114,7 @@ Destiny.Core.Flow重写微软的identity用户角色和重写IDS4的实体，以
     + #### Destiny.Core.Flow.API
 
       API接口定义。
-   
+  
     + #### Destiny.Core.Flow.AuthenticationCenter
       IdentityServer授权中心
     + to do...
@@ -129,6 +138,7 @@ Destiny.Core.Flow重写微软的identity用户角色和重写IDS4的实体，以
     + #### Destiny.Core.Flow.MongoDB 模块
       注意MongoDB链接 mongodb://127.0.0.2/Test
       集成MongoDB分页查询，添加，更新，删除。实现MongoDB单独仓储
+  
 + ## 3.框架技术
 
   + ### 数据库
