@@ -20,8 +20,8 @@ namespace Destiny.Core.Flow.FluentValidation
             var fvValidator = _factory.GetValidator(model.GetType());
 
             if (fvValidator == null) return Enumerable.Empty<ValidationFailure>();
-
-            var validationResult = fvValidator.Validate((IValidationContext)model);
+            var context = new ValidationContext<object>(model);
+            var validationResult = fvValidator.Validate(context);
             var failures = validationResult.Errors
                 .Select(e => new ValidationFailure(e.PropertyName, e.ErrorMessage))
                 .ToList();

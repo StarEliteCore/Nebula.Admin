@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.AspNetCore.Api;
+using Destiny.Core.Flow.AspNetCore.Mvc.Filters;
 using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Audit;
 using Destiny.Core.Flow.Dtos;
@@ -39,7 +40,7 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Description("异步创建用户")]
-
+        //[ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<AjaxResult> CreateAsync([FromBody] UserInputDto dto)
         {
 

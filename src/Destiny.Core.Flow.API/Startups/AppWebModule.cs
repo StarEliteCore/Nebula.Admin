@@ -5,6 +5,7 @@ using Destiny.Core.Flow.CodeGenerator;
 using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Events;
 using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.FluentValidation;
 using Destiny.Core.Flow.MiniProfiler;
 using Destiny.Core.Flow.Model;
 using Destiny.Core.Flow.Modules;
@@ -31,6 +32,7 @@ namespace Destiny.Core.Flow.API.Startups
                typeof(MongoDBModelule),
                typeof(MigrationModule),
                typeof(CodeGeneratorModeule)
+               //typeof(FluentValidationModuleBase)
 
         )]
     public class AppWebModule : AppModule
@@ -41,6 +43,7 @@ namespace Destiny.Core.Flow.API.Startups
         public override void ConfigureServices(ConfigureServicesContext context)
         {
             context.Services.AddTransient(typeof(Lazy<>), typeof(LazyFactory<>));
+            context.Services.AddScoped<ValidationFilterAttribute>();
             var configuration = context.GetConfiguration();
             var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath; //获取项目路径
             context.Services.AddSingleton<IFileProvider>(new PhysicalFileProvider(basePath));
