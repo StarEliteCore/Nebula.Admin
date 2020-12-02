@@ -188,7 +188,7 @@ namespace Destiny.Core.Flow.Extensions
             {
                 if (list.Any(e => childswhere(item, e)))
                 {
-                    var nodedata = list.Where(e => childswhere(item, e)).ToList();
+                    var nodedata = list.Where(e => childswhere(item, e));
                     foreach (var child in nodedata)
                     {
                         //添加子集
