@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Exceptions;
+﻿using Destiny.Core.Flow.Dependency;
+using Destiny.Core.Flow.Exceptions;
 using Destiny.Core.Flow.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -233,5 +234,31 @@ where TImplementation : class, TServiceType
             return Encoding.Default.GetString(buffer).Trim();
         }
 
+        /// <summary>
+        /// 添加文件提供器
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddFileProvider(this IServiceCollection services)
+        {
+
+            var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath; //获取项目路径
+            return services.AddSingleton<IFileProvider>(new PhysicalFileProvider(basePath));
+
+        }
+
+
+        /// <summary>
+        /// 添加延迟工厂
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddLazyFactory(this IServiceCollection services)
+        {
+            return services.AddTransient(typeof(Lazy<>), typeof(LazyFactory<>));
+        }
+
+
+ 
     }
 }

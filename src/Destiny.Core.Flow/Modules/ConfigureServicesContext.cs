@@ -3,6 +3,7 @@ using Destiny.Core.Flow.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Destiny.Core.Flow.Modules
 {
     /// <summary>
@@ -35,6 +36,25 @@ namespace Destiny.Core.Flow.Modules
         {
             key.NotNullOrEmpty(nameof(key));
             return this.GetConfiguration()?.GetSection(key);
+        }
+
+
+        /// <summary>
+        /// 得到配置文件
+        /// </summary>
+        /// <typeparam name="TOptionSettings"></typeparam>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public TOptionSettings GetOptionSettings<TOptionSettings>(string key) where TOptionSettings : class
+        {
+            var configuration = this.GetConfiguration();
+            var settings = configuration.GetSection(key).Get<TOptionSettings>();
+            if (settings != null)
+            {
+                return settings;
+            }
+
+            return Services.GetObject<TOptionSettings>();
         }
     }
 }

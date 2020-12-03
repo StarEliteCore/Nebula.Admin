@@ -12,6 +12,7 @@ using Destiny.Core.Flow.Modules;
 using Destiny.Core.Flow.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using System;
@@ -39,17 +40,19 @@ namespace Destiny.Core.Flow.API.Startups
     {
         private string _corePolicyName = string.Empty;
 
-
+    
         public override void ConfigureServices(ConfigureServicesContext context)
         {
-            context.Services.AddTransient(typeof(Lazy<>), typeof(LazyFactory<>));
-            context.Services.AddScoped<ValidationFilterAttribute>();
-            var configuration = context.GetConfiguration();
-            var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath; //获取项目路径
-            context.Services.AddSingleton<IFileProvider>(new PhysicalFileProvider(basePath));
-            context.Services.Configure<AppOptionSettings>(configuration.GetSection("Destiny"));
+   
 
-            var settings = context.GetConfiguration<AppOptionSettings>("Destiny");
+            context.Services.AddLazyFactory();
+            context.Services.AddFileProvider();
+            var configuration = context.GetConfiguration();
+
+            var section = configuration.GetSection("Destiny");
+            context.Services.Configure<AppOptionSettings>(section);
+
+            var settings = section.Get<AppOptionSettings>();
             context.Services.AddObjectAccessor<AppOptionSettings>(settings);
             if (!settings.Cors.PolicyName.IsNullOrEmpty() && !settings.Cors.Url.IsNullOrEmpty()) //添加跨域
             {

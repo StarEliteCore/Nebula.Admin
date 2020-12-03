@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.Dependency;
+using Destiny.Core.Flow.Exceptions;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace Destiny.Core.Flow.Extensions
         {
             if (services.Any(s => s.ServiceType == typeof(ObjectAccessor<T>)))
             {
-                throw new Exception("在类型“{typeof(T).AssemblyQualifiedName)}”之前注册了对象: ");
+                throw new AppException("在类型“{typeof(T).AssemblyQualifiedName)}”之前注册了对象: ");
             }
 
             //Add to the beginning for fast retrieve
@@ -50,7 +51,7 @@ namespace Destiny.Core.Flow.Extensions
         public static T GetObject<T>(this IServiceCollection services)
             where T : class
         {
-            return services.GetObjectOrNull<T>() ?? throw new Exception($"找不到的对象 {typeof(T).AssemblyQualifiedName} 服务。请确保您以前使用过AddObjectAccessor！");
+            return services.GetObjectOrNull<T>() ?? throw new AppException($"找不到的对象 {typeof(T).AssemblyQualifiedName} 服务。请确保您以前使用过AddObjectAccessor！");
         }
     }
 }
