@@ -15,6 +15,8 @@ namespace Destiny.Core.Flow.Dependency
     {
         public override void ConfigureServices(ConfigureServicesContext context)
         {
+
+            context.Services.AddTransient(typeof(Lazy<>), typeof(LazyFactory<>));
             var services = context.Services;
 
             AddAutoInjection(services);

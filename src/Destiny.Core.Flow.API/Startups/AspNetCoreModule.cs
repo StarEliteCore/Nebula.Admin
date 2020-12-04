@@ -20,25 +20,21 @@ namespace Destiny.Core.Flow.API.Startups
     public class AspNetCoreModule : AppModule
     {
 
-        protected virtual AppOptionSettings Configure(ConfigureServicesContext context)
-        {
-            var configuration = context.GetConfiguration();
-            context.Services.Configure<AppOptionSettings>(configuration.GetSection("Destiny"));
 
-            var settings = context.GetConfiguration<AppOptionSettings>("Destiny");
-            context.Services.AddObjectAccessor<AppOptionSettings>(settings);
-            return settings;
-
-        }
         public override void ConfigureServices(ConfigureServicesContext context)
         {
-            var settings = Configure(context);
+            var settings = context.Services.GetObject<AppOptionSettings>();
             context.Services.AddFileProvider();
-            context.Services.AddTransient(typeof(Lazy<>), typeof(LazyFactory<>));
+   
 
-            this.AddCors(context,settings);
+            this.AddCors(context);
             context.Services.AddHttpContextAccessor();
-            this.AddControllers(context);
+            context.Services.AddControllers(o => this.AddMvcOptions(o)).AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
+
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+            });
 
             context.Services.AddTransient<IPrincipal>(provider =>
             {
@@ -48,36 +44,13 @@ namespace Destiny.Core.Flow.API.Startups
 
         }
 
-        protected virtual void AddCors(ConfigureServicesContext context, AppOptionSettings settings)
+        protected virtual void AddCors(ConfigureServicesContext context)
         {
 
-            if (!settings.Cors.PolicyName.IsNullOrEmpty() && !settings.Cors.Url.IsNullOrEmpty()) //添加跨域
-            {
-
-                context.Services.AddCors(c =>
-                {
-                    c.AddPolicy(settings.Cors.PolicyName, policy =>
-                    {
-                        policy.WithOrigins(settings.Cors.Url
-                          .Split(",", StringSplitOptions.RemoveEmptyEntries).ToArray())
-                        //policy.WithOrigins("http://localhost:5001")//支持多个域名端口，注意端口号后不要带/斜杆：比如localhost:8000/，是错的
-                        .AllowAnyHeader().AllowAnyMethod().AllowCredentials();//允许cookie;
-                    });
-                });
-            }
 
         }
 
-        protected virtual void AddControllers(ConfigureServicesContext context)
-        {
-
-            context.Services.AddControllers(o=>this.AddMvcOptions(o)).AddNewtonsoftJson(options =>
-            {
-                options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
-
-                options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
-            });
-        }
+      
 
         protected virtual void AddMvcOptions(MvcOptions options)
         {
@@ -88,49 +61,16 @@ namespace Destiny.Core.Flow.API.Startups
         {
             var app = context.GetApplicationBuilder();
             app.UseRouting();
-            UseCors(context,app);
-            this.ApplicationInitializationMiddle(context,app);
-            UseEndpoints(app);
+            UseCors(context);
+            
         }
 
-        protected virtual void ApplicationInitializationMiddle(ApplicationContext context,IApplicationBuilder app)
-        {
-            app.UseAuthentication(); //认证
-            app.UseAuthorization();//授权
-
-        }
-
-        protected virtual void UseCors(ApplicationContext context,IApplicationBuilder app)
+        protected virtual void UseCors(ApplicationContext context)
         {
           
-            var  settings=    context.ServiceProvider.GetRequiredService<IObjectAccessor<AppOptionSettings>>()?.Value;
-            if (settings?.Cors != null)
-            {
-                string corePolicyName = settings.Cors.PolicyName;
-                if (!corePolicyName.IsNullOrEmpty())
-                {
-                    app.UseCors(corePolicyName); //添加跨域中间件
-                }
-            }
+          
   
         }
 
-        protected virtual void UseEndpoints(IApplicationBuilder app)
-        {
-
-            app.UseEndpoints(endpoints => EndpointRouteBuilder(endpoints));
-        }
-
-        protected virtual void EndpointRouteBuilder(IEndpointRouteBuilder endpoints)
-        {
-
-            endpoints.MapControllers();
-        }
-
-
-        protected void AddMvc(IServiceCollection services) {
-
-            services.AddMvc();
-        }
     }
 }
