@@ -35,6 +35,7 @@ namespace Destiny.Core.Flow.IdentityServer
             //var app = context.GetApplicationBuilder();
             //app.UseStaticFiles();
 
+         
         }
 
 

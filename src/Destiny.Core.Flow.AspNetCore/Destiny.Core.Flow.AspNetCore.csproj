@@ -1,23 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
+	<ItemGroup>
+	
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.8" />
+	</ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.8" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Destiny.Core.Flow.Caching\Destiny.Core.Flow.Caching.csproj" />
-    <ProjectReference Include="..\Destiny.Core.Flow.Model\Destiny.Core.Flow.Model.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow\Destiny.Core.Flow.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Middleware\" />
   </ItemGroup>
 
 </Project>

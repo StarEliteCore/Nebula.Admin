@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Destiny.Core.Flow.AspNetCore\Destiny.Core.Flow.AspNetCore.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.AutoMapper\Destiny.Core.Flow.AutoMapper.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.IdentityServer4\Destiny.Core.Flow.IdentityServer.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Model\Destiny.Core.Flow.Model.csproj" />

@@ -4,6 +4,7 @@ using Destiny.Core.Flow.Model.Security;
 using Destiny.Core.Flow.Modules;
 using Destiny.Core.Flow.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -62,7 +63,7 @@ namespace Destiny.Core.Flow.API.Startups
                 ClockSkew = TimeSpan.Zero, ////允许的服务器时间偏移量
                 LifetimeValidator = (nbf, exp, token, param) => exp > DateTime.UtcNow
             };
-
+ 
             services.AddAuthorization();
             services.AddAuthentication(x =>
             {
@@ -146,6 +147,8 @@ namespace Destiny.Core.Flow.API.Startups
         {
             return identityBuilder.AddDefaultTokenProviders();
         }
+
+ 
     }
 
 }
