@@ -183,8 +183,3 @@ Destiny.Core.Flow重写微软的identity用户角色和重写IDS4的实体，以
 
 + https://www.cnblogs.com/pual13/p/12587113.html 项目名字可能有些不同思路一样
 
-
-
-License
-MIT
-Free Software, Hell Yeah!
