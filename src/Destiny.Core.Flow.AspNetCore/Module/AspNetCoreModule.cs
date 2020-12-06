@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow.AspNetCore.Module
 {
-   public  class AspNetCoreModule:AspNetCoreModuleBase
+    public class AspNetCoreModule : AspNetCoreModuleBase
     {
     }
 }

@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.AuthenticationCenter.Startups
 {
+   /// <summary>
+   /// 这里也可以抽出来
+   /// </summary>
     public class IdentityModule : IdentityModuleBase<UserStore, RoleStore, User, UserRole, Role, Guid, Guid>
     {
         protected override void AddAuthentication(IServiceCollection services)
@@ -36,7 +39,7 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
 
         protected override IdentityBuilder UseIdentityBuilder(IdentityBuilder identityBuilder)
         {
-            return identityBuilder;/*.AddEntityFrameworkStores<DefaultDbContext>().AddDefaultTokenProviders();*/
+            return identityBuilder;
         }
     }
 }

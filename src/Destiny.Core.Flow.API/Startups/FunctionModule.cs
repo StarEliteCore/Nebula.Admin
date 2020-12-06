@@ -3,7 +3,7 @@ using Destiny.Core.Flow.Model.Security;
 
 namespace Destiny.Core.Flow.API.Startups
 {
-    public class FunctionModule : FunctionModuleBase<ApiControllerBase>
+    public class FunctionModule : FunctionModuleBase <ApiControllerBase>
     {
 
     }
