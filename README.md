@@ -185,3 +185,6 @@ Destiny.Core.Flow重写微软的identity用户角色和重写IDS4的实体，以
 
 
 
+License
+MIT
+Free Software, Hell Yeah!
