@@ -52,17 +52,34 @@ namespace Destiny.Core.Flow.Services.Permission
             {
                 return true;
             }
-            var roleIds = _repositoryUserRole.Entities.Where(x => x.UserId == userId.Value).Select(x => x.RoleId); //得到用户角色
-            var menuIds = _roleMenuRepository.Entities.Where(rm => roleIds.Contains(rm.RoleId)).Select(o => o.MenuId); //获取MenuId集合;
-            var funcIds = _menuFuncRepository.Entities.Where(mf => menuIds.Contains(mf.MenuId)).Select(o => o.FunctionId); //得到功能Id集合
 
+         
             if (isAdmin != 1)
             {
-                var isExistUrl = await _funcRepository.Entities.AnyAsync(f => funcIds.Contains(f.Id) && f.LinkUrl == url);
+                var userRoles = _repositoryUserRole.Entities.Where(o => o.UserId == userId.Value);
+                var roleMenus = _roleMenuRepository.Entities.Select(o => new { o.RoleId, o.MenuId });
+                var menuIds1 = _menuFuncRepository.Entities.Select(o => new { o.MenuId, o.FunctionId });
+
+                var funcIds = _funcRepository.Entities.Select(o => new { o.Id, o.LinkUrl });
+
+                //是否存在
+                var isExistUrl = 
+                    await userRoles.
+                    Join(roleMenus, ur => ur.RoleId,rm => rm.RoleId, (ur, rm) => new { rm.MenuId }).
+                    Join(menuIds1, m => m.MenuId, mf => mf.MenuId, (m, mf) => mf.FunctionId).
+                    Join(funcIds, fid => fid, f => f.Id, (fid, f) => f.LinkUrl).AnyAsync(o => o == url); //待优化
                 if (!isExistUrl)
                 {
                     return false;
                 }
+                //var roleIds = _repositoryUserRole.Entities.Where(x => x.UserId == userId.Value).Select(x => x.RoleId); //得到用户角色
+                //var menuIds = _roleMenuRepository.Entities.Where(rm => roleIds.Contains(rm.RoleId)).Select(o => o.MenuId); //获取MenuId集合;
+                //var funcIds = _menuFuncRepository.Entities.Where(mf => menuIds.Contains(mf.MenuId)).Select(o => o.FunctionId); //得到功能Id集合
+                //var isExistUrl = await _funcRepository.Entities.AnyAsync(f => funcIds.Contains(f.Id) && f.LinkUrl == url);
+                //if (!isExistUrl)
+                //{
+                //    return false;
+                //}
 
             }
             return true;
