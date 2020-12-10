@@ -4,6 +4,7 @@
 **Destiny.Core.Flow是一个基于`.net core3.1`平台轻量级的模块化开发框架Admin管理应用框架，旨在提升团队的快速开发输出能力，由常用公共操作类（工具类、帮助类）、分层架构基类，第三方组件封装等组成。
 Destiny.Core.Flow重写微软的identity用户角色和重写IDS4的实体，以及IDS4的查询仓库实现，将IDS4和Identity以及其他模块合并成为一个上下文，在使用IDS4时不需要在维护几个上下文，统一了上下文管理。
 框架lambda查询不需要在后台写各种判断，所有的查询条件通过前端传入，从而减少后台的一些字符段判断等，使用动态拼接lambda。**
++ # 本项目长期维护有疑问请提交issues
 + ## 在线地址
 
 ✔ [在线展示](http://admin.destinycore.club)
@@ -183,6 +184,4 @@ Destiny.Core.Flow重写微软的identity用户角色和重写IDS4的实体，以
 ### 框架博客
 
 + https://www.cnblogs.com/pual13/p/12587113.html 项目名字可能有些不同思路一样
-
-
 
