@@ -85,13 +85,13 @@ where TImplementation : class, TServiceType
         public static AppOptionSettings GetAppSettings(this IServiceCollection services)
         {
             services.NotNull(nameof(services));
-            return services.GetService<IOptions<AppOptionSettings>>()?.Value;
+            return services.GetSingletonInstanceOrNull<IOptions<AppOptionSettings>>()?.Value;
         }
 
         public static IConfiguration GetConfiguration(this IServiceCollection services)
         {
 
-            return services.GetService<IConfiguration>();
+            return services.GetSingletonInstanceOrNull<IConfiguration>();
         }
 
 

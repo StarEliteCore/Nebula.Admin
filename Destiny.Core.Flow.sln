@@ -74,7 +74,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Authentic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.MiniProfiler", "src\Destiny.Core.Flow.MiniProfiler\Destiny.Core.Flow.MiniProfiler.csproj", "{BF84625C-82CB-4F84-A799-F21F81E563F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.AspNetCore", "src\Destiny.Core.Flow.AspNetCore\Destiny.Core.Flow.AspNetCore.csproj", "{40BACBCF-713A-4F38-ABE8-57B6BC3EC7A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.AspNetCore", "src\Destiny.Core.Flow.AspNetCore\Destiny.Core.Flow.AspNetCore.csproj", "{40BACBCF-713A-4F38-ABE8-57B6BC3EC7A2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.EntityFrameworkCore.SqlServer", "src\Destiny.Core.Flow.EntityFrameworkCore.SqlServer\Destiny.Core.Flow.EntityFrameworkCore.SqlServer.csproj", "{07DD2E3D-A473-4C12-A5E0-7BC91892CA20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Destiny.Core.Flow.EntityFrameworkCore.MySql", "src\Destiny.Core.Flow.EntityFrameworkCore.MySql\Destiny.Core.Flow.EntityFrameworkCore.MySql.csproj", "{CB0D4D30-0D85-42D0-AC01-00257E3805A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -194,6 +198,14 @@ Global
 		{40BACBCF-713A-4F38-ABE8-57B6BC3EC7A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40BACBCF-713A-4F38-ABE8-57B6BC3EC7A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40BACBCF-713A-4F38-ABE8-57B6BC3EC7A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07DD2E3D-A473-4C12-A5E0-7BC91892CA20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07DD2E3D-A473-4C12-A5E0-7BC91892CA20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07DD2E3D-A473-4C12-A5E0-7BC91892CA20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07DD2E3D-A473-4C12-A5E0-7BC91892CA20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB0D4D30-0D85-42D0-AC01-00257E3805A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB0D4D30-0D85-42D0-AC01-00257E3805A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB0D4D30-0D85-42D0-AC01-00257E3805A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB0D4D30-0D85-42D0-AC01-00257E3805A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -231,6 +243,8 @@ Global
 		{4D580BFD-1D8A-4A23-B152-5A6739F26C97} = {9A347066-1CEA-4FD6-BD7E-598A7FF21E6C}
 		{BF84625C-82CB-4F84-A799-F21F81E563F1} = {D49782B1-99E0-442F-98DD-6D30CD09F6BA}
 		{40BACBCF-713A-4F38-ABE8-57B6BC3EC7A2} = {968F74F4-4D0A-4832-A7EA-5CB2BA08AF8A}
+		{07DD2E3D-A473-4C12-A5E0-7BC91892CA20} = {968F74F4-4D0A-4832-A7EA-5CB2BA08AF8A}
+		{CB0D4D30-0D85-42D0-AC01-00257E3805A2} = {968F74F4-4D0A-4832-A7EA-5CB2BA08AF8A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {468F450C-837F-4FCD-8E06-3E12690DDED6}

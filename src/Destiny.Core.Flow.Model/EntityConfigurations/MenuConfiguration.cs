@@ -12,8 +12,8 @@ namespace Destiny.Core.Flow.Model.EntityConfigurations
             b.HasKey(x => x.Id);
             b.Property(x => x.Name).HasMaxLength(50).IsRequired();
             b.Property(x => x.ParentId).HasDefaultValue(Guid.Empty);
-            b.Property(x => x.Path).HasMaxLength(200).IsRequired();
-            b.Property(x => x.Component).HasMaxLength(400).IsRequired();
+            b.Property(x => x.Path).HasMaxLength(200).IsRequired(false);
+            b.Property(x => x.Component).HasMaxLength(400).IsRequired(false);
             b.Property(x => x.Sort).HasDefaultValue(0);
             b.Property(x => x.Icon).HasMaxLength(50);
             b.Property(x => x.IsDeleted).HasDefaultValue(0);

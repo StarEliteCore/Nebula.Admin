@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Destiny.Core.Flow.Model.Migrations
 {
-    public partial class _20201206 : Migration
+    public partial class _20201212 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -210,12 +210,12 @@ namespace Destiny.Core.Flow.Model.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     Sort = table.Column<int>(nullable: false, defaultValue: 0),
-                    Path = table.Column<string>(maxLength: 200, nullable: false),
+                    Path = table.Column<string>(maxLength: 200, nullable: true),
                     ParentId = table.Column<Guid>(nullable: false, defaultValue: new Guid("00000000-0000-0000-0000-000000000000")),
                     Icon = table.Column<string>(maxLength: 50, nullable: true),
                     Description = table.Column<string>(nullable: true),
                     ParentNumber = table.Column<string>(nullable: true),
-                    Component = table.Column<string>(maxLength: 400, nullable: false),
+                    Component = table.Column<string>(maxLength: 400, nullable: true),
                     Redirect = table.Column<string>(nullable: true),
                     Depth = table.Column<int>(nullable: false),
                     Type = table.Column<int>(nullable: false),

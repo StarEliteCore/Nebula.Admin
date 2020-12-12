@@ -1,11 +1,15 @@
-﻿namespace Destiny.Core.Flow.Options
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Destiny.Core.Flow.Options
 {
     public class AppOptionSettings
     {
 
         public AppOptionSettings()
         {
-
+            DbContexts = new Dictionary<string, DestinyContextOptions>();
         }
 
 
@@ -29,6 +33,14 @@
         /// 是否启用审计 
         /// </summary>
         public bool AuditEnabled { get; set; }
+
+        /// <summary>
+        /// 数据操作
+        /// </summary>
+        public Dictionary<string, DestinyContextOptions> DbContexts { get; set; }
+
+
+     
 
     }
 }

@@ -146,20 +146,6 @@ namespace Destiny.Core.Flow.Model.SeedDatas
                   EventName="handleDeleteMenuFunction",
 
                  }
-                  ,new MenuEntity(){
-                  Id=Guid.Parse("08d88bd8-87b6-4737-8f8b-2778c807fe43"),
-                  Name="删除功能",
-                  Sort=0,
-                  ParentId=Guid.Parse("08d815d8-dae5-4891-83d3-38a134d63506"),
-                  ParentNumber="fd8a36d4-d6d8-a6bb-2924-77455100a305.08d815d8-dae5-4891-83d3-38a134d63506",
-                  Depth=3,
-                  IsDeleted=false,
-                  CreatedTime=DateTime.Parse("2020-11-15 22:32:40.825658"),
-                  Type=MenuEnum.Function,
-                  IsHide=false,
-                  EventName="handleDeleteMenuFunction",
-
-                 }
                  ,new MenuEntity(){
                   Id=Guid.Parse("08d88bd8-a84f-434e-8e97-255bab78ccf2"),
                   Name="分配菜单功能",

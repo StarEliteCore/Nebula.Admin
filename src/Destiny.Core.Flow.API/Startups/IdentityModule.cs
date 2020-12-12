@@ -47,7 +47,7 @@ namespace Destiny.Core.Flow.API.Startups
         protected override void AddAuthentication(IServiceCollection services)
         {
 
-            AppOptionSettings settings = services.GetAppSettings();
+            AppOptionSettings settings = services.GetObjectOrNull<AppOptionSettings>();
             var jwt = settings.Jwt;
 
             var keyByteArray = Encoding.UTF8.GetBytes(jwt.SecretKey);
