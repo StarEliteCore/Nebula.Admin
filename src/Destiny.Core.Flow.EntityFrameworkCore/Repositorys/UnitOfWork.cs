@@ -61,7 +61,16 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
                 _transaction = _connection.BeginTransaction();
             }
 
-            _dbContext.Database.UseTransaction(_transaction);
+            if (_dbContext.IsRelationalTransaction())
+            {
+                _dbContext.Database.UseTransaction(_transaction);
+            }
+            else
+            {
+
+                _dbContext.Database.BeginTransaction();
+            }
+          
 
             HasCommitted = false;
         }
@@ -194,7 +203,18 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
                 _transaction = _connection.BeginTransaction();
             }
 
-            _dbContext.Database.UseTransaction(_transaction);
+
+            if (_dbContext.IsRelationalTransaction())
+            {
+
+                _dbContext.Database.UseTransaction(_transaction);
+            }
+            else {
+                _dbContext.Database.BeginTransaction();
+
+
+            }
+
 
             HasCommitted = false;
         }
@@ -209,7 +229,14 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
                 return;
             }
             _transaction.Commit();
-            _dbContext.Database.CurrentTransaction.Dispose();
+            if (_dbContext.IsRelationalTransaction())
+            {
+                _dbContext.Database.CurrentTransaction.Dispose();
+            }
+            else {
+                _dbContext.Database.CommitTransaction();
+            }
+       
             HasCommitted = true;
         }
 
@@ -224,7 +251,16 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
                 return;
             }
             await _transaction.CommitAsync();
-            await _dbContext.Database.CurrentTransaction.DisposeAsync();
+
+            if (_dbContext.IsRelationalTransaction())
+            {
+                await _dbContext.Database.CurrentTransaction.DisposeAsync();
+            }
+            else
+            {
+                _dbContext.Database.CommitTransaction();
+            }
+           
             HasCommitted = true;
         }
 
@@ -265,9 +301,15 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
                 _transaction.Rollback();
             }
 
-            if (_dbContext.Database.CurrentTransaction != null)
+            if (_dbContext.IsRelationalTransaction())
             {
-                _dbContext.Database.CurrentTransaction.Dispose();
+                if (_dbContext.Database.CurrentTransaction != null)
+                {
+                    _dbContext.Database.CurrentTransaction.Dispose();
+                }
+            }
+            else {
+                _dbContext.Database.RollbackTransaction();
             }
             HasCommitted = true;
         }
@@ -283,10 +325,17 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
                 await _transaction.RollbackAsync();
             }
 
-            if (_dbContext.Database.CurrentTransaction != null)
+            if (_dbContext.IsRelationalTransaction())
             {
-                await _dbContext.Database.CurrentTransaction.DisposeAsync();
+                if (_dbContext.Database.CurrentTransaction != null)
+                {
+                    await _dbContext.Database.CurrentTransaction.DisposeAsync();
+                }
             }
+            else {
+                _dbContext.Database.RollbackTransaction();
+            }
+        
             HasCommitted = true;
         }
     }

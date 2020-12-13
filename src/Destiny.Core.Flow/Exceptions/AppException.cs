@@ -19,5 +19,14 @@ namespace Destiny.Core.Flow.Exceptions
         {
 
         }
+
+        public AppException ThrowIf(bool flag)
+        {
+            if (flag)
+            {
+                throw this;
+            }
+            return this;
+        }
     }
 }

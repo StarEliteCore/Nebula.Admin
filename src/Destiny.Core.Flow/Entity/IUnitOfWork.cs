@@ -12,6 +12,7 @@ namespace Destiny.Core.Flow.Entity
     /// </summary>
     public interface IUnitOfWork : IDisposable
     {
+
         /// <summary>
         /// 释放时触发
         /// </summary>
