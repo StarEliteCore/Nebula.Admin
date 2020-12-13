@@ -11,7 +11,7 @@ namespace Destiny.Core.Flow
       typeof(MediatorAppModule)
 
    )]
-    public  class EntityFrameworkCoreModuleBase : AppModule
+    public  class EntityFrameworkCoreModule : AppModule
     {
         public override void ConfigureServices(ConfigureServicesContext context)
         {

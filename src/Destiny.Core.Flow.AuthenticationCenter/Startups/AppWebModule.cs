@@ -19,7 +19,7 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
     typeof(IdentityModule),
     typeof(DependencyAppModule),
     typeof(MediatorAppModule),
-    typeof(EntityFrameworkCoreModule),
+    typeof(AuthenticationCenterEntityFrameworkCoreModule),
     typeof(AutoMapperModule),
     typeof(IdentityServer4Module)
     )]

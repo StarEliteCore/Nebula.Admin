@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Entity;
+﻿using Destiny.Core.Flow.Dependency;
+using Destiny.Core.Flow.Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,10 +7,11 @@ using System.Text;
 
 namespace Destiny.Core.Flow
 {
+
     /// <summary>
     /// 上下文驱动提供者
     /// </summary>
-    public interface IDbContextDrivenProvider
+    public interface IDbContextDrivenProvider: ISingletonDependency
     {
         /// <summary>
         /// 数据库类型

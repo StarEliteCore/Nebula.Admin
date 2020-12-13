@@ -7,7 +7,6 @@ using Destiny.Core.Flow.Events;
 using Destiny.Core.Flow.MiniProfiler;
 using Destiny.Core.Flow.Model;
 using Destiny.Core.Flow.Modules;
-using Destiny.Core.Flow.MySql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +20,7 @@ namespace Destiny.Core.Flow.API.Startups
            typeof(AspNetCoreSwaggerModule),
            typeof(IdentityModule),
            typeof(FunctionModule),
-           typeof(EntityFrameworkCoreMySqlModule),
+           typeof(EntityFrameworkCoreModule),
            typeof(AutoMapperModule),
            typeof(CSRedisModule),
            typeof(MongoDBModelule),

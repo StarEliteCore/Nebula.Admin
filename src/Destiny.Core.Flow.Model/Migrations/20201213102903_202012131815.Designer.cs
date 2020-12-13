@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Destiny.Core.Flow.Model.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    [Migration("20201213062600_20201213")]
-    partial class _20201213
+    [Migration("20201213102903_202012131815")]
+    partial class _202012131815
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
