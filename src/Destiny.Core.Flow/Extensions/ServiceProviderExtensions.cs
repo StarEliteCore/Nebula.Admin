@@ -1,9 +1,13 @@
-﻿using Destiny.Core.Flow.Options;
+﻿using Destiny.Core.Flow.Exceptions;
+using Destiny.Core.Flow.Options;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 using System;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Extensions
@@ -169,6 +173,64 @@ namespace Destiny.Core.Flow.Extensions
             await callback(scope.ServiceProvider);
         }
 
+
+
+        /// <summary>
+        /// 根据配置得到文件内容
+        /// </summary>
+        /// <param name="services">服务接口</param>
+        /// <param name=""></param>
+        /// <param name="sectionKey">分区键</param>
+        /// <param name="fileNotExistsMsg">文件不存提示信息</param>
+        /// <returns>返回文件中的文件</returns>
+        public static string GetFileByConfiguration(this IServiceProvider provider, string sectionKey, string fileNotExistsMsg)
+        {
+
+
+            sectionKey.NotNullOrEmpty(nameof(sectionKey));
+            var configuration = provider.GetService<IConfiguration>();
+            var value = configuration?.GetSection(sectionKey)?.Value;
+            return provider.GetFileText(value, fileNotExistsMsg);
+
+        }
+
+        /// <summary>
+        /// 得到文件容器
+        /// </summary>
+        /// <param name="services">服务接口</param>
+        /// <param name="fileName">文件名+后缀名</param>
+        /// <param name="fileNotExistsMsg">文件不存提示信息</param>
+        /// <returns>返回文件中的文件</returns>
+        public static string GetFileText(this IServiceProvider provider, string fileName, string fileNotExistsMsg)
+        {
+            fileName.NotNullOrEmpty(nameof(fileName));
+            var fileProvider = provider.GetService<IFileProvider>();
+
+            if (fileProvider == null)
+            {
+
+                throw new AppException("IFileProvider接口不存在");
+            }
+
+
+            var fileInfo = fileProvider.GetFileInfo(fileName);
+            if (!fileInfo.Exists)
+            {
+                if (!fileNotExistsMsg.IsNullOrEmpty())
+                {
+                    throw new AppException(fileNotExistsMsg);
+                }
+
+            }
+            var text = ReadAllText(fileInfo);
+            if (text.IsNullOrEmpty())
+            {
+                throw new AppException("文件内容不存在");
+            }
+            return text;
+        }
+
+ 
 
     }
 }

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Destiny.Core.Flow.Entity;
+using System.IO;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -52,7 +53,14 @@ namespace Microsoft.Extensions.DependencyInjection
                 }
                 DestinyContextOptionsBuilder optionsBuilder1 = new DestinyContextOptionsBuilder();
                 optionsBuilder1.MigrationsAssemblyName = contextOptions.MigrationsAssemblyName;
-                builder = drivenProvider.Builder(builder, contextOptions.ConnectionString, optionsBuilder1);
+                var connectionString = contextOptions.ConnectionString;
+                if (Path.GetExtension(contextOptions.ConnectionString) == ".txt")
+                {
+                    
+                    connectionString = provider.GetFileText(contextOptions.ConnectionString, $"未找到存放{databaseType.ToDescription()}数据库链接的文件");
+                }
+
+                builder = drivenProvider.Builder(builder, connectionString, optionsBuilder1);
                 optionsAction?.Invoke(provider,builder);
 
             });
