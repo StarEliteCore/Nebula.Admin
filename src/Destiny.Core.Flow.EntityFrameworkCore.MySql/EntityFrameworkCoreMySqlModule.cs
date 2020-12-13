@@ -5,18 +5,19 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Destiny.Core.Flow.SqlServer
+namespace Destiny.Core.Flow.MySql
 {
     /// <summary>
-    /// SqlServer模块
+    /// MySql模块
     /// </summary>
-    public class EntityFrameworkCoreSqlServerModule : EntityFrameworkCoreModuleBase
+    public class EntityFrameworkCoreMySqlModule : EntityFrameworkCoreModuleBase
     {
 
         public override void ConfigureServices(ConfigureServicesContext context)
         {
             base.ConfigureServices(context);
-            context.Services.AddSingleton(typeof(IDbContextDrivenProvider), typeof(SqlServerDbContextDrivenProvider));
+            context.Services.AddSingleton(typeof(IDbContextDrivenProvider), typeof(MySqlDbContextDrivenProvider));
+
         }
 
        

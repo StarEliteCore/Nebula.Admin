@@ -7,6 +7,7 @@ using Destiny.Core.Flow.Events;
 using Destiny.Core.Flow.MiniProfiler;
 using Destiny.Core.Flow.Model;
 using Destiny.Core.Flow.Modules;
+using Destiny.Core.Flow.MySql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,12 @@ using System.Threading.Tasks;
 namespace Destiny.Core.Flow.API.Startups
 {
     [DependsOn(typeof(DestinyCoreModule),
-         typeof(MvcModule),
-          typeof(MiniProfilerModule),
+           typeof(MvcModule),
+           typeof(MiniProfilerModule),
            typeof(AspNetCoreSwaggerModule),
            typeof(IdentityModule),
            typeof(FunctionModule),
-           typeof(EntityFrameworkCoreModule),
+           typeof(EntityFrameworkCoreMySqlModule),
            typeof(AutoMapperModule),
            typeof(CSRedisModule),
            typeof(MongoDBModelule),

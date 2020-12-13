@@ -205,17 +205,15 @@ namespace Destiny.Core.Flow.Extensions
         {
             fileName.NotNullOrEmpty(nameof(fileName));
             var fileProvider = provider.GetService<IFileProvider>();
-
-            if (fileProvider == null)
-            {
-
-                throw new AppException("IFileProvider接口不存在");
-            }
+            fileProvider.NotNull(nameof(fileProvider));
 
 
+        
             var fileInfo = fileProvider.GetFileInfo(fileName);
+
             if (!fileInfo.Exists)
             {
+
                 if (!fileNotExistsMsg.IsNullOrEmpty())
                 {
                     throw new AppException(fileNotExistsMsg);

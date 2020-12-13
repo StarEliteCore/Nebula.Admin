@@ -20,7 +20,6 @@ namespace Destiny.Core.Flow.AspNetCore.Module
         public override void ConfigureServices(ConfigureServicesContext context)
         {
             context.Services.AddFileProvider();
-
             var configuration = context.GetConfiguration();
             context.Services.Configure<AppOptionSettings>(configuration.GetSection("Destiny"));
 

@@ -7,26 +7,16 @@ using System.Text;
 
 namespace Destiny.Core.Flow.SqlServer
 {
+    /// <summary>
+    /// SqlServer驱动提供者
+    /// </summary>
     public class SqlServerDbContextDrivenProvider : IDbContextDrivenProvider
     {
         public DatabaseType DatabaseType => DatabaseType.SqlServer;
 
-
-
-  
-
         public DbContextOptionsBuilder Builder(DbContextOptionsBuilder builder, string connectionString, DestinyContextOptionsBuilder optionsBuilder)
         {
-            builder.UseSqlServer(connectionString, options => {
-
-                if (!optionsBuilder.MigrationsAssemblyName.IsNullOrEmpty())
-                {
-                    options.MigrationsAssembly(optionsBuilder.MigrationsAssemblyName);
-
-                }
-              
-
-            });
+            builder.UseSqlServer(connectionString, options => options.MigrationsAssembly(optionsBuilder.MigrationsAssemblyName));
             return builder;
         }
     }

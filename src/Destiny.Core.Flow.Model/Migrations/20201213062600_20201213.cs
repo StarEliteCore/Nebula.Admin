@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Destiny.Core.Flow.Model.Migrations
 {
-    public partial class _20201212 : Migration
+    public partial class _20201213 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

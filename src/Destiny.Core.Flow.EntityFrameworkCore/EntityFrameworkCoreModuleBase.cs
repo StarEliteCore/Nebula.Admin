@@ -1,31 +1,25 @@
 ﻿using Destiny.Core.Flow.Entity;
+using Destiny.Core.Flow.Events;
 using Destiny.Core.Flow.Modules;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Destiny.Core.Flow
 {
-    public abstract class EntityFrameworkCoreModuleBase : AppModule
+    [DependsOn(
+      typeof(MediatorAppModule)
+
+   )]
+    public  class EntityFrameworkCoreModuleBase : AppModule
     {
         public override void ConfigureServices(ConfigureServicesContext context)
         {
-            UseSql(context.Services);
-            AddUnitOfWork(context.Services);
+            AddDestinyDbContextWnitUnitOfWork(context.Services);
             AddRepository(context.Services);
         }
 
-        /// <summary>
-        /// 添加工作单元
-        /// </summary>
-        /// <param name="services"></param>
-        /// <returns></returns>
-
-        protected virtual IServiceCollection AddUnitOfWork(IServiceCollection services)
-        {
-
-            return services.AddUnitOfWork<DefaultDbContext>();
-
-
-        }
+        
 
         /// <summary>
         /// 添加仓储
@@ -39,6 +33,19 @@ namespace Destiny.Core.Flow
             return services;
         }
 
-        protected abstract IServiceCollection UseSql(IServiceCollection services);
+
+        /// <summary>
+        /// 添加上下文与工作单元
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+
+        protected virtual IServiceCollection AddDestinyDbContextWnitUnitOfWork(IServiceCollection services) {
+
+            services.AddDestinyDbContext<DefaultDbContext>();
+            services.AddUnitOfWork<DefaultDbContext>();
+            return services;
+        }
+
     }
 }

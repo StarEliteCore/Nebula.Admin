@@ -146,5 +146,19 @@ namespace Destiny.Core.Flow.Extensions
             NotNull(filename, paramName);
             Require<FileNotFoundException>(File.Exists(filename), $"指定的文件路径“{filename}”不存在");
         }
+
+        /// <summary>
+        /// 检查指定路径的文件必须存在，否则抛出<see cref="FileNotFoundException"/>异常。
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="fileNotExistsMsg">文件不存在消息。</param>
+        /// <param name="paramName">参数名称。</param>
+        /// <exception cref="ArgumentNullException">当文件路径为null时</exception>
+        /// <exception cref="FileNotFoundException">当文件路径不存在时</exception>
+        public static void FileExists(this string filename,string fileNotExistsMsg, string paramName = null)
+        {
+            NotNull(filename, paramName);
+            Require<FileNotFoundException>(File.Exists(filename), fileNotExistsMsg);
+        }
     }
 }
