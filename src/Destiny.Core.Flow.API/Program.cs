@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using System;
 
 namespace Destiny.Core.Flow.API
 {
@@ -22,7 +23,7 @@ namespace Destiny.Core.Flow.API
                 {
                     webBuilder.UseStartup<Startup>()
                     .UseSerilog()
-                   .ConfigureLogging((hostingContext, builder) =>
+                    .ConfigureLogging((hostingContext, builder) =>
                    {
                        builder.ClearProviders();
                        builder.SetMinimumLevel(LogLevel.Information);

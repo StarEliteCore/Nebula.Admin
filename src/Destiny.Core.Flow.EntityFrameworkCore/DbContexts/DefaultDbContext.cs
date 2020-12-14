@@ -45,7 +45,7 @@ namespace Destiny.Core.Flow
                 auditEntitys = _serviceProvider.GetRequiredService<IAuditHelper>()?.GetAuditEntity(entityEntry);
             }
             int count = await base.SaveChangesAsync(cancellationToken);
-            _logger.LogInformation($"成功保存多少条{count}数据");
+            _logger.LogInformation($"成功保存{count}条数据");
             if (count > 0 && auditEntitys.Count() > 0)
             {
                 var _bus = _serviceProvider.GetService<IMediatorHandler>();
@@ -68,7 +68,7 @@ namespace Destiny.Core.Flow
                 auditEntitys = _serviceProvider.GetRequiredService<IAuditHelper>()?.GetAuditEntity(entityEntry);
             }
             int count = base.SaveChanges();
-            _logger.LogInformation($"成功保存多少条{count}数据");
+            _logger.LogInformation($"成功保存{count}条数据");
             if (count > 0 && auditEntitys.Count() > 0)
             {
                 var _bus = _serviceProvider.GetService<IMediatorHandler>();

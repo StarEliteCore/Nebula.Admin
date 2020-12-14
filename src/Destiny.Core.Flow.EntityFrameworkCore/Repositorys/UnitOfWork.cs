@@ -5,8 +5,10 @@ using Destiny.Core.Flow.Ui;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -47,11 +49,16 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
             _dbContext = dbContext as DbContextBase;
         }
 
+
+        private Stack<bool> _callStack = new Stack<bool>();
+
+
         /// <summary>
         /// 开启事务
         /// </summary>
         public virtual void BeginTransaction()
         {
+  
             if (_transaction?.Connection == null)
             {
                 if (_connection.State != ConnectionState.Open)
@@ -144,6 +151,7 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message, ex);
                 await this.RollbackAsync();
                 //_logger.LogError(ex.Message, ex);
                 return new OperationResponse()
@@ -194,6 +202,8 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
         /// </summary>
         public virtual async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
         {
+      
+
             if (_transaction?.Connection == null)
             {
                 if (_connection.State != ConnectionState.Open)

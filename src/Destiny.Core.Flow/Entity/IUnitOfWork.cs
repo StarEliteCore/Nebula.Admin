@@ -12,6 +12,11 @@ namespace Destiny.Core.Flow.Entity
     /// </summary>
     public interface IUnitOfWork : IDisposable
     {
+        /// <summary>
+        /// 是否提交
+        /// </summary>
+        bool HasCommitted { get; }
+
 
         /// <summary>
         /// 释放时触发
