@@ -31,7 +31,16 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
         /// <summary>
         /// 是否提交
         /// </summary>
-        public bool HasCommitted { get; private set; }
+        /// <returns></returns>
+        public bool HasCommit()
+        {
+            return HasCommitted;
+        }
+
+        /// <summary>
+        /// 是否提交
+        /// </summary>
+        private bool HasCommitted { get;  set; }
 
         /// <summary>
         /// 事务
@@ -40,7 +49,7 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
 
         private bool _disposed;
 
-        private readonly ILogger _logger = null;
+        //private readonly ILogger _logger = null;
 
         private DbConnection _connection = null;
 
@@ -83,119 +92,6 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
         }
 
 
-        /// <summary>
-        /// 开启事务 如果成功提交事务，失败回滚事务
-        /// </summary>
-        /// <param name="action">要执行的操作</param>
-        /// <returns></returns>
-        public void UseTran(Action action)
-        {
-            action.NotNull(nameof(action));
-            if (HasCommitted)
-            {
-                return;
-            }
-
-            BeginTransaction();
-            try
-            {
-                action?.Invoke();
-                Commit();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-                this.Rollback();
-            }
-        }
-
-        public async Task UseTranAsync(Func<Task> func)
-        {
-            func.NotNull(nameof(func));
-            if (HasCommitted)
-            {
-                return;
-            }
-
-            BeginTransaction();
-            await func?.Invoke();
-            Commit();
-        }
-
-        /// <summary>
-        /// 开启事务 如果成功提交事务，失败回滚事务
-        /// </summary>
-        /// <param name="func"></param>
-        /// <returns>返回操作结果</returns>
-        public async Task<OperationResponse> UseTranAsync(Func<Task<OperationResponse>> func)
-        {
-            func.NotNull(nameof(func));
-            OperationResponse result = new OperationResponse();
-            if (HasCommitted)
-            {
-                result.Type = OperationResponseType.NoChanged;
-                result.Message = "事务已提交!!";
-                return result;
-            }
-
-            try
-            {
-                await this.BeginTransactionAsync();
-                result = await func.Invoke();
-                if (!result.Success)
-                {
-                    await this.RollbackAsync();
-                    return result;
-                }
-                await this.CommitAsync();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message, ex);
-                await this.RollbackAsync();
-                //_logger.LogError(ex.Message, ex);
-                return new OperationResponse()
-                {
-                    Type = OperationResponseType.Error,
-                    Message = ex.Message,
-                };
-            }
-            return result;
-        }
-
-        /// <summary>
-        /// 开启事务 如果成功提交事务，失败回滚事务
-        /// </summary>
-        /// <param name="func"></param>
-        /// <returns>返回操作结果</returns>
-        public OperationResponse UseTran(Func<OperationResponse> func)
-        {
-            func.NotNull(nameof(func));
-            OperationResponse result = new OperationResponse();
-            if (HasCommitted)
-            {
-                result.Type = OperationResponseType.NoChanged;
-                result.Message = "事务已提交!!";
-                return result;
-            }
-            try
-            {
-                this.BeginTransaction();
-                result = func.Invoke();
-                this.Commit();
-                return result;
-            }
-            catch (Exception ex)
-            {
-                this.Rollback();
-                _logger.LogError(ex.Message, ex);
-                return new OperationResponse()
-                {
-                    Type = OperationResponseType.Error,
-                    Message = ex.Message,
-                };
-            }
-        }
 
         /// <summary>
         /// 开启事务异步

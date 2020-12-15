@@ -33,6 +33,16 @@ namespace Destiny.Core.Flow
         /// 保存更改前
         /// </summary>
         protected event EventHandler SaveChangesPreEvent;
+
+
+        /// <summary>
+        /// 保存成功
+        /// </summary>
+        protected virtual void OnSaveCompleted()
+        {
+     
+        }
+
         protected DbContextBase(DbContextOptions options, IServiceProvider serviceProvider)
              : base(options)
         {
@@ -83,5 +93,18 @@ namespace Destiny.Core.Flow
         }
 
 
+
+        protected virtual  IReadOnlyList<EntityEntry> FindChangedEntries()
+        {
+            return this.ChangeTracker.Entries()
+                .Where(x =>
+                    x.State == EntityState.Added ||
+                    x.State == EntityState.Modified ||
+                    x.State == EntityState.Deleted)
+                .ToList();
+        }
+
     }
+
+
 }

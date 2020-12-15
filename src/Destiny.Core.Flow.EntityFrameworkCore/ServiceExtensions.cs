@@ -52,9 +52,16 @@ namespace Microsoft.Extensions.DependencyInjection
 
 
                 //}
+                var drivenProviderType = services.GetImplementationTypes<IDbContextDrivenProvider>()
+                ?.FirstOrDefault(o=>o.GetAttribute<DatabaseTypeAttribute>()?.DatabaseType == databaseType);
 
-                var drivenProvider = provider.GetServices<IDbContextDrivenProvider>().FirstOrDefault(o => o.DatabaseType == databaseType); 
+                if (drivenProviderType == null)
+                {
+                    MessageBox.Show($"没有找到{databaseType}类型的驱动实例");
 
+                }
+
+                var drivenProvider = (IDbContextDrivenProvider)provider.GetService(drivenProviderType);
                 if (drivenProvider == null)
                 {
                     MessageBox.Show($"没有找到{databaseType}类型的驱动");
@@ -63,7 +70,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 DestinyContextOptionsBuilder optionsBuilder1 = new DestinyContextOptionsBuilder();
                 optionsBuilder1.MigrationsAssemblyName = contextOptions.MigrationsAssemblyName;
                 var connectionString = contextOptions.ConnectionString;
-
+               
                 if (Path.GetExtension(contextOptions.ConnectionString).ToLower() == ".txt") //txt文件
                 {
                     

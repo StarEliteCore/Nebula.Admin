@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
@@ -259,6 +260,19 @@ where TImplementation : class, TServiceType
         }
 
 
- 
+        /// <summary>
+        /// 得到实例类型集合
+        /// </summary>
+        /// <typeparam name="TServiceType"></typeparam>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IEnumerable<Type> GetImplementationTypes<TServiceType>(this IServiceCollection services)
+        {
+
+           return services.Where(o => o.ServiceType == typeof(TServiceType) && o.Lifetime == ServiceLifetime.Singleton).Select(o=>o.ImplementationType);
+        }
+
+     
+
     }
 }
