@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,18 +21,28 @@ namespace Destiny.Core.Flow.AuthenticationCenter.DbContexts
           
         }
 
-
-        public override int SaveChanges()
+        protected override object OnBeforeSaveChanges()
         {
-            return base.SaveChanges();
+            _logger.LogInformation($"进入IdentityServer4下上文开始保存更改方法");
+            return null;
         }
 
-
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        protected override void OnCompleted(int count, object sender)
         {
-
-            return base.SaveChangesAsync(cancellationToken);
+            _logger.LogInformation($"进入IdentityServer4下上文保存更改成功方法");
         }
+
+        //public override int SaveChanges()
+        //{
+        //    return base.SaveChanges();
+        //}
+
+
+        //public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        //{
+
+        //    return base.SaveChangesAsync(cancellationToken);
+        //}
 
 
     }

@@ -24,58 +24,9 @@ namespace Destiny.Core.Flow
         public DefaultDbContext(DbContextOptions<DefaultDbContext> options, IServiceProvider serviceProvider)
           : base(options, serviceProvider)
         {
-         
+        
         }
-
-
-
-        /// <summary>
-        /// 异步保存
-        /// </summary>
-        /// <param name="cancellationToken"></param> 
-        /// <returns></returns>
-
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        {
-            IEnumerable<AuditEntryDto> auditEntitys = new List<AuditEntryDto>();
-            IEnumerable<EntityEntry> entityEntry = this.ChangeTracker.Entries();
-            if (_option.AuditEnabled)
-            {
-
-                auditEntitys = _serviceProvider.GetRequiredService<IAuditHelper>()?.GetAuditEntity(entityEntry);
-            }
-            int count = await base.SaveChangesAsync(cancellationToken);
-            _logger.LogInformation($"成功保存{count}条数据");
-            if (count > 0 && auditEntitys.Count() > 0)
-            {
-                var _bus = _serviceProvider.GetService<IMediatorHandler>();
-                await _bus.PublishAsync(new AuditEntityEventData() { AuditEntitys = auditEntitys.ToList() });
-            }
-            return count;
-        }
-
-        /// <summary>
-        /// 保存更改
-        /// </summary>
-        /// <returns></returns>
-        public override int SaveChanges()
-        {
-            IEnumerable<AuditEntryDto> auditEntitys = new List<AuditEntryDto>();
-            IEnumerable<EntityEntry> entityEntry = this.ChangeTracker.Entries();
-            if (_option.AuditEnabled)
-            {
-
-                auditEntitys = _serviceProvider.GetRequiredService<IAuditHelper>()?.GetAuditEntity(entityEntry);
-            }
-            int count = base.SaveChanges();
-            _logger.LogInformation($"成功保存{count}条数据");
-            if (count > 0 && auditEntitys.Count() > 0)
-            {
-                var _bus = _serviceProvider.GetService<IMediatorHandler>();
-                _bus.PublishAsync(new AuditEntityEventData() { AuditEntitys = auditEntitys.ToList() }).GetAwaiter();
-            }
-            return count;
-        }
+  
 
     }
 }
