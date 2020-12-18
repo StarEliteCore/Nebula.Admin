@@ -19,7 +19,13 @@ namespace Destiny.Core.Flow.SeriLog
                 .MinimumLevel.Information()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
-                .WriteTo.Console()
+#if DEBUG
+
+       .WriteTo.Console(LogEventLevel.Information)
+#else
+       .WriteTo.Console(LogEventLevel.Error)
+#endif
+
                 //.WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(eshost))
                 //{
                 //    AutoRegisterTemplate = true,

@@ -21,7 +21,14 @@ namespace Destiny.Core.Flow.API
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    //webBuilder.ConfigureServices((web, s) =>
+                    //{
+                    //    web.HostingEnvironment.IsDevelopment();
+
+
+                    //}).UseStartup<Startup>()
                     webBuilder.UseStartup<Startup>()
+
                     .UseSerilog()
                     .ConfigureLogging((hostingContext, builder) =>
                    {
