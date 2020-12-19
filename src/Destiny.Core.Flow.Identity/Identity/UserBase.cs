@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Entity;
+﻿using Destiny.Core.Flow.Audit;
+using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Enums;
 using System;
 using System.ComponentModel;
@@ -12,6 +13,7 @@ namespace Destiny.Core.Flow.Identity
         [DisplayName("用户名")]
         public string UserName { get; set; }
 
+        [DisableAuditing]
         [DisplayName("标准化的用户名")]
         public string NormalizedUserName { get; set; }
 
@@ -21,8 +23,10 @@ namespace Destiny.Core.Flow.Identity
         [DisplayName("电子邮箱"), DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [DisableAuditing]
         [DisplayName("标准化的电子邮箱"), DataType(DataType.EmailAddress)]
         public string NormalizeEmail { get; set; }
+
 
         [DisplayName("电子邮箱确认")]
         public bool EmailConfirmed { get; set; }
@@ -33,9 +37,11 @@ namespace Destiny.Core.Flow.Identity
         [DisplayName("用户头像")]
         public string HeadImg { get; set; }
 
+        [DisableAuditing]
         [DisplayName("安全标识")]
         public string SecurityStamp { get; set; }
 
+        [DisableAuditing]
         [DisplayName("版本标识")]
         public string ConcurrencyStamp { get; set; } = Guid.NewGuid().ToString();
 

@@ -22,6 +22,11 @@ namespace Destiny.Core.Flow.AspNetCore.Module
             var settings = context.Services.GetObject<AppOptionSettings>();
             context.Services.AddFileProvider();
 
+            if (context.GetAppSettings().AuditEnabled)
+            {
+                
+
+            }
 
 
             context.Services.AddHttpContextAccessor();

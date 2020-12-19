@@ -16,8 +16,13 @@ namespace Destiny.Core.Flow.SeriLog
         public static void SetSeriLoggerToFile(string fileName, string eshost)
         {
             Log.Logger = new LoggerConfiguration()
+#if DEBUG
                 .MinimumLevel.Information()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+#else
+                 .MinimumLevel.Error()
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
+#endif
                 .Enrich.FromLogContext()
 #if DEBUG
 

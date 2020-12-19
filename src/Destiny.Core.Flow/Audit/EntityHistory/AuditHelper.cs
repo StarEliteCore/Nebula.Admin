@@ -94,22 +94,67 @@ namespace Destiny.Core.Flow.Audit.EntityHistory
         /// <returns></returns>
         private List<AuditPropertyDto> GetAuditPropertys(EntityEntry entityEntry)
         {
-            return entityEntry.Metadata.GetProperties().Where(p => !p.IsConcurrencyToken && p.PropertyInfo.GetCustomAttribute<DisableAuditingAttribute>() == null).Select(p =>
-            {
-                var propertyEntry = entityEntry.Property(p.Name);//获取字段名
-                AuditPropertyDto propertyDto = new AuditPropertyDto();
-                propertyDto.PropertyName = p.Name;
-                propertyDto.PropertyDisplayName = propertyEntry.Metadata.PropertyInfo.ToDescription();
-                propertyDto.PropertyType = p.ClrType.FullName;
-                var currentValue = propertyEntry.CurrentValue?.ToString();
-                var originalValue = propertyEntry.OriginalValue?.ToString();
-                propertyDto.NewValues = currentValue;
-                propertyDto.OriginalValues = originalValue;
-                return propertyDto;
+            List<AuditPropertyDto> propertyDtos = new List<AuditPropertyDto>();
 
-            }).ToList();
-           
-          
+            foreach (var propertie in entityEntry.CurrentValues.Properties.Where(p => !p.IsConcurrencyToken && p.PropertyInfo.GetCustomAttribute<DisableAuditingAttribute>() == null))
+            {
+                var propertyEntry = entityEntry.Property(propertie.Name);//获取字段名
+                AuditPropertyDto propertyDto = new AuditPropertyDto();
+                propertyDto.PropertyName = propertie.Name;
+                propertyDto.PropertyDisplayName = propertyEntry.Metadata.PropertyInfo.ToDescription();
+                propertyDto.PropertyType = propertie.ClrType.FullName;
+                if (propertie.IsPrimaryKey())
+                {
+                    continue;
+                }
+                if (entityEntry.State == EntityState.Added)
+                {
+                    var currentValue = propertyEntry.CurrentValue?.ToString();
+                    propertyDto.NewValues = currentValue;
+                    propertyDtos.Add(propertyDto);
+                }
+                else if (entityEntry.State == EntityState.Modified)
+                {
+                    var originalValue = propertyEntry.OriginalValue?.ToString();
+                    var currentValue = propertyEntry.CurrentValue?.ToString();
+                    if (currentValue != originalValue)
+                    {
+                        propertyDto.NewValues = currentValue;
+
+                        propertyDto.OriginalValues = originalValue;
+                        propertyDtos.Add(propertyDto);
+                    }
+
+
+                }
+                else if (entityEntry.State == EntityState.Deleted)
+                {
+
+                    var originalValue = propertyEntry.OriginalValue?.ToString();
+                    propertyDto.OriginalValues = originalValue;
+                    propertyDtos.Add(propertyDto);
+                }
+       
+              
+            }
+
+            return propertyDtos;
+            //return entityEntry.Metadata.GetProperties().Where(p => !p.IsConcurrencyToken && p.PropertyInfo.GetCustomAttribute<DisableAuditingAttribute>() == null).Select(p =>
+            //{
+            //    var propertyEntry = entityEntry.Property(p.Name);//获取字段名
+            //    AuditPropertyDto propertyDto = new AuditPropertyDto();
+            //    propertyDto.PropertyName = p.Name;
+            //    propertyDto.PropertyDisplayName = propertyEntry.Metadata.PropertyInfo.ToDescription();
+            //    propertyDto.PropertyType = p.ClrType.FullName;
+            //    var currentValue = propertyEntry.CurrentValue?.ToString();
+            //    var originalValue = propertyEntry.OriginalValue?.ToString();
+            //    propertyDto.NewValues = currentValue;
+            //    propertyDto.OriginalValues = originalValue;
+            //    return propertyDto;
+
+            //}).ToList();
+
+
         }
 
     }

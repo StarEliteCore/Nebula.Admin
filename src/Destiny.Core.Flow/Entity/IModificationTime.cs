@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Destiny.Core.Flow.Audit;
+using System;
 
 namespace Destiny.Core.Flow.Entity
 {
@@ -7,6 +8,7 @@ namespace Destiny.Core.Flow.Entity
         /// <summary>
         /// 最后修改时间
         /// </summary>
+        [DisableAuditing]
         DateTime? LastModifionTime { get; set; }
     }
 }

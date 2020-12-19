@@ -50,7 +50,7 @@ namespace Destiny.Core.Flow.API.Controllers.DataDictionary
         /// <returns></returns>
         [HttpPost]
         [Description("异步创建数据字典")]
-        [AuditLog]
+
         public async Task<AjaxResult> CreateAsync([FromBody] DataDictionnaryInputDto dto)
         {
             return (await _dataDictionnaryServices.CreateAsync(dto)).ToAjaxResult();

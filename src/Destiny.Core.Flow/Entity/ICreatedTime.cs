@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Destiny.Core.Flow.Audit;
+using System;
 
 namespace Destiny.Core.Flow.Entity
 {
@@ -7,6 +8,7 @@ namespace Destiny.Core.Flow.Entity
     /// </summary>
     public interface ICreatedTime
     {
+        [DisableAuditing]
         DateTime CreatedTime { get; set; }
     }
 }

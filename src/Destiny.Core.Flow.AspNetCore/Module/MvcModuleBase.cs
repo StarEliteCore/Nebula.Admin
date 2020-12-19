@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Modules;
+﻿using Destiny.Core.Flow.AspNetCore.Mvc.Filters;
+using Destiny.Core.Flow.Modules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,7 +23,7 @@ namespace Destiny.Core.Flow.AspNetCore.Module
 
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
             });
-
+            context.Services.AddScoped<AuditLogFilterAttribute>();
         }
 
 

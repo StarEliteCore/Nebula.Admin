@@ -42,7 +42,7 @@ namespace Destiny.Core.Flow.API.Startups
         {
             options.SuppressAsyncSuffixInActionNames = false;
             options.Filters.Add<PermissionAuthorizationFilter>();
-            options.Filters.Add<AuditLogFilter>();
+            //options.Filters.Add<AuditLogFilter>();
         }
         protected override void UseCors(ApplicationContext context)
         {

@@ -5,12 +5,11 @@ using Destiny.Core.Flow.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
+using System.Text;
 
 namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
 {
@@ -18,10 +17,10 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
     /// c# 计算程序运行时间三种方法
     /// https://www.cnblogs.com/dearzhoubi/p/9842452.html 
     /// </summary>
-    [Obsolete("使用 AuditLogFilterAttribute 代替")]
-    public class AuditLogFilter : IActionFilter, IResultFilter
+    public class AuditLogFilterAttribute : ActionFilterAttribute
     {
-        public void OnActionExecuted(ActionExecutedContext context)
+
+        public override void OnActionExecuted(ActionExecutedContext context)
         {
 
             if (context.Result is ObjectResult result)
@@ -45,46 +44,40 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
 
         }
 
-        public void OnActionExecuting(ActionExecutingContext context)
+        public override void OnActionExecuting(ActionExecutingContext context)
         {
             IServiceProvider provider = context.HttpContext.RequestServices;
             var controllerAction = context.ActionDescriptor as ControllerActionDescriptor;
-            var isAuditEnabled=  provider.GetAppSettings().AuditEnabled;
-            if (isAuditEnabled&&controllerAction.ControllerTypeInfo.HasAttribute<DisableAuditingAttribute>() == false || !controllerAction.MethodInfo.HasAttribute<DisableAuditingAttribute>() == false)
+            var isAuditEnabled = provider.GetAppSettings().AuditEnabled;
+            if (isAuditEnabled)
             {
-            
-   
                 DictionaryScoped dict = provider.GetService<DictionaryScoped>();
                 AuditChange auditChange = new AuditChange();
                 auditChange.FunctionName = $"{context.Controller.GetType().ToDescription()}-{controllerAction.MethodInfo.ToDescription()}";
-                auditChange.Action= context.HttpContext.Request.Path;
+                auditChange.Action = context.HttpContext.Request.Path;
                 auditChange.Ip = context.HttpContext.GetClientIP();
                 auditChange.BrowserInformation = context.HttpContext.Request.Headers["User-Agent"].ToString();
                 auditChange.StartTime = DateTime.Now;
                 dict.AuditChange = auditChange;
-               
             }
+          
         }
-
-        public void OnResultExecuted(ResultExecutedContext context)
+        public override void OnResultExecuted(ResultExecutedContext context)
         {
 
             IServiceProvider provider = context.HttpContext.RequestServices;
             var action = context.ActionDescriptor as ControllerActionDescriptor;
             var isAuditEnabled = provider.GetAppSettings().AuditEnabled;
-            if (isAuditEnabled&&!action.EndpointMetadata.Any(x => x is DisableAuditingAttribute))
+            if (isAuditEnabled)
             {
-   
-                var dic=  provider.GetService<DictionaryScoped>();
-                
-                dic.AuditChange.ExecutionDuration= DateTime.Now.Subtract(dic.AuditChange.StartTime).TotalMilliseconds;
+
+                var dic = provider.GetService<DictionaryScoped>();
+
+                dic.AuditChange.ExecutionDuration = DateTime.Now.Subtract(dic.AuditChange.StartTime).TotalMilliseconds;
                 provider.GetService<IAuditStore>()?.SaveAsync(dic.AuditChange).GetAwaiter().GetResult();
 
             }
         }
 
-        public void OnResultExecuting(ResultExecutingContext context)
-        {
-        }
     }
 }
