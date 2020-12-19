@@ -36,12 +36,12 @@ jobs:
         username: ${{ secrets.PORTAINER_USERNAME }}
         password: ${{ secrets.PORTAINER_PASSWORD }}
         endpointId: 1
-        stackname: destinyapi
+        stackname: destinyidp
         imagename: 18790997531/destinycoreauthenticationcenter:latest
         docker_compose: |
           version: "2"
           services:
-            destinyapi:
+            destinyidp:
               image:  18790997531/destinycoreauthenticationcenter
               container_name: DestinyFlowIDP_From_GithubAction             
               ports:
