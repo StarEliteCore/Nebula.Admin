@@ -24,6 +24,7 @@ namespace Destiny.Core.Flow.AspNetCore.Module
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
             });
             context.Services.AddScoped<AuditLogFilterAttribute>();
+            context.Services.AddScoped<UnitOfWorkAtrrribute>();
         }
 
 

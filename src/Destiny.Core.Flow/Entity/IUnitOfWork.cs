@@ -64,7 +64,9 @@ namespace Destiny.Core.Flow.Entity
         /// <returns></returns>
         Task RollbackAsync();
 
-  
+        void Push();
+
+        void Pop();
 
     }
 }

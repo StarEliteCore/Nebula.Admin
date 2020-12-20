@@ -61,12 +61,38 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
 
         private Stack<bool> _callStack = new Stack<bool>();
 
+        /// <summary>
+        /// 为了解决多接口使用事务问题
+        /// </summary>
+
+        public void Push()
+        {
+            _callStack.Push(true);
+        }
+
+        public void Pop()
+        {
+            if (_callStack.Any())
+            {
+                _callStack.Pop();
+            }
+        }
+
+
+
+
+        public bool Enabled => _callStack.Count <= 0;
 
         /// <summary>
         /// 开启事务
         /// </summary>
         public virtual void BeginTransaction()
         {
+
+            if (!Enabled)
+            {
+                return;
+            }
   
             if (_transaction?.Connection == null)
             {
@@ -98,7 +124,12 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
         /// </summary>
         public virtual async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
         {
-      
+
+
+            if (!Enabled)
+            {
+                return;
+            }
 
             if (_transaction?.Connection == null)
             {
@@ -130,6 +161,11 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
         /// </summary>
         public void Commit()
         {
+            if (!Enabled)
+            {
+                return;
+            }
+
             if (HasCommitted || _transaction == null)
             {
                 return;
@@ -152,6 +188,11 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
         /// <returns></returns>
         public async Task CommitAsync()
         {
+            if (!Enabled)
+            {
+                return;
+            }
+
             if (HasCommitted || _transaction == null)
             {
                 return;
@@ -193,6 +234,7 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
             _transaction?.Dispose();
             _dbContext.Dispose();
             OnDispose?.Invoke();
+            _callStack?.Clear();
             _disposed = true;
   
         }
@@ -202,6 +244,11 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
         /// </summary>
         public void Rollback()
         {
+            if (!Enabled)
+            {
+                return;
+            }
+
             if (_transaction?.Connection != null)
             {
                 _transaction.Rollback();
@@ -226,6 +273,11 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
         /// <returns></returns>
         public async Task RollbackAsync()
         {
+            if (!Enabled)
+            {
+                return;
+            }
+
             if (_transaction?.Connection != null)
             {
                 await _transaction.RollbackAsync();

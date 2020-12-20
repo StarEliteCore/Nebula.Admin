@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.AspNetCore.Api;
+using Destiny.Core.Flow.AspNetCore.Mvc.Filters;
 using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Dtos.RoleDtos;
 using Destiny.Core.Flow.Filter;
@@ -106,6 +107,7 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <returns></returns>
         [Description("异步设置角色菜单")]
         [HttpPost]
+        [ServiceFilter(typeof(UnitOfWorkAtrrribute))]
         public async Task<AjaxResult> SetRoleMenuAsync([FromQuery]Guid roleId, [FromBody]Guid[] menuIds)
         {
 

@@ -164,6 +164,7 @@ namespace Destiny.Core.Flow.Services.RoleServices
 
         public async Task<OperationResponse> SetRoleMenu(Guid roleId, Guid[] menuIds)
         {
+
             return await _roleMenuRepository.UnitOfWork.UseTranAsync(async () =>
             {
                 roleId.NotEmpty(nameof(roleId));
@@ -173,9 +174,9 @@ namespace Destiny.Core.Flow.Services.RoleServices
 
                 }
 
-              
-                 await _roleMenuRepository.DeleteBatchAsync(o => o.RoleId == roleId);
-                
+
+                await _roleMenuRepository.DeleteBatchAsync(o => o.RoleId == roleId);
+
                 var roleMenuList = menuIds.Select(x => new RoleMenuEntity
                 {
                     MenuId = x,
@@ -195,7 +196,7 @@ namespace Destiny.Core.Flow.Services.RoleServices
                 return new OperationResponse("设置角色菜单成功!!!", OperationResponseType.Success);
 
             });
-          
+
         }
     }
 }

@@ -14,6 +14,9 @@ namespace Destiny.Core.Flow.Exceptions
         /// <param name="message"></param>
         public static void Show(string message) => throw new AppException(message);
 
+
+        public static void Show(string message, Exception  ex) => throw new AppException(message, ex);
+
         public static void ShowIf(string message, bool flag) {
 
             if (flag)

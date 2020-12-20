@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Extensions;
+﻿using Destiny.Core.Flow.AspNetCore.Mvc.Filters;
+using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Modules;
 using Destiny.Core.Flow.Options;
 using Microsoft.AspNetCore.Builder;
@@ -21,13 +22,6 @@ namespace Destiny.Core.Flow.AspNetCore.Module
         {
             var settings = context.Services.GetObject<AppOptionSettings>();
             context.Services.AddFileProvider();
-
-            if (context.GetAppSettings().AuditEnabled)
-            {
-                
-
-            }
-
 
             context.Services.AddHttpContextAccessor();
     
