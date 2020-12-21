@@ -27,17 +27,20 @@ namespace Destiny.Core.Flow.SeriLog
 #if DEBUG
 
        .WriteTo.Console(LogEventLevel.Information)
+                       .WriteTo.Map(le => MapData(le),
+                (key, log) =>
+                 log.Async(o => o.File(Path.Combine(fileName, @$"{key.time:yyyy-MM-dd}\{key.level.ToString().ToLower()}.txt"))), restrictedToMinimumLevel: LogEventLevel.Information)
 #else
        .WriteTo.Console(LogEventLevel.Error)
+                       .WriteTo.Map(le => MapData(le),
+                (key, log) =>
+                 log.Async(o => o.File(Path.Combine(fileName, @$"{key.time:yyyy-MM-dd}\{key.level.ToString().ToLower()}.txt"))), restrictedToMinimumLevel:LogEventLevel.Error)
 #endif
 
                 //.WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(eshost))
                 //{
                 //    AutoRegisterTemplate = true,
                 //})
-                .WriteTo.Map(le => MapData(le),
-                (key, log) =>
-                 log.Async(o => o.File(Path.Combine(fileName, @$"{key.time:yyyy-MM-dd}\{key.level.ToString().ToLower()}.txt"))))
                 .CreateLogger();
 
             (DateTime time, LogEventLevel level) MapData(LogEvent logEvent)
