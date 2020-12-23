@@ -1,0 +1,55 @@
+name: .NET Core
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.302
+    - name: Install dependencies
+      run: dotnet restore src/Destiny.Core.Flow.AuthenticationCenter
+    - name: publish
+      run: dotnet publish src/Destiny.Core.Flow.AuthenticationCenter --configuration Release --no-restore -o idpapp
+    - name: build image
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: 18790997531/destinycoreauthenticationcenter
+        tags: latest
+        path: /home/runner/work/Destiny.Core.Flow/Destiny.Core.Flow/idpapp
+        dockerfile: /home/runner/work/Destiny.Core.Flow/Destiny.Core.Flow/idpapp/Dockerfile
+    - name: deploy to portainer
+      uses: LGinC/portainer-stack-deploy@master
+      with: 
+        serverurl: https://portainer.destinycore.club
+        username: ${{ secrets.PORTAINER_USERNAME }}
+        password: ${{ secrets.PORTAINER_PASSWORD }}
+        endpointId: 1
+        stackname: destinyidp
+        imagename: 18790997531/destinycoreauthenticationcenter:latest
+        docker_compose: |
+          version: "2"
+          services:
+            destinyidp:
+              image:  18790997531/destinycoreauthenticationcenter
+              container_name: DestinyFlowIDP_From_GithubAction             
+              ports:
+              - 5005:80
+              environment: 
+                TZ: Asia/Shanghai
+              volumes:
+              - /home/wzw/DestinyCore/DestinyFlow/DestinyCoreDb.txt:/app/DestinyCoreDb.txt
+              - /home/wzw/DestinyCore/DestinyFlow/DestinyCoreRedis.txt:/app/DestinyCoreRedis.txt
+              - /home/wzw/DestinyCore/DestinyFlow/DestinyCoreMongoDb.txt:/app/DestinyCoreMongoDb.txt
+              - /home/wzw/DestinyCore/DestinyFlow/appsettings.json:/app/appsettings.json

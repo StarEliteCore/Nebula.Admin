@@ -32,26 +32,10 @@ jobs:
     - name: deploy to portainer
       uses: LGinC/portainer-stack-deploy@master
       with: 
-        serverurl: http://47.100.213.49:8862
+        serverurl: https://portainer.destinycore.club
         username: ${{ secrets.PORTAINER_USERNAME }}
         password: ${{ secrets.PORTAINER_PASSWORD }}
-        endpointId: 1
         stackname: destinyapi
         imagename: 18790997531/destinycore:latest
-        docker_compose: |
-          version: "2"
-          services:
-            destinyapi:
-              image:  18790997531/destinycore
-              container_name: DestinyFlowAPI_From_GithubAction             
-              ports:
-              - 5003:80
-              environment: 
-                TZ: Asia/Shanghai
-              volumes:
-              - /home/wzw/DestinyCore/DestinyFlow/DestinyCoreDb.txt:/app/DestinyCoreDb.txt
-              - /home/wzw/DestinyCore/DestinyFlow/DestinyCoreRedis.txt:/app/DestinyCoreRedis.txt
-              - /home/wzw/DestinyCore/DestinyFlow/DestinyCoreMongoDb.txt:/app/DestinyCoreMongoDb.txt
-              - /home/wzw/DestinyCore/DestinyFlow/appsettings.json:/app/appsettings.json
 #    - name: Test
 #      run: dotnet test --no-restore --verbosity normal
