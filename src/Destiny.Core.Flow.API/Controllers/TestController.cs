@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 
@@ -18,12 +19,13 @@ namespace Destiny.Core.Flow.API.Controllers
         private ICache<Test> _cache = null;
         private ICache _cache1 = null;
         private IConfiguration _configuration;
-
-        public TestController(ICache<Test> cache, ICache cache1, IConfiguration configuration)
+        private ILogger _logger = null;
+        public TestController(ICache<Test> cache, ICache cache1, IConfiguration configuration,ILoggerFactory loggerFactory)
         {
             _cache = cache;
             _cache1 = cache1;
             _configuration = configuration;
+            _logger = loggerFactory.CreateLogger<TestController>();
         }
 
         [Route("GetPage")]
@@ -52,6 +54,7 @@ namespace Destiny.Core.Flow.API.Controllers
         [HttpGet("{id}", Name = "Get")]
         public string Get(int id)
         {
+            _logger.LogError("出错拉");
             return "value";
         }
 
