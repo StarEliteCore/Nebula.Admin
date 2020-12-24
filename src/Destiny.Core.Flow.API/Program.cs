@@ -23,33 +23,23 @@ namespace Destiny.Core.Flow.API
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    //webBuilder.ConfigureServices((web, s) =>
-                    //{
-                    //    web.HostingEnvironment.IsDevelopment();
-
-
-                    //}).UseStartup<Startup>()
                     webBuilder.UseStartup<Startup>()
+                 //待封装
+                 .UseSerilog((webHost, configuration) => {
+                    
+                     //得到配置文件
+                     var serilog= webHost.Configuration.GetSection("Serilog");
+                     //最小级别
+                     var minimumLevel =serilog["MinimumLevel:Default"];
+                     //日志事件级别
+                     var logEventLevel = (LogEventLevel)Enum.Parse(typeof(LogEventLevel), minimumLevel);
 
-                 
-                 .UseSerilog((webHostBuilderContext, loggerConfiguration) => {
-                     var configuration = loggerConfiguration;
-                     var isDev= webHostBuilderContext.HostingEnvironment.IsDevelopment();
-                     if (isDev)
-                     {
-                         configuration = configuration.MinimumLevel.Information()
-                         .MinimumLevel.Override("Microsoft", LogEventLevel.Information);
 
-                     }
-                     else {
-                         configuration = loggerConfiguration.MinimumLevel.Error().MinimumLevel
-                        .Override("Microsoft", LogEventLevel.Error);
-                     }
-
-                     configuration.Enrich.FromLogContext().WriteTo.Console(isDev? LogEventLevel.Information: LogEventLevel.Error)
-                        .WriteTo.Map(le => MapData(le),
+                     configuration.ReadFrom.
+                     Configuration(webHost.Configuration.GetSection("Serilog")).Enrich.FromLogContext().WriteTo.Console(logEventLevel);
+                     configuration.WriteTo.Map(le => MapData(le),
              (key, log) =>
-              log.Async(o => o.File(Path.Combine("Logs", @$"{key.time:yyyy-MM-dd}\{key.level.ToString().ToLower()}.txt"))));
+              log.Async(o => o.File(Path.Combine("Logs", @$"{key.time:yyyy-MM-dd}\{key.level.ToString().ToLower()}.txt"), logEventLevel)));
 
                      (DateTime time, LogEventLevel level) MapData(LogEvent logEvent)
                      {
@@ -58,14 +48,14 @@ namespace Destiny.Core.Flow.API
                      }
 
                  }).ConfigureLogging((hostingContext, builder) =>
-                   {
-                       builder.ClearProviders();
-                       builder.SetMinimumLevel(LogLevel.Information);
+                 {
+                     builder.ClearProviders();
+                     builder.SetMinimumLevel(LogLevel.Information);
 
-                       builder.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
-                       builder.AddConsole();
-                       builder.AddDebug();
-                   });
+                     builder.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                     builder.AddConsole();
+                     builder.AddDebug();
+                 });
                 }).UseDynamicProxy();//*/;//aspcectcore;
 
 
