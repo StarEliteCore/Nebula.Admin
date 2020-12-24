@@ -28,9 +28,8 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
         private readonly IUnitOfWork _unitOfWork = null;
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-
             _unitOfWork?.BeginTransaction();
-            _unitOfWork?.Push(); 
+            _unitOfWork?.Push();
         }
 
 
