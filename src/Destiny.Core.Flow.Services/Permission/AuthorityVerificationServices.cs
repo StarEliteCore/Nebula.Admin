@@ -1,10 +1,12 @@
-﻿using Destiny.Core.Flow.Extensions;
+﻿using Destiny.Core.Flow.Enums;
+using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Model.Entities.Function;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Model.Entities.Menu;
 using Destiny.Core.Flow.Model.Entities.Rolemenu;
 using Destiny.Core.Flow.Permission;
 using Destiny.Core.Flow.Security.Identity;
+using Destiny.Core.Flow.Ui;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -43,14 +45,17 @@ namespace Destiny.Core.Flow.Services.Permission
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public async Task<bool> IsPermission(string url)
+        public async Task<AuthorizationResult> IsPermission(string url)
         {
             var userId = _principal?.Identity.GetUesrId<Guid>();//获取登录用户Id
             var isAdmin = _principal?.Identity.FindFirst<int>(DestinyCoreFlowClaimTypes.IsAdmin);
-
+            AuthorizationResult result = new AuthorizationResult();
+            
             if (isAdmin == 1)
             {
-                return true;
+                result.Message = "管理员不用验证";
+                result.Type = AuthResultType.Success;
+                return result;
             }
 
          
@@ -70,7 +75,9 @@ namespace Destiny.Core.Flow.Services.Permission
                     Join(funcIds, fid => fid, f => f.Id, (fid, f) => f.LinkUrl).AnyAsync(o => o == url); //待优化
                 if (!isExistUrl)
                 {
-                    return false;
+                    result.Message = $"{url}权限不足，无法访问";
+                    result.Type = AuthResultType.Uncertified;
+                    return result;
                 }
                 //var roleIds = _repositoryUserRole.Entities.Where(x => x.UserId == userId.Value).Select(x => x.RoleId); //得到用户角色
                 //var menuIds = _roleMenuRepository.Entities.Where(rm => roleIds.Contains(rm.RoleId)).Select(o => o.MenuId); //获取MenuId集合;
@@ -82,7 +89,9 @@ namespace Destiny.Core.Flow.Services.Permission
                 //}
 
             }
-            return true;
+            result.Message = "验证成功";
+            result.Type = AuthResultType.Success;
+            return result;
         }
     }
 }

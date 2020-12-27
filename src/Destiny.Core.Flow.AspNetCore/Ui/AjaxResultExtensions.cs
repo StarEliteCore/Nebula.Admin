@@ -29,5 +29,27 @@ namespace Destiny.Core.Flow.AspNetCore.Ui
                 _ => AjaxResultType.Error,
             };
         }
+
+        public static AjaxResultType ToAjaxResultType(this AuthResultType type)
+        {
+            return type switch
+            {
+                AuthResultType.Success => AjaxResultType.Success,
+                AuthResultType.Unauthorized => AjaxResultType.Unauthorized,
+                AuthResultType.NoFound => AjaxResultType.NoFound,
+                AuthResultType.Uncertified => AjaxResultType.Uncertified,
+                _ => AjaxResultType.Uncertified,
+            };
+        }
+
+
+        public static AjaxResult ToAjaxResult(this AuthorizationResult result)
+        {
+
+
+            var message = result.Message ?? result.Type.ToDescription();
+            AjaxResultType type = result.Type.ToAjaxResultType();
+            return new AjaxResult(message, type) { Success = result.Success };
+        }
     }
 }
