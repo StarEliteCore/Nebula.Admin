@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.Audit
 {
-    public class AuditServices : IAuditStore
+    public class AuditService : IAuditStore
     {
         private readonly IMongoDBRepository<AuditLog, ObjectId> _auditLogRepository;
         private readonly IMongoDBRepository<AuditEntry, ObjectId> _auditEntryRepository;
@@ -31,7 +31,7 @@ namespace Destiny.Core.Flow.Services.Audit
 
         private readonly IPrincipal _principal;
 
-        public AuditServices(IMongoDBRepository<AuditLog, ObjectId> auditLogRepository, IMongoDBRepository<AuditEntry, ObjectId> auditEntryRepository, IMongoDBRepository<AuditPropertysEntry, ObjectId> auditPropertysEntryRepository, UserManager<User> userManager,IPrincipal principal)
+        public AuditService(IMongoDBRepository<AuditLog, ObjectId> auditLogRepository, IMongoDBRepository<AuditEntry, ObjectId> auditEntryRepository, IMongoDBRepository<AuditPropertysEntry, ObjectId> auditPropertysEntryRepository, UserManager<User> userManager,IPrincipal principal)
         {
             _auditLogRepository = auditLogRepository;
             _auditEntryRepository = auditEntryRepository;
@@ -42,26 +42,7 @@ namespace Destiny.Core.Flow.Services.Audit
 
         }
 
-        public async Task Save(AuditLog auditLog, List<AuditEntryInputDto> auditEntry)
-        {
-            List<AuditEntry> auditentrylist = new List<AuditEntry>();
-            List<AuditPropertysEntry> auditpropertysentrylist = new List<AuditPropertysEntry>();
-            foreach (var item in auditEntry)
-            {
-                var model = item.MapTo<AuditEntry>();
-                model.AuditLogId = auditLog.Id;
-                foreach (var auditProperty in item.AuditPropertys)
-                {
-                    var auditPropertymodel = auditProperty.MapTo<AuditPropertysEntry>();
-                    auditPropertymodel.AuditEntryId = model.Id;
-                    auditpropertysentrylist.Add(auditPropertymodel);
-                }
-                auditentrylist.Add(model);
-            }
-            await _auditLogRepository.InsertAsync(auditLog);
-            await _auditEntryRepository.InsertAsync(auditentrylist.ToArray());
-            await _auditPropertysEntryRepository.InsertAsync(auditpropertysentrylist.ToArray());
-        }
+
 
         /// <summary>
         /// </summary>
@@ -92,35 +73,9 @@ namespace Destiny.Core.Flow.Services.Audit
 
         }
 
-        public async Task<OperationResponse> GetAuditEntryListByAuditLogIdAsync(ObjectId id)
-        {
-            var list = await _auditEntryRepository.Entities.Where(x => x.AuditLogId == id)
-                .Select(x => new AuditEntryOutputDto
-                {
-                    EntityAllName = x.EntityAllName,
-                    EntityDisplayName = x.EntityDisplayName,
-                    TableName = x.TableName,
-                    KeyValues = x.KeyValues,
-                    OperationType = x.OperationType,
-                    Id=x.Id
-                }).ToListAsync();
-            return new OperationResponse(MessageDefinitionType.LoadSucces, list, OperationResponseType.Success);
-        }
+    
 
-        public async Task<OperationResponse> GetAuditEntryListByAuditEntryIdAsync(ObjectId id)
-        {
-            var list = await _auditPropertysEntryRepository.Entities.Where(x => x.AuditEntryId == id).Select(x => new AuditPropertyEntryOutputDto
-            {
-                Properties = x.Properties,
-                PropertieDisplayName = x.PropertieDisplayName,
-                OriginalValues = x.OriginalValues,
-                NewValues = x.NewValues,
-                PropertiesType = x.PropertiesType,
-                Id=x.Id
-            }).ToListAsync();
-            return new OperationResponse(MessageDefinitionType.LoadSucces, list, OperationResponseType.Success);
-        }
-
+  
 
         /// <summary>
         /// 分页获取数据实体审计 

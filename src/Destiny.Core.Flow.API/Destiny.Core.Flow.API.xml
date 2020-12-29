@@ -35,18 +35,6 @@
             <param name="request"></param>
             <returns></returns>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.AuditLogController.GetAuditEntryListByAuditLogIdAsync(System.String)">
-            <summary>
-            获取操作实体列表
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.AuditLogController.GetAuditEntryListByAuditEntryIdAsync(System.String)">
-            <summary>
-            获取实体属性列表
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.CodeGeneratorController">
             <summary>
             代码生成器

@@ -38,28 +38,6 @@ namespace Destiny.Core.Flow.API.Controllers
         {
             return (await _auditStore.GetAuditLogPageAsync(request)).ToPageList();
         }
-        /// <summary>
-        /// 获取操作实体列表
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [Description("获取操作实体列表")]
-        public async Task<AjaxResult> GetAuditEntryListByAuditLogIdAsync(string id)
-        {
-            var objectId = id.AsTo<ObjectId>();
-            //ObjectId.TryParse(id, out ObjectId objectId);
-            return (await _auditStore.GetAuditEntryListByAuditLogIdAsync(objectId)).ToAjaxResult();
-        }
-        /// <summary>
-        /// 获取实体属性列表
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [Description("获取实体属性列表")]
-        public async Task<AjaxResult> GetAuditEntryListByAuditEntryIdAsync(string id)
-        {
-            var objectId = id.AsTo<ObjectId>();
-            return (await _auditStore.GetAuditEntryListByAuditEntryIdAsync(objectId)).ToAjaxResult();
-        }
+  
     }
 }
