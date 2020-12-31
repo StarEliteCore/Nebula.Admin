@@ -77,6 +77,7 @@ namespace Destiny.Core.Flow.API.Controllers
 
         [HttpDelete]
         [Description("异步删除用户")]
+        [ServiceFilter(typeof(AuditLogFilterAttribute))]
         public async Task<AjaxResult> DeleteAsync(Guid id)
         {
 
@@ -109,6 +110,7 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <returns></returns>
         [Description("用户分配角色")]
         [HttpPost]
+        [ServiceFilter(typeof(AuditLogFilterAttribute))]
         public async Task<AjaxResult> AllocationRoleAsync([FromBody] UserAllocationRoleInputDto dto)
         {
             return (await _userService.AllocationRoleAsync(dto)).ToAjaxResult();
@@ -145,7 +147,6 @@ namespace Destiny.Core.Flow.API.Controllers
         [HttpGet]
         [Description("异步得到所有用户")]
         [NoAuthorityVerification]
-        [DisableAuditing]
         public async Task<AjaxResult> GetUsersAsync()
         {
 

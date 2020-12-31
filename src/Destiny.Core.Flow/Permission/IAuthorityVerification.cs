@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.Dependency;
+using Destiny.Core.Flow.Ui;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Permission
@@ -13,6 +14,6 @@ namespace Destiny.Core.Flow.Permission
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<bool> IsPermission(string url);
+        Task<AuthorizationResult> IsPermission(string url);
     }
 }

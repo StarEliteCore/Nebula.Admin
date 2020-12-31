@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Destiny.Core.Flow.Audit.EntityHistory;
 using Destiny.Core.Flow.Events.EventBus;
-using Destiny.Core.Flow.Audit.Events;
+
 using Destiny.Core.Flow.Dependency;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Destiny.Core.Flow.Audit;
@@ -23,16 +23,7 @@ using Destiny.Core.Flow.Helpers;
 
 namespace Destiny.Core.Flow
 {
-    //public class CompletedEventArgs : EventArgs
-    //{
 
-    //    public int Count { get; set; }
-
-    //    public object Sender { get; set; }
-
-
-
-    //}
     /// <summary>
     /// 上下文基类
     /// </summary>
@@ -41,14 +32,6 @@ namespace Destiny.Core.Flow
         protected readonly IServiceProvider _serviceProvider = null;
         protected readonly AppOptionSettings _option = null;
         protected readonly Microsoft.Extensions.Logging.ILogger _logger = null;
-
-        //public event EventHandler<CompletedEventArgs> Completed;
-
-
-
-
-
-
         protected DbContextBase(DbContextOptions options, IServiceProvider serviceProvider)
              : base(options)
         {
@@ -75,32 +58,7 @@ namespace Destiny.Core.Flow
                 item.Map(modelBuilder);
             }
         }
-
-
-        //protected virtual void OnCompleted()
-        //{
-
-        //    Completed += (sender, ev) =>
-        //    {
-        //        if (_option.AuditEnabled)
-        //        {
-        //            if (ev.Count > 0 && ev.Sender != null && ev.Sender is List<AuditEntryDto> senders)
-        //            {
-        //                var scoped = _serviceProvider.GetService<DictionaryScoped>();
-        //                var auditChange = scoped.AuditChange;
-        //                if (auditChange != null)
-        //                {
-        //                    auditChange.AuditEntitys.AddRange(senders);
-        //                }
-
-
-        //            }
-        //        }
-
-               
-        //    };
-        //}
-
+     
         /// <summary>
         /// 异步保存
         /// </summary>
@@ -113,8 +71,6 @@ namespace Destiny.Core.Flow
             int count = await base.SaveChangesAsync(cancellationToken);
             _logger.LogInformation($"成功保存{count}条数据");
             OnCompleted(count,result);
-            //OnCompleted();
-            //Completed?.Invoke(this, new CompletedEventArgs() { Count = count, Sender = result });
             return count;
         }
 

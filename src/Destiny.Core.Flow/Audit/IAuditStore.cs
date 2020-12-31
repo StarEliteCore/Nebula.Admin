@@ -12,7 +12,7 @@ namespace Destiny.Core.Flow.Audit
 {
     public interface IAuditStore : IScopedDependency
     {
-        Task Save(AuditLog auditLog, List<AuditEntryInputDto> auditEntry);
+ 
 
         /// <summary>
         /// 异步保存
@@ -43,18 +43,6 @@ namespace Destiny.Core.Flow.Audit
         /// <returns></returns>
         Task<IPagedResult<AuditPropertyEntryOutputDto>> GetAuditEntryPropertyPageAsync(PageRequest request);
 
-        /// <summary>
-        /// 获取操作明细
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        Task<OperationResponse> GetAuditEntryListByAuditLogIdAsync(ObjectId id);
-
-        /// <summary>
-        /// 获取实体明细
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        Task<OperationResponse> GetAuditEntryListByAuditEntryIdAsync(ObjectId id);
+   
     }
 }

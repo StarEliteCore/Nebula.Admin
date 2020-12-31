@@ -34,7 +34,6 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
         {
             _logger.LogInformation($"进入权限判断");
             var action = context.ActionDescriptor as ControllerActionDescriptor;
-            var isAllowAnonymous = action.ControllerTypeInfo.GetCustomAttribute<AllowAnonymousAttribute>();//获取Action中的特性
             var linkurl = context.HttpContext.Request.Path.Value.Replace("/api/", "");
             var result = new AjaxResult(MessageDefinitionType.Unauthorized, Enums.AjaxResultType.Unauthorized);
             if (!action.EndpointMetadata.Any(x => x is AllowAnonymousAttribute))
@@ -42,22 +41,26 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
                 if (!_principal.Identity.IsAuthenticated)
                 {
                     context.HttpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                    context.Result = new JsonResult(result);
+                    context.Result.ToJsonResult(result);
                     return;
                 }
                 else
                 {
                     if (!action.EndpointMetadata.Any(x => x is NoAuthorityVerificationAttribute))
                     {
-                        if (!await _authority.IsPermission(linkurl.ToLower()))
+                        var result1 = (await _authority.IsPermission(linkurl.ToLower()));
+                        if (!result1.Success)
                         {
                             ////????不包含的时候怎么返回出去？这个请求终止掉
                             ///
                             _logger.LogError($"此{linkurl}地址没有权限");
-                            result.Message = MessageDefinitionType.Uncertified;
-                            result.Type = Enums.AjaxResultType.Uncertified;
+                            result = result1.ToAjaxResult();
                             context.HttpContext.Response.StatusCode = StatusCodes.Status403Forbidden;
-                            context.Result = new JsonResult(result);
+                            context.Result.ToJsonResult(result);
+                            //result.Message = MessageDefinitionType.Uncertified;
+                            //result.Type = Enums.AjaxResultType.Uncertified;
+                            //context.HttpContext.Response.StatusCode = StatusCodes.Status403Forbidden;
+                            //context.Result = new JsonResult(result);
                             return;
                         }
                     }

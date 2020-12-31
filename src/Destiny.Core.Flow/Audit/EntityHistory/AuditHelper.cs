@@ -19,11 +19,7 @@ namespace Destiny.Core.Flow.Audit.EntityHistory
             List<AuditEntryDto> auditEntries = new List<AuditEntryDto>();
             EntityState[] states = { EntityState.Added, EntityState.Modified, EntityState.Deleted };
              return entityEntries.Where(m => m.Entity != null && states.Contains(m.State) && m.GetType().IsDefined(typeof(DisableAuditingAttribute)) == false).ToArray().Select(o => this.CreateAuditEntity(o)).ToList();
-            //foreach (var item in )
-            //{
-            //    auditEntries.Add(this.CreateAuditEntity(item));
-            //}
-            //return auditEntries;
+            
         }
 
        /// <summary>
