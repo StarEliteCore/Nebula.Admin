@@ -33,7 +33,7 @@ namespace Destiny.Core.Flow.Audit
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        Task<IPagedResult<AuditEntryOutputDto>> GetAuditEntryPageAsync(PageRequest request);
+        Task<IPagedResult<AuditEntryOutputPageDto>> GetAuditEntryPageAsync(PageRequest request);
 
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Destiny.Core.Flow.Audit
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        Task<IPagedResult<AuditPropertyEntryOutputDto>> GetAuditEntryPropertyPageAsync(PageRequest request);
+        Task<IPagedResult<AuditPropertyEntryOutputPageDto>> GetAuditEntryPropertyPageAsync(PageRequest request);
 
    
     }

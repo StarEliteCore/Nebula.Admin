@@ -39,7 +39,7 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Description("异步得到数据审计分页")]
-        public async Task<PageList<AuditEntryOutputDto>> GetAuditEntryPageAsync([FromBody] PageRequest request)
+        public async Task<PageList<AuditEntryOutputPageDto>> GetAuditEntryPageAsync([FromBody] PageRequest request)
         {
             return (await _auditStore.GetAuditEntryPageAsync(request)).ToPageList();
         }
