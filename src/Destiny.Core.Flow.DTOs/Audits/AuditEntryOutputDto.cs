@@ -29,11 +29,7 @@ namespace Destiny.Core.Flow.Dtos.Audits
         [DisplayName("实体显示名称")]
         public string EntityDisplayName { get; set; }
 
-        /// <summary>
-        /// 表名称
-        /// </summary>
-        [DisplayName("表名称")]
-        public string TableName { get; set; }
+
 
         /// <summary>
         /// 主键
@@ -61,7 +57,5 @@ namespace Destiny.Core.Flow.Dtos.Audits
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime? CreatedTime { get; set; }
-
-        public string UserId { get; set; }
     }
 }

@@ -23,6 +23,13 @@
             <param name="request"></param>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.AuditEntryController.LoadAuditEntryByIdAsync(MongoDB.Bson.ObjectId)">
+            <summary>
+            异步加载审计实体
+            </summary>
+            <param name="id">审计实体Id</param>
+            <returns></returns>
+        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.AuditLogController">
             <summary>
             审计日志

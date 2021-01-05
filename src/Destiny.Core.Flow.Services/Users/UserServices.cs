@@ -17,6 +17,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services
@@ -28,14 +29,16 @@ namespace Destiny.Core.Flow.Services
         private readonly IUnitOfWork _unitOfWork = null;
         private readonly IUserRoleService _userRoleService = null;
         private readonly IMediatorHandler _bus = null;
+        private readonly IPrincipal _principal;
 
-        public UserServices(UserManager<User> userManager, RoleManager<Role> roleManager, IUnitOfWork unitOfWork, IUserRoleService userRoleService, IMediatorHandler bus)
+        public UserServices(UserManager<User> userManager, RoleManager<Role> roleManager, IUnitOfWork unitOfWork, IUserRoleService userRoleService, IMediatorHandler bus, IPrincipal principal)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _unitOfWork = unitOfWork;
             _userRoleService = userRoleService;
             _bus = bus;
+            _principal = principal;
         }
 
         //[NonGlobalAopTran]
@@ -102,7 +105,19 @@ namespace Destiny.Core.Flow.Services
         public async Task<OperationResponse> DeleteAsync(Guid id)
         {
             id.NotNull(nameof(id));
+            var userId = _principal.Identity.GetUesrId<Guid>();
+            if (id == userId)
+            {
+                return OperationResponse.Error("删除失败，无法删除自己");
+            }
+
+
             var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user.NormalizedUserName == "ADMIN")
+            {
+                return OperationResponse.Error("此用户为系统超级管理员，无法删除");
+            }
+  
             // IList<string> existRoleNames = await _userManager.GetRolesAsync(user);
             return await _unitOfWork.UseTranAsync(async () =>
             {
