@@ -5,8 +5,10 @@ using Destiny.Core.Flow.IServices.Audit;
 using Destiny.Core.Flow.MongoDB.Repositorys;
 using Destiny.Core.Flow.Ui;
 using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -50,6 +52,21 @@ namespace Destiny.Core.Flow.Services.Audit
         {
             var auditEntry = await _auditEntryRepository.FindByIdAsync(id);
             return OperationResponse<AuditEntryOutputDto>.Ok("加载成功", auditEntry.MapTo<AuditEntryOutputDto>());
+        }
+
+
+
+        /// <summary>
+        /// 得到审计实体属性
+        /// </summary>
+        /// <param name="auditEntryId"></param>
+        /// <returns></returns>
+        public async  Task<OperationResponse> GetAuditEntryPropertyByAuditEntryIdListAsnyc(ObjectId auditEntryId)
+        {
+
+            var entryPropertys =await _auditPropertysEntryRepository.Collection.Find(o => o.AuditEntryId == auditEntryId).ToListAsync();
+            var dtos= entryPropertys.MapToList<AuditEntryPropertyOutputDto>();
+            return OperationResponse.Ok("操作成功",dtos);
         }
     }
 }

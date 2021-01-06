@@ -27,5 +27,14 @@ namespace Destiny.Core.Flow.IServices.Audit
         /// <returns></returns>
 
         Task<OperationResponse<AuditEntryOutputDto>> LoadAuditEntryByIdAsync(ObjectId id);
+
+
+
+        /// <summary>
+        /// 得到审计实体属性
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<OperationResponse> GetAuditEntryPropertyByAuditEntryIdListAsnyc(ObjectId auditEntryId);
     }
 }

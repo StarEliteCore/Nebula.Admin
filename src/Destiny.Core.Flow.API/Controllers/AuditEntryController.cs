@@ -74,6 +74,19 @@ namespace Destiny.Core.Flow.API.Controllers
             return (await _auditService.LoadAuditEntryByIdAsync(id)).ToAjaxResult();
         }
 
+        /// <summary>
+        /// 异步得到审计属性集合
+        /// </summary>
+        /// <param name="id">审计实体Id</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Description("异步得到审计属性集合")]
+        public async Task<AjaxResult> GetAuditPropertyListAsnyc(string id)
+        {
+            ObjectId.TryParse(id, out ObjectId newId);
+
+            return (await _auditService.GetAuditEntryPropertyByAuditEntryIdListAsnyc(newId)).ToAjaxResult();
+        }
 
     }
 }
