@@ -9,7 +9,7 @@ namespace Destiny.Core.Flow.Audit.Dto
     /// 日志属性输出Dto
     /// </summary>
     [DisplayName("日志属性输出Dto")]
-    public class AuditPropertyEntryOutputDto:OutputDtoBase<ObjectId>
+    public class AuditPropertyEntryOutputPageDto:OutputDtoBase<ObjectId>
     {
         /// <summary>
         /// 属性名称

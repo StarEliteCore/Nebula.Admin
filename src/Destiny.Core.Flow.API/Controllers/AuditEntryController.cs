@@ -7,10 +7,14 @@ using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Audit;
 using Destiny.Core.Flow.Audit.Dto;
+using Destiny.Core.Flow.Dtos.Audits;
 using Destiny.Core.Flow.Filter;
+using Destiny.Core.Flow.IServices.Audit;
+using Destiny.Core.Flow.Ui;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 
 namespace Destiny.Core.Flow.API.Controllers
 {
@@ -25,10 +29,12 @@ namespace Destiny.Core.Flow.API.Controllers
 
 
         private readonly IAuditStore _auditStore = null;
+        private readonly IAuditService _auditService = null;
 
-        public AuditEntryController(IAuditStore auditStore)
+        public AuditEntryController(IAuditStore auditStore, IAuditService auditService)
         {
             _auditStore = auditStore;
+            _auditService = auditService;
         }
 
 
@@ -39,7 +45,7 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Description("异步得到数据审计分页")]
-        public async Task<PageList<AuditEntryOutputDto>> GetAuditEntryPageAsync([FromBody] PageRequest request)
+        public async Task<PageList<AuditEntryOutputPageDto>> GetAuditEntryPageAsync([FromBody] PageRequest request)
         {
             return (await _auditStore.GetAuditEntryPageAsync(request)).ToPageList();
         }
@@ -51,9 +57,36 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Description("异步得到实体属性分页")]
-        public async Task<PageList<AuditPropertyEntryOutputDto>> GetAuditEntryPropertyPageAsync([FromBody] PageRequest request)
+        public async Task<PageList<AuditPropertyEntryOutputPageDto>> GetAuditEntryPropertyPageAsync([FromBody] PageRequest request)
         {
             return (await _auditStore.GetAuditEntryPropertyPageAsync(request)).ToPageList();
         }
+
+        /// <summary>
+        /// 异步加载审计实体
+        /// </summary>
+        /// <param name="id">审计实体Id</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Description("异步加载审计实体")]
+        public async Task<AjaxResult> LoadAuditEntryByIdAsync(ObjectId id)
+        {
+            return (await _auditService.LoadAuditEntryByIdAsync(id)).ToAjaxResult();
+        }
+
+        /// <summary>
+        /// 异步得到审计属性集合
+        /// </summary>
+        /// <param name="id">审计实体Id</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Description("异步得到审计属性集合")]
+        public async Task<AjaxResult> GetAuditPropertyListAsnyc(string id)
+        {
+            ObjectId.TryParse(id, out ObjectId newId);
+
+            return (await _auditService.GetAuditEntryPropertyByAuditEntryIdListAsnyc(newId)).ToAjaxResult();
+        }
+
     }
 }

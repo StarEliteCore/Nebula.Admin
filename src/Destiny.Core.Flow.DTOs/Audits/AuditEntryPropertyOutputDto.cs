@@ -1,13 +1,18 @@
-﻿using Destiny.Core.Flow.Mapping;
+﻿using Destiny.Core.Flow.Audit;
+using Destiny.Core.Flow.Entity;
+using Destiny.Core.Flow.Mapping;
+using MongoDB.Bson;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text;
 
-namespace Destiny.Core.Flow.Audit
+namespace Destiny.Core.Flow.Dtos.Audits
 {
-    [DisplayName("审计日志属性输入Dto")]
     [AutoMapping(typeof(AuditPropertysEntry))]
-    public class AuditPropertyEntryInputDto
+    public class AuditEntryPropertyOutputDto : EntityBase<ObjectId>
     {
+
         /// <summary>
         /// 属性名称
         /// </summary>
@@ -37,5 +42,11 @@ namespace Destiny.Core.Flow.Audit
         /// </summary>
         [DisplayName("属性类型")]
         public string PropertiesType { get; set; }
+
+        /// <summary>
+        /// 审计日志实体Id
+        /// </summary>
+        [DisplayName("审计日志实体Id")]
+        public ObjectId AuditEntryId { get; set; }
     }
 }

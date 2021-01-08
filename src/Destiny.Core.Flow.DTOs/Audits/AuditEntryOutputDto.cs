@@ -1,16 +1,20 @@
-﻿using Destiny.Core.Flow.Entity;
+﻿using Destiny.Core.Flow.Audit;
+using Destiny.Core.Flow.Entity;
+using Destiny.Core.Flow.Mapping;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text;
 
-namespace Destiny.Core.Flow.Audit.Dto
+namespace Destiny.Core.Flow.Dtos.Audits
 {
     /// <summary>
     /// 实体输出Dto
     /// </summary>
     [DisplayName("日志实体输出")]
+    [AutoMapping(typeof(AuditEntry))]
     public class AuditEntryOutputDto : OutputDto<ObjectId>
     {
         /// <summary>
@@ -25,11 +29,7 @@ namespace Destiny.Core.Flow.Audit.Dto
         [DisplayName("实体显示名称")]
         public string EntityDisplayName { get; set; }
 
-        /// <summary>
-        /// 表名称
-        /// </summary>
-        [DisplayName("表名称")]
-        public string TableName { get; set; }
+
 
         /// <summary>
         /// 主键
@@ -57,7 +57,5 @@ namespace Destiny.Core.Flow.Audit.Dto
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime? CreatedTime { get; set; }
-
-        public string UserId { get; set; }
     }
 }
