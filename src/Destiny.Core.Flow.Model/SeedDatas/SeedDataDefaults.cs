@@ -29,7 +29,7 @@ namespace Destiny.Core.Flow.Model.SeedDatas
             }
             _serviceProvider.CreateScoped(provider =>
             {
-                var repository = provider.GetService<IEFCoreRepository<TEntity, TKey>>();
+                var repository = provider.GetService<IRepository<TEntity, TKey>>();
                 var unitOfWork = provider.GetService<IUnitOfWork>();
                 unitOfWork.BeginTransaction();
                 foreach (var entitie in entities)

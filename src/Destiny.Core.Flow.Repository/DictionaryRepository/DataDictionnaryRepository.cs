@@ -13,7 +13,7 @@ namespace Destiny.Core.Flow.Repository.DictionaryRepository
         }
     }
 
-    public interface IDataDictionnaryRepository : IEFCoreRepository<DataDictionaryEntity, Guid>
+    public interface IDataDictionnaryRepository : IRepository<DataDictionaryEntity, Guid>
     {
     }
 }

@@ -15,11 +15,11 @@ namespace Destiny.Core.Flow.Services.UserRoles
     /// </summary>
     public class UserRoleService : IUserRoleService
     {
-        private readonly IEFCoreRepository<UserRole, Guid> _repositoryUserRole = null;
+        private readonly IRepository<UserRole, Guid> _repositoryUserRole = null;
 
         private readonly RoleManager<Role> _roleManager = null;
 
-        public UserRoleService(IEFCoreRepository<UserRole, Guid> repositoryUserRole, RoleManager<Role> roleManager)
+        public UserRoleService(IRepository<UserRole, Guid> repositoryUserRole, RoleManager<Role> roleManager)
         {
             _repositoryUserRole = repositoryUserRole;
             _roleManager = roleManager;

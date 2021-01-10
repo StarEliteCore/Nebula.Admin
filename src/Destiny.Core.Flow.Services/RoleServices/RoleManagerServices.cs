@@ -23,7 +23,7 @@ namespace Destiny.Core.Flow.Services.RoleServices
     public class RoleManagerServices : IRoleManagerServices
     {
         private readonly RoleManager<Role> _roleManager = null;
-        private readonly IEFCoreRepository<RoleMenuEntity, Guid> _roleMenuRepository;
+        private readonly IRepository<RoleMenuEntity, Guid> _roleMenuRepository;
         private readonly IMediatorHandler _eventBus = null;
         private readonly IUnitOfWork _unitOfWork = null;
 
@@ -31,7 +31,7 @@ namespace Destiny.Core.Flow.Services.RoleServices
         /// 构造函数注入
         /// </summary>
         /// <param name="roleManager"></param>
-        public RoleManagerServices(RoleManager<Role> roleManager, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository, IMediatorHandler eventBus, IUnitOfWork unitOfWork)
+        public RoleManagerServices(RoleManager<Role> roleManager, IRepository<RoleMenuEntity, Guid> roleMenuRepository, IMediatorHandler eventBus, IUnitOfWork unitOfWork)
         {
             _roleManager = roleManager;
             _roleMenuRepository = roleMenuRepository;

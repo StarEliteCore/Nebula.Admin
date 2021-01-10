@@ -20,10 +20,10 @@ namespace Destiny.Core.Flow.Services.Functions
 {
     public class FunctionService : IFunctionService
     {
-        private readonly IEFCoreRepository<Function, Guid> _functionRepository;
+        private readonly IRepository<Function, Guid> _functionRepository;
         private readonly IMenuFunctionRepository _menuFunctionRepository = null;
 
-        public FunctionService(IEFCoreRepository<Function, Guid> functionRepository, IMenuFunctionRepository menuFunctionRepository)
+        public FunctionService(IRepository<Function, Guid> functionRepository, IMenuFunctionRepository menuFunctionRepository)
         {
             _functionRepository = functionRepository ?? throw new ArgumentNullException(nameof(functionRepository));
             _menuFunctionRepository = menuFunctionRepository;

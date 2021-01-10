@@ -8,12 +8,12 @@ namespace Destiny.Core.Flow.Model.Security
     {
         public UserStore(
 
-            IEFCoreRepository<User, Guid> userRepository,
-            IEFCoreRepository<UserLogin, Guid> userLoginRepository,
-            IEFCoreRepository<UserClaim, Guid> userClaimRepository,
-            IEFCoreRepository<UserToken, Guid> userTokenRepository,
-            IEFCoreRepository<Role, Guid> roleRepository,
-            IEFCoreRepository<UserRole, Guid> userRoleRepository)
+            IRepository<User, Guid> userRepository,
+            IRepository<UserLogin, Guid> userLoginRepository,
+            IRepository<UserClaim, Guid> userClaimRepository,
+            IRepository<UserToken, Guid> userTokenRepository,
+            IRepository<Role, Guid> roleRepository,
+            IRepository<UserRole, Guid> userRoleRepository)
             : base(userRepository, userLoginRepository, userClaimRepository, userTokenRepository, roleRepository, userRoleRepository)
         {
         }

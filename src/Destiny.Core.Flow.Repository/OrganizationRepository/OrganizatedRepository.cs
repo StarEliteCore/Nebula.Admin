@@ -13,7 +13,7 @@ namespace Destiny.Core.Flow.Repository.OrganizationRepository
         }
     }
 
-    public interface IOrganizatedRepository : IEFCoreRepository<OrganizatedEntity, Guid>
+    public interface IOrganizatedRepository : IRepository<OrganizatedEntity, Guid>
     {
     }
 }

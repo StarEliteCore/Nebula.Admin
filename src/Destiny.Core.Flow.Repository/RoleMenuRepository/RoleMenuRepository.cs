@@ -13,7 +13,7 @@ namespace Destiny.Core.Flow.Repository.RoleMenuRepository
         }
     }
 
-    public interface IRoleMenuRepository : IEFCoreRepository<RoleMenuEntity, Guid>
+    public interface IRoleMenuRepository : IRepository<RoleMenuEntity, Guid>
     {
     }
 }

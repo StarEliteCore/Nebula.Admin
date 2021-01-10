@@ -14,15 +14,15 @@ namespace Destiny.Core.Flow.IdentityServer.Store
 {
     public class ApiResourceStoreBase : IResourceStore
     {
-        private readonly IEFCoreRepository<ApiResource, Guid> _apiResourceRepository;
-        private readonly IEFCoreRepository<IdentityResource, Guid> _identityResourceRepository;
-        private readonly IEFCoreRepository<ApiScope, Guid> _apiScopeRepository;
-        private readonly IEFCoreRepository<ApiResourceScope, Guid> _apiResourceScopeRepository;
+        private readonly IRepository<ApiResource, Guid> _apiResourceRepository;
+        private readonly IRepository<IdentityResource, Guid> _identityResourceRepository;
+        private readonly IRepository<ApiScope, Guid> _apiScopeRepository;
+        private readonly IRepository<ApiResourceScope, Guid> _apiResourceScopeRepository;
 
 
         private readonly ILogger<ApiResourceStoreBase> _logger;
 
-        public ApiResourceStoreBase(IEFCoreRepository<ApiResource, Guid> apiResourceRepository, IEFCoreRepository<IdentityResource, Guid> identityResourceRepository, IEFCoreRepository<ApiScope, Guid> apiScopeRepository, ILogger<ApiResourceStoreBase> logger, IEFCoreRepository<ApiResourceScope, Guid> apiResourceScopeRepository)
+        public ApiResourceStoreBase(IRepository<ApiResource, Guid> apiResourceRepository, IRepository<IdentityResource, Guid> identityResourceRepository, IRepository<ApiScope, Guid> apiScopeRepository, ILogger<ApiResourceStoreBase> logger, IRepository<ApiResourceScope, Guid> apiResourceScopeRepository)
         {
             _apiResourceRepository = apiResourceRepository;
             _identityResourceRepository = identityResourceRepository;

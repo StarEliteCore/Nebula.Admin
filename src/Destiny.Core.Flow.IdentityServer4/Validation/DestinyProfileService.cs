@@ -17,9 +17,9 @@ namespace Destiny.Core.Flow.IdentityServer.Validation
     {
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
-        private readonly IEFCoreRepository<UserRole, Guid> _userRoleRepository;
+        private readonly IRepository<UserRole, Guid> _userRoleRepository;
 
-        public DestinyProfileService(UserManager<User> userManager, RoleManager<Role> roleManager, IEFCoreRepository<UserRole, Guid> userRoleRepository)
+        public DestinyProfileService(UserManager<User> userManager, RoleManager<Role> roleManager, IRepository<UserRole, Guid> userRoleRepository)
         {
             _userManager = userManager;
             _roleManager = roleManager;

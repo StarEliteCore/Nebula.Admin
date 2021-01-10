@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow
 {
-    public interface IEFCoreRepository<TEntity, TPrimaryKey>
+    public interface IRepository<TEntity, TPrimaryKey>
            where TEntity : IEntity<TPrimaryKey>
     {
 

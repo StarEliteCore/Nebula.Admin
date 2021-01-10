@@ -18,7 +18,7 @@ using Z.EntityFramework.Plus;
 
 namespace Destiny.Core.Flow
 {
-    public class Repository<TEntity, TPrimaryKey> : IEFCoreRepository<TEntity, TPrimaryKey>
+    public class Repository<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
        where TEntity : class, IEntity<TPrimaryKey>
        where TPrimaryKey : IEquatable<TPrimaryKey>
     {

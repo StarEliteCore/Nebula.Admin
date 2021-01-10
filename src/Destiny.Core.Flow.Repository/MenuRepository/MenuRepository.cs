@@ -11,7 +11,7 @@ namespace Destiny.Core.Flow.Repository.MenuRepository
         }
     }
 
-    public interface IMenuRepository : IEFCoreRepository<MenuEntity, Guid>, IScopedDependency
+    public interface IMenuRepository : IRepository<MenuEntity, Guid>, IScopedDependency
     {
     }
 }

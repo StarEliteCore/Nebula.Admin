@@ -22,14 +22,14 @@ namespace Destiny.Core.Flow.Services.Permission
     public class AuthorityVerificationServices : IAuthorityVerification
     {
         private readonly IPrincipal _principal;
-        private readonly IEFCoreRepository<UserRole, Guid> _repositoryUserRole = null;
-        private readonly IEFCoreRepository<RoleMenuEntity, Guid> _roleMenuRepository = null;
-        private readonly IEFCoreRepository<MenuFunction, Guid> _menuFuncRepository = null;
-        private readonly IEFCoreRepository<Function, Guid> _funcRepository = null;
+        private readonly IRepository<UserRole, Guid> _repositoryUserRole = null;
+        private readonly IRepository<RoleMenuEntity, Guid> _roleMenuRepository = null;
+        private readonly IRepository<MenuFunction, Guid> _menuFuncRepository = null;
+        private readonly IRepository<Function, Guid> _funcRepository = null;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
 
-        public AuthorityVerificationServices(IPrincipal principal, IEFCoreRepository<UserRole, Guid> repositoryUserRole, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository, IEFCoreRepository<MenuFunction, Guid> menuFuncRepository, IEFCoreRepository<Function, Guid> funcRepository, UserManager<User> userManager, RoleManager<Role> roleManager)
+        public AuthorityVerificationServices(IPrincipal principal, IRepository<UserRole, Guid> repositoryUserRole, IRepository<RoleMenuEntity, Guid> roleMenuRepository, IRepository<MenuFunction, Guid> menuFuncRepository, IRepository<Function, Guid> funcRepository, UserManager<User> userManager, RoleManager<Role> roleManager)
         {
             _principal = principal;
             _repositoryUserRole = repositoryUserRole;

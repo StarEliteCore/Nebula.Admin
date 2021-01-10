@@ -29,7 +29,7 @@ namespace Destiny.Core.Flow
         protected virtual IServiceCollection AddRepository(IServiceCollection services)
         {
 
-            services.AddScoped(typeof(IEFCoreRepository<,>), typeof(Repository<,>));
+            services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
             return services;
         }
 

@@ -24,12 +24,12 @@ namespace Destiny.Core.Flow.Services.Menu
     public class MenuFunctionServices : IMenuFunctionServices
     {
         private readonly IMenuFunctionRepository _menuFunctionRepository = null;
-        private readonly IEFCoreRepository<Function, Guid> _functionRepository;
+        private readonly IRepository<Function, Guid> _functionRepository;
         private readonly IMenuRepository _menuRepository = null;
         private readonly IUnitOfWork _unitOfWork = null;
 
 
-        public MenuFunctionServices(IMenuFunctionRepository menuFunctionRepository, IEFCoreRepository<Function, Guid> functionRepository, IMenuRepository menuRepository, IUnitOfWork unitOfWork)
+        public MenuFunctionServices(IMenuFunctionRepository menuFunctionRepository, IRepository<Function, Guid> functionRepository, IMenuRepository menuRepository, IUnitOfWork unitOfWork)
         {
             _menuFunctionRepository = menuFunctionRepository;
             _functionRepository = functionRepository;

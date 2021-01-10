@@ -35,22 +35,22 @@ namespace Destiny.Core.Flow.Identity
         where TRoleKey : IEquatable<TRoleKey>
 
     {
-        private readonly IEFCoreRepository<TUser, TUserKey> _userRepository;
-        private readonly IEFCoreRepository<TUserLogin, Guid> _userLoginRepository;
-        private readonly IEFCoreRepository<TUserClaim, Guid> _userClaimRepository;
-        private readonly IEFCoreRepository<TUserToken, Guid> _userTokenRepository;
-        private readonly IEFCoreRepository<TRole, TRoleKey> _roleRepository;
-        private readonly IEFCoreRepository<TUserRole, Guid> _userRoleRepository;
+        private readonly IRepository<TUser, TUserKey> _userRepository;
+        private readonly IRepository<TUserLogin, Guid> _userLoginRepository;
+        private readonly IRepository<TUserClaim, Guid> _userClaimRepository;
+        private readonly IRepository<TUserToken, Guid> _userTokenRepository;
+        private readonly IRepository<TRole, TRoleKey> _roleRepository;
+        private readonly IRepository<TUserRole, Guid> _userRoleRepository;
 
         private bool _disposed;
 
         protected UserStoreBase(
-            IEFCoreRepository<TUser, TUserKey> userRepository,
-            IEFCoreRepository<TUserLogin, Guid> userLoginRepository,
-            IEFCoreRepository<TUserClaim, Guid> userClaimRepository,
-            IEFCoreRepository<TUserToken, Guid> userTokenRepository,
-            IEFCoreRepository<TRole, TRoleKey> roleRepository,
-            IEFCoreRepository<TUserRole, Guid> userRoleRepository
+            IRepository<TUser, TUserKey> userRepository,
+            IRepository<TUserLogin, Guid> userLoginRepository,
+            IRepository<TUserClaim, Guid> userClaimRepository,
+            IRepository<TUserToken, Guid> userTokenRepository,
+            IRepository<TRole, TRoleKey> roleRepository,
+            IRepository<TUserRole, Guid> userRoleRepository
 
         )
         {

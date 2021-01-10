@@ -13,10 +13,10 @@ namespace Destiny.Core.Flow.IdentityServer.Store
     {
         private readonly ILogger<ClientStoreBase> _logger;
 
-        private readonly IEFCoreRepository<Client, Guid> _clientRepository;
-        private readonly IEFCoreRepository<ClientGrantType, Guid> _clientGrantTypeRepository;
+        private readonly IRepository<Client, Guid> _clientRepository;
+        private readonly IRepository<ClientGrantType, Guid> _clientGrantTypeRepository;
 
-        public ClientStoreBase(ILogger<ClientStoreBase> logger, IEFCoreRepository<Client, Guid> clientRepository, IEFCoreRepository<ClientGrantType, Guid> clientGrantTypeRepository)
+        public ClientStoreBase(ILogger<ClientStoreBase> logger, IRepository<Client, Guid> clientRepository, IRepository<ClientGrantType, Guid> clientGrantTypeRepository)
         {
             _logger = logger;
             _clientRepository = clientRepository;

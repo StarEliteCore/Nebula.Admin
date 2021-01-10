@@ -12,12 +12,12 @@ namespace Destiny.Core.Flow.Application
             where TEntity : IEntity<TPrimaryKey>, IEquatable<TPrimaryKey>
     {
         private readonly IServiceProvider _serviceProvider = null;
-        private readonly IEFCoreRepository<TEntity, TPrimaryKey> _efCoreRepository = null;
+        private readonly IRepository<TEntity, TPrimaryKey> _efCoreRepository = null;
 
         public CrudServiceAsync(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            _efCoreRepository = _serviceProvider.GetService<IEFCoreRepository<TEntity, TPrimaryKey>>();
+            _efCoreRepository = _serviceProvider.GetService<IRepository<TEntity, TPrimaryKey>>();
         }
 
         public async Task<OperationResponse> DeleteAsync(TPrimaryKey primaryKey)

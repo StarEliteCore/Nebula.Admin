@@ -17,13 +17,13 @@ namespace Destiny.Core.Flow.Identity
         where TRoleClaim : RoleClaimBase<TRoleKey>, new()
         where TRoleKey : IEquatable<TRoleKey>
     {
-        private readonly IEFCoreRepository<TRole, TRoleKey> _roleRepository;
-        private readonly IEFCoreRepository<TRoleClaim, Guid> _roleClaimRepository;
+        private readonly IRepository<TRole, TRoleKey> _roleRepository;
+        private readonly IRepository<TRoleClaim, Guid> _roleClaimRepository;
         private bool _disposed;
 
         protected RoleStoreBase(
-            IEFCoreRepository<TRole, TRoleKey> roleRepository,
-            IEFCoreRepository<TRoleClaim, Guid> roleClaimRepository)
+            IRepository<TRole, TRoleKey> roleRepository,
+            IRepository<TRoleClaim, Guid> roleClaimRepository)
         {
             _roleRepository = roleRepository;
             _roleClaimRepository = roleClaimRepository;

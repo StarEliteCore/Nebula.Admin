@@ -48,7 +48,7 @@ namespace Destiny.Core.Flow.Model.Security
             {
                 return;
             }
-            _serviceProvider.CreateScoped<IEFCoreRepository<Function, Guid>>(repository =>
+            _serviceProvider.CreateScoped<IRepository<Function, Guid>>(repository =>
             {
                 var fcutionSelector = functionInfos.Select(o => o.LinkUrl);
                 var dbFcutions = repository.Entities.ToList();
@@ -77,7 +77,7 @@ namespace Destiny.Core.Flow.Model.Security
             });
         }
 
-        private void UpdateFunctions(IEnumerable<Function> updatFunction, IEnumerable<FunctionInfo> functionInfos, IEFCoreRepository<Function, Guid> repository)
+        private void UpdateFunctions(IEnumerable<Function> updatFunction, IEnumerable<FunctionInfo> functionInfos, IRepository<Function, Guid> repository)
         {
             foreach (var function in updatFunction)
             {

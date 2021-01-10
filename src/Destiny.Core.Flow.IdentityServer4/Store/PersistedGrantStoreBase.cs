@@ -13,10 +13,10 @@ namespace Destiny.Core.Flow.IdentityServer.Store
 {
     public class PersistedGrantStoreBase : IPersistedGrantStore
     {
-        private readonly IEFCoreRepository<PersistedGrant, Guid> _persistedGrantRepository;
+        private readonly IRepository<PersistedGrant, Guid> _persistedGrantRepository;
         private readonly ILogger<PersistedGrantStoreBase> _logger;
 
-        public PersistedGrantStoreBase(IEFCoreRepository<PersistedGrant, Guid> persistedGrantRepository, ILogger<PersistedGrantStoreBase> logger)
+        public PersistedGrantStoreBase(IRepository<PersistedGrant, Guid> persistedGrantRepository, ILogger<PersistedGrantStoreBase> logger)
         {
             _persistedGrantRepository = persistedGrantRepository;
             _logger = logger;

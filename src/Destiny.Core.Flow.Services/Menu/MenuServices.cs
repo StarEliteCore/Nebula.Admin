@@ -30,17 +30,17 @@ namespace Destiny.Core.Flow.Services.Menu
     public class MenuServices : IMenuServices
     {
         private readonly IMenuRepository _menuRepository = null;
-        private readonly IEFCoreRepository<RoleMenuEntity, Guid> _roleMenuRepository;
+        private readonly IRepository<RoleMenuEntity, Guid> _roleMenuRepository;
         private readonly IMenuFunctionRepository _menuFunction = null;
         private readonly IUnitOfWork _unitOfWork = null;
         private readonly IIdentity _iIdentity = null;
-        private readonly IEFCoreRepository<UserRole, Guid> _repositoryUserRole = null;
+        private readonly IRepository<UserRole, Guid> _repositoryUserRole = null;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
         private readonly Microsoft.Extensions.Logging.ILogger _logger = null;
         private readonly ICache _cache = null;
         private readonly AsyncLock _mutex = new AsyncLock();
-        public MenuServices(IMenuRepository menuRepository, IUnitOfWork unitOfWork, IEFCoreRepository<RoleMenuEntity, Guid> roleMenuRepository, IMenuFunctionRepository menuFunction, IPrincipal principal, UserManager<User> userManager, RoleManager<Role> roleManager, IEFCoreRepository<UserRole, Guid> repositoryUserRole, Microsoft.Extensions.Logging.ILoggerFactory loggerFactory, ICache cache)
+        public MenuServices(IMenuRepository menuRepository, IUnitOfWork unitOfWork, IRepository<RoleMenuEntity, Guid> roleMenuRepository, IMenuFunctionRepository menuFunction, IPrincipal principal, UserManager<User> userManager, RoleManager<Role> roleManager, IRepository<UserRole, Guid> repositoryUserRole, Microsoft.Extensions.Logging.ILoggerFactory loggerFactory, ICache cache)
         {
             _menuRepository = menuRepository;
             _roleMenuRepository = roleMenuRepository;
