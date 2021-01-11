@@ -26,7 +26,7 @@ namespace Destiny.Core.Flow.IServices.Audit
         /// <param name="id"></param>
         /// <returns></returns>
 
-        Task<OperationResponse<AuditEntryOutputDto>> LoadAuditEntryByIdAsync(ObjectId id);
+        Task<OperationResponse<AuditEntryOutputDto>> LoadAuditEntryByIdAsync(string id);
 
 
 
@@ -35,6 +35,6 @@ namespace Destiny.Core.Flow.IServices.Audit
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<OperationResponse> GetAuditEntryPropertyByAuditEntryIdListAsnyc(ObjectId auditEntryId);
+        Task<OperationResponse> GetAuditEntryPropertyByAuditEntryIdListAsnyc(string auditEntryId);
     }
 }

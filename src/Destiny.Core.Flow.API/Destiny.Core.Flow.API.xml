@@ -23,7 +23,7 @@
             <param name="request"></param>
             <returns></returns>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.AuditEntryController.LoadAuditEntryByIdAsync(MongoDB.Bson.ObjectId)">
+        <member name="M:Destiny.Core.Flow.API.Controllers.AuditEntryController.LoadAuditEntryByIdAsync(System.String)">
             <summary>
             异步加载审计实体
             </summary>

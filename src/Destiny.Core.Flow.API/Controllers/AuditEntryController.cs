@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using Destiny.Core.Flow.Extensions;
 
 namespace Destiny.Core.Flow.API.Controllers
 {
@@ -69,7 +70,7 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Description("异步加载审计实体")]
-        public async Task<AjaxResult> LoadAuditEntryByIdAsync(ObjectId id)
+        public async Task<AjaxResult> LoadAuditEntryByIdAsync(string id)
         {
             return (await _auditService.LoadAuditEntryByIdAsync(id)).ToAjaxResult();
         }
@@ -83,9 +84,7 @@ namespace Destiny.Core.Flow.API.Controllers
         [Description("异步得到审计属性集合")]
         public async Task<AjaxResult> GetAuditPropertyListAsnyc(string id)
         {
-            ObjectId.TryParse(id, out ObjectId newId);
-
-            return (await _auditService.GetAuditEntryPropertyByAuditEntryIdListAsnyc(newId)).ToAjaxResult();
+            return (await _auditService.GetAuditEntryPropertyByAuditEntryIdListAsnyc(id)).ToAjaxResult();
         }
 
     }

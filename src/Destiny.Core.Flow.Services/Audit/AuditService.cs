@@ -48,9 +48,10 @@ namespace Destiny.Core.Flow.Services.Audit
         /// <param name="id"></param>
         /// <returns></returns>
 
-        public async Task<OperationResponse<AuditEntryOutputDto>> LoadAuditEntryByIdAsync(ObjectId id)
+        public async Task<OperationResponse<AuditEntryOutputDto>> LoadAuditEntryByIdAsync(string id)
         {
-            var auditEntry = await _auditEntryRepository.FindByIdAsync(id);
+            var newId = id.AsTo<ObjectId>();
+            var auditEntry = await _auditEntryRepository.FindByIdAsync(newId);
             return OperationResponse<AuditEntryOutputDto>.Ok("加载成功", auditEntry.MapTo<AuditEntryOutputDto>());
         }
 
@@ -61,10 +62,10 @@ namespace Destiny.Core.Flow.Services.Audit
         /// </summary>
         /// <param name="auditEntryId"></param>
         /// <returns></returns>
-        public async  Task<OperationResponse> GetAuditEntryPropertyByAuditEntryIdListAsnyc(ObjectId auditEntryId)
+        public async  Task<OperationResponse> GetAuditEntryPropertyByAuditEntryIdListAsnyc(string auditEntryId)
         {
-
-            var entryPropertys =await _auditPropertysEntryRepository.Collection.Find(o => o.AuditEntryId == auditEntryId).ToListAsync();
+            var newAuditEntryId = auditEntryId.AsTo<ObjectId>();
+            var entryPropertys =await _auditPropertysEntryRepository.Collection.Find(o => o.AuditEntryId == newAuditEntryId).ToListAsync();
             var dtos= entryPropertys.MapToList<AuditEntryPropertyOutputDto>();
             return OperationResponse.Ok("操作成功",dtos);
         }
