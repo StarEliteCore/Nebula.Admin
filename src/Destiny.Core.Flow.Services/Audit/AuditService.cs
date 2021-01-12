@@ -1,5 +1,5 @@
 ﻿using Destiny.Core.Flow.Audit;
-using Destiny.Core.Flow.Dtos;
+using Destiny.Core.Flow.Audit.Dto;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.IServices.Audit;
 using Destiny.Core.Flow.MongoDB.Repositorys;
@@ -31,10 +31,10 @@ namespace Destiny.Core.Flow.Services.Audit
         /// <param name="id"></param>
         /// <returns></returns>
 
-        public async Task<OperationResponse<AuditLogsOutputDto>> LoadAuditLogByIdAsync(ObjectId id)
+        public async Task<OperationResponse<AuditLogOutputPageDto>> LoadAuditLogByIdAsync(ObjectId id)
         {
             var auditLog = await _auditLogRepository.FindByIdAsync(id);
-            return OperationResponse<AuditLogsOutputDto>.Ok("操作成功", auditLog.MapTo<AuditLogsOutputDto>());
+            return OperationResponse<AuditLogOutputPageDto>.Ok("操作成功", auditLog.MapTo<AuditLogOutputPageDto>());
         }
 
 
@@ -44,11 +44,11 @@ namespace Destiny.Core.Flow.Services.Audit
         /// <param name="id"></param>
         /// <returns></returns>
 
-        public async Task<OperationResponse<AuditEntrysOutputDto>> LoadAuditEntryByIdAsync(string id)
+        public async Task<OperationResponse<AuditEntryOutputPageDto>> LoadAuditEntryByIdAsync(string id)
         {
             var newId = id.AsTo<ObjectId>();
             var auditEntry = await _auditEntryRepository.FindByIdAsync(newId);
-            return OperationResponse<AuditEntrysOutputDto>.Ok("加载成功", auditEntry.MapTo<AuditEntrysOutputDto>());
+            return OperationResponse<AuditEntryOutputPageDto>.Ok("加载成功", auditEntry.MapTo<AuditEntryOutputPageDto>());
         }
 
 
@@ -62,7 +62,7 @@ namespace Destiny.Core.Flow.Services.Audit
         {
             var newAuditEntryId = auditEntryId.AsTo<ObjectId>();
             var entryPropertys = await _auditPropertysEntryRepository.Collection.Find(o => o.AuditEntryId == newAuditEntryId).ToListAsync();
-            var dtos = entryPropertys.MapToList<AuditEntryPropertyOutputDto>();
+            var dtos = entryPropertys.MapToList<AuditPropertyEntryOutputPageDto>();
             return OperationResponse.Ok("操作成功", dtos);
         }
     }
