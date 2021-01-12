@@ -31,10 +31,10 @@ namespace Destiny.Core.Flow.Services.Audit
         /// <param name="id"></param>
         /// <returns></returns>
 
-        public async Task<OperationResponse<AuditLogOutputDto>> LoadAuditLogByIdAsync(ObjectId id)
+        public async Task<OperationResponse<AuditLogsOutputDto>> LoadAuditLogByIdAsync(ObjectId id)
         {
             var auditLog = await _auditLogRepository.FindByIdAsync(id);
-            return OperationResponse<AuditLogOutputDto>.Ok("操作成功", auditLog.MapTo<AuditLogOutputDto>());
+            return OperationResponse<AuditLogsOutputDto>.Ok("操作成功", auditLog.MapTo<AuditLogsOutputDto>());
         }
 
 
@@ -44,11 +44,11 @@ namespace Destiny.Core.Flow.Services.Audit
         /// <param name="id"></param>
         /// <returns></returns>
 
-        public async Task<OperationResponse<AuditEntryOutputDto>> LoadAuditEntryByIdAsync(string id)
+        public async Task<OperationResponse<AuditEntrysOutputDto>> LoadAuditEntryByIdAsync(string id)
         {
             var newId = id.AsTo<ObjectId>();
             var auditEntry = await _auditEntryRepository.FindByIdAsync(newId);
-            return OperationResponse<AuditEntryOutputDto>.Ok("加载成功", auditEntry.MapTo<AuditEntryOutputDto>());
+            return OperationResponse<AuditEntrysOutputDto>.Ok("加载成功", auditEntry.MapTo<AuditEntrysOutputDto>());
         }
 
 

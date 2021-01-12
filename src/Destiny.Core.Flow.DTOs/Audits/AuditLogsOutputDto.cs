@@ -8,7 +8,7 @@ using System.ComponentModel;
 namespace Destiny.Core.Flow.Dtos
 {
     [DisplayName("操作审计日志")]
-    public class AuditLogOutputDto : EntityBase<ObjectId>
+    public class AuditLogsOutputDto : EntityBase<ObjectId>
     {
 
 

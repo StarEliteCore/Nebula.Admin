@@ -13,7 +13,7 @@ namespace Destiny.Core.Flow.IServices.Audit
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<OperationResponse<AuditLogOutputDto>> LoadAuditLogByIdAsync(ObjectId id);
+        Task<OperationResponse<AuditLogsOutputDto>> LoadAuditLogByIdAsync(ObjectId id);
 
 
 
@@ -23,7 +23,7 @@ namespace Destiny.Core.Flow.IServices.Audit
         /// <param name="id"></param>
         /// <returns></returns>
 
-        Task<OperationResponse<AuditEntryOutputDto>> LoadAuditEntryByIdAsync(string id);
+        Task<OperationResponse<AuditEntrysOutputDto>> LoadAuditEntryByIdAsync(string id);
 
 
 

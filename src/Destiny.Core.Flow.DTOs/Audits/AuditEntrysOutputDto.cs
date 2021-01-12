@@ -14,7 +14,7 @@ namespace Destiny.Core.Flow.Dtos
     /// </summary>
     [DisplayName("日志实体输出")]
     [AutoMapping(typeof(AuditEntry))]
-    public class AuditEntryOutputDto : OutputDto<ObjectId>
+    public class AuditEntrysOutputDto : OutputDto<ObjectId>
     {
         /// <summary>
         /// 实体名称
