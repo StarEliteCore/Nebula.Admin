@@ -1,15 +1,12 @@
 ﻿using Destiny.Core.Flow.Dependency;
-using Destiny.Core.Flow.Dtos.Audits;
+using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Ui;
 using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IServices.Audit
 {
-    public   interface IAuditService : IScopedDependency
+    public interface IAuditService : IScopedDependency
     {
         /// <summary>
         /// 根据Id加载审计日志数据

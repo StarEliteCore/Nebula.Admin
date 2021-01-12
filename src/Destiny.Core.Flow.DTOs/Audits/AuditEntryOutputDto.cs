@@ -6,9 +6,8 @@ using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 
-namespace Destiny.Core.Flow.Dtos.Audits
+namespace Destiny.Core.Flow.Dtos
 {
     /// <summary>
     /// 实体输出Dto

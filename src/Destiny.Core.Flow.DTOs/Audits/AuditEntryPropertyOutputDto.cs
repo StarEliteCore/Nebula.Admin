@@ -2,12 +2,9 @@
 using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Mapping;
 using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 
-namespace Destiny.Core.Flow.Dtos.Audits
+namespace Destiny.Core.Flow.Dtos
 {
     [AutoMapping(typeof(AuditPropertysEntry))]
     public class AuditEntryPropertyOutputDto : EntityBase<ObjectId>

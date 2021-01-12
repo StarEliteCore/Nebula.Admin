@@ -1,20 +1,16 @@
 ﻿using Destiny.Core.Flow.Audit;
-using Destiny.Core.Flow.Dtos.Audits;
+using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.IServices.Audit;
 using Destiny.Core.Flow.MongoDB.Repositorys;
 using Destiny.Core.Flow.Ui;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.Audit
 {
-    public class AuditService: IAuditService
+    public class AuditService : IAuditService
     {
 
         private readonly IMongoDBRepository<AuditLog, ObjectId> _auditLogRepository;
@@ -37,8 +33,8 @@ namespace Destiny.Core.Flow.Services.Audit
 
         public async Task<OperationResponse<AuditLogOutputDto>> LoadAuditLogByIdAsync(ObjectId id)
         {
-           var auditLog=  await  _auditLogRepository.FindByIdAsync(id);
-           return  OperationResponse<AuditLogOutputDto>.Ok("操作成功", auditLog.MapTo<AuditLogOutputDto>());
+            var auditLog = await _auditLogRepository.FindByIdAsync(id);
+            return OperationResponse<AuditLogOutputDto>.Ok("操作成功", auditLog.MapTo<AuditLogOutputDto>());
         }
 
 
@@ -62,12 +58,12 @@ namespace Destiny.Core.Flow.Services.Audit
         /// </summary>
         /// <param name="auditEntryId"></param>
         /// <returns></returns>
-        public async  Task<OperationResponse> GetAuditEntryPropertyByAuditEntryIdListAsnyc(string auditEntryId)
+        public async Task<OperationResponse> GetAuditEntryPropertyByAuditEntryIdListAsnyc(string auditEntryId)
         {
             var newAuditEntryId = auditEntryId.AsTo<ObjectId>();
-            var entryPropertys =await _auditPropertysEntryRepository.Collection.Find(o => o.AuditEntryId == newAuditEntryId).ToListAsync();
-            var dtos= entryPropertys.MapToList<AuditEntryPropertyOutputDto>();
-            return OperationResponse.Ok("操作成功",dtos);
+            var entryPropertys = await _auditPropertysEntryRepository.Collection.Find(o => o.AuditEntryId == newAuditEntryId).ToListAsync();
+            var dtos = entryPropertys.MapToList<AuditEntryPropertyOutputDto>();
+            return OperationResponse.Ok("操作成功", dtos);
         }
     }
 }

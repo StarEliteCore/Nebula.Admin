@@ -3,14 +3,12 @@ using Destiny.Core.Flow.Enums;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 
-namespace Destiny.Core.Flow.Dtos.Audits
+namespace Destiny.Core.Flow.Dtos
 {
     [DisplayName("操作审计日志")]
-    public   class AuditLogOutputDto : EntityBase<ObjectId>
+    public class AuditLogOutputDto : EntityBase<ObjectId>
     {
 
 
