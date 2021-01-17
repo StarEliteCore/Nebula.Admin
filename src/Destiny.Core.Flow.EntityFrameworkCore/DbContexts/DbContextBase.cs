@@ -20,6 +20,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Destiny.Core.Flow.Audit;
 using System.Reflection;
 using Destiny.Core.Flow.Helpers;
+using System.Security.Principal;
 
 namespace Destiny.Core.Flow
 {
@@ -32,14 +33,14 @@ namespace Destiny.Core.Flow
         protected readonly IServiceProvider _serviceProvider = null;
         protected readonly AppOptionSettings _option = null;
         protected readonly Microsoft.Extensions.Logging.ILogger _logger = null;
+        private readonly IPrincipal _principal;
         protected DbContextBase(DbContextOptions options, IServiceProvider serviceProvider)
              : base(options)
         {
             _serviceProvider = serviceProvider;
             _option = serviceProvider.GetService<IObjectAccessor<AppOptionSettings>>()?.Value;
-
-
             _logger = serviceProvider.GetLogger(GetType());
+            _principal = serviceProvider.GetService<IPrincipal>();
 
         }
 
@@ -58,7 +59,7 @@ namespace Destiny.Core.Flow
                 item.Map(modelBuilder);
             }
         }
-     
+
         /// <summary>
         /// 异步保存
         /// </summary>
@@ -67,17 +68,32 @@ namespace Destiny.Core.Flow
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
+
+            var entries = this.FindChangedEntries().ToList();
+            foreach (var entity in entries)
+            {
+                if (entity.Entity is ICreationAudited<Guid> createdTime && entity.State == EntityState.Added)
+                {
+                    createdTime.CreatedTime = DateTime.Now;
+                    createdTime.CreatorUserId = _principal.Identity.GetUesrId<Guid>();
+                }
+                if (entity.Entity is IModificationAudited<Guid> ModificationAuditedUserId && entity.State == EntityState.Modified)
+                {
+                    ModificationAuditedUserId.LastModifionTime = DateTime.Now;
+                    ModificationAuditedUserId.LastModifierUserId = _principal.Identity.GetUesrId<Guid>();
+                }
+            }
             var result = OnBeforeSaveChanges();
             int count = await base.SaveChangesAsync(cancellationToken);
             _logger.LogInformation($"成功保存{count}条数据");
-            OnCompleted(count,result);
+            OnCompleted(count, result);
             return count;
         }
 
 
         protected virtual void OnCompleted(int count, object sender)
         {
-          
+
             if (_option.AuditEnabled)
             {
                 if (count > 0 && sender != null && sender is List<AuditEntryDto> senders)
@@ -123,7 +139,7 @@ namespace Destiny.Core.Flow
         public override int SaveChanges()
         {
             var result = OnBeforeSaveChanges();
-            int count= base.SaveChanges();
+            int count = base.SaveChanges();
             _logger.LogInformation($"成功保存{count}条数据");
             OnCompleted(count, result);
             return count;
