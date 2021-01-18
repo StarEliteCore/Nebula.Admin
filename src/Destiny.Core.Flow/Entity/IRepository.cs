@@ -100,8 +100,12 @@ namespace Destiny.Core.Flow
         /// <param name="entity">要插入实体</param>
         /// <returns>影响的行数</returns>
         Task<int> InsertAsync(TEntity entity);
-
-
+        /// <summary>
+        /// 异步添加单条实体
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        Task<OperationResponse> InsertAsync(TEntity entity, Func<TEntity, Task> checkFunc = null, Func<TEntity, TEntity, Task<TEntity>> insertFunc = null, Func<TEntity, TEntity> completeFunc = null);
 
         /// <summary>
         /// 以异步批量插入实体
