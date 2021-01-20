@@ -182,11 +182,6 @@
             <param name="dto"></param>
             <returns></returns>
         </member>
-        <member name="T:Destiny.Core.Flow.API.Controllers.IdentityServerController">
-            <summary>
-            Ids4管理
-            </summary>
-        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.MenuFunctionController">
             <summary>
             菜单功能
