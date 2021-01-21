@@ -1,26 +1,21 @@
 ﻿using Destiny.Core.Flow.Audit.Dto;
+using Destiny.Core.Flow.Audit.EntityHistory;
+using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Options;
 using Destiny.Core.Flow.Reflection;
 using DnsClient.Internal;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using Destiny.Core.Flow.Audit.EntityHistory;
-using Destiny.Core.Flow.Events.EventBus;
-
-using Destiny.Core.Flow.Dependency;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Destiny.Core.Flow.Audit;
-using System.Reflection;
-using Destiny.Core.Flow.Helpers;
-using System.Security.Principal;
 
 namespace Destiny.Core.Flow
 {
@@ -68,7 +63,15 @@ namespace Destiny.Core.Flow
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-
+            ApplyConcepts();
+            var result = OnBeforeSaveChanges();
+            int count = await base.SaveChangesAsync(cancellationToken);
+            _logger.LogInformation($"成功保存{count}条数据");
+            OnCompleted(count, result);
+            return count;
+        }
+        protected virtual void ApplyConcepts()
+        {
             var entries = this.FindChangedEntries().ToList();
             foreach (var entity in entries)
             {
@@ -83,13 +86,7 @@ namespace Destiny.Core.Flow
                     ModificationAuditedUserId.LastModifierUserId = _principal.Identity.GetUesrId<Guid>();
                 }
             }
-            var result = OnBeforeSaveChanges();
-            int count = await base.SaveChangesAsync(cancellationToken);
-            _logger.LogInformation($"成功保存{count}条数据");
-            OnCompleted(count, result);
-            return count;
         }
-
 
         protected virtual void OnCompleted(int count, object sender)
         {
@@ -110,18 +107,12 @@ namespace Destiny.Core.Flow
             }
             _logger.LogInformation($"进入保存更新成功方法");
         }
-
-
-
-
         protected virtual object OnBeforeSaveChanges()
         {
 
             _logger.LogInformation($"进入开始保存更改方法");
             return GetAuditEntitys();
         }
-
-
         protected virtual IEnumerable<AuditEntryDto> GetAuditEntitys()
         {
             if (!_option.AuditEnabled)
@@ -138,15 +129,13 @@ namespace Destiny.Core.Flow
         /// <returns></returns>
         public override int SaveChanges()
         {
+            ApplyConcepts();
             var result = OnBeforeSaveChanges();
             int count = base.SaveChanges();
             _logger.LogInformation($"成功保存{count}条数据");
             OnCompleted(count, result);
             return count;
         }
-
-
-
         protected virtual IReadOnlyList<EntityEntry> FindChangedEntries()
         {
             return this.ChangeTracker.Entries()
@@ -157,6 +146,14 @@ namespace Destiny.Core.Flow
                 .ToList();
         }
 
+        protected virtual bool HasCreationAuditedIdProperty(EntityEntry entity)
+        {
+            return entity.GetType().GetProperty(nameof(ICreationAudited<Guid>.CreatorUserId)) != null;
+        }
+        protected virtual bool HasCreatedTimeProperty(EntityEntry entity)
+        {
+            return entity.GetType().GetProperty(nameof(ICreationAudited<Guid>.CreatedTime)) != null;
+        }
     }
 
 

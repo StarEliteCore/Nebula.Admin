@@ -263,8 +263,6 @@ namespace Destiny.Core.Flow.Extensions
                 var command = sqlGenerator.GetCommand(selectExpression);
                 return $"{command.CommandText};{Environment.NewLine}";
             }
-            return string.Empty;
-
         }
 
         private static readonly BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic;

@@ -6,6 +6,7 @@
     <DockerfileContext>..\..</DockerfileContext>
     <AssemblyName>Destiny.Core.Flow.API</AssemblyName>
     <UserSecretsId>7177758a-76de-4181-88ee-65238e443e6c</UserSecretsId>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

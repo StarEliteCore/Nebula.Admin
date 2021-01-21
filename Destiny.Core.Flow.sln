@@ -49,11 +49,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.CodeGener
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.Aop", "src\Destiny.Core.Flow.Aop\Destiny.Core.Flow.Aop.csproj", "{41EBC4A1-09C2-4426-937B-441B0EF62767}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5FF5E8E6-1CD3-4223-94DC-E5791332D9BB}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.MongoDB", "src\Destiny.Core.Flow.MongoDB\Destiny.Core.Flow.MongoDB.csproj", "{D8E15451-16A4-4769-9BFA-A38C6237715B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Destiny.Core.Flow.GateWay", "src\Destiny.Core.Flow.GateWay\Destiny.Core.Flow.GateWay.csproj", "{3DD6B93E-872B-4F11-B968-DDC88C0E0C3A}"
