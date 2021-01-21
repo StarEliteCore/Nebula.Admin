@@ -45,5 +45,13 @@ namespace Destiny.Core.Flow.Dtos.Application
         /// 客户端访问作用域
         /// </summary>
         public List<string> AllowedScopes { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ProtocolType { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string AllowedIdentityTokenSigningAlgorithms { get; set; }
     }
 }
