@@ -9,7 +9,7 @@ namespace Destiny.Core.Flow.Model.DestinyIdentityServer4
     /// <summary>
     /// api资源
     /// </summary>
-    [DisplayName("api资源")]
+    [DisplayName("api资源秘钥")]
     [DisableAuditing]
     public class ApiResourceSecret : ApiResourceSecretBase, IFullAuditedEntity<Guid>
     {
