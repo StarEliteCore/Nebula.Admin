@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Entity;
+﻿using Destiny.Core.Flow.Audit;
+using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.IdentityServer.Entities;
 using System;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ namespace Destiny.Core.Flow.Model.DestinyIdentityServer4
     /// 客户端限制提供器
     /// </summary>
     [DisplayName("客户端限制提供器")]
+    [DisableAuditing]
     public class ClientIdPRestriction : ClientIdPRestrictionBase, IFullAuditedEntity<Guid>
     {
         #region 公共属性

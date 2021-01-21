@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Entity;
+﻿using Destiny.Core.Flow.Audit;
+using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.IdentityServer.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace Destiny.Core.Flow.Model.DestinyIdentityServer4
     /// api授权范围
     /// </summary>
     [DisplayName("api授权范围")]
+    [DisableAuditing]
     public class ApiScope : ApiScopeBase, IFullAuditedEntity<Guid>
     {
         #region 公共属性

@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Entity;
+﻿using Destiny.Core.Flow.Audit;
+using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.IdentityServer.Entities;
 using System;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ namespace Destiny.Core.Flow.Model.DestinyIdentityServer4
     /// 设备代码
     /// </summary>
     [DisplayName("设备代码")]
+    [DisableAuditing]
     public class DeviceFlowCodes : DeviceFlowCodesBase, IFullAuditedEntity<Guid>
     {
         #region 公共属性

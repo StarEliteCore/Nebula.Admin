@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Entity;
+﻿using Destiny.Core.Flow.Audit;
+using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.IdentityServer.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace Destiny.Core.Flow.Model.DestinyIdentityServer4
     /// 身份资源
     /// </summary>
     [DisplayName("身份资源")]
+    [DisableAuditing]
     public class IdentityResource : IdentityResourceBase, IFullAuditedEntity<Guid>
     {
 

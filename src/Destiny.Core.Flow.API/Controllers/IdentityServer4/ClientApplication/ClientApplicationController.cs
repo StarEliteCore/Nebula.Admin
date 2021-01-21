@@ -31,5 +31,16 @@ namespace Destiny.Core.Flow.API.Controllers.ClientApplication
         {
             return (await _applicationClientContract.CreatAsync(input)).ToAjaxResult();
         }
+        ///// <summary>
+        ///// 添加客户端
+        ///// </summary>
+        ///// <param name="input"></param>
+        ///// <returns></returns>
+        //[HttpPost]
+        //[Description("添加客户端")]
+        //public async Task<AjaxResult> CreateAsync([FromBody] ClientAddInputDto input)
+        //{
+        //    return (await _applicationClientContract.CreatAsync(input)).ToAjaxResult();
+        //}
     }
 }

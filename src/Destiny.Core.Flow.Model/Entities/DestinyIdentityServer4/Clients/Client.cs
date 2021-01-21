@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Entity;
+﻿using Destiny.Core.Flow.Audit;
+using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.IdentityServer.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace Destiny.Core.Flow.Model.DestinyIdentityServer4
     /// 客户端实体
     /// </summary>
     [DisplayName("客户端")]
+    [DisableAuditing]
     public class Client : ClientBase, IFullAuditedEntity<Guid>
     {
 

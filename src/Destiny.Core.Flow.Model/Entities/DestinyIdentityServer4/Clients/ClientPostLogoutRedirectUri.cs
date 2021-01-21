@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Entity;
+﻿using Destiny.Core.Flow.Audit;
+using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.IdentityServer.Entities;
 using System;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ namespace Destiny.Core.Flow.Model.DestinyIdentityServer4
     /// 客户端退出重定向uri
     /// </summary>
     [DisplayName("客户端退出重定向uri")]
+    [DisableAuditing]
     public class ClientPostLogoutRedirectUri : ClientPostLogoutRedirectUriBase, IFullAuditedEntity<Guid>
     {
         #region 公共属性

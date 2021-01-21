@@ -49,18 +49,6 @@
             <param name="request"></param>
             <returns></returns>
         </member>
-        <member name="T:Destiny.Core.Flow.API.Controllers.ClientApplication.ClientApplicationController">
-            <summary>
-            客户端应用管理
-            </summary>
-        </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.ClientApplication.ClientApplicationController.CreateAsync(Destiny.Core.Flow.Dtos.Application.ClientAddInputDto)">
-            <summary>
-            添加客户端
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.CodeGeneratorController">
             <summary>
             代码生成器
@@ -192,6 +180,18 @@
             更新密码
             </summary>
             <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Destiny.Core.Flow.API.Controllers.ClientApplication.ClientApplicationController">
+            <summary>
+            客户端应用管理
+            </summary>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.ClientApplication.ClientApplicationController.CreateAsync(Destiny.Core.Flow.Dtos.Application.ClientAddInputDto)">
+            <summary>
+            添加客户端
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.MenuFunctionController">

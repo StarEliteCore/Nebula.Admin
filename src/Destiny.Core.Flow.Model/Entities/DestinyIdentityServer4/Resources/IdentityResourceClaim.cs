@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Entity;
+﻿using Destiny.Core.Flow.Audit;
+using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.IdentityServer.Entities;
 using System;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ namespace Destiny.Core.Flow.Model.DestinyIdentityServer4
     /// 身份资源声明
     /// </summary>
     [DisplayName("身份资源声明")]
+    [DisableAuditing]
     public class IdentityResourceClaim : IdentityResourceClaimBase, IFullAuditedEntity<Guid>
     {
         #region 公共属性
