@@ -20,7 +20,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <typeparam name="TDbContext">上下文</typeparam>
         /// <param name="services">服务集合</param>
         /// <param name="optionsAction">操作委托</param>
-        /// <returns></returns>
+        /// <returns>返回已添加上下文服务集合</returns>
 
         public static IServiceCollection AddDestinyDbContext<TDbContext>(this IServiceCollection services, Action<IServiceProvider, DbContextOptionsBuilder> optionsAction = null) where TDbContext : DbContextBase
         {
@@ -71,7 +71,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 optionsBuilder1.MigrationsAssemblyName = contextOptions.MigrationsAssemblyName;
                 var connectionString = contextOptions.ConnectionString;
                
-                if (Path.GetExtension(contextOptions.ConnectionString).ToLower() == ".txt") //txt文件
+                if (contextOptions.ConnectionString.IsFile(".txt")) //txt文件
                 {
                     
                     connectionString = provider.GetFileText(contextOptions.ConnectionString, $"未找到存放{databaseType.ToDescription()}数据库链接的文件");

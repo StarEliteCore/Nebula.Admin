@@ -67,7 +67,6 @@ namespace Destiny.Core.Flow
             var result = OnBeforeSaveChanges();
             int count = await base.SaveChangesAsync(cancellationToken);
             _logger.LogInformation($"成功保存{count}条数据");
-            OnCompleted(count, result);
             return count;
         }
         protected virtual void ApplyConcepts()
@@ -109,10 +108,11 @@ namespace Destiny.Core.Flow
         }
         protected virtual object OnBeforeSaveChanges()
         {
-
             _logger.LogInformation($"进入开始保存更改方法");
             return GetAuditEntitys();
         }
+
+
         protected virtual IEnumerable<AuditEntryDto> GetAuditEntitys()
         {
             if (!_option.AuditEnabled)
@@ -133,9 +133,19 @@ namespace Destiny.Core.Flow
             var result = OnBeforeSaveChanges();
             int count = base.SaveChanges();
             _logger.LogInformation($"成功保存{count}条数据");
+            OnAfterSaveChanges();
             OnCompleted(count, result);
             return count;
         }
+        /// <summary>
+        /// 结束保存
+        /// </summary>
+        protected virtual void OnAfterSaveChanges()
+        {
+
+            _logger.LogInformation($"进入结束保存更改");
+        }
+
         protected virtual IReadOnlyList<EntityEntry> FindChangedEntries()
         {
             return this.ChangeTracker.Entries()

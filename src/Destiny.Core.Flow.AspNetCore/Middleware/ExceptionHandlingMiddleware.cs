@@ -67,7 +67,7 @@ namespace Destiny.Core.Flow.AspNetCore
             catch (Exception ex)
             {
                 _logger.LogError(new EventId(), ex, ex.Message);
-                await catchFunc(context, AjaxResultType.Error, ex, string.Empty, (int)HttpStatusCode.InternalServerError);
+                await catchFunc(context, AjaxResultType.Error, ex, "服务器出现异常，请联系管理员!!", (int)HttpStatusCode.InternalServerError);
                 throw;
             }
         }
