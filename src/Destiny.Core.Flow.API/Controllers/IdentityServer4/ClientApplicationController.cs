@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System.Threading.Tasks;
 
-namespace Destiny.Core.Flow.API.Controllers.ClientApplication
+namespace Destiny.Core.Flow.API.Controllers.IdentityServer4
 {
     /// <summary>
     /// 客户端应用管理

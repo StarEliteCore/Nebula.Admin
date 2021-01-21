@@ -182,12 +182,12 @@
             <param name="dto"></param>
             <returns></returns>
         </member>
-        <member name="T:Destiny.Core.Flow.API.Controllers.ClientApplication.ClientApplicationController">
+        <member name="T:Destiny.Core.Flow.API.Controllers.IdentityServer4.ClientApplicationController">
             <summary>
             客户端应用管理
             </summary>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.ClientApplication.ClientApplicationController.CreateAsync(Destiny.Core.Flow.Dtos.Application.ClientAddInputDto)">
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ClientApplicationController.CreateAsync(Destiny.Core.Flow.Dtos.Application.ClientAddInputDto)">
             <summary>
             添加客户端
             </summary>
