@@ -118,6 +118,19 @@ namespace Destiny.Core.Flow
             return this.TrackEntities.Where(predicate);
         }
 
+        /// <summary>
+        /// 异步得到实体
+        /// </summary>
+        /// <param name="predicate">条件</param>
+        /// <returns>返回查询后实体</returns>
+
+        public  Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+
+            predicate.NotNull(nameof(predicate));
+            return this._dbSet.FirstOrDefaultAsync(predicate);
+        }
+
         #endregion 查询
 
         #region 添加
@@ -685,6 +698,7 @@ namespace Destiny.Core.Flow
 
             return updateExpression1;
         }
+
 
         #endregion 其他
     }

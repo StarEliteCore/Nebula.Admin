@@ -79,6 +79,13 @@ namespace Destiny.Core.Flow
         /// <returns>返回查询后数据源</returns>
         IQueryable<TEntity> TrackQuery(Expression<Func<TEntity, bool>> predicate);
 
+        /// <summary>
+        /// 异步得到实体
+        /// </summary>
+        /// <param name="predicate">条件</param>
+        /// <returns>返回查询后实体</returns>
+        Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate);
+
         #endregion
 
 

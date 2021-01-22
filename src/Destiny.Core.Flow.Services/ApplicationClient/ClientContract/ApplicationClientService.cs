@@ -23,8 +23,8 @@ namespace Destiny.Core.Flow.Services
         public async Task<OperationResponse> CreatAsync(ClientAddInputDto input)
         {
             input.NotNull(nameof(input));
-            var entity = input.MapTo<Client>();
-            return await _clientRepository.InsertAsync(entity, async f =>
+
+            return await _clientRepository.InsertAsync(input, async f =>
             {
                 bool isExist = await _clientRepository.Entities.Where(x => x.ClientId == input.ClientId).AnyAsync();
                 if (isExist)
