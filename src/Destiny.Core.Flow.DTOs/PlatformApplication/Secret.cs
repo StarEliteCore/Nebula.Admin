@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Destiny.Core.Flow.Extensions;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,7 +8,11 @@ namespace Destiny.Core.Flow.Dtos.PlatformApplication
 {
     public class Secret
     {
-        public Secret(string value, DateTimeOffset? expiration)
+        public Secret()
+        {
+            Type = "SharedSecret";
+        }
+        public Secret(string value, DateTimeOffset? expiration) : this()
         {
             Value = value;
             Expiration = expiration;
@@ -17,7 +23,6 @@ namespace Destiny.Core.Flow.Dtos.PlatformApplication
             Value = value;
             Expiration = expiration;
         }
-
         public string Description { get; set; }
         public string Value { get; set; }
         public DateTimeOffset? Expiration { get; set; }

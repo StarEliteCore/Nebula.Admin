@@ -23,12 +23,21 @@ namespace Destiny.Core.Flow.Services
         public async Task<OperationResponse> CreateAsync(ClientAddInputDto input)
         {
             input.NotNull(nameof(input));
+            if(input.ClientSecrets!=null)
+            {
+                input.ClientSecrets.ForEach(x =>
+                {
+                    x.Value = x.Value.Sha256();
+                });
+            }
+            return  await _clientRepository.InsertAsync(input.MapTo<Client>(),async f=> {
 
-            await _clientRepository.InsertAsync(input.MapTo<Client>(), async dto => MessageBox.ShowIf($"指定的客户端{input.ClientId}已存在", 
-                await _clientRepository.Query(c => c.ClientId == input.ClientId || c.ClientName == input.ClientName).AnyAsync()));
-
-            return new OperationResponse();
-     
+                bool isExist = await _clientRepository.Query(c => c.ClientId == input.ClientId || c.ClientName == input.ClientName).AnyAsync();
+                if (isExist)
+                {
+                    throw new AppException($"指定的客户端{input.ClientId}已存在");
+                }
+            });     
         }
     }
 }

@@ -57,8 +57,8 @@ namespace Destiny.Core.Flow.Dtos.PlatformApplication.ClientProfile
                 .ReverseMap()
                 .ForMember(dest => dest.GrantType, opt => opt.MapFrom(src => src));
 
-            CreateMap<string, ClientSecret>()
-                .ForMember(d => d.Value, opt => opt.MapFrom(s => s));
+            //CreateMap<string, ClientSecret>()
+            //    .ForMember(d => d.Value, opt => opt.MapFrom(s => s));
 
             CreateMap<ClientSecret, Secret>()
                 .ForMember(dest => dest.Type, opt => opt.Condition(srs => srs != null))
