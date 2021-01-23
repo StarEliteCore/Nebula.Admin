@@ -20,16 +20,13 @@ namespace Destiny.Core.Flow.Services
             _clientRepository = clientRepository;
         }
 
-        public async Task<OperationResponse> CreatAsync(ClientAddInputDto input)
+        public async Task<OperationResponse> CreateAsync(ClientAddInputDto input)
         {
             input.NotNull(nameof(input));
 
-            //return await _clientRepository.InsertAsync(input, async (f)=>
-            //{
-            //    bool isExist = await _clientRepository.Entities.Where(x => x.ClientId == input.ClientId).AnyAsync();
-            //    if (isExist)
-            //        throw new AppException("此功能已存在!!!");
-            //});
+            await _clientRepository.InsertAsync(input.MapTo<Client>(), async dto => MessageBox.ShowIf($"指定的客户端{input.ClientId}已存在", 
+                await _clientRepository.Query(c => c.ClientId == input.ClientId || c.ClientName == input.ClientName).AnyAsync()));
+
             return new OperationResponse();
      
         }
