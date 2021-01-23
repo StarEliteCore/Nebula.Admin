@@ -52,6 +52,6 @@ namespace Destiny.Core.Flow.Dtos.Application
         /// <summary>
         /// 
         /// </summary>
-        public string AllowedIdentityTokenSigningAlgorithms { get; set; }
+        public ICollection<string> AllowedIdentityTokenSigningAlgorithms { get; set; }
     }
 }

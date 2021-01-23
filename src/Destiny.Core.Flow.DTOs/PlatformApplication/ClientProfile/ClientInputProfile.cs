@@ -17,9 +17,8 @@ namespace Destiny.Core.Flow.Dtos.PlatformApplication.ClientProfile
 
             CreateMap<Client, ClientAddInputDto>()
                 .ForMember(dest => dest.ProtocolType, opt => opt.Condition(srs => srs != null))
-                //.ForMember(x => x.AllowedIdentityTokenSigningAlgorithms, opts => opts.ConvertUsing(AllowedSigningAlgorithmsConverter.Converter, x => x.AllowedIdentityTokenSigningAlgorithms))
+                .ForMember(x => x.AllowedIdentityTokenSigningAlgorithms, opts => opts.ConvertUsing(AllowedSigningAlgorithmsConverter.Converter, x => x.AllowedIdentityTokenSigningAlgorithms))
                 .ReverseMap();
-                //.ForMember(x => x.AllowedIdentityTokenSigningAlgorithms, opts => opts.ConvertUsing(AllowedSigningAlgorithmsConverter.Converter, x => x.AllowedIdentityTokenSigningAlgorithms));
 
             CreateMap<ClientCorsOrigin, string>()
                 .ConstructUsing(src => src.Origin)

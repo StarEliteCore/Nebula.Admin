@@ -18,7 +18,7 @@ namespace Destiny.Core.Flow.Dtos.PlatformApplication
             {
                 return null;
             }
-            return sourceMember.Aggregate((x, y) => $"{x},{y}");
+            return string.Join(',', sourceMember);
         }
 
         public ICollection<string> Convert(string sourceMember, ResolutionContext context)
