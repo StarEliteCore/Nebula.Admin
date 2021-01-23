@@ -43,19 +43,7 @@ namespace Destiny.Core.Flow
         Task<TEntity> GetByIdAsync(TPrimaryKey primaryKey);
 
 
-        /// <summary>
-        /// 根据ID得到Dto实体
-        /// </summary>
-        /// <param name="primaryKey">主键</param>
-        /// <returns>返回查询后实体并转成Dto</returns>
-        TDto GetByIdToDto<TDto>(TPrimaryKey primaryKey) where TDto : class, new();
-
-        /// <summary>
-        /// 异步根据ID得到Dto实体
-        /// </summary>
-        /// <param name="primaryKey">主键</param>
-        /// <returns>返回查询后实体并转成Dto</returns>
-        Task<TDto> GetByIdToDtoAsync<TDto>(TPrimaryKey primaryKey) where TDto : class, new();
+       
         /// <summary>
         ///查询不跟踪数据源
         /// </summary>

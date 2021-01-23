@@ -24,12 +24,14 @@ namespace Destiny.Core.Flow.Services
         {
             input.NotNull(nameof(input));
 
-            return await _clientRepository.InsertAsync(input, async f =>
-            {
-                bool isExist = await _clientRepository.Entities.Where(x => x.ClientId == input.ClientId).AnyAsync();
-                if (isExist)
-                    throw new AppException("此功能已存在!!!");
-            });
+            //return await _clientRepository.InsertAsync(input, async (f)=>
+            //{
+            //    bool isExist = await _clientRepository.Entities.Where(x => x.ClientId == input.ClientId).AnyAsync();
+            //    if (isExist)
+            //        throw new AppException("此功能已存在!!!");
+            //});
+            return new OperationResponse();
+     
         }
     }
 }

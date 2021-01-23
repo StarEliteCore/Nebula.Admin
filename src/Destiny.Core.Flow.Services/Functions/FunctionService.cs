@@ -72,7 +72,8 @@ namespace Destiny.Core.Flow.Services.Functions
         public async Task<OperationResponse<FunctionOutputDto>> LoadFormFunctionAsync(Guid id)
         {
             id.NotEmpty(nameof(id));
-            var functionDto = await _functionRepository.GetByIdToDtoAsync<FunctionOutputDto>(id);
+            var functionDto = (await _functionRepository.GetByIdAsync(id)).MapTo<FunctionOutputDto>();
+            //var functionDto = await _functionRepository.GetByIdToDtoAsync<FunctionOutputDto>(id);
             return new OperationResponse<FunctionOutputDto>("加载成功", functionDto, OperationResponseType.Success);
         }
 
