@@ -13,6 +13,11 @@ namespace Destiny.Core.Flow.Dtos.IdentityServer4
     public class ApiResourceInputDto: ApiResourceInputBase, IInputDto<Guid>
     {
 
-        
+        public ICollection<string> AllowedAccessTokenSigningAlgorithms
+        {
+            get;
+            set;
+        } = new HashSet<string>();
+
     }
 }

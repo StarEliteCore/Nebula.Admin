@@ -20,5 +20,18 @@ namespace Destiny.Core.Flow.IServices.IdentityServer4
         /// <param name="dto">要伟入DTO</param>
         /// <returns></returns>
         Task<OperationResponse>  CreateApiResourceAsync(ApiResourceInputDto dto);
+
+        /// <summary>
+        /// 得到JWTClaim类型下拉项
+        /// </summary>
+        /// <returns></returns>
+        OperationResponse GetJwtClaimTypeSelectItem();
+
+        /// <summary>
+        /// 异步加载Api资源数据
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        OperationResponse LoadApiResourceDataAsync(Guid Id);
     }
 }

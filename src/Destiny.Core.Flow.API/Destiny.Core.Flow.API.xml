@@ -182,6 +182,13 @@
             <param name="dto"></param>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ApiResourceController.CreateApiResourceAsync(Destiny.Core.Flow.Dtos.IdentityServer4.ApiResourceInputDto)">
+            <summary>
+            异步创建Api资源
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.IdentityServer4.ClientApplicationController">
             <summary>
             客户端应用管理
