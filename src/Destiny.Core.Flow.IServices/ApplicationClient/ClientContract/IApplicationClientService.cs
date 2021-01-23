@@ -7,6 +7,6 @@ namespace Destiny.Core.Flow.IServices
 {
     public interface IApplicationClientService : IScopedDependency
     {
-        Task<OperationResponse> CreatAsync(ClientAddInputDto input);
+        Task<OperationResponse> CreateAsync(ClientAddInputDto input);
     }
 }

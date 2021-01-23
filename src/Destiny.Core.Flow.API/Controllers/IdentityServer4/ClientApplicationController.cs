@@ -20,6 +20,7 @@ namespace Destiny.Core.Flow.API.Controllers.IdentityServer4
         {
             _applicationClientContract = applicationClientContract;
         }
+
         /// <summary>
         /// 添加客户端
         /// </summary>
@@ -29,8 +30,9 @@ namespace Destiny.Core.Flow.API.Controllers.IdentityServer4
         [Description("添加客户端")]
         public async Task<AjaxResult> CreateAsync([FromBody] ClientAddInputDto input)
         {
-            return (await _applicationClientContract.CreatAsync(input)).ToAjaxResult();
+            return (await _applicationClientContract.CreateAsync(input)).ToAjaxResult();
         }
+
         ///// <summary>
         ///// 添加客户端
         ///// </summary>

@@ -6,12 +6,12 @@ namespace Destiny.Core.Flow.Dtos.PlatformApplication
 {
     public class Secret
     {
-        public Secret(string value, string expiration)
+        public Secret(string value, DateTimeOffset? expiration)
         {
             Value = value;
             Expiration = expiration;
         }
-        public Secret(string description, string value, string expiration)
+        public Secret(string description, string value, DateTimeOffset? expiration)
         {
             Description = description;
             Value = value;
@@ -20,7 +20,7 @@ namespace Destiny.Core.Flow.Dtos.PlatformApplication
 
         public string Description { get; set; }
         public string Value { get; set; }
-        public string Expiration { get; set; }
+        public DateTimeOffset? Expiration { get; set; }
         public string Type { get; set; }
         public override int GetHashCode()
         {

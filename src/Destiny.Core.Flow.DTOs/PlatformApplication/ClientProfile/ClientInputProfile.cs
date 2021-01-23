@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Destiny.Core.Flow.Dtos.Application;
+using Destiny.Core.Flow.Dtos.Share;
 using Destiny.Core.Flow.Model.DestinyIdentityServer4;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace Destiny.Core.Flow.Dtos.PlatformApplication.ClientProfile
     {
         public ClientInputProfile()
         {
+            CreateMap<DateTime, DateTimeOffset>().ReverseMap().ConvertUsing(new DateTimeTypeConverter());
+
             CreateMap<ClientProperty, KeyValuePair<string, string>>()
                  .ReverseMap();
 
@@ -54,7 +57,10 @@ namespace Destiny.Core.Flow.Dtos.PlatformApplication.ClientProfile
                 .ReverseMap()
                 .ForMember(dest => dest.GrantType, opt => opt.MapFrom(src => src));
 
-            CreateMap<ClientSecret, Secret>(MemberList.Destination)
+            CreateMap<string, ClientSecret>()
+                .ForMember(d => d.Value, opt => opt.MapFrom(s => s));
+
+            CreateMap<ClientSecret, Secret>()
                 .ForMember(dest => dest.Type, opt => opt.Condition(srs => srs != null))
                 .ReverseMap();
         }

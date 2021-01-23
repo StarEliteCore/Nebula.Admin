@@ -28,7 +28,7 @@ namespace Destiny.Core.Flow.Dtos.Application
         /// 客户端令牌
         /// </summary>
         [DisplayName("客户端令牌")]
-        public string ClientSecrets { get; set; }
+        public List<string> ClientSecrets { get; set; }
         /// <summary>
         /// 回调地址
         /// </summary>
