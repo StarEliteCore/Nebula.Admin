@@ -10,7 +10,7 @@ namespace Destiny.Core.Flow.Dtos.IdentityServer4
     /// API资源输入DTO
     /// </summary>
 
-    public class ApiResourceInputDto: ApiResourceInputBase, IInputDto<Guid>
+    public class ApiResourceInputDto: ApiResourceDtoBase, IInputDto<Guid>
     {
 
         public ICollection<string> AllowedAccessTokenSigningAlgorithms

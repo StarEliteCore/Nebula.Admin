@@ -182,11 +182,43 @@
             <param name="dto"></param>
             <returns></returns>
         </member>
+        <member name="T:Destiny.Core.Flow.API.Controllers.IdentityServer4.ApiResourceController">
+            <summary>
+            Api资源管理
+            </summary>
+        </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ApiResourceController.CreateApiResourceAsync(Destiny.Core.Flow.Dtos.IdentityServer4.ApiResourceInputDto)">
             <summary>
             异步创建Api资源
             </summary>
             <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ApiResourceController.LoadAsync(System.Guid)">
+            <summary>
+            异步加载 API资源
+            </summary>
+            <param name="id">资源ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ApiResourceController.GetApiResourcePageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+            <summary>
+            异步得到API资源分页
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ApiResourceController.GetJwtClaimTypeSelectItem">
+            <summary>
+            得到JWTClaim类型下拉项
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ApiResourceController.DeleteAsync(System.Guid)">
+            <summary>
+            异步删除资源
+            </summary>
+            <param name="id">主键</param>
             <returns></returns>
         </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.IdentityServer4.ClientApplicationController">

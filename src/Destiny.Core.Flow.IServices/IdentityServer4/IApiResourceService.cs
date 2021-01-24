@@ -4,6 +4,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Dtos.IdentityServer4;
+using Destiny.Core.Flow.Filter;
+using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.Ui;
 
 namespace Destiny.Core.Flow.IServices.IdentityServer4
@@ -32,6 +34,24 @@ namespace Destiny.Core.Flow.IServices.IdentityServer4
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        OperationResponse LoadApiResourceDataAsync(Guid Id);
+        Task<OperationResponse> LoadApiResourceDataAsync(Guid Id);
+
+
+        /// <summary>
+        /// 异步得到Api资源分页
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<IPagedResult<ApiResourceOutputPageListDto>> GetApiResourcePageAsync(PageRequest request);
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<OperationResponse> DeleteAsync(Guid id);
+
+
+
     }
 }

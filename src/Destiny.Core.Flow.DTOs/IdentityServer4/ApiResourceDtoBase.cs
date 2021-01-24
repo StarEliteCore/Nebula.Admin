@@ -8,7 +8,7 @@ namespace Destiny.Core.Flow.Dtos.IdentityServer4
     /// <summary>
     /// API资源基类DTO
     /// </summary>
-    public class ApiResourceInputBase:IDto<Guid>
+    public class ApiResourceDtoBase:IDto<Guid>
     {
         /// <summary>
         /// 主键
