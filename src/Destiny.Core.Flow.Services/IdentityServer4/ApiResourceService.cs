@@ -42,9 +42,12 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
         {
 
             dto.NotNull(nameof(dto));
-            return await _apiResourceRepository.InsertAsync(dto, async (dto) =>
+            //dto.ApiSecrets = new List<ApiResourceSecretDto>();
+            dto.ApiSecrets.Add(new ApiResourceSecretDto() { Value= dto.ApiSecretValue });
+            return await _apiResourceRepository.InsertAsync(dto, async (dto1) =>
             {
-                MessageBox.ShowIf($"指定【{dto.Name}】Api资源已存在", await this.CheckApiResourceIsExist(dto.Id, dto.Name));
+
+                MessageBox.ShowIf($"指定【{dto.Name}】Api资源已存在", await this.CheckApiResourceIsExist(dto1.Id, dto1.Name));
             });
         }
 

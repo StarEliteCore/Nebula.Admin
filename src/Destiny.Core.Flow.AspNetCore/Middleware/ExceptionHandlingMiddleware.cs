@@ -5,6 +5,7 @@ using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Exceptions;
 using Destiny.Core.Flow.Extensions;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
@@ -29,6 +30,8 @@ namespace Destiny.Core.Flow.AspNetCore
         {
             try
             {
+                var feature = context.Features[typeof(IExceptionHandlerFeature)] as IExceptionHandlerFeature;
+
                 await _next(context);
             }
             catch (SecurityTokenExpiredException ex)

@@ -12,7 +12,7 @@ namespace Destiny.Core.Flow.Dtos.IdentityServer4
 
     public class ApiResourceInputDto: ApiResourceDtoBase, IInputDto<Guid>
     {
-
+        public string ApiSecretValue { get; set; }
         public ICollection<string> AllowedAccessTokenSigningAlgorithms
         {
             get;
