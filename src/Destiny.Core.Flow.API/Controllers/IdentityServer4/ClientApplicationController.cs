@@ -4,6 +4,7 @@ using Destiny.Core.Flow.Dtos.IdentityServer4.ClientApplication;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 
@@ -44,6 +45,19 @@ namespace Destiny.Core.Flow.API.Controllers.IdentityServer4
         public async Task<PageList<ClientOutputPageListDto>> GetPageAsync([FromBody] PageRequest request)
         {
             return (await _applicationClientContract.GetPageAsync(request)).ToPageList();
+        }
+        /// <summary>
+        /// 异步删除客户端
+        /// </summary>
+        /// <param name="id">主键</param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Description("异步删除客户端")]
+
+        public async Task<AjaxResult> DeleteAsync(Guid? id)
+        {
+            return (await _applicationClientContract.DeleteAsync(id.Value)).ToAjaxResult();
+
         }
     }
 }

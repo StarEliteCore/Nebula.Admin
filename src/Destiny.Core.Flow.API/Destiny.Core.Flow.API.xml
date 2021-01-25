@@ -240,6 +240,13 @@
             <param name="request"></param>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ClientApplicationController.DeleteAsync(System.Nullable{System.Guid})">
+            <summary>
+            异步删除客户端
+            </summary>
+            <param name="id">主键</param>
+            <returns></returns>
+        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.MenuFunctionController">
             <summary>
             菜单功能

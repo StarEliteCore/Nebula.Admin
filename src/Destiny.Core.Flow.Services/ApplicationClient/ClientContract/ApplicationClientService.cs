@@ -77,5 +77,9 @@ namespace Destiny.Core.Flow.Services
                 Type = pagedResult.Type
             };
         }
+        public async Task<OperationResponse> DeleteAsync(Guid id)
+        {
+            return await _clientRepository.DeleteAsync(id);
+        }
     }
 }
