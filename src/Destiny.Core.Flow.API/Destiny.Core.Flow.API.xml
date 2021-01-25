@@ -226,11 +226,18 @@
             客户端应用管理
             </summary>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ClientApplicationController.CreateAsync(Destiny.Core.Flow.Dtos.Application.ClientAddInputDto)">
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ClientApplicationController.CreateAsync(Destiny.Core.Flow.Dtos.IdentityServer4.ClientApplication.ClientAddInputDto)">
             <summary>
             添加客户端
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ClientApplicationController.GetPageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+            <summary>
+            分页获取
+            </summary>
+            <param name="request"></param>
             <returns></returns>
         </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.MenuFunctionController">

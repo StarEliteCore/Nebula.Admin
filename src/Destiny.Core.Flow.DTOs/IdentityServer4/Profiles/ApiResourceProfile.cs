@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
-using Destiny.Core.Flow.Dtos.PlatformApplication;
-using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Model.DestinyIdentityServer4;
-using IdentityModel;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Destiny.Core.Flow.Dtos.IdentityServer4.Profiles
 {
@@ -45,7 +40,7 @@ namespace Destiny.Core.Flow.Dtos.IdentityServer4.Profiles
                 .ReverseMap()
                 .ForMember(dest => dest.Scope, opt => opt.MapFrom(src => src));
 
-           
+
         }
     }
 }

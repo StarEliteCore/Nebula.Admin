@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Destiny.Core.Flow.Dtos.PlatformApplication
+namespace Destiny.Core.Flow.Dtos.IdentityServer4.ClientApplication
 {
     public class ClientClaim
     {

@@ -4,7 +4,7 @@ using Destiny.Core.Flow.Model.DestinyIdentityServer4;
 using System;
 using System.ComponentModel;
 
-namespace IDN.Services.BasicsService.Dtos.Application
+namespace IDN.Services.BasicsService.Dtos.IdentityServer4.ClientApplication
 {
     [AutoMapTo(typeof(ClientRedirectUri))]
     public class ClientRedirectUriInputDto : InputDto<Guid>

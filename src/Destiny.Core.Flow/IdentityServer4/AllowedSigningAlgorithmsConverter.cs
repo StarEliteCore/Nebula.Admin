@@ -2,11 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace Destiny.Core.Flow.Dtos.PlatformApplication
+namespace Destiny.Core.Flow
 {
-    class AllowedSigningAlgorithmsConverter :
+    public class AllowedSigningAlgorithmsConverter :
         IValueConverter<ICollection<string>, string>,
         IValueConverter<string, ICollection<string>>
     {
@@ -35,4 +34,5 @@ namespace Destiny.Core.Flow.Dtos.PlatformApplication
             return list;
         }
     }
+
 }

@@ -1,13 +1,11 @@
 ﻿using AutoMapper;
-using Destiny.Core.Flow.Dtos.Application;
 using Destiny.Core.Flow.Dtos.Share;
 using Destiny.Core.Flow.Model.DestinyIdentityServer4;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
-using System.Text;
 
-namespace Destiny.Core.Flow.Dtos.PlatformApplication.ClientProfile
+namespace Destiny.Core.Flow.Dtos.IdentityServer4.ClientApplication
 {
     public class ClientInputProfile : Profile
     {

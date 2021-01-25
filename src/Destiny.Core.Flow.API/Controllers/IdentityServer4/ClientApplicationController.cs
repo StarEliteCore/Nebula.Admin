@@ -1,6 +1,7 @@
 ﻿using Destiny.Core.Flow.AspNetCore.Api;
 using Destiny.Core.Flow.AspNetCore.Ui;
-using Destiny.Core.Flow.Dtos.Application;
+using Destiny.Core.Flow.Dtos.IdentityServer4.ClientApplication;
+using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
@@ -33,16 +34,16 @@ namespace Destiny.Core.Flow.API.Controllers.IdentityServer4
             return (await _applicationClientContract.CreateAsync(input)).ToAjaxResult();
         }
 
-        ///// <summary>
-        ///// 添加客户端
-        ///// </summary>
-        ///// <param name="input"></param>
-        ///// <returns></returns>
-        //[HttpPost]
-        //[Description("添加客户端")]
-        //public async Task<AjaxResult> CreateAsync([FromBody] ClientAddInputDto input)
-        //{
-        //    return (await _applicationClientContract.CreatAsync(input)).ToAjaxResult();
-        //}
+        /// <summary>
+        /// 分页获取
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Description("分页获取")]
+        public async Task<PageList<ClientOutputPageListDto>> GetPageAsync([FromBody] PageRequest request)
+        {
+            return (await _applicationClientContract.GetPageAsync(request)).ToPageList();
+        }
     }
 }
