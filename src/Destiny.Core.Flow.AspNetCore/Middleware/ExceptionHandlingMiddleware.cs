@@ -15,6 +15,9 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.AspNetCore
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ExceptionHandlingMiddleware
     {
         private readonly RequestDelegate _next;
@@ -28,9 +31,10 @@ namespace Destiny.Core.Flow.AspNetCore
 
         public async Task Invoke(HttpContext context)
         {
+            //todo 实现方式不够好，待重写，2021-1-26 大黄瓜
             try
             {
-                var feature = context.Features[typeof(IExceptionHandlerFeature)] as IExceptionHandlerFeature;
+                var ex = context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>()?.Error;
 
                 await _next(context);
             }
@@ -38,44 +42,21 @@ namespace Destiny.Core.Flow.AspNetCore
             {
                 _logger.LogError(new EventId(), ex, ex.Message);
                 await catchFunc(context, AjaxResultType.Unauthorized, ex, "未经授权", (int)HttpStatusCode.Unauthorized);
-                //if (context.Request.IsAjaxRequest() || context.Request.IsJsonContextType())
-                //{
-                //    if (context.Response.HasStarted)
-                //    {
-                //        return;
-                //    }
-                //    context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                //    context.Response.Clear();
-                //    context.Response.ContentType = "application/json; charset=utf-8";
-                //    await context.Response.WriteAsync(new AjaxResult("未经授权", AjaxResultType.Unauthorized).ToJson());
-                //    return;
-                //}
-                throw;
             }
             catch (AppException ex)
             {
                 _logger.LogError(new EventId(), ex, ex.Message);
                 await catchFunc(context, AjaxResultType.Error, ex, string.Empty, (int)HttpStatusCode.OK);
-                //_logger.LogError(new EventId(), ex, ex.Message);
-                //if (context.Request.IsAjaxRequest() || context.Request.IsJsonContextType())
-                //{
-                //    context.Response.StatusCode = (int)HttpStatusCode.OK;
-                //    context.Response.Clear();
-                //    context.Response.ContentType = "application/json; charset=utf-8";
-                //    await context.Response.WriteAsync(new AjaxResult(ex.Message, AjaxResultType.Error).ToJson());
-                //    return;
-                //}
-                throw;
             }
             catch (Exception ex)
             {
                 _logger.LogError(new EventId(), ex, ex.Message);
+
                 await catchFunc(context, AjaxResultType.Error, ex, "服务器出现异常，请联系管理员!!", (int)HttpStatusCode.InternalServerError);
-                throw;
             }
         }
 
-
+        //todo 实现方式不够好，待重写，2021-1-26 大黄瓜
         private Func<HttpContext, AjaxResultType, Exception, string, int, Task> catchFunc = async (context, ajax, ex, msg, code) =>
         {
        
@@ -86,10 +67,10 @@ namespace Destiny.Core.Flow.AspNetCore
                     return;
                 }
                 context.Response.StatusCode = code;
-                context.Response.Clear();
+              
                 context.Response.ContentType = "application/json; charset=utf-8";
                 await context.Response.WriteAsync(new AjaxResult(msg.IsNullOrEmpty() ? ex.Message : msg, ajax).ToJson());
-                return;
+       
             }
 
         };

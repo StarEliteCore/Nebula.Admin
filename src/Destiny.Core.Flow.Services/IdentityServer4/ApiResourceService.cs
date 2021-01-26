@@ -42,8 +42,8 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
         {
 
             dto.NotNull(nameof(dto));
-            //dto.ApiSecrets = new List<ApiResourceSecretDto>();
-            dto.ApiSecrets.Add(new ApiResourceSecretDto() { Value= dto.ApiSecretValue });
+            dto.ApiSecrets = new List<ApiResourceSecretDto>();
+            dto.ApiSecrets.Add(new ApiResourceSecretDto(dto.ApiSecretValue));
             return await _apiResourceRepository.InsertAsync(dto, async (dto1) =>
             {
 
@@ -59,7 +59,8 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
         /// <returns></returns>
         private async Task<bool> CheckApiResourceIsExist(Guid Id, string name)
         {
-            return (await _apiResourceRepository.GetAsync(m => m.Id.Equals(Id) && m.Name == name)) != null;
+            var dddd = (await _apiResourceRepository.GetAsync(m => !m.Id.Equals(Id) && m.Name == name));
+            return (await _apiResourceRepository.GetAsync(m => !m.Id.Equals(Id) && m.Name == name)) != null;
         }
 
         /// <summary>

@@ -39,11 +39,15 @@ namespace Destiny.Core.Flow.Dtos.IdentityServer4
         public ApiResourceSecretDto()
         {
             Type = "SharedSecret";
-            Value = this.Value.Sha256();
+           
         }
 
 
-        
+        public ApiResourceSecretDto(string value) : this()
+        {
+            Value = value.Sha256();
+
+        }
 
         //public ApiResourceSecretDto(string value, DateTime? expiration = null)
         //    : this()
@@ -53,7 +57,7 @@ namespace Destiny.Core.Flow.Dtos.IdentityServer4
         //}
 
 
-     
+
         //public ApiResourceSecretDto(string value, string description, DateTime? expiration = null)
         //    : this()
         //{
