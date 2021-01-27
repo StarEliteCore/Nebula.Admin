@@ -1,15 +1,9 @@
-﻿
-
-using Destiny.Core.Flow.IdentityServer;
-using IdentityModel;
-using IdentityServer4;
+﻿using IdentityServer4;
 using IdentityServer4.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 namespace Destiny.Core.Flow.IdentityServer
 {
-    public sealed class Config 
+    public sealed class Config
     {
         /// <summary>
         /// 资源授权类型

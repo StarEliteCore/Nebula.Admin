@@ -18,5 +18,6 @@ namespace Destiny.Core.Flow.IServices
         /// <param name="id"></param>
         /// <returns></returns>
         Task<OperationResponse> DeleteAsync(Guid id);
+        OperationResponse GetGrantTypeSelectItem();
     }
 }

@@ -3,6 +3,7 @@ using Destiny.Core.Flow.AspNetCore.Ui;
 using Destiny.Core.Flow.Dtos.IdentityServer4.ClientApplication;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel;
@@ -57,7 +58,19 @@ namespace Destiny.Core.Flow.API.Controllers.IdentityServer4
         public async Task<AjaxResult> DeleteAsync(Guid? id)
         {
             return (await _applicationClientContract.DeleteAsync(id.Value)).ToAjaxResult();
+        }
+        /// <summary>
+        /// 获取授权类型
+        /// </summary>
+        /// <param name="id">主键</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Description("获取授权类型")]
+        [AllowAnonymous]
 
+        public AjaxResult GetGrantTypeSelectItemAsync()
+        {
+            return _applicationClientContract.GetGrantTypeSelectItem().ToAjaxResult();
         }
     }
 }
