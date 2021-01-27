@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.Dtos.IdentityServer4.ClientApplication;
+using Destiny.Core.Flow.Dtos.Menu;
 using Destiny.Core.Flow.Exceptions;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
@@ -6,6 +7,7 @@ using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.IServices;
 using Destiny.Core.Flow.Model.DestinyIdentityServer4;
 using Destiny.Core.Flow.Ui;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -80,6 +82,18 @@ namespace Destiny.Core.Flow.Services
         public async Task<OperationResponse> DeleteAsync(Guid id)
         {
             return await _clientRepository.DeleteAsync(id);
+        }
+        /// <summary>
+        /// 获取授权类型
+        /// </summary>
+        /// <returns></returns>
+        public OperationResponse GetGrantTypeSelectItem()
+        {
+            var type = typeof(GrantType);
+            var items = type.GetFields().Select(o => new SelectListItem { Text = o.Name, Value = o.GetValue(type)?.ToString() });
+            SelectedItem<SelectListItem, string> selectedItem = new SelectedItem<SelectListItem, string>();
+            selectedItem.ItemList = items.ToList();
+            return OperationResponse.Ok("得到数据", selectedItem);
         }
     }
 }

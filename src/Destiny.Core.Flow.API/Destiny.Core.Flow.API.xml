@@ -247,6 +247,13 @@
             <param name="id">主键</param>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ClientApplicationController.GetGrantTypeSelectItemAsync">
+            <summary>
+            获取授权类型
+            </summary>
+            <param name="id">主键</param>
+            <returns></returns>
+        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.MenuFunctionController">
             <summary>
             菜单功能
