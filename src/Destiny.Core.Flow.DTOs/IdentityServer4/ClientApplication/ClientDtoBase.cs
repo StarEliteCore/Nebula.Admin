@@ -1,11 +1,21 @@
-﻿using Destiny.Core.Flow.Dtos.PlatformApplication;
+﻿using Destiny.Core.Flow.Dtos.IdentityServer4.ClientApplication;
+using Destiny.Core.Flow.Entity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Destiny.Core.Flow.Dtos.Application
+namespace Destiny.Core.Flow.Dtos
 {
-    public class ClientAddInputDto
+    /// <summary>
+    /// 
+    /// </summary>
+    public class ClientDtoBase : OutputDtoBase<Guid>
     {
+        /// <summary>
+        /// 是否启用
+        /// </summary>
+        [DisplayName("是否启用")]
+        public bool Enabled { get; set; }
         /// <summary>
         /// 客户端Id
         /// </summary>

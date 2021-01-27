@@ -36,6 +36,6 @@ namespace Destiny.Core.Flow.IdentityServer.Entities
         /// 是否显示在发现文档中
         /// </summary>
         [DisplayName("是否显示在发现文档中")]
-        public bool ShowInDiscoveryDocument { get; set; }
+        public bool ShowInDiscoveryDocument { get; set; } = true;
     }
 }

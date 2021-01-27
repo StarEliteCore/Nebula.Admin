@@ -77,12 +77,12 @@ namespace Destiny.Core.Flow
                 if (entity.Entity is ICreationAudited<Guid> createdTime && entity.State == EntityState.Added)
                 {
                     createdTime.CreatedTime = DateTime.Now;
-                    createdTime.CreatorUserId = _principal.Identity.GetUesrId<Guid>();
+                    createdTime.CreatorUserId = _principal?.Identity?.GetUesrId<Guid>();
                 }
                 if (entity.Entity is IModificationAudited<Guid> ModificationAuditedUserId && entity.State == EntityState.Modified)
                 {
                     ModificationAuditedUserId.LastModifionTime = DateTime.Now;
-                    ModificationAuditedUserId.LastModifierUserId = _principal.Identity.GetUesrId<Guid>();
+                    ModificationAuditedUserId.LastModifierUserId = _principal?.Identity?.GetUesrId<Guid>();
                 }
             }
         }

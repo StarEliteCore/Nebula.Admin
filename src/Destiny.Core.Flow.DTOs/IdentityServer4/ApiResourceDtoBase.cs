@@ -8,7 +8,7 @@ namespace Destiny.Core.Flow.Dtos.IdentityServer4
     /// <summary>
     /// API资源基类DTO
     /// </summary>
-    public class ApiResourceInputBase:IDto<Guid>
+    public class ApiResourceDtoBase:IDto<Guid>
     {
         /// <summary>
         /// 主键
@@ -52,7 +52,7 @@ namespace Destiny.Core.Flow.Dtos.IdentityServer4
         /// <summary>
         /// Api秘钥
         /// </summary>
-        public ICollection<string> ApiSecrets { get; set; }
+        public ICollection<ApiResourceSecretDto> ApiSecrets { get; set; }
 
         /// <summary>
         /// 范围

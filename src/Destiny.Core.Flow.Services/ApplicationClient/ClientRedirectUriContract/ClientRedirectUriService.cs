@@ -3,7 +3,7 @@ using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.IServices;
 using Destiny.Core.Flow.Model.DestinyIdentityServer4;
 using Destiny.Core.Flow.Ui;
-using IDN.Services.BasicsService.Dtos.Application;
+using IDN.Services.BasicsService.Dtos.IdentityServer4.ClientApplication;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -29,5 +29,15 @@ namespace Destiny.Core.Flow.Services
                     throw new AppException($"此回调【{input.RedirectUri}】已存在!!!");
             });
         }
+        //public async Task<OperationResponse> CreatAsync(PageRequest request)
+        //{
+        //    //input.NotNull(nameof(input));
+        //    //return await _clientRedirectUriRepository.InsertAsync(input, async f =>
+        //    //{
+        //    //    bool isExist = await _clientRedirectUriRepository.Entities.Where(x => x.RedirectUri == input.RedirectUri && x.ClientId == input.ClientId).AnyAsync();
+        //    //    if (isExist)
+        //    //        throw new AppException($"此回调【{input.RedirectUri}】已存在!!!");
+        //    //});
+        //}
     }
 }

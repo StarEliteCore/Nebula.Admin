@@ -4,6 +4,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Dtos.IdentityServer4;
+using Destiny.Core.Flow.Filter;
+using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.Ui;
 
 namespace Destiny.Core.Flow.IServices.IdentityServer4
@@ -20,5 +22,36 @@ namespace Destiny.Core.Flow.IServices.IdentityServer4
         /// <param name="dto">要伟入DTO</param>
         /// <returns></returns>
         Task<OperationResponse>  CreateApiResourceAsync(ApiResourceInputDto dto);
+
+        /// <summary>
+        /// 得到JWTClaim类型下拉项
+        /// </summary>
+        /// <returns></returns>
+        OperationResponse GetJwtClaimTypeSelectItem();
+
+        /// <summary>
+        /// 异步加载Api资源数据
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        Task<OperationResponse> LoadApiResourceDataAsync(Guid Id);
+
+
+        /// <summary>
+        /// 异步得到Api资源分页
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<IPagedResult<ApiResourceOutputPageListDto>> GetApiResourcePageAsync(PageRequest request);
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<OperationResponse> DeleteAsync(Guid id);
+
+
+
     }
 }

@@ -1,10 +1,6 @@
-﻿using Destiny.Core.Flow.Extensions;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
-namespace Destiny.Core.Flow.Dtos.PlatformApplication
+namespace Destiny.Core.Flow.Dtos.IdentityServer4.ClientApplication
 {
     public class Secret
     {
