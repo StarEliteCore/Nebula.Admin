@@ -362,7 +362,8 @@ namespace Destiny.Core.Flow
             {
                 return new OperationResponse($"该{primaryKey}键的数据不存在", OperationResponseType.QueryNull);
             }
-            int count = await this.DeleteAsync(entity);
+            CheckDelete(entity);
+            int count = await _dbContext.SaveChangesAsync();
             return new OperationResponse(count > 0 ? "删除成功" : "操作没有引发任何变化", count > 0 ? OperationResponseType.Success : OperationResponseType.NoChanged);
         }
 
