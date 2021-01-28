@@ -201,6 +201,12 @@
             <param name="id">资源ID</param>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ApiResourceController.GetApiResourceSelectItemAsync">
+            <summary>
+            获取API资源下拉框列表
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ApiResourceController.GetApiResourcePageAsync(Destiny.Core.Flow.Filter.PageRequest)">
             <summary>
             异步得到API资源分页

@@ -34,7 +34,7 @@ namespace Destiny.Core.Flow.IdentityServer
                     {
                         new Secret("Destiny.Core.Flow.API_secret".Sha256())
                     },
-                    Scopes =
+                    Scopes =//必须和APiScope表内的名称相同
                     {
                         "Destiny.Core.Flow.API"
                     }

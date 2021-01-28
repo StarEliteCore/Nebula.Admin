@@ -1,19 +1,19 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Destiny.Core.Flow.Dtos.IdentityServer4;
+using Destiny.Core.Flow.Dtos.Menu;
+using Destiny.Core.Flow.Enums;
+using Destiny.Core.Flow.Exceptions;
 using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.Filter;
+using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.IServices.IdentityServer4;
 using Destiny.Core.Flow.Model.DestinyIdentityServer4;
 using Destiny.Core.Flow.Ui;
-using Microsoft.EntityFrameworkCore;
-using Destiny.Core.Flow.Exceptions;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Destiny.Core.Flow.Dtos.Menu;
-using Destiny.Core.Flow.IdentityServer.Entities;
-using Destiny.Core.Flow.Filter.Abstract;
-using Destiny.Core.Flow.Filter;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.IdentityServer4
 {
@@ -130,6 +130,13 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
                 Success = pagedResult.Success,
                 Type = pagedResult.Type
             };
+        }
+        public async Task<OperationResponse<IEnumerable<SelectListItem>>> GetApiResourceSelectItemAsync()
+        {
+
+            var apiResult = await _apiResourceRepository.Entities.Select(x => new SelectListItem { Value = x.Name, Text = x.Name, Selected = false }).ToListAsync();
+            return new OperationResponse<IEnumerable<SelectListItem>>(MessageDefinitionType.DataSuccess, apiResult, OperationResponseType.Success);
+
         }
 
 

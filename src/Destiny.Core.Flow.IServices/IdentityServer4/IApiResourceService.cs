@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Destiny.Core.Flow.Dependency;
+﻿using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Dtos.IdentityServer4;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.Ui;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IServices.IdentityServer4
 {
@@ -15,13 +15,13 @@ namespace Destiny.Core.Flow.IServices.IdentityServer4
     /// </summary>
     public interface IApiResourceService : IScopedDependency
     {
-        
+
         /// <summary>
         /// 异步创建Api资源
         /// </summary>
         /// <param name="dto">要伟入DTO</param>
         /// <returns></returns>
-        Task<OperationResponse>  CreateApiResourceAsync(ApiResourceInputDto dto);
+        Task<OperationResponse> CreateApiResourceAsync(ApiResourceInputDto dto);
 
         /// <summary>
         /// 得到JWTClaim类型下拉项
@@ -50,8 +50,10 @@ namespace Destiny.Core.Flow.IServices.IdentityServer4
         /// <param name="id"></param>
         /// <returns></returns>
         Task<OperationResponse> DeleteAsync(Guid id);
-
-
-
+        /// <summary>
+        /// 获取API资源下拉框列表
+        /// </summary>
+        /// <returns></returns>
+        Task<OperationResponse<IEnumerable<SelectListItem>>> GetApiResourceSelectItemAsync();
     }
 }
