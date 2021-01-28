@@ -52,7 +52,16 @@ namespace Destiny.Core.Flow.API.Controllers.IdentityServer4
 
             return (await _apiResourceService.LoadApiResourceDataAsync(id)).ToAjaxResult();
         }
-
+        /// <summary>
+        /// 获取API资源下拉框列表
+        /// </summary>
+        /// <returns></returns>
+        [Description("获取API资源下拉框列表")]
+        [HttpGet]
+        public async Task<AjaxResult> GetApiResourceSelectItemAsync()
+        {
+            return (await _apiResourceService.GetApiResourceSelectItemAsync()).ToAjaxResult();
+        }
         /// <summary>
         /// 异步得到API资源分页
         /// </summary>
@@ -76,8 +85,6 @@ namespace Destiny.Core.Flow.API.Controllers.IdentityServer4
         {
             return _apiResourceService.GetJwtClaimTypeSelectItem().ToAjaxResult();
         }
-
-
         /// <summary>
         /// 异步删除资源
         /// </summary>
