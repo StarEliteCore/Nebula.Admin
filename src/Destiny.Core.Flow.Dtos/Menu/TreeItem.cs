@@ -12,4 +12,5 @@ namespace Destiny.Core.Flow.Dtos.Menu
         public List<TData> ItemList { get; set; }
         public IEnumerable<TSelectedType> Selected { get; set; }
     }
+    
 }

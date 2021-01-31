@@ -79,6 +79,7 @@ namespace Destiny.Core.Flow
             var entries = this.FindChangedEntries().ToList();
             foreach (var entity in entries)
             {
+                
                 if (entity.Entity is ICreationAudited<Guid> createdTime && entity.State == EntityState.Added) 
                 {
                     createdTime.CreatedTime = DateTime.Now;

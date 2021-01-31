@@ -1,6 +1,7 @@
 ﻿using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Ui;
+using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.AspNetCore.Ui
 {
@@ -11,6 +12,15 @@ namespace Destiny.Core.Flow.AspNetCore.Ui
             var message = operationResponse.Message ?? operationResponse.Type.ToDescription();
             AjaxResultType type = operationResponse.Type.ToAjaxResultType();
             return new AjaxResult(message, type, operationResponse.Data) { Success = operationResponse.Success };
+        }
+
+        public static async Task<AjaxResult> ToAjaxResult(this Task<OperationResponse> operationResponse)
+        {
+
+            var result = await operationResponse;
+            var message = result.Message ?? result.Type.ToDescription();
+            AjaxResultType type = result.Type.ToAjaxResultType();
+            return new AjaxResult(message, type, result.Data) { Success = result.Success };
         }
 
         public static AjaxResult ToAjaxResult<T>(this OperationResponse<T> operationResult)

@@ -2,6 +2,7 @@ using Destiny.Core.Flow.Dtos.IdentityServer4;
 using Destiny.Core.Flow.Dtos.Menu;
 using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Exceptions;
+using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Filter.Abstract;
@@ -22,6 +23,7 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
     /// </summary>
     public class ApiResourceService : IApiResourceService
     {
+
 
         private readonly IRepository<ApiResource, Guid> _apiResourceRepository;
 
@@ -50,6 +52,25 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
                 MessageBox.ShowIf($"指定【{dto.Name}】Api资源已存在", await this.CheckApiResourceIsExist(dto1.Id, dto1.Name));
             });
         }
+
+        /// <summary>
+        /// 异步更新Api资源
+        /// </summary>
+        /// <param name="dto">要传入DTO</param>
+        /// <returns></returns>
+
+        public async Task<OperationResponse> UpdateApiResourceAsync(ApiResourceInputDto dto)
+        {
+
+            dto.NotNull(nameof(dto));
+            return await _apiResourceRepository.UpdateAsync(dto, async (entity, dto1) =>
+            {
+
+                MessageBox.ShowIf($"指定【{dto.Name}】Api资源已存在", await this.CheckApiResourceIsExist(dto1.Id, dto1.Name));
+            });
+
+        }
+
 
         /// <summary>
         /// 检查是否存在
@@ -104,8 +125,10 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
         /// <returns></returns>
         public async Task<IPagedResult<ApiResourceOutputPageListDto>> GetApiResourcePageAsync(PageRequest request)
         {
+            var expression= FilterBuilder.GetExpression<ApiResource>(request.Filter);
 
-            var pagedResult = await _apiResourceRepository.Entities.Include(s => s.Scopes).Include(u => u.UserClaims).ToPageAsync(request);
+
+            var pagedResult = await _apiResourceRepository.Entities.Include(s => s.Scopes).Include(u => u.UserClaims).ToPageAsync(expression, request);
             var itemList = pagedResult.ItemList.Select(o => new ApiResourceOutputPageListDto
             {
 
@@ -166,6 +189,16 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
         {
 
             return _apiResourceRepository.DeleteAsync(id);
+        }
+
+        public Task<OperationResponse> CreateOrUpdateApiResourceAsync(ApiResourceInputDto dto)
+        {
+            if (dto.Id == Guid.Empty)
+            {
+
+                return this.CreateApiResourceAsync(dto);
+            }
+            return this.UpdateApiResourceAsync(dto);
         }
     }
 }

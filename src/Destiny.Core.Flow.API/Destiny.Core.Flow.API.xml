@@ -227,6 +227,50 @@
             <param name="id">主键</param>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ApiResourceController.AddOrUpdateApiResourceAsync(Destiny.Core.Flow.Dtos.IdentityServer4.ApiResourceInputDto)">
+            <summary>
+            更新或者修改Api资源
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Destiny.Core.Flow.API.Controllers.IdentityServer4.ApiResourceScopeController">
+            <summary>
+            Api资源范围
+            </summary>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ApiResourceScopeController.GetApiResourceScopeListAsync">
+            <summary>
+            异步得到API资源范围集合数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Destiny.Core.Flow.API.Controllers.IdentityServer4.ApiScopeController">
+            <summary>
+            Api范围
+            </summary>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ApiScopeController.CreateApiScopeAsync(Destiny.Core.Flow.Dtos.IdentityServer4.ApiScopeDto)">
+            <summary>
+            异步创建API范围
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ApiScopeController.GetApiScopePageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+            <summary>
+            异步得到API范围分页
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ApiScopeController.DeleteAsync(System.Guid)">
+            <summary>
+            异步API范围
+            </summary>
+            <param name="id">主键</param>
+            <returns></returns>
+        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.IdentityServer4.ClientApplicationController">
             <summary>
             客户端应用管理

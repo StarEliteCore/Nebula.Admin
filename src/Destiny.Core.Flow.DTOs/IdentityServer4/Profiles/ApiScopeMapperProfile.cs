@@ -25,6 +25,11 @@ namespace Destiny.Core.Flow.Dtos.IdentityServer4.Profiles
                 .ForMember(x => x.Properties, opts => opts.MapFrom(x => x.Properties))
                 .ForMember(x => x.UserClaims, opts => opts.MapFrom(x => x.UserClaims))
                 .ReverseMap();
+
+
+            CreateMap<ApiScope, ApiScopeOutputPageListDto>(MemberList.Destination)
+             .ConstructUsing(src => new ApiScopeOutputPageListDto())
+             .ReverseMap();
         }
     }
 }

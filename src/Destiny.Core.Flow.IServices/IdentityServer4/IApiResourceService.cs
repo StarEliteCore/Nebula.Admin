@@ -23,6 +23,22 @@ namespace Destiny.Core.Flow.IServices.IdentityServer4
         /// <returns></returns>
         Task<OperationResponse> CreateApiResourceAsync(ApiResourceInputDto dto);
 
+
+        /// <summary>
+        /// 异步更新Api资源
+        /// </summary>
+        /// <param name="dto">要传入DTO</param>
+        /// <returns></returns>
+
+        Task<OperationResponse> UpdateApiResourceAsync(ApiResourceInputDto dto);
+
+        /// <summary>
+        /// 异步创建或更新Api资源
+        /// </summary>
+        /// <param name="dto">要传入DTO</param>
+        /// <returns></returns>
+        Task<OperationResponse> CreateOrUpdateApiResourceAsync(ApiResourceInputDto dto);
+
         /// <summary>
         /// 得到JWTClaim类型下拉项
         /// </summary>
@@ -55,5 +71,10 @@ namespace Destiny.Core.Flow.IServices.IdentityServer4
         /// </summary>
         /// <returns></returns>
         Task<OperationResponse<IEnumerable<SelectListItem>>> GetApiResourceSelectItemAsync();
+
+
+
+
+
     }
 }

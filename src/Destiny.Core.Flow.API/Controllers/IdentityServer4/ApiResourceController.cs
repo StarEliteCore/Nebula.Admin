@@ -100,19 +100,18 @@ namespace Destiny.Core.Flow.API.Controllers.IdentityServer4
 
         }
 
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="dto"></param>
-        ///// <returns></returns>
+        /// <summary>
+        /// 更新或者修改Api资源
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Description("更新或者修改Api资源")]
+        public async Task<AjaxResult> AddOrUpdateApiResourceAsync([FromBody] ApiResourceInputDto dto)
+        {
 
-        //public async Task<AjaxResult> AddOrUpdate([FromBody] ApiResourceInputDto dto)
-        //{
 
-        //    if (dto.Id == Guid.Empty)
-        //    {
-        //        return (await _apiResourceService.CreateApiResourceAsync(dto)).ToAjaxResult();
-        //    }
-        //}
+            return (await _apiResourceService.CreateOrUpdateApiResourceAsync(dto)).ToAjaxResult();
+        }
     }
 }

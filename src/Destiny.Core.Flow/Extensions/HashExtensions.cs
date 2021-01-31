@@ -20,6 +20,28 @@ namespace Destiny.Core.Flow.Extensions
                 return Convert.ToBase64String(sHA.ComputeHash(bytes));
             }
         }
+
+
+        /// <summary>
+        /// AES解密
+        /// </summary>
+        /// <param name="decryptStr">密文</param>
+        /// <param name="key">密钥</param>
+        /// <returns></returns>
+        public static string Decrypt(string decryptStr, string key)
+        {
+            byte[] keyArray = UTF8Encoding.UTF8.GetBytes(key);
+            byte[] toEncryptArray = Convert.FromBase64String(decryptStr);
+            RijndaelManaged rDel = new RijndaelManaged();
+            rDel.Key = keyArray;
+            rDel.Mode = CipherMode.ECB;
+            rDel.Padding = PaddingMode.PKCS7;
+            ICryptoTransform cTransform = rDel.CreateDecryptor();
+            byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
+            return UTF8Encoding.UTF8.GetString(resultArray);
+        }
+
+
         public static byte[] Sha256(this byte[] input)
         {
             if (input == null)
