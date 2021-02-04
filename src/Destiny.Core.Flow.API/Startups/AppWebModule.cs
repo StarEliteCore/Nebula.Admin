@@ -1,6 +1,5 @@
 ﻿using Destiny.Core.Flow.AspNetCore.Module;
 using Destiny.Core.Flow.AutoMapper;
-using Destiny.Core.Flow.Caching.CSRedis;
 using Destiny.Core.Flow.CodeGenerator;
 using Destiny.Core.Flow.Dependency;
 using Destiny.Core.Flow.Events;
@@ -22,7 +21,7 @@ namespace Destiny.Core.Flow.API.Startups
            typeof(FunctionModule),
            typeof(EntityFrameworkCoreModule),
            typeof(AutoMapperModule),
-           typeof(CSRedisModule),
+           //typeof(CSRedisModule),
            typeof(MongoDBModelule),
            typeof(MigrationModule),
            typeof(CodeGeneratorModeule)

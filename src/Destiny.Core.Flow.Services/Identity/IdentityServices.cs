@@ -75,7 +75,7 @@ namespace Destiny.Core.Flow.Services.Identity
             }
 
             var jwtToken = _jwtBearerService.CreateToken(user.Id, user.UserName);
-            await _bus.PublishAsync(new IdentityEvent() { UserName = loginDto.UserName });
+            //await _bus.PublishAsync(new IdentityEvent() { UserName = loginDto.UserName });
             return (new OperationResponse("登录成功", new
             {
                 AccessToken = jwtToken.AccessToken,

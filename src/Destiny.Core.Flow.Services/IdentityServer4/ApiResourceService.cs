@@ -125,7 +125,7 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
         /// <returns></returns>
         public async Task<IPagedResult<ApiResourceOutputPageListDto>> GetApiResourcePageAsync(PageRequest request)
         {
-            var expression= FilterBuilder.GetExpression<ApiResource>(request.Filter);
+            var expression = FilterBuilder.GetExpression<ApiResource>(request.Filter);
 
 
             var pagedResult = await _apiResourceRepository.Entities.Include(s => s.Scopes).Include(u => u.UserClaims).ToPageAsync(expression, request);
@@ -185,10 +185,13 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Task<OperationResponse> DeleteAsync(Guid id)
+        public async Task<OperationResponse> DeleteAsync(Guid id)
         {
+    
+            var entites=await _apiResourceRepository.Entities.Include(o => o.Scopes).Include(o=>o.UserClaims).Include(o => o.Secrets).Where(o=>o.Id==id).ToListAsync();
+            var count= _apiResourceRepository.Delete(entites.ToArray());
+            return new OperationResponse(count > 0 ? "删除成功" : "操作没有引发任何变化", count > 0 ? OperationResponseType.Success : OperationResponseType.NoChanged);
 
-            return _apiResourceRepository.DeleteAsync(id);
         }
 
         public Task<OperationResponse> CreateOrUpdateApiResourceAsync(ApiResourceInputDto dto)

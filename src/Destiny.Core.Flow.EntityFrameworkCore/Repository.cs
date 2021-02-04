@@ -204,11 +204,7 @@ namespace Destiny.Core.Flow
             {
                 return new OperationResponse(ex.Message, OperationResponseType.Error);
             }
-            //entity.NotNull(nameof(entity));
-            //entity = CheckInsert(entity);
-            //await _dbSet.AddAsync(entity);
-            //int count = await _dbContext.SaveChangesAsync();
-            //return new OperationResponse(count > 0 ? ResultMessage.InsertSuccess : ResultMessage.NoChangeInOperation, count > 0 ? OperationEnumType.Success : OperationEnumType.NoChanged);
+          
         }
 
         /// <summary>
@@ -367,6 +363,7 @@ namespace Destiny.Core.Flow
             return new OperationResponse(count > 0 ? "删除成功" : "操作没有引发任何变化", count > 0 ? OperationResponseType.Success : OperationResponseType.NoChanged);
         }
 
+
         /// <summary>
         /// 删除
         /// </summary>
@@ -386,6 +383,7 @@ namespace Destiny.Core.Flow
             return count;
         }
 
+  
         public virtual int Delete(params TEntity[] entitys)
         {
             foreach (var entity in entitys)
@@ -433,18 +431,7 @@ namespace Destiny.Core.Flow
 
         #region 其他
 
-        /// <summary>
-        /// 检查删除
-        /// </summary>
-        /// <param name="entitys">实体集合</param>
-        /// <returns></returns>
-        private void CheckDelete(IEnumerable<TEntity> entitys)
-        {
-            foreach (var entity in entitys)
-            {
-                this.CheckDelete(entity);
-            }
-        }
+
 
         /// <summary>
         /// 检查删除
@@ -687,6 +674,8 @@ namespace Destiny.Core.Flow
 
             return updateExpression1;
         }
+
+   
 
 
         #endregion 其他

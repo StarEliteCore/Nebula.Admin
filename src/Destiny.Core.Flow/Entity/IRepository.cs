@@ -157,7 +157,6 @@ namespace Destiny.Core.Flow
         /// <returns></returns>
         Task<OperationResponse> DeleteAsync(TPrimaryKey primaryKey);
 
-
         /// <summary>
         /// 删除
         /// </summary>
@@ -179,6 +178,8 @@ namespace Destiny.Core.Flow
         /// <returns>操作影响的行数</returns>
         int Delete(params TEntity[] entitys);
 
+
+  
         #endregion
     }
 }
