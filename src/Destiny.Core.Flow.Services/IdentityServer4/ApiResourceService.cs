@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.IdentityServer4
@@ -109,6 +110,7 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
         public async Task<OperationResponse> LoadApiResourceDataAsync(Guid Id)
         {
 
+     
             var apiResource = await _apiResourceRepository.Entities.Where(o => o.Id == Id).Include(O => O.Scopes).Include(O => O.UserClaims).FirstOrDefaultAsync();
             return OperationResponse.Ok("查询成功", MapTo(apiResource));
 
@@ -139,7 +141,8 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
                 Description = o.Description,
                 Enabled = o.Enabled,
                 Scope = o.Scopes.Select(s => s.Scope).ToJoin(),
-                UserClaim = o.UserClaims.Select(u => u.Type).ToJoin()
+                UserClaim = o.UserClaims.Select(u => u.Type).ToJoin(),
+                CreatedTime = o.CreatedTime,
                 //Scopes = o.Scopes.Select(s => s.Scope).ToList(),
                 //UserClaims = o.UserClaims.Select(u => u.Type).ToList(),
 
@@ -187,10 +190,10 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
         /// <returns></returns>
         public async Task<OperationResponse> DeleteAsync(Guid id)
         {
-    
-            var entites=await _apiResourceRepository.Entities.Include(o => o.Scopes).Include(o=>o.UserClaims).Include(o => o.Secrets).Where(o=>o.Id==id).ToListAsync();
-            var count= _apiResourceRepository.Delete(entites.ToArray());
-            return new OperationResponse(count > 0 ? "删除成功" : "操作没有引发任何变化", count > 0 ? OperationResponseType.Success : OperationResponseType.NoChanged);
+           
+            //var entite = await _apiResourceRepository.Entities.Include(o => o.Scopes).Include(o => o.UserClaims).Include(o => o.Secrets).Where(o => o.Id == id).FirstOrDefaultAsync(); //这样就有BUG
+
+            return  await _apiResourceRepository.DeleteAsync(id);
 
         }
 

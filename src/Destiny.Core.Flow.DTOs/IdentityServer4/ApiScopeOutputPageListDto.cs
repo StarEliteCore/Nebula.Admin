@@ -56,6 +56,11 @@ namespace Destiny.Core.Flow.Dtos.IdentityServer4
         /// </summary>
         [Description("是否强调显示")]
         public bool Emphasize { get; set; } = false;
-     
+
+
+
+        public DateTime CreatedTime { get; set; }
+
+
     }
 }

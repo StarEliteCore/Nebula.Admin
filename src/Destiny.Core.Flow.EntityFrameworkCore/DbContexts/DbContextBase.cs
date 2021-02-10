@@ -70,16 +70,41 @@ namespace Destiny.Core.Flow
             return count;
         }
 
+
+        private void CheckAdd(EntityEntry entity)
+        {
+
+            var creationAudited = entity.GetType().GetInterface(typeof(ICreationAudited<>).Name);
+
+            if (!creationAudited.IsNull())
+            {
+                var typeArguments = creationAudited?.GenericTypeArguments[0];
+            }
+            //if (creationAudited == null)
+            //{
+            //    return entity;
+            //}
+
+            //var typeArguments = creationAudited?.GenericTypeArguments[0];
+            //var fullName = typeArguments?.FullName;
+            //if (fullName == typeof(Guid).FullName)
+            //{
+            //    entity = CheckIModificationAudited<Guid>(entity);
+            //}
+
+            //return entity;
+        }
+
         /// <summary>
         /// 设置公共属性
         /// </summary>
- 
+
         protected virtual void ApplyConcepts()
         {
             var entries = this.FindChangedEntries().ToList();
             foreach (var entity in entries)
             {
-                
+         
                 if (entity.Entity is ICreationAudited<Guid> createdTime && entity.State == EntityState.Added) 
                 {
                     createdTime.CreatedTime = DateTime.Now;
@@ -94,16 +119,21 @@ namespace Destiny.Core.Flow
                         modificationAuditedUserId.LastModifierUserId = _principal?.Identity?.GetUesrId<Guid>();
                     }
 
-                    if (entity.Entity is ISoftDelete softDelete)
-                    {
+                    //if (entity.Entity is ISoftDelete softDelete)
+                    //{
 
-                        softDelete.IsDeleted = true;
-                    }
+                    //    softDelete.IsDeleted = true;
+                    //}
                 }
             
             }
         }
 
+        /// <summary>
+        /// 准备重写
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="sender"></param>
         protected virtual void OnCompleted(int count, object sender)
         {
 
