@@ -16,13 +16,13 @@ namespace Destiny.Core.Flow.API.Controllers
     {
 
 
-        private ICache<Test> _cache = null;
+    
         private ICache _cache1 = null;
         private IConfiguration _configuration;
         private ILogger _logger = null;
-        public TestController(ICache<Test> cache, ICache cache1, IConfiguration configuration,ILoggerFactory loggerFactory)
+        public TestController( ICache cache1, IConfiguration configuration,ILoggerFactory loggerFactory)
         {
-            _cache = cache;
+      
             _cache1 = cache1;
             _configuration = configuration;
             _logger = loggerFactory.CreateLogger<TestController>();
@@ -37,15 +37,7 @@ namespace Destiny.Core.Flow.API.Controllers
             Console.WriteLine($"client: {_configuration["MysqlConnectionString"]}");
             var item = _configuration.GetValue<string>("TEST1.Destiny_Apollo:MysqlConnectionString");
             Console.WriteLine(item);
-            List<Test> test = new List<Test>();
-
-            for (int i = 0; i < 10; i++)
-            {
-                test.Add(new Test { Name = i.ToString() });
-            }
-            _cache.Set("_test", new Test { Name = "大黄瓜" });
-            var value = _cache.Get("_test");
-            _cache1.Set("aa", test);
+           
             var values = _cache1.Get<List<Test>>("aa");
             return new string[] { "🐕威威还是没用给我链接字符串", "🐕威威也没有给我远程仓库的权限,无法上传代码." };
         }

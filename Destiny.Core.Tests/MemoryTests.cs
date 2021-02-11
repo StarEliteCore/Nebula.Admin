@@ -3,6 +3,8 @@ using Destiny.Core.Flow.Modules;
 using Destiny.Core.Flow.TestBase;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Destiny.Core.Tests
@@ -29,6 +31,25 @@ namespace Destiny.Core.Tests
             Assert.True(value.Name == "大黄瓜18CM");
         }
 
+        [Fact]
+        public async Task SetOrGetCaches_TestAsync()
+        {
+
+            List<TestCacheItem> testCacheItems = new List<TestCacheItem>();
+            for (int i = 0; i < 5; i++)
+            {
+                testCacheItems.Add(new TestCacheItem
+                {
+                    TestId = Guid.NewGuid().ToString(),
+                    Name = $"大黄瓜_{i}"
+
+                }); 
+            }
+            await _cache.SetAsync<List<TestCacheItem>>("tests", testCacheItems);
+
+            var values = await _cache.GetAsync<List<TestCacheItem>>("tests");
+            Assert.True(values.Count==5);
+        }
 
         [Fact]
         public void CachePrefixWith_Test()

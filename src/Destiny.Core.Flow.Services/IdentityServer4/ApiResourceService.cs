@@ -1,5 +1,6 @@
 using Destiny.Core.Flow.Dtos.IdentityServer4;
 using Destiny.Core.Flow.Dtos.Menu;
+using Destiny.Core.Flow.Entity;
 using Destiny.Core.Flow.Enums;
 using Destiny.Core.Flow.Exceptions;
 using Destiny.Core.Flow.ExpressionUtil;
@@ -27,13 +28,20 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
 
 
         private readonly IRepository<ApiResource, Guid> _apiResourceRepository;
+        private readonly IRepository<ApiResourceScope, Guid> _apiResourceScopeRepository;
+        private readonly IRepository<ApiResourceClaim, Guid> _userClaimsRepository;
+        private readonly IRepository<ApiResourceSecret, Guid> _apiResourceSecretRepository;
 
-
-        public ApiResourceService(IRepository<ApiResource, Guid> apiResourceRepository)
+        public ApiResourceService(IRepository<ApiResource, Guid> apiResourceRepository, IRepository<ApiResourceScope, Guid> apiResourceScopeRepository, IRepository<ApiResourceClaim, Guid> userClaimsRepository, IRepository<ApiResourceSecret, Guid> apiResourceSecretRepository)
         {
-
-            this._apiResourceRepository = apiResourceRepository;
+            _apiResourceRepository = apiResourceRepository;
+            _apiResourceScopeRepository = apiResourceScopeRepository;
+            _userClaimsRepository = userClaimsRepository;
+            _apiResourceSecretRepository = apiResourceSecretRepository;
         }
+
+
+
 
         /// <summary>
         /// 异步创建Api资源
@@ -110,7 +118,7 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
         public async Task<OperationResponse> LoadApiResourceDataAsync(Guid Id)
         {
 
-     
+
             var apiResource = await _apiResourceRepository.Entities.Where(o => o.Id == Id).Include(O => O.Scopes).Include(O => O.UserClaims).FirstOrDefaultAsync();
             return OperationResponse.Ok("查询成功", MapTo(apiResource));
 
@@ -190,11 +198,7 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
         /// <returns></returns>
         public async Task<OperationResponse> DeleteAsync(Guid id)
         {
-           
-            //var entite = await _apiResourceRepository.Entities.Include(o => o.Scopes).Include(o => o.UserClaims).Include(o => o.Secrets).Where(o => o.Id == id).FirstOrDefaultAsync(); //这样就有BUG
-
-            return  await _apiResourceRepository.DeleteAsync(id);
-
+            return await _apiResourceScopeRepository.DeleteAsync(id);
         }
 
         public Task<OperationResponse> CreateOrUpdateApiResourceAsync(ApiResourceInputDto dto)

@@ -286,6 +286,7 @@ namespace Destiny.Core.Flow.Services.Menu
             {
                 expression = o => menuIds.Contains(o.Id);
             }
+
             System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
             sw.Start();
             var result = await _menuRepository.Entities.Where(expression).OrderBy(o => o.Sort).ToTreeResultAsync<MenuEntity, VueDynamicRouterTreeOutDto>((p, c) =>
