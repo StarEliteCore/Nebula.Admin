@@ -11,7 +11,7 @@ namespace Destiny.Core.Tests
 {
     public class MemoryTests : IntegratedTest<MemoryTestModelule>
     {
-        ICache _cache = null;
+        private ICache _cache = null;
         public MemoryTests()
         {
             _cache = ServiceProvider.GetService<ICache>();
@@ -32,38 +32,73 @@ namespace Destiny.Core.Tests
         }
 
         [Fact]
-        public async Task SetOrGetCaches_TestAsync()
+
+        public async Task SetOrGetCasheListAsync_Test()
         {
 
-            List<TestCacheItem> testCacheItems = new List<TestCacheItem>();
-            for (int i = 0; i < 5; i++)
+            List<TestCacheItem> list = new List<TestCacheItem>();
+
+            for (int i = 0; i < 100; i++)
             {
-                testCacheItems.Add(new TestCacheItem
+                list.Add(new TestCacheItem
                 {
+
                     TestId = Guid.NewGuid().ToString(),
-                    Name = $"大黄瓜_{i}"
-
-                }); 
+                    Name = "大黄瓜_{i}"
+                });
             }
-            await _cache.SetAsync<List<TestCacheItem>>("tests", testCacheItems);
 
-            var values = await _cache.GetAsync<List<TestCacheItem>>("tests");
-            Assert.True(values.Count==5);
+            await _cache.SetAsync("Tests", list);
+            var caches = await _cache.GetAsync<List<TestCacheItem>>("Tests");
+            Assert.True(caches.Count == 100);
         }
 
         [Fact]
-        public void CachePrefixWith_Test()
+        public async Task GetOrAddAsync_Test()
         {
-            //这种用法的好处？？？？
-            TestCachePrefixItem testCache = new TestCachePrefixItem();
-            testCache.TestId = Guid.NewGuid().ToString();
-            testCache.Name = "大黄瓜22CM";
-            _cache.Set(testCache);
 
-            var value = _cache.Get<TestCachePrefixItem>($"test_{testCache.TestId}");
-            Assert.NotNull(value);
-            Assert.True(value.Name == "大黄瓜22CM");
+            var newTestCache = await _cache.GetOrAddAsync<TestCacheItem>("getOrAddAsync", async () =>
+            {
+
+                await Task.CompletedTask;
+                TestCacheItem testCache = new TestCacheItem();
+                testCache.TestId = Guid.NewGuid().ToString();
+                testCache.Name = "帅气大黄瓜";
+                return testCache;
+            });
+            Assert.Equal(newTestCache.Name, "帅气大黄瓜");
+
         }
+
+
+        [Fact]
+        public void GetOrAdd_Test()
+        {
+
+            var newTestCache = _cache.GetOrAdd<TestCacheItem>("getOrAdd", () =>
+            {
+
+                TestCacheItem testCache = new TestCacheItem();
+                testCache.TestId = Guid.NewGuid().ToString();
+                testCache.Name = "帅气大黄瓜1";
+                return testCache;
+            });
+            Assert.Equal(newTestCache.Name, "帅气大黄瓜1");
+
+        }
+
+
+        [Fact]
+        public async Task RemoveAsync_Test()
+        {
+
+            await _cache.RemoveAsync("getOrAddAsync");
+            var test = await _cache.GetAsync<TestCacheItem>("getOrAddAsync");
+            Assert.Null(test);
+        }
+
+
+
     }
 
 
@@ -75,22 +110,13 @@ namespace Destiny.Core.Tests
     }
 
 
-    [CachePrefix("test_")]
-    public class TestCachePrefixItem : CacheItemBase
-    {
-        [CacheAutoKey]
-        public string TestId { get; set; }
-
-        public string Name { get; set; }
-    }
-
     public class MemoryTestModelule : AppModule
     {
 
         public override void ConfigureServices(ConfigureServicesContext context)
         {
-            context.Services.AddMemoryCache();
-            context.Services.AddSingleton<ICache, MemoryCache>();
+            context.Services.AddDistributedMemoryCache();
+            context.Services.AddSingleton<ICache, CacheDefault>();
         }
     }
 }

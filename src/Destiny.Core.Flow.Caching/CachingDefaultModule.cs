@@ -14,8 +14,8 @@ namespace Destiny.Core.Flow.Caching
 
         public override void ConfigureServices(ConfigureServicesContext context)
         {
-            context.Services.AddMemoryCache();
-            context.Services.AddSingleton<ICache, MemoryCache>();
+            context.Services.AddDistributedMemoryCache();
+            context.Services.AddSingleton<ICache, CacheDefault>();
         }
     }
 }
