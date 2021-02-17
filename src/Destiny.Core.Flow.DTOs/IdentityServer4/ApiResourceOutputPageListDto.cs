@@ -18,5 +18,11 @@ namespace Destiny.Core.Flow.Dtos.IdentityServer4
         /// 范围
         /// </summary>
         public string Scope { get; set; }
+
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public  DateTime CreatedTime { get; set; }
+
     }
 }

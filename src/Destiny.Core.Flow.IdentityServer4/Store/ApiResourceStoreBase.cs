@@ -62,15 +62,20 @@ namespace Destiny.Core.Flow.IdentityServer.Store
         }
 
 
-        public async Task<IEnumerable<IdentityServer4.Models.ApiScope>> FindApiScopesByNameAsync(IEnumerable<string> scopeNames)
+        public  async  Task<IEnumerable<IdentityServer4.Models.ApiScope>> FindApiScopesByNameAsync(IEnumerable<string> scopeNames)
         {
 
-            return (await _apiScopeRepository.Entities.Where(x => scopeNames.Contains(x.Name)).Include(x => x.UserClaims).Include(x => x.Properties).ToListAsync()).Where(x => scopeNames.Contains(x.Name)).Select(x => x.MapTo<IdentityServer4.Models.ApiScope>());
-            
+
+            return  await   _apiScopeRepository.Entities.Include(x => x.UserClaims).Include(o => o.Properties).Where(o => scopeNames.Contains(o.Name)).Select(x => x.MapTo<IdentityServer4.Models.ApiScope>()).ToListAsync();
+
+           //return (await _apiScopeRepository.Entities.Where(x => scopeNames.Contains(x.Name)).Include(x => x.UserClaims).Include(x => x.Properties).ToListAsync()).Where(x => scopeNames.Contains(x.Name)).Select(x => x.MapTo<IdentityServer4.Models.ApiScope>());
+
         }
         public async Task<IdentityServer4.Models.Resources> GetAllResourcesAsync()
         {
-            var identityResources = ( await _identityResourceRepository.Entities.Include(x => x.UserClaims).Include(x => x.Properties).ToListAsync()).Select(x=>x.MapTo<IdentityServer4.Models.IdentityResource>());
+            var identityResources =
+                ( await _identityResourceRepository.Entities.Include(x => x.UserClaims).Include(x => x.Properties).ToListAsync())
+                .Select(x=>x.MapTo<IdentityServer4.Models.IdentityResource>());
            var apiResources =  (await _apiResourceRepository.Entities.Include(x => x.Secrets)
                 .Include(x => x.Scopes)
                 .Include(x => x.UserClaims)

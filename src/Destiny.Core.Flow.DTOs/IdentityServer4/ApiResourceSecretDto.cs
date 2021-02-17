@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Destiny.Core.Flow.Dtos.IdentityServer4
 {
-   public class ApiResourceSecretDto
+    public class ApiResourceSecretDto
     {
 
         public string Description
@@ -15,10 +15,11 @@ namespace Destiny.Core.Flow.Dtos.IdentityServer4
         }
 
 
+        private string _value;
         public string Value
         {
-            get;
-            set;
+            get => _value;
+            set => _value = value.Sha256();
         }
 
 
@@ -33,21 +34,9 @@ namespace Destiny.Core.Flow.Dtos.IdentityServer4
         {
             get;
             set;
-        }
+        } = "SharedSecret";
 
 
-        public ApiResourceSecretDto()
-        {
-            Type = "SharedSecret";
-           
-        }
-
-
-        public ApiResourceSecretDto(string value) : this()
-        {
-            Value = value.Sha256();
-
-        }
 
         //public ApiResourceSecretDto(string value, DateTime? expiration = null)
         //    : this()

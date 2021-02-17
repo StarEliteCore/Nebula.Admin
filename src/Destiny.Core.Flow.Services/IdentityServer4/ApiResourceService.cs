@@ -1,19 +1,22 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Destiny.Core.Flow.Dtos.IdentityServer4;
+using Destiny.Core.Flow.Dtos.Menu;
+using Destiny.Core.Flow.Entity;
+using Destiny.Core.Flow.Enums;
+using Destiny.Core.Flow.Exceptions;
+using Destiny.Core.Flow.ExpressionUtil;
 using Destiny.Core.Flow.Extensions;
+using Destiny.Core.Flow.Filter;
+using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.IServices.IdentityServer4;
 using Destiny.Core.Flow.Model.DestinyIdentityServer4;
 using Destiny.Core.Flow.Ui;
-using Microsoft.EntityFrameworkCore;
-using Destiny.Core.Flow.Exceptions;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Destiny.Core.Flow.Dtos.Menu;
-using Destiny.Core.Flow.IdentityServer.Entities;
-using Destiny.Core.Flow.Filter.Abstract;
-using Destiny.Core.Flow.Filter;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Services.IdentityServer4
 {
@@ -23,14 +26,22 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
     public class ApiResourceService : IApiResourceService
     {
 
+
         private readonly IRepository<ApiResource, Guid> _apiResourceRepository;
+        private readonly IRepository<ApiResourceScope, Guid> _apiResourceScopeRepository;
+        private readonly IRepository<ApiResourceClaim, Guid> _userClaimsRepository;
+        private readonly IRepository<ApiResourceSecret, Guid> _apiResourceSecretRepository;
 
-
-        public ApiResourceService(IRepository<ApiResource, Guid> apiResourceRepository)
+        public ApiResourceService(IRepository<ApiResource, Guid> apiResourceRepository, IRepository<ApiResourceScope, Guid> apiResourceScopeRepository, IRepository<ApiResourceClaim, Guid> userClaimsRepository, IRepository<ApiResourceSecret, Guid> apiResourceSecretRepository)
         {
-
-            this._apiResourceRepository = apiResourceRepository;
+            _apiResourceRepository = apiResourceRepository;
+            _apiResourceScopeRepository = apiResourceScopeRepository;
+            _userClaimsRepository = userClaimsRepository;
+            _apiResourceSecretRepository = apiResourceSecretRepository;
         }
+
+
+
 
         /// <summary>
         /// 异步创建Api资源
@@ -42,14 +53,33 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
         {
 
             dto.NotNull(nameof(dto));
-            dto.ApiSecrets = new List<ApiResourceSecretDto>();
-            dto.ApiSecrets.Add(new ApiResourceSecretDto(dto.ApiSecretValue));
+            //dto.ApiSecrets = new List<ApiResourceSecretDto>();
+            //dto.ApiSecrets.Add(new ApiResourceSecretDto(dto.ApiSecretValue));
             return await _apiResourceRepository.InsertAsync(dto, async (dto1) =>
             {
 
                 MessageBox.ShowIf($"指定【{dto.Name}】Api资源已存在", await this.CheckApiResourceIsExist(dto1.Id, dto1.Name));
             });
         }
+
+        /// <summary>
+        /// 异步更新Api资源
+        /// </summary>
+        /// <param name="dto">要传入DTO</param>
+        /// <returns></returns>
+
+        public async Task<OperationResponse> UpdateApiResourceAsync(ApiResourceInputDto dto)
+        {
+
+            dto.NotNull(nameof(dto));
+            return await _apiResourceRepository.UpdateAsync(dto, async (entity, dto1) =>
+            {
+
+                MessageBox.ShowIf($"指定【{dto.Name}】Api资源已存在", await this.CheckApiResourceIsExist(dto1.Id, dto1.Name));
+            });
+
+        }
+
 
         /// <summary>
         /// 检查是否存在
@@ -59,7 +89,6 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
         /// <returns></returns>
         private async Task<bool> CheckApiResourceIsExist(Guid Id, string name)
         {
-            var dddd = (await _apiResourceRepository.GetAsync(m => !m.Id.Equals(Id) && m.Name == name));
             return (await _apiResourceRepository.GetAsync(m => !m.Id.Equals(Id) && m.Name == name)) != null;
         }
 
@@ -89,6 +118,7 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
         public async Task<OperationResponse> LoadApiResourceDataAsync(Guid Id)
         {
 
+
             var apiResource = await _apiResourceRepository.Entities.Where(o => o.Id == Id).Include(O => O.Scopes).Include(O => O.UserClaims).FirstOrDefaultAsync();
             return OperationResponse.Ok("查询成功", MapTo(apiResource));
 
@@ -105,8 +135,10 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
         /// <returns></returns>
         public async Task<IPagedResult<ApiResourceOutputPageListDto>> GetApiResourcePageAsync(PageRequest request)
         {
+            var expression = FilterBuilder.GetExpression<ApiResource>(request.Filter);
 
-            var pagedResult = await _apiResourceRepository.Entities.Include(s => s.Scopes).Include(u => u.UserClaims).ToPageAsync(request);
+
+            var pagedResult = await _apiResourceRepository.Entities.Include(s => s.Scopes).Include(u => u.UserClaims).ToPageAsync(expression, request);
             var itemList = pagedResult.ItemList.Select(o => new ApiResourceOutputPageListDto
             {
 
@@ -117,7 +149,8 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
                 Description = o.Description,
                 Enabled = o.Enabled,
                 Scope = o.Scopes.Select(s => s.Scope).ToJoin(),
-                UserClaim = o.UserClaims.Select(u => u.Type).ToJoin()
+                UserClaim = o.UserClaims.Select(u => u.Type).ToJoin(),
+                CreatedTime = o.CreatedTime,
                 //Scopes = o.Scopes.Select(s => s.Scope).ToList(),
                 //UserClaims = o.UserClaims.Select(u => u.Type).ToList(),
 
@@ -130,6 +163,13 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
                 Success = pagedResult.Success,
                 Type = pagedResult.Type
             };
+        }
+        public async Task<OperationResponse<IEnumerable<SelectListItem>>> GetApiResourceSelectItemAsync()
+        {
+
+            var apiResult = await _apiResourceRepository.Entities.Select(x => new SelectListItem { Value = x.Name, Text = x.Name, Selected = false }).ToListAsync();
+            return new OperationResponse<IEnumerable<SelectListItem>>(MessageDefinitionType.DataSuccess, apiResult, OperationResponseType.Success);
+
         }
 
 
@@ -156,10 +196,19 @@ namespace Destiny.Core.Flow.Services.IdentityServer4
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Task<OperationResponse> DeleteAsync(Guid id)
+        public async Task<OperationResponse> DeleteAsync(Guid id)
         {
+            return await _apiResourceScopeRepository.DeleteAsync(id);
+        }
 
-            return _apiResourceRepository.DeleteAsync(id);
+        public Task<OperationResponse> CreateOrUpdateApiResourceAsync(ApiResourceInputDto dto)
+        {
+            if (dto.Id == Guid.Empty)
+            {
+
+                return this.CreateApiResourceAsync(dto);
+            }
+            return this.UpdateApiResourceAsync(dto);
         }
     }
 }

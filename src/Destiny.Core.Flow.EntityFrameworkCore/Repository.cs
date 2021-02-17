@@ -148,7 +148,7 @@ namespace Destiny.Core.Flow
                 {
                     entity = await insertFunc(dto, entity);
                 }
-                entity = CheckInsert(entity);
+                //entity = CheckInsert(entity);
                 await _dbSet.AddAsync(entity);
 
                 if (completeFunc.IsNotNull())
@@ -186,7 +186,7 @@ namespace Destiny.Core.Flow
                 {
                     entity = await insertFunc(entity, entity);
                 }
-                entity = CheckInsert(entity);
+                //entity = CheckInsert(entity);
                 await _dbSet.AddAsync(entity);
 
                 if (completeFunc.IsNotNull())
@@ -204,11 +204,7 @@ namespace Destiny.Core.Flow
             {
                 return new OperationResponse(ex.Message, OperationResponseType.Error);
             }
-            //entity.NotNull(nameof(entity));
-            //entity = CheckInsert(entity);
-            //await _dbSet.AddAsync(entity);
-            //int count = await _dbContext.SaveChangesAsync();
-            //return new OperationResponse(count > 0 ? ResultMessage.InsertSuccess : ResultMessage.NoChangeInOperation, count > 0 ? OperationEnumType.Success : OperationEnumType.NoChanged);
+          
         }
 
         /// <summary>
@@ -219,7 +215,7 @@ namespace Destiny.Core.Flow
         public virtual async Task<int> InsertAsync(TEntity entity)
         {
             entity.NotNull(nameof(entity));
-            entity = CheckInsert(entity);
+            //entity = CheckInsert(entity);
 
             await _dbSet.AddAsync(entity);
             return await _dbContext.SaveChangesAsync();
@@ -233,7 +229,7 @@ namespace Destiny.Core.Flow
         public virtual async Task<int> InsertAsync(TEntity[] entitys)
         {
             entitys.NotNull(nameof(entitys));
-            entitys = CheckInsert(entitys);
+            //entitys = CheckInsert(entitys);
 
             await _dbSet.AddRangeAsync(entitys);
             return await _dbContext.SaveChangesAsync();
@@ -247,7 +243,7 @@ namespace Destiny.Core.Flow
         public virtual int Insert(params TEntity[] entitys)
         {
             entitys.NotNull(nameof(entitys));
-            entitys = CheckInsert(entitys);
+            //entitys = CheckInsert(entitys);
             _dbSet.AddRange(entitys);
             return _dbContext.SaveChanges();
         }
@@ -286,7 +282,7 @@ namespace Destiny.Core.Flow
                 {
                     entity = await updateFunc(dto, entity);
                 }
-                entity = CheckUpdate(entity);
+                //entity = CheckUpdate(entity);
                 _dbSet.Update(entity);
                 int count = await _dbContext.SaveChangesAsync();
                 return new OperationResponse(count > 0 ? "更新成功" : "操作没有引发任何变化", count > 0 ? OperationResponseType.Success : OperationResponseType.NoChanged);
@@ -309,7 +305,7 @@ namespace Destiny.Core.Flow
         public virtual async Task<int> UpdateAsync(TEntity entity)
         {
             entity.NotNull(nameof(entity));
-            entity = CheckUpdate(entity);
+            //entity = CheckUpdate(entity);
             _dbSet.Update(entity);
             int count = await _dbContext.SaveChangesAsync();
             return count;
@@ -323,7 +319,7 @@ namespace Destiny.Core.Flow
         public int Update(TEntity entity)
         {
             entity.NotNull(nameof(entity));
-            entity = CheckUpdate(entity);
+            //entity = CheckUpdate(entity);
             _dbSet.Update(entity);
             int count = _dbContext.SaveChanges();
             return count;
@@ -340,7 +336,7 @@ namespace Destiny.Core.Flow
         {
             predicate.NotNull(nameof(predicate));
             predicate.NotNull(nameof(updateExpression));
-            updateExpression = CheckUpdate(updateExpression);
+            //updateExpression = CheckUpdate(updateExpression);
 
             return await this.TrackEntities.Where(predicate).UpdateAsync(updateExpression, cancellationToken);
         }
@@ -362,9 +358,11 @@ namespace Destiny.Core.Flow
             {
                 return new OperationResponse($"该{primaryKey}键的数据不存在", OperationResponseType.QueryNull);
             }
-            int count = await this.DeleteAsync(entity);
+            CheckDelete(entity);
+            int count = await _dbContext.SaveChangesAsync();
             return new OperationResponse(count > 0 ? "删除成功" : "操作没有引发任何变化", count > 0 ? OperationResponseType.Success : OperationResponseType.NoChanged);
         }
+
 
         /// <summary>
         /// 删除
@@ -385,6 +383,7 @@ namespace Destiny.Core.Flow
             return count;
         }
 
+  
         public virtual int Delete(params TEntity[] entitys)
         {
             foreach (var entity in entitys)
@@ -428,22 +427,16 @@ namespace Destiny.Core.Flow
             return await TrackEntities.Where(predicate).DeleteAsync(cancellationToken);
         }
 
+
+
+      
+
+
         #endregion 删除
 
         #region 其他
 
-        /// <summary>
-        /// 检查删除
-        /// </summary>
-        /// <param name="entitys">实体集合</param>
-        /// <returns></returns>
-        private void CheckDelete(IEnumerable<TEntity> entitys)
-        {
-            foreach (var entity in entitys)
-            {
-                this.CheckDelete(entity);
-            }
-        }
+
 
         /// <summary>
         /// 检查删除

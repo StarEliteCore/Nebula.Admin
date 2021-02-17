@@ -57,6 +57,8 @@ Destiny.Core.Flow重写微软的identity用户角色和重写IDS4的实体，以
     
     + #### 数据审计
     
+    + #### IdentityServer4管理（正在开发）
+    
     + #### 文档管理（暂时不支持）
 
     + #### 工作流（暂时不支持）

@@ -69,24 +69,71 @@ namespace Destiny.Core.Flow
             _logger.LogInformation($"成功保存{count}条数据");
             return count;
         }
+
+
+        private void CheckAdd(EntityEntry entity)
+        {
+
+            var creationAudited = entity.GetType().GetInterface(typeof(ICreationAudited<>).Name);
+
+            if (!creationAudited.IsNull())
+            {
+                var typeArguments = creationAudited?.GenericTypeArguments[0];
+            }
+            //if (creationAudited == null)
+            //{
+            //    return entity;
+            //}
+
+            //var typeArguments = creationAudited?.GenericTypeArguments[0];
+            //var fullName = typeArguments?.FullName;
+            //if (fullName == typeof(Guid).FullName)
+            //{
+            //    entity = CheckIModificationAudited<Guid>(entity);
+            //}
+
+            //return entity;
+        }
+
+        /// <summary>
+        /// 设置公共属性
+        /// </summary>
+
         protected virtual void ApplyConcepts()
         {
             var entries = this.FindChangedEntries().ToList();
             foreach (var entity in entries)
             {
-                if (entity.Entity is ICreationAudited<Guid> createdTime && entity.State == EntityState.Added)
+         
+                if (entity.Entity is ICreationAudited<Guid> createdTime && entity.State == EntityState.Added) 
                 {
                     createdTime.CreatedTime = DateTime.Now;
                     createdTime.CreatorUserId = _principal?.Identity?.GetUesrId<Guid>();
                 }
-                if (entity.Entity is IModificationAudited<Guid> ModificationAuditedUserId && entity.State == EntityState.Modified)
+
+                if (entity.State == EntityState.Modified)
                 {
-                    ModificationAuditedUserId.LastModifionTime = DateTime.Now;
-                    ModificationAuditedUserId.LastModifierUserId = _principal?.Identity?.GetUesrId<Guid>();
+                    if (entity.Entity is IModificationAudited<Guid> modificationAuditedUserId)
+                    {
+                        modificationAuditedUserId.LastModifionTime = DateTime.Now;
+                        modificationAuditedUserId.LastModifierUserId = _principal?.Identity?.GetUesrId<Guid>();
+                    }
+
+                    //if (entity.Entity is ISoftDelete softDelete)
+                    //{
+
+                    //    softDelete.IsDeleted = true;
+                    //}
                 }
+            
             }
         }
 
+        /// <summary>
+        /// 准备重写
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="sender"></param>
         protected virtual void OnCompleted(int count, object sender)
         {
 

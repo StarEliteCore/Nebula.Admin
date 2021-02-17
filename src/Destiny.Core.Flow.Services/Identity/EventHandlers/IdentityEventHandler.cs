@@ -14,13 +14,12 @@ namespace Destiny.Core.Flow.Services.Identity.EventHandlers
     {
         private IServiceProvider _serviceProvider = null;
         private readonly ILogger _logger = null;
-        private readonly ICache _cache = null;
 
-        public IdentityEventHandler(IServiceProvider serviceProvider, ICache cache)
+        public IdentityEventHandler(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             _logger = serviceProvider.GetLogger<IdentityEventHandler>();
-            _cache = cache;
+ 
         }
 
         public override Task Handle(IdentityEvent @event, CancellationToken cancellationToken)

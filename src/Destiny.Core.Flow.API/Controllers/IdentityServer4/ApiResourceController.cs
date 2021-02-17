@@ -52,7 +52,16 @@ namespace Destiny.Core.Flow.API.Controllers.IdentityServer4
 
             return (await _apiResourceService.LoadApiResourceDataAsync(id)).ToAjaxResult();
         }
-
+        /// <summary>
+        /// 获取API资源下拉框列表
+        /// </summary>
+        /// <returns></returns>
+        [Description("获取API资源下拉框列表")]
+        [HttpGet]
+        public async Task<AjaxResult> GetApiResourceSelectItemAsync()
+        {
+            return (await _apiResourceService.GetApiResourceSelectItemAsync()).ToAjaxResult();
+        }
         /// <summary>
         /// 异步得到API资源分页
         /// </summary>
@@ -76,8 +85,6 @@ namespace Destiny.Core.Flow.API.Controllers.IdentityServer4
         {
             return _apiResourceService.GetJwtClaimTypeSelectItem().ToAjaxResult();
         }
-
-
         /// <summary>
         /// 异步删除资源
         /// </summary>
@@ -93,19 +100,18 @@ namespace Destiny.Core.Flow.API.Controllers.IdentityServer4
 
         }
 
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="dto"></param>
-        ///// <returns></returns>
+        /// <summary>
+        /// 更新或者修改Api资源
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Description("更新或者修改Api资源")]
+        public async Task<AjaxResult> AddOrUpdateApiResourceAsync([FromBody] ApiResourceInputDto dto)
+        {
 
-        //public async Task<AjaxResult> AddOrUpdate([FromBody] ApiResourceInputDto dto)
-        //{
 
-        //    if (dto.Id == Guid.Empty)
-        //    {
-        //        return (await _apiResourceService.CreateApiResourceAsync(dto)).ToAjaxResult();
-        //    }
-        //}
+            return (await _apiResourceService.CreateOrUpdateApiResourceAsync(dto)).ToAjaxResult();
+        }
     }
 }

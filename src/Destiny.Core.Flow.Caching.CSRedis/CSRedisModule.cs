@@ -17,8 +17,6 @@ namespace Destiny.Core.Flow.Caching.CSRedis
             var connStr = context.Services.GetFileByConfiguration("Destiny:Redis:ConnectionString", "未找到存放Rdis链接的文件");
             var csredis = new CSRedisClient(connStr);
             RedisHelper.Initialization(csredis);
-            context.Services.TryAddSingleton(typeof(ICache<>), typeof(CSRedisCache<>));
-            context.Services.TryAddSingleton(typeof(ICache<,>), typeof(CSRedisCache<,>));
             context.Services.TryAddSingleton<ICache, CSRedisCache>();
         }
 
