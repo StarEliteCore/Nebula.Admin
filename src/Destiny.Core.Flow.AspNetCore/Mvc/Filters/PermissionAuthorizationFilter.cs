@@ -41,7 +41,7 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
                 if (!_principal.Identity.IsAuthenticated)
                 {
                     context.HttpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                    context.Result.ToJsonResult(result);
+                    context.Result = new JsonResult(result);
                     return;
                 }
                 else
@@ -54,13 +54,13 @@ namespace Destiny.Core.Flow.AspNetCore.Mvc.Filters
                             ////????不包含的时候怎么返回出去？这个请求终止掉
                             ///
                             _logger.LogError($"此{linkurl}地址没有权限");
-                            result = result1.ToAjaxResult();
-                            context.HttpContext.Response.StatusCode = StatusCodes.Status403Forbidden;
-                            context.Result.ToJsonResult(result);
-                            //result.Message = MessageDefinitionType.Uncertified;
-                            //result.Type = Enums.AjaxResultType.Uncertified;
+                            //result = result1.ToAjaxResult();
                             //context.HttpContext.Response.StatusCode = StatusCodes.Status403Forbidden;
-                            //context.Result = new JsonResult(result);
+                            //context.Result.ToJsonResult(result);
+                            result.Message = MessageDefinitionType.Uncertified;
+                            result.Type = Enums.AjaxResultType.Uncertified;
+                            context.HttpContext.Response.StatusCode = StatusCodes.Status403Forbidden;
+                            context.Result = new JsonResult(result);
                             return;
                         }
                     }
