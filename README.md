@@ -181,6 +181,7 @@ Destiny.Core.Flow重写微软的identity用户角色和重写IDS4的实体，以
 + Linux
   + Ubuntu Server19.04
   + Docker
+  + K8S待定
 + 容器管理
   + Portainer
 
