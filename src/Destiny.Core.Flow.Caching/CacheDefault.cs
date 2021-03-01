@@ -112,13 +112,24 @@ namespace Destiny.Core.Flow.Caching
 
         public void Set<TCacheData>(string key, TCacheData value, int expireSeconds = -1)
         {
-            _cache.SetString(key, value.ToJson());
+            DistributedCacheEntryOptions options = new DistributedCacheEntryOptions();
+            if (expireSeconds > 0)
+            {
+                options.SetAbsoluteExpiration(TimeSpan.FromSeconds(expireSeconds));
+            }
+            _cache.SetString(key, value.ToJson(), options);
 
         }
 
+       
         public async Task SetAsync<TCacheData>(string key, TCacheData value, int expireSeconds = -1, CancellationToken token = default)
         {
-            await _cache.SetStringAsync(key, value.ToJson());
+            DistributedCacheEntryOptions options = new DistributedCacheEntryOptions();
+            if (expireSeconds > 0)
+            {
+                options.SetAbsoluteExpiration(TimeSpan.FromSeconds(expireSeconds));
+            }
+            await _cache.SetStringAsync(key, value.ToJson(), options);
         }
     }
 }
