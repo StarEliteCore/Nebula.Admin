@@ -97,6 +97,19 @@ namespace Destiny.Core.Tests
             Assert.Null(test);
         }
 
+        [Fact]
+
+        public async Task ExpireSeconds_Test()
+        {
+
+            await _cache.SetAsync("expireSeconds","dfdff",10);
+            var test = await _cache.GetAsync<string>("expireSeconds");
+            Assert.NotNull(test);
+            await Task.Delay(TimeSpan.FromSeconds(10));
+            var test1= await _cache.GetAsync<string>("expireSeconds");
+            Assert.Null(test1);
+        }
+
 
 
     }
