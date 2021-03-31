@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.8" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Destiny.Core.Flow.Caching\Destiny.Core.Flow.Caching.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Dtos\Destiny.Core.Flow.Dtos.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.IServices\Destiny.Core.Flow.IServices.csproj" />

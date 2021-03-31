@@ -52,6 +52,7 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
         /// <returns></returns>
         [HttpGet]
         [Description("获取表格菜单信息")]
+        [AllowAnonymous]
         public async Task<TreeModel<MenuTableOutDto>> GetTableAsync()
         {
             var result = await _menuServices.GetMenuTableAsync();
