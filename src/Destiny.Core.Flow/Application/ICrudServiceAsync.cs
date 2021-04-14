@@ -25,6 +25,11 @@ namespace Destiny.Core.Flow.Application
         Task<OperationResponse> UpdateAsync(TEntity entity);
 
 
+        /// <summary>
+        /// 异步删除sss
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         Task<OperationResponse> DeleteAsync(TPrimaryKey key);
     }
 }
