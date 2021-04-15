@@ -25,7 +25,7 @@
         /// </summary>
         /// <param name="metadata">元数据</param>
         /// <returns></returns>
-         CodeData GenerateEntityConfigurationCode(ProjectMetadata metadata);
+        CodeData GenerateEntityConfigurationCode(ProjectMetadata metadata);
 
 
         /// <summary>

@@ -26,7 +26,7 @@ namespace @(metadata.Namespace).API.Controllers
     ///@(string.IsNullOrEmpty(metadata.EntityMetadata.DisplayName) ? metadata.EntityMetadata.EntityName : metadata.EntityMetadata.DisplayName)
     ///&lt;/summary&gt;
     [Description("@metadata.EntityMetadata.DisplayName")]
-    public class @(metadata.EntityMetadata.EntityName)Controller : AuthorizeControllerBase
+    public class @(metadata.EntityMetadata.EntityName)Controller : AdminControllerBase
     {
 
         private readonly I@(metadata.EntityMetadata.EntityName)Service @_serive;
