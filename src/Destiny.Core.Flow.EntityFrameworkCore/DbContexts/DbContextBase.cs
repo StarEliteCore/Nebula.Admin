@@ -36,7 +36,6 @@ namespace Destiny.Core.Flow
             _option = serviceProvider.GetService<IObjectAccessor<AppOptionSettings>>()?.Value;
             _logger = serviceProvider.GetLogger(GetType());
             _principal = serviceProvider.GetService<IPrincipal>();
-
         }
 
         public IUnitOfWork UnitOfWork { get; set; }
@@ -70,12 +69,6 @@ namespace Destiny.Core.Flow
             _logger.LogInformation($"成功保存{count}条数据");
             return count;
         }
-
-        //private void DbContextBase_SavedChanges(object sender, SavedChangesEventArgs e)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         private void CheckAdd(EntityEntry entity)
         {
 
