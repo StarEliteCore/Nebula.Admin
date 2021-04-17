@@ -20,36 +20,19 @@ namespace Destiny.Core.Flow.Application
             _efCoreRepository = _serviceProvider.GetService<IRepository<TEntity, TPrimaryKey>>();
         }
 
-        public async Task<OperationResponse> DeleteAsync(TPrimaryKey primaryKey)
+        public Task<OperationResponse> AddAsync(TEntity entity)
         {
-            var entity = _efCoreRepository.GetById(primaryKey);
-            var result = await BeforeDeleteAsync(entity);
-            if (!result.Success)
-            {
-                return result;
-            }
-            result = await RemoveEntityAsync(new List<TEntity> { entity });
-            if (!result.Success)
-            {
-                return result;
-            }
-            result = await AfterDeleteAsync(entity);
-
-            return result;
+            throw new NotImplementedException();
         }
 
-        protected virtual Task<OperationResponse> BeforeDeleteAsync(TEntity entity)
+        public Task<OperationResponse> DeleteAsync(TPrimaryKey key)
         {
-            return Task.FromResult(OperationResponse.Ok());
+            throw new NotImplementedException();
         }
 
-        protected virtual Task<OperationResponse> AfterDeleteAsync(TEntity entity)
+        public Task<OperationResponse> UpdateAsync(TEntity entity)
         {
-            return Task.FromResult(OperationResponse.Ok());
+            throw new NotImplementedException();
         }
-
-        protected virtual IQueryable<TEntity> FindEntityQueryable => _efCoreRepository.Entities;
-
-        protected abstract Task<OperationResponse> RemoveEntityAsync(IReadOnlyList<TEntity> entityList);
     }
 }

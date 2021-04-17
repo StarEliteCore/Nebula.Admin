@@ -6,7 +6,8 @@
 
     ProjectMetadata metadata = Model;
     string lowerFirstNmae = Destiny.Core.Flow.Extensions.Extensions.LowerFirstChar(metadata.EntityMetadata.EntityName);
-    string repository = $"_{lowerFirstNmae}Repository";
+    string iRepository = $"_{lowerFirstNmae}Repository";
+    string repository = $"{lowerFirstNmae}Repository";
 }
 
 
@@ -32,16 +33,14 @@ namespace @(metadata.Namespace).Services.@(metadata.EntityMetadata.EntityName)s
     public class @(metadata.EntityMetadata.EntityName)Service : I@(metadata.EntityMetadata.EntityName)Service
     {
 
-        private readonly IServiceProvider _provider;
-        private readonly IEFCoreRepository&lt;@(metadata.EntityMetadata.EntityName), @(metadata.EntityMetadata.PrimaryKeyType)&gt; @repository;
+        private readonly IRepository&lt;@(metadata.EntityMetadata.EntityName), @(metadata.EntityMetadata.PrimaryKeyType)&gt; @iRepository;
 
         /// &lt;summary&gt;
         /// 初始化一个&lt;see cref="@(metadata.EntityMetadata.EntityName)Service"/&gt;类型的新实例
         /// &lt;/summary&gt;
-        public @(metadata.EntityMetadata.EntityName)Service(IServiceProvider provider)
+        public @(metadata.EntityMetadata.EntityName)Service(IRepository&lt;@(metadata.EntityMetadata.EntityName), @(metadata.EntityMetadata.PrimaryKeyType)&gt; @repository)
         {
-            _provider = provider;
-            @(repository) = provider.GetService&lt;IEFCoreRepository&lt;@(metadata.EntityMetadata.EntityName), @(metadata.EntityMetadata.PrimaryKeyType)&gt;&gt;();
+            @(iRepository) = @(repository);
         }
         
         /// &lt;summary&gt;
@@ -50,7 +49,7 @@ namespace @(metadata.Namespace).Services.@(metadata.EntityMetadata.EntityName)s
         /// &lt;param name="dto"&gt;添加的@(metadata.EntityMetadata.DisplayName)DTO&lt;/param&gt;
         public async Task&lt;OperationResponse&gt; CreateAsync(@(metadata.EntityMetadata.EntityName)InputDto dto)
         {
-            return await @(repository).InsertAsync(dto);
+            return await @(iRepository).InsertAsync(dto);
         }
         
         
@@ -60,7 +59,7 @@ namespace @(metadata.Namespace).Services.@(metadata.EntityMetadata.EntityName)s
         /// &lt;param name="dto"&gt;更新的@(metadata.EntityMetadata.DisplayName)DTO&lt;/param&gt;
         public async Task&lt;OperationResponse&gt; UpdateAsync(@(metadata.EntityMetadata.EntityName)InputDto dto)
         {
-            return await @(repository).UpdateAsync(dto);
+            return await @(iRepository).UpdateAsync(dto);
         }
 
         /// &lt;summary&gt;
@@ -69,7 +68,7 @@ namespace @(metadata.Namespace).Services.@(metadata.EntityMetadata.EntityName)s
         /// &lt;param name="id"&gt;要加载的@(metadata.EntityMetadata.DisplayName)主键&lt;/param&gt;
         public async Task&lt;OperationResponse&lt;@(metadata.EntityMetadata.EntityName)OutputDto&gt;&gt; LoadFormAsync(@metadata.EntityMetadata.PrimaryKeyType id)
         {
-            var dto = await @(repository).GetByIdToDtoAsync&lt;@(metadata.EntityMetadata.EntityName)OutputDto&gt;(id);
+            var dto = (await @(iRepository).GetByIdAsync(id)).MapTo&lt;@(metadata.EntityMetadata.EntityName)OutputDto&gt;();
             return new OperationResponse&lt;@(metadata.EntityMetadata.EntityName)OutputDto&gt;("加载成功",dto,OperationResponseType.Success);
         }
         
@@ -80,7 +79,7 @@ namespace @(metadata.Namespace).Services.@(metadata.EntityMetadata.EntityName)s
         public Task&lt;OperationResponse&gt; DeleteAsync(@metadata.EntityMetadata.PrimaryKeyType id)
         {
             id.NotEmpty(nameof(id));
-            return @(repository).DeleteAsync(id);
+            return @(iRepository).DeleteAsync(id);
         }
         
         /// &lt;summary&gt;
@@ -89,7 +88,7 @@ namespace @(metadata.Namespace).Services.@(metadata.EntityMetadata.EntityName)s
         /// &lt;param name="request"&gt;分页请求数据&lt;/param&gt;
         public Task&lt;IPagedResult&lt;@(metadata.EntityMetadata.EntityName)PageListDto&gt;&gt; GetPageAsync(PageRequest request)
         {
-            return @(repository).Entities.ToPageAsync&lt; @(metadata.EntityMetadata.EntityName),@(metadata.EntityMetadata.EntityName)PageListDto&gt;(request);
+            return @(iRepository).Entities.ToPageAsync&lt;@(metadata.EntityMetadata.EntityName),@(metadata.EntityMetadata.EntityName)PageListDto&gt;(request);
         }
     }
 }

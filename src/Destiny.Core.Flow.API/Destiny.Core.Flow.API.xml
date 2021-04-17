@@ -105,6 +105,41 @@
             <param name="Id"></param>
             <returns></returns>
         </member>
+        <member name="T:Destiny.Core.Flow.API.Controllers.DocumentTypeController">
+            <summary>
+            文档类型
+            </summary>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentTypeController.CreateAsync(Destiny.Core.Flow.Dtos.DocumentTypeInputDto)">
+            <summary>
+            异步创建文档类型
+            </summary>
+            <param name="dto">添加的文档类型DTO</param>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentTypeController.UpdateAsync(Destiny.Core.Flow.Dtos.DocumentTypeInputDto)">
+            <summary>
+            异步更新文档类型
+            </summary>
+            <param name="dto">更新的文档类型DTO</param>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentTypeController.LoadFormAsync(System.Guid)">
+            <summary>
+            异步加载表单文档类型
+            </summary>
+            <param name="id">要加载的文档类型主键</param>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentTypeController.DeleteAsync(System.Guid)">
+            <summary>
+            异步删除文档类型
+            </summary>
+            <param name="id">要删除的文档类型主键</param>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentTypeController.GetPageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+            <summary>
+            异步得到文档类型分页数据
+            </summary>
+            <param name="request">分页请求数据</param>
+        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.FunctionController">
             <summary>
             功能管理

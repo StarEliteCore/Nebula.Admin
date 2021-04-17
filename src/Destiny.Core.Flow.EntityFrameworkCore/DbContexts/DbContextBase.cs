@@ -36,7 +36,6 @@ namespace Destiny.Core.Flow
             _option = serviceProvider.GetService<IObjectAccessor<AppOptionSettings>>()?.Value;
             _logger = serviceProvider.GetLogger(GetType());
             _principal = serviceProvider.GetService<IPrincipal>();
-
         }
 
         public IUnitOfWork UnitOfWork { get; set; }
@@ -65,12 +64,11 @@ namespace Destiny.Core.Flow
         {
             ApplyConcepts();
             var result = OnBeforeSaveChanges();
+            //SavedChanges += DbContextBase_SavedChanges;//EFCore 5.X自带事件触发
             int count = await base.SaveChangesAsync(cancellationToken);
             _logger.LogInformation($"成功保存{count}条数据");
             return count;
         }
-
-
         private void CheckAdd(EntityEntry entity)
         {
 
