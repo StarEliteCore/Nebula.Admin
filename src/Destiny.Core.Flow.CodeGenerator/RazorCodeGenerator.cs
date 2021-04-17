@@ -143,7 +143,7 @@ namespace Destiny.Core.Flow.CodeGenerator
             var code = new CodeData()
             {
                 SourceCode = template,
-                FileName = $"Dtos/{metadata.EntityMetadata.EntityName}InputDto.cs"
+                FileName = $"Dtos/{metadata.EntityMetadata.EntityName}s/{metadata.EntityMetadata.EntityName}InputDto.cs"
             };
             return code;
         }
@@ -160,7 +160,7 @@ namespace Destiny.Core.Flow.CodeGenerator
             var code = new CodeData()
             {
                 SourceCode = template,
-                FileName = $"Dtos/{metadata.EntityMetadata.EntityName}OutputDto.cs"
+                FileName = $"Dtos/{metadata.EntityMetadata.EntityName}s/{metadata.EntityMetadata.EntityName}OutputDto.cs"
             };
             return code;
         }
@@ -177,7 +177,7 @@ namespace Destiny.Core.Flow.CodeGenerator
             var code = new CodeData()
             {
                 SourceCode = template,
-                FileName = $"Dtos/{metadata.EntityMetadata.EntityName}PageListDto.cs"
+                FileName = $"Dtos/{metadata.EntityMetadata.EntityName}s/{metadata.EntityMetadata.EntityName}PageListDto.cs"
             };
             return code;
         }
@@ -195,7 +195,7 @@ namespace Destiny.Core.Flow.CodeGenerator
             var code = new CodeData()
             {
                 SourceCode = template,
-                FileName = $"Services/I{metadata.EntityMetadata.EntityName}Service.cs"
+                FileName = $"IService/{metadata.EntityMetadata.EntityName}s/I{metadata.EntityMetadata.EntityName}Service.cs"
             };
             return code;
         }
@@ -207,7 +207,7 @@ namespace Destiny.Core.Flow.CodeGenerator
             var code = new CodeData()
             {
                 SourceCode = template,
-                FileName = $"Services/{metadata.EntityMetadata.EntityName}Service.cs"
+                FileName = $"Service/{metadata.EntityMetadata.EntityName}s/{metadata.EntityMetadata.EntityName}Service.cs"
             };
             return code;
         }

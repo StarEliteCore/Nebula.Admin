@@ -33,7 +33,7 @@ namespace @(metadata.Namespace).Services.@(metadata.EntityMetadata.EntityName)s
     {
 
         private readonly IServiceProvider _provider;
-        private readonly IEFCoreRepository&lt;@(metadata.EntityMetadata.EntityName), @(metadata.EntityMetadata.PrimaryKeyType)&gt; @repository;
+        private readonly IRepository&lt;@(metadata.EntityMetadata.EntityName), @(metadata.EntityMetadata.PrimaryKeyType)&gt; @repository;
 
         /// &lt;summary&gt;
         /// 初始化一个&lt;see cref="@(metadata.EntityMetadata.EntityName)Service"/&gt;类型的新实例
@@ -69,7 +69,7 @@ namespace @(metadata.Namespace).Services.@(metadata.EntityMetadata.EntityName)s
         /// &lt;param name="id"&gt;要加载的@(metadata.EntityMetadata.DisplayName)主键&lt;/param&gt;
         public async Task&lt;OperationResponse&lt;@(metadata.EntityMetadata.EntityName)OutputDto&gt;&gt; LoadFormAsync(@metadata.EntityMetadata.PrimaryKeyType id)
         {
-            var dto = await @(repository).GetByIdToDtoAsync&lt;@(metadata.EntityMetadata.EntityName)OutputDto&gt;(id);
+            var dto = (await @(repository).GetByIdAsync&lt;@(metadata.EntityMetadata.EntityName)OutputDto&gt;(id)).MapTo&lt;@(metadata.EntityMetadata.EntityName)OutputDto&gt;();
             return new OperationResponse&lt;@(metadata.EntityMetadata.EntityName)OutputDto&gt;("加载成功",dto,OperationResponseType.Success);
         }
         
@@ -89,7 +89,7 @@ namespace @(metadata.Namespace).Services.@(metadata.EntityMetadata.EntityName)s
         /// &lt;param name="request"&gt;分页请求数据&lt;/param&gt;
         public Task&lt;IPagedResult&lt;@(metadata.EntityMetadata.EntityName)PageListDto&gt;&gt; GetPageAsync(PageRequest request)
         {
-            return @(repository).Entities.ToPageAsync&lt; @(metadata.EntityMetadata.EntityName),@(metadata.EntityMetadata.EntityName)PageListDto&gt;(request);
+            return @(repository).Entities.ToPageAsync&lt;@(metadata.EntityMetadata.EntityName),@(metadata.EntityMetadata.EntityName)PageListDto&gt;(request);
         }
     }
 }
