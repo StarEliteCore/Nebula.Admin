@@ -29,7 +29,7 @@ namespace @(metadata.Namespace).EntityConfigurations
         @foreach (var property in metadata.EntityMetadata.Properties)
         {
             <text>
-            builder.Property(x => x.@(property.PropertyName)).HasComment("@property.DisplayName").IsRequired(@(property.IsNullable.ToString().ToLower()));</text>
+            builder.Property(x => x.@(property.PropertyName)).HasComment("@property.DisplayName").IsRequired(@((property.IsNullable==true?false:true).ToString().ToLower()));</text>
         }
 
             builder.ToTable("@metadata.EntityMetadata.EntityName");

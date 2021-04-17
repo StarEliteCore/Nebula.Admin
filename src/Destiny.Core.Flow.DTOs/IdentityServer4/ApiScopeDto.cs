@@ -8,7 +8,7 @@ namespace Destiny.Core.Flow.Dtos.IdentityServer4
 {
     public class ApiScopeDto :InputDto<Guid>
     {
-        public Guid Id { get; set; }
+  
 
 
       
