@@ -2,6 +2,7 @@
 using Destiny.Core.Flow.Exceptions;
 using Destiny.Core.Flow.Extensions;
 using Destiny.Core.Flow.Options;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Linq;
 using Destiny.Core.Flow.Entity;
 using System.IO;
+using Destiny.Core.Flow.Interceptor;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -79,7 +81,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
                 builder = drivenProvider.Builder(builder, connectionString, optionsBuilder1);
                 optionsAction?.Invoke(provider,builder);
-
+                builder.AddInterceptors(new AuditInterceptor(provider));
             });
             return services;
 
