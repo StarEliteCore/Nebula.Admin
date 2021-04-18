@@ -50,6 +50,13 @@ namespace Destiny.Core.Flow.IServices.DocumentTypes
         /// <param name="request">分页请求数据</param>
         Task<IPagedResult<DocumentTypePageListDto>> GetPageAsync(PageRequest request);
 
+        /// <summary>
+        /// 异步创建或者更新
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        Task<OperationResponse> CreateOrUpdateAsync(DocumentTypeInputDto dto);
+
     }
 
 }

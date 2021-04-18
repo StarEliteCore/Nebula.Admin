@@ -15,7 +15,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Destiny.Core.Flow.Entities;
 using Destiny.Core.Flow.IServices.DocumentTypes;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using Destiny.Core.Flow.Exceptions;
+
 
 namespace Destiny.Core.Flow.Services.DocumentTypes
 {
@@ -34,32 +35,30 @@ namespace Destiny.Core.Flow.Services.DocumentTypes
         {
             _documentTypeRepository = documentTypeRepository;
         }
-        
+
         /// <summary>
         /// 异步创建文档类型
         /// </summary>
         /// <param name="dto">添加的文档类型DTO</param>
         public async Task<OperationResponse> CreateAsync(DocumentTypeInputDto dto)
         {
-            return await _documentTypeRepository.InsertAsync(dto,async (d)=> {
+            return await _documentTypeRepository.InsertAsync(dto, async (d) => {
+                MessageBox.ShowIf($"创建失败，此{dto.Name}名字已存在！！",await _documentTypeRepository.ExistAsync(o => o.Name == d.Name));
 
-                var isExist = await _documentTypeRepository.Entities.Where(o => o.Name == d.Name).AnyAsync();
-                if (isExist)
-                {
-                    OperationResponse.Error("创建失败，该名字已存在！！");
-                }
-            
             });
         }
-        
-        
+
+
         /// <summary>
         /// 异步更新文档类型
         /// </summary>
         /// <param name="dto">更新的文档类型DTO</param>
         public async Task<OperationResponse> UpdateAsync(DocumentTypeInputDto dto)
         {
-            return await _documentTypeRepository.UpdateAsync(dto);
+            return await _documentTypeRepository.UpdateAsync(dto, async (d, e) => {
+                MessageBox.ShowIf($"更新失败，此{dto.Name}名字已存在！！", await _documentTypeRepository.ExistAsync(ee => ee.Id != d.Id && ee.Name == ee.Name));
+
+            });
         }
 
         /// <summary>
@@ -69,26 +68,50 @@ namespace Destiny.Core.Flow.Services.DocumentTypes
         public async Task<OperationResponse<DocumentTypeOutputDto>> LoadFormAsync(Guid id)
         {
             var dto = (await _documentTypeRepository.GetByIdAsync(id)).MapTo<DocumentTypeOutputDto>();
-            return new OperationResponse<DocumentTypeOutputDto>("加载成功",dto,OperationResponseType.Success);
+            return new OperationResponse<DocumentTypeOutputDto>("加载成功", dto, OperationResponseType.Success);
         }
-        
+
         /// <summary>
         /// 异步删除文档类型
         /// </summary>
         /// <param name="id">要删除的文档类型主键</param>
-        public Task<OperationResponse> DeleteAsync(Guid id)
+        public async Task<OperationResponse> DeleteAsync(Guid id)
         {
             id.NotEmpty(nameof(id));
-            return _documentTypeRepository.DeleteAsync(id);
+
+
+            return await _documentTypeRepository.DeleteAsync(id, async e=> {
+                if (!e.ParentId.IsNullOrEmpty())
+                {
+
+                    MessageBox.ShowIf("已存在下一级，无法删除，请先把下一级删除后，再删除！！！", await _documentTypeRepository.ExistAsync(e => e.ParentId == id));
+                }
+            });
         }
-        
+
         /// <summary>
         /// 异步得到文档类型分页数据
         /// </summary>
         /// <param name="request">分页请求数据</param>
         public Task<IPagedResult<DocumentTypePageListDto>> GetPageAsync(PageRequest request)
         {
-            return _documentTypeRepository.Entities.ToPageAsync<DocumentType,DocumentTypePageListDto>(request);
+            return _documentTypeRepository.Entities.ToPageAsync<DocumentType, DocumentTypePageListDto>(request);
         }
+
+        /// <summary>
+        /// 异步创建或者更新
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        public Task<OperationResponse> CreateOrUpdateAsync(DocumentTypeInputDto dto)
+        {
+
+            if (dto.Id == Guid.Empty)
+            {
+                return this.CreateAsync(dto);
+            }
+            return this.UpdateAsync(dto);
+        }
+           
     }
 }

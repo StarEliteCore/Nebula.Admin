@@ -119,6 +119,19 @@ namespace Destiny.Core.Flow
             return this._dbSet.FirstOrDefaultAsync(predicate);
         }
 
+
+
+        /// <summary>
+        /// 异步判断是否存
+        /// </summary>
+        /// <param name="predicate">要判断的条件</param>
+        /// <returns>返回true/false,若存在true,则false</returns>
+        public Task<bool> ExistAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            predicate.NotNull(nameof(predicate));
+            return this.Entities.AnyAsync(predicate);
+        }
+
         #endregion 查询
 
         #region 添加
@@ -348,9 +361,10 @@ namespace Destiny.Core.Flow
         /// <summary>
         /// 删除
         /// </summary>
-        /// <param name="primaryKey"></param>
+        /// <param name="primaryKey">主键</param>
+        /// <param name="checkFunc">删除合法性检查委托</param>
         /// <returns></returns>
-        public virtual async Task<OperationResponse> DeleteAsync(TPrimaryKey primaryKey)
+        public virtual async Task<OperationResponse> DeleteAsync(TPrimaryKey primaryKey,Func<TEntity, Task> checkFunc = null)
         {
             TEntity entity = await this.GetByIdAsync(primaryKey);
 
@@ -358,9 +372,25 @@ namespace Destiny.Core.Flow
             {
                 return new OperationResponse($"该{primaryKey}键的数据不存在", OperationResponseType.QueryNull);
             }
-            CheckDelete(entity);
-            int count = await _dbContext.SaveChangesAsync();
-            return new OperationResponse(count > 0 ? "删除成功" : "操作没有引发任何变化", count > 0 ? OperationResponseType.Success : OperationResponseType.NoChanged);
+
+            try
+            {
+                if (checkFunc.IsNotNull())
+                {
+
+                    await checkFunc(entity);
+                }
+                CheckDelete(entity);
+
+                int count = await _dbContext.SaveChangesAsync();
+                return new OperationResponse(count > 0 ? "删除成功" : "操作没有引发任何变化", count > 0 ? OperationResponseType.Success : OperationResponseType.NoChanged);
+            }
+            catch (AppException app)
+            {
+                return OperationResponse.Error(app.Message);
+            }
+         
+           
         }
 
 
