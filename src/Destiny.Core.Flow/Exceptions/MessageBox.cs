@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.Exceptions
 {
@@ -24,5 +25,6 @@ namespace Destiny.Core.Flow.Exceptions
                 throw new AppException(message);
             }
         }
+
     }
 }

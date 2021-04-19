@@ -35,5 +35,28 @@ namespace Destiny.Core.Flow.Extensions
 
             return new Guid(guidArray);
         }
+
+        /// <summary>
+        /// 判断是否为空或NULL
+        /// </summary>
+        /// <param name="guid">要判断GUID</param>
+        /// <returns>返回true/false</returns>
+        public static bool IsNullOrEmpty(this Guid guid)
+        {
+            return guid == Guid.Empty || guid == null;
+        }
+
+
+        /// <summary>
+        /// 判断是否为空或NULL
+        /// </summary>
+        /// <param name="guid">要判断GUID</param>
+        /// <returns>返回true/false</returns>
+        public static bool IsNullOrEmpty(this Guid? guid)
+        {
+
+    
+            return !guid.HasValue || guid.Value == Guid.Empty;
+        }
     }
 }

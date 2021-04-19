@@ -74,6 +74,13 @@ namespace Destiny.Core.Flow
         /// <returns>返回查询后实体</returns>
         Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate);
 
+        /// <summary>
+        /// 异步判断是否存
+        /// </summary>
+        /// <param name="predicate">要判断的条件</param>
+        /// <returns>返回true/false,若存在true,则false</returns>
+        Task<bool> ExistAsync(Expression<Func<TEntity, bool>> predicate);
+
         #endregion
 
 
@@ -154,8 +161,9 @@ namespace Destiny.Core.Flow
         /// 删除
         /// </summary>
         /// <param name="primaryKey"></param>
+        /// <param name="checkFunc">删除合法性检查委托</param>
         /// <returns></returns>
-        Task<OperationResponse> DeleteAsync(TPrimaryKey primaryKey);
+        Task<OperationResponse> DeleteAsync(TPrimaryKey primaryKey, Func<TEntity, Task> checkFunc = null);
 
 
 
