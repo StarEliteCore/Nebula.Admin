@@ -4,6 +4,23 @@ namespace Destiny.Core.Flow.Filter
 {
     public class FilterCondition
     {
+
+        public FilterCondition()
+        { 
+        
+        }
+
+        public FilterCondition(string field, object value) : this(field, value, FilterOperator.Equal)
+        { 
+        
+        }
+        public FilterCondition(string field, object value, FilterOperator @operator)
+        {
+            this.Field = field;
+            this.Value = value;
+            this.Operator = @operator;
+        }
+
         /// <summary>
         /// 字段名称
         /// </summary>
