@@ -14,12 +14,12 @@ namespace Destiny.Core.Flow.Extensions
         public static bool IsFile(this string fileName,string fileExtension)
         {
 
-            if (Path.GetExtension(fileExtension).ToLower() != fileExtension) //txt文件
+            if (Path.GetExtension(fileName).ToLower() == fileExtension) //txt文件
             {
 
-                return false;
+                return true;
             }
-            return true;
+            return false;
 
         }
     }

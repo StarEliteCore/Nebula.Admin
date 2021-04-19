@@ -66,6 +66,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="appsettings.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Destiny.Core.Flow.API.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

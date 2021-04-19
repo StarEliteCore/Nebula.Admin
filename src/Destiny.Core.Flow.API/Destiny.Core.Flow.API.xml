@@ -609,5 +609,11 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.UpLoadFileController.Upload(Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Destiny.Core.Flow.Filter.PageRequest)">
+            <summary>
+            文件分片上传接口
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>

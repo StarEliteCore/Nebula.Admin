@@ -4,6 +4,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_PublishTargetUrl>E:\sirengithub\Destiny.Core.Flow\src\Destiny.Core.Flow.API\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
+    <_PublishTargetUrl>F:\Github\Destiny.Core.Flow\src\Destiny.Core.Flow.API\bin\Release\net5.0\publish\</_PublishTargetUrl>
+    <History>True|2021-04-18T14:35:28.3562042Z;True|2021-04-18T22:13:33.7933765+08:00;True|2021-04-18T21:41:02.2325343+08:00;True|2021-04-18T21:40:39.9242295+08:00;False|2021-04-18T21:40:00.6560711+08:00;True|2021-04-18T21:39:44.5612093+08:00;True|2021-04-18T21:37:41.3596322+08:00;</History>
   </PropertyGroup>
 </Project>
