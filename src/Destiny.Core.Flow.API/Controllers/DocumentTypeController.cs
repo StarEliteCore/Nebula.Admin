@@ -28,26 +28,19 @@ namespace Destiny.Core.Flow.API.Controllers
 
 
         /// <summary>
-        /// 异步创建文档类型
+        /// 异步创建或更新文档类型
         /// </summary>
-        /// <param name="dto">添加的文档类型DTO</param>
+        /// <param name="dto">创建或更新的文档类型DTO</param>
         [HttpPost]
-        [Description("异步创建文档类型")]
-        public async Task<AjaxResult> CreateAsync([FromBody] DocumentTypeInputDto dto)
+        [Description("异步创建或更新文档类型")]
+        public async Task<AjaxResult> CreateOrUpdateAsync([FromBody] DocumentTypeInputDto dto)
         {
-            return (await _documentTypeService.CreateAsync(dto)).ToAjaxResult();
+
+            return (await _documentTypeService.CreateOrUpdateAsync(dto)).ToAjaxResult();
         }
 
-        /// <summary>
-        /// 异步更新文档类型
-        /// </summary>
-        /// <param name="dto">更新的文档类型DTO</param>
-        [HttpPost]
-        [Description("异步更新文档类型")]
-        public async Task<AjaxResult> UpdateAsync([FromBody] DocumentTypeInputDto dto)
-        {
-            return (await _documentTypeService.UpdateAsync(dto)).ToAjaxResult();
-        }
+      
+   
         
         /// <summary>
         /// 异步加载表单文档类型

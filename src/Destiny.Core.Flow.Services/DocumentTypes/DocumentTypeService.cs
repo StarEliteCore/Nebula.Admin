@@ -95,9 +95,10 @@ namespace Destiny.Core.Flow.Services.DocumentTypes
         /// <param name="request">分页请求数据</param>
         public Task<IPagedResult<DocumentTypePageListDto>> GetPageAsync(PageRequest request)
         {
-            request.Filter.AddCondition("1","").AddCondition().AddCondition().AddCondition().AddCondition();
+
             return _documentTypeRepository.Entities.ToPageAsync<DocumentType, DocumentTypePageListDto>(request);
         }
+
 
         /// <summary>
         /// 异步创建或者更新
