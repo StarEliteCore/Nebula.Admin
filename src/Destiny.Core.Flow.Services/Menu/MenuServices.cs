@@ -282,7 +282,7 @@ namespace Destiny.Core.Flow.Services.Menu
 
             using (await _mutex.LockAsync())
             {
-                var key = "Vue_Dynamic_Router";
+                var key = $"Vue_DynamicRouter_{userId}";
 
 
                 var treeList = await _cache.GetAsync<IReadOnlyList<VueDynamicRouterTreeOutDto>>(key); //得到缓存
