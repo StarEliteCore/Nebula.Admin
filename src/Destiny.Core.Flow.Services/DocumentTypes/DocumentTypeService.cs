@@ -16,7 +16,9 @@ using Destiny.Core.Flow.Entities;
 using Destiny.Core.Flow.IServices.DocumentTypes;
 using System.Linq;
 using Destiny.Core.Flow.Exceptions;
-
+using Destiny.Core.Flow.Ui.Abstracts;
+using Destiny.Core.Flow.Dtos.DocumentTypes;
+using System.Collections.Generic;
 
 namespace Destiny.Core.Flow.Services.DocumentTypes
 {
@@ -114,6 +116,29 @@ namespace Destiny.Core.Flow.Services.DocumentTypes
             }
             return this.UpdateAsync(dto);
         }
-           
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public async Task<ITreeResult<DocumentTreeOutDto>> GetTreeDataAsync(PageRequest request)
+        {
+            return await _documentTypeRepository.Entities.ToTreeResultAsync<DocumentType, DocumentTreeOutDto>((p, c) =>
+            {
+                return c.ParentId == null || c.ParentId == Guid.Empty;
+            },
+              (p, c) =>
+              {
+                  return p.Id == c.ParentId;
+              },
+              (p, children) =>
+              {
+                  if (p.Children == null)
+                      p.Children = new List<DocumentTreeOutDto>();
+                  p.Children.AddRange(children);
+              });
+        }
+
     }
 }

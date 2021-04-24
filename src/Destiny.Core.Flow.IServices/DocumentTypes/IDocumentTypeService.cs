@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.Ui;
-
-
+using Destiny.Core.Flow.Ui.Abstracts;
+using Destiny.Core.Flow.Dtos.DocumentTypes;
 
 namespace Destiny.Core.Flow.IServices.DocumentTypes
 {
@@ -56,6 +56,14 @@ namespace Destiny.Core.Flow.IServices.DocumentTypes
         /// <param name="dto"></param>
         /// <returns></returns>
         Task<OperationResponse> CreateOrUpdateAsync(DocumentTypeInputDto dto);
+
+        /// <summary>
+        /// 异步得到树数据
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+
+        Task<ITreeResult<DocumentTreeOutDto>> GetTreeDataAsync(PageRequest request);
 
     }
 

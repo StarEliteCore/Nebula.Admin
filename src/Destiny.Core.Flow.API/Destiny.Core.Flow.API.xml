@@ -169,6 +169,12 @@
             </summary>
             <param name="request">分页请求数据</param>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentTypeController.GetDocumentTreeTreeDataAsync">
+            <summary>
+            异步得到文档类型树数据
+            </summary>
+            <param name="request">请求数据</param>
+        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.FunctionController">
             <summary>
             功能管理

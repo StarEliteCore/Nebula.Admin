@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.IServices.DocumentTypes;
+using Destiny.Core.Flow.Dtos.DocumentTypes;
+
 namespace Destiny.Core.Flow.API.Controllers
 {
 
@@ -74,6 +76,18 @@ namespace Destiny.Core.Flow.API.Controllers
         public async Task<PageList<DocumentTypePageListDto>> GetPageAsync(PageRequest request)
         {
             return (await _documentTypeService.GetPageAsync(request)).ToPageList();
+        }
+
+        /// <summary>
+        /// 异步得到文档类型树数据
+        /// </summary>
+        /// <param name="request">请求数据</param>
+        [HttpPost]
+        [Description("异步得到文档类型分页数据")]
+        public async Task<TreeModel<DocumentTreeOutDto>> GetDocumentTreeTreeDataAsync()
+        {
+            return (await _documentTypeService.GetTreeDataAsync(null)).ToTreeModel();
+
         }
 
     }
