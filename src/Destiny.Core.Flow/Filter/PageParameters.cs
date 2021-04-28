@@ -5,7 +5,7 @@ namespace Destiny.Core.Flow.Filter
     /// <summary>
     /// 分页所需的参数
     /// </summary>
-    public class PageParameters : IPagedRequest, IFilteredPagedRequest
+    public class PageParameters : IPagedRequest, IFilteredPagedRequest, IOrderRequest
     {
 
 

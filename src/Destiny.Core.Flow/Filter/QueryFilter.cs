@@ -7,6 +7,9 @@ using System.Linq.Expressions;
 
 namespace Destiny.Core.Flow.Filter
 {
+    /// <summary>
+    /// 查询过滤器
+    /// </summary>
     public class QueryFilter
     {
         public QueryFilter()

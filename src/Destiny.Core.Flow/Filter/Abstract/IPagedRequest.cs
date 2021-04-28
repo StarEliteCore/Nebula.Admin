@@ -3,7 +3,7 @@
     /// <summary>
     /// 分页请求口
     /// </summary>
-    public interface IPagedRequest
+    public interface IPagedRequest: IOrderRequest
     {
 
         /// <summary>
@@ -16,9 +16,6 @@
         /// </summary>
         int PageSize { get; set; }
 
-        /// <summary>
-        /// 排序条件集合
-        /// </summary>
-        OrderCondition[] OrderConditions { get; set; }
+    
     }
 }
