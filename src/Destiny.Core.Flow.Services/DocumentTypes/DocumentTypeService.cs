@@ -58,7 +58,7 @@ namespace Destiny.Core.Flow.Services.DocumentTypes
         public async Task<OperationResponse> UpdateAsync(DocumentTypeInputDto dto)
         {
             return await _documentTypeRepository.UpdateAsync(dto, async (d, e) => {
-                MessageBox.ShowIf($"更新失败，此{dto.Name}名字已存在！！", await _documentTypeRepository.ExistAsync(ee => ee.Id != d.Id && ee.Name == ee.Name));
+                MessageBox.ShowIf($"更新失败，此{dto.Name}名字已存在！！", await _documentTypeRepository.ExistAsync(ee => ee.Id != d.Id && ee.Name == d.Name));
 
             });
         }
@@ -83,11 +83,7 @@ namespace Destiny.Core.Flow.Services.DocumentTypes
 
 
             return await _documentTypeRepository.DeleteAsync(id, async e=> {
-                if (!e.ParentId.IsNullOrEmpty())
-                {
-
-                    MessageBox.ShowIf("已存在下一级，无法删除，请先把下一级删除后，再删除！！！", await _documentTypeRepository.ExistAsync(e => e.ParentId == id));
-                }
+                MessageBox.ShowIf("已存在下一级，无法删除，请先把下一级删除后，再删除！！！", await _documentTypeRepository.ExistAsync(e => e.ParentId == id));
             });
         }
 
@@ -124,7 +120,7 @@ namespace Destiny.Core.Flow.Services.DocumentTypes
         /// <returns></returns>
         public async Task<ITreeResult<DocumentTreeOutDto>> GetTreeDataAsync(PageRequest request)
         {
-            return await _documentTypeRepository.Entities.ToTreeResultAsync<DocumentType, DocumentTreeOutDto>((p, c) =>
+            return await _documentTypeRepository.Entities.OrderBy(o=>o.Sort).ToTreeResultAsync<DocumentType, DocumentTreeOutDto>((p, c) =>
             {
                 return c.ParentId == null || c.ParentId == Guid.Empty;
             },
