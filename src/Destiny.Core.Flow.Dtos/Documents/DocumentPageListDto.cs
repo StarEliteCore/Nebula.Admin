@@ -22,10 +22,22 @@ namespace Destiny.Core.Flow.Dtos
         /// 获取或设置 文档类型ID
         /// </summary>
         public Guid DocumentTypeId { get; set; }
+
+        /// <summary>
+        /// 获取或设置 文档类型名字
+        /// </summary>
+        public string DocumentTypeName { get; set; }
+
         /// <summary>
         /// 获取或设置 标题
         /// </summary>
         public string Title { get; set; }
+
+        /// <summary>
+        /// 获取或设置创建时间
+        /// </summary>
+        [DisplayName("创建时间")]
+        public DateTime CreatedTime { get; set; }
 
     }
 

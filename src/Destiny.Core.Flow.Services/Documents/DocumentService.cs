@@ -17,6 +17,9 @@ using Destiny.Core.Flow.IServices.Documents;
 using Destiny.Core.Flow.Ui.Abstracts;
 using Destiny.Core.Flow.Dtos.DocumentTypes;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using Destiny.Core.Flow.ExpressionUtil;
+using System.Linq;
 
 namespace Destiny.Core.Flow.Services.Documents
 {
@@ -27,13 +30,15 @@ namespace Destiny.Core.Flow.Services.Documents
     {
 
         private readonly IRepository<Document, Guid> _documentRepository;
+        private readonly IRepository<DocumentType, Guid> _documentTypeRepository;
 
         /// <summary>
         /// 初始化一个<see cref="DocumentService"/>类型的新实例
         /// </summary>
-        public DocumentService(IRepository<Document, Guid> documentRepository)
+        public DocumentService(IRepository<Document, Guid> documentRepository, IRepository<DocumentType, Guid> documentTypeRepository)
         {
             _documentRepository = documentRepository;
+            _documentTypeRepository = documentTypeRepository;
         }
         
         /// <summary>
@@ -79,9 +84,20 @@ namespace Destiny.Core.Flow.Services.Documents
         /// 异步得到文档分页数据
         /// </summary>
         /// <param name="request">分页请求数据</param>
-        public Task<IPagedResult<DocumentPageListDto>> GetPageAsync(PageRequest request)
+        public async Task<IPagedResult<DocumentPageListDto>> GetPageAsync(PageRequest request)
         {
-            return _documentRepository.Entities.ToPageAsync<Document,DocumentPageListDto>(request);
+            var filter=  FilterBuilder.GetExpression<Document>(request.Filter);  //这前要修改每次都这样，好麻烦。。
+            var documents= await _documentRepository.Entities.ToPageAsync(filter,request,o=>new DocumentPageListDto() { 
+            
+                Id=o.Id,
+                Title=o.Title,
+                Content=o.Content,
+                CreatedTime=o.CreatedTime,
+                DocumentTypeId=o.DocumentTypeId,
+                DocumentTypeName= _documentTypeRepository.Entities.Where(type=>type.Id==o.DocumentTypeId).Select(type=>type.Name).FirstOrDefault()
+            });
+            return documents;
+           
         }
 
        
