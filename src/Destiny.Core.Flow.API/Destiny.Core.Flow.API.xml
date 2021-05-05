@@ -140,6 +140,12 @@
             </summary>
             <param name="request">分页请求数据</param>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentController.CreateOrUpdateAsync(Destiny.Core.Flow.Dtos.DocumentInputDto)">
+            <summary>
+            异步添加与更新文档
+            </summary>
+            <param name="dto">要操作的DTO</param>
+        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.DocumentTypeController">
             <summary>
             文档类型

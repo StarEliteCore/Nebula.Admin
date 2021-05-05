@@ -20,10 +20,10 @@ namespace Destiny.Core.Flow.API.Controllers
     {
 
         private readonly IDocumentService _documentService;
-        
+
         public DocumentController(IDocumentService documentService)
         {
-            _documentService=documentService;
+            _documentService = documentService;
         }
 
 
@@ -48,19 +48,19 @@ namespace Destiny.Core.Flow.API.Controllers
         {
             return (await _documentService.UpdateAsync(dto)).ToAjaxResult();
         }
-        
+
         /// <summary>
         /// 异步加载表单文档
         /// </summary>
         /// <param name="id">要加载的文档主键</param>
         [HttpGet]
         [Description("异步加载表单文档")]
-        public async Task<AjaxResult>  LoadFormAsync(Guid id)
+        public async Task<AjaxResult> LoadFormAsync(Guid id)
         {
             return (await _documentService.LoadFormAsync(id)).ToAjaxResult();
         }
-        
-        
+
+
         /// <summary>
         /// 异步删除文档
         /// </summary>
@@ -71,7 +71,7 @@ namespace Destiny.Core.Flow.API.Controllers
         {
             return (await _documentService.DeleteAsync(id)).ToAjaxResult();
         }
-        
+
         /// <summary>
         /// 异步得到文档分页数据
         /// </summary>
@@ -83,5 +83,22 @@ namespace Destiny.Core.Flow.API.Controllers
             return (await _documentService.GetPageAsync(request)).ToPageList();
         }
 
+
+        /// <summary>
+        /// 异步添加与更新文档
+        /// </summary>
+        /// <param name="dto">要操作的DTO</param>
+        [HttpPost]
+        [Description("异步添加与更新文档")]
+        public Task<AjaxResult> CreateOrUpdateAsync([FromBody] DocumentInputDto dto)
+        {
+            if (dto.Id == Guid.Empty)
+            {
+
+                return CreateAsync(dto);
+            }
+            return UpdateAsync(dto);
+
+        }
     }
 }
