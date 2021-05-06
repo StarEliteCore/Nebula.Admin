@@ -20,6 +20,8 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Destiny.Core.Flow.ExpressionUtil;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
+using Destiny.Core.Flow.Model.Entities.Identity;
 
 namespace Destiny.Core.Flow.Services.Documents
 {
@@ -31,14 +33,16 @@ namespace Destiny.Core.Flow.Services.Documents
 
         private readonly IRepository<Document, Guid> _documentRepository;
         private readonly IRepository<DocumentType, Guid> _documentTypeRepository;
+        private readonly UserManager<User> _userManager = null;
 
         /// <summary>
         /// 初始化一个<see cref="DocumentService"/>类型的新实例
         /// </summary>
-        public DocumentService(IRepository<Document, Guid> documentRepository, IRepository<DocumentType, Guid> documentTypeRepository)
+        public DocumentService(IRepository<Document, Guid> documentRepository, IRepository<DocumentType, Guid> documentTypeRepository, UserManager<User> userManager)
         {
             _documentRepository = documentRepository;
             _documentTypeRepository = documentTypeRepository;
+            _userManager = userManager;
         }
         
         /// <summary>
@@ -86,7 +90,7 @@ namespace Destiny.Core.Flow.Services.Documents
         /// <param name="request">分页请求数据</param>
         public async Task<IPagedResult<DocumentPageListDto>> GetPageAsync(PageRequest request)
         {
-            var filter=  FilterBuilder.GetExpression<Document>(request.Filter);  //这前要修改每次都这样，好麻烦。。
+            var filter=  FilterBuilder.GetExpression<Document>(request.Filter);  //这里可以分到分页里做
             var documents= await _documentRepository.Entities.ToPageAsync(filter,request,o=>new DocumentPageListDto() { 
             
                 Id=o.Id,
@@ -94,7 +98,10 @@ namespace Destiny.Core.Flow.Services.Documents
                 Content=o.Content,
                 CreatedTime=o.CreatedTime,
                 DocumentTypeId=o.DocumentTypeId,
-                DocumentTypeName= _documentTypeRepository.Entities.Where(type=>type.Id==o.DocumentTypeId).Select(type=>type.Name).FirstOrDefault()
+                
+                DocumentTypeName= _documentTypeRepository.Entities.Where(type=>type.Id==o.DocumentTypeId).Select(type=>type.Name).FirstOrDefault(),
+                NickName=_userManager.Users.Where(u=>u.Id==o.CreatorUserId).Select(u=>u.NickName).FirstOrDefault()
+                
             });
             return documents;
            
