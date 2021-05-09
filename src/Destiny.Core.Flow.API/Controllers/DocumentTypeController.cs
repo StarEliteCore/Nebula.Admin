@@ -11,6 +11,7 @@ using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.IServices.DocumentTypes;
 using Destiny.Core.Flow.Dtos.DocumentTypes;
 
+
 namespace Destiny.Core.Flow.API.Controllers
 {
 
@@ -37,7 +38,7 @@ namespace Destiny.Core.Flow.API.Controllers
         [Description("异步创建或更新文档类型")]
         public async Task<AjaxResult> CreateOrUpdateAsync([FromBody] DocumentTypeInputDto dto)
         {
-
+         
             return (await _documentTypeService.CreateOrUpdateAsync(dto)).ToAjaxResult();
         }
 

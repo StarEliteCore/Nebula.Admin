@@ -51,7 +51,11 @@ namespace Destiny.Core.Flow.Dtos
         [DisplayName("用户昵称")]
         public string NickName { get; set; }
 
-
+        /// <summary>
+        /// 获取或设置最后修改时间
+        /// </summary>
+        [DisplayName("最后修改时间")]
+        public DateTime? LastModifionTime { get; set; }
 
     }
 
