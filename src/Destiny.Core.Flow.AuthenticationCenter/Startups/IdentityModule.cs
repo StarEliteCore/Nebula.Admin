@@ -1,5 +1,6 @@
 ﻿using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Model.Security;
+using Microsoft.AspNetCore.Authentication.QQ;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -16,7 +17,11 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
     {
         protected override void AddAuthentication(IServiceCollection services)
         {
+            //services.AddAuthentication().AddQQ(x =>
+            //{
 
+            //    x.AppId
+            //});
         }
 
         protected override Action<IdentityOptions> IdentityOption()

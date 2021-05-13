@@ -15,7 +15,7 @@ spec:
       nodeName: k8sworknode1
       containers:
         - name: destiny-core-flowadmin-container
-          image: registry.cn-hangzhou.aliyuncs.com/destinycore/destiny-core-admin-api:v1.1
+          image: registry.cn-hangzhou.aliyuncs.com/destinycore/destiny-core-admin-api:v1.2
           resources:
             limits:
               memory: "500Mi"
