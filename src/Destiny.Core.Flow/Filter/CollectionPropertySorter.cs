@@ -61,7 +61,7 @@ namespace Destiny.Core.Flow.Filter
 
             foreach (var propertyName in propertyNames)
             {
-                PropertyInfo property = type.GetProperty(propertyName);
+                PropertyInfo property = type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.IgnoreCase | BindingFlags.Instance);
                 if (property.IsNull())
                 {
                     throw new Exception($"查找类似 指定对象中不存在名称为“{propertyName}”的属性");
