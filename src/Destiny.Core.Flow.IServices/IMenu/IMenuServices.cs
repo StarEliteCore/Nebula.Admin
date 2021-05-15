@@ -97,5 +97,12 @@ namespace Destiny.Core.Flow.IServices.IMenu
         /// <param name="request">请求参数</param>
         /// <returns></returns>
         Task<IPagedResult<MenuOutPageListDto>> GetMenuPageAsync(PageRequest request);
+
+        /// <summary>
+        /// 清除缓存
+        /// </summary>
+        /// <returns></returns>
+        Task<OperationResponse> CleanVueDynamicRouterCache();
+
     }
 }

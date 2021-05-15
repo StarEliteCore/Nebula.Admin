@@ -204,5 +204,18 @@ namespace Destiny.Core.Flow.API.Controllers.Menu
 
             return (await _menuServices.GetAllMenuTreeAsync()).ToTreeModel();
         }
+
+        [HttpGet]
+        [Description("清除VUE动态路由缓存")]
+        /// <summary>
+        /// 清除VUE动态路由缓存
+        /// </summary>
+        /// <returns></returns>
+        public async Task<AjaxResult> CleanVueDynamicRouterCache()
+        {
+
+
+            return (await _menuServices.CleanVueDynamicRouterCache()).ToAjaxResult();
+        }
     }
 }

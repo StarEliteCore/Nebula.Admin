@@ -118,7 +118,7 @@ namespace Destiny.Core.Flow.Services.DocumentTypes
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<ITreeResult<DocumentTreeOutDto>> GetTreeDataAsync(PageRequest request)
+        public async Task<ITreeResult<DocumentTreeOutDto>> GetTreeDataAsync()
         {
             return await _documentTypeRepository.Entities.OrderBy(o=>o.Sort).ToTreeResultAsync<DocumentType, DocumentTreeOutDto>((p, c) =>
             {
