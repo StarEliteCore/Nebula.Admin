@@ -60,10 +60,10 @@ namespace Destiny.Core.Flow.IServices.DocumentTypes
         /// <summary>
         /// 异步得到树数据
         /// </summary>
-        /// <param name="request"></param>
+        /// <param name=""></param>
         /// <returns></returns>
 
-        Task<ITreeResult<DocumentTreeOutDto>> GetTreeDataAsync(PageRequest request);
+        Task<ITreeResult<DocumentTreeOutDto>> GetTreeDataAsync();
 
     }
 

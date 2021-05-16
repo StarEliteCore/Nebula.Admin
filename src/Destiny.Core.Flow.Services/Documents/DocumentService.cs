@@ -98,7 +98,7 @@ namespace Destiny.Core.Flow.Services.Documents
                 Content=o.Content,
                 CreatedTime=o.CreatedTime,
                 DocumentTypeId=o.DocumentTypeId,
-                
+                LastModifionTime=o.LastModifionTime,
                 DocumentTypeName= _documentTypeRepository.Entities.Where(type=>type.Id==o.DocumentTypeId).Select(type=>type.Name).FirstOrDefault(),
                 NickName=_userManager.Users.Where(u=>u.Id==o.CreatorUserId).Select(u=>u.NickName).FirstOrDefault()
                 

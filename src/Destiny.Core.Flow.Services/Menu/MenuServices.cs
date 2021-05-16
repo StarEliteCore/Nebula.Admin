@@ -264,6 +264,7 @@ namespace Destiny.Core.Flow.Services.Menu
             return new OperationResponse<Dictionary<string, bool>>(MessageDefinitionType.LoadSucces, dic, OperationResponseType.Success);
         }
 
+        private readonly string routerKey = "Vue_DynamicRouter_";
 
         /// <summary>
         /// 获取Vue动态路由菜单(应该返回Tree)
@@ -282,8 +283,8 @@ namespace Destiny.Core.Flow.Services.Menu
 
             using (await _mutex.LockAsync())
             {
-                var key = $"Vue_DynamicRouter_{userId}";
 
+                var key = $"{routerKey}{userId}";
 
                 var treeList = await _cache.GetAsync<IReadOnlyList<VueDynamicRouterTreeOutDto>>(key); //得到缓存
                 if (treeList == null)
@@ -322,10 +323,11 @@ namespace Destiny.Core.Flow.Services.Menu
 
                     TimeSpan ts2 = sw.Elapsed;
                     _logger.LogInformation($"得到动态路由所有多少{ts2.TotalMilliseconds}毫秒");
-                     await _cache.SetAsync(key, result.ItemList);
+                    await _cache.SetAsync(key, result.ItemList);
                     return OperationResponse.Ok(MessageDefinitionType.LoadSucces, result.ItemList);
                 }
-                else {
+                else
+                {
 
                     return OperationResponse.Ok(MessageDefinitionType.LoadSucces, treeList);
                 }
@@ -371,9 +373,9 @@ namespace Destiny.Core.Flow.Services.Menu
         /// 异步得到所有菜单
         /// </summary>
         /// <returns></returns>
-        public  Task<TreeResult<MenuTreeOutDto>> GetAllMenuTreeAsync(MenuEnum menu = MenuEnum.Menu)
+        public Task<TreeResult<MenuTreeOutDto>> GetAllMenuTreeAsync(MenuEnum menu = MenuEnum.Menu)
         {
-            return  _menuRepository.Entities.OrderBy(o => o.Sort).Where(o => o.Type == menu).ToTreeResultAsync<MenuEntity, MenuTreeOutDto>(
+            return _menuRepository.Entities.OrderBy(o => o.Sort).Where(o => o.Type == menu).ToTreeResultAsync<MenuEntity, MenuTreeOutDto>(
               (p, c) =>
               {
                   return c.ParentId == null || c.ParentId == Guid.Empty;
@@ -396,12 +398,26 @@ namespace Destiny.Core.Flow.Services.Menu
         /// </summary>
         /// <param name="request">请求参数</param>
         /// <returns></returns>
-        public  Task<IPagedResult<MenuOutPageListDto>> GetMenuPageAsync(PageRequest request)
+        public Task<IPagedResult<MenuOutPageListDto>> GetMenuPageAsync(PageRequest request)
         {
             request.NotNull(nameof(request));
             OrderCondition<MenuEntity>[] orderConditions = new OrderCondition<MenuEntity>[] { new OrderCondition<MenuEntity>(o => o.Depth, SortDirection.Ascending), new OrderCondition<MenuEntity>(o => o.Sort, SortDirection.Ascending) };
             request.OrderConditions = orderConditions;
             return _menuRepository.Entities.ToPageAsync<MenuEntity, MenuOutPageListDto>(request);
+        }
+
+        public async Task<OperationResponse> CleanVueDynamicRouterCache()
+        {
+
+            var keys = await RedisHelper.KeysAsync($"destinycoreflow_{routerKey}*");  //目前这样用
+
+            List<string> newKyes =new List<string>();
+            foreach (var item in keys)
+            {
+                newKyes.Add(item.Substring(16));
+            }
+            var count = await RedisHelper.DelAsync(newKyes.ToArray());
+            return count > 0 ? OperationResponse.Ok("清除缓存成功!!!") : OperationResponse.Error("清除缓存失败!!!");
         }
     }
 }

@@ -87,7 +87,7 @@ namespace Destiny.Core.Flow.API.Controllers
         [Description("异步得到文档类型分页数据")]
         public async Task<TreeModel<DocumentTreeOutDto>> GetDocumentTreeTreeDataAsync()
         {
-            return (await _documentTypeService.GetTreeDataAsync(null)).ToTreeModel();
+            return (await _documentTypeService.GetTreeDataAsync()).ToTreeModel();
 
         }
 

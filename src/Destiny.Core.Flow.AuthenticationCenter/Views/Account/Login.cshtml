@@ -5,23 +5,20 @@
     <div class="sub-main-w3">
         <form asp-route="Login">
             <h2>
-                Login Now
-                @*<i class="fa fa-long-arrow-down"></i>*@
+                欢迎使用DestinyCore系统
             </h2>
             <input type="hidden" asp-for="ReturnUrl" />
             <div class="form-style-agile">
                 <label>
-                    @*<i class="fa fa-user"></i>*@
-                    Username
+                    用户名
                 </label>
-                <input placeholder="Username" asp-for="Username" autofocus>
+                <input placeholder="请输入用户名" asp-for="Username" autofocus>
             </div>
             <div class="form-style-agile">
                 <label>
-                    @*<i class="fa fa-unlock-alt"></i>*@
-                    Password
+                     密码：
                 </label>
-                <input type="password" placeholder="Password" asp-for="Password" autocomplete="off">
+                <input type="password" placeholder="请输入密码" asp-for="Password" autocomplete="off">
             </div>
             <div class="form-style-agile">
                 @if (Model.AllowRememberLogin)
@@ -36,10 +33,11 @@
                     </div>
                 }
             </div>
+     
             <div class="form-style-agile">
                 <img class="image-po" src="~/Connect_logo_5.png" />
             </div>
-                <button class="button-sub" name="button" value="login">登录</button>
+            <button class="button-sub" name="button" value="login">登录</button>
         </form>
     </div>
 }
