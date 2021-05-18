@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace IdentityServerHost.Quickstart.UI
@@ -172,7 +173,7 @@ namespace IdentityServerHost.Quickstart.UI
                     }
                     else if (string.IsNullOrEmpty(model.ReturnUrl))
                     {
-                        return Redirect("~/");
+                        return Redirect("/Home/Index");
                     }
                     else
                     {
@@ -373,6 +374,29 @@ namespace IdentityServerHost.Quickstart.UI
             }
 
             return vm;
+        }
+
+        /// <summary>
+        /// 打开qq授权页面
+        /// </summary>
+        /// <returns></returns>
+        public virtual IActionResult QQAuthorize()
+        {
+            var appId = "101945230";
+            var url = string.Format("https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id={0}&redirect_uri={1}&state=State", appId, WebUtility.UrlEncode("http://localhost:50001/signin-qq"));
+            return new RedirectResult(url);
+        }
+        /// <summary>
+        /// QQ回掉方法
+        /// </summary>
+        /// <returns></returns>
+        public virtual IActionResult QQCallbackLogin()
+        {
+            //var code = Request.Query["code"];
+            //var token = GetAuthorityAccessToken(code);
+            //var dis = GetAuthorityOpendIdAndUnionId(token);
+            //var userInfo = GetUserInfo(token, dis["openid"]);
+            return null;
         }
     }
 }
