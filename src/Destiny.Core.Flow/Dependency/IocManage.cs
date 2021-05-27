@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Security.Claims;
+using System.Security.Principal;
 
 namespace Destiny.Core.Flow.Dependency
 {
@@ -62,6 +64,22 @@ namespace Destiny.Core.Flow.Dependency
         {
             ILoggerFactory factory = _provider.GetService<ILoggerFactory>();
             return factory.CreateLogger<T>();
+        }
+
+
+        /// <summary>
+        /// 得到身份信息 
+        /// </summary>
+        /// <returns></returns>
+        public ClaimsIdentity GetClaimsIdentity()
+        {
+
+           var identity =  _provider.GetService<IPrincipal>()?.Identity;
+            if (!(identity is ClaimsIdentity claimsIdentity))
+            {
+                return null;
+            }
+            return claimsIdentity;
         }
     }
 }
