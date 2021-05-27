@@ -19,17 +19,15 @@ namespace Destiny.Core.Flow.API.Controllers
     ///文档类型
     ///</summary>
     [Description("文档类型")]
+    [AllowAnonymous]
     public class DocumentTypeController : AdminControllerBase
     {
 
         private readonly IDocumentTypeService _documentTypeService;
-        
         public DocumentTypeController(IDocumentTypeService documentTypeService)
         {
             _documentTypeService=documentTypeService;
         }
-
-
         /// <summary>
         /// 异步创建或更新文档类型
         /// </summary>
@@ -41,10 +39,6 @@ namespace Destiny.Core.Flow.API.Controllers
          
             return (await _documentTypeService.CreateOrUpdateAsync(dto)).ToAjaxResult();
         }
-
-      
-   
-        
         /// <summary>
         /// 异步加载表单文档类型
         /// </summary>
@@ -55,8 +49,6 @@ namespace Destiny.Core.Flow.API.Controllers
         {
             return (await _documentTypeService.LoadFormAsync(id)).ToAjaxResult();
         }
-        
-        
         /// <summary>
         /// 异步删除文档类型
         /// </summary>
@@ -67,7 +59,6 @@ namespace Destiny.Core.Flow.API.Controllers
         {
             return (await _documentTypeService.DeleteAsync(id)).ToAjaxResult();
         }
-        
         /// <summary>
         /// 异步得到文档类型分页数据
         /// </summary>
@@ -78,7 +69,6 @@ namespace Destiny.Core.Flow.API.Controllers
         {
             return (await _documentTypeService.GetPageAsync(request)).ToPageList();
         }
-
         /// <summary>
         /// 异步得到文档类型树数据
         /// </summary>
@@ -90,6 +80,5 @@ namespace Destiny.Core.Flow.API.Controllers
             return (await _documentTypeService.GetTreeDataAsync()).ToTreeModel();
 
         }
-
     }
 }

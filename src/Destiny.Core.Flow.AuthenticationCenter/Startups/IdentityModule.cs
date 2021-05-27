@@ -18,8 +18,9 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
         {
             services.AddAuthentication().AddQQ(x =>
             {
-                x.ClientId = "adasdasd";
-                x.ClientSecret = "asdasdadas";
+                x.ClientId = "adasd";
+                x.ClientSecret = "adasdas";
+                //x.ReturnUrlParameter = "http://localhost:50001/signin-qq";
             });
         }
 
