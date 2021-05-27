@@ -486,6 +486,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.CleanVueDynamicRouterCache">
+            <summary>
+            清除VUE动态路由缓存
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.Organization.OrganizationController">
             <summary>
             组织架构管理
