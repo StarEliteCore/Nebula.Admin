@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Filter.Abstract;
 using Destiny.Core.Flow.Ui;
-
-
+using Destiny.Core.Flow.Ui.Abstracts;
+using Destiny.Core.Flow.Dtos.DocumentTypes;
 
 namespace Destiny.Core.Flow.IServices.DocumentTypes
 {
@@ -49,6 +49,21 @@ namespace Destiny.Core.Flow.IServices.DocumentTypes
         /// </summary>
         /// <param name="request">分页请求数据</param>
         Task<IPagedResult<DocumentTypePageListDto>> GetPageAsync(PageRequest request);
+
+        /// <summary>
+        /// 异步创建或者更新
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        Task<OperationResponse> CreateOrUpdateAsync(DocumentTypeInputDto dto);
+
+        /// <summary>
+        /// 异步得到树数据
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+
+        Task<ITreeResult<DocumentTreeOutDto>> GetTreeDataAsync();
 
     }
 

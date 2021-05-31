@@ -5,13 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+	<PackageReference Include="Destiny.Core.Flow" Version="1.0.3" />
 	<PackageReference Include="IdentityServer4" Version="4.1.2"></PackageReference>
     <PackageReference Include="IdentityServer4.EntityFramework.Storage" Version="4.1.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Destiny.Core.Flow.Model\Destiny.Core.Flow.Model.csproj" />
-    <ProjectReference Include="..\Destiny.Core.Flow\Destiny.Core.Flow.csproj" />
   </ItemGroup>
 
 </Project>

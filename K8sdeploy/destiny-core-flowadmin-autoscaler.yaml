@@ -1,0 +1,13 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: destiny-core-flowadmin-autoscaler
+  namespace: destinycore-flow
+spec:
+  maxReplicas: 10 #最大数量
+  minReplicas: 2 #最小数量
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: destiny-core-flowadmin-pod #需要监控的deployment
+  targetCPUUtilizationPercentage: 40 #目标CPU占用率达到多少启动扩容

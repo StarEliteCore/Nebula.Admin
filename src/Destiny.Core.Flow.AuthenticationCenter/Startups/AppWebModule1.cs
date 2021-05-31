@@ -28,7 +28,12 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
         public override void ConfigureServices(ConfigureServicesContext context)
         {
            var service = context.Services;
-           service.AddMvc();
+#if DEBUG
+            service.AddRazorPages().AddRazorRuntimeCompilation();
+
+#else
+            service.AddMvc();
+#endif
         }
         public override void ApplicationInitialization(ApplicationContext context)
         {

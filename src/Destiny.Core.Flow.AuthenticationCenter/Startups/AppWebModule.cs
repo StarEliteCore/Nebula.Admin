@@ -42,14 +42,20 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Account}/{action=Login}/{id?}");
             });
         }
 
         public override void ConfigureServices(ConfigureServicesContext context)
         {
             var service = context.Services;
+#if DEBUG
+            service.AddRazorPages().AddRazorRuntimeCompilation();
+
+#else
             service.AddMvc();
+#endif
+
             context.Services.AddTransient<IPrincipal>(provider =>
             {
                 IHttpContextAccessor accessor = provider.GetService<IHttpContextAccessor>();

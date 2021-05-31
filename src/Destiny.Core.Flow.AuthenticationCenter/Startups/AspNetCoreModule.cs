@@ -17,7 +17,7 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
 
         protected override IEndpointRouteBuilder Endpoints(IEndpointRouteBuilder endpoint)
         {
-            endpoint.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+            endpoint.MapControllerRoute(name: "default", pattern: "{controller=Account}/{action=Login}/{id?}");
             return endpoint;
         }
     }

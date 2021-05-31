@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using Destiny.Core.Flow.Filter;
 using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.IServices.DocumentTypes;
+using Destiny.Core.Flow.Dtos.DocumentTypes;
+
+
 namespace Destiny.Core.Flow.API.Controllers
 {
 
@@ -16,39 +19,26 @@ namespace Destiny.Core.Flow.API.Controllers
     ///文档类型
     ///</summary>
     [Description("文档类型")]
+    [AllowAnonymous]
     public class DocumentTypeController : AdminControllerBase
     {
 
         private readonly IDocumentTypeService _documentTypeService;
-        
         public DocumentTypeController(IDocumentTypeService documentTypeService)
         {
             _documentTypeService=documentTypeService;
         }
-
-
         /// <summary>
-        /// 异步创建文档类型
+        /// 异步创建或更新文档类型
         /// </summary>
-        /// <param name="dto">添加的文档类型DTO</param>
+        /// <param name="dto">创建或更新的文档类型DTO</param>
         [HttpPost]
-        [Description("异步创建文档类型")]
-        public async Task<AjaxResult> CreateAsync([FromBody] DocumentTypeInputDto dto)
+        [Description("异步创建或更新文档类型")]
+        public async Task<AjaxResult> CreateOrUpdateAsync([FromBody] DocumentTypeInputDto dto)
         {
-            return (await _documentTypeService.CreateAsync(dto)).ToAjaxResult();
+         
+            return (await _documentTypeService.CreateOrUpdateAsync(dto)).ToAjaxResult();
         }
-
-        /// <summary>
-        /// 异步更新文档类型
-        /// </summary>
-        /// <param name="dto">更新的文档类型DTO</param>
-        [HttpPost]
-        [Description("异步更新文档类型")]
-        public async Task<AjaxResult> UpdateAsync([FromBody] DocumentTypeInputDto dto)
-        {
-            return (await _documentTypeService.UpdateAsync(dto)).ToAjaxResult();
-        }
-        
         /// <summary>
         /// 异步加载表单文档类型
         /// </summary>
@@ -59,8 +49,6 @@ namespace Destiny.Core.Flow.API.Controllers
         {
             return (await _documentTypeService.LoadFormAsync(id)).ToAjaxResult();
         }
-        
-        
         /// <summary>
         /// 异步删除文档类型
         /// </summary>
@@ -71,7 +59,6 @@ namespace Destiny.Core.Flow.API.Controllers
         {
             return (await _documentTypeService.DeleteAsync(id)).ToAjaxResult();
         }
-        
         /// <summary>
         /// 异步得到文档类型分页数据
         /// </summary>
@@ -82,6 +69,16 @@ namespace Destiny.Core.Flow.API.Controllers
         {
             return (await _documentTypeService.GetPageAsync(request)).ToPageList();
         }
+        /// <summary>
+        /// 异步得到文档类型树数据
+        /// </summary>
+        /// <param name="request">请求数据</param>
+        [HttpPost]
+        [Description("异步得到文档类型分页数据")]
+        public async Task<TreeModel<DocumentTreeOutDto>> GetDocumentTreeTreeDataAsync()
+        {
+            return (await _documentTypeService.GetTreeDataAsync()).ToTreeModel();
 
+        }
     }
 }

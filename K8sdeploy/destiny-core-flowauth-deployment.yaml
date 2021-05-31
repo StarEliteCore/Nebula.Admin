@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: destiny-core-flowauth-pod
+  namespace: destinycore-flow
+spec:
+  selector:
+    matchLabels:
+      app: destiny-core-flowauth-pod
+  template:
+    metadata:
+      labels:
+        app: destiny-core-flowauth-pod
+    spec:
+      nodeName: k8sworknode1
+      containers:
+        - name: destiny-core-flowauth-server
+          image: registry.cn-hangzhou.aliyuncs.com/destinycore/authenticationcenter:v1.3
+          resources:
+            limits:
+              memory: "500Mi" #内存资源 
+              cpu: "150m" #CPU资源 1H=1000
+          ports:
+          - containerPort: 80
+          volumeMounts:
+            - mountPath: /app/appsettings.json
+              name: test
+              readOnly: true
+              subPath: appsettings.json
+      imagePullSecrets:
+        - name: aliyun-iamge-secret
+      volumes:
+        - configMap:
+            defaultMode: 420
+            name:  destiny-core-auth-appsettings 
+          name: test

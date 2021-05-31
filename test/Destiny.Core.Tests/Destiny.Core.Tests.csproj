@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="AutoMapperTest.cs" />
+    <Compile Remove="CustomWebApplicationFactory.cs" />
+    <Compile Remove="DependencyTest.cs" />
+    <Compile Remove="ExpressionTest.cs" />
+    <Compile Remove="MediatRTest.cs" />
+    <Compile Remove="TestBase.cs" />
+    <Compile Remove="TestServerFixtureBase.cs" />
+    <Compile Remove="TestStartup.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Destiny.Core.Flow" Version="1.0.3" />
+    <PackageReference Include="Destiny.Core.Flow.Caching" Version="1.0.0" />
+    <PackageReference Include="Destiny.Core.Flow.CodeGenerator" Version="1.0.0" />
+    <PackageReference Include="Destiny.Core.Flow.EntityFrameworkCore" Version="1.0.1" />
+    <PackageReference Include="Destiny.Core.Flow.MongoDB" Version="1.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="5.0.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="5.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.1" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.collector" Version="3.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\Destiny.Core.Flow.API\Destiny.Core.Flow.API.csproj" />
+    <ProjectReference Include="..\src\Destiny.Core.Flow.TestBase\Destiny.Core.Flow.TestBase.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -105,22 +105,57 @@
             <param name="Id"></param>
             <returns></returns>
         </member>
+        <member name="T:Destiny.Core.Flow.API.Controllers.DocumentController">
+            <summary>
+            文档
+            </summary>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentController.CreateAsync(Destiny.Core.Flow.Dtos.DocumentInputDto)">
+            <summary>
+            异步创建文档
+            </summary>
+            <param name="dto">添加的文档DTO</param>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentController.UpdateAsync(Destiny.Core.Flow.Dtos.DocumentInputDto)">
+            <summary>
+            异步更新文档
+            </summary>
+            <param name="dto">更新的文档DTO</param>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentController.LoadFormAsync(System.Guid)">
+            <summary>
+            异步加载表单文档
+            </summary>
+            <param name="id">要加载的文档主键</param>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentController.DeleteAsync(System.Guid)">
+            <summary>
+            异步删除文档
+            </summary>
+            <param name="id">要删除的文档主键</param>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentController.GetPageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+            <summary>
+            异步得到文档分页数据
+            </summary>
+            <param name="request">分页请求数据</param>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentController.CreateOrUpdateAsync(Destiny.Core.Flow.Dtos.DocumentInputDto)">
+            <summary>
+            异步添加与更新文档
+            </summary>
+            <param name="dto">要操作的DTO</param>
+        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.DocumentTypeController">
             <summary>
             文档类型
             </summary>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentTypeController.CreateAsync(Destiny.Core.Flow.Dtos.DocumentTypeInputDto)">
+        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentTypeController.CreateOrUpdateAsync(Destiny.Core.Flow.Dtos.DocumentTypeInputDto)">
             <summary>
-            异步创建文档类型
+            异步创建或更新文档类型
             </summary>
-            <param name="dto">添加的文档类型DTO</param>
-        </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentTypeController.UpdateAsync(Destiny.Core.Flow.Dtos.DocumentTypeInputDto)">
-            <summary>
-            异步更新文档类型
-            </summary>
-            <param name="dto">更新的文档类型DTO</param>
+            <param name="dto">创建或更新的文档类型DTO</param>
         </member>
         <member name="M:Destiny.Core.Flow.API.Controllers.DocumentTypeController.LoadFormAsync(System.Guid)">
             <summary>
@@ -139,6 +174,12 @@
             异步得到文档类型分页数据
             </summary>
             <param name="request">分页请求数据</param>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentTypeController.GetDocumentTreeTreeDataAsync">
+            <summary>
+            异步得到文档类型树数据
+            </summary>
+            <param name="request">请求数据</param>
         </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.FunctionController">
             <summary>
@@ -445,6 +486,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.CleanVueDynamicRouterCache">
+            <summary>
+            清除VUE动态路由缓存
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.Organization.OrganizationController">
             <summary>
             组织架构管理
@@ -606,6 +653,12 @@
         <member name="M:Destiny.Core.Flow.API.Controllers.UserController.GetUsersAsync">
             <summary>
             异步得到所有用户
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.UpLoadFileController.Upload(Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Destiny.Core.Flow.Filter.PageRequest)">
+            <summary>
+            文件分片上传接口
             </summary>
             <returns></returns>
         </member>

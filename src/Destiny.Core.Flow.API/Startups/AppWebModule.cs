@@ -15,7 +15,8 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.API.Startups
 {
-    [DependsOn(typeof(DestinyCoreModule),
+    [DependsOn
+           (typeof(DestinyCoreModule),
            typeof(MvcModule),
            typeof(MiniProfilerModule),
            typeof(AspNetCoreSwaggerModule),

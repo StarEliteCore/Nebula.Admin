@@ -16,7 +16,12 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
     {
         protected override void AddAuthentication(IServiceCollection services)
         {
-
+            services.AddAuthentication().AddQQ(x =>
+            {
+                x.ClientId = "adasd";
+                x.ClientSecret = "adasdas";
+                //x.ReturnUrlParameter = "http://localhost:50001/signin-qq";
+            });
         }
 
         protected override Action<IdentityOptions> IdentityOption()

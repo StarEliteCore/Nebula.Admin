@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Destiny.Core.Flow\Destiny.Core.Flow.csproj" />
+    <PackageReference Include="Destiny.Core.Flow" Version="1.0.3" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: destiny-core-flowadmin-pod
+  namespace: destinycore-flow
+spec:
+  selector:
+    matchLabels:
+      app: destiny-core-flowadmin-pod
+  template:
+    metadata:
+      labels:
+        app: destiny-core-flowadmin-pod
+    spec:
+      nodeName: k8sworknode1
+      containers:
+        - name: destiny-core-flowadmin-container
+          image: registry.cn-hangzhou.aliyuncs.com/destinycore/destiny-core-admin-api:v1.2
+          resources:
+            limits:
+              memory: "500Mi"
+              cpu: "150m"
+          ports:
+          - containerPort: 80
+          volumeMounts:
+            - mountPath: /app/appsettings.json
+              name: test
+              readOnly: true
+              subPath: appsettings.json
+      imagePullSecrets:
+        - name: aliyun-iamge-secret
+      volumes:
+        - configMap:
+            defaultMode: 420
+            name:  destiny-core-flowadmin-appsettings
+          name: test
+
