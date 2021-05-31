@@ -656,9 +656,14 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Destiny.Core.Flow.API.UpLoadFileController.Upload(Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Destiny.Core.Flow.Filter.PageRequest)">
+        <member name="T:Destiny.Core.Flow.API.UpLoadFileController">
             <summary>
-            文件分片上传接口
+            文件上传
+            </summary>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.UpLoadFileController.UploadAsnyc(Microsoft.AspNetCore.Http.IFormFileCollection)">
+            <summary>
+            异步上传
             </summary>
             <returns></returns>
         </member>
