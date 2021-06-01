@@ -52,8 +52,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Destiny.Core.Flow.API\Destiny.Core.Flow.API.csproj" />
-    <ProjectReference Include="..\src\Destiny.Core.Flow.TestBase\Destiny.Core.Flow.TestBase.csproj" />
+    <ProjectReference Include="..\..\src\Destiny.Core.Flow.API\Destiny.Core.Flow.API.csproj" />
+    <ProjectReference Include="..\..\src\Destiny.Core.Flow.TestBase\Destiny.Core.Flow.TestBase.csproj" />
   </ItemGroup>
 
 </Project>
