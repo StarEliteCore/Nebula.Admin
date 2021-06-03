@@ -1,18 +1,19 @@
-﻿using Destiny.Core.Flow.Enums;
-using Destiny.Core.Flow.Extensions;
+﻿using DestinyCore.Enums;
+using DestinyCore.Extensions;
 using Destiny.Core.Flow.Model.Entities.Function;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Model.Entities.Menu;
 using Destiny.Core.Flow.Model.Entities.Rolemenu;
-using Destiny.Core.Flow.Permission;
-using Destiny.Core.Flow.Security.Identity;
-using Destiny.Core.Flow.Ui;
+using DestinyCore.Permission;
+using DestinyCore.Security.Identity;
+using DestinyCore.Ui;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using DestinyCore;
 
 namespace Destiny.Core.Flow.Services.Permission
 {

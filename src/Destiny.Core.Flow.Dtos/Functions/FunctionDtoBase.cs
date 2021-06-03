@@ -1,4 +1,4 @@
-﻿using Destiny.Core.Flow.Entity;
+﻿using DestinyCore.Entity;
 
 namespace Destiny.Core.Flow.Dtos.Functions
 {

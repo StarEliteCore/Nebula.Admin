@@ -1,5 +1,4 @@
-﻿using Destiny.Core.Flow.AspNetCore.Module;
-using Destiny.Core.Flow.Modules;
+﻿using DestinyCore.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;

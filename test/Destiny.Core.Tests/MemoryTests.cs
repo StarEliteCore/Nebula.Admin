@@ -1,6 +1,6 @@
-﻿using Destiny.Core.Flow.Caching;
-using Destiny.Core.Flow.Modules;
-using Destiny.Core.Flow.TestBase;
+﻿using DestinyCore.Caching;
+using DestinyCore.Modules;
+using DestinyCore.TestBase;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,6 @@
-﻿using Destiny.Core.Flow.Audit;
-using Destiny.Core.Flow.Data;
-using Destiny.Core.Flow.Entity;
+﻿using DestinyCore.Audit;
+using DestinyCore.Data;
+using DestinyCore.Entity;
 using Destiny.Core.Flow.Identity;
 using System;
 using System.ComponentModel;

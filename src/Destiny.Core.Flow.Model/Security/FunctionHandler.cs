@@ -1,7 +1,7 @@
-﻿using Destiny.Core.Flow.Data.Core;
-using Destiny.Core.Flow.Extensions;
+﻿using DestinyCore.Data.Core;
+using DestinyCore.Extensions;
 using Destiny.Core.Flow.Model.Entities.Function;
-using Destiny.Core.Flow.Reflection;
+using DestinyCore.Reflection;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using DestinyCore;
 
 namespace Destiny.Core.Flow.Model.Security
 {

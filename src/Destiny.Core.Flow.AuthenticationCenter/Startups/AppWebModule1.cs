@@ -1,13 +1,13 @@
-﻿using Destiny.Core.Flow.AspNetCore.Module;
-using Destiny.Core.Flow.AutoMapper;
-using Destiny.Core.Flow.IdentityServer;
-using Destiny.Core.Flow.Modules;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DestinyCore.Modules;
+using DestinyCore.AspNetCore;
+using DestinyCore.AutoMapper;
+using Destiny.Core.Flow.IdentityServer;
 
 namespace Destiny.Core.Flow.AuthenticationCenter.Startups
 {
@@ -18,9 +18,6 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
     typeof(AuthenticationCenterEntityFrameworkCoreModule),
     typeof(AutoMapperModule),
     typeof(IdentityServer4Module)
-
-
-
    )]
     public class AppWebModule1 : AppModule
     {

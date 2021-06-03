@@ -1,9 +1,9 @@
-﻿using Destiny.Core.Flow.Dependency;
+﻿using DestinyCore.Dependency;
 using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.Dtos.Users;
-using Destiny.Core.Flow.Filter;
-using Destiny.Core.Flow.Filter.Abstract;
-using Destiny.Core.Flow.Ui;
+using DestinyCore.Filter;
+using DestinyCore.Filter.Abstract;
+using DestinyCore.Ui;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;

@@ -1,5 +1,5 @@
-﻿using Destiny.Core.Flow.Caching;
-using Destiny.Core.Flow.Events;
+﻿using DestinyCore.Caching;
+using DestinyCore.Events;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Services.Users.Events;
 using System;

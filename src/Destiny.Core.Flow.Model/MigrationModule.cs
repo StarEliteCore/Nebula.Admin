@@ -1,7 +1,7 @@
-﻿using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.Entity.Modules;
-using Destiny.Core.Flow.Extensions;
-using Destiny.Core.Flow.Modules;
+﻿using DestinyCore.Entity;
+using DestinyCore.Entity.Modules;
+using DestinyCore.Extensions;
+using DestinyCore.Modules;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,12 +1,12 @@
 using System;
-using Destiny.Core.Flow.AspNetCore.Api;
-using Destiny.Core.Flow.AspNetCore.Ui;
+using DestinyCore.AspNetCore.Api;
+using DestinyCore.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using Destiny.Core.Flow.Filter;
+using DestinyCore.Filter;
 using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.IServices.DocumentTypes;
 using Destiny.Core.Flow.Dtos.DocumentTypes;

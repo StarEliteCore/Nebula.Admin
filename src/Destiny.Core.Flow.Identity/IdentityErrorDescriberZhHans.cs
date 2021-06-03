@@ -1,4 +1,4 @@
-﻿using Destiny.Core.Flow.Extensions;
+﻿using DestinyCore.Extensions;
 using Microsoft.AspNetCore.Identity;
 
 namespace Destiny.Core.Flow

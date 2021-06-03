@@ -1,8 +1,8 @@
-﻿using Destiny.Core.Flow.AspNetCore.Api;
-using Destiny.Core.Flow.AspNetCore.Ui;
-using Destiny.Core.Flow.Audit;
-using Destiny.Core.Flow.Audit.Dto;
-using Destiny.Core.Flow.Filter;
+﻿using DestinyCore.AspNetCore.Api;
+using DestinyCore.AspNetCore;
+using DestinyCore.Audit;
+using DestinyCore.Audit.Dto;
+using DestinyCore.Filter;
 using Destiny.Core.Flow.IServices.Audit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

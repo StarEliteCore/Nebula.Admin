@@ -1,6 +1,6 @@
 ﻿using Destiny.Core.Flow.Entities;
-using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.Mapping;
+using DestinyCore.Entity;
+using DestinyCore.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Text;

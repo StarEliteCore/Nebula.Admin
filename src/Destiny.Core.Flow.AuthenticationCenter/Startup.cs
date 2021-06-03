@@ -1,6 +1,6 @@
 ﻿using Destiny.Core.Flow.AuthenticationCenter.Startups;
-using Destiny.Core.Flow.Extensions;
-using Destiny.Core.Flow.Modules;
+using DestinyCore.Extensions;
+using DestinyCore.Modules;
 using IdentityServer4.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

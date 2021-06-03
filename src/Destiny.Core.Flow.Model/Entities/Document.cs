@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Destiny.Core.Flow.Entity;
+using DestinyCore.Entity;
 namespace Destiny.Core.Flow.Entities
 {
 

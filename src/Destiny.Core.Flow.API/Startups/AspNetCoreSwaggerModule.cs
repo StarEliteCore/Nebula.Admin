@@ -1,4 +1,4 @@
-﻿using Destiny.Core.Flow.Swagger;
+﻿using DestinyCore.Swagger;
 using System;
 using System.Collections.Generic;
 using System.IO;

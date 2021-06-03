@@ -1,8 +1,8 @@
-﻿using Destiny.Core.Flow.Extensions;
+﻿using DestinyCore.Extensions;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Model.Security;
-using Destiny.Core.Flow.Modules;
-using Destiny.Core.Flow.Options;
+using DestinyCore.Modules;
+using DestinyCore.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;

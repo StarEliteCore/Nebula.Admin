@@ -1,17 +1,18 @@
 ﻿using Destiny.Core.Flow.Dtos.IdentityServer4;
-using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.Exceptions;
-using Destiny.Core.Flow.Extensions;
-using Destiny.Core.Flow.Filter;
-using Destiny.Core.Flow.Filter.Abstract;
+using DestinyCore.Entity;
+using DestinyCore.Exceptions;
+using DestinyCore.Extensions;
+using DestinyCore.Filter;
+using DestinyCore.Filter.Abstract;
 using Destiny.Core.Flow.IServices.IdentityServer4;
 using Destiny.Core.Flow.Model.DestinyIdentityServer4;
-using Destiny.Core.Flow.Ui;
+using DestinyCore.Ui;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DestinyCore;
 
 namespace Destiny.Core.Flow.Services.IdentityServer4
 {

@@ -1,14 +1,13 @@
-﻿using Destiny.Core.Flow.Audit;
-using Destiny.Core.Flow.Audit.Dto;
-using Destiny.Core.Flow.Enums;
-using Destiny.Core.Flow.ExpressionUtil;
-using Destiny.Core.Flow.Extensions;
-using Destiny.Core.Flow.Filter;
-using Destiny.Core.Flow.Filter.Abstract;
-using Destiny.Core.Flow.Metadata.Builders;
+﻿using DestinyCore.Audit;
+using DestinyCore.Audit.Dto;
+using DestinyCore.Enums;
+using DestinyCore.ExpressionUtil;
+using DestinyCore.Extensions;
+using DestinyCore.Filter;
+using DestinyCore.Filter.Abstract;
 using Destiny.Core.Flow.Model.Entities.Identity;
-using Destiny.Core.Flow.MongoDB.Repositorys;
-using Destiny.Core.Flow.Ui;
+using DestinyCore.MongoDB.Repositorys;
+using DestinyCore.Ui;
 using Microsoft.AspNetCore.Identity;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -18,6 +17,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using DestinyCore.MongoDB.Builders;
+using DestinyCore.MongoDB;
 
 namespace Destiny.Core.Flow.Services.Audit
 {
@@ -50,7 +51,7 @@ namespace Destiny.Core.Flow.Services.Audit
         {
 
             var exp = MongoDBFilterBuilder.GetExpression<AuditLog>(request.Filter);
-            OrderCondition<AuditLog>[] orderConditions = new OrderCondition<AuditLog>[] { new OrderCondition<AuditLog>(o => o.CreatedTime, Enums.SortDirection.Descending) };
+            OrderCondition<AuditLog>[] orderConditions = new OrderCondition<AuditLog>[] { new OrderCondition<AuditLog>(o => o.CreatedTime,DestinyCore.Enums.SortDirection.Descending) };
             request.OrderConditions = orderConditions;
             //_auditLogRepository.Collection.Find(o=>o.FunctionName.Contains("dd"))
             var page= await _auditLogRepository.Collection.ToPageAsync(exp, request, x => new AuditLogOutputPageDto
@@ -85,7 +86,7 @@ namespace Destiny.Core.Flow.Services.Audit
         public async Task<IPagedResult<AuditEntryOutputPageDto>> GetAuditEntryPageAsync(PageRequest request)
         {
             var exp = MongoDBFilterBuilder.GetExpression<AuditEntry>(request.Filter);
-            OrderCondition<AuditEntry>[] orderConditions = new OrderCondition<AuditEntry>[] { new OrderCondition<AuditEntry>(o => o.CreatedTime, Enums.SortDirection.Descending) };
+            OrderCondition<AuditEntry>[] orderConditions = new OrderCondition<AuditEntry>[] { new OrderCondition<AuditEntry>(o => o.CreatedTime, DestinyCore.Enums.SortDirection.Descending) };
             request.OrderConditions = orderConditions;
             var page= await _auditEntryRepository.Collection.ToPageAsync(exp, request, x => new AuditEntryOutputPageDto
             {

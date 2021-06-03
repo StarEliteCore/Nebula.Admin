@@ -1,5 +1,5 @@
-﻿using Destiny.Core.Flow.Extensions;
-using Destiny.Core.Flow.Modules;
+﻿using DestinyCore.Extensions;
+using DestinyCore.Modules;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 

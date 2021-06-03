@@ -4,8 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.Mapping;
+using DestinyCore.Entity;
+using DestinyCore.Mapping;
 using Destiny.Core.Flow.Entities;
 
 namespace Destiny.Core.Flow.Dtos

@@ -1,6 +1,6 @@
-﻿using Destiny.Core.Flow.Extensions;
-using Destiny.Core.Flow.Modules;
+﻿using DestinyCore.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using DestinyCore.Modules;
 
 namespace Destiny.Core.Flow.Model.Security
 {

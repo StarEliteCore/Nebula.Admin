@@ -1,5 +1,5 @@
-﻿using Destiny.Core.Flow.Dependency;
-using Destiny.Core.Flow.Extensions;
+﻿using DestinyCore.Dependency;
+using DestinyCore.Extensions;
 using Destiny.Core.Flow.IdentityServer;
 using Destiny.Core.Flow.Model.DestinyIdentityServer4;
 using Destiny.Core.Flow.Model.SeedDatas;

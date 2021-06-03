@@ -1,5 +1,5 @@
-﻿using Destiny.Core.Flow.AspNetCore.Api;
-using Destiny.Core.Flow.Filter;
+﻿using DestinyCore.AspNetCore.Api;
+using DestinyCore.Filter;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -40,7 +40,7 @@ namespace Destiny.Core.Flow.API
         [AllowAnonymous]
         public async Task<IActionResult> UploadAsnyc(IFormFileCollection files)
         {
-    
+            await Task.CompletedTask;
             long size = files.Sum(f => f.Length);
 
             foreach (var formFile in files)

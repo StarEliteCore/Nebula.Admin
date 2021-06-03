@@ -1,5 +1,5 @@
-﻿using Destiny.Core.Flow.Dependency;
-using Destiny.Core.Flow.Enums;
+﻿using DestinyCore.Dependency;
+using DestinyCore.Enums;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;

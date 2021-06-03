@@ -32,17 +32,14 @@
   <ItemGroup>
     <PackageReference Include="AspectCore.Extensions.DependencyInjection" Version="2.2.0" />
     <PackageReference Include="AspectCore.Extensions.Hosting" Version="2.2.0" />
-    <PackageReference Include="Destiny.Core.Flow" Version="1.0.3" />
-    <PackageReference Include="Destiny.Core.Flow.AspNetCore" Version="1.0.0" />
-    <PackageReference Include="Destiny.Core.Flow.AutoMapper" Version="1.0.0" />
-    <PackageReference Include="Destiny.Core.Flow.CodeGenerator" Version="1.0.0" />
-    <PackageReference Include="Destiny.Core.Flow.MiniProfiler" Version="1.0.0" />
-    <PackageReference Include="Destiny.Core.Flow.Swagger" Version="1.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.4" />
+    <PackageReference Include="DestinyCore.AspNetCore" Version="1.0.0" />
+    <PackageReference Include="DestinyCore.MiniProfiler" Version="1.0.0" />
+    <PackageReference Include="DestinyCore.Swagger" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.6" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.9.0" />
     <PackageReference Include="Microsoft.DotNet.PlatformAbstractions" Version="3.1.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.4">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

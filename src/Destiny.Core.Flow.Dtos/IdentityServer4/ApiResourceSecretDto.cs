@@ -1,4 +1,4 @@
-﻿using Destiny.Core.Flow.Extensions;
+﻿using DestinyCore.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Text;

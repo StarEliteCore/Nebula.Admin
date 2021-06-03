@@ -1,5 +1,6 @@
-﻿using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.Extensions;
+﻿using DestinyCore;
+using DestinyCore.Entity;
+using DestinyCore.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;

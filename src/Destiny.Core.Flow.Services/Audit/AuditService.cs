@@ -1,9 +1,9 @@
-﻿using Destiny.Core.Flow.Audit;
-using Destiny.Core.Flow.Audit.Dto;
-using Destiny.Core.Flow.Extensions;
+﻿using DestinyCore.Audit;
+using DestinyCore.Audit.Dto;
+using DestinyCore.Extensions;
 using Destiny.Core.Flow.IServices.Audit;
-using Destiny.Core.Flow.MongoDB.Repositorys;
-using Destiny.Core.Flow.Ui;
+using DestinyCore.MongoDB.Repositorys;
+using DestinyCore.Ui;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Threading.Tasks;

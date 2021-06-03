@@ -1,11 +1,11 @@
-﻿using Destiny.Core.Flow.CodeGenerator;
-using Destiny.Core.Flow.TestBase;
+﻿using DestinyCore.CodeGenerator;
+using DestinyCore.TestBase;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using Microsoft.Extensions.DependencyInjection;
-using Destiny.Core.Flow.Exceptions;
+using DestinyCore.Exceptions;
 using System.IO;
 
 namespace Destiny.Core.Tests

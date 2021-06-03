@@ -1,8 +1,9 @@
-﻿using Destiny.Core.Flow.Exceptions;
-using Destiny.Core.Flow.Extensions;
-using Destiny.Core.Flow.MongoDB.DbContexts;
+﻿using DestinyCore.Exceptions;
+using DestinyCore.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
+using DestinyCore.MongoDB.DbContexts;
+using DestinyCore.MongoDB;
 
 namespace Destiny.Core.Flow.API.Startups
 {

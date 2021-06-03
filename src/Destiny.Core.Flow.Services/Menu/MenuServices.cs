@@ -1,16 +1,16 @@
 ﻿using Destiny.Core.Flow.Dtos.Menu;
-using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.Enums;
-using Destiny.Core.Flow.Extensions;
-using Destiny.Core.Flow.Filter;
-using Destiny.Core.Flow.Filter.Abstract;
+using DestinyCore.Entity;
+using DestinyCore.Enums;
+using DestinyCore.Extensions;
+using DestinyCore.Filter;
+using DestinyCore.Filter.Abstract;
 using Destiny.Core.Flow.IServices.IMenu;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Destiny.Core.Flow.Model.Entities.Menu;
 using Destiny.Core.Flow.Model.Entities.Rolemenu;
 using Destiny.Core.Flow.Repository.MenuRepository;
-using Destiny.Core.Flow.Security.Identity;
-using Destiny.Core.Flow.Ui;
+using DestinyCore.Security.Identity;
+using DestinyCore.Ui;
 using DnsClient.Internal;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +23,8 @@ using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore.Internal;
-using Destiny.Core.Flow.Caching;
+using DestinyCore.Caching;
+using DestinyCore;
 
 namespace Destiny.Core.Flow.Services.Menu
 {
@@ -125,7 +126,7 @@ namespace Destiny.Core.Flow.Services.Menu
             var list = await _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuTreeOutDto>(
                 (r, c) =>
                 {
-                    return c.ParentId == null || c.ParentId == Guid.Empty;
+                    return c.ParentId == Guid.Empty;
                 }, (p, q) =>
                 {
                     return p.Id == q.ParentId;
@@ -206,7 +207,7 @@ namespace Destiny.Core.Flow.Services.Menu
             return await _menuRepository.Entities.ToTreeResultAsync<MenuEntity, MenuTableOutDto>(
              (p, c) =>
              {
-                 return c.ParentId == null || c.ParentId == Guid.Empty;
+                 return  c.ParentId == Guid.Empty;
              },
              (p, c) =>
              {
@@ -303,7 +304,7 @@ namespace Destiny.Core.Flow.Services.Menu
                     sw.Start();
                     var result = await _menuRepository.Entities.Where(expression).OrderBy(o => o.Sort).ToTreeResultAsync<MenuEntity, VueDynamicRouterTreeOutDto>((p, c) =>
                     {
-                        return c.ParentId == null || c.ParentId == Guid.Empty;
+                        return  c.ParentId == Guid.Empty;
                     },
                      (p, c) =>
                      {
@@ -378,7 +379,7 @@ namespace Destiny.Core.Flow.Services.Menu
             return _menuRepository.Entities.OrderBy(o => o.Sort).Where(o => o.Type == menu).ToTreeResultAsync<MenuEntity, MenuTreeOutDto>(
               (p, c) =>
               {
-                  return c.ParentId == null || c.ParentId == Guid.Empty;
+                  return  c.ParentId == Guid.Empty;
               },
               (p, c) =>
               {

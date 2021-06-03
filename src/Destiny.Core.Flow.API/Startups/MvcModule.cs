@@ -1,8 +1,7 @@
-﻿using Destiny.Core.Flow.AspNetCore.Module;
-using Destiny.Core.Flow.AspNetCore.Mvc.Filters;
-using Destiny.Core.Flow.Extensions;
-using Destiny.Core.Flow.Modules;
-using Destiny.Core.Flow.Options;
+﻿using DestinyCore.AspNetCore;
+using DestinyCore.Extensions;
+using DestinyCore.Modules;
+using DestinyCore.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;

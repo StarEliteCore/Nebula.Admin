@@ -1,5 +1,5 @@
-﻿using Destiny.Core.Flow.AspNetCore.Api;
-using Destiny.Core.Flow.AspNetCore.Ui;
+﻿using DestinyCore.AspNetCore.Api;
+using DestinyCore.AspNetCore;
 using Destiny.Core.Flow.IServices.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

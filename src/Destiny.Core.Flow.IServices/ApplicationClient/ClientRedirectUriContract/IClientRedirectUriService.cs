@@ -1,5 +1,5 @@
-﻿using Destiny.Core.Flow.Dependency;
-using Destiny.Core.Flow.Ui;
+﻿using DestinyCore.Dependency;
+using DestinyCore.Ui;
 using IDN.Services.BasicsService.Dtos.IdentityServer4.ClientApplication;
 using System.Threading.Tasks;
 

@@ -1,4 +1,4 @@
-﻿using Destiny.Core.Flow.Events;
+﻿using DestinyCore.Events;
 using System;
 
 namespace Destiny.Core.Flow.Services.RoleServices.Events

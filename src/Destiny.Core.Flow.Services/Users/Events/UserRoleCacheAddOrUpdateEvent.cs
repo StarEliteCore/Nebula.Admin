@@ -1,4 +1,4 @@
-﻿using Destiny.Core.Flow.Events;
+﻿using DestinyCore.Events;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using System.Collections.Generic;
 

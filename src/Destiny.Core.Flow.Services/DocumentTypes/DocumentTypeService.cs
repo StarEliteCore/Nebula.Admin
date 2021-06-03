@@ -5,20 +5,21 @@
 using System;
 using Destiny.Core.Flow.Dtos;
 using System.Threading.Tasks;
-using Destiny.Core.Flow.Filter;
-using Destiny.Core.Flow.Filter.Abstract;
-using Destiny.Core.Flow.Ui;
-using Destiny.Core.Flow.Extensions;
+using DestinyCore.Filter;
+using DestinyCore.Filter.Abstract;
+using DestinyCore.Ui;
+using DestinyCore.Extensions;
 using Destiny.Core.Flow;
-using Destiny.Core.Flow.Enums;
+using DestinyCore.Enums;
 using Microsoft.Extensions.DependencyInjection;
 using Destiny.Core.Flow.Entities;
 using Destiny.Core.Flow.IServices.DocumentTypes;
 using System.Linq;
-using Destiny.Core.Flow.Exceptions;
-using Destiny.Core.Flow.Ui.Abstracts;
+using DestinyCore.Exceptions;
+using DestinyCore.Ui.Abstracts;
 using Destiny.Core.Flow.Dtos.DocumentTypes;
 using System.Collections.Generic;
+using DestinyCore;
 
 namespace Destiny.Core.Flow.Services.DocumentTypes
 {

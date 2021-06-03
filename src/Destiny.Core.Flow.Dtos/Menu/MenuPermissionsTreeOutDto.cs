@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Destiny.Core.Flow.Entity;
+using DestinyCore.Entity;
 using Destiny.Core.Flow.Model.Entities.Menu;
 using System;
 using System.Collections.Generic;

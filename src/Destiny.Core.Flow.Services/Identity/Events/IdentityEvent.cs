@@ -1,4 +1,4 @@
-﻿using Destiny.Core.Flow.Events;
+﻿using DestinyCore.Events;
 
 namespace Destiny.Core.Flow.Services.Identity.Events
 {

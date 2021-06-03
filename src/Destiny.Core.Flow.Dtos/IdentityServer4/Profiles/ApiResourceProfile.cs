@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Destiny.Core.Flow.Model.DestinyIdentityServer4;
+using DestinyCore;
 using System.Collections.Generic;
 
 namespace Destiny.Core.Flow.Dtos.IdentityServer4.Profiles

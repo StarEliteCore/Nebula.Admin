@@ -1,6 +1,6 @@
-﻿using Destiny.Core.Flow.Extensions;
+﻿using DestinyCore.Extensions;
 using Destiny.Core.Flow.Model.Entities.Identity;
-using Destiny.Core.Flow.Security.Identity;
+using DestinyCore.Security.Identity;
 using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
@@ -10,6 +10,7 @@ using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using DestinyCore;
 
 namespace Destiny.Core.Flow.IdentityServer.Validation
 {

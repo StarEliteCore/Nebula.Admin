@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Destiny.Core.Flow.Entity;
+using DestinyCore.Entity;
 using Destiny.Core.Flow.Entities;
-using Destiny.Core.Flow.Mapping;
+using DestinyCore.Mapping;
 namespace Destiny.Core.Flow.Dtos
 {
     /// <summary>

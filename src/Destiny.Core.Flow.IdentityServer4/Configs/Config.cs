@@ -1,4 +1,5 @@
-﻿using IdentityServer4;
+﻿using DestinyCore;
+using IdentityServer4;
 using IdentityServer4.Models;
 using System.Collections.Generic;
 namespace Destiny.Core.Flow.IdentityServer
@@ -49,7 +50,7 @@ namespace Destiny.Core.Flow.IdentityServer
                 new Client {
                     ClientId = "DestinyCoreFlowReactClient",
                     ClientName = "Destiny.Core.Flow.ReactClient",
-                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowedGrantTypes =  DestinyCore.GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
                     ClientSecrets =
                     {
@@ -69,7 +70,7 @@ namespace Destiny.Core.Flow.IdentityServer
                 new Client {
                     ClientId = "DestinyCoreFlowReactClientpwd",
                     ClientName = "Destiny.Core.Flow.ReactClientpwd",
-                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    AllowedGrantTypes = DestinyCore.GrantTypes.ResourceOwnerPassword,
                     AllowAccessTokensViaBrowser = true,
                     ClientSecrets =
                     {

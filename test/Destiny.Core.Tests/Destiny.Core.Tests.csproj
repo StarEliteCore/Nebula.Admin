@@ -30,16 +30,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Destiny.Core.Flow" Version="1.0.3" />
-    <PackageReference Include="Destiny.Core.Flow.Caching" Version="1.0.0" />
-    <PackageReference Include="Destiny.Core.Flow.CodeGenerator" Version="1.0.0" />
-    <PackageReference Include="Destiny.Core.Flow.EntityFrameworkCore" Version="1.0.1" />
-    <PackageReference Include="Destiny.Core.Flow.MongoDB" Version="1.0.0" />
+    <PackageReference Include="DestinyCore" Version="1.0.0" />
+    <PackageReference Include="DestinyCore.Caching" Version="1.0.0" />
+    <PackageReference Include="DestinyCore.CodeGenerator" Version="1.0.0" />
+    <PackageReference Include="DestinyCore.EntityFrameworkCore" Version="1.0.0" />
+    <PackageReference Include="DestinyCore.MongoDB" Version="1.0.0" />
+    <PackageReference Include="DestinyCore.TestBase" Version="1.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.4" />
-    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="5.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="5.0.6" />
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="5.0.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <PrivateAssets>all</PrivateAssets>
@@ -49,11 +50,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Destiny.Core.Flow.API\Destiny.Core.Flow.API.csproj" />
-    <ProjectReference Include="..\..\src\Destiny.Core.Flow.TestBase\Destiny.Core.Flow.TestBase.csproj" />
   </ItemGroup>
 
 </Project>

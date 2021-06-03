@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using DestinyCore.EntityFrameworkCore;
 namespace Destiny.Core.Flow.Model.DestinyIdentityServer4.EntityConfigurations.IdentityServer4.Resources
 {
     public class IdentityResourceConfiguration : EntityMappingConfiguration<IdentityResource, Guid>
