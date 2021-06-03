@@ -1,5 +1,5 @@
-﻿using Destiny.Core.Flow.Modules;
-using Destiny.Core.Flow.TestBase;
+﻿using DestinyCore.Modules;
+using DestinyCore.TestBase;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 

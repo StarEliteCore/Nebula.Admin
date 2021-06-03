@@ -1,7 +1,7 @@
 
 using Destiny.Core.Flow.API.Startups;
-using Destiny.Core.Flow.AspNetCore;
-using Destiny.Core.Flow.Modules;
+using DestinyCore.AspNetCore;
+using DestinyCore.Modules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

@@ -1,5 +1,6 @@
 ﻿using Destiny.Core.Flow.Identity;
 using Destiny.Core.Flow.Model.Entities.Identity;
+using DestinyCore;
 using System;
 
 namespace Destiny.Core.Flow.Model.Security

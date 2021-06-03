@@ -1,6 +1,7 @@
 ﻿using Destiny.Core.Flow.Model.Entities.Rolemenu;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using DestinyCore.EntityFrameworkCore;
 using System;
 
 namespace Destiny.Core.Flow.Model.EntityConfigurations

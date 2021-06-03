@@ -1,4 +1,4 @@
-﻿using Destiny.Core.Flow.Caching;
+﻿using DestinyCore.Caching;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;

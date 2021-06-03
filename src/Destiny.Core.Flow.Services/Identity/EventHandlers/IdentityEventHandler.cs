@@ -1,7 +1,7 @@
-﻿using Destiny.Core.Flow.Caching;
-using Destiny.Core.Flow.Events;
-using Destiny.Core.Flow.Extensions;
-using Destiny.Core.Flow.Helpers;
+﻿using DestinyCore.Caching;
+using DestinyCore.Events;
+using DestinyCore.Extensions;
+using DestinyCore.Helpers;
 using Destiny.Core.Flow.Services.Identity.Events;
 using Microsoft.Extensions.Logging;
 using System;

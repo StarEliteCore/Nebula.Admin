@@ -1,5 +1,5 @@
 ﻿using Destiny.Core.Flow.Identity;
-using Destiny.Core.Flow.Modules;
+using DestinyCore.Modules;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;

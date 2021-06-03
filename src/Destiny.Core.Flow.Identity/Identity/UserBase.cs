@@ -1,6 +1,6 @@
-﻿using Destiny.Core.Flow.Audit;
-using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.Enums;
+﻿using DestinyCore.Audit;
+using DestinyCore.Entity;
+using DestinyCore.Enums;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;

@@ -1,10 +1,7 @@
-﻿using Destiny.Core.Flow.AutoMapper;
-using Destiny.Core.Flow.Dependency;
-using Destiny.Core.Flow.Events;
-using Destiny.Core.Flow.Extensions;
+﻿
+using DestinyCore.Dependency;
+using DestinyCore.Extensions;
 using Destiny.Core.Flow.IdentityServer;
-using Destiny.Core.Flow.Modules;
-using Destiny.Core.Flow.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +9,10 @@ using Microsoft.Extensions.FileProviders;
 using System;
 using System.Linq;
 using System.Security.Principal;
+using DestinyCore.Modules;
+using DestinyCore.Events;
+using DestinyCore.AutoMapper;
+using DestinyCore.Options;
 
 namespace Destiny.Core.Flow.AuthenticationCenter.Startups
 {

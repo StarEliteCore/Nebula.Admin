@@ -1,9 +1,9 @@
-﻿using Destiny.Core.Flow.Dependency;
+﻿using DestinyCore.Dependency;
 using Destiny.Core.Flow.Dtos.Menu;
-using Destiny.Core.Flow.Filter;
-using Destiny.Core.Flow.Filter.Abstract;
+using DestinyCore.Filter;
+using DestinyCore.Filter.Abstract;
 using Destiny.Core.Flow.Model.Entities.Menu;
-using Destiny.Core.Flow.Ui;
+using DestinyCore.Ui;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

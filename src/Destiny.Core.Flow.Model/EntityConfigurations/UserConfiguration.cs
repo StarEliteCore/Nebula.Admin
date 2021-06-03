@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-
+using DestinyCore.EntityFrameworkCore;
 namespace Destiny.Core.Flow.Model.EntityConfigurations
 {
     public class UserConfiguration : EntityMappingConfiguration<User, Guid>

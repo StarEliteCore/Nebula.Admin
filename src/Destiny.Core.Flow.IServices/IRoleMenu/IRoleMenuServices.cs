@@ -1,5 +1,5 @@
-﻿using Destiny.Core.Flow.Dependency;
-using Destiny.Core.Flow.Ui;
+﻿using DestinyCore.Dependency;
+using DestinyCore.Ui;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IServices.IRoleMenu

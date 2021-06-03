@@ -1,5 +1,5 @@
-﻿using Destiny.Core.Flow.Audit;
-using Destiny.Core.Flow.Entity;
+﻿using DestinyCore.Audit;
+using DestinyCore.Entity;
 using Destiny.Core.Flow.IdentityServer.Entities;
 using System;
 using System.ComponentModel;

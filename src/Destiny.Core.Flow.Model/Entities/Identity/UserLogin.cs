@@ -1,4 +1,4 @@
-﻿using Destiny.Core.Flow.Entity;
+﻿using DestinyCore.Entity;
 using Destiny.Core.Flow.Identity;
 using System;
 using System.ComponentModel;

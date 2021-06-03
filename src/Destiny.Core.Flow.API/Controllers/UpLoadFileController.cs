@@ -1,5 +1,5 @@
-﻿using Destiny.Core.Flow.AspNetCore.Api;
-using Destiny.Core.Flow.Filter;
+﻿using DestinyCore.AspNetCore.Api;
+using DestinyCore.Filter;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

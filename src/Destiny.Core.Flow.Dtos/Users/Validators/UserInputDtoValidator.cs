@@ -1,4 +1,4 @@
-﻿using Destiny.Core.Flow.FluentValidation;
+﻿using DestinyCore.FluentValidation;
 using FluentValidation;
 
 namespace Destiny.Core.Flow.Dtos.Users.Validators

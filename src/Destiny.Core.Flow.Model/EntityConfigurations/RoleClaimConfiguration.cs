@@ -1,8 +1,8 @@
 ﻿using Destiny.Core.Flow.Model.Entities.Identity;
+using DestinyCore.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-
 namespace Destiny.Core.Flow.Model.EntityConfigurations
 {
     public class RoleClaimConfiguration : EntityMappingConfiguration<RoleClaim, Guid>

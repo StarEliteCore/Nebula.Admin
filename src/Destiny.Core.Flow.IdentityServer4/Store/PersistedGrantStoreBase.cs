@@ -1,4 +1,4 @@
-﻿using Destiny.Core.Flow.Extensions;
+﻿using DestinyCore.Extensions;
 using Destiny.Core.Flow.Model.DestinyIdentityServer4;
 using IdentityServer4.Stores;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DestinyCore;
 
 namespace Destiny.Core.Flow.IdentityServer.Store
 {

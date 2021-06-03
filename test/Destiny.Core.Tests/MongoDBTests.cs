@@ -1,14 +1,13 @@
-﻿using Destiny.Core.Flow;
-using Destiny.Core.Flow.API.Controllers;
-using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.ExpressionUtil;
-using Destiny.Core.Flow.Extensions;
-using Destiny.Core.Flow.Filter;
-using Destiny.Core.Flow.Filter.Abstract;
-using Destiny.Core.Flow.MongoDB;
-using Destiny.Core.Flow.MongoDB.DbContexts;
-using Destiny.Core.Flow.MongoDB.Repositorys;
-using Destiny.Core.Flow.TestBase;
+﻿using DestinyCore;
+using DestinyCore.Entity;
+using DestinyCore.ExpressionUtil;
+using DestinyCore.Extensions;
+using DestinyCore.Filter;
+using DestinyCore.Filter.Abstract;
+using DestinyCore.MongoDB;
+using DestinyCore.MongoDB.DbContexts;
+using DestinyCore.MongoDB.Repositorys;
+using DestinyCore.TestBase;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;
@@ -30,7 +29,7 @@ namespace Destiny.Core.Tests
     {
 
         private readonly IMongoDBRepository<TestDB, ObjectId> _mongoDBRepository = null;
-        private readonly AuditEntryController _auditEntryController;
+        //private readonly AuditEntryController _auditEntryController;
         public MongoDBTests()
         {
             _mongoDBRepository = ServiceProvider.GetService<IMongoDBRepository<TestDB, ObjectId>>();
@@ -40,7 +39,7 @@ namespace Destiny.Core.Tests
             //    cm.MapProperty(o => o.Name);
             //    cm.ToCollection("Test001");
             //});
-            _auditEntryController = ServiceProvider.GetRequiredService<AuditEntryController>();
+            //_auditEntryController = ServiceProvider.GetRequiredService<AuditEntryController>();
 
 
         }
@@ -48,7 +47,7 @@ namespace Destiny.Core.Tests
         public async Task InsertEntityAsync_Test()
         {
 
-            var request = await _auditEntryController.GetAuditEntryPageAsync(new PageRequest());
+            //var request = await _auditEntryController.GetAuditEntryPageAsync(new PageRequest());
             for (int i = 0; i < 100; i++)
             {
                 TestDB test = new TestDB();
@@ -72,7 +71,7 @@ namespace Destiny.Core.Tests
             filter.Conditions.Add(condition);
             var exp = FilterBuilder.GetExpression<TestDB>(filter);
             OrderCondition[] orderConditions = new OrderCondition[] {
-                new OrderCondition("Name",Flow.Enums.SortDirection.Descending),
+                new OrderCondition("Name",DestinyCore.Enums.SortDirection.Descending),
                 new OrderCondition("CreatedTime")
                };
             PagedRequest pagedRequest = new PagedRequest();
@@ -157,7 +156,7 @@ namespace Destiny.Core.Tests
         protected override void AddDbContext(IServiceCollection services)
         {
             var builder = new ConfigurationBuilder();
-            services.AddScoped<AuditEntryController>();
+            //services.AddScoped<AuditEntryController>();
             var configuration = builder.AddJsonFile("appsettings.json").Build();
             var dbpath = configuration["Destiny:DbContext:MongoDBConnectionString"];
             var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath; //获取项目路径

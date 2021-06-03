@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.Enums;
-using Destiny.Core.Flow.Mapping;
+using DestinyCore.Entity;
+using DestinyCore.Enums;
+using DestinyCore.Mapping;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using System;
 using System.ComponentModel;

@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Destiny.Core.Flow.Entities;
+using Destiny.Core.Flow.Model.DestinyIdentityServer4;
+using DestinyCore.EntityFrameworkCore;
 namespace Destiny.Core.Flow.EntityConfigurations
 {
 

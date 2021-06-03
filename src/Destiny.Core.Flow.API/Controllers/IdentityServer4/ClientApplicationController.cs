@@ -1,7 +1,7 @@
-﻿using Destiny.Core.Flow.AspNetCore.Api;
-using Destiny.Core.Flow.AspNetCore.Ui;
+﻿using DestinyCore.AspNetCore.Api;
+using DestinyCore.AspNetCore;
 using Destiny.Core.Flow.Dtos.IdentityServer4.ClientApplication;
-using Destiny.Core.Flow.Filter;
+using DestinyCore.Filter;
 using Destiny.Core.Flow.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

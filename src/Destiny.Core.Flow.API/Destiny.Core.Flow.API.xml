@@ -9,14 +9,14 @@
             数据审计
             </summary>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.AuditEntryController.GetAuditEntryPageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+        <member name="M:Destiny.Core.Flow.API.Controllers.AuditEntryController.GetAuditEntryPageAsync(DestinyCore.Filter.PageRequest)">
             <summary>
             异步得到数据审计分页
             </summary>
             <param name="request"></param>
             <returns></returns>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.AuditEntryController.GetAuditEntryPropertyPageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+        <member name="M:Destiny.Core.Flow.API.Controllers.AuditEntryController.GetAuditEntryPropertyPageAsync(DestinyCore.Filter.PageRequest)">
             <summary>
             异步得到实体属性分页
             </summary>
@@ -42,7 +42,7 @@
             审计日志
             </summary>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.AuditLogController.GetAuditLogPageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+        <member name="M:Destiny.Core.Flow.API.Controllers.AuditLogController.GetAuditLogPageAsync(DestinyCore.Filter.PageRequest)">
             <summary>
             分页获取审计日志
             </summary>
@@ -54,7 +54,7 @@
             代码生成器
             </summary>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.CodeGeneratorController.GenerateCode(Destiny.Core.Flow.CodeGenerator.ProjectMetadata)">
+        <member name="M:Destiny.Core.Flow.API.Controllers.CodeGeneratorController.GenerateCode(DestinyCore.CodeGenerator.ProjectMetadata)">
             <summary>
             代码生成
             </summary>
@@ -64,7 +64,7 @@
             数据字典
             </summary>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.DataDictionary.DataDictionaryController.GetPageListAsync(Destiny.Core.Flow.Filter.PageRequest)">
+        <member name="M:Destiny.Core.Flow.API.Controllers.DataDictionary.DataDictionaryController.GetPageListAsync(DestinyCore.Filter.PageRequest)">
             <summary>
             分页获取数据字典
             </summary>
@@ -134,7 +134,7 @@
             </summary>
             <param name="id">要删除的文档主键</param>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentController.GetPageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentController.GetPageAsync(DestinyCore.Filter.PageRequest)">
             <summary>
             异步得到文档分页数据
             </summary>
@@ -169,7 +169,7 @@
             </summary>
             <param name="id">要删除的文档类型主键</param>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentTypeController.GetPageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+        <member name="M:Destiny.Core.Flow.API.Controllers.DocumentTypeController.GetPageAsync(DestinyCore.Filter.PageRequest)">
             <summary>
             异步得到文档类型分页数据
             </summary>
@@ -283,7 +283,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ApiResourceController.GetApiResourcePageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ApiResourceController.GetApiResourcePageAsync(DestinyCore.Filter.PageRequest)">
             <summary>
             异步得到API资源分页
             </summary>
@@ -333,7 +333,7 @@
             <param name="dto"></param>
             <returns></returns>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ApiScopeController.GetApiScopePageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ApiScopeController.GetApiScopePageAsync(DestinyCore.Filter.PageRequest)">
             <summary>
             异步得到API范围分页
             </summary>
@@ -359,7 +359,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ClientApplicationController.GetPageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+        <member name="M:Destiny.Core.Flow.API.Controllers.IdentityServer4.ClientApplicationController.GetPageAsync(DestinyCore.Filter.PageRequest)">
             <summary>
             分页获取
             </summary>
@@ -473,7 +473,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetMenuPageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+        <member name="M:Destiny.Core.Flow.API.Controllers.Menu.MenuController.GetMenuPageAsync(DestinyCore.Filter.PageRequest)">
             <summary>
             异步得到菜单分页数据（不是树，只是普通表格）
             </summary>
@@ -532,7 +532,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.Organization.OrganizationController.GetPageOrganizationAsync(Destiny.Core.Flow.Filter.PageRequest)">
+        <member name="M:Destiny.Core.Flow.API.Controllers.Organization.OrganizationController.GetPageOrganizationAsync(DestinyCore.Filter.PageRequest)">
             <summary>
             异步得到组织架构分页数据
             </summary>
@@ -554,7 +554,7 @@
             角色管理
             </summary>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.RoleController.GetRolePageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+        <member name="M:Destiny.Core.Flow.API.Controllers.RoleController.GetRolePageAsync(DestinyCore.Filter.PageRequest)">
             <summary>
             异步得到分页
             </summary>
@@ -643,7 +643,7 @@
              <param name="dto"></param>
              <returns></returns>
         </member>
-        <member name="M:Destiny.Core.Flow.API.Controllers.UserController.GetUserPageAsync(Destiny.Core.Flow.Filter.PageRequest)">
+        <member name="M:Destiny.Core.Flow.API.Controllers.UserController.GetUserPageAsync(DestinyCore.Filter.PageRequest)">
             <summary>
             异步得到分页
             </summary>

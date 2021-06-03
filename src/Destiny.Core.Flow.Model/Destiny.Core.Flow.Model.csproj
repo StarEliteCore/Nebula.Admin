@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,9 +11,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Destiny.Core.Flow" Version="1.0.3" />
-    <PackageReference Include="Destiny.Core.Flow.EntityFrameworkCore" Version="1.0.1" />
+    <PackageReference Include="DestinyCore" Version="1.0.0" />
+    <PackageReference Include="DestinyCore.EntityFrameworkCore" Version="1.0.0" />
+    <PackageReference Include="DestinyCore.FluentValidation" Version="1.0.0" />
+    <PackageReference Include="DestinyCore.TestBase" Version="1.0.0" />
+    <PackageReference Include="DestinyCore.AutoMapper" Version="1.0.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.1.8" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="5.0.6" />
   </ItemGroup>
 
   <ItemGroup>

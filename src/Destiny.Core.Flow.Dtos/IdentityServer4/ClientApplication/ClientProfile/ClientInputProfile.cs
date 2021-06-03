@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Destiny.Core.Flow.Dtos.Share;
 using Destiny.Core.Flow.Model.DestinyIdentityServer4;
+using DestinyCore;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;

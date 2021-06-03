@@ -1,4 +1,4 @@
-﻿using Destiny.Core.Flow.Dependency;
+﻿using DestinyCore.Dependency;
 using Destiny.Core.Flow.Model.Entities.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;

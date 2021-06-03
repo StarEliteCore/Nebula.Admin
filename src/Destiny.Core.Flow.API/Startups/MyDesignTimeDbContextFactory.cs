@@ -1,8 +1,8 @@
-﻿using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.Exceptions;
-using Destiny.Core.Flow.Extensions;
-using Destiny.Core.Flow.Interceptor;
-using Destiny.Core.Flow.Options;
+﻿using DestinyCore.Entity;
+using DestinyCore.Exceptions;
+using DestinyCore.Extensions;
+//using DestinyCore.Interceptor;
+using DestinyCore.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.DependencyInjection;

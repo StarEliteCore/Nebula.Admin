@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.Model.DestinyIdentityServer4;
+using DestinyCore.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

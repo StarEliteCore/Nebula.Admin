@@ -1,14 +1,15 @@
-﻿using Destiny.Core.Flow.Data.Dto;
-using Destiny.Core.Flow.Extensions;
+﻿using DestinyCore.Data.Dto;
+using DestinyCore.Extensions;
 using Destiny.Core.Flow.IServices.IdentityServer4;
 using Destiny.Core.Flow.Model.DestinyIdentityServer4;
-using Destiny.Core.Flow.Ui;
+using DestinyCore.Ui;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DestinyCore;
 
 namespace Destiny.Core.Flow.Services.IdentityServer4
 {

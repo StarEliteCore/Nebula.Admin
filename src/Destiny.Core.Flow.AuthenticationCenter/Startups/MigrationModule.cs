@@ -1,5 +1,5 @@
-﻿using Destiny.Core.Flow.Entity.Modules;
-using Destiny.Core.Flow.Modules;
+﻿using DestinyCore.Entity.Modules;
+using DestinyCore.Modules;
 using System;
 using System.Collections.Generic;
 using System.Linq;

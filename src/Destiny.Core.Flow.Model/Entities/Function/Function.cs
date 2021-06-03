@@ -1,5 +1,5 @@
-﻿using Destiny.Core.Flow.Data;
-using Destiny.Core.Flow.Entity;
+﻿using DestinyCore.Data;
+using DestinyCore.Entity;
 using System;
 using System.ComponentModel;
 

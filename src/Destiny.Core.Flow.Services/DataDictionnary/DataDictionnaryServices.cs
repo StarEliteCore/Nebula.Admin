@@ -1,12 +1,12 @@
 ﻿using Destiny.Core.Flow.Dtos.DataDictionnary;
-using Destiny.Core.Flow.Enums;
-using Destiny.Core.Flow.Extensions;
-using Destiny.Core.Flow.Filter;
-using Destiny.Core.Flow.Filter.Abstract;
+using DestinyCore.Enums;
+using DestinyCore.Extensions;
+using DestinyCore.Filter;
+using DestinyCore.Filter.Abstract;
 using Destiny.Core.Flow.IServices.IDataDictionnary;
 using Destiny.Core.Flow.Model.Entities.Dictionary;
 using Destiny.Core.Flow.Repository.DictionaryRepository;
-using Destiny.Core.Flow.Ui;
+using DestinyCore.Ui;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -56,7 +56,7 @@ namespace Destiny.Core.Flow.Services.DataDictionnary
             return await _dataDictionnaryRepository.Entities.ToTreeResultAsync<DataDictionaryEntity, DataDictionaryOutDto>(
                 (p, c) =>
                 {
-                    return c.ParentId == null || c.ParentId == Guid.Empty;
+                    return c.ParentId == Guid.Empty;
                 },
                 (p, c) =>
                 {

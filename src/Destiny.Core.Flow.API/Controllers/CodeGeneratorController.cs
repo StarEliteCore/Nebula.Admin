@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Destiny.Core.Flow.AspNetCore.Api;
-using Destiny.Core.Flow.AspNetCore.Ui;
-using Destiny.Core.Flow.Audit;
-using Destiny.Core.Flow.CodeGenerator;
-using Destiny.Core.Flow.Enums;
+using DestinyCore.AspNetCore.Api;
+using DestinyCore.AspNetCore;
+using DestinyCore.Audit;
+using DestinyCore.CodeGenerator;
+using DestinyCore.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,10 +22,10 @@ namespace Destiny.Core.Flow.API.Controllers
     public class CodeGeneratorController : ApiControllerBase
     {
 
-        private readonly Destiny.Core.Flow.CodeGenerator.ICodeGenerator _codeGenerator = null;
+        private readonly DestinyCore.CodeGenerator.ICodeGenerator _codeGenerator = null;
         private readonly ICodeGeneratorService _codeGeneratorService = null;
 
-        public CodeGeneratorController(Destiny.Core.Flow.CodeGenerator.ICodeGenerator codeGenerator, ICodeGeneratorService codeGeneratorService)
+        public CodeGeneratorController(DestinyCore.CodeGenerator.ICodeGenerator codeGenerator, ICodeGeneratorService codeGeneratorService)
         {
             _codeGenerator = codeGenerator;
             _codeGeneratorService = codeGeneratorService;

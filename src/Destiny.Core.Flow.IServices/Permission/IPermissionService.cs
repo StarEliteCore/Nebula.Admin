@@ -1,6 +1,6 @@
-﻿using Destiny.Core.Flow.Dependency;
+﻿using DestinyCore.Dependency;
 using Destiny.Core.Flow.Dtos.Permissions;
-using Destiny.Core.Flow.Ui;
+using DestinyCore.Ui;
 using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IServices.Permission

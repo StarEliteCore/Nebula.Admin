@@ -1,12 +1,12 @@
 ﻿using Destiny.Core.Flow.Dtos.Organization;
-using Destiny.Core.Flow.Enums;
-using Destiny.Core.Flow.Extensions;
-using Destiny.Core.Flow.Filter;
-using Destiny.Core.Flow.Filter.Abstract;
+using DestinyCore.Enums;
+using DestinyCore.Extensions;
+using DestinyCore.Filter;
+using DestinyCore.Filter.Abstract;
 using Destiny.Core.Flow.IServices.Organization;
 using Destiny.Core.Flow.Model.Entities.Organizational;
 using Destiny.Core.Flow.Repository.OrganizationRepository;
-using Destiny.Core.Flow.Ui;
+using DestinyCore.Ui;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

@@ -1,15 +1,15 @@
-﻿using Destiny.Core.Flow.AspNetCore.Api;
-using Destiny.Core.Flow.AspNetCore.Ui;
-using Destiny.Core.Flow.Audit;
-using Destiny.Core.Flow.Audit.Dto;
-using Destiny.Core.Flow.Filter;
+﻿using DestinyCore.AspNetCore.Api;
+using DestinyCore.AspNetCore;
+using DestinyCore.Audit;
+using DestinyCore.Audit.Dto;
+using DestinyCore.Filter;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using Destiny.Core.Flow.Extensions;
+using DestinyCore.Extensions;
 
 namespace Destiny.Core.Flow.API.Controllers
 {

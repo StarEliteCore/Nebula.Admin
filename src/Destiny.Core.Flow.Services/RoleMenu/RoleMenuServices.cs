@@ -1,7 +1,7 @@
 ﻿using Destiny.Core.Flow.IServices.IRoleMenu;
 using Destiny.Core.Flow.Model.Entities.Rolemenu;
 using Destiny.Core.Flow.Repository.RoleMenuRepository;
-using Destiny.Core.Flow.Ui;
+using DestinyCore.Ui;
 using System;
 using System.Threading.Tasks;
 

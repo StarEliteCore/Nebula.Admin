@@ -1,9 +1,9 @@
-﻿using Destiny.Core.Flow.AspNetCore.Api;
-using Destiny.Core.Flow.AspNetCore.Ui;
-using Destiny.Core.Flow.Audit;
+﻿using DestinyCore.AspNetCore.Api;
+using DestinyCore.AspNetCore;
+using DestinyCore.Audit;
 using Destiny.Core.Flow.Dtos;
 using Destiny.Core.Flow.IServices.Identity;
-using Destiny.Core.Flow.Permission;
+using DestinyCore.Permission;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -1,4 +1,4 @@
-﻿//using Destiny.Core.Flow.Dependency;
+﻿//using DestinyCore.Dependency;
 //using Destiny.Core.Flow.IdentityServer.IdentityServerFour;
 //using System;
 //using System.Collections.Generic;

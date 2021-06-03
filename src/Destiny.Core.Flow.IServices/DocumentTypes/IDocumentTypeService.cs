@@ -4,12 +4,12 @@
 
 using System;
 using Destiny.Core.Flow.Dtos;
-using Destiny.Core.Flow.Dependency;
+using DestinyCore.Dependency;
 using System.Threading.Tasks;
-using Destiny.Core.Flow.Filter;
-using Destiny.Core.Flow.Filter.Abstract;
-using Destiny.Core.Flow.Ui;
-using Destiny.Core.Flow.Ui.Abstracts;
+using DestinyCore.Filter;
+using DestinyCore.Filter.Abstract;
+using DestinyCore.Ui;
+using DestinyCore.Ui.Abstracts;
 using Destiny.Core.Flow.Dtos.DocumentTypes;
 
 namespace Destiny.Core.Flow.IServices.DocumentTypes

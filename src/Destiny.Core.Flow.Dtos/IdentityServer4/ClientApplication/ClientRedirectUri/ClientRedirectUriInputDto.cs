@@ -1,5 +1,5 @@
-﻿using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.Mapping;
+﻿using DestinyCore.Entity;
+using DestinyCore.Mapping;
 using Destiny.Core.Flow.Model.DestinyIdentityServer4;
 using System;
 using System.ComponentModel;

@@ -1,16 +1,16 @@
 ﻿using Destiny.Core.Flow.Dtos.Menu;
 using Destiny.Core.Flow.Dtos.MenuFunction;
-using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.Enums;
-using Destiny.Core.Flow.ExpressionUtil;
-using Destiny.Core.Flow.Extensions;
-using Destiny.Core.Flow.Filter;
-using Destiny.Core.Flow.Filter.Abstract;
+using DestinyCore.Entity;
+using DestinyCore.Enums;
+using DestinyCore.ExpressionUtil;
+using DestinyCore.Extensions;
+using DestinyCore.Filter;
+using DestinyCore.Filter.Abstract;
 using Destiny.Core.Flow.IServices.IMenu;
 using Destiny.Core.Flow.Model.Entities.Function;
 using Destiny.Core.Flow.Model.Entities.Menu;
 using Destiny.Core.Flow.Repository.MenuRepository;
-using Destiny.Core.Flow.Ui;
+using DestinyCore.Ui;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,6 +18,8 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using DestinyCore;
+using DestinyCore.EntityFrameworkCore;
 
 namespace Destiny.Core.Flow.Services.Menu
 {

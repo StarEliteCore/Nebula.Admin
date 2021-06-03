@@ -1,4 +1,5 @@
 ﻿using Destiny.Core.Flow.Model.Entities.Menu;
+using DestinyCore.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

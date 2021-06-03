@@ -1,7 +1,7 @@
-﻿using Destiny.Core.Flow.Extensions;
+﻿using DestinyCore.Extensions;
 using Destiny.Core.Flow.IdentityServer.Store;
 using Destiny.Core.Flow.IdentityServer.Validation;
-using Destiny.Core.Flow.Modules;
+using DestinyCore.Modules;
 using IdentityServer4.Stores;
 using IdentityServer4.Validation;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,26 +1,31 @@
-﻿using Destiny.Core.Flow.AuthenticationCenter.DbContexts;
-using Destiny.Core.Flow.Entity;
-using Destiny.Core.Flow.Events;
-using Destiny.Core.Flow.Modules;
+﻿using DestinyCore.Entity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Destiny.Core.Flow.EntityFrameworkCore;
+using DestinyCore.EntityFrameworkCore;
+using DestinyCore.Modules;
 
 namespace Destiny.Core.Flow.AuthenticationCenter.Startups
 {
 
-    public class AuthenticationCenterEntityFrameworkCoreModule : EntityFrameworkCoreModule
+    public class AuthenticationCenterEntityFrameworkCoreModule :AppModule
     {
 
-
-        protected override IServiceCollection AddDestinyDbContextWnitUnitOfWork(IServiceCollection services)
+        public override void ConfigureServices(ConfigureServicesContext context)
         {
-            services.AddDestinyDbContext<IdentityServer4DefaultDbContext>();
-            services.AddUnitOfWork<IdentityServer4DefaultDbContext>();
-            return services;
+            context.Services.AddDestinyDbContext<IdentityServer4DefaultDbContext>();
+            context.Services.AddUnitOfWork<IdentityServer4DefaultDbContext>();
+            ServiceExtensions.AddRepository(context.Services);
         }
+        //protected override IServiceCollection AddDestinyDbContextWnitUnitOfWork(IServiceCollection services)
+        //{
+        //    services.AddDestinyDbContext<IdentityServer4DefaultDbContext>();
+        //    services.AddUnitOfWork<IdentityServer4DefaultDbContext>();
+        //    return services;
+        //}
      
     }
 }

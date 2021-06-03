@@ -1,17 +1,16 @@
 ﻿using Destiny.Core.Flow.Dtos;
-using Destiny.Core.Flow.Enums;
-using Destiny.Core.Flow.Events.EventBus;
-using Destiny.Core.Flow.Extensions;
+using DestinyCore.Enums;
+using DestinyCore.Events.EventBus;
+using DestinyCore.Extensions;
 using Destiny.Core.Flow.IServices.Identity;
 using Destiny.Core.Flow.Model.Entities.Identity;
-using Destiny.Core.Flow.Security.Jwt;
 using Destiny.Core.Flow.Services.Identity.Events;
-using Destiny.Core.Flow.Ui;
+using DestinyCore.Ui;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
-
+using DestinyCore.Security.Jwt;
 namespace Destiny.Core.Flow.Services.Identity
 {
     public class IdentityServices : IIdentityServices
