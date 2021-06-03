@@ -40,7 +40,7 @@ namespace Destiny.Core.Flow.API
         [AllowAnonymous]
         public async Task<IActionResult> UploadAsnyc(IFormFileCollection files)
         {
-    
+            await Task.CompletedTask;
             long size = files.Sum(f => f.Length);
 
             foreach (var formFile in files)
