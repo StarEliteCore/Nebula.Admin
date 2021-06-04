@@ -17,9 +17,11 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
     {
         public override void ConfigureServices(ConfigureServicesContext context)
         {
-            context.Services.AddDestinyDbContext<DestinyCoreDbContext>();
-            context.Services.AddUnitOfWork<DestinyCoreDbContext>();
+
+            context.Services.AddDestinyDbContext<DefaultDbContext>();
+            context.Services.AddUnitOfWork<DefaultDbContext>();
             ServiceExtensions.AddRepository(context.Services);
+           var DD= context.Services;
         }
     }
 }

@@ -667,5 +667,10 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Destiny.Core.Flow.API.Filters.PermissionAuthorizationFilter">
+            <summary>
+            待重写大黄瓜
+            </summary>
+        </member>
     </members>
 </doc>

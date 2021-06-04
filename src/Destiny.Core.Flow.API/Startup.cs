@@ -25,18 +25,7 @@ namespace Destiny.Core.Flow.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //string[] filters =
-            //{
-            //    "mscorlib",
-            //    "netstandard",
-            //    "dotnet",
-            //    "api-ms-win-core",
-            //    "runtime.",
-            //    "System",
-            //    "Microsoft",
-            //    "Window",
-            //};
-            //IEnumerable<Assembly> allAssemblies = Assembly.GetEntryAssembly().GetReferencedAssemblies().Where(x => !filters.Any(x.Name.StartsWith)).Select(Assembly.Load).ToArray();
+          
             services.AddApplication<AppWebModule>();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
