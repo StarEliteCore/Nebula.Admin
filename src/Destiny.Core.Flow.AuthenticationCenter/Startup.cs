@@ -21,7 +21,7 @@ namespace Destiny.Core.Flow.AuthenticationCenter
         {
             //_uris = services.GetConfiguration()["Destiny:IsOnlineurl"];
             _isonline = Convert.ToBoolean(services.GetConfiguration()["Destiny:IsOnline"]);
-            services.AddApplication<AppWebModule1>();
+            services.AddApplication<AppWebModule>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
