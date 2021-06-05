@@ -30,4 +30,8 @@
     <ProjectReference Include="..\Destiny.Core.Flow.Identity\Destiny.Core.Flow.Identitys.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

@@ -12,7 +12,7 @@ using Destiny.Core.Flow.IdentityServer;
 namespace Destiny.Core.Flow.AuthenticationCenter.Startups
 {
     [DependsOn(
-    typeof(DestinyCoreModule),
+    typeof(DestinyCoreConfigModule),
     typeof(MvcModule),
     typeof(IdentityModule),
     typeof(AuthenticationCenterEntityFrameworkCoreModule),

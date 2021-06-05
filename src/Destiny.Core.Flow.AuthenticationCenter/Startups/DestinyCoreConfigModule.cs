@@ -1,24 +1,18 @@
-﻿using DestinyCore.AspNetCore.Api;
-using Destiny.Core.Flow.Model.Security;
-using DestinyCore.Modules;
+﻿using DestinyCore.Dependency;
+using DestinyCore.Events;
 using DestinyCore.Extensions;
+using DestinyCore.Modules;
+using DestinyCore.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using DestinyCore.Options;
-using DestinyCore.AspNetCore;
-using DestinyCore.Dependency;
-using DestinyCore.Events;
-using System.IO;
-using Microsoft.Extensions.Options;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Destiny.Core.Flow.API.Startups
+namespace Destiny.Core.Flow.AuthenticationCenter.Startups
 {
-    public class FunctionModule : FunctionModuleBase<ApiControllerBase>
-    {
-
-    }
-
     [DependsOn(typeof(DependencyAppModule), typeof(MediatorAppModule))]
     public class DestinyCoreConfigModule : AppModule
     {
@@ -45,14 +39,14 @@ namespace Destiny.Core.Flow.API.Startups
 
                 configuration.Bind("Destiny", option);
                 context.Services.AddObjectAccessor(option);
-                context.Services.Configure<AppOptionSettings>(o=>{
+                context.Services.Configure<AppOptionSettings>(o => {
                     o.AuditEnabled = option.AuditEnabled;
                     o.Auth = option.Auth;
                     o.Cors = option.Cors;
                     o.DbContexts = option.DbContexts;
                     o.IsAutoAddFunction = option.IsAutoAddFunction;
                     o.Jwt = option.Jwt;
-                
+
                 });
             }
 

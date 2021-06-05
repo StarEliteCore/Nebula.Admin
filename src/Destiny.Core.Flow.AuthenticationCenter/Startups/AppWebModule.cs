@@ -18,7 +18,6 @@ namespace Destiny.Core.Flow.AuthenticationCenter.Startups
 {
     [DependsOn(
     typeof(IdentityModule),
-    typeof(DependencyAppModule),
     typeof(MediatorAppModule),
     typeof(AuthenticationCenterEntityFrameworkCoreModule),
     typeof(AutoMapperModule),
