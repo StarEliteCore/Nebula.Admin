@@ -672,5 +672,13 @@
             待重写大黄瓜
             </summary>
         </member>
+        <member name="M:Destiny.Core.Flow.API.Filters.PermissionAuthorizationFilter.CheckHandlerAsync(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext,Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            验证处理
+            </summary>
+            <param name="context"></param>
+            <param name="httpContext"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
