@@ -134,9 +134,7 @@ namespace Destiny.Core.Flow.API.Filters
                             ////????不包含的时候怎么返回出去？这个请求终止掉
                             ///
                             _logger.LogError($"此{linkurl}地址没有权限");
-                            //result = result1.ToAjaxResult();
-                            //context.HttpContext.Response.StatusCode = StatusCodes.Status403Forbidden;
-                            //context.Result.ToJsonResult(result);
+ 
                             result.Message = MessageDefinitionType.Uncertified;
                             result.Type = AjaxResultType.Uncertified;
                             context.HttpContext.Response.StatusCode = StatusCodes.Status403Forbidden;

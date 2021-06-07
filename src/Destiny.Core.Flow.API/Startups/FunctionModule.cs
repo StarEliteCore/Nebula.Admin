@@ -26,7 +26,7 @@ namespace Destiny.Core.Flow.API.Startups
         {
             context.Services.AddFileProvider();
             var configuration = context.Services.GetConfiguration();
-
+ 
 
             if (configuration == null)
             {
