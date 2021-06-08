@@ -34,7 +34,7 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <param name="dto">创建或更新的文档类型DTO</param>
         [HttpPost]
         [Description("异步创建或更新文档类型")]
-        public async Task<AjaxResult> CreateOrUpdateAsync([FromBody] DocumentTypeInputDto dto)
+        public async Task<AjaxResult> CreateOrUpdateAsync([FromBody] AssetInputDto dto)
         {
          
             return (await _documentTypeService.CreateOrUpdateAsync(dto)).ToAjaxResult();
@@ -65,7 +65,7 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <param name="request">分页请求数据</param>
         [HttpPost]
         [Description("异步得到文档类型分页数据")]
-        public async Task<PageList<DocumentTypePageListDto>> GetPageAsync(PageRequest request)
+        public async Task<PageList<AssetPageListDto>> GetPageAsync(PageRequest request)
         {
             return (await _documentTypeService.GetPageAsync(request)).ToPageList();
         }

@@ -1,4 +1,5 @@
-﻿using DestinyCore.Entity;
+﻿using DestinyCore.Dependency;
+using DestinyCore.Entity;
 using DestinyCore.Filter;
 using DestinyCore.Filter.Abstract;
 using DestinyCore.Ui;
@@ -7,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.IServices.Abstractions
 {
-    public interface ICrudServiceAsync<TPrimaryKey, TEntity, IInputDto, IPagedListDto>
-             where TEntity : IEntity<TPrimaryKey>, IEquatable<TPrimaryKey>
+    public interface ICrudServiceAsync<TPrimaryKey, TEntity, IInputDto, IPagedListDto> : IScopedDependency
+              where TEntity : class, IEntity<TPrimaryKey>
+              where TPrimaryKey : IEquatable<TPrimaryKey>
              where IInputDto : IInputDto<TPrimaryKey>
              where IPagedListDto:IOutputDto<TPrimaryKey>
     {

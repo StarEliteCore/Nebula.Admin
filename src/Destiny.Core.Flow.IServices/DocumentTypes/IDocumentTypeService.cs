@@ -23,20 +23,20 @@ namespace Destiny.Core.Flow.IServices.DocumentTypes
         /// 异步创建文档类型
         /// </summary>
         /// <param name="dto">添加的文档类型DTO</param>
-        Task<OperationResponse> CreateAsync(DocumentTypeInputDto dto);
+        Task<OperationResponse> CreateAsync(AssetInputDto dto);
 
 
         /// <summary>
         /// 异步更新文档类型
         /// </summary>
         /// <param name="dto">更新的文档类型DTO</param>
-        Task<OperationResponse> UpdateAsync(DocumentTypeInputDto dto);
+        Task<OperationResponse> UpdateAsync(AssetInputDto dto);
 
         /// <summary>
         /// 异步加载表单文档类型
         /// </summary>
         /// <param name="id">要加载的文档类型主键</param>
-        Task<OperationResponse<DocumentTypeOutputDto>> LoadFormAsync(Guid id);
+        Task<OperationResponse<AssetOutputDto>> LoadFormAsync(Guid id);
 
         /// <summary>
         /// 异步删除文档类型
@@ -48,14 +48,14 @@ namespace Destiny.Core.Flow.IServices.DocumentTypes
         /// 异步得到文档类型分页数据
         /// </summary>
         /// <param name="request">分页请求数据</param>
-        Task<IPagedResult<DocumentTypePageListDto>> GetPageAsync(PageRequest request);
+        Task<IPagedResult<AssetPageListDto>> GetPageAsync(PageRequest request);
 
         /// <summary>
         /// 异步创建或者更新
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        Task<OperationResponse> CreateOrUpdateAsync(DocumentTypeInputDto dto);
+        Task<OperationResponse> CreateOrUpdateAsync(AssetInputDto dto);
 
         /// <summary>
         /// 异步得到树数据
