@@ -43,7 +43,7 @@ namespace Destiny.Core.Flow.Services.DocumentTypes
         /// 异步创建文档类型
         /// </summary>
         /// <param name="dto">添加的文档类型DTO</param>
-        public async Task<OperationResponse> CreateAsync(AssetInputDto dto)
+        public async Task<OperationResponse> CreateAsync(DocumentTypeInputDto dto)
         {
             return await _documentTypeRepository.InsertAsync(dto, async (d) => {
                 MessageBox.ShowIf($"创建失败，此{dto.Name}名字已存在！！",await _documentTypeRepository.ExistAsync(o => o.Name == d.Name));
@@ -56,7 +56,7 @@ namespace Destiny.Core.Flow.Services.DocumentTypes
         /// 异步更新文档类型
         /// </summary>
         /// <param name="dto">更新的文档类型DTO</param>
-        public async Task<OperationResponse> UpdateAsync(AssetInputDto dto)
+        public async Task<OperationResponse> UpdateAsync(DocumentTypeInputDto dto)
         {
             return await _documentTypeRepository.UpdateAsync(dto, async (d, e) => {
                 MessageBox.ShowIf($"更新失败，此{dto.Name}名字已存在！！", await _documentTypeRepository.ExistAsync(ee => ee.Id != d.Id && ee.Name == d.Name));
@@ -68,10 +68,10 @@ namespace Destiny.Core.Flow.Services.DocumentTypes
         /// 异步加载表单文档类型
         /// </summary>
         /// <param name="id">要加载的文档类型主键</param>
-        public async Task<OperationResponse<AssetOutputDto>> LoadFormAsync(Guid id)
+        public async Task<OperationResponse<DocumentTypeOutputDto>> LoadFormAsync(Guid id)
         {
-            var dto = (await _documentTypeRepository.GetByIdAsync(id)).MapTo<AssetOutputDto>();
-            return new OperationResponse<AssetOutputDto>("加载成功", dto, OperationResponseType.Success);
+            var dto = (await _documentTypeRepository.GetByIdAsync(id)).MapTo<DocumentTypeOutputDto>();
+            return new OperationResponse<DocumentTypeOutputDto>("加载成功", dto, OperationResponseType.Success);
         }
 
         /// <summary>
@@ -92,10 +92,10 @@ namespace Destiny.Core.Flow.Services.DocumentTypes
         /// 异步得到文档类型分页数据
         /// </summary>
         /// <param name="request">分页请求数据</param>
-        public Task<IPagedResult<AssetPageListDto>> GetPageAsync(PageRequest request)
+        public Task<IPagedResult<DocumentTypePageListDto>> GetPageAsync(PageRequest request)
         {
 
-            return _documentTypeRepository.Entities.ToPageAsync<DocumentType, AssetPageListDto>(request);
+            return _documentTypeRepository.Entities.ToPageAsync<DocumentType, DocumentTypePageListDto>(request);
         }
 
 
@@ -104,7 +104,7 @@ namespace Destiny.Core.Flow.Services.DocumentTypes
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        public Task<OperationResponse> CreateOrUpdateAsync(AssetInputDto dto)
+        public Task<OperationResponse> CreateOrUpdateAsync(DocumentTypeInputDto dto)
         {
 
             if (dto.Id == Guid.Empty)
