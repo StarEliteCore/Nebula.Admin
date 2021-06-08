@@ -1,5 +1,6 @@
 ﻿using Destiny.Core.Flow.Services.Permission;
 using DestinyCore.AspNetCore;
+using DestinyCore.AspNetCore.Module;
 using DestinyCore.Extensions;
 using DestinyCore.Modules;
 using DestinyCore.Options;

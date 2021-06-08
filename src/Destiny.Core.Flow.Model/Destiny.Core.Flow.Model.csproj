@@ -11,11 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DestinyCore" Version="1.0.0" />
-    <PackageReference Include="DestinyCore.EntityFrameworkCore" Version="1.0.0" />
-    <PackageReference Include="DestinyCore.FluentValidation" Version="1.0.0" />
-    <PackageReference Include="DestinyCore.TestBase" Version="1.0.0" />
-    <PackageReference Include="DestinyCore.AutoMapper" Version="1.0.0" />
+    <PackageReference Include="DestinyCore" Version="1.0.1" />
+    <PackageReference Include="DestinyCore.EntityFrameworkCore" Version="1.0.1" />
+    <PackageReference Include="DestinyCore.FluentValidation" Version="1.0.1" />
+    <PackageReference Include="DestinyCore.TestBase" Version="1.0.1" />
+    <PackageReference Include="DestinyCore.AutoMapper" Version="1.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -28,10 +28,6 @@
     <ProjectReference Include="..\Destiny.Core.Flow.EntityFrameworkCore\Destiny.Core.Flow.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.IdentityServer.Entities\Destiny.Core.Flow.IdentityServer.Entities.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Identity\Destiny.Core.Flow.Identitys.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

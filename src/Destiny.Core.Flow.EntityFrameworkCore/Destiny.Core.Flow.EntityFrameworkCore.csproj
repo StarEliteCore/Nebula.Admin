@@ -4,7 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="DestinyCore" Version="1.0.0" />
-    <PackageReference Include="DestinyCore.EntityFrameworkCore" Version="1.0.0" />
+    <PackageReference Include="DestinyCore" Version="1.0.1" />
+    <PackageReference Include="DestinyCore.EntityFrameworkCore" Version="1.0.1" />
   </ItemGroup>
 </Project>
