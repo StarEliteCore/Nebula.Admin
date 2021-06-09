@@ -31,7 +31,7 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
             //{
             //    connection = provider.GetFileText(connection, $"未找到存放MySql数据库链接的文件");
             //}
-            services.AddDestinyDbContext<DefaultDbContext>(x =>
+            services.AddDestinyDbContext<DestinyCoreDbContext>(x =>
             {
                 x.ConnectionString = connection;//settings.DbContexts.Values.First().ConnectionString;
                 x.DatabaseType = settings.DbContexts.Values.First().DatabaseType;

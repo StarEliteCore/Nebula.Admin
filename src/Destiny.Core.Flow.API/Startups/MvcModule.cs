@@ -20,7 +20,7 @@ namespace Destiny.Core.Flow.API.Startups
     {
         protected override void PreConfigureServices(ConfigureServicesContext context)
         {
-            context.Services.AddScoped<IAuthorityVerification, AuthorityVerificationServices>();
+            //context.Services.AddScoped<IAuthorityVerification, AuthorityVerificationServices>();
         }
 
         private string _corePolicyName = string.Empty;

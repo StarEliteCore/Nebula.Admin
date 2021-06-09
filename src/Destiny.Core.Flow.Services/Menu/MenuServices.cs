@@ -39,10 +39,10 @@ namespace Destiny.Core.Flow.Services.Menu
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
         private readonly Microsoft.Extensions.Logging.ILogger _logger = null;
-        private readonly ICache _cache = null;
+        //private readonly ICache _cache = null;
 
         private readonly AsyncLock _mutex = new AsyncLock();
-        public MenuServices(IMenuRepository menuRepository, IUnitOfWork unitOfWork, IRepository<RoleMenuEntity, Guid> roleMenuRepository, IMenuFunctionRepository menuFunction, IPrincipal principal, UserManager<User> userManager, RoleManager<Role> roleManager, IRepository<UserRole, Guid> repositoryUserRole, Microsoft.Extensions.Logging.ILoggerFactory loggerFactory, ICache cache)
+        public MenuServices(IMenuRepository menuRepository, IUnitOfWork unitOfWork, IRepository<RoleMenuEntity, Guid> roleMenuRepository, IMenuFunctionRepository menuFunction, IPrincipal principal, UserManager<User> userManager, RoleManager<Role> roleManager, IRepository<UserRole, Guid> repositoryUserRole, Microsoft.Extensions.Logging.ILoggerFactory loggerFactory/*, ICache cache*/)
         {
             _menuRepository = menuRepository;
             _roleMenuRepository = roleMenuRepository;
@@ -53,7 +53,7 @@ namespace Destiny.Core.Flow.Services.Menu
             _roleManager = roleManager;
             _repositoryUserRole = repositoryUserRole;
             _logger = loggerFactory.CreateLogger<MenuServices>();
-            _cache = cache;
+            //_cache = cache;
         }
 
         public async Task<OperationResponse> CreateAsync(MenuInputDto input)
@@ -287,9 +287,9 @@ namespace Destiny.Core.Flow.Services.Menu
 
                 var key = $"{routerKey}{userId}";
 
-                var treeList = await _cache.GetAsync<IReadOnlyList<VueDynamicRouterTreeOutDto>>(key); //得到缓存
-                if (treeList == null)
-                {
+                //var treeList = await _cache.GetAsync<IReadOnlyList<VueDynamicRouterTreeOutDto>>(key); //得到缓存
+                //if (treeList == null)
+                //{
 
                     int isAdmin = _iIdentity.FindFirst<int>(DestinyCoreFlowClaimTypes.IsAdmin);
                     var roleids = _repositoryUserRole.Entities.Where(x => x.UserId == userId).Select(x => x.RoleId);
@@ -324,14 +324,14 @@ namespace Destiny.Core.Flow.Services.Menu
 
                     TimeSpan ts2 = sw.Elapsed;
                     _logger.LogInformation($"得到动态路由所有多少{ts2.TotalMilliseconds}毫秒");
-                    await _cache.SetAsync(key, result.ItemList);
+                    //await _cache.SetAsync(key, result.ItemList);
                     return OperationResponse.Ok(MessageDefinitionType.LoadSucces, result.ItemList);
-                }
-                else
-                {
+                //}
+                //else
+                //{
 
-                    return OperationResponse.Ok(MessageDefinitionType.LoadSucces, treeList);
-                }
+                //    return OperationResponse.Ok(MessageDefinitionType.LoadSucces, treeList);
+                //}
             }
 
 
