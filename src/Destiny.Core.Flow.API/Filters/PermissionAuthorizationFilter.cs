@@ -1,4 +1,5 @@
-﻿using DestinyCore.AspNetCore;
+﻿using Destiny.Core.Flow.IServices.Permission;
+using DestinyCore.AspNetCore;
 using DestinyCore.Enums;
 using DestinyCore.Extensions;
 using DestinyCore.Permission;
@@ -24,7 +25,7 @@ namespace Destiny.Core.Flow.API.Filters
     /// </summary>
     public class PermissionAuthorizationFilter: IAsyncAuthorizationFilter
     {
-        private readonly IAuthorityVerification _authority = null;
+        private readonly IAuthorityService _authority = null;
         private readonly IPrincipal _principal;
         private readonly ILogger<PermissionAuthorizationFilter> _logger = null;
         private readonly IServiceProvider _serviceProvider = null;
@@ -34,7 +35,8 @@ namespace Destiny.Core.Flow.API.Filters
             _serviceProvider = serviceProvider;
             _principal = serviceProvider.GetService<IPrincipal>();
             _logger = serviceProvider.GetService<ILoggerFactory>()?.CreateLogger<PermissionAuthorizationFilter>();
-            _authority = serviceProvider.GetService<IAuthorityVerification>();
+            _authority = serviceProvider.GetService<IAuthorityService>();
+            _authority.NotNull(nameof(_authority));
 
         }
 
@@ -71,7 +73,7 @@ namespace Destiny.Core.Flow.API.Filters
         protected async Task<bool> CheckHandlerAsync(AuthorizationFilterContext context, HttpContext httpContext)
         {
 
-            var authority=  this._serviceProvider.GetService<IAuthorityVerification>();
+            var authority=  this._serviceProvider.GetService<IAuthorityService>();
             var action = context.ActionDescriptor as ControllerActionDescriptor;
             var linkurl = context.HttpContext.Request.Path.Value.Replace("/api/", "");
             var result = new AjaxResult(MessageDefinitionType.Unauthorized, AjaxResultType.Unauthorized);

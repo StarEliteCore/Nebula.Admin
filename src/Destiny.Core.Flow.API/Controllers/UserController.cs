@@ -39,8 +39,7 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Description("异步创建用户")]
-        [ServiceFilter(typeof(AuditLogFilterAttribute))]
-        //[ServiceFilter(typeof(ValidationFilterAttribute))]
+        //[ServiceFilter(typeof(AuditLogFilterAttribute))]
         public async Task<AjaxResult> CreateAsync([FromBody] UserInputDto dto)
         {
 
@@ -60,7 +59,7 @@ namespace Destiny.Core.Flow.API.Controllers
 
         [HttpPost]
         [Description("异步更新用户")]
-        [ServiceFilter(typeof(AuditLogFilterAttribute))]
+        //[ServiceFilter(typeof(AuditLogFilterAttribute))]
 
         public async Task<AjaxResult> UpdateAsync([FromBody] UserUpdateInputDto dto)
         {
@@ -76,7 +75,7 @@ namespace Destiny.Core.Flow.API.Controllers
 
         [HttpDelete]
         [Description("异步删除用户")]
-        [ServiceFilter(typeof(AuditLogFilterAttribute))]
+        //[ServiceFilter(typeof(AuditLogFilterAttribute))]
         public async Task<AjaxResult> DeleteAsync(Guid id)
         {
 
@@ -95,7 +94,6 @@ namespace Destiny.Core.Flow.API.Controllers
         [HttpGet]
         [Description("异步加载用户")]
         [NoAuthorityVerification]
-
         public async Task<AjaxResult> LoadAsync(Guid id)
         {
 
@@ -109,7 +107,7 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <returns></returns>
         [Description("用户分配角色")]
         [HttpPost]
-        [ServiceFilter(typeof(AuditLogFilterAttribute))]
+        //[ServiceFilter(typeof(AuditLogFilterAttribute))]
         public async Task<AjaxResult> AllocationRoleAsync([FromBody] UserAllocationRoleInputDto dto)
         {
             return (await _userService.AllocationRoleAsync(dto)).ToAjaxResult();

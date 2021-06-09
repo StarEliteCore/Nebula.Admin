@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.Services.Permission;
+﻿using Destiny.Core.Flow.IServices.Permission;
+using Destiny.Core.Flow.Services.Permission;
 using DestinyCore.AspNetCore;
 using DestinyCore.AspNetCore.Module;
 using DestinyCore.Extensions;
@@ -20,7 +21,7 @@ namespace Destiny.Core.Flow.API.Startups
     {
         protected override void PreConfigureServices(ConfigureServicesContext context)
         {
-            //context.Services.AddScoped<IAuthorityVerification, AuthorityVerificationServices>();
+            context.Services.AddScoped<IAuthorityService, AuthorityVerificationServices>();
         }
 
         private string _corePolicyName = string.Empty;
