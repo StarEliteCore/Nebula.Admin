@@ -5,7 +5,6 @@ using DestinyCore.AspNetCore.Module;
 using DestinyCore.Extensions;
 using DestinyCore.Modules;
 using DestinyCore.Options;
-using DestinyCore.Permission;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;

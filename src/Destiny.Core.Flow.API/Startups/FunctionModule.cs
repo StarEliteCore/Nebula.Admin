@@ -13,6 +13,8 @@ using Microsoft.Extensions.Options;
 using System;
 using Destiny.Core.Flow.IServices.Abstractions;
 using Destiny.Core.Flow.Services.Application;
+using Destiny.Core.Flow.Core;
+
 
 namespace Destiny.Core.Flow.API.Startups
 {
@@ -45,8 +47,10 @@ namespace Destiny.Core.Flow.API.Startups
 
             if (configuration != null)
             {
+                string key = "Destiny";
 
-                configuration.Bind("Destiny", option);
+                configuration.Bind(key, option);
+               
                 context.Services.AddObjectAccessor(option);
                 context.Services.Configure<AppOptionSettings>(o=>{
                     o.AuditEnabled = option.AuditEnabled;
@@ -57,13 +61,34 @@ namespace Destiny.Core.Flow.API.Startups
                     o.Jwt = option.Jwt;
                 
                 });
+                context.Services.AddObjectAccessor<MongoOptions>(configuration.GetSection($"{key}:MongoDBs").Get<MongoOptions>()); 
+
             }
 
             //context.Services.AddFileProvider();
             //IConfiguration configuration = context.GetConfiguration();
-            //context.Services.Configure<AppOptionSettings>(configuration.GetSection("Destiny"));
             //AppOptionSettings configuration2 = context.GetConfiguration<AppOptionSettings>("Destiny");
             //context.Services.AddObjectAccessor(configuration2);
         }
     }
+
+
+    //public class MyConfigureOptions : IConfigureOptions<AppOptionSettings>
+    //{
+
+    //    private readonly IConfiguration _configuration = null;
+    //    private readonly IServiceCollection _serviceDescriptors = null;
+
+    //    public MyConfigureOptions(IConfiguration configuration, IServiceCollection serviceDescriptors)
+    //    {
+    //        this._configuration = configuration;
+    //        this._serviceDescriptors = serviceDescriptors;
+    //    }
+
+    //    public void Configure(AppOptionSettings options)
+    //    {
+
+
+    //    }
+    //}
 }

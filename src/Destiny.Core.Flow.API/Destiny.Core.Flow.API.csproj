@@ -45,6 +45,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
     <PackageReference Include="Serilog" Version="2.10.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
@@ -53,6 +54,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Destiny.Core.Flow.Core\Destiny.Core.Flow.Core.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Dtos\Destiny.Core.Flow.Dtos.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.IdentityServer4\Destiny.Core.Flow.IdentityServer.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.IServices\Destiny.Core.Flow.IServices.csproj" />
