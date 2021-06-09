@@ -18,10 +18,15 @@ namespace Destiny.Core.Flow.API.Startups
     [DependsOn(typeof(AspNetCoreModule))]
     public class MvcModule: MvcModuleBase
     {
+        protected override void PreConfigureServices(ConfigureServicesContext context)
+        {
+            context.Services.AddScoped<IAuthorityVerification, AuthorityVerificationServices>();
+        }
+
         private string _corePolicyName = string.Empty;
         protected override void AddCors(ConfigureServicesContext context)
         {
-            context.Services.AddScoped<IAuthorityVerification, AuthorityVerificationServices>();
+
             var settings= context.Services.GetObject<AppOptionSettings>();
             if (!settings.Cors.PolicyName.IsNullOrEmpty() && !settings.Cors.Url.IsNullOrEmpty())
             {
