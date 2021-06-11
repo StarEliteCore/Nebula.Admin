@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="3.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Destiny.Core.Flow.OpenIddict.Entities\Destiny.Core.Flow.OpenIddict.Entities.csproj" />
+    <ProjectReference Include="..\Destiny.Core.Flow.OpenIddict\Destiny.Core.Flow.OpenIddict.csproj" />
+  </ItemGroup>
+
+</Project>
