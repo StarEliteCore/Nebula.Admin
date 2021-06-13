@@ -11,9 +11,7 @@ using DestinyCore.Events;
 using System.IO;
 using Microsoft.Extensions.Options;
 using System;
-
-using Destiny.Core.Flow.Core;
-
+using Destiny.Core.Flow.Shared.Options;
 
 namespace Destiny.Core.Flow.API.Startups
 {

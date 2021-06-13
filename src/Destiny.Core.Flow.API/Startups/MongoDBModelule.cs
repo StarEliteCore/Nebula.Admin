@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.IO;
 using DestinyCore.MongoDB.DbContexts;
 using DestinyCore.MongoDB;
-using Destiny.Core.Flow.Core;
+using Destiny.Core.Flow.Shared.Options;
 
 namespace Destiny.Core.Flow.API.Startups
 {
