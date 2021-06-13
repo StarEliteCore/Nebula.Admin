@@ -10,7 +10,7 @@
     <PackageReference Include="DestinyCore.FluentValidation" Version="1.0.1" />
     <PackageReference Include="DestinyCore.TestBase" Version="1.0.1" />
     <PackageReference Include="DestinyCore.AutoMapper" Version="1.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
