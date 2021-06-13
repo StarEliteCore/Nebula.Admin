@@ -1,4 +1,5 @@
-﻿using Destiny.Core.Flow.IServices.Abstractions;
+﻿
+using Destiny.Core.Flow.Shared.Abstractions;
 using DestinyCore;
 using DestinyCore.Entity;
 using DestinyCore.Extensions;
@@ -12,13 +13,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Destiny.Core.Flow.Services.Application
+namespace Destiny.Core.Flow.Shared.Application
 {
-    public class CrudServiceAsync<TPrimaryKey, IEntity, IInputDto, IPagedListDto> : ICrudServiceAsync<TPrimaryKey, IEntity, IInputDto, IPagedListDto>
-             where IEntity : class, IEntity<TPrimaryKey>
+    public class CrudServiceAsync<TPrimaryKey, IEntity, IInputDto, IOutputDto, IPagedListDto> : ICrudServiceAsync<TPrimaryKey, IEntity, IInputDto, IOutputDto, IPagedListDto>
+              where IEntity : EntityBase<TPrimaryKey>
               where TPrimaryKey : IEquatable<TPrimaryKey>
-              where IInputDto : class, IInputDto<TPrimaryKey>, new()
-              where IPagedListDto : IOutputDto<TPrimaryKey>
+              where IInputDto : IInputDto<TPrimaryKey>
+              where IPagedListDto:IOutputDto<TPrimaryKey>
+              where IOutputDto : IOutputDto<TPrimaryKey>
     {
         protected IServiceProvider ServiceProvider { get; set; }
         protected IRepository<IEntity, TPrimaryKey> Repository { get; set; }
@@ -29,13 +31,10 @@ namespace Destiny.Core.Flow.Services.Application
         {
             this.ServiceProvider = serviceProvider;
             this.Repository = repository;
-            this.Logger = loggerFactory.CreateLogger("CrudServiceAsync");
+            this.Logger = loggerFactory.CreateLogger<CrudServiceAsync<TPrimaryKey, IEntity, IInputDto, IOutputDto, IPagedListDto>>();
         }
 
         protected IQueryable<IEntity> Entities => this.Repository.Entities;
-
-
-
 
         protected IQueryable<IEntity> TrackEntities => this.Repository.TrackEntities;
 
@@ -58,13 +57,22 @@ namespace Destiny.Core.Flow.Services.Application
         }
 
 
-
+        /// <summary>
+        /// 异步删除
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
 
         public virtual Task<OperationResponse> DeleteAsync(TPrimaryKey key)
         {
             return this.Repository.DeleteAsync(key);
         }
 
+        /// <summary>
+        /// 异步更新
+        /// </summary>
+        /// <param name="inputDto"></param>
+        /// <returns></returns>
         public virtual Task<OperationResponse> UpdateAsync(IInputDto inputDto)
         {
             inputDto.NotNull(nameof(inputDto));
@@ -93,6 +101,30 @@ namespace Destiny.Core.Flow.Services.Application
         {
             request.NotNull(nameof(request));
             return this.Entities.ToPageAsync<IEntity,IPagedListDto>(request);
+        }
+
+        /// <summary>
+        /// 异步根据键加载数据
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public virtual async Task<OperationResponse<IOutputDto>> LoadDataByKeyAsync(TPrimaryKey key)
+        {
+        
+            var entity =await this.FindEntityByKeyAsync(key);
+            var dto= entity.MapTo<IOutputDto>();
+            return OperationResponse<IOutputDto>.Ok(dto);
+        }
+
+        /// <summary>
+        /// 异步根据键查找实体
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public virtual Task<IEntity> FindEntityByKeyAsync(TPrimaryKey key)
+        {
+            key.NotNull(nameof(key));
+            return this.Repository.GetByIdAsync(key);
         }
     }
 }

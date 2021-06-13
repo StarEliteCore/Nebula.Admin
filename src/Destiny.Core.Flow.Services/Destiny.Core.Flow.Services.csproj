@@ -21,4 +21,8 @@
     <ProjectReference Include="..\Destiny.Core.Flow.Repository\Destiny.Core.Flow.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Application\" />
+  </ItemGroup>
+
 </Project>

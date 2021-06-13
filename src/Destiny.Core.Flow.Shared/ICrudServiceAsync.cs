@@ -6,13 +6,14 @@ using DestinyCore.Ui;
 using System;
 using System.Threading.Tasks;
 
-namespace Destiny.Core.Flow.IServices.Abstractions
+namespace Destiny.Core.Flow.Shared.Abstractions
 {
-    public interface ICrudServiceAsync<TPrimaryKey, TEntity, IInputDto, IPagedListDto> : IScopedDependency
-              where TEntity : class, IEntity<TPrimaryKey>
-              where TPrimaryKey : IEquatable<TPrimaryKey>
+    public interface ICrudServiceAsync<TPrimaryKey, TEntity, IInputDto, IOutputDto, IPagedListDto>
+             where TEntity : EntityBase<TPrimaryKey>
+             where TPrimaryKey : IEquatable<TPrimaryKey>
              where IInputDto : IInputDto<TPrimaryKey>
              where IPagedListDto:IOutputDto<TPrimaryKey>
+             where IOutputDto : IOutputDto<TPrimaryKey>
     {
 
 
@@ -44,5 +45,21 @@ namespace Destiny.Core.Flow.IServices.Abstractions
         /// </summary>
         /// <param name="request">分页请求数据</param>
         Task<IPagedResult<IPagedListDto>> GetPageAsync(PageRequest request);
+
+
+
+        /// <summary>
+        /// 异步根据键加载数据
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        Task<OperationResponse<IOutputDto>> LoadDataByKeyAsync(TPrimaryKey key);
+
+        /// <summary>
+        /// 异步根据键查找实体
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        Task<TEntity> FindEntityByKeyAsync(TPrimaryKey key);
     }
 }
