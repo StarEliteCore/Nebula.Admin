@@ -51,7 +51,7 @@ namespace Destiny.Core.AspNetMvc.Test.Controller
         {
             var url = "api/User_Test/DeleteAsync";
 
-            var reust = await this.Client.DeleteObjectAsync(url, new Dictionary<string, object> { { "id", "9af57d58-92ba-4f43-9e43-f4195ab66f56" } });
+            var reust = await this.Client.DeleteObjectAsync(url, new Dictionary<string, object> { { "key", "9af57d58-92ba-4f43-9e43-f4195ab66f56" } });
 
             reust.Success.ShouldBe(true);
 

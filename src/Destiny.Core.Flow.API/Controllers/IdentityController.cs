@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using DestinyCore.Enums;
 
 namespace Destiny.Core.Flow.API.Controllers
 {
@@ -57,9 +58,15 @@ namespace Destiny.Core.Flow.API.Controllers
         [NoAuthorityVerification]
         public async Task<AjaxResult> ChangePassword([FromBody] ChangePassInputDto dto)
         {
-            var result = await _identityService.ChangePassword(dto);
-        
-            return result.ToAjaxResult();
+
+           #if DEBUG
+           var result = await _identityService.ChangePassword(dto);
+           return result.ToAjaxResult();
+           #else
+           await  Task.CompletedTask;
+           return new AjaxResult("正式环境上不支持修改密码功能", AjaxResultType.Info);
+           #endif
+
         }
 
 

@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Destiny.Core.Flow.Dtos\Destiny.Core.Flow.Dtos.csproj" />
+    <ProjectReference Include="..\Destiny.Core.Flow.Shared\Destiny.Core.Flow.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,7 +26,6 @@
 
   <ItemGroup>
     <Folder Include="Abstractions\" />
-    <Folder Include="Assets\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
-﻿using DestinyCore.Entity;
+﻿using Destiny.Core.Flow.Shared.Entity;
+using DestinyCore.Entity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +11,7 @@ namespace Destiny.Core.Flow.Model.Entities
     /// 资产
     /// </summary>
     [DisplayName("资产")]
-    public partial class Asset : EntityBase<Guid>, IFullAuditedEntity<Guid>
+    public partial class Asset : FullAuditedEntityWithEntity<Guid,Guid>
     {
         /// <summary>
         /// 后缀名
@@ -44,30 +45,6 @@ namespace Destiny.Core.Flow.Model.Entities
         [DisplayName("名字")]
         public string Name { get; set; }
 
-        /// <summary>
-        /// 获取或设置最后修改用户
-        /// </summary>
-        [DisplayName("最后修改用户")]
-        public Guid? LastModifierUserId { get; set; }
-        /// <summary>
-        /// 获取或设置最后修改时间
-        /// </summary>
-        [DisplayName("最后修改时间")]
-        public DateTime? LastModifionTime { get; set; }
-        /// <summary>
-        /// 获取或设置是否删除
-        /// </summary>
-        [DisplayName("是否删除")]
-        public bool IsDeleted { get; set; }
-        /// <summary>
-        /// 获取或设置创建用户ID
-        /// </summary>
-        [DisplayName("创建用户ID")]
-        public Guid? CreatorUserId { get; set; }
-        /// <summary>
-        /// 获取或设置创建时间
-        /// </summary>
-        [DisplayName("创建时间")]
-        public DateTime CreatedTime { get; set; }
+  
     }
 }

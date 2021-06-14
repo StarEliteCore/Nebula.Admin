@@ -92,10 +92,10 @@ namespace Destiny.Core.Flow.AspNetCore
 
         [Description("异步删除")]
         [HttpDelete]
-        public virtual async Task<AjaxResult> DeleteAsync(TPrimaryKey id)
+        public virtual async Task<AjaxResult> DeleteAsync(TPrimaryKey key)
         {
 
-            return (await CrudServiceAsync.DeleteAsync(id)).ToAjaxResult();
+            return (await CrudServiceAsync.DeleteAsync(key)).ToAjaxResult();
 
         }
 
@@ -105,6 +105,17 @@ namespace Destiny.Core.Flow.AspNetCore
         {
             return (await CrudServiceAsync.GetPageAsync(request)).ToPageList();
 
+        }
+
+        /// <summary>
+        /// 异步创建或更新
+        /// </summary>
+        /// <param name="dto"></param>
+        [Description("异步创建或更新")]
+        [HttpPost]
+        public async Task<AjaxResult> CreateOrUpdateAsync([FromBody] IInputDto dto)
+        {
+            return (await CrudServiceAsync.CreateOrUpdateAsync(dto)).ToAjaxResult();
         }
     }
 
@@ -156,7 +167,7 @@ namespace Destiny.Core.Flow.AspNetCore
              where ICrudService : ICrudServiceAsync<TPrimaryKey, TEntity, IInputDto, IIOutputDto, IPagedListDto>
     {
 
-
+    
 
         protected CrudAdminControllerBase(ICrudService crudServiceAsync) : base(crudServiceAsync)
         {

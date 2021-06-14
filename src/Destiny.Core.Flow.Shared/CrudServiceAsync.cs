@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,16 +43,16 @@ namespace Destiny.Core.Flow.Shared.Application
         {
             inputDto.NotNull(nameof(inputDto));
 
-            return await this.Repository.InsertAsync(inputDto,this.InsertCheckAsync);
+            return await this.Repository.InsertAsync(inputDto,this.CreateCheckAsync);
         }
 
 
         /// <summary>
-        /// 插入检查
+        /// 创建检查
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        protected virtual Task InsertCheckAsync(IInputDto dto)
+        protected virtual Task CreateCheckAsync(IInputDto dto)
         {
             return Task.CompletedTask;
         }
@@ -125,6 +126,23 @@ namespace Destiny.Core.Flow.Shared.Application
         {
             key.NotNull(nameof(key));
             return this.Repository.GetByIdAsync(key);
+        }
+
+        /// <summary>
+        /// 创建或更新异步
+        /// </summary>
+        /// <param name="inputDto"></param>
+        /// <returns></returns>
+        public virtual async Task<OperationResponse> CreateOrUpdateAsync(IInputDto inputDto)
+        {
+
+            var entity =await FindEntityByKeyAsync(inputDto.Id);
+            if (entity is null)
+            {
+              return  await this.CreateAsync(inputDto);
+            }
+            return await this.UpdateAsync(inputDto);
+            
         }
     }
 }

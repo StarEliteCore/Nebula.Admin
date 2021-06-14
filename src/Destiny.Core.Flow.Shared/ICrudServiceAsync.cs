@@ -33,6 +33,13 @@ namespace Destiny.Core.Flow.Shared.Abstractions
 
 
         /// <summary>
+        /// 创建或更新异步
+        /// </summary>
+        /// <param name="inputDto"></param>
+        /// <returns></returns>
+        Task<OperationResponse> CreateOrUpdateAsync(IInputDto inputDto);
+
+        /// <summary>
         /// 异步删除
         /// </summary>
         /// <param name="key">按键删除</param>
@@ -61,5 +68,8 @@ namespace Destiny.Core.Flow.Shared.Abstractions
         /// <param name="key"></param>
         /// <returns></returns>
         Task<TEntity> FindEntityByKeyAsync(TPrimaryKey key);
+
+
+
     }
 }
