@@ -16,17 +16,51 @@ using System.Threading.Tasks;
 namespace Destiny.Core.Flow.AspNetCore
 {
 
+    /// <summary>
+    /// 增删改查权API制器(无权限)
+    /// </summary>
+    /// <typeparam name="ICrudService">增删改查服务</typeparam>
+    /// <typeparam name="TPrimaryKey">键</typeparam>
+    /// <typeparam name="TEntity">实体</typeparam>
+    /// <typeparam name="IInputDto">输入DTO</typeparam>
+    /// <typeparam name="IIOutputDto">输出DTO</typeparam>
+    /// <typeparam name="IPagedListDto">分页DTO</typeparam>
+    public abstract class CrudApiControllerBase<ICrudService, TPrimaryKey, TEntity, IInputDto, IIOutputDto, IPagedListDto> : CrudApiControllerBase<TPrimaryKey, TEntity, IInputDto, IIOutputDto, IPagedListDto>
+            where TEntity : EntityBase<TPrimaryKey>
+            where TPrimaryKey : IEquatable<TPrimaryKey>
+            where IInputDto : IInputDto<TPrimaryKey>
+            where IPagedListDto : IOutputDto<TPrimaryKey>
+            where IIOutputDto : IOutputDto<TPrimaryKey>
+            where ICrudService : ICrudServiceAsync<TPrimaryKey, TEntity, IInputDto, IIOutputDto, IPagedListDto>
+    {
 
+        
+        protected CrudApiControllerBase(ICrudService crudServiceAsync):base(crudServiceAsync)
+        {
+
+            this.CrudServiceAsync = crudServiceAsync;
+        }
+
+    }
+
+    /// <summary>
+    /// 增删改查权API制器(无权限)
+    /// </summary>
+    /// <typeparam name="TPrimaryKey">键</typeparam>
+    /// <typeparam name="TEntity">实体</typeparam>
+    /// <typeparam name="IInputDto">输入DTO</typeparam>
+    /// <typeparam name="IIOutputDto">输出DTO</typeparam>
+    /// <typeparam name="IPagedListDto">分页DTO</typeparam>
     [Route("api/[controller]/[action]")]
     [ApiController]
     public abstract class CrudApiControllerBase<TPrimaryKey, TEntity, IInputDto, IIOutputDto, IPagedListDto>: ApiControllerBase
           where TEntity : EntityBase<TPrimaryKey>
-              where TPrimaryKey : IEquatable<TPrimaryKey>
-             where IInputDto : IInputDto<TPrimaryKey>
-             where IPagedListDto : IOutputDto<TPrimaryKey>
-            where IIOutputDto : IOutputDto<TPrimaryKey>
+          where TPrimaryKey : IEquatable<TPrimaryKey>
+          where IInputDto : IInputDto<TPrimaryKey>
+          where IPagedListDto : IOutputDto<TPrimaryKey>
+          where IIOutputDto : IOutputDto<TPrimaryKey>
     {
-        protected ICrudServiceAsync<TPrimaryKey, TEntity, IInputDto, IIOutputDto, IPagedListDto> CrudServiceAsync { get; set; }
+        protected virtual ICrudServiceAsync<TPrimaryKey, TEntity, IInputDto, IIOutputDto, IPagedListDto> CrudServiceAsync { get; set; }
         protected CrudApiControllerBase(ICrudServiceAsync<TPrimaryKey, TEntity, IInputDto, IIOutputDto, IPagedListDto> crudServiceAsync)
         {
 
@@ -74,18 +108,57 @@ namespace Destiny.Core.Flow.AspNetCore
         }
     }
 
+
+    /// <summary>
+    /// 增删改查控制器(有权限)
+    /// </summary>
+    /// <typeparam name="TPrimaryKey">键</typeparam>
+    /// <typeparam name="TEntity">实体</typeparam>
+    /// <typeparam name="IInputDto">输入DTO</typeparam>
+    /// <typeparam name="IIOutputDto">输出DTO</typeparam>
+    /// <typeparam name="IPagedListDto">分页DTO</typeparam>
     [Authorize]
     public abstract class CrudAdminControllerBase<TPrimaryKey, TEntity, IInputDto, IIOutputDto, IPagedListDto> : CrudApiControllerBase<TPrimaryKey, TEntity, IInputDto, IIOutputDto, IPagedListDto>
               where TEntity :  EntityBase<TPrimaryKey>
               where TPrimaryKey : IEquatable<TPrimaryKey>
-             where IInputDto : IInputDto<TPrimaryKey>
-             where IPagedListDto : IOutputDto<TPrimaryKey>
-            where IIOutputDto : IOutputDto<TPrimaryKey>
+              where IInputDto : IInputDto<TPrimaryKey>
+              where IPagedListDto : IOutputDto<TPrimaryKey>
+              where IIOutputDto : IOutputDto<TPrimaryKey>
     {
 
 
 
         protected CrudAdminControllerBase(ICrudServiceAsync<TPrimaryKey, TEntity, IInputDto, IIOutputDto, IPagedListDto> crudServiceAsync):base(crudServiceAsync)
+        {
+
+            this.CrudServiceAsync = crudServiceAsync;
+        }
+
+    }
+
+    /// <summary>
+    /// 增删改查控制器(有权限)
+    /// </summary>
+    /// <typeparam name="ICrudService">增删改查服务</typeparam>
+    /// <typeparam name="TPrimaryKey">键</typeparam>
+    /// <typeparam name="TEntity">实体</typeparam>
+    /// <typeparam name="IInputDto">输入DTO</typeparam>
+    /// <typeparam name="IIOutputDto">输出DTO</typeparam>
+    /// <typeparam name="IPagedListDto">分页DTO</typeparam>
+
+    [Authorize]
+    public abstract class CrudAdminControllerBase<ICrudService, TPrimaryKey, TEntity, IInputDto, IIOutputDto, IPagedListDto> : CrudApiControllerBase<TPrimaryKey, TEntity, IInputDto, IIOutputDto, IPagedListDto>
+             where TEntity : EntityBase<TPrimaryKey>
+             where TPrimaryKey : IEquatable<TPrimaryKey>
+             where IInputDto : IInputDto<TPrimaryKey>
+             where IPagedListDto : IOutputDto<TPrimaryKey>
+             where IIOutputDto : IOutputDto<TPrimaryKey>
+             where ICrudService : ICrudServiceAsync<TPrimaryKey, TEntity, IInputDto, IIOutputDto, IPagedListDto>
+    {
+
+
+
+        protected CrudAdminControllerBase(ICrudService crudServiceAsync) : base(crudServiceAsync)
         {
 
             this.CrudServiceAsync = crudServiceAsync;
