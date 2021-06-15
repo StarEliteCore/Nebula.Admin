@@ -3,7 +3,10 @@ using Destiny.Core.Flow.Shared.Abstractions;
 using DestinyCore.AspNetCore;
 using DestinyCore.AspNetCore.Api;
 using DestinyCore.Entity;
+using DestinyCore.Enums;
+using DestinyCore.Extensions;
 using DestinyCore.Filter;
+using DestinyCore.Ui;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -80,6 +83,7 @@ namespace Destiny.Core.Flow.AspNetCore
         public virtual async Task<AjaxResult> LoadDataAsync(TPrimaryKey key) {
 
             return (await CrudServiceAsync.LoadDataByKeyAsync(key)).ToAjaxResult();
+
         }
 
         [Description("异步更新")]
@@ -101,7 +105,7 @@ namespace Destiny.Core.Flow.AspNetCore
 
         [Description("异步得到分页")]
         [HttpPost]
-        public async Task<PageList<IPagedListDto>> GetPageAsync([FromBody] PageRequest request)
+        public virtual async Task<PageList<IPagedListDto>> GetPageAsync([FromBody] PageRequest request)
         {
             return (await CrudServiceAsync.GetPageAsync(request)).ToPageList();
 
@@ -113,10 +117,15 @@ namespace Destiny.Core.Flow.AspNetCore
         /// <param name="dto"></param>
         [Description("异步创建或更新")]
         [HttpPost]
-        public async Task<AjaxResult> CreateOrUpdateAsync([FromBody] IInputDto dto)
+        public virtual async Task<AjaxResult> CreateOrUpdateAsync([FromBody] IInputDto dto)
         {
             return (await CrudServiceAsync.CreateOrUpdateAsync(dto)).ToAjaxResult();
         }
+
+
+      
+
+
     }
 
 
