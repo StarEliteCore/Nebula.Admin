@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DestinyCore" Version="1.0.1" />
+    <PackageReference Include="DestinyCore.AspNetCore" Version="1.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="5.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Destiny.Core.Flow.Shared\Destiny.Core.Flow.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

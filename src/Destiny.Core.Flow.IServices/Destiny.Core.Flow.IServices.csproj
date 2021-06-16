@@ -16,11 +16,16 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Destiny.Core.Flow.Dtos\Destiny.Core.Flow.Dtos.csproj" />
+    <ProjectReference Include="..\Destiny.Core.Flow.Shared\Destiny.Core.Flow.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="DestinyCore.CodeGenerator" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Abstractions\" />
   </ItemGroup>
 
 </Project>

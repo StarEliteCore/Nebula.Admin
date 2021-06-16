@@ -9,9 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DestinyCore.Caching" Version="1.0.0" />
-    <PackageReference Include="DestinyCore.Caching.CSRedis" Version="1.0.0" />
-    <PackageReference Include="DestinyCore.MongoDB" Version="1.0.0" />
+    <PackageReference Include="DestinyCore.Caching" Version="1.0.1" />
+    <PackageReference Include="DestinyCore.Caching.CSRedis" Version="1.0.1" />
+    <PackageReference Include="DestinyCore.MongoDB" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +19,10 @@
     <ProjectReference Include="..\Destiny.Core.Flow.IServices\Destiny.Core.Flow.IServices.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Model\Destiny.Core.Flow.Model.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.Repository\Destiny.Core.Flow.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\" />
   </ItemGroup>
 
 </Project>

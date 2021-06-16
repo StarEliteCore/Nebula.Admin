@@ -14,13 +14,14 @@ using System.Linq;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using DestinyCore;
+using Destiny.Core.Flow.IServices.Permission;
 
 namespace Destiny.Core.Flow.Services.Permission
 {
     /// <summary>
     /// 登录账号访问接口权限验证
     /// </summary>
-    public class AuthorityVerificationServices : IAuthorityVerification
+    public class AuthorityVerificationServices : IAuthorityService
     {
         private readonly IPrincipal _principal;
         private readonly IRepository<UserRole, Guid> _repositoryUserRole = null;

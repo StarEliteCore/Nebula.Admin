@@ -51,7 +51,6 @@ namespace Destiny.Core.Flow.IServices.Documents
         Task<IPagedResult<DocumentPageListDto>> GetPageAsync(PageRequest request);
 
 
-        
 
     }
 

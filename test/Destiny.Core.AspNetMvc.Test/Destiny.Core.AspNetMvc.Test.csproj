@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+    <RootNamespace>Destiny.Core.AspNetMvc.Test</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\Admin\.nuget\packages\microsoft.testplatform.testhost\16.10.0\build\netcoreapp2.1\x64\Microsoft.TestPlatform.PlatformAbstractions.dll" />
+    <Content Remove="C:\Users\Admin\.nuget\packages\microsoft.testplatform.testhost\16.10.0\build\netcoreapp2.1\x64\testhost.dll" />
+    <Content Remove="C:\Users\Admin\.nuget\packages\microsoft.testplatform.testhost\16.10.0\build\netcoreapp2.1\x64\testhost.exe" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\Admin\.nuget\packages\xunit.runner.visualstudio\2.4.3\build\netcoreapp2.1\xunit.runner.reporters.netcoreapp10.dll" />
+    <None Remove="C:\Users\Admin\.nuget\packages\xunit.runner.visualstudio\2.4.3\build\netcoreapp2.1\xunit.runner.utility.netcoreapp10.dll" />
+    <None Remove="C:\Users\Admin\.nuget\packages\xunit.runner.visualstudio\2.4.3\build\netcoreapp2.1\xunit.runner.visualstudio.dotnetcore.testadapter.dll" />
+  </ItemGroup>
+
+
+
+
+
+  <ItemGroup>
+    <PackageReference Include="DestinyCore.AspNetCore" Version="1.0.1" />
+    <PackageReference Include="DestinyCore.AutoMapper" Version="1.0.1" />
+    <PackageReference Include="DestinyCore.EntityFrameworkCore" Version="1.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
+    <PackageReference Include="more.xunit.runner.visualstudio" Version="2.3.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Shouldly" Version="4.0.3" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Destiny.Core.Flow.AspNetCore.TestBase\Destiny.Core.Flow.AspNetCore.TestBase.csproj" />
+    <ProjectReference Include="..\..\src\Destiny.Core.Flow.AspNetCore\Destiny.Core.Flow.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\src\Destiny.Core.Flow.Shared\Destiny.Core.Flow.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

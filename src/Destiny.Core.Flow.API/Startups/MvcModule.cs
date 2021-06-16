@@ -1,4 +1,7 @@
-﻿using DestinyCore.AspNetCore;
+﻿using Destiny.Core.Flow.IServices.Permission;
+using Destiny.Core.Flow.Services.Permission;
+using DestinyCore.AspNetCore;
+using DestinyCore.AspNetCore.Module;
 using DestinyCore.Extensions;
 using DestinyCore.Modules;
 using DestinyCore.Options;
@@ -15,9 +18,15 @@ namespace Destiny.Core.Flow.API.Startups
     [DependsOn(typeof(AspNetCoreModule))]
     public class MvcModule: MvcModuleBase
     {
+        protected override void PreConfigureServices(ConfigureServicesContext context)
+        {
+            context.Services.AddScoped<IAuthorityService, AuthorityVerificationServices>();
+        }
+
         private string _corePolicyName = string.Empty;
         protected override void AddCors(ConfigureServicesContext context)
         {
+
             var settings= context.Services.GetObject<AppOptionSettings>();
             if (!settings.Cors.PolicyName.IsNullOrEmpty() && !settings.Cors.Url.IsNullOrEmpty())
             {
@@ -40,7 +49,7 @@ namespace Destiny.Core.Flow.API.Startups
         protected override void AddMvcOptions(MvcOptions options)
         {
             options.SuppressAsyncSuffixInActionNames = false;
-            options.Filters.Add<PermissionAuthorizationFilter>();
+            options.Filters.Add<Destiny.Core.Flow.API.Filters.PermissionAuthorizationFilter>();
             //options.Filters.Add<AuditLogFilter>();
         }
         protected override void UseCors(ApplicationContext context)

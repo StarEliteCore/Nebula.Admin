@@ -11,6 +11,7 @@ using DestinyCore.Filter.Abstract;
 using DestinyCore.Ui;
 using DestinyCore.Ui.Abstracts;
 using Destiny.Core.Flow.Dtos.DocumentTypes;
+using Destiny.Core.Flow.Entities;
 
 namespace Destiny.Core.Flow.IServices.DocumentTypes
 {

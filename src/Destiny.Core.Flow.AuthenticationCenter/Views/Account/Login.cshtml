@@ -34,9 +34,7 @@
                 }
             </div>
      
-            <div class="form-style-agile">
-                <a asp-controller="Account" asp-action="QQAuthorize">QQ<img class="image-po" src="~/Connect_logo_5.png" /></a>
-            </div>
+
             <button class="button-sub" name="button" value="login">登录</button>
         </form>
     </div>
@@ -53,13 +51,13 @@
                     @foreach (var provider in Model.VisibleExternalProviders)
                     {
                         <li class="list-inline-item">
-                            <a class="btn btn-secondary"
+                            @*<a class="btn btn-secondary"
                                asp-controller="External"
                                asp-action="Challenge"
                                asp-route-scheme="@provider.AuthenticationScheme"
                                asp-route-returnUrl="@Model.ReturnUrl">
                                 @provider.DisplayName
-                            </a>
+                            </a>*@
                         </li>
                     }
                 </ul>
