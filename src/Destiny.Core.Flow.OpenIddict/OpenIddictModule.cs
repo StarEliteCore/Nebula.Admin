@@ -1,4 +1,5 @@
-﻿using DestinyCore.Modules;
+﻿using Destiny.Core.Flow.OpenIddict.Entities;
+using DestinyCore.Modules;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using static OpenIddict.Abstractions.OpenIddictConstants;
@@ -63,7 +64,7 @@ namespace Destiny.Core.Flow.OpenIddict
                     options.UseLocalServer();//从本地server示例导入验证配置
                     options.UseAspNetCore();//启用aspnet core host
                 });
-                
+
         }
     }
 }

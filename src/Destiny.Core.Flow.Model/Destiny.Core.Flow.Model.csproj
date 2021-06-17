@@ -5,17 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DestinyCore" Version="1.0.1" />
-    <PackageReference Include="DestinyCore.EntityFrameworkCore" Version="1.0.1" />
-    <PackageReference Include="DestinyCore.FluentValidation" Version="1.0.1" />
-    <PackageReference Include="DestinyCore.TestBase" Version="1.0.1" />
-    <PackageReference Include="DestinyCore.AutoMapper" Version="1.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.6">
+    <PackageReference Include="DestinyCore" Version="1.0.3" />
+    <PackageReference Include="DestinyCore.EntityFrameworkCore" Version="1.0.3" />
+    <PackageReference Include="DestinyCore.FluentValidation" Version="1.0.3" />
+    <PackageReference Include="DestinyCore.TestBase" Version="1.0.3" />
+    <PackageReference Include="DestinyCore.AutoMapper" Version="1.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.1.8" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="5.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="5.0.7" />
   </ItemGroup>
 
   <ItemGroup>

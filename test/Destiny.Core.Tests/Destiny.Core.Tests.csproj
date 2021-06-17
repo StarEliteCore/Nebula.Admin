@@ -30,15 +30,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DestinyCore" Version="1.0.0" />
-    <PackageReference Include="DestinyCore.Caching" Version="1.0.0" />
-    <PackageReference Include="DestinyCore.CodeGenerator" Version="1.0.0" />
-    <PackageReference Include="DestinyCore.EntityFrameworkCore" Version="1.0.0" />
-    <PackageReference Include="DestinyCore.MongoDB" Version="1.0.0" />
-    <PackageReference Include="DestinyCore.TestBase" Version="1.0.0" />
+    <PackageReference Include="DestinyCore" Version="1.0.3" />
+    <PackageReference Include="DestinyCore.Caching" Version="1.0.3" />
+    <PackageReference Include="DestinyCore.CodeGenerator" Version="1.0.3" />
+    <PackageReference Include="DestinyCore.EntityFrameworkCore" Version="1.0.3" />
+    <PackageReference Include="DestinyCore.MongoDB" Version="1.0.3" />
+    <PackageReference Include="DestinyCore.TestBase" Version="1.0.3" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.6" />
-    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="5.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="5.0.7" />
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="5.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
     <PackageReference Include="xunit" Version="2.4.1" />

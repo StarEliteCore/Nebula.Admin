@@ -9,9 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DestinyCore.Caching" Version="1.0.1" />
-    <PackageReference Include="DestinyCore.Caching.CSRedis" Version="1.0.1" />
-    <PackageReference Include="DestinyCore.MongoDB" Version="1.0.1" />
+    <PackageReference Include="DestinyCore.Caching" Version="1.0.3" />
+    <PackageReference Include="DestinyCore.Caching.CSRedis" Version="1.0.3" />
+    <PackageReference Include="DestinyCore.MongoDB" Version="1.0.3" />
   </ItemGroup>
 
   <ItemGroup>

@@ -18,7 +18,7 @@ namespace Destiny.Core.Flow.SeriLog
             Log.Logger = new LoggerConfiguration()
 #if DEBUG
                 .MinimumLevel.Information()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Debug)
 #else
                  .MinimumLevel.Error()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
