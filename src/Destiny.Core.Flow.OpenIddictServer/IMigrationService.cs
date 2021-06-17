@@ -64,23 +64,23 @@ namespace Destiny.Core.Flow.OpenIddictServer
               new Uri("http://localhost:4200")
             },
                         Permissions =
-            {
-              Permissions.Endpoints.Authorization,
-              Permissions.Endpoints.Logout,
-              Permissions.Endpoints.Token,
-              Permissions.GrantTypes.AuthorizationCode,
-              Permissions.GrantTypes.RefreshToken,
-              Permissions.ResponseTypes.Code,
-              Permissions.Scopes.Email,
-              Permissions.Scopes.Profile,
-              Permissions.Scopes.Roles,
-              Permissions.Prefixes.Scope + "server_scope",
-              Permissions.Prefixes.Scope + "api_scope"
-            },
+                        {
+                          Permissions.Endpoints.Authorization,
+                          Permissions.Endpoints.Logout,
+                          Permissions.Endpoints.Token,
+                          Permissions.GrantTypes.AuthorizationCode,
+                          Permissions.GrantTypes.RefreshToken,
+                          Permissions.ResponseTypes.Code,
+                          Permissions.Scopes.Email,
+                          Permissions.Scopes.Profile,
+                          Permissions.Scopes.Roles,
+                          Permissions.Prefixes.Scope + "server_scope",
+                          Permissions.Prefixes.Scope + "api_scope"
+                        },
                         Requirements =
-            {
-              Requirements.Features.ProofKeyForCodeExchange
-            }
+                        {
+                          Requirements.Features.ProofKeyForCodeExchange
+                        }
                     });
                 }
 
@@ -92,9 +92,11 @@ namespace Destiny.Core.Flow.OpenIddictServer
                         DisplayName = "API Service",
                         ClientSecret = "my-api-secret",
                         Permissions =
-            {
-              Permissions.Endpoints.Introspection
-            }
+                        {
+                          Permissions.Endpoints.Introspection,
+                          Permissions.GrantTypes.Password,
+                          Permissions.Endpoints.Token
+                        }
                     };
 
                     await manager.CreateAsync(descriptor);
@@ -136,13 +138,13 @@ namespace Destiny.Core.Flow.OpenIddictServer
 
             static async Task EnsureAdministratorRole(IServiceProvider provider)
             {
-                var manager = provider.GetRequiredService<RoleManager<IdentityRole>>();
+                var manager = provider.GetRequiredService<RoleManager<Role>>();
 
                 var role = "admin";
                 var roleExists = await manager.RoleExistsAsync(role);
                 if (!roleExists)
                 {
-                    var newRole = new IdentityRole(role);
+                    var newRole = new Role { Name = role };
                     await manager.CreateAsync(newRole);
                 }
             }
@@ -157,14 +159,15 @@ namespace Destiny.Core.Flow.OpenIddictServer
                 var applicationUser = new User
                 {
                     UserName = "admin",
-                    Email = "admin@qq.com"
+                    Email = "admin@qq.com",
+                    NickName = "管理员"
                 };
 
                 var userResult = await manager.CreateAsync(applicationUser, "Pass123$");
                 if (!userResult.Succeeded) return;
 
                 await manager.SetLockoutEnabledAsync(applicationUser, false);
-                await manager.AddToRoleAsync(applicationUser, "role");
+                await manager.AddToRoleAsync(applicationUser, "admin");
             }
         }
     }

@@ -73,7 +73,7 @@ namespace Destiny.Core.Flow.OpenIddictServer
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("An error occurred while migrating the database."+ex);
+                    Console.WriteLine("An error occurred while migrating the database." + ex);
                 }
             }
         }

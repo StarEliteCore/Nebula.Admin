@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <None Update="DestinyCoreDb.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="DestinyCoreMongoDb.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

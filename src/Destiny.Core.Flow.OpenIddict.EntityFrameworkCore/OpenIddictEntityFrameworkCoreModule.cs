@@ -6,6 +6,7 @@ using DestinyCore.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.IO;
 using System.Linq;
 
 namespace Destiny.Core.Flow.OpenIddict.EntityFrameworkCore
@@ -27,9 +28,11 @@ namespace Destiny.Core.Flow.OpenIddict.EntityFrameworkCore
         protected override IServiceCollection AddDbContextWithUnitOfWork(IServiceCollection services)
         {
             var settings = services.GetObjectOrNull<AppOptionSettings>();
-            var connection = "server=47.100.213.49;userid=test;pwd=pwd123456;database=Destiny.Core.Flow.OpenIddict;port=3307";// settings.DbContexts.Values.First().ConnectionString;
+            var connection = settings.DbContexts.Values.First().ConnectionString;
             var databaseType = settings.DbContexts.Values.First().DatabaseType;
             var assemblyName = settings.DbContexts.Values.First().MigrationsAssemblyName;
+
+            
             services.AddDestinyDbContext<OpenIddictEntityDefaultDbContext>(x =>
             {
                 x.ConnectionString = connection;
@@ -38,8 +41,10 @@ namespace Destiny.Core.Flow.OpenIddict.EntityFrameworkCore
             },
             (_, options) =>
             {
+                var connStr = connection.IsTxtFile() ? File.ReadAllText(connection) : connection;
+                Console.WriteLine(connStr);
                 options.UseOpenIddict<OpenIddictApplication, OpenIddictAuthorization, OpenIddictScope, OpenIddictToken, Guid>();
-                options.UseMySql(connection, ServerVersion.AutoDetect(connection), null);
+                options.UseMySql(connStr, ServerVersion.AutoDetect(connStr), null);
             });
             services.AddUnitOfWork<OpenIddictEntityDefaultDbContext>();
             return services;
