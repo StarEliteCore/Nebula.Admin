@@ -6,14 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenIddict.EntityFrameworkCore.Models" Version="3.0.4" />
-    <PackageReference Include="OpenIddict.Server.AspNetCore" Version="3.0.4" />
-    <PackageReference Include="OpenIddict.Validation.AspNetCore" Version="3.0.4" />
-    <PackageReference Include="OpenIddict.Validation.ServerIntegration" Version="3.0.4" />
+    <PackageReference Include="DestinyCore" Version="1.0.3" />
+    <PackageReference Include="OpenIddict.Core" Version="3.0.5" />
+    <PackageReference Include="OpenIddict.EntityFrameworkCore.Models" Version="3.0.5" />
+    <PackageReference Include="OpenIddict.Server.AspNetCore" Version="3.0.5" />
+    <PackageReference Include="OpenIddict.Validation.AspNetCore" Version="3.0.5" />
+    <PackageReference Include="OpenIddict.Validation.ServerIntegration" Version="3.0.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Destiny.Core.Flow.Model\Destiny.Core.Flow.Model.csproj" />
+    <ProjectReference Include="..\Destiny.Core.Flow.OpenIddict.Entities\Destiny.Core.Flow.OpenIddict.Entities.csproj" />
   </ItemGroup>
 
 </Project>

@@ -11,7 +11,7 @@ namespace Destiny.Core.Flow.EntityFrameworkCore
     public class IdentityServer4DefaultDbContext : DbContextBase
     {
         public IdentityServer4DefaultDbContext(DbContextOptions<IdentityServer4DefaultDbContext> options, IServiceProvider serviceProvider)
-          : base(options, serviceProvider)
+          : base(options,serviceProvider)
         {
 
         }

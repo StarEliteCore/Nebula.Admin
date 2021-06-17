@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="DestinyCore" Version="1.0.1" />
+	<PackageReference Include="DestinyCore" Version="1.0.3" />
 	<PackageReference Include="IdentityServer4" Version="4.1.2"></PackageReference>
     <PackageReference Include="IdentityServer4.EntityFramework.Storage" Version="4.1.2" />
   </ItemGroup>

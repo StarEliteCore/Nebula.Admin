@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DestinyCore" Version="1.0.1" />
+    <PackageReference Include="DestinyCore" Version="1.0.3" />
   </ItemGroup>
 
 </Project>
