@@ -5,9 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspectCore.Extensions.Hosting" Version="2.2.0" />
     <PackageReference Include="AspNet.Security.OAuth.QQ" Version="5.0.6" />
     <PackageReference Include="DestinyCore.AspNetCore" Version="1.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

@@ -19,13 +19,15 @@ namespace Destiny.Core.Flow.OpenIddict
             context.Services.AddOpenIddict()
                 .AddServer(options =>
                 {
+                    options.SetIssuer(new System.Uri("https://localhost:5001/"));
                     //注册端点
                     options.SetAuthorizationEndpointUris("/connect/authorize")
-                           .SetDeviceEndpointUris("/connect/device")
-                           .SetLogoutEndpointUris("/connect/logout")
-                           .SetTokenEndpointUris("/connect/token")
-                           .SetUserinfoEndpointUris("/connect/userinfo")
-                           .SetVerificationEndpointUris("/connect/verify");
+                                   .SetDeviceEndpointUris("/connect/device")
+                                   .SetLogoutEndpointUris("/connect/logout")
+                                   .SetTokenEndpointUris("/connect/token")
+                                   .SetIntrospectionEndpointUris("/connect/introspect")
+                                   .SetUserinfoEndpointUris("/connect/userinfo")
+                                   .SetVerificationEndpointUris("/connect/verify");
 
                     //启用验证码 隐式 客户端凭证 设备码 密码 刷新token模式
                     options.AllowAuthorizationCodeFlow()

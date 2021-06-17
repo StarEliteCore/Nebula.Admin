@@ -1,3 +1,4 @@
+using AspectCore.Extensions.Hosting;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -18,6 +19,7 @@ namespace Destiny.Core.Flow.OpenIddictServer
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseServiceContext()//Ê¹ÓÃaspectcoreÌæ»»ioc
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
