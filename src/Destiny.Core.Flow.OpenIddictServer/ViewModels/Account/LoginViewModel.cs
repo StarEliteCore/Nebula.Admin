@@ -11,7 +11,7 @@ namespace Destiny.Core.Flow.OpenIddictServer.ViewModels.Account
         /// 邮箱
         /// </summary>
         [Required]
-        [EmailAddress]
+        //[EmailAddress]
         public string Email { get; set; }
 
         /// <summary>
