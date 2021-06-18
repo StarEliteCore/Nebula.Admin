@@ -9,7 +9,7 @@ using System;
 using System.Threading.Tasks;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
-namespace Destiny.Core.Flow.OpenIddictServer
+namespace Destiny.Core.Flow.OpenIddictServer.Services
 {
     public interface IMigrationService
     {

@@ -39,11 +39,14 @@ namespace Destiny.Core.Flow.OpenIddict
                            .AllowRefreshTokenFlow();
 
                     //注册授权范围
+                    //TODO:从配置文件读取注册scope
                     options.RegisterScopes(Scopes.Email, Scopes.Profile, Scopes.Roles, Scopes.OfflineAccess, Scopes.OpenId, Scopes.Phone, "demo_api");
 
                     //注册登录和加密证书
                     options.AddDevelopmentEncryptionCertificate()
                            .AddDevelopmentSigningCertificate();
+
+                    //options.AddEphemeralEncryptionKey().AddEphemeralSigningKey();
 
                     //强制客户端使用PKCE Proof Key for Code Exchange
                     options.RequireProofKeyForCodeExchange();

@@ -1,19 +1,12 @@
-using Destiny.Core.Flow.OpenIddict.Entities;
-using Destiny.Core.Flow.OpenIddict.EntityFrameworkCore;
+using Destiny.Core.Flow.OpenIddictServer.Services;
 using Destiny.Core.Flow.OpenIddictServer.Startups;
-using DestinyCore.EntityFrameworkCore;
-using DestinyCore.Extensions;
 using DestinyCore.Modules;
-using DestinyCore.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Linq;
-using static OpenIddict.Abstractions.OpenIddictConstants;
 
 namespace Destiny.Core.Flow.OpenIddictServer
 {
