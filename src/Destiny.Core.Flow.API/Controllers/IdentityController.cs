@@ -55,7 +55,6 @@ namespace Destiny.Core.Flow.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Description("更改密码")]
-        [NoAuthorityVerification]
         public async Task<AjaxResult> ChangePassword([FromBody] ChangePassInputDto dto)
         {
 

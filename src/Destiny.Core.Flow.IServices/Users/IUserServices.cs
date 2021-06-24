@@ -66,5 +66,12 @@ namespace Destiny.Core.Flow.IServices
         /// </summary>
         /// <returns></returns>
         Task<OperationResponse<IEnumerable<SelectListItem>>> GetUsersToSelectListItemAsync();
+
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        /// <param name="userId">用户ID</param>
+        /// <returns></returns>
+        Task<OperationResponse> ResetPasswordAsync(Guid userId);
     }
 }

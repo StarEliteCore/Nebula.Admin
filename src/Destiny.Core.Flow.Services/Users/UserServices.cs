@@ -118,7 +118,7 @@ namespace Destiny.Core.Flow.Services
             {
                 return OperationResponse.Error("此用户为系统超级管理员，无法删除");
             }
-  
+
             // IList<string> existRoleNames = await _userManager.GetRolesAsync(user);
             return await _unitOfWork.UseTranAsync(async () =>
             {
@@ -153,7 +153,7 @@ namespace Destiny.Core.Flow.Services
             user = dto.MapTo(user);
             var result = await _userManager.UpdateAsync(user);
             return result.ToOperationResponse("保存用户成功");
-           
+
         }
 
         /// <summary>
@@ -228,6 +228,30 @@ namespace Destiny.Core.Flow.Services
                 Selected = false,
             }).ToListAsync();
             return new OperationResponse<IEnumerable<SelectListItem>>("得到数据成功", users, OperationResponseType.Success);
+        }
+
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<OperationResponse> ResetPasswordAsync(Guid userId)
+        {
+            userId.NotEmpty(nameof(userId));
+            //是否超级用户
+            var isSuperUser = _principal.Identity.GetUserName("name")?.Equals("Admin", StringComparison.OrdinalIgnoreCase);
+            if (isSuperUser == false)
+            {
+                return OperationResponse.Error("不是超过用户无法重置密码");
+            }
+            var password = "123456";
+            var user = await _userManager.FindByIdAsync(userId.AsTo<string>());
+            //重置此用户令牌
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            //更新密码 123456 系统默认超级密码
+            var result = await _userManager.ResetPasswordAsync(user, token, password);
+            return result.ToOperationResponse($"重置密码成功，密码为【{password}】");
+
         }
     }
 }

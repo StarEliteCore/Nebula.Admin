@@ -41,8 +41,9 @@ namespace Destiny.Core.Flow.Shared.Application
 
         public virtual async Task<OperationResponse> CreateAsync(IInputDto inputDto)
         {
-            inputDto.NotNull(nameof(inputDto));
 
+            
+            inputDto.NotNull(nameof(inputDto));
             return await this.Repository.InsertAsync(inputDto,this.CreateCheckAsync);
         }
 
@@ -101,7 +102,19 @@ namespace Destiny.Core.Flow.Shared.Application
         public virtual Task<IPagedResult<IPagedListDto>> GetPageAsync(PageRequest request)
         {
             request.NotNull(nameof(request));
+            request = GetPageRequest(request);
             return this.Entities.ToPageAsync<IEntity,IPagedListDto>(request);
+        }
+
+        /// <summary>
+        /// 得到分页请求
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        protected virtual PageRequest GetPageRequest(PageRequest request)
+        {
+
+            return request;
         }
 
         /// <summary>
