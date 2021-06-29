@@ -9,7 +9,7 @@ namespace EntityFrameworkCore.DbContexts
 {
     public class TestContext001 : DbContextBase
     {
-        public TestContext001(DbContextOptions options, IServiceProvider serviceProvider) : base(options, serviceProvider)
+        public TestContext001(DbContextOptions options, IServiceProvider serviceProvider) : base(options,serviceProvider)
         {
         }
     }

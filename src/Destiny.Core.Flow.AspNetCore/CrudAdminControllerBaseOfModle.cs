@@ -176,8 +176,6 @@ namespace Destiny.Core.Flow.AspNetCore
              where ICrudService : ICrudServiceAsync<TPrimaryKey, TEntity, IInputDto, IIOutputDto, IPagedListDto>
     {
 
-    
-
         protected CrudAdminControllerBase(ICrudService crudServiceAsync) : base(crudServiceAsync)
         {
 

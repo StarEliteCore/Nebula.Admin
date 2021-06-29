@@ -149,5 +149,17 @@ namespace Destiny.Core.Flow.API.Controllers
 
             return (await _userService.GetUsersAsync()).ToAjaxResult();
         }
+
+        /// <summary>
+        /// 异步重置密码
+        /// </summary>
+        /// <param name="userId">用户ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Description("异步重置密码")]
+        public Task<AjaxResult> ResetPasswordAsync(Guid userId)
+        {
+            return _userService.ResetPasswordAsync(userId).ToAjaxResult();
+        }
     }
 }

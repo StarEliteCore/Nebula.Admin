@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DestinyCore.FluentValidation" Version="1.0.1" />
+    <PackageReference Include="DestinyCore.FluentValidation" Version="1.0.3" />
   </ItemGroup>
 
 </Project>

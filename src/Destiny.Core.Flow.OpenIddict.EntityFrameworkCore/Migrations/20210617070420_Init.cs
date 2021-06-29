@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Destiny.Core.Flow.Model.Migrations
+namespace Destiny.Core.Flow.OpenIddict.EntityFrameworkCore.Migrations
 {
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -377,6 +377,70 @@ namespace Destiny.Core.Flow.Model.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MenuFunction", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "OpenIddictApplications",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    ClientId = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ClientSecret = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ConcurrencyToken = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ConsentType = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DisplayName = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DisplayNames = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Permissions = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    PostLogoutRedirectUris = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Properties = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    RedirectUris = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Requirements = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Type = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OpenIddictApplications", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "OpenIddictScopes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    ConcurrencyToken = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Description = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Descriptions = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DisplayName = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DisplayNames = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Name = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Properties = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Resources = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OpenIddictScopes", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -1081,6 +1145,81 @@ namespace Destiny.Core.Flow.Model.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "OpenIddictAuthorizations",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    ApplicationId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    ConcurrencyToken = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    Properties = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Scopes = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Status = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Subject = table.Column<string>(type: "varchar(400)", maxLength: 400, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Type = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OpenIddictAuthorizations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OpenIddictAuthorizations_OpenIddictApplications_ApplicationId",
+                        column: x => x.ApplicationId,
+                        principalTable: "OpenIddictApplications",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "OpenIddictTokens",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    ApplicationId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    AuthorizationId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    ConcurrencyToken = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    ExpirationDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    Payload = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Properties = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    RedemptionDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    ReferenceId = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Status = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Subject = table.Column<string>(type: "varchar(400)", maxLength: 400, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Type = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OpenIddictTokens", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OpenIddictTokens_OpenIddictApplications_ApplicationId",
+                        column: x => x.ApplicationId,
+                        principalTable: "OpenIddictApplications",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_OpenIddictTokens_OpenIddictAuthorizations_AuthorizationId",
+                        column: x => x.AuthorizationId,
+                        principalTable: "OpenIddictAuthorizations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "IX_ApiResourceClaim_ApiResourceId",
                 table: "ApiResourceClaim",
@@ -1165,6 +1304,39 @@ namespace Destiny.Core.Flow.Model.Migrations
                 name: "IX_IdentityResourceProperty_IdentityResourceId",
                 table: "IdentityResourceProperty",
                 column: "IdentityResourceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OpenIddictApplications_ClientId",
+                table: "OpenIddictApplications",
+                column: "ClientId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OpenIddictAuthorizations_ApplicationId_Status_Subject_Type",
+                table: "OpenIddictAuthorizations",
+                columns: new[] { "ApplicationId", "Status", "Subject", "Type" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OpenIddictScopes_Name",
+                table: "OpenIddictScopes",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OpenIddictTokens_ApplicationId_Status_Subject_Type",
+                table: "OpenIddictTokens",
+                columns: new[] { "ApplicationId", "Status", "Subject", "Type" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OpenIddictTokens_AuthorizationId",
+                table: "OpenIddictTokens",
+                column: "AuthorizationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OpenIddictTokens_ReferenceId",
+                table: "OpenIddictTokens",
+                column: "ReferenceId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -1245,6 +1417,12 @@ namespace Destiny.Core.Flow.Model.Migrations
                 name: "MenuFunction");
 
             migrationBuilder.DropTable(
+                name: "OpenIddictScopes");
+
+            migrationBuilder.DropTable(
+                name: "OpenIddictTokens");
+
+            migrationBuilder.DropTable(
                 name: "Organizated");
 
             migrationBuilder.DropTable(
@@ -1282,6 +1460,12 @@ namespace Destiny.Core.Flow.Model.Migrations
 
             migrationBuilder.DropTable(
                 name: "IdentityResource");
+
+            migrationBuilder.DropTable(
+                name: "OpenIddictAuthorizations");
+
+            migrationBuilder.DropTable(
+                name: "OpenIddictApplications");
         }
     }
 }

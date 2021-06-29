@@ -6,13 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="3.0.4" />
+    <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="3.0.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Destiny.Core.Flow.Model\Destiny.Core.Flow.Model.csproj" />
-    <ProjectReference Include="..\Destiny.Core.Flow.OpenIddict.Entities\Destiny.Core.Flow.OpenIddict.Entities.csproj" />
+    <ProjectReference Include="..\Destiny.Core.Flow.EntityFrameworkCore\Destiny.Core.Flow.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.OpenIddict\Destiny.Core.Flow.OpenIddict.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

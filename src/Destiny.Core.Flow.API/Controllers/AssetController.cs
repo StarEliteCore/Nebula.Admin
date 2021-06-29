@@ -12,7 +12,11 @@ using System.Threading.Tasks;
 
 namespace Destiny.Core.Flow.API.Controllers
 {
-    [Description("资产控制器")]
+
+    /// <summary>
+    /// 资产管理
+    /// </summary>
+    [Description("资产管理")]
 
     public class AssetController : CrudAdminControllerBase<IAssetService, Guid, Asset, AssetInputDto, AssetOutputDto, AssetPageListDto>
     {

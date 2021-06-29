@@ -13,8 +13,8 @@ namespace Destiny.Core.AspNetMvc.Test.Controller
 {
     public class User_TestController_Tests : AspNetMvcTestBase
     {
-
-
+        //主题+期望结果+参数
+        //被测试方法全名_期望的结果_给予的条件
         [Fact]
         public async Task Should_Trigger_User_TestController_CreateAsync()
         {

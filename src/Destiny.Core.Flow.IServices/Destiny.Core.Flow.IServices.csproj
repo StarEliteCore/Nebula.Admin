@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DestinyCore.CodeGenerator" Version="1.0.0" />
+    <PackageReference Include="DestinyCore.CodeGenerator" Version="1.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
   </ItemGroup>
 

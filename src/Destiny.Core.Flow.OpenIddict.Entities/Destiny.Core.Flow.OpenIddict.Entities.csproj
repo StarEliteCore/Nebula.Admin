@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenIddict.EntityFrameworkCore.Models" Version="3.0.4" />
-    <PackageReference Include="DestinyCore" Version="1.0.1" />
+    <PackageReference Include="OpenIddict.EntityFrameworkCore.Models" Version="3.0.5" />
+    <PackageReference Include="DestinyCore" Version="1.0.3" />
   </ItemGroup>
 
 </Project>

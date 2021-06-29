@@ -5,8 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspectCore.Extensions.Hosting" Version="2.2.0" />
     <PackageReference Include="AspNet.Security.OAuth.QQ" Version="5.0.6" />
-    <PackageReference Include="DestinyCore.AspNetCore" Version="1.0.1" />
+    <PackageReference Include="DestinyCore.AspNetCore" Version="1.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -15,11 +16,12 @@
     <ProjectReference Include="..\Destiny.Core.Flow.Model\Destiny.Core.Flow.Model.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.OpenIddict.EntityFrameworkCore\Destiny.Core.Flow.OpenIddict.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Destiny.Core.Flow.OpenIddict\Destiny.Core.Flow.OpenIddict.csproj" />
+    <ProjectReference Include="..\Destiny.Core.Flow.SeriLog\Destiny.Core.Flow.SeriLog.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="DestinyCoreDb.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="DestinyCoreMongoDb.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

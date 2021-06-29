@@ -14,6 +14,7 @@ namespace Destiny.Core.Flow.OpenIddictServer.Startups
     typeof(IdentityModule),
     typeof(OpenIddictModule),
     typeof(OpenIddictEntityFrameworkCoreModule),
+    typeof(MigrationModule),
     typeof(AutoMapperModule)
    )]
     public class AppWebModule : AppModule
@@ -23,10 +24,6 @@ namespace Destiny.Core.Flow.OpenIddictServer.Startups
         {
            var service = context.Services;
            service.AddMvc();
-        }
-        public override void ApplicationInitialization(ApplicationContext context)
-        {
-        
         }
     }
 }

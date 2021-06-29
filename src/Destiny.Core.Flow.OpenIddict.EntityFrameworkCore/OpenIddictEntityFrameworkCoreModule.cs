@@ -1,23 +1,21 @@
-﻿
-using Destiny.Core.Flow.OpenIddict.Entities;
+﻿using Destiny.Core.Flow.OpenIddict.Entities;
 using DestinyCore.EntityFrameworkCore;
 using DestinyCore.Extensions;
 using DestinyCore.Modules;
 using DestinyCore.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using OpenIddict.EntityFrameworkCore.Models;
 using System;
+using System.IO;
 using System.Linq;
 
 namespace Destiny.Core.Flow.OpenIddict.EntityFrameworkCore
 {
-
-
-    public class OpenIddictEntityFrameworkCoreModule : AppModule
+    public class OpenIddictEntityFrameworkCoreModule : EntityFrameworkCoreModuleBase
     {
         public override void ConfigureServices(ConfigureServicesContext context)
         {
+            base.ConfigureServices(context);
             context.Services.AddOpenIddict()
                 .AddCore(options =>
                 {
@@ -25,15 +23,31 @@ namespace Destiny.Core.Flow.OpenIddict.EntityFrameworkCore
                     .UseDbContext<OpenIddictEntityDefaultDbContext>()
                     .ReplaceDefaultEntities<OpenIddictApplication, OpenIddictAuthorization, OpenIddictScope, OpenIddictToken, Guid>();
                 });
+        }
 
-            //var settings = context.Services.GetObjectOrNull<AppOptionSettings>();
-            //var connection = settings.DbContexts.Values.First().ConnectionString;
-            //var provider = context.Services.BuildServiceProvider();
-            context.Services.AddDbContext<OpenIddictEntityDefaultDbContext>(x =>
+        protected override IServiceCollection AddDbContextWithUnitOfWork(IServiceCollection services)
+        {
+            var settings = services.GetObjectOrNull<AppOptionSettings>();
+            var connection = settings.DbContexts.Values.First().ConnectionString;
+            var databaseType = settings.DbContexts.Values.First().DatabaseType;
+            var assemblyName = settings.DbContexts.Values.First().MigrationsAssemblyName;
+
+            
+            services.AddDestinyDbContext<OpenIddictEntityDefaultDbContext>(x =>
             {
-                x.UseOpenIddict<OpenIddictApplication, OpenIddictAuthorization, OpenIddictScope, OpenIddictToken, Guid>();
+                x.ConnectionString = connection;
+                x.DatabaseType = databaseType;
+                x.MigrationsAssemblyName = assemblyName;
+            },
+            (_, options) =>
+            {
+                var connStr = connection.IsTxtFile() ? File.ReadAllText(connection) : connection;
+                Console.WriteLine(connStr);
+                options.UseOpenIddict<OpenIddictApplication, OpenIddictAuthorization, OpenIddictScope, OpenIddictToken, Guid>();
+                options.UseMySql(connStr, ServerVersion.AutoDetect(connStr), null);
             });
-            context.Services.AddUnitOfWork<OpenIddictEntityDefaultDbContext>();
+            services.AddUnitOfWork<OpenIddictEntityDefaultDbContext>();
+            return services;
         }
     }
 }

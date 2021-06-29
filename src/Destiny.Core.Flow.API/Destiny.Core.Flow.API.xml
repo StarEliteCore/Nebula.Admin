@@ -4,6 +4,11 @@
         <name>Destiny.Core.Flow.API</name>
     </assembly>
     <members>
+        <member name="T:Destiny.Core.Flow.API.Controllers.AssetController">
+            <summary>
+            资产管理
+            </summary>
+        </member>
         <member name="T:Destiny.Core.Flow.API.Controllers.AuditEntryController">
             <summary>
             数据审计
@@ -654,6 +659,13 @@
             <summary>
             异步得到所有用户
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Destiny.Core.Flow.API.Controllers.UserController.ResetPasswordAsync(System.Guid)">
+            <summary>
+            异步重置密码
+            </summary>
+            <param name="userId">用户ID</param>
             <returns></returns>
         </member>
         <member name="T:Destiny.Core.Flow.API.UpLoadFileController">
