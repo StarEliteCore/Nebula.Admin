@@ -31,7 +31,7 @@ namespace Destiny.Core.Flow.Dtos.DataDictionnary
         /// 数据字典父级
         /// </summary>
         [DisplayName("数据字典父级")]
-        public Guid ParentId { get; set; } = Guid.Empty;
+        public Guid? ParentId { get; set; }
 
         /// <summary>
         /// 排序

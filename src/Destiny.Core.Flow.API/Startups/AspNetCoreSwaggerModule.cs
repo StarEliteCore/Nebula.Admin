@@ -1,4 +1,8 @@
-﻿using DestinyCore.Swagger;
+﻿using DestinyCore.Exceptions;
+using DestinyCore.Extensions;
+using DestinyCore.Modules;
+using DestinyCore.Swagger;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;

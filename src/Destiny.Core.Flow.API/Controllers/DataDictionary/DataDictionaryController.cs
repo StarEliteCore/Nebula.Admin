@@ -53,6 +53,7 @@ namespace Destiny.Core.Flow.API.Controllers.DataDictionary
 
         public async Task<AjaxResult> CreateAsync([FromBody] DataDictionnaryInputDto dto)
         {
+      
             return (await _dataDictionnaryServices.CreateAsync(dto)).ToAjaxResult();
         }
         /// <summary>

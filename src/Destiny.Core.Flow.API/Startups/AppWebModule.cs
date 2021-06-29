@@ -22,12 +22,10 @@ namespace Destiny.Core.Flow.API.Startups
            typeof(FunctionModule),
            typeof(EntityFrameworkCoreModule),
            typeof(AutoMapperModule),
-           //typeof(CachingDefaultModule), //普通缓存
            typeof(CSRedisModule), //redis缓存
            typeof(MongoDBModelule),
            typeof(MigrationModule),
            typeof(CodeGeneratorModeule)
-    //typeof(FluentValidationModuleBase)
 
     )]
     public class AppWebModule : AppModule
