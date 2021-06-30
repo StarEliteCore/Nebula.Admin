@@ -44,7 +44,7 @@ namespace Destiny.Core.Flow.Shared
         {
             while (true)
             {
-                string task = null;
+                string task =null;
                 lock (_locker)
                 {
                     if (tasks.Count > 0)
@@ -58,12 +58,13 @@ namespace Destiny.Core.Flow.Shared
 
                 }
 
+
                 if (task != null)
                 {
 
                     if (EventHandler != null)
                     {
-                        EventHandler.Invoke(task,null);
+                        EventHandler.Invoke(task, EventArgs.Empty);
                         Thread.Sleep(1000);
 
                     }
