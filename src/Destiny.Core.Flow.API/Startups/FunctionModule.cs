@@ -12,6 +12,7 @@ using System.IO;
 using Microsoft.Extensions.Options;
 using System;
 using Destiny.Core.Flow.Shared.Options;
+using Destiny.Core.Flow.Shared.Extensions;
 
 namespace Destiny.Core.Flow.API.Startups
 {
@@ -27,46 +28,57 @@ namespace Destiny.Core.Flow.API.Startups
         {
   
             context.Services.AddFileProvider();
-            var configuration = context.Services.GetConfiguration();
- 
+            //var configuration = context.Services.GetConfiguration();
 
-            if (configuration == null)
-            {
-                IConfigurationBuilder configurationBuilder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                    .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
-                configuration = configurationBuilder.Build();
-                context.Services.AddSingleton<IConfiguration>(configuration);
-            }
+
+            //if (configuration == null)
+            //{
+            //    IConfigurationBuilder configurationBuilder = new ConfigurationBuilder()
+            //        .SetBasePath(Directory.GetCurrentDirectory())
+            //        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            //        .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
+            //    configuration = configurationBuilder.Build();
+            //    context.Services.AddSingleton<IConfiguration>(configuration);
+            //}
 
             AppOptionSettings option = new AppOptionSettings();
 
-            if (configuration != null)
-            {
-                string key = "Destiny";
+            //if (configuration != null)
+            //{
+            //    string key = "Destiny";
 
-                configuration.Bind(key, option);
-               
-                context.Services.AddObjectAccessor(option);
-                context.Services.Configure<AppOptionSettings>(o=>{
-                    o.AuditEnabled = option.AuditEnabled;
-                    o.Auth = option.Auth;
-                    o.Cors = option.Cors;
-                    o.DbContexts = option.DbContexts;
-                    o.IsAutoAddFunction = option.IsAutoAddFunction;
-                    o.Jwt = option.Jwt;
-                
-                });
-                context.Services.AddObjectAccessor<MongoOptions>(configuration.GetSection($"{key}:MongoDBs").Get<MongoOptions>()); 
+            //    configuration.Bind(key, option);
 
+            //    context.Services.AddObjectAccessor(option);
+            //    context.Services.Configure<AppOptionSettings>(o=>{
+            //        o.AuditEnabled = option.AuditEnabled;
+            //        o.Auth = option.Auth;
+            //        o.Cors = option.Cors;
+            //        o.DbContexts = option.DbContexts;
+            //        o.IsAutoAddFunction = option.IsAutoAddFunction;
+            //        o.Jwt = option.Jwt;
+
+            //    });
+            //    context.Services.AddObjectAccessor<MongoOptions>(configuration.GetSection($"{key}:MongoDBs").Get<MongoOptions>()); 
+
+            //}
+
+           var configuration=  context.Services.Build<AppOptionSettings>("Destiny", option,o=> {
+                o.AuditEnabled = option.AuditEnabled;
+                o.Auth = option.Auth;
+                o.Cors = option.Cors;
+                o.DbContexts = option.DbContexts;
+                o.IsAutoAddFunction = option.IsAutoAddFunction;
+                o.Jwt = option.Jwt;
+
+            });
+
+            if (configuration != null) {
+                context.Services.AddObjectAccessor<MongoOptions>(configuration.GetSection($"Destiny:MongoDBs").Get<MongoOptions>());
             }
-
-            //context.Services.AddFileProvider();
-            //IConfiguration configuration = context.GetConfiguration();
-            //AppOptionSettings configuration2 = context.GetConfiguration<AppOptionSettings>("Destiny");
-            //context.Services.AddObjectAccessor(configuration2);
         }
+
+
     }
 
 
