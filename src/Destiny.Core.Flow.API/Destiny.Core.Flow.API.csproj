@@ -35,7 +35,7 @@
     <PackageReference Include="DestinyCore.AspNetCore" Version="1.0.3" />
     <PackageReference Include="DestinyCore.MiniProfiler" Version="1.0.3" />
     <PackageReference Include="DestinyCore.Swagger" Version="1.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.7" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.10.0" />
     <PackageReference Include="Microsoft.DotNet.PlatformAbstractions" Version="3.1.6" />
